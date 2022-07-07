@@ -45,6 +45,7 @@ static void TilesetAnim_BattlePyramid(u16);
 static void TilesetAnim_BattleDome(u16);
 static void QueueAnimTiles_General_Flower(u16);
 static void QueueAnimTiles_General_Water(u16);
+static void QueueAnimTiles_General_Soul(u16);
 static void QueueAnimTiles_General_SandWaterEdge(u16);
 static void QueueAnimTiles_General_Waterfall(u16);
 static void QueueAnimTiles_General_LandWaterEdge(u16);
@@ -104,6 +105,18 @@ const u16 *const gTilesetAnims_General_Water[] = {
     gTilesetAnims_General_Water_Frame5,
     gTilesetAnims_General_Water_Frame6,
     gTilesetAnims_General_Water_Frame7
+};
+
+const u16 gTilesetAnims_General_Soul_Frame0[] = INCBIN_U16("data/tilesets/primary/general/anim/soul/soul0.4bpp");
+const u16 gTilesetAnims_General_Soul_Frame1[] = INCBIN_U16("data/tilesets/primary/general/anim/soul/soul1.4bpp");
+const u16 gTilesetAnims_General_Soul_Frame2[] = INCBIN_U16("data/tilesets/primary/general/anim/soul/soul2.4bpp");
+const u16 gTilesetAnims_General_Soul_Frame3[] = INCBIN_U16("data/tilesets/primary/general/anim/soul/soul3.4bpp");
+
+const u16 *const gTilesetAnims_General_Soul[] = {
+    gTilesetAnims_General_Soul_Frame0,
+    gTilesetAnims_General_Soul_Frame1,
+    gTilesetAnims_General_Soul_Frame2,
+    gTilesetAnims_General_Soul_Frame3
 };
 
 const u16 gTilesetAnims_General_SandWaterEdge_Frame0[] = INCBIN_U16("data/tilesets/primary/general/anim/sand_water_edge/0.4bpp");
@@ -641,6 +654,8 @@ static void TilesetAnim_General(u16 timer)
         QueueAnimTiles_General_Waterfall(timer / 16);
     if (timer % 16 == 4)
         QueueAnimTiles_General_LandWaterEdge(timer / 16);
+	if (timer % 16 == 5)
+		QueueAnimTiles_General_Soul (timer / 16);
 }
 
 static void TilesetAnim_Building(u16 timer)
@@ -659,6 +674,12 @@ static void QueueAnimTiles_General_Water(u16 timer)
 {
     u8 i = timer % ARRAY_COUNT(gTilesetAnims_General_Water);
     AppendTilesetAnimToBuffer(gTilesetAnims_General_Water[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(432)), 30 * TILE_SIZE_4BPP);
+}
+
+static void QueueAnimTiles_General_Soul(u16 timer)
+{
+	u16 i = timer % 4;
+	AppendTilesetAnimToBuffer(gTilesetAnims_General_Soul[i], (u16 *) (BG_VRAM + TILE_OFFSET_4BPP(490)), 0x80);
 }
 
 static void QueueAnimTiles_General_SandWaterEdge(u16 timer)

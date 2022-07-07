@@ -637,6 +637,83 @@ DewfordTown_EventScript_PhraseNotTrendyEnough::
 	msgbox DewfordTown_Text_XHuhIThinkYIsCool, MSGBOX_DEFAULT
 	release
 	end
+	
+DewfordTown_EventScript_GymBlocker::
+	msgbox DewfordTown_Text_BrawlyGone, MSGBOX_NPC
+	end
+	
+DewfordTown_Text_BrawlyGone:
+	.string "Hey, how's it going, CHAMPION-\n"
+	.string "bound {PLAYER}?\p"
+	.string "Eager to challenge DEWFORD's GYM?\n"
+	.string "I like your enthusiasm, but sorry\l"
+	.string "to say, BRAWLY's not in right now.\p"
+	.string "He's out training in the DEWFORD\n"
+	.string "WILDS to the west. See him up there?\p"
+	.string "You can't challenge the GYM until he\n"
+	.string "comes back.$"
+	
+DewfordTown_EventScript_Brawly::
+	lock
+	msgbox DewfordTown_Text_Brawly1, MSGBOX_DEFAULT
+	applymovement 6, DewfordTown_Movement_BrawlyStartle
+	waitmovement 0
+	msgbox DewfordTown_Text_Brawly2, MSGBOX_DEFAULT
+	closemessage
+	applymovement 6, DewfordTown_Movement_BrawlyJump
+	waitmovement 0
+	msgbox DewfordTown_Text_Brawly3, MSGBOX_NPC
+	setflag FLAG_BRAWLY_GYM_OPEN
+	fadescreen FADE_TO_BLACK
+	removeobject 6
+	removeobject 7
+	fadescreen FADE_FROM_BLACK
+	end
+	
+DewfordTown_Text_Brawly1:
+	.string "… … … … …\n"
+	.string "WHOA!!!$"
+
+DewfordTown_Text_Brawly2:
+	.string "You startled me!\n"
+	.string "I was so engrossed in observing the\l"
+	.string "beauty and majesty of DEWFORD…\p"
+	.string "I almost fell off the cliff!\p"
+	.string "Anyway, what did you need? … … …\n"
+	.string "Ah, I see you've beaten ROXANNE.\l"
+	.string "You're a challenger, then?\p"
+	.string "Sorry for making you come all this\n"
+	.string "way to get me. I'll head back to\l"
+	.string "the GYM now.\p"
+	.string "I look forward to accepting your\n"
+	.string "challenge!$"
+
+DewfordTown_Text_Brawly3:
+	.string "… … Don't jump down like that.\n"
+	.string "I have a lot of practice doing that.\p"
+	.string "If you do it wrong, you could really\n"
+	.string "hurt yourself.\p"
+	.string "Sorry, but please take the long way\n"
+	.string "back. See you at the GYM!$"
+	
+DewfordTown_Movement_BrawlyStartle:
+	emote_exclamation_mark
+	delay_16
+	delay_16
+	delay_16
+	jump_in_place_up
+	jump_in_place_up
+	delay_16
+	face_down
+	step_end
+	
+DewfordTown_Movement_BrawlyJump:
+	jump_up
+	delay_16
+	delay_16
+	face_down
+	step_end
+	
 
 DewfordTown_Text_TinyIslandCommunity:
 	.string "DEWFORD is a tiny island community.\n"

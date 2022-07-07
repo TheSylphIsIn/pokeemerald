@@ -388,6 +388,10 @@ gCryTable::
 	cry Cry_Jirachi
 	cry Cry_Deoxys
 	cry Cry_Chimecho
+	cry Cry_Dubsnake
+	cry Cry_Hydroil
+	cry Cry_Wycern
+	cry Cry_Bitteragon
 
 	.align 2
 gCryTable_Reverse::
@@ -779,3 +783,7 @@ gCryTable_Reverse::
 	cry_reverse Cry_Jirachi
 	cry_reverse Cry_Deoxys
 	cry_reverse Cry_Chimecho
+	cry_reverse Cry_Dubsnake
+	cry_reverse Cry_Hydroil
+	cry_reverse Cry_Wycern
+	cry_reverse Cry_Bitteragon

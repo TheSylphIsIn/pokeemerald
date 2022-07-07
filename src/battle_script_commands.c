@@ -913,8 +913,28 @@ static const u8 sBattlePalaceNatureToFlavorTextId[NUM_NATURES] =
 
 static void Cmd_attackcanceler(void)
 {
-    s32 i;
+    s32 i, moveType;
+	
+	GET_MOVE_TYPE(gCurrentMove, moveType);
+	if (gBattleMons[gBattlerAttacker].ability == ABILITY_REFRIGERATE && moveType == TYPE_NORMAL)
+		moveType = TYPE_ICE;
 
+	if (WEATHER_HAS_EFFECT && gBattleMoves[gCurrentMove].power)
+    {
+        if (moveType == TYPE_FIRE && (gBattleWeather & B_WEATHER_RAIN_DOWNPOUR))
+        {
+            BattleScriptPushCursor();
+            gBattlescriptCurrInstr = BattleScript_DownpourFireFail;
+            return;
+        }
+        else if (moveType == TYPE_WATER && (gBattleWeather & B_WEATHER_INTENSE_SUN))
+        {
+            BattleScriptPushCursor();
+            gBattlescriptCurrInstr = BattleScript_DesolationWaterFail;
+            return;
+        }
+    }
+	
     if (gBattleOutcome != 0)
     {
         gCurrentActionFuncId = B_ACTION_FINISHED;
@@ -1085,8 +1105,10 @@ static bool8 AccuracyCalcHelper(u16 move)
 
     gHitMarker &= ~HITMARKER_IGNORE_UNDERWATER;
 
-    if ((WEATHER_HAS_EFFECT && (gBattleWeather & B_WEATHER_RAIN) && gBattleMoves[move].effect == EFFECT_THUNDER)
-     || (gBattleMoves[move].effect == EFFECT_ALWAYS_HIT || gBattleMoves[move].effect == EFFECT_VITAL_THROW))
+    if ((WEATHER_HAS_EFFECT && (gBattleWeather & B_WEATHER_RAIN) && gBattleMoves[move].effect == (EFFECT_THUNDER || EFFECT_HURRICANE))
+     || (gBattleMoves[move].effect == EFFECT_ALWAYS_HIT || gBattleMoves[move].effect == EFFECT_VITAL_THROW) ||
+     (WEATHER_HAS_EFFECT && (gBattleWeather & B_WEATHER_HAIL) && gBattleMoves[move].effect == EFFECT_FREEZE_HIT) ||
+	 (IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_POISON) && gBattleMoves[move].effect == EFFECT_TOXIC))
     {
         JumpIfMoveFailed(7, move);
         return TRUE;
@@ -1148,11 +1170,13 @@ static void Cmd_accuracycheck(void)
         calc = sAccuracyStageRatios[buff].dividend * moveAcc;
         calc /= sAccuracyStageRatios[buff].divisor;
 
-        if (gBattleMons[gBattlerAttacker].ability == ABILITY_COMPOUND_EYES)
+        if (gBattleMons[gBattlerAttacker].ability == ABILITY_COMPOUND_EYES || gBattleMons[gBattlerAttacker].ability == ABILITY_ILLUMINATE)
             calc = (calc * 130) / 100; // 1.3 compound eyes boost
         if (WEATHER_HAS_EFFECT && gBattleMons[gBattlerTarget].ability == ABILITY_SAND_VEIL && gBattleWeather & B_WEATHER_SANDSTORM)
             calc = (calc * 80) / 100; // 1.2 sand veil loss
-        if (gBattleMons[gBattlerAttacker].ability == ABILITY_HUSTLE && IS_TYPE_PHYSICAL(type))
+		if (WEATHER_HAS_EFFECT && gBattleMons[gBattlerTarget].ability == ABILITY_SNOW_CLOAK && gBattleWeather & B_WEATHER_HAIL)
+			calc = (calc * 80) / 100;
+        if (gBattleMons[gBattlerAttacker].ability == ABILITY_HUSTLE && IS_MOVE_PHYSICAL(move))
             calc = (calc * 80) / 100; // 1.2 hustle loss
 
         if (gBattleMons[gBattlerTarget].item == ITEM_ENIGMA_BERRY)
@@ -1362,6 +1386,8 @@ static void Cmd_typecalc(void)
     }
 
     GET_MOVE_TYPE(gCurrentMove, moveType);
+	if (gBattleMons[gBattlerAttacker].ability == ABILITY_REFRIGERATE && moveType == TYPE_NORMAL)
+		moveType = TYPE_ICE;
 
     // check stab
     if (IS_BATTLER_OF_TYPE(gBattlerAttacker, moveType))
@@ -1431,6 +1457,8 @@ static void CheckWonderGuardAndLevitate(void)
         return;
 
     GET_MOVE_TYPE(gCurrentMove, moveType);
+	if (gBattleMons[gBattlerAttacker].ability == ABILITY_REFRIGERATE && moveType == TYPE_NORMAL)
+		moveType = TYPE_ICE;
 
     if (gBattleMons[gBattlerTarget].ability == ABILITY_LEVITATE && moveType == TYPE_GROUND)
     {
@@ -1540,6 +1568,8 @@ u8 TypeCalc(u16 move, u8 attacker, u8 defender)
         return 0;
 
     moveType = gBattleMoves[move].type;
+	if (gBattleMons[gBattlerAttacker].ability == ABILITY_REFRIGERATE && moveType == TYPE_NORMAL)
+		moveType = TYPE_ICE;
 
     // check stab
     if (IS_BATTLER_OF_TYPE(attacker, moveType))
@@ -1599,6 +1629,8 @@ u8 AI_TypeCalc(u16 move, u16 targetSpecies, u8 targetAbility)
         return 0;
 
     moveType = gBattleMoves[move].type;
+	if (gBattleMons[gBattlerAttacker].ability == ABILITY_REFRIGERATE && moveType == TYPE_NORMAL)
+		moveType = TYPE_ICE;
 
     if (targetAbility == ABILITY_LEVITATE && moveType == TYPE_GROUND)
     {
@@ -1844,7 +1876,11 @@ static void Cmd_datahpupdate(void)
     else if (!(gBattleStruct->dynamicMoveType & F_DYNAMIC_TYPE_1))
         moveType = gBattleStruct->dynamicMoveType & DYNAMIC_TYPE_MASK;
     else
+	{
         moveType = gBattleMoves[gCurrentMove].type;
+		if (gBattleMons[gBattlerAttacker].ability == ABILITY_REFRIGERATE && moveType == TYPE_NORMAL)
+			moveType = TYPE_ICE;
+	}
 
     if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
     {
@@ -1913,7 +1949,7 @@ static void Cmd_datahpupdate(void)
                 if (!gSpecialStatuses[gActiveBattler].dmg && !(gHitMarker & HITMARKER_PASSIVE_DAMAGE))
                     gSpecialStatuses[gActiveBattler].dmg = gHpDealt;
 
-                if (IS_TYPE_PHYSICAL(moveType) && !(gHitMarker & HITMARKER_PASSIVE_DAMAGE) && gCurrentMove != MOVE_PAIN_SPLIT)
+                if (IS_MOVE_PHYSICAL(gCurrentMove) && !(gHitMarker & HITMARKER_PASSIVE_DAMAGE) && gCurrentMove != MOVE_PAIN_SPLIT)
                 {
                     gProtectStructs[gActiveBattler].physicalDmg = gHpDealt;
                     gSpecialStatuses[gActiveBattler].physicalDmg = gHpDealt;
@@ -1928,7 +1964,7 @@ static void Cmd_datahpupdate(void)
                         gSpecialStatuses[gActiveBattler].physicalBattlerId = gBattlerTarget;
                     }
                 }
-                else if (!IS_TYPE_PHYSICAL(moveType) && !(gHitMarker & HITMARKER_PASSIVE_DAMAGE))
+                else if (IS_MOVE_SPECIAL(gCurrentMove) && !(gHitMarker & HITMARKER_PASSIVE_DAMAGE))
                 {
                     gProtectStructs[gActiveBattler].specialDmg = gHpDealt;
                     gSpecialStatuses[gActiveBattler].specialDmg = gHpDealt;
@@ -4199,6 +4235,8 @@ static void Cmd_moveend(void)
 
     choicedMoveAtk = &gBattleStruct->choicedMove[gBattlerAttacker];
     GET_MOVE_TYPE(gCurrentMove, moveType);
+	if (gBattleMons[gBattlerAttacker].ability == ABILITY_REFRIGERATE && moveType == TYPE_NORMAL)
+		moveType = TYPE_ICE;
 
     do
     {
@@ -4257,7 +4295,9 @@ static void Cmd_moveend(void)
             break;
         case MOVEEND_CHOICE_MOVE: // update choice band move
             if (gHitMarker & HITMARKER_OBEYS
-             && holdEffectAtk == HOLD_EFFECT_CHOICE_BAND
+             && ((holdEffectAtk == HOLD_EFFECT_CHOICE_BAND)
+			 || (holdEffectAtk == HOLD_EFFECT_CHOICE_SPECS)
+			 || (holdEffectAtk == HOLD_EFFECT_CHOICE_SCARF))
              && gChosenMove != MOVE_STRUGGLE
              && (*choicedMoveAtk == 0 || *choicedMoveAtk == 0xFFFF))
             {
@@ -4461,6 +4501,9 @@ static void Cmd_typecalc2(void)
     u8 flags = 0;
     s32 i = 0;
     u8 moveType = gBattleMoves[gCurrentMove].type;
+	
+	if (gBattleMons[gBattlerAttacker].ability == ABILITY_REFRIGERATE && moveType == TYPE_NORMAL)
+		moveType = TYPE_ICE;
 
     if (gBattleMons[gBattlerTarget].ability == ABILITY_LEVITATE && moveType == TYPE_GROUND)
     {
@@ -6632,7 +6675,15 @@ static void Cmd_trymirrormove(void)
 
 static void Cmd_setrain(void)
 {
-    if (gBattleWeather & B_WEATHER_RAIN)
+	if (gBattleWeather & B_WEATHER_INTENSE_SUN)
+	{
+		gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_DESOLATE_OVERRIDE;
+	}
+	else if (gBattleWeather & B_WEATHER_RAIN_DOWNPOUR)
+	{
+		gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_DOWNPOUR_OVERRIDE;
+	}
+    else if (gBattleWeather & B_WEATHER_RAIN)
     {
         gMoveResultFlags |= MOVE_RESULT_MISSED;
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_WEATHER_FAILED;
@@ -7315,13 +7366,13 @@ static void Cmd_tryconversiontypechange(void) // randomly changes user's type to
     {
         moveType = gBattleMoves[gBattleMons[gBattlerAttacker].moves[moveChecked]].type;
 
-        if (moveType == TYPE_MYSTERY)
-        {
-            if (IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_GHOST))
-                moveType = TYPE_GHOST;
-            else
-                moveType = TYPE_NORMAL;
-        }
+        // if (moveType == TYPE_MYSTERY)
+        // {
+            // if (IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_GHOST))
+                // moveType = TYPE_GHOST;
+            // else
+                // moveType = TYPE_NORMAL;
+        // }
         if (moveType != gBattleMons[gBattlerAttacker].type1
             && moveType != gBattleMons[gBattlerAttacker].type2)
         {
@@ -7342,13 +7393,13 @@ static void Cmd_tryconversiontypechange(void) // randomly changes user's type to
 
             moveType = gBattleMoves[gBattleMons[gBattlerAttacker].moves[moveChecked]].type;
 
-            if (moveType == TYPE_MYSTERY)
-            {
-                if (IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_GHOST))
-                    moveType = TYPE_GHOST;
-                else
-                    moveType = TYPE_NORMAL;
-            }
+            // if (moveType == TYPE_MYSTERY)
+            // {
+                // if (IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_GHOST))
+                    // moveType = TYPE_GHOST;
+                // else
+                    // moveType = TYPE_NORMAL;
+            // }
         }
         while (moveType == gBattleMons[gBattlerAttacker].type1 || moveType == gBattleMons[gBattlerAttacker].type2);
 
@@ -7496,7 +7547,15 @@ static void Cmd_damagetohalftargethp(void) // super fang
 
 static void Cmd_setsandstorm(void)
 {
-    if (gBattleWeather & B_WEATHER_SANDSTORM)
+	if (gBattleWeather & B_WEATHER_INTENSE_SUN)
+	{
+		gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_DESOLATE_OVERRIDE;
+	}
+	else if (gBattleWeather & B_WEATHER_RAIN_DOWNPOUR)
+	{
+		gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_DOWNPOUR_OVERRIDE;
+	}
+    else if (gBattleWeather & B_WEATHER_SANDSTORM)
     {
         gMoveResultFlags |= MOVE_RESULT_MISSED;
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_WEATHER_FAILED;
@@ -7523,6 +7582,7 @@ static void Cmd_weatherdamage(void)
                 && gBattleMons[gBattlerAttacker].type2 != TYPE_STEEL
                 && gBattleMons[gBattlerAttacker].type2 != TYPE_GROUND
                 && gBattleMons[gBattlerAttacker].ability != ABILITY_SAND_VEIL
+				&& gBattleMons[gBattlerAttacker].ability != ABILITY_SAND_RUSH
                 && !(gStatuses3[gBattlerAttacker] & STATUS3_UNDERGROUND)
                 && !(gStatuses3[gBattlerAttacker] & STATUS3_UNDERWATER))
             {
@@ -7538,6 +7598,8 @@ static void Cmd_weatherdamage(void)
         if (gBattleWeather & B_WEATHER_HAIL)
         {
             if (!IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_ICE)
+				&& gBattleMons[gBattlerAttacker].ability != ABILITY_SNOW_CLOAK
+				&& gBattleMons[gBattlerAttacker].ability != ABILITY_SLUSH_RUSH
                 && !(gStatuses3[gBattlerAttacker] & STATUS3_UNDERGROUND)
                 && !(gStatuses3[gBattlerAttacker] & STATUS3_UNDERWATER))
             {
@@ -8654,7 +8716,15 @@ static void Cmd_jumpifnopursuitswitchdmg(void)
 
 static void Cmd_setsunny(void)
 {
-    if (gBattleWeather & B_WEATHER_SUN)
+	if (gBattleWeather & B_WEATHER_INTENSE_SUN)
+	{
+		gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_DESOLATE_OVERRIDE;
+	}
+	else if (gBattleWeather & B_WEATHER_RAIN_DOWNPOUR)
+	{
+		gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_DOWNPOUR_OVERRIDE;
+	}
+    else if (gBattleWeather & B_WEATHER_SUN)
     {
         gMoveResultFlags |= MOVE_RESULT_MISSED;
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_WEATHER_FAILED;
@@ -8935,7 +9005,15 @@ static void Cmd_setminimize(void)
 
 static void Cmd_sethail(void)
 {
-    if (gBattleWeather & B_WEATHER_HAIL)
+    if (gBattleWeather & B_WEATHER_INTENSE_SUN)
+	{
+		gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_DESOLATE_OVERRIDE;
+	}
+	else if (gBattleWeather & B_WEATHER_RAIN_DOWNPOUR)
+	{
+		gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_DOWNPOUR_OVERRIDE;
+	}
+	else if (gBattleWeather & B_WEATHER_HAIL)
     {
         gMoveResultFlags |= MOVE_RESULT_MISSED;
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_WEATHER_FAILED;

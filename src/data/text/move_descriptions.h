@@ -535,7 +535,7 @@ static const u8 sAmnesiaDescription[] = _(
 
 static const u8 sKinesisDescription[] = _(
     "Distracts the foe.\n"
-    "May lower accuracy.");
+    "Harshly lowers accuracy.");
 
 static const u8 sSoftBoiledDescription[] = _(
     "Recovers up to half the\n"
@@ -1416,6 +1416,68 @@ static const u8 sDoomDesireDescription[] = _(
 static const u8 sPsychoBoostDescription[] = _(
     "Allows a full-power attack,\n"
     "but sharply lowers SP. ATK.");
+	
+static const u8 sContactDescription[] = _(
+	"Uses the foe as a ground.\n"
+	"May paralyze.");
+
+static const u8 sZenHeadbuttDescription[] = _(
+	"Rams with a focused head.\n"
+	"May flinch.");
+	
+static const u8 sBrambleDescription[] = _(
+	"Erupts thorns from below.\n"
+	"May poison.");
+	
+static const u8 sWoodHammerDescription[] = _(
+	"Slams the foe with planty\n"
+	"mass. Damages the user too.");
+	
+static const u8 sDragonPulseDescription[] = _(
+	"Blasts energy from the\n"
+	"mouth. May raise SP. ATK.");
+	
+static const u8 sFlareBlitzDescription[] = _(
+	"Slams a flaming body into\n"
+	"the foe. Damages the user.");
+	
+static const u8 sMoonblastDescription[] = _(
+	"Blasts energy from the moon\n"
+	"at the foe. Lowers SP. ATK.");
+	
+static const u8 sDazzleDescription[] = _(
+	"Shines blinding light at\n"
+	"both foes. May flinch.");
+	
+static const u8 sFlashCannonDescription[] = _(
+	"Releases a burst of light.\n"
+	"May lower SP. DEFENSE.");
+	
+static const u8 sPuppyEyesDescription[] = _(
+	"Lowers foe's attack with a\n"
+	"charming look. Goes first.");
+	
+static const u8 sCharmingCryDescription[] = _(
+	"Damages the foe with an\n"
+	"unavoidable shout.");
+	
+static const u8 sTwinklePopDescription[] = _(
+	"Bursts starry energy on\n"
+	"the foe. May lower ATTACK.");
+	
+static const u8 sDrainingKissDescription[] = _(
+	"Damages the foe and\n"
+	"restores the user's HP.");
+	
+static const u8 sPlayRoughDescription[] = _(
+	"Roughs up the target.\n"
+	"May lower foe's ATTACK.");
+
+static const u8 sCloseCombatDescription[] = _(
+	"Goes all-out recklessly.\n"
+	"Lowers both user DEFENSEs.");
+
+
 
 // MOVE_NONE is ignored in this table. Make sure to always subtract 1 before getting the right pointer.
 const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
@@ -1774,4 +1836,9 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
     [MOVE_WATER_PULSE - 1] = sWaterPulseDescription,
     [MOVE_DOOM_DESIRE - 1] = sDoomDesireDescription,
     [MOVE_PSYCHO_BOOST - 1] = sPsychoBoostDescription,
+	[MOVE_CONTACT - 1] = sContactDescription,
+	[MOVE_ZEN_HEADBUTT - 1] = sZenHeadbuttDescription,
+	[MOVE_BRAMBLE - 1] = sBrambleDescription,
+	[MOVE_WOOD_HAMMER - 1] = sWoodHammerDescription,
+	[MOVE_CLOSE_COMBAT - 1] = sCloseCombatDescription,
 };

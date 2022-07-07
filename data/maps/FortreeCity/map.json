@@ -22,6 +22,16 @@
       "direction": "right",
       "offset": 0,
       "map": "MAP_ROUTE120"
+    },
+    {
+      "direction": "up",
+      "offset": 9,
+      "map": "MAP_SHADED_PASS"
+    },
+    {
+      "direction": "up",
+      "offset": 9,
+      "map": "MAP_SHADED_PASS"
     }
   ],
   "object_events": [
@@ -182,7 +192,9 @@
       "dest_warp_id": 0
     }
   ],
-  "coord_events": [],
+  "coord_events": [
+
+  ],
   "bg_events": [
     {
       "type": "sign",

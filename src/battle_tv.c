@@ -108,7 +108,7 @@ static const u16 sPoints_MoveEffect[NUM_BATTLE_MOVE_EFFECTS] =
     [EFFECT_DEFENSE_DOWN] = 1,
     [EFFECT_SPEED_DOWN] = 1,
     [EFFECT_SPECIAL_ATTACK_DOWN] = 1,
-    [EFFECT_SPECIAL_DEFENSE_DOWN] = 1,
+    [EFFECT_JUNK_2] = 1,
     [EFFECT_ACCURACY_DOWN] = 1,
     [EFFECT_EVASION_DOWN] = 1,
     [EFFECT_HAZE] = 5,
@@ -147,7 +147,7 @@ static const u16 sPoints_MoveEffect[NUM_BATTLE_MOVE_EFFECTS] =
     [EFFECT_ATTACK_DOWN_2] = 1,
     [EFFECT_DEFENSE_DOWN_2] = 1,
     [EFFECT_SPEED_DOWN_2] = 1,
-    [EFFECT_SPECIAL_ATTACK_DOWN_2] = 1,
+    [EFFECT_JUNK_1] = 1,
     [EFFECT_SPECIAL_DEFENSE_DOWN_2] = 1,
     [EFFECT_ACCURACY_DOWN_2] = 1,
     [EFFECT_EVASION_DOWN_2] = 1,
@@ -1246,7 +1246,7 @@ static void AddMovePoints(u8 caseId, u16 arg1, u8 arg2, u8 arg3)
         break;
     case PTS_REFLECT:
         // If hit Reflect with damaging physical move
-        if (IS_TYPE_PHYSICAL(type) && power != 0 && tvPtr->side[defSide].reflectMonId != 0)
+        if (IS_MOVE_PHYSICAL(gCurrentMove) && power != 0 && tvPtr->side[defSide].reflectMonId != 0)
         {
             u32 id = (tvPtr->side[defSide].reflectMonId - 1) * 4;
             movePoints->points[defSide][id + tvPtr->side[defSide].reflectMoveSlot] += sPointsArray[caseId][0];
@@ -1254,7 +1254,7 @@ static void AddMovePoints(u8 caseId, u16 arg1, u8 arg2, u8 arg3)
         break;
     case PTS_LIGHT_SCREEN:
         // If hit Light Screen with damaging special move
-        if (!IS_TYPE_PHYSICAL(type) && power != 0 && tvPtr->side[defSide].lightScreenMonId != 0)
+        if (IS_MOVE_SPECIAL(gCurrentMove) && power != 0 && tvPtr->side[defSide].lightScreenMonId != 0)
         {
             u32 id = (tvPtr->side[defSide].lightScreenMonId - 1) * 4;
             movePoints->points[defSide][id + tvPtr->side[defSide].lightScreenMoveSlot] += sPointsArray[caseId][0];

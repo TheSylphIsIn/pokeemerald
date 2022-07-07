@@ -699,22 +699,21 @@ static u8 GetBattleTransitionTypeByMap(void)
 
     PlayerGetDestCoords(&x, &y);
     tileBehavior = MapGridGetMetatileBehaviorAt(x, y);
-
     if (GetFlashLevel())
         return TRANSITION_TYPE_FLASH;
-
-    if (MetatileBehavior_IsSurfableWaterOrUnderwater(tileBehavior))
-        return TRANSITION_TYPE_WATER;
-
-    switch (gMapHeader.mapType)
+    if (!MetatileBehavior_IsSurfableWaterOrUnderwater(tileBehavior))
     {
-    case MAP_TYPE_UNDERGROUND:
-        return TRANSITION_TYPE_CAVE;
-    case MAP_TYPE_UNDERWATER:
-        return TRANSITION_TYPE_WATER;
-    default:
-        return TRANSITION_TYPE_NORMAL;
+        switch (gMapHeader.mapType)
+        {
+        case MAP_TYPE_UNDERGROUND:
+            return TRANSITION_TYPE_CAVE;
+        case MAP_TYPE_UNDERWATER:
+            return TRANSITION_TYPE_WATER;
+        default:
+            return TRANSITION_TYPE_NORMAL;
+        }
     }
+    return TRANSITION_TYPE_WATER;
 }
 
 static u16 GetSumOfPlayerPartyLevel(u8 numMons)

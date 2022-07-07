@@ -4643,4 +4643,52 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerScale = 290,
         .trainerOffset = 2,
     },
+	
+	[NATIONAL_DEX_DUBSNAKE] = 
+	{
+		.categoryName = _("DUAL SNAKE"),
+		.height = 14,
+		.weight = 111,
+		.description = gDubsnakePokedexText,
+		.pokemonScale = 350,
+		.pokemonOffset = 0,
+		.trainerScale = 256,
+		.trainerOffset = 0,
+	},
+	
+	[NATIONAL_DEX_HYDROIL] = 
+	{
+		.categoryName = _("DUOHYDRA"),
+		.height = 22,
+		.weight = 2222,
+		.description = gHydroilPokedexText,
+		.pokemonScale = 256,
+		.pokemonOffset = 0,
+		.trainerScale = 300,
+		.trainerOffset = 3,
+	},
+	
+	[NATIONAL_DEX_WYCERN] = 
+	{
+		.categoryName = _("WYRMLING"),
+		.height = 5,
+		.weight = 360, 
+		.description = gWycernPokedexText,
+		.pokemonScale = 500,
+		.pokemonOffset = 0,
+		.trainerScale = 256,
+		.trainerOffset = 0,
+	},
+	
+	[NATIONAL_DEX_BITTERAGON] = 
+	{
+		.categoryName = _("ICEMAKER"),
+		.height = 18,
+		.weight = 1300,
+		.description = gBitteragonPokedexText,
+		.pokemonScale = 250,
+		.pokemonOffset = 0,
+		.trainerScale = 290,
+		.trainerOffset = 0,
+	},
 };

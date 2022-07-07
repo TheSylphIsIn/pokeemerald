@@ -1135,26 +1135,26 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_05B] =
+    [ITEM_ALPHA_STONE] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
-        .price = 0,
-        .description = sDummyDesc,
+        .name = _("ALPHA STONE"),
+        .itemId = ITEM_ALPHA_STONE,
+        .price = 4200,
+        .description = sAlphaStoneDesc,
         .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
     },
 
-    [ITEM_05C] =
+    [ITEM_OMEGA_STONE] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
-        .price = 0,
-        .description = sDummyDesc,
+        .name = _("OMEGA STONE"),
+        .itemId = ITEM_OMEGA_STONE,
+        .price = 4200,
+        .description = sOmegaStoneDesc,
         .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
     },
 
 // Evolution stones
@@ -1225,48 +1225,48 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
     },
 
-    [ITEM_063] =
+    [ITEM_DUSK_STONE] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
-        .price = 0,
-        .description = sDummyDesc,
+        .name = _("DUSK STONE"),
+        .itemId = ITEM_DUSK_STONE,
+        .price = 2100,
+        .description = sDuskStoneDesc,
         .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
     },
 
-    [ITEM_064] =
+    [ITEM_DAWN_STONE] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
-        .price = 0,
-        .description = sDummyDesc,
+        .name = _("DAWN STONE"),
+        .itemId = ITEM_DAWN_STONE,
+        .price = 2100,
+        .description = sDawnStoneDesc,
         .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
     },
 
-    [ITEM_065] =
+    [ITEM_HEART_STONE] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
-        .price = 0,
-        .description = sDummyDesc,
+        .name = _("HEART STONE"),
+        .itemId = ITEM_HEART_STONE,
+        .price = 2100,
+        .description = sHeartStoneDesc,
         .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
     },
 
-    [ITEM_066] =
+    [ITEM_ICE_STONE] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
-        .price = 0,
-        .description = sDummyDesc,
+        .name = _("ICE STONE"),
+        .itemId = ITEM_ICE_STONE,
+        .price = 2100,
+        .description = sIceStoneDesc,
         .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
     },
 
 // Valuable items
@@ -2774,221 +2774,259 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_0E2] =
+    [ITEM_CHOICE_SPECS] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
-        .price = 0,
-        .description = sDummyDesc,
+        .name = _("CHOICE SPECS"),
+        .itemId = ITEM_CHOICE_SPECS,
+        .price = 100,
+        .holdEffect = HOLD_EFFECT_CHOICE_SPECS,
+        .description = sChoiceSpecsDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_0E3] =
+    [ITEM_CHOICE_SCARF] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
-        .price = 0,
-        .description = sDummyDesc,
+        .name = _("CHOICE SCARF"),
+        .itemId = ITEM_CHOICE_SCARF,
+        .price = 100,
+        .holdEffect = HOLD_EFFECT_CHOICE_SCARF,
+        .description = sChoiceScarfDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_0E4] =
+    [ITEM_CALM_SOUL] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
+        .name = _("CALM SOUL"),
+        .itemId = ITEM_CALM_SOUL,
         .price = 0,
-        .description = sDummyDesc,
+		.holdEffect = HOLD_EFFECT_NORMAL_POWER,
+		.holdEffectParam = 50,
+        .description = sCalmSoulDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_0E5] =
+    [ITEM_LIVING_SOUL] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
+        .name = _("LIVING SOUL"),
+        .itemId = ITEM_LIVING_SOUL,
         .price = 0,
-        .description = sDummyDesc,
+		.holdEffect = HOLD_EFFECT_GRASS_POWER,
+		.holdEffectParam = 50,
+        .description = sLivingSoulDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_0E6] =
+    [ITEM_BURNING_SOUL] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
+        .name = _("BURNING SOUL"),
+        .itemId = ITEM_BURNING_SOUL,
         .price = 0,
-        .description = sDummyDesc,
+		.holdEffect = HOLD_EFFECT_FIRE_POWER,
+		.holdEffectParam = 50,
+        .description = sBurningSoulDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_0E7] =
+    [ITEM_DROWNED_SOUL] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
+        .name = _("DROWNED SOUL"),
+        .itemId = ITEM_DROWNED_SOUL,
         .price = 0,
-        .description = sDummyDesc,
+		.holdEffect = HOLD_EFFECT_WATER_POWER,
+		.holdEffectParam = 50,
+        .description = sDrownedSoulDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_0E8] =
+    [ITEM_FREE_SOUL] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
+        .name = _("FREE SOUL"),
+        .itemId = ITEM_FREE_SOUL,
         .price = 0,
-        .description = sDummyDesc,
+		.holdEffect = HOLD_EFFECT_FLYING_POWER,
+		.holdEffectParam = 50,
+        .description = sFreeSoulDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_0E9] =
+    [ITEM_CREEPY_SOUL] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
+        .name = _("CREEPY SOUL"),
+        .itemId = ITEM_CREEPY_SOUL,
         .price = 0,
-        .description = sDummyDesc,
+		.holdEffect = HOLD_EFFECT_BUG_POWER,
+		.holdEffectParam = 50,
+        .description = sCreepySoulDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_0EA] =
+    [ITEM_STATIC_SOUL] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
+        .name = _("STATIC SOUL"),
+        .itemId = ITEM_STATIC_SOUL,
         .price = 0,
-        .description = sDummyDesc,
+		.holdEffect = HOLD_EFFECT_ELECTRIC_POWER,
+		.holdEffectParam = 50,
+        .description = sStaticSoulDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_0EB] =
+    [ITEM_DECAYED_SOUL] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
+        .name = _("DECAYED SOUL"),
+        .itemId = ITEM_DECAYED_SOUL,
         .price = 0,
-        .description = sDummyDesc,
+		.holdEffect = HOLD_EFFECT_POISON_POWER,
+		.holdEffectParam = 50,
+        .description = sDecayedSoulDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_0EC] =
+    [ITEM_VIGOR_SOUL] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
+        .name = _("VIGOR SOUL"),
+        .itemId = ITEM_VIGOR_SOUL,
         .price = 0,
-        .description = sDummyDesc,
+		.holdEffect = HOLD_EFFECT_FIGHTING_POWER,
+		.holdEffectParam = 50,
+        .description = sVigorSoulDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_0ED] =
+    [ITEM_VIM_SOUL] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
+        .name = _("VIM SOUL"),
+        .itemId = ITEM_VIM_SOUL,
         .price = 0,
-        .description = sDummyDesc,
+		.holdEffect = HOLD_EFFECT_PSYCHIC_POWER,
+		.holdEffectParam = 50,
+        .description = sVimSoulDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_0EE] =
+    [ITEM_SOLID_SOUL] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
+        .name = _("SOLID SOUL"),
+        .itemId = ITEM_SOLID_SOUL,
         .price = 0,
-        .description = sDummyDesc,
+		.holdEffect = HOLD_EFFECT_ROCK_POWER,
+		.holdEffectParam = 50,
+        .description = sSolidSoulDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_0EF] =
+    [ITEM_SHAKY_SOUL] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
+        .name = _("SHAKY SOUL"),
+        .itemId = ITEM_SHAKY_SOUL,
         .price = 0,
-        .description = sDummyDesc,
+		.holdEffect = HOLD_EFFECT_GROUND_POWER,
+		.holdEffectParam = 50,
+        .description = sShakySoulDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_0F0] =
+    [ITEM_HOLLOW_SOUL] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
+        .name = _("HOLLOW SOUL"),
+        .itemId = ITEM_HOLLOW_SOUL,
         .price = 0,
-        .description = sDummyDesc,
+		.holdEffect = HOLD_EFFECT_STEEL_POWER,
+		.holdEffectParam = 50,
+        .description = sHollowSoulDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_0F1] =
+    [ITEM_PHANTOM_SOUL] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
+        .name = _("PHANTOM SOUL"),
+        .itemId = ITEM_PHANTOM_SOUL,
         .price = 0,
-        .description = sDummyDesc,
+		.holdEffect = HOLD_EFFECT_GHOST_POWER,
+		.holdEffectParam = 50,
+        .description = sPhantomSoulDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_0F2] =
+    [ITEM_WICKED_SOUL] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
+        .name = _("WICKED SOUL"),
+        .itemId = ITEM_WICKED_SOUL,
         .price = 0,
-        .description = sDummyDesc,
+		.holdEffect = HOLD_EFFECT_DARK_POWER,
+		.holdEffectParam = 50,
+        .description = sWickedSoulDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_0F3] =
+    [ITEM_COLD_SOUL] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
+        .name = _("COLD SOUL"),
+        .itemId = ITEM_COLD_SOUL,
         .price = 0,
-        .description = sDummyDesc,
+		.holdEffect = HOLD_EFFECT_ICE_POWER,
+		.holdEffectParam = 50,
+        .description = sColdSoulDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+	
+    [ITEM_FIERCE_SOUL] =
+    {
+        .name = _("FIERCE SOUL"),
+        .itemId = ITEM_FIERCE_SOUL,
+        .price = 0,
+		.holdEffect = HOLD_EFFECT_DRAGON_POWER,
+		.holdEffectParam = 50,
+        .description = sFierceSoulDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_0F4] =
+    [ITEM_MYSTIC_SOUL] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
+        .name = _("MYSTIC SOUL"),
+        .itemId = ITEM_MYSTIC_SOUL,
         .price = 0,
-        .description = sDummyDesc,
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
-    },
-
-    [ITEM_0F5] =
-    {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
-        .price = 0,
-        .description = sDummyDesc,
+		.holdEffect = HOLD_EFFECT_FAIRY_POWER,
+		.holdEffectParam = 50,
+        .description = sMysticSoulDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -3634,10 +3672,10 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_TM12_TAUNT] =
+    [ITEM_TM12_DARK_PULSE] =
     {
         .name = _("TM12"),
-        .itemId = ITEM_TM12_TAUNT,
+        .itemId = ITEM_TM12_DARK_PULSE,
         .price = 3000,
         .description = sTM12Desc,
         .pocket = POCKET_TM_HM,
@@ -3733,10 +3771,10 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_TM21_FRUSTRATION] =
+    [ITEM_TM21_DAZZLE] =
     {
         .name = _("TM21"),
-        .itemId = ITEM_TM21_FRUSTRATION,
+        .itemId = ITEM_TM21_DAZZLE,
         .price = 1000,
         .description = sTM21Desc,
         .pocket = POCKET_TM_HM,
@@ -3810,10 +3848,10 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_TM28_DIG] =
+    [ITEM_TM28_TOMBSTONER] =
     {
         .name = _("TM28"),
-        .itemId = ITEM_TM28_DIG,
+        .itemId = ITEM_TM28_TOMBSTONER,
         .price = 2000,
         .description = sTM28Desc,
         .pocket = POCKET_TM_HM,
@@ -3997,10 +4035,10 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_TM45_ATTRACT] =
+    [ITEM_TM45_THUNDER_WAVE] =
     {
         .name = _("TM45"),
-        .itemId = ITEM_TM45_ATTRACT,
+        .itemId = ITEM_TM45_THUNDER_WAVE,
         .price = 3000,
         .description = sTM45Desc,
         .pocket = POCKET_TM_HM,
@@ -4030,10 +4068,10 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_TM48_SKILL_SWAP] =
+    [ITEM_TM48_SIGNAL_BEAM] =
     {
         .name = _("TM48"),
-        .itemId = ITEM_TM48_SKILL_SWAP,
+        .itemId = ITEM_TM48_SIGNAL_BEAM,
         .price = 3000,
         .description = sTM48Desc,
         .pocket = POCKET_TM_HM,
@@ -4041,10 +4079,10 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_TM49_SNATCH] =
+    [ITEM_TM49_DRAGON_PULSE] =
     {
         .name = _("TM49"),
-        .itemId = ITEM_TM49_SNATCH,
+        .itemId = ITEM_TM49_DRAGON_PULSE,
         .price = 3000,
         .description = sTM49Desc,
         .pocket = POCKET_TM_HM,

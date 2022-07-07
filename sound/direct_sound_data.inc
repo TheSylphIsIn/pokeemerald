@@ -1937,6 +1937,22 @@ Cry_Deoxys::
 	.align 2
 Cry_Chimecho::
 	.incbin "sound/direct_sound_samples/cries/chimecho.bin"
+	
+	.align 2
+Cry_Dubsnake::
+	.incbin "sound/direct_sound_samples/cries/ekans.bin"
+	
+	.align 2
+Cry_Hydroil::
+	.incbin "sound/direct_sound_samples/cries/arbok.bin"
+	
+	.align 2
+Cry_Wycern::
+	.incbin "sound/direct_sound_samples/cries/bulbasaur.bin"
+	
+	.align 2
+Cry_Bitteragon::
+	.incbin "sound/direct_sound_samples/cries/venusaur.bin"
 
 	.align 2
 DirectSoundWaveData_register_noise::

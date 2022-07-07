@@ -222,5 +222,15 @@ extern const u8 BattleScript_RunByUsingItem[];
 extern const u8 BattleScript_ActionWatchesCarefully[];
 extern const u8 BattleScript_ActionGetNear[];
 extern const u8 BattleScript_ActionThrowPokeblock[];
+extern const u8 BattleScript_SnowWarningActivates[];
+extern const u8 BattleScript_DownpourActivates[];
+extern const u8 BattleScript_DesolationActivates[];
+extern const u8 BattleScript_IntenseSunOverride[];
+extern const u8 BattleScript_HeavyRainOverride[];
+extern const u8 BattleScript_SolarPowerDrain[];
+extern const u8 BattleScript_DownpourFireFail[];
+extern const u8 BattleScript_DesolationWaterFail[];
+extern const u8 BattleScript_LightningRod_PPLoss[];
+extern const u8 BattleScript_LightningRod[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

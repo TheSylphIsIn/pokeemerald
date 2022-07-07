@@ -114,7 +114,7 @@ AI_CheckBadMove_CheckEffect:
 	if_effect EFFECT_DEFENSE_DOWN, AI_CBM_DefenseDown
 	if_effect EFFECT_SPEED_DOWN, AI_CBM_SpeedDown
 	if_effect EFFECT_SPECIAL_ATTACK_DOWN, AI_CBM_SpAtkDown
-	if_effect EFFECT_SPECIAL_DEFENSE_DOWN, AI_CBM_SpDefDown
+	if_effect EFFECT_JUNK_1, AI_CBM_SpDefDown
 	if_effect EFFECT_ACCURACY_DOWN, AI_CBM_AccDown
 	if_effect EFFECT_EVASION_DOWN, AI_CBM_EvasionDown
 	if_effect EFFECT_HAZE, AI_CBM_Haze
@@ -138,7 +138,7 @@ AI_CheckBadMove_CheckEffect:
 	if_effect EFFECT_ATTACK_DOWN_2, AI_CBM_AttackDown
 	if_effect EFFECT_DEFENSE_DOWN_2, AI_CBM_DefenseDown
 	if_effect EFFECT_SPEED_DOWN_2, AI_CBM_SpeedDown
-	if_effect EFFECT_SPECIAL_ATTACK_DOWN_2, AI_CBM_SpAtkDown
+	if_effect EFFECT_JUNK_2, AI_CBM_SpAtkDown
 	if_effect EFFECT_SPECIAL_DEFENSE_DOWN_2, AI_CBM_SpDefDown
 	if_effect EFFECT_ACCURACY_DOWN_2, AI_CBM_AccDown
 	if_effect EFFECT_EVASION_DOWN_2, AI_CBM_EvasionDown
@@ -666,7 +666,7 @@ AI_CheckViability:
 	if_effect EFFECT_DEFENSE_DOWN, AI_CV_DefenseDown
 	if_effect EFFECT_SPEED_DOWN, AI_CV_SpeedDown
 	if_effect EFFECT_SPECIAL_ATTACK_DOWN, AI_CV_SpAtkDown
-	if_effect EFFECT_SPECIAL_DEFENSE_DOWN, AI_CV_SpDefDown
+	if_effect EFFECT_JUNK_1, AI_CV_SpDefDown
 	if_effect EFFECT_ACCURACY_DOWN, AI_CV_AccuracyDown
 	if_effect EFFECT_EVASION_DOWN, AI_CV_EvasionDown
 	if_effect EFFECT_HAZE, AI_CV_Haze
@@ -693,7 +693,7 @@ AI_CheckViability:
 	if_effect EFFECT_ATTACK_DOWN_2, AI_CV_AttackDown
 	if_effect EFFECT_DEFENSE_DOWN_2, AI_CV_DefenseDown
 	if_effect EFFECT_SPEED_DOWN_2, AI_CV_SpeedDown
-	if_effect EFFECT_SPECIAL_ATTACK_DOWN_2, AI_CV_SpAtkDown
+	if_effect EFFECT_JUNK_2, AI_CV_SpAtkDown
 	if_effect EFFECT_SPECIAL_DEFENSE_DOWN_2, AI_CV_SpDefDown
 	if_effect EFFECT_ACCURACY_DOWN_2, AI_CV_AccuracyDown
 	if_effect EFFECT_EVASION_DOWN_2, AI_CV_EvasionDown
@@ -2631,7 +2631,7 @@ AI_SetupFirstTurn_SetupEffectsToEncourage:
     .byte EFFECT_DEFENSE_DOWN
     .byte EFFECT_SPEED_DOWN
     .byte EFFECT_SPECIAL_ATTACK_DOWN
-    .byte EFFECT_SPECIAL_DEFENSE_DOWN
+    .byte EFFECT_JUNK_1
     .byte EFFECT_ACCURACY_DOWN
     .byte EFFECT_EVASION_DOWN
     .byte EFFECT_CONVERSION
@@ -2649,7 +2649,7 @@ AI_SetupFirstTurn_SetupEffectsToEncourage:
     .byte EFFECT_ATTACK_DOWN_2
     .byte EFFECT_DEFENSE_DOWN_2
     .byte EFFECT_SPEED_DOWN_2
-    .byte EFFECT_SPECIAL_ATTACK_DOWN_2
+    .byte EFFECT_JUNK_2
     .byte EFFECT_SPECIAL_DEFENSE_DOWN_2
     .byte EFFECT_ACCURACY_DOWN_2
     .byte EFFECT_EVASION_DOWN_2
@@ -2978,7 +2978,7 @@ AI_HPAware_DiscouragedEffectsWhenMediumHP:
     .byte EFFECT_DEFENSE_DOWN
     .byte EFFECT_SPEED_DOWN
     .byte EFFECT_SPECIAL_ATTACK_DOWN
-    .byte EFFECT_SPECIAL_DEFENSE_DOWN
+    .byte EFFECT_JUNK_1
     .byte EFFECT_ACCURACY_DOWN
     .byte EFFECT_EVASION_DOWN
     .byte EFFECT_BIDE
@@ -2996,7 +2996,7 @@ AI_HPAware_DiscouragedEffectsWhenMediumHP:
     .byte EFFECT_ATTACK_DOWN_2
     .byte EFFECT_DEFENSE_DOWN_2
     .byte EFFECT_SPEED_DOWN_2
-    .byte EFFECT_SPECIAL_ATTACK_DOWN_2
+    .byte EFFECT_JUNK_2
     .byte EFFECT_SPECIAL_DEFENSE_DOWN_2
     .byte EFFECT_ACCURACY_DOWN_2
     .byte EFFECT_EVASION_DOWN_2
@@ -3022,7 +3022,7 @@ AI_HPAware_DiscouragedEffectsWhenLowHP:
     .byte EFFECT_DEFENSE_DOWN
     .byte EFFECT_SPEED_DOWN
     .byte EFFECT_SPECIAL_ATTACK_DOWN
-    .byte EFFECT_SPECIAL_DEFENSE_DOWN
+    .byte EFFECT_JUNK_1
     .byte EFFECT_ACCURACY_DOWN
     .byte EFFECT_EVASION_DOWN
     .byte EFFECT_BIDE
@@ -3040,7 +3040,7 @@ AI_HPAware_DiscouragedEffectsWhenLowHP:
     .byte EFFECT_ATTACK_DOWN_2
     .byte EFFECT_DEFENSE_DOWN_2
     .byte EFFECT_SPEED_DOWN_2
-    .byte EFFECT_SPECIAL_ATTACK_DOWN_2
+    .byte EFFECT_JUNK_2
     .byte EFFECT_SPECIAL_DEFENSE_DOWN_2
     .byte EFFECT_ACCURACY_DOWN_2
     .byte EFFECT_EVASION_DOWN_2
@@ -3075,7 +3075,7 @@ AI_HPAware_DiscouragedEffectsWhenTargetMediumHP:
     .byte EFFECT_DEFENSE_DOWN
     .byte EFFECT_SPEED_DOWN
     .byte EFFECT_SPECIAL_ATTACK_DOWN
-    .byte EFFECT_SPECIAL_DEFENSE_DOWN
+    .byte EFFECT_JUNK_1
     .byte EFFECT_ACCURACY_DOWN
     .byte EFFECT_EVASION_DOWN
     .byte EFFECT_MIST
@@ -3090,7 +3090,7 @@ AI_HPAware_DiscouragedEffectsWhenTargetMediumHP:
     .byte EFFECT_ATTACK_DOWN_2
     .byte EFFECT_DEFENSE_DOWN_2
     .byte EFFECT_SPEED_DOWN_2
-    .byte EFFECT_SPECIAL_ATTACK_DOWN_2
+    .byte EFFECT_JUNK_2
     .byte EFFECT_SPECIAL_DEFENSE_DOWN_2
     .byte EFFECT_ACCURACY_DOWN_2
     .byte EFFECT_EVASION_DOWN_2
@@ -3119,7 +3119,7 @@ AI_HPAware_DiscouragedEffectsWhenTargetLowHP:
     .byte EFFECT_DEFENSE_DOWN
     .byte EFFECT_SPEED_DOWN
     .byte EFFECT_SPECIAL_ATTACK_DOWN
-    .byte EFFECT_SPECIAL_DEFENSE_DOWN
+    .byte EFFECT_JUNK_1
     .byte EFFECT_ACCURACY_DOWN
     .byte EFFECT_EVASION_DOWN
     .byte EFFECT_BIDE
@@ -3142,7 +3142,7 @@ AI_HPAware_DiscouragedEffectsWhenTargetLowHP:
     .byte EFFECT_ATTACK_DOWN_2
     .byte EFFECT_DEFENSE_DOWN_2
     .byte EFFECT_SPEED_DOWN_2
-    .byte EFFECT_SPECIAL_ATTACK_DOWN_2
+    .byte EFFECT_JUNK_2
     .byte EFFECT_SPECIAL_DEFENSE_DOWN_2
     .byte EFFECT_ACCURACY_DOWN_2
     .byte EFFECT_EVASION_DOWN_2

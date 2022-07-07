@@ -749,9 +749,9 @@ static const u8 sMentalHerbDesc[] = _(
     "of infatuation.");
 
 static const u8 sChoiceBandDesc[] = _(
-    "Raises a move's\n"
-    "power, but permits\n"
-    "only that move.");
+    "Raises ATTACK, but\n"
+    "permits only the\n"
+    "first chosen move.");
 
 static const u8 sKingsRockDesc[] = _(
     "A hold item that\n"
@@ -946,7 +946,137 @@ static const u8 sStickDesc[] = _(
     "A hold item that\n"
     "raises FARFETCH'D's\n"
     "critical-hit ratio.");
+	
+static const u8 sChoiceSpecsDesc[] =_(
+	"Raises SP.ATK, but\n"
+    "permits only the\n"
+    "first chosen move.");
+	
+static const u8 sChoiceScarfDesc[] = _(
+	"Raises SPEED, but\n"
+    "permits only the\n"
+    "first chosen move.");
+	
+static const u8 sCalmSoulDesc[] = _(
+	"Unshakeable. When\n"
+	"held, maximizes\n"
+	"NORMAL power.");
 
+static const u8 sLivingSoulDesc[] = _(
+	"Pleasant. When\n"
+	"held, maximizes\n"
+	"GRASS power.");
+
+static const u8 sBurningSoulDesc[] = _(
+	"Untameable. When\n"
+	"held, maximizes\n"
+	"FIRE power.");
+
+static const u8 sDrownedSoulDesc[] = _(
+	"Lost at sea. When\n"
+	"held, maximizes\n"
+	"WATER power.");
+
+static const u8 sFreeSoulDesc[] = _(
+	"Carefree. When\n"
+	"held, maximizes\n"
+	"FLYING power.");
+
+static const u8 sCreepySoulDesc[] = _(
+	"Unnerving. When\n"
+	"held, maximizes\n"
+	"BUG power.");
+
+static const u8 sStaticSoulDesc[] = _(
+	"Unchanging. When\n"
+	"held, maximizes\n"
+	"ELECTRIC power.");
+
+static const u8 sDecayedSoulDesc[] = _(
+	"Far gone. When\n"
+	"held, maximizes\n"
+	"POISON power.");
+
+static const u8 sVigorSoulDesc[] = _(
+	"Powerful. When\n"
+	"held, maximizes\n"
+	"FIGHTING power.");
+
+static const u8 sVimSoulDesc[] = _(
+	"Relentless. When\n"
+	"held, maximizes\n"
+	"PSYCHIC power.");
+
+static const u8 sSolidSoulDesc[] = _(
+	"Steadfast. When\n"
+	"held, maximizes\n"
+	"ROCK power.");
+
+static const u8 sShakySoulDesc[] = _(
+	"Wavering. When\n"
+	"held, maximizes\n"
+	"GROUND power.");
+
+static const u8 sHollowSoulDesc[] = _(
+	"Unthinking. When\n"
+	"held, maximizes\n"
+	"STEEL power.");
+
+static const u8 sPhantomSoulDesc[] = _(
+	"Unknowable. When\n"
+	"held, maximizes\n"
+	"GHOST power.");
+
+static const u8 sWickedSoulDesc[] = _(
+	"Unbelieveable. When\n"
+	"held, maximizes\n"
+	"DARK power.");
+
+static const u8 sColdSoulDesc[] = _(
+	"Unfeeling. When\n"
+	"held, maximizes\n"
+	"ICE power.");
+
+static const u8 sFierceSoulDesc[] = _(
+	"Insurpassable. When\n"
+	"held, maximizes\n"
+	"DRAGON power.");
+
+static const u8 sMysticSoulDesc[] = _(
+	"Inscrutable. When\n"
+	"held, maximizes\n"
+	"FAIRY power.");
+	
+static const u8 sAlphaStoneDesc[] = _(
+    "Makes certain\n"
+    "species of POKéMON\n"
+    "evolve further.");
+	
+static const u8 sOmegaStoneDesc[] = _(
+    "Makes certain\n"
+    "species of POKéMON\n"
+    "evolve further.");
+	
+static const u8 sDuskStoneDesc[] = _(
+    "Makes certain\n"
+    "species of POKéMON\n"
+    "evolve.");
+	
+static const u8 sDawnStoneDesc[] = _(
+    "Makes certain\n"
+    "species of POKéMON\n"
+    "evolve.");
+	
+static const u8 sHeartStoneDesc[] = _(
+    "Makes certain\n"
+    "species of POKéMON\n"
+    "evolve.");
+	
+static const u8 sIceStoneDesc[] = _(
+    "Makes certain\n"
+    "species of POKéMON\n"
+    "evolve.");
+	
 static const u8 sRedScarfDesc[] = _(
     "A hold item that\n"
     "raises COOL in\n"

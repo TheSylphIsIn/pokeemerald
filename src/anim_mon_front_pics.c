@@ -392,6 +392,11 @@ const u32 gMonFrontPic_Latios[] = INCBIN_U32("graphics/pokemon/latios/anim_front
 const u32 gMonFrontPic_Jirachi[] = INCBIN_U32("graphics/pokemon/jirachi/anim_front.4bpp.lz");
 const u32 gMonFrontPic_Deoxys[] = INCBIN_U32("graphics/pokemon/deoxys/anim_front.4bpp.lz");
 const u32 gMonFrontPic_Chimecho[] = INCBIN_U32("graphics/pokemon/chimecho/anim_front.4bpp.lz");
+const u32 gMonFrontPic_Dubsnake[] = INCBIN_U32("graphics/pokemon/dubsnake/anim_front.4bpp.lz");
+const u32 gMonFrontPic_Hydroil[] = INCBIN_U32("graphics/pokemon/hydroil/anim_front.4bpp.lz");
+const u32 gMonFrontPic_Wycern[] = INCBIN_U32("graphics/pokemon/wycern/anim_front.4bpp.lz");
+const u32 gMonFrontPic_Bitteragon[] = INCBIN_U32("graphics/pokemon/bitteragon/anim_front.4bpp.lz");
+// const u32 gMonFrontPic_[] = INCBIN_U32("graphics/pokemon//anim_front.4bpp.lz");
 
 const u32 gMonFrontPic_Egg[] = INCBIN_U32("graphics/pokemon/egg/anim_front.4bpp.lz");
 

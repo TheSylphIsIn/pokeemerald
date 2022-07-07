@@ -4580,6 +4580,54 @@ static const union AnimCmd sAnim_CHIMECHO_1[] =
     ANIMCMD_END,
 };
 
+static const union AnimCmd sAnim_DUBSNAKE_1[] = 
+{
+	ANIMCMD_FRAME(0, 10),
+	ANIMCMD_FRAME(1, 60),
+	ANIMCMD_FRAME(0, 1),
+	ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_HYDROIL_1[] = 
+{
+	ANIMCMD_FRAME(0, 10),
+	ANIMCMD_FRAME(1, 30),
+	ANIMCMD_FRAME(0, 10),
+	ANIMCMD_FRAME(1, 10),
+	ANIMCMD_FRAME(0, 10),
+	ANIMCMD_FRAME(1, 10),
+	ANIMCMD_FRAME(0, 10),
+	ANIMCMD_FRAME(1, 20),
+	ANIMCMD_FRAME(0, 10),
+	ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_WYCERN_1[] = 
+{
+	ANIMCMD_FRAME(0, 10),
+	ANIMCMD_FRAME(1, 10),
+	ANIMCMD_FRAME(0, 20),
+	ANIMCMD_FRAME(1, 10),
+	ANIMCMD_FRAME(0, 20),
+	ANIMCMD_FRAME(1, 10),
+	ANIMCMD_FRAME(0, 20),
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_BITTERAGON_1[] = 
+{
+	ANIMCMD_FRAME(0, 15),
+	ANIMCMD_FRAME(1, 45),
+	ANIMCMD_FRAME(0, 15),
+	ANIMCMD_END
+};
+
+
+// static const union AnimCmd sAnim__1[] = 
+// {
+	// ANIMCMD_END
+// };
+
 static const union AnimCmd sAnim_EGG_1[] =
 {
     ANIMCMD_FRAME(0, 6),
@@ -6805,6 +6853,32 @@ static const union AnimCmd *const sAnims_CHIMECHO[] ={
     sAnim_CHIMECHO_1,
 };
 
+static const union AnimCmd *const sAnims_DUBSNAKE[] ={
+	sAnim_GeneralFrame0,
+	sAnim_DUBSNAKE_1,
+};
+
+static const union AnimCmd *const sAnims_HYDROIL[] ={
+	sAnim_GeneralFrame0,
+	sAnim_HYDROIL_1,
+};
+
+static const union AnimCmd *const sAnims_WYCERN[] ={
+	sAnim_GeneralFrame0,
+	sAnim_WYCERN_1,
+};
+
+static const union AnimCmd *const sAnims_BITTERAGON[] ={
+	sAnim_GeneralFrame0,
+	sAnim_BITTERAGON_1,
+};
+
+
+// static const union AnimCmd *const sAnims_[] ={
+	// sAnim_GeneralFrame0,
+	// sAnim__1,
+// };
+
 static const union AnimCmd *const sAnims_EGG[] ={
     sAnim_GeneralFrame0,
     sAnim_EGG_1,
@@ -7362,6 +7436,10 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[] =
     ANIM_CMD(JIRACHI),
     ANIM_CMD(DEOXYS),
     ANIM_CMD(CHIMECHO),
+	ANIM_CMD(DUBSNAKE),
+	ANIM_CMD(HYDROIL),
+	ANIM_CMD(WYCERN),
+	ANIM_CMD(BITTERAGON),
     ANIM_CMD(EGG),
     ANIM_CMD(UNOWN_B),
     ANIM_CMD(UNOWN_C),

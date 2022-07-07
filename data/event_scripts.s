@@ -1055,3 +1055,45 @@ Common_EventScript_LegendaryFlewAway::
 	.include "data/text/frontier_brain.inc"
 	.include "data/text/save.inc"
 	.include "data/text/birch_speech.inc"
+
+	.include "data/maps/LoversPark/scripts.inc"
+
+	.include "data/maps/ShadedPass/scripts.inc"
+
+	.include "data/maps/LostMansion/scripts.inc"
+
+	.include "data/maps/LostMansion2/scripts.inc"
+
+	.include "data/maps/LostMansion3/scripts.inc"
+
+	.include "data/maps/LostMansion_1F/scripts.inc"
+
+	.include "data/maps/LostMansion2_1F/scripts.inc"
+
+	.include "data/maps/LostMansion3_1F/scripts.inc"
+
+	.include "data/maps/LostMansion4_1F/scripts.inc"
+
+	.include "data/maps/LostMansion4_2F/scripts.inc"
+
+	.include "data/maps/NewMap1/scripts.inc"
+
+	.include "data/maps/LostMansion_2F_1/scripts.inc"
+
+	.include "data/maps/LostMansion_2F_2/scripts.inc"
+
+	.include "data/maps/LostMansion3_2F_1/scripts.inc"
+
+	.include "data/maps/LostMansion3_2F_2/scripts.inc"
+
+	.include "data/maps/LostMansion_Exit/scripts.inc"
+
+	.include "data/maps/DewfordWilds/scripts.inc"
+
+	.include "data/maps/NewMap2/scripts.inc"
+
+	.include "data/maps/HookyHideout_1F/scripts.inc"
+
+	.include "data/maps/HookyHideout_2F/scripts.inc"
+
+	.include "data/maps/UnknownIsland/scripts.inc"

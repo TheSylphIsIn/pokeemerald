@@ -5746,6 +5746,14 @@ static const u32 sTutorLearnsets[] =
                                 | TUTOR(MOVE_SWAGGER)
                                 | TUTOR(MOVE_SLEEP_TALK)
                                 | TUTOR(MOVE_DEFENSE_CURL)),
+								
+	[SPECIES_DUBSNAKE] = (0),
+	
+	[SPECIES_HYDROIL] = (0),
+	
+	[SPECIES_WYCERN] = (0),
+	
+	[SPECIES_BITTERAGON] = (0),
 
 };
 

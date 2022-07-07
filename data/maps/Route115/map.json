@@ -346,9 +346,18 @@
       "elevation": 0,
       "dest_map": "MAP_TERRA_CAVE_ENTRANCE",
       "dest_warp_id": 0
+    },
+    {
+      "x": 20,
+      "y": 53,
+      "elevation": 0,
+      "dest_map": "MAP_HOOKY_HIDEOUT_1F",
+      "dest_warp_id": 0
     }
   ],
-  "coord_events": [],
+  "coord_events": [
+
+  ],
   "bg_events": [
     {
       "type": "secret_base",
@@ -435,13 +444,6 @@
       "y": 24,
       "elevation": 0,
       "secret_base_id": "SECRET_BASE_BROWN_CAVE3_3"
-    },
-    {
-      "type": "secret_base",
-      "x": 20,
-      "y": 53,
-      "elevation": 0,
-      "secret_base_id": "SECRET_BASE_RED_CAVE3_1"
     },
     {
       "type": "hidden_item",

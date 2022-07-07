@@ -529,6 +529,87 @@ const u32 gItemIconPalette_ThickClub[] = INCBIN_U32("graphics/items/icon_palette
 const u32 gItemIcon_Stick[] = INCBIN_U32("graphics/items/icons/stick.4bpp.lz");
 const u32 gItemIconPalette_Stick[] = INCBIN_U32("graphics/items/icon_palettes/stick.gbapal.lz");
 
+const u32 gItemIcon_ChoiceSpecs[] = INCBIN_U32("graphics/items/icons/choice_specs.4bpp.lz");
+const u32 gItemIconPalette_ChoiceSpecs[] = INCBIN_U32("graphics/items/icon_palettes/choice_specs.gbapal.lz");
+
+const u32 gItemIcon_ChoiceScarf[] = INCBIN_U32("graphics/items/icons/choice_scarf.4bpp.lz");
+const u32 gItemIconPalette_ChoiceScarf[] = INCBIN_U32("graphics/items/icon_palettes/choice_scarf.gbapal.lz");
+
+const u32 gItemIcon_AlphaStone[] = INCBIN_U32("graphics/items/icons/alpha_stone.4bpp.lz");
+const u32 gItemIconPalette_AlphaStone[] = INCBIN_U32("graphics/items/icon_palettes/alpha_stone.gbapal.lz");
+
+const u32 gItemIcon_OmegaStone[] = INCBIN_U32("graphics/items/icons/omega_stone.4bpp.lz");
+const u32 gItemIconPalette_OmegaStone[] = INCBIN_U32("graphics/items/icon_palettes/omega_stone.gbapal.lz");
+
+const u32 gItemIcon_DuskStone[] = INCBIN_U32("graphics/items/icons/dusk_stone.4bpp.lz");
+const u32 gItemIconPalette_DuskStone[] = INCBIN_U32("graphics/items/icon_palettes/dusk_stone.gbapal.lz");
+
+const u32 gItemIcon_DawnStone[] = INCBIN_U32("graphics/items/icons/dawn_stone.4bpp.lz");
+const u32 gItemIconPalette_DawnStone[] = INCBIN_U32("graphics/items/icon_palettes/dawn_stone.gbapal.lz");
+
+const u32 gItemIcon_HeartStone[] = INCBIN_U32("graphics/items/icons/heart_stone.4bpp.lz");
+const u32 gItemIconPalette_HeartStone[] = INCBIN_U32("graphics/items/icon_palettes/heart_stone.gbapal.lz");
+
+const u32 gItemIcon_IceStone[] = INCBIN_U32("graphics/items/icons/ice_stone.4bpp.lz");
+const u32 gItemIconPalette_IceStone[] = INCBIN_U32("graphics/items/icon_palettes/ice_stone.gbapal.lz");
+
+const u32 gItemIcon_CalmSoul[] = INCBIN_U32("graphics/items/icons/soul.4bpp.lz");
+const u32 gItemIconPalette_CalmSoul[] = INCBIN_U32("graphics/items/icon_palettes/normal_tm_hm.gbapal.lz");
+
+const u32 gItemIcon_LivingSoul[] = INCBIN_U32("graphics/items/icons/soul.4bpp.lz");
+const u32 gItemIconPalette_LivingSoul[] = INCBIN_U32("graphics/items/icon_palettes/grass_tm_hm.gbapal.lz");
+
+const u32 gItemIcon_BurningSoul[] = INCBIN_U32("graphics/items/icons/soul.4bpp.lz");
+const u32 gItemIconPalette_BurningSoul[] = INCBIN_U32("graphics/items/icon_palettes/fire_tm_hm.gbapal.lz");
+
+const u32 gItemIcon_DrownedSoul[] = INCBIN_U32("graphics/items/icons/soul.4bpp.lz");
+const u32 gItemIconPalette_DrownedSoul[] = INCBIN_U32("graphics/items/icon_palettes/water_tm_hm.gbapal.lz");
+
+const u32 gItemIcon_FreeSoul[] = INCBIN_U32("graphics/items/icons/soul.4bpp.lz");
+const u32 gItemIconPalette_FreeSoul[] = INCBIN_U32("graphics/items/icon_palettes/flying_tm_hm.gbapal.lz");
+
+const u32 gItemIcon_CreepySoul[] = INCBIN_U32("graphics/items/icons/soul.4bpp.lz");
+const u32 gItemIconPalette_CreepySoul[] = INCBIN_U32("graphics/items/icon_palettes/bug_tm_hm.gbapal.lz");
+
+const u32 gItemIcon_StaticSoul[] = INCBIN_U32("graphics/items/icons/soul.4bpp.lz");
+const u32 gItemIconPalette_StaticSoul[] = INCBIN_U32("graphics/items/icon_palettes/electric_tm_hm.gbapal.lz");
+
+const u32 gItemIcon_DecayedSoul[] = INCBIN_U32("graphics/items/icons/soul.4bpp.lz");
+const u32 gItemIconPalette_DecayedSoul[] = INCBIN_U32("graphics/items/icon_palettes/poison_tm_hm.gbapal.lz");
+
+const u32 gItemIcon_VigorSoul[] = INCBIN_U32("graphics/items/icons/soul.4bpp.lz");
+const u32 gItemIconPalette_VigorSoul[] = INCBIN_U32("graphics/items/icon_palettes/fighting_tm_hm.gbapal.lz");
+
+const u32 gItemIcon_VimSoul[] = INCBIN_U32("graphics/items/icons/soul.4bpp.lz");
+const u32 gItemIconPalette_VimSoul[] = INCBIN_U32("graphics/items/icon_palettes/psychic_tm_hm.gbapal.lz");
+
+const u32 gItemIcon_SolidSoul[] = INCBIN_U32("graphics/items/icons/soul.4bpp.lz");
+const u32 gItemIconPalette_SolidSoul[] = INCBIN_U32("graphics/items/icon_palettes/rock_tm_hm.gbapal.lz");
+
+const u32 gItemIcon_ShakySoul[] = INCBIN_U32("graphics/items/icons/soul.4bpp.lz");
+const u32 gItemIconPalette_ShakySoul[] = INCBIN_U32("graphics/items/icon_palettes/ground_tm_hm.gbapal.lz");
+
+const u32 gItemIcon_HollowSoul[] = INCBIN_U32("graphics/items/icons/soul.4bpp.lz");
+const u32 gItemIconPalette_HollowSoul[] = INCBIN_U32("graphics/items/icon_palettes/steel_tm_hm.gbapal.lz");
+
+const u32 gItemIcon_PhantomSoul[] = INCBIN_U32("graphics/items/icons/soul.4bpp.lz");
+const u32 gItemIconPalette_PhantomSoul[] = INCBIN_U32("graphics/items/icon_palettes/ghost_tm_hm.gbapal.lz");
+
+const u32 gItemIcon_WickedSoul[] = INCBIN_U32("graphics/items/icons/soul.4bpp.lz");
+const u32 gItemIconPalette_WickedSoul[] = INCBIN_U32("graphics/items/icon_palettes/dark_tm_hm.gbapal.lz");
+
+const u32 gItemIcon_ColdSoul[] = INCBIN_U32("graphics/items/icons/soul.4bpp.lz");
+const u32 gItemIconPalette_ColdSoul[] = INCBIN_U32("graphics/items/icon_palettes/ice_tm_hm.gbapal.lz");
+
+const u32 gItemIcon_FierceSoul[] = INCBIN_U32("graphics/items/icons/soul.4bpp.lz");
+const u32 gItemIconPalette_FierceSoul[] = INCBIN_U32("graphics/items/icon_palettes/dragon_tm_hm.gbapal.lz");
+
+const u32 gItemIcon_MysticSoul[] = INCBIN_U32("graphics/items/icons/soul.4bpp.lz");
+const u32 gItemIconPalette_MysticSoul[] = INCBIN_U32("graphics/items/icon_palettes/fairy_tm_hm.gbapal.lz");
+
+// const u32 gItemIcon_[] = INCBIN_U32("graphics/items/icons/.4bpp.lz");
+// const u32 gItemIconPalette_[] = INCBIN_U32("graphics/items/icon_palettes/.gbapal.lz");
+
 const u32 gItemIcon_Scarf[] = INCBIN_U32("graphics/items/icons/scarf.4bpp.lz");
 const u32 gItemIconPalette_RedScarf[] = INCBIN_U32("graphics/items/icon_palettes/red_scarf.gbapal.lz");
 const u32 gItemIconPalette_BlueScarf[] = INCBIN_U32("graphics/items/icon_palettes/blue_scarf.gbapal.lz");

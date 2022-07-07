@@ -63,6 +63,11 @@
 #define MAP_UNDERWATER_ROUTE129 (54 | (0 << 8))
 #define MAP_UNDERWATER_ROUTE105 (55 | (0 << 8))
 #define MAP_UNDERWATER_ROUTE125 (56 | (0 << 8))
+#define MAP_LOVERS_PARK         (57 | (0 << 8))
+#define MAP_SHADED_PASS         (58 | (0 << 8))
+#define MAP_NEW_MAP1            (59 | (0 << 8))
+#define MAP_DEWFORD_WILDS       (60 | (0 << 8))
+#define MAP_NEW_MAP2            (61 | (0 << 8))
 
 // gMapGroup_IndoorLittleroot
 #define MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F    (0 | (1 << 8))
@@ -178,6 +183,8 @@
 #define MAP_RUSTBORO_CITY_FLAT2_2F          (14 | (11 << 8))
 #define MAP_RUSTBORO_CITY_FLAT2_3F          (15 | (11 << 8))
 #define MAP_RUSTBORO_CITY_HOUSE3            (16 | (11 << 8))
+#define MAP_HOOKY_HIDEOUT_1F                (17 | (11 << 8))
+#define MAP_HOOKY_HIDEOUT_2F                (18 | (11 << 8))
 
 // gMapGroup_IndoorFortree
 #define MAP_FORTREE_CITY_HOUSE1            (0 | (12 << 8))
@@ -400,6 +407,20 @@
 #define MAP_TERRA_CAVE_END                           (105 | (24 << 8))
 #define MAP_ALTERING_CAVE                            (106 | (24 << 8))
 #define MAP_METEOR_FALLS_STEVENS_CAVE                (107 | (24 << 8))
+#define MAP_LOST_MANSION                             (108 | (24 << 8))
+#define MAP_LOST_MANSION2                            (109 | (24 << 8))
+#define MAP_LOST_MANSION3                            (110 | (24 << 8))
+#define MAP_LOST_MANSION_1F                          (111 | (24 << 8))
+#define MAP_LOST_MANSION2_1F                         (112 | (24 << 8))
+#define MAP_LOST_MANSION3_1F                         (113 | (24 << 8))
+#define MAP_LOST_MANSION4_1F                         (114 | (24 << 8))
+#define MAP_LOST_MANSION4_2F                         (115 | (24 << 8))
+#define MAP_LOST_MANSION_2F_1                        (116 | (24 << 8))
+#define MAP_LOST_MANSION_2F_2                        (117 | (24 << 8))
+#define MAP_LOST_MANSION3_2F_1                       (118 | (24 << 8))
+#define MAP_LOST_MANSION3_2F_2                       (119 | (24 << 8))
+#define MAP_LOST_MANSION_EXIT                        (120 | (24 << 8))
+#define MAP_UNKNOWN_ISLAND                           (121 | (24 << 8))
 
 // gMapGroup_IndoorDynamic
 #define MAP_SECRET_BASE_RED_CAVE1    (0 | (25 << 8))

@@ -1021,6 +1021,42 @@ RustboroCity_EventScript_Boy1::
 	msgbox RustboroCity_Text_YouCanHave2On2Battle, MSGBOX_NPC
 	end
 
+RustboroCity_EventScript_BlockRoxane::
+	lock
+	msgbox RustboroCity_Text_Roxanne1, MSGBOX_DEFAULT
+	closemessage
+	faceplayer
+	msgbox RustboroCity_Text_Roxanne2, MSGBOX_DEFAULT
+	release
+	end
+	
+RustboroCity_Text_Roxanne1:
+	.string "Yes, I saw one going up to\n"
+	.string "ROUTE 115…$"
+	
+RustboroCity_Text_Roxanne2:
+	.string "Oh, hello. Are you a challenger?\p"
+	.string "I'm sorry, but I'm a litte busy…\n"
+	.string "Some of my students have been\l"
+	.string "playing hooky.\p"
+	.string "I balance my responsibilities as\n"
+	.string "a GYM LEADER and a teacher, but\l"
+	.string "right now I need to be a teacher.\p"
+	.string "Please understand.$"
+	
+RustboroCity_EventScript_Gentleman::
+	lock
+	msgbox RustboroCity_Text_Gentleman, MSGBOX_DEFAULT
+	release
+	end
+	
+RustboroCity_Text_Gentleman:
+	.string "Those rascals! Education is\n"
+	.string "important!\p"
+	.string "Imagine slacking off from school\n"
+	.string "just to play games! How out of\l"
+	.string "whack can your priorities be?$"
+
 RustboroCity_Text_WeShortenItToDevon:
 	.string "The DEVON CORPORATION…\n"
 	.string "We all just shorten it to DEVON.\p"

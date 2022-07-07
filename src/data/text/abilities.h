@@ -76,6 +76,17 @@ static const u8 sPurePowerDescription[] = _("Raises ATTACK.");
 static const u8 sShellArmorDescription[] = _("Blocks critical hits.");
 static const u8 sCacophonyDescription[] = _("Avoids sound-based moves.");
 static const u8 sAirLockDescription[] = _("Negates weather effects.");
+static const u8 sDownpourDescription[] = _("Summons heavy rain.");
+static const u8 sDesolationDescription[] = _("Summons intense sun.");
+static const u8 sSnowWarningDescription[] = _("Summons hail in battle.");
+static const u8 sIceBodyDescription[] = _("Slight HP recovery in hail.");
+static const u8 sSolarPowerDescription[] = _("Trade HP for SP.ATK in sun.");
+static const u8 sSlushRushDescription[] = _("SPEED up in hail.");
+static const u8 sSandForceDescription[] = _("Trade HP for ATK in sand.");
+static const u8 sSandRushDescription[] = _("SPEED up in sandstorm.");
+static const u8 sSnowCloakDescription[] = _("Ups evasion in a hailstorm.");
+static const u8 sWhiteoutDescription[] = _("Trade HP for ATK in hail.");
+static const u8 sRefrigerateDescription[] = _("Turns NORMAL moves to ICE.");
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
 {
@@ -157,6 +168,17 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_SHELL_ARMOR] = _("SHELL ARMOR"),
     [ABILITY_CACOPHONY] = _("CACOPHONY"),
     [ABILITY_AIR_LOCK] = _("AIR LOCK"),
+	[ABILITY_DOWNPOUR] = _("DOWNPOUR"),
+	[ABILITY_DESOLATION] = _("DESOLATION"),
+	[ABILITY_SNOW_WARNING] = _("SNOW WARNING"),
+	[ABILITY_ICE_BODY] = _("ICE BODY"),
+	[ABILITY_SOLAR_POWER] = _("SOLAR POWER"),
+	[ABILITY_SLUSH_RUSH] = _("SLUSH RUSH"),
+	[ABILITY_SAND_FORCE] = _("SAND FORCE"),
+	[ABILITY_SAND_RUSH] = _("SAND RUSH"),
+	[ABILITY_SNOW_CLOAK] = _("SNOW CLOAK"),
+	[ABILITY_WHITEOUT] = _("WHITEOUT"),
+	[ABILITY_REFRIGERATE] = _("REFRIGERATE"),
 };
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
@@ -239,4 +261,15 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
     [ABILITY_SHELL_ARMOR] = sShellArmorDescription,
     [ABILITY_CACOPHONY] = sCacophonyDescription,
     [ABILITY_AIR_LOCK] = sAirLockDescription,
+	[ABILITY_DOWNPOUR] = sDownpourDescription,
+	[ABILITY_DESOLATION] = sDesolationDescription,
+	[ABILITY_SNOW_WARNING] = sSnowWarningDescription,
+	[ABILITY_ICE_BODY] = sIceBodyDescription,
+	[ABILITY_SOLAR_POWER] = sSolarPowerDescription,
+	[ABILITY_SLUSH_RUSH] = sSlushRushDescription,
+	[ABILITY_SAND_FORCE] = sSandForceDescription,
+	[ABILITY_SAND_RUSH] = sSandRushDescription,
+	[ABILITY_SNOW_CLOAK] = sSnowCloakDescription,
+	[ABILITY_WHITEOUT] = sWhiteoutDescription,
+	[ABILITY_REFRIGERATE] = sRefrigerateDescription,
 };

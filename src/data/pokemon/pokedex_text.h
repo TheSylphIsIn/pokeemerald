@@ -2319,3 +2319,27 @@ const u8 gDeoxysPokedexText[] = _(
     "extraterrestrial virus exposed to a laser\n"
     "beam. Its body is configured for superior\n"
     "agility and speed.");
+	
+const u8 gDubsnakePokedexText[] = _(
+	"A POKéMON from the FONEI region.\n"
+	"Even though it can't always agree on where\n"
+	"to go, it's not easy prey because it can\n"
+	"attack from both ends.");
+	
+const u8 gHydroilPokedexText[] = _(
+	"A POKéMON from the FONEI region.\n"
+	"As its two heads bicker, they whip up a\n"
+	"cloud of hot vapors that make it difficult\n"
+	"to approach, then suddenly strike in unison.");
+	
+const u8 gWycernPokedexText[] = _(
+	"A POKéMON from the FONEI region.\n"
+	"Its huge head is a biological\n"
+	"refrigerator. The cooled air is blasted out\n"
+	"the end of its tail as icicles.");
+	
+const u8 gBitteragonPokedexText[] = _(
+	"A POKéMON from the FONEI region.\n"
+	"Its fridge is strong enough to whip up\n"
+	"blizzards, which it vents out its back.\n"
+	"Its fury can be calmed by choral singing.");
