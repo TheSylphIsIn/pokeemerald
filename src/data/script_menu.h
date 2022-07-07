@@ -771,6 +771,15 @@ static const struct MenuAction MultichoiceList_TagMatchType[] =
     {gText_Exit},
 };
 
+static const struct MenuAction MultichoiceList_StarterSet[] = 
+{
+	{gText_StarterSet1},
+	{gText_StarterSet2},
+	{gText_StarterSet3},
+	{gText_StarterSet4},
+	{gText_StarterSet5},
+};
+
 static const struct MenuAction MultichoiceList_Exit[] =
 {
     {gText_Exit},
@@ -898,6 +907,7 @@ static const struct MultichoiceListStruct sMultichoiceLists[] =
     [MULTI_SLATEPORT_TENT_RULES]       = MULTICHOICE(MultichoiceList_SlateportTentRules),
     [MULTI_FALLARBOR_TENT_RULES]       = MULTICHOICE(MultichoiceList_FallarborTentRules),
     [MULTI_TAG_MATCH_TYPE]             = MULTICHOICE(MultichoiceList_TagMatchType),
+	[MULTI_STARTER_SET]				   = MULTICHOICE(MultichoiceList_StarterSet),
 };
 
 const u8 *const gStdStrings[] =

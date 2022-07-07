@@ -221,6 +221,38 @@ Route101_EventScript_RouteSign::
 Route101_EventScript_BirchsBag::
 	lock
 	faceplayer
+	message Route101_Text_StarterSetChoice
+	waitmessage
+	multichoicedefault 15, 0, MULTI_STARTER_SET, 0, TRUE
+	switch VAR_RESULT
+	case 0, StarterSet0
+	case 1, StarterSet1
+	case 2, StarterSet2
+	case 3, StarterSet3
+	case 4, StarterSet4
+	goto StarterSet0
+	
+StarterSet0::
+	setvar VAR_STARTER_SET, 0
+	goto Route101_EventScript_BirchsBagContinue
+	
+StarterSet1::
+	setvar VAR_STARTER_SET, 1
+	goto Route101_EventScript_BirchsBagContinue
+	
+StarterSet2::
+	setvar VAR_STARTER_SET, 2
+	goto Route101_EventScript_BirchsBagContinue
+	
+StarterSet3::
+	setvar VAR_STARTER_SET, 3
+	goto Route101_EventScript_BirchsBagContinue
+	
+StarterSet4::
+	setvar VAR_STARTER_SET, 4
+	goto Route101_EventScript_BirchsBagContinue
+	
+Route101_EventScript_BirchsBagContinue::
 	setflag FLAG_SYS_POKEMON_GET
 	setflag FLAG_RESCUED_BIRCH
 	fadescreen FADE_TO_BLACK
@@ -247,6 +279,10 @@ Route101_EventScript_BirchsBag::
 	waitstate
 	release
 	end
+	
+Route101_Text_StarterSetChoice:
+	.string "Which starter POKéMON set\n"
+	.string "would you like?$"
 
 Route101_EventScript_HideMayInBedroom::
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_BEDROOM

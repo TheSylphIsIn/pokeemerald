@@ -115,11 +115,39 @@ static const u8 sStarterLabelCoords[STARTER_MON_COUNT][2] =
     {8, 4},
 };
 
-static const u16 sStarterMon[STARTER_MON_COUNT] =
+static const u16 sStarterMon0[STARTER_MON_COUNT] =
+{
+    SPECIES_RHYHORN,
+    SPECIES_SHROOMISH,
+    SPECIES_NATU,
+};
+
+static const u16 sStarterMon1[STARTER_MON_COUNT] =
 {
     SPECIES_TREECKO,
-    SPECIES_DUBSNAKE,
+    SPECIES_TORCHIC,
     SPECIES_MUDKIP,
+};
+
+static const u16 sStarterMon2[STARTER_MON_COUNT] =
+{
+    SPECIES_CHIKORITA,
+    SPECIES_CYNDAQUIL,
+    SPECIES_TOTODILE,
+};
+
+static const u16 sStarterMon3[STARTER_MON_COUNT] =
+{
+    SPECIES_BULBASAUR,
+    SPECIES_CHARMANDER,
+    SPECIES_SQUIRTLE,
+};
+
+static const u16 sStarterMon4[STARTER_MON_COUNT] =
+{
+    SPECIES_DUBSNAKE,
+    SPECIES_WYCERN,
+    SPECIES_ABRA,
 };
 
 static const struct BgTemplate sBgTemplates[3] =
@@ -357,7 +385,21 @@ u16 GetStarterPokemon(u16 chosenStarterId)
 {
     if (chosenStarterId > STARTER_MON_COUNT)
         chosenStarterId = 0;
-    return sStarterMon[chosenStarterId];
+	
+	if (VarGet(VAR_STARTER_SET) == 1)
+		return sStarterMon1[chosenStarterId];
+	
+	else if (VarGet(VAR_STARTER_SET) == 2)
+		return sStarterMon2[chosenStarterId];
+	
+	else if (VarGet(VAR_STARTER_SET) == 3)
+		return sStarterMon3[chosenStarterId];
+	
+	else if (VarGet(VAR_STARTER_SET) == 4)
+		return sStarterMon4[chosenStarterId];
+	
+	else 
+		return sStarterMon0[chosenStarterId];
 }
 
 static void VblankCB_StarterChoose(void)

@@ -3022,5 +3022,10 @@ extern const u8 gText_Summary2[];
 extern const u8 gText_PkmnForSwap[];
 extern const u8 gText_SamePkmnInPartyAlready[];
 extern const u8 gText_Cancel3[];
+extern const u8 gText_StarterSet1[];
+extern const u8 gText_StarterSet2[];
+extern const u8 gText_StarterSet3[];
+extern const u8 gText_StarterSet4[];
+extern const u8 gText_StarterSet5[];
 
 #endif // GUARD_STRINGS_H
