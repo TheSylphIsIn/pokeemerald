@@ -1477,6 +1477,17 @@ static const u8 sCloseCombatDescription[] = _(
 	"Goes all-out recklessly.\n"
 	"Lowers both user DEFENSEs.");
 
+static const u8 sBulletPunchDescription[] = _(
+	"Rapid-fire punches that\n"
+	"always move first.");
+	
+static const u8 sIceShardDescription[] = _(
+	"Fires ice needles that\n"
+	"always move first.");
+	
+static const u8 sGaslightDescription[] = _(
+	"Makes the target think it\n"
+	"has a random status problem.");
 
 
 // MOVE_NONE is ignored in this table. Make sure to always subtract 1 before getting the right pointer.
@@ -1841,4 +1852,7 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
 	[MOVE_BRAMBLE - 1] = sBrambleDescription,
 	[MOVE_WOOD_HAMMER - 1] = sWoodHammerDescription,
 	[MOVE_CLOSE_COMBAT - 1] = sCloseCombatDescription,
+	[MOVE_BULLET_PUNCH - 1] = sBulletPunchDescription,
+	[MOVE_ICE_SHARD - 1] = sIceShardDescription,
+	[MOVE_GASLIGHT - 1] = sGaslightDescription,
 };

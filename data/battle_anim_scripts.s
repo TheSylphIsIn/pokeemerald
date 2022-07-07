@@ -9775,6 +9775,18 @@ Move_COLD_SNAP:
 Move_TOMBSTONER:
 Move_NASTY_PLOT:
 Move_GASLIGHT:
+	loadspritegfx ANIM_TAG_AMNESIA
+	loadspritegfx ANIM_TAG_THOUGHT_BUBBLE
+	call SetPsychicBackground
+	delay 8
+	createvisualtask AnimTask_TormentAttacker, 2
+	waitforvisualfinish
+	delay 20
+	call UnsetPsychicBackground
+	delay 10
+	call Status_Curse
+	end
+	
 
 Move_KNOCK_OFF:
 	loadspritegfx ANIM_TAG_SLAM_HIT_2

@@ -237,6 +237,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectCloseCombat	         @ EFFECT_CLOSE_COMBAT
 	.4byte BattleScript_EffectFreeze 				 @ EFFECT_FREEZE
 	.4byte BattleScript_EffectSpecialAttackUpHit	 @ EFFECT_SPECIAL_ATTACK_UP_HIT
+	.4byte BattleScript_EffectGaslight				 @ EFFECT_GASLIGHT
 
 BattleScript_EffectHit::
 	jumpifnotmove MOVE_SURF, BattleScript_HitFromAtkCanceler
@@ -2918,6 +2919,20 @@ BattleScript_EffectFreeze::
 BattleScript_EffectSpecialAttackUpHit::
 	setmoveeffect MOVE_EFFECT_SP_ATK_PLUS_1 | MOVE_EFFECT_AFFECTS_USER
 	goto BattleScript_EffectHit
+	
+BattleScript_EffectGaslight::
+	attackcanceler
+	attackstring
+	ppreduce
+	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_ButItFailed
+	jumpifstatus BS_TARGET, STATUS1_ANY, BattleScript_EffectConfuse
+	accuracycheck BattleScript_ButItFailed, ACC_CURR_MOVE
+	jumpifsideaffecting BS_TARGET, SIDE_STATUS_SAFEGUARD, BattleScript_SafeguardProtected
+	attackanimation
+	waitanimation
+	setmoveeffect MOVE_EFFECT_GASLIGHT
+	seteffectprimary
+	goto BattleScript_MoveEnd
 
 BattleScript_FaintAttacker::
 	playfaintcry BS_ATTACKER
