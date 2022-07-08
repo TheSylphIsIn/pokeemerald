@@ -238,6 +238,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectFreeze 				 @ EFFECT_FREEZE
 	.4byte BattleScript_EffectSpecialAttackUpHit	 @ EFFECT_SPECIAL_ATTACK_UP_HIT
 	.4byte BattleScript_EffectGaslight				 @ EFFECT_GASLIGHT
+	.4byte BattleScript_EffectFreezeDry				 @ EFFECT_FREEZE_DRY
 
 BattleScript_EffectHit::
 	jumpifnotmove MOVE_SURF, BattleScript_HitFromAtkCanceler
@@ -2933,6 +2934,10 @@ BattleScript_EffectGaslight::
 	setmoveeffect MOVE_EFFECT_GASLIGHT
 	seteffectprimary
 	goto BattleScript_MoveEnd
+	
+BattleScript_EffectFreezeDry::
+	setmoveeffect MOVE_EFFECT_FREEZE
+	goto BattleScript_EffectHit	
 
 BattleScript_FaintAttacker::
 	playfaintcry BS_ATTACKER

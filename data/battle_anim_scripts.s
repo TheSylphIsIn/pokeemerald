@@ -416,6 +416,7 @@ gBattleAnims_Moves::
 	.4byte Move_TOMBSTONER
 	.4byte Move_NASTY_PLOT
 	.4byte Move_GASLIGHT
+	.4byte Move_FREEZE_DRY
 	.4byte Move_COUNT @ cannot be reached, because last move is Psycho Boost
 
 	.align 2
@@ -9745,6 +9746,34 @@ Move_POISON_JAB:
 Move_POWER_GEM:
 Move_SHADOW_SNEAK:
 Move_X_SCISSOR:
+	loadspritegfx ANIM_TAG_CROSS_IMPACT
+	loadspritegfx ANIM_TAG_SLASH
+	createsprite gSlashSliceSpriteTemplate, ANIM_TARGET, 2, 1, -8, 0
+	playsewithpan SE_M_RAZOR_WIND, SOUND_PAN_TARGET
+	delay 4
+	createsprite gSlashSliceSpriteTemplate, ANIM_TARGET, 2, 1, 8, 0
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 4, 0, 18, 1
+	playsewithpan SE_M_RAZOR_WIND, SOUND_PAN_TARGET
+	waitforvisualfinish
+	delay 4
+	createsprite gSlashSliceSpriteTemplate, ANIM_ATTACKER, 2, 1, -8, 0
+	playsewithpan SE_M_RAZOR_WIND, SOUND_PAN_TARGET
+	delay 4
+	createsprite gSlashSliceSpriteTemplate, ANIM_ATTACKER, 2, 1, 8, 0
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 4, 0, 18, 1
+	playsewithpan SE_M_RAZOR_WIND, SOUND_PAN_TARGET
+	waitforvisualfinish
+	monbg ANIM_TARGET
+	setalpha 12, 8
+	delay 12
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 8, 0, 18, 1
+	createsprite gCrossImpactSpriteTemplate, ANIM_TARGET, 2, 0, 0, 1, 36
+	playsewithpan SE_M_LEER, SOUND_PAN_TARGET
+	waitforvisualfinish
+	clearmonbg ANIM_TARGET
+	blendoff
+	end
+	
 Move_SHADOW_STALK:
 Move_AURA_WAVE:
 Move_COLD_SNAP:
@@ -9786,6 +9815,54 @@ Move_GASLIGHT:
 	delay 10
 	call Status_Curse
 	end
+	
+Move_FREEZE_DRY:
+	loadspritegfx ANIM_TAG_WATER_IMPACT
+	loadspritegfx ANIM_TAG_SMALL_BUBBLES
+	loadspritegfx ANIM_TAG_ICE_CRYSTALS
+	loadspritegfx ANIM_TAG_ICE_CUBE
+	fadetobg BG_ICE
+	waitbgfadeout
+	createvisualtask AnimTask_ShakeMon, 5, ANIM_TARGET, 0, 2, 23, 1
+	delay 5
+	playsewithpan SE_M_CRABHAMMER, SOUND_PAN_TARGET
+	createsprite gSmallBubblePairSpriteTemplate, ANIM_TARGET, 2, 10, 10, 25, ANIM_TARGET
+	delay 4
+	playsewithpan SE_M_CRABHAMMER, SOUND_PAN_TARGET
+	createsprite gSmallBubblePairSpriteTemplate, ANIM_TARGET, 2, -15, 0, 25, ANIM_TARGET
+	delay 4
+	playsewithpan SE_M_CRABHAMMER, SOUND_PAN_TARGET
+	createsprite gSmallBubblePairSpriteTemplate, ANIM_TARGET, 2, 20, 10, 25, ANIM_TARGET
+	delay 4
+	playsewithpan SE_M_CRABHAMMER, SOUND_PAN_TARGET
+	createsprite gSmallBubblePairSpriteTemplate, ANIM_TARGET, 2, 0, -10, 25, ANIM_TARGET
+	delay 4
+	playsewithpan SE_M_CRABHAMMER, SOUND_PAN_TARGET
+	createsprite gSmallBubblePairSpriteTemplate, ANIM_TARGET, 2, -10, 15, 25, ANIM_TARGET
+	delay 4
+	playsewithpan SE_M_CRABHAMMER, SOUND_PAN_TARGET
+	createsprite gSmallBubblePairSpriteTemplate, ANIM_TARGET, 2, 25, 20, 25, ANIM_TARGET
+	delay 4
+	playsewithpan SE_M_CRABHAMMER, SOUND_PAN_TARGET
+	createsprite gSmallBubblePairSpriteTemplate, ANIM_TARGET, 2, -20, 20, 25, ANIM_TARGET
+	delay 4
+	playsewithpan SE_M_CRABHAMMER, SOUND_PAN_TARGET
+	createsprite gSmallBubblePairSpriteTemplate, ANIM_TARGET, 2, 12, 0, 25, ANIM_TARGET
+	waitforvisualfinish
+	playsewithpan SE_M_ICY_WIND, 0
+	waitbgfadein
+	monbg ANIM_DEF_PARTNER
+	splitbgprio ANIM_TARGET
+	setalpha 12, 8
+	createvisualtask AnimTask_FrozenIceCube, 2
+	waitplaysewithpan SE_M_HAIL, SOUND_PAN_TARGET, 17
+	waitforvisualfinish
+	clearmonbg ANIM_DEF_PARTNER
+	blendoff
+	restorebg
+	waitbgfadein
+	end
+	
 	
 
 Move_KNOCK_OFF:

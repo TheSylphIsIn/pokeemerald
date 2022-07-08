@@ -1481,6 +1481,10 @@ static const u8 sBulletPunchDescription[] = _(
 	"Rapid-fire punches that\n"
 	"always move first.");
 	
+static const u8 sDischargeDescription[] = _(
+	"A wave of electricity that\n"
+	"hits all battlers.");
+	
 static const u8 sIceShardDescription[] = _(
 	"Fires ice needles that\n"
 	"always move first.");
@@ -1488,6 +1492,10 @@ static const u8 sIceShardDescription[] = _(
 static const u8 sGaslightDescription[] = _(
 	"Makes the target think it\n"
 	"has a random status problem.");
+	
+static const u8 sFreezeDryDescription[] = _(
+	"Super-effective on WATER.\n"
+	"May cause frostbite.");
 
 
 // MOVE_NONE is ignored in this table. Make sure to always subtract 1 before getting the right pointer.
@@ -1853,6 +1861,8 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
 	[MOVE_WOOD_HAMMER - 1] = sWoodHammerDescription,
 	[MOVE_CLOSE_COMBAT - 1] = sCloseCombatDescription,
 	[MOVE_BULLET_PUNCH - 1] = sBulletPunchDescription,
+	[MOVE_DISCHARGE - 1] = sDischargeDescription,
 	[MOVE_ICE_SHARD - 1] = sIceShardDescription,
 	[MOVE_GASLIGHT - 1] = sGaslightDescription,
+	[MOVE_FREEZE_DRY - 1] = sFreezeDryDescription,
 };

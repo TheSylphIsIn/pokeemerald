@@ -1420,11 +1420,23 @@ static void Cmd_typecalc(void)
             {
                 // check type1
                 if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[gBattlerTarget].type1)
-                    ModulateDmgByType(TYPE_EFFECT_MULTIPLIER(i));
+				{
+					if (gBattleMoves[gCurrentMove].effect == EFFECT_FREEZE_DRY && 
+					gBattleMons[gBattlerTarget].type1 == TYPE_WATER)
+						ModulateDmgByType(20);
+					else 
+						ModulateDmgByType(TYPE_EFFECT_MULTIPLIER(i));
+				}
                 // check type2
                 if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[gBattlerTarget].type2 &&
                     gBattleMons[gBattlerTarget].type1 != gBattleMons[gBattlerTarget].type2)
-                    ModulateDmgByType(TYPE_EFFECT_MULTIPLIER(i));
+                {
+						if (gBattleMoves[gCurrentMove].effect == EFFECT_FREEZE_DRY && 
+					gBattleMons[gBattlerTarget].type2 == TYPE_WATER)
+						ModulateDmgByType(20);
+					else 
+						ModulateDmgByType(TYPE_EFFECT_MULTIPLIER(i));
+				}
             }
             i += 3;
         }

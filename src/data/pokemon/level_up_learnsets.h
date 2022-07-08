@@ -2447,7 +2447,7 @@ static const u16 sTogeticLevelUpLearnset[] = {
 
 static const u16 sNatuLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_PECK),
-    LEVEL_UP_MOVE( 1, MOVE_LEER),
+    LEVEL_UP_MOVE( 1, MOVE_X_SCISSOR),
     LEVEL_UP_MOVE(10, MOVE_NIGHT_SHADE),
     LEVEL_UP_MOVE(20, MOVE_TELEPORT),
     LEVEL_UP_MOVE(30, MOVE_WISH),
@@ -3763,7 +3763,7 @@ static const u16 sMightyenaLevelUpLearnset[] = {
 };
 
 static const u16 sZigzagoonLevelUpLearnset[] = {
-    LEVEL_UP_MOVE( 1, MOVE_TACKLE),
+    LEVEL_UP_MOVE( 1, MOVE_FREEZE_DRY),
     LEVEL_UP_MOVE( 5, MOVE_TAIL_WHIP),
     LEVEL_UP_MOVE( 9, MOVE_HEADBUTT),
     LEVEL_UP_MOVE(13, MOVE_SAND_ATTACK),

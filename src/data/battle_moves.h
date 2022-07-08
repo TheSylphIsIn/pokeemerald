@@ -5599,4 +5599,18 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .flags = FLAG_SNATCH_AFFECTED | FLAG_MAGIC_COAT_AFFECTED,
 		.category = MOVE_CATEGORY_STATUS,
     },
+	
+	[MOVE_FREEZE_DRY] =
+    {
+        .effect = EFFECT_FREEZE_DRY,
+        .power = 75,
+        .type = TYPE_ICE,
+        .accuracy = 100,
+        .pp = 20,
+        .secondaryEffectChance = 10,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_PROTECT_AFFECTED,
+		.category = MOVE_CATEGORY_SPECIAL,
+    },
 };
