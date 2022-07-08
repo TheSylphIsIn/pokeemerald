@@ -1421,8 +1421,10 @@ static void Cmd_typecalc(void)
                 // check type1
                 if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[gBattlerTarget].type1)
 				{
-					if (gBattleMoves[gCurrentMove].effect == EFFECT_FREEZE_DRY && 
-					gBattleMons[gBattlerTarget].type1 == TYPE_WATER)
+					if ((gBattleMoves[gCurrentMove].effect == EFFECT_FREEZE_DRY && 
+					gBattleMons[gBattlerTarget].type1 == TYPE_WATER) ||
+					(gBattleMoves[gCurrentMove].effect == EFFECT_LIGHTNING && 
+					gBattleMons[gBattlerTarget].type1 == TYPE_GRASS))
 						ModulateDmgByType(20);
 					else 
 						ModulateDmgByType(TYPE_EFFECT_MULTIPLIER(i));
@@ -1431,8 +1433,10 @@ static void Cmd_typecalc(void)
                 if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[gBattlerTarget].type2 &&
                     gBattleMons[gBattlerTarget].type1 != gBattleMons[gBattlerTarget].type2)
                 {
-						if (gBattleMoves[gCurrentMove].effect == EFFECT_FREEZE_DRY && 
-					gBattleMons[gBattlerTarget].type2 == TYPE_WATER)
+					if ((gBattleMoves[gCurrentMove].effect == EFFECT_FREEZE_DRY && 
+					gBattleMons[gBattlerTarget].type2 == TYPE_WATER) || 
+					(gBattleMoves[gCurrentMove].effect == EFFECT_LIGHTNING && 
+					gBattleMons[gBattlerTarget].type2 == TYPE_GRASS))
 						ModulateDmgByType(20);
 					else 
 						ModulateDmgByType(TYPE_EFFECT_MULTIPLIER(i));
@@ -1440,6 +1444,13 @@ static void Cmd_typecalc(void)
             }
             i += 3;
         }
+		if ((gBattleMoves[gCurrentMove].effect == EFFECT_SCALE_PIERCE && 
+			(gBattleMons[gBattlerTarget].type1 == TYPE_DRAGON || 
+			 gBattleMons[gBattlerTarget].type2 == TYPE_DRAGON)) ||
+			(gBattleMoves[gCurrentMove].effect == EFFECT_HARPOON_LASH && 
+			(gBattleMons[gBattlerTarget].type1 == TYPE_FLYING || 
+			 gBattleMons[gBattlerTarget].type2 == TYPE_FLYING)))
+			 ModulateDmgByType(20);		
     }
 
     if (gBattleMons[gBattlerTarget].ability == ABILITY_WONDER_GUARD && AttacksThisTurn(gBattlerAttacker, gCurrentMove) == 2

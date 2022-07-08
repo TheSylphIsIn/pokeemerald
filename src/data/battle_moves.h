@@ -5613,4 +5613,46 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .flags = FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_PROTECT_AFFECTED,
 		.category = MOVE_CATEGORY_SPECIAL,
     },
+	
+	[MOVE_SCALE_PIERCE] =
+    {
+        .effect = EFFECT_SCALE_PIERCE,
+        .power = 85,
+        .type = TYPE_FIGHTING,
+        .accuracy = 100,
+        .pp = 20,
+        .secondaryEffectChance = 20,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_PROTECT_AFFECTED |FLAG_MAKES_CONTACT,
+		.category = MOVE_CATEGORY_PHYSICAL,
+    },
+	
+	[MOVE_HARPOON_LASH] =
+    {
+        .effect = EFFECT_HARPOON_LASH,
+        .power = 85,
+        .type = TYPE_DRAGON,
+        .accuracy = 100,
+        .pp = 20,
+        .secondaryEffectChance = 20,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_PROTECT_AFFECTED,
+		.category = MOVE_CATEGORY_PHYSICAL,
+    },
+	
+	[MOVE_LIGHTNING] =
+    {
+        .effect = EFFECT_LIGHTNING,
+        .power = 85,
+        .type = TYPE_ICE,
+        .accuracy = 100,
+        .pp = 20,
+        .secondaryEffectChance = 20,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_PROTECT_AFFECTED,
+		.category = MOVE_CATEGORY_SPECIAL,
+    },
 };

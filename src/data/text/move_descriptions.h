@@ -1496,6 +1496,18 @@ static const u8 sGaslightDescription[] = _(
 static const u8 sFreezeDryDescription[] = _(
 	"Super-effective on WATER.\n"
 	"May cause frostbite.");
+	
+static const u8 sScalePierceDescription[] = _(
+	"A focused karate strike.\n"
+	"Super-effective on DRAGON.");
+	
+static const u8 sHarpoonLashDescription[] = _(
+	"Stabs with a fired tongue.\n"
+	"Super-effective on FLYING.");
+	
+static const u8 sLightningDescription[] = _(
+	"A high-voltage bolt that's\n"
+	"super-effective on GRASS.");
 
 
 // MOVE_NONE is ignored in this table. Make sure to always subtract 1 before getting the right pointer.
@@ -1865,4 +1877,7 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
 	[MOVE_ICE_SHARD - 1] = sIceShardDescription,
 	[MOVE_GASLIGHT - 1] = sGaslightDescription,
 	[MOVE_FREEZE_DRY - 1] = sFreezeDryDescription,
+	[MOVE_SCALE_PIERCE - 1] = sScalePierceDescription,
+	[MOVE_HARPOON_LASH - 1] = sHarpoonLashDescription,
+	[MOVE_LIGHTNING - 1] = sLightningDescription,
 };
