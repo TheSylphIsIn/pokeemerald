@@ -1639,6 +1639,7 @@ const u8 gText_StarterSet2[] = _("HOENN SET");
 const u8 gText_StarterSet3[] = _("JOHTO SET");
 const u8 gText_StarterSet4[] = _("KANTO SET");
 const u8 gText_StarterSet5[] = _("FAKEMON SET");
+const u8 gText_PkmnAbilityChanged[] = _("{STR_VAR_1}'s ability changed\n to {STR_VAR_2}.");
 const u8 gText_Swap2[] = _("SWAP"); // Unused
 const u8 gText_Accept[] = _("ACCEPT"); // Unused
 const u8 gText_AcceptThisPkmn[] = _("Accept this POKéMON?");

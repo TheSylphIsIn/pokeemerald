@@ -165,6 +165,11 @@ const u8 gItemEffect_SacredAsh[7] = {
     [(i) + 1] = 3, /* Friendship change, mid */  \
     [(i) + 2] = 2  /* Friendship change, high */
 
+const u8 gItemEffect_AbilityPill[9] = {
+	[5] = ITEM5_FRIENDSHIP_ALL,
+    VITAMIN_FRIENDSHIP_CHANGE(6),
+};
+
 const u8 gItemEffect_HPUp[10] = {
     [4] = ITEM4_EV_HP,
     [5] = ITEM5_FRIENDSHIP_ALL,
@@ -439,6 +444,7 @@ const u8 *const gItemEffectTable[] =
     [ITEM_RED_FLUTE - ITEM_POTION]     = gItemEffect_RedFlute,
     [ITEM_BERRY_JUICE - ITEM_POTION]   = gItemEffect_BerryJuice,
     [ITEM_SACRED_ASH - ITEM_POTION]    = gItemEffect_SacredAsh,
+	[ITEM_ABILITY_PILL - ITEM_POTION]  = gItemEffect_AbilityPill,
     [ITEM_HP_UP - ITEM_POTION]         = gItemEffect_HPUp,
     [ITEM_PROTEIN - ITEM_POTION]       = gItemEffect_Protein,
     [ITEM_IRON - ITEM_POTION]          = gItemEffect_Iron,

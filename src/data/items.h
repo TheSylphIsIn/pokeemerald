@@ -679,16 +679,16 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_034] =
-    {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
-        .price = 0,
-        .description = sDummyDesc,
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
-    },
+    [ITEM_ABILITY_PILL] = 
+	{
+		.name = _("ABILITY TAB"),
+		.itemId = ITEM_ABILITY_PILL,
+		.price = 10000,
+		.description = sAbilityPillDesc,
+		.pocket = POCKET_ITEMS,
+		.type = ITEM_USE_PARTY_MENU,
+		.fieldUseFunc = ItemUseOutOfBattle_Medicine,
+	},
 
     [ITEM_035] =
     {

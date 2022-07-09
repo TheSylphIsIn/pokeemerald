@@ -451,7 +451,8 @@
     "LostMansion3_2F_1",
     "LostMansion3_2F_2",
     "LostMansion_Exit",
-    "UnknownIsland"
+    "UnknownIsland",
+    "DreamyAbyss"
   ],
   "gMapGroup_IndoorDynamic": [
     "SecretBase_RedCave1",

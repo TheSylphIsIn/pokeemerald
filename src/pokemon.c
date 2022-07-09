@@ -4750,6 +4750,11 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
     s8 evChange;
     u16 evCount;
 
+	if (item == ITEM_ABILITY_PILL && gBaseStats[GetMonData(mon, MON_DATA_SPECIES, NULL)].abilities[1] != 0)
+		//|| item == ITEM_DREAM_PILL && gBaseStats[GetMonData(mon, MON_DATA_SPECIES, NULL).abilities[2] != 0)
+	{
+		return FALSE;
+	}
     // Get item hold effect
     heldItem = GetMonData(mon, MON_DATA_HELD_ITEM, NULL);
     if (heldItem == ITEM_ENIGMA_BERRY)

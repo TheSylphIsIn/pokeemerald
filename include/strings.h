@@ -3027,5 +3027,6 @@ extern const u8 gText_StarterSet2[];
 extern const u8 gText_StarterSet3[];
 extern const u8 gText_StarterSet4[];
 extern const u8 gText_StarterSet5[];
+extern const u8 gText_PkmnAbilityChanged[];
 
 #endif // GUARD_STRINGS_H

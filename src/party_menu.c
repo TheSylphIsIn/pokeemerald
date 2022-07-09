@@ -4321,6 +4321,7 @@ void ItemUseCB_Medicine(u8 taskId, TaskFunc task)
     struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
     u16 item = gSpecialVar_ItemId;
     bool8 canHeal, cannotUse;
+	u32 value;
 
     if (NotUsingHPEVItemOnShedinja(mon, item) == FALSE)
     {
@@ -4370,6 +4371,46 @@ void ItemUseCB_Medicine(u8 taskId, TaskFunc task)
             ResetHPTaskData(taskId, 0, hp);
             return;
         }
+		else if (item == ITEM_ABILITY_PILL)
+		{
+			GetMonData(mon, MON_DATA_ABILITY_NUM, value);
+			if (value == 0 || value == 2)
+			{
+				value++;
+				SetMonData(mon, MON_DATA_ABILITY_NUM, &value);
+			}
+			else
+			{
+				value--;
+				SetMonData(mon, MON_DATA_ABILITY_NUM, &value);
+			}
+			GetMonNickname(mon, gStringVar1);
+			StringCopy(gStringVar2, gAbilityNames[gBaseStats[GetMonData(mon, MON_DATA_SPECIES, NULL)].abilities[value]]);
+			StringExpandPlaceholders(gStringVar4, gText_PkmnAbilityChanged);
+			DisplayPartyMenuMessage(gStringVar4, TRUE);
+			ScheduleBgCopyTilemapToVram(2);
+			gTasks[taskId].func = task;
+		}
+		// else if (item == ITEM_DREAM_PILL)
+		// {
+			// GetMonData(mon, MON_DATA_ABILITY_NUM, value);
+			// if (value >= 1)
+			// {
+				// value += 2;
+				// SetMonData(mon, MON_DATA_ABILITY_NUM, &value);
+			// }
+			// else
+			// {
+				// value -= 2;
+				// SetMonData(mon, MON_DATA_ABILITY_NUM, &value);
+			// }
+			// GetMonNickname(mon, gStringVar1);
+			// gStringVar2 = StringGet_Nickname(gAbilityNames[value]);
+			// StringExpandPlaceholders(gStringVar4, gText_PkmnAbilityChanged);
+			// DisplayPartyMenuMessage(gStringVar4, TRUE);
+			// ScheduleBgCopyTilemapToVram(2);
+			// gTasks[taskId].func = Task_ClosePartyMenuAfterText;
+		// }
         else
         {
             GetMonNickname(mon, gStringVar1);

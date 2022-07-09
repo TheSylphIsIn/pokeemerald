@@ -421,6 +421,7 @@
 #define MAP_LOST_MANSION3_2F_2                       (119 | (24 << 8))
 #define MAP_LOST_MANSION_EXIT                        (120 | (24 << 8))
 #define MAP_UNKNOWN_ISLAND                           (121 | (24 << 8))
+#define MAP_DREAMY_ABYSS                             (122 | (24 << 8))
 
 // gMapGroup_IndoorDynamic
 #define MAP_SECRET_BASE_RED_CAVE1    (0 | (25 << 8))

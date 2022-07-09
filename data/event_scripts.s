@@ -1097,3 +1097,5 @@ Common_EventScript_LegendaryFlewAway::
 	.include "data/maps/HookyHideout_2F/scripts.inc"
 
 	.include "data/maps/UnknownIsland/scripts.inc"
+
+	.include "data/maps/DreamyAbyss/scripts.inc"
