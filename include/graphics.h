@@ -3803,6 +3803,8 @@ extern const u32 gItemIcon_FierceSoul[];
 extern const u32 gItemIconPalette_FierceSoul[];
 extern const u32 gItemIcon_MysticSoul[];
 extern const u32 gItemIconPalette_MysticSoul[];
+extern const u32 gItemIcon_Eviolite[];
+extern const u32 gItemIconPalette_Eviolite[];
 // extern const u32 gItemIcon_[];
 // extern const u32 gItemIconPalette_[];
 // Contest hold items

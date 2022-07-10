@@ -607,6 +607,9 @@ const u32 gItemIconPalette_FierceSoul[] = INCBIN_U32("graphics/items/icon_palett
 const u32 gItemIcon_MysticSoul[] = INCBIN_U32("graphics/items/icons/soul.4bpp.lz");
 const u32 gItemIconPalette_MysticSoul[] = INCBIN_U32("graphics/items/icon_palettes/fairy_tm_hm.gbapal.lz");
 
+const u32 gItemIcon_Eviolite[] = INCBIN_U32("graphics/items/icons/eviolite.4bpp.lz");
+const u32 gItemIconPalette_Eviolite[] = INCBIN_U32("graphics/items/icons/eviolite.gbapal.lz");
+
 // const u32 gItemIcon_[] = INCBIN_U32("graphics/items/icons/.4bpp.lz");
 // const u32 gItemIconPalette_[] = INCBIN_U32("graphics/items/icon_palettes/.gbapal.lz");
 

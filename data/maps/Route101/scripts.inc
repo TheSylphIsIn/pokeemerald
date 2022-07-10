@@ -230,6 +230,7 @@ Route101_EventScript_BirchsBag::
 	case 2, StarterSet2
 	case 3, StarterSet3
 	case 4, StarterSet4
+	case 5, StarterSetInfo
 	goto StarterSet0
 	
 StarterSet0::
@@ -251,6 +252,26 @@ StarterSet3::
 StarterSet4::
 	setvar VAR_STARTER_SET, 4
 	goto Route101_EventScript_BirchsBagContinue
+	
+StarterSetInfo::
+	msgbox Text_StarterSetInfo, MSGBOX_SIGN
+	goto Route101_EventScript_BirchsBag
+	
+Text_StarterSetInfo:
+	.string "Different sets of three starters.\n"
+	.string "Your choice will not change any\l"
+	.string "enemy trainers' parties, so it's\l"
+	.string "just for fun.\p"
+	.string "DEFAULT SET:\n"
+	.string "RHYHORN, NATU, SHROOMISH\p"
+	.string "HOENN SET:\n"
+	.string "TREECKO, TORCHIC, MUDKIP\p"
+	.string "JOHTO SET:\n"
+	.string "CHIKORITA, CYNDAQUIL, TOTODILE\p"
+	.string "KANTO SET:\n"
+	.string "BULBASAUR, CHARMANDER, SQUIRTLE\p"
+	.string "FAKEMON SET:\n"
+	.string "GLASMA, ELADRIFT, SANDUDE$"
 	
 Route101_EventScript_BirchsBagContinue::
 	setflag FLAG_SYS_POKEMON_GET

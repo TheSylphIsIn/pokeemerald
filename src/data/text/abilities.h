@@ -87,6 +87,7 @@ static const u8 sSandRushDescription[] = _("SPEED up in sandstorm.");
 static const u8 sSnowCloakDescription[] = _("Ups evasion in a hailstorm.");
 static const u8 sWhiteoutDescription[] = _("Trade HP for ATK in hail.");
 static const u8 sRefrigerateDescription[] = _("Turns NORMAL moves to ICE.");
+static const u8 sFurCoatDescription[] = _("Raises DEFENSE.");
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
 {
@@ -179,6 +180,7 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
 	[ABILITY_SNOW_CLOAK] = _("SNOW CLOAK"),
 	[ABILITY_WHITEOUT] = _("WHITEOUT"),
 	[ABILITY_REFRIGERATE] = _("REFRIGERATE"),
+	[ABILITY_FUR_COAT] = _("FUR COAT"),
 };
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
@@ -272,4 +274,5 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 	[ABILITY_SNOW_CLOAK] = sSnowCloakDescription,
 	[ABILITY_WHITEOUT] = sWhiteoutDescription,
 	[ABILITY_REFRIGERATE] = sRefrigerateDescription,
+	[ABILITY_FUR_COAT] = sFurCoatDescription,
 };

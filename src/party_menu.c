@@ -4373,8 +4373,8 @@ void ItemUseCB_Medicine(u8 taskId, TaskFunc task)
         }
 		else if (item == ITEM_ABILITY_PILL)
 		{
-			GetMonData(mon, MON_DATA_ABILITY_NUM, value);
-			if (value == 0 || value == 2)
+			value = GetMonData(mon, MON_DATA_ABILITY_NUM, NULL);
+			if (value == 0)
 			{
 				value++;
 				SetMonData(mon, MON_DATA_ABILITY_NUM, &value);
@@ -4387,7 +4387,7 @@ void ItemUseCB_Medicine(u8 taskId, TaskFunc task)
 			GetMonNickname(mon, gStringVar1);
 			StringCopy(gStringVar2, gAbilityNames[gBaseStats[GetMonData(mon, MON_DATA_SPECIES, NULL)].abilities[value]]);
 			StringExpandPlaceholders(gStringVar4, gText_PkmnAbilityChanged);
-			DisplayPartyMenuMessage(gStringVar4, TRUE);
+			DisplayPartyMenuMessage(gStringVar4, FALSE);
 			ScheduleBgCopyTilemapToVram(2);
 			gTasks[taskId].func = task;
 		}

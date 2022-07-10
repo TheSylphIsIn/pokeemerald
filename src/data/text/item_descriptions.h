@@ -1052,6 +1052,11 @@ static const u8 sMysticSoulDesc[] = _(
 	"held, maximizes\n"
 	"FAIRY power.");
 	
+static const u8 sEvioliteDesc[] = _(
+	"Ups SP.DEFENSE\n"
+	"and DEFENSE if\n"
+	"holder can evolve.");
+	
 static const u8 sAlphaStoneDesc[] = _(
     "Makes certain\n"
     "species of POKéMON\n"

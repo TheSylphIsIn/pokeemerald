@@ -3134,7 +3134,6 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     defense = defender->defense;
     spAttack = attacker->spAttack;
     spDefense = defender->spDefense;
-	speed = attacker->speed;
 
     // Get attacker hold item info    
     if (attacker->item == ITEM_ENIGMA_BERRY)
@@ -3162,6 +3161,9 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
 
     if (attacker->ability == ABILITY_HUGE_POWER || attacker->ability == ABILITY_PURE_POWER)
         attack *= 2;
+	
+	if (defender->ability == ABILITY_FUR_COAT)
+		defense *= 2;
 
     if (ShouldGetStatBadgeBoost(FLAG_BADGE01_GET, battlerIdAtk))
         attack = (110 * attack) / 100;
@@ -3189,8 +3191,6 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         attack = (150 * attack) / 100;
 	if (attackerHoldEffect == HOLD_EFFECT_CHOICE_SPECS)
         spAttack = (150 * spAttack) / 100;
-	if (attackerHoldEffect == HOLD_EFFECT_CHOICE_SCARF)
-        speed = (150 * speed) / 100;
     if (attackerHoldEffect == HOLD_EFFECT_SOUL_DEW && !(gBattleTypeFlags & (BATTLE_TYPE_FRONTIER)) && (attacker->species == SPECIES_LATIAS || attacker->species == SPECIES_LATIOS))
         spAttack = (150 * spAttack) / 100;
     if (defenderHoldEffect == HOLD_EFFECT_SOUL_DEW && !(gBattleTypeFlags & (BATTLE_TYPE_FRONTIER)) && (defender->species == SPECIES_LATIAS || defender->species == SPECIES_LATIOS))
@@ -3205,6 +3205,11 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         defense *= 2;
     if (attackerHoldEffect == HOLD_EFFECT_THICK_CLUB && (attacker->species == SPECIES_CUBONE || attacker->species == SPECIES_MAROWAK))
         attack *= 2;
+	if (defenderHoldEffect == HOLD_EFFECT_EVIOLITE && gEvolutionTable[defender->species][0].method != 0)
+	{
+		defense = (150 * defense) / 100;
+		spDefense = (150 * spDefense) / 100;
+	}
 
     // Apply abilities / field sports
     if (defender->ability == ABILITY_THICK_FAT && (type == TYPE_FIRE || type == TYPE_ICE))

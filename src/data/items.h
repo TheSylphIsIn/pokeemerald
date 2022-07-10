@@ -3032,12 +3032,14 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_0F6] =
+    [ITEM_EVIOLITE] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
+        .name = _("EVIOLITE"),
+        .itemId = ITEM_EVIOLITE,
         .price = 0,
-        .description = sDummyDesc,
+		.holdEffect = HOLD_EFFECT_EVIOLITE,
+		.holdEffectParam = 0,
+        .description = sEvioliteDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,

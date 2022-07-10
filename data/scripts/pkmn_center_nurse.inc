@@ -59,6 +59,9 @@ EventScript_PkmnCenterNurse_ReturnPkmn::
 	applymovement VAR_0x800B, Movement_PkmnCenterNurse_Bow
 	waitmovement 0
 	message gText_WeHopeToSeeYouAgain
+	waitmessage
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_FaceDown
+	waitmovement 0
 	return
 
 EventScript_PkmnCenterNurse_ReturnPkmn2::
@@ -67,7 +70,14 @@ EventScript_PkmnCenterNurse_ReturnPkmn2::
 	applymovement VAR_0x800B, Movement_PkmnCenterNurse_Bow
 	waitmovement 0
 	message gText_WeHopeToSeeYouAgain2
+	waitmessage
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_FaceDown
+	waitmovement 0
 	return
+	
+Movement_FaceDown:
+	face_down
+	step_end
 
 EventScript_PkmnCenterNurse_PlayerWaitingInUnionRoom::
 	goto_if_set FLAG_NURSE_UNION_ROOM_REMINDER, EventScript_PkmnCenterNurse_ReturnPkmn
