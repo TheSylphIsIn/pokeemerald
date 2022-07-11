@@ -3805,6 +3805,10 @@ extern const u32 gItemIcon_MysticSoul[];
 extern const u32 gItemIconPalette_MysticSoul[];
 extern const u32 gItemIcon_Eviolite[];
 extern const u32 gItemIconPalette_Eviolite[];
+extern const u32 gItemIconPalette_FairyTMHM[];
+extern const u32 gItemIconPalette_BugTMHM[];
+extern const u32 gItemIcon_CandiedBerry[];
+extern const u32 gItemIconPalette_CandiedBerry[];
 // extern const u32 gItemIcon_[];
 // extern const u32 gItemIconPalette_[];
 // Contest hold items

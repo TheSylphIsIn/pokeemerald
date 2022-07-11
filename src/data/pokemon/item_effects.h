@@ -365,7 +365,7 @@ const u8 gItemEffect_LumBerry[6] = {
 
 const u8 gItemEffect_SitrusBerry[7] = {
     [4] = ITEM4_HEAL_HP,
-    [6] = 30, // Amount of HP to recover
+    [6] = ITEM6_HEAL_HP_QUARTER, // Amount of HP to recover
 };
 
 #define EV_BERRY_FRIENDSHIP_CHANGE          \
@@ -445,6 +445,7 @@ const u8 *const gItemEffectTable[] =
     [ITEM_BERRY_JUICE - ITEM_POTION]   = gItemEffect_BerryJuice,
     [ITEM_SACRED_ASH - ITEM_POTION]    = gItemEffect_SacredAsh,
 	[ITEM_ABILITY_PILL - ITEM_POTION]  = gItemEffect_AbilityPill,
+	[ITEM_CANDIED_BERRY - ITEM_POTION] = gItemEffect_RareCandy,
     [ITEM_HP_UP - ITEM_POTION]         = gItemEffect_HPUp,
     [ITEM_PROTEIN - ITEM_POTION]       = gItemEffect_Protein,
     [ITEM_IRON - ITEM_POTION]          = gItemEffect_Iron,

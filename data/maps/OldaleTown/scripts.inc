@@ -75,7 +75,8 @@ OldaleTown_EventScript_GoToMartEast::
 
 OldaleTown_EventScript_ExplainPokemonMart::
 	msgbox OldaleTown_Text_ThisIsAPokemonMart, MSGBOX_DEFAULT
-	giveitem ITEM_POTION
+	giveitem ITEM_CANDIED_BERRY
+	giveitem ITEM_RARE_CANDY
 	goto_if_eq VAR_RESULT, FALSE, OldaleTown_EventScript_BagIsFull
 	msgbox OldaleTown_Text_PotionExplanation, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_POTION_OLDALE

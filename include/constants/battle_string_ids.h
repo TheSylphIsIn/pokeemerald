@@ -387,8 +387,10 @@
 #define STRINGID_MOVEWASHEDOUT				387
 #define STRINGID_MOVEEVAPORATED				388
 #define STRINGID_PKMNABSORBEDLIGHTNINGROD	389
+#define STRINGID_PLAYERLOSTTOENEMYTRAINER   390
+#define STRINGID_PLAYERPAIDPRIZEMONEY       391
 
-#define BATTLESTRINGS_COUNT                 390
+#define BATTLESTRINGS_COUNT                 392
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,

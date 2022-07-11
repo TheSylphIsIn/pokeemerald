@@ -610,6 +610,9 @@ const u32 gItemIconPalette_MysticSoul[] = INCBIN_U32("graphics/items/icon_palett
 const u32 gItemIcon_Eviolite[] = INCBIN_U32("graphics/items/icons/eviolite.4bpp.lz");
 const u32 gItemIconPalette_Eviolite[] = INCBIN_U32("graphics/items/icons/eviolite.gbapal.lz");
 
+const u32 gItemIcon_CandiedBerry[] = INCBIN_U32("graphics/items/icons/candied_berry.4bpp.lz");
+const u32 gItemIconPalette_CandiedBerry[] = INCBIN_U32("graphics/items/icon_palettes/candied_berry.gbapal.lz");
+
 // const u32 gItemIcon_[] = INCBIN_U32("graphics/items/icons/.4bpp.lz");
 // const u32 gItemIconPalette_[] = INCBIN_U32("graphics/items/icon_palettes/.gbapal.lz");
 
@@ -734,6 +737,10 @@ const u32 gItemIconPalette_GhostTMHM[] = INCBIN_U32("graphics/items/icon_palette
 const u32 gItemIconPalette_RockTMHM[] = INCBIN_U32("graphics/items/icon_palettes/rock_tm_hm.gbapal.lz");
 
 const u32 gItemIconPalette_FlyingTMHM[] = INCBIN_U32("graphics/items/icon_palettes/flying_tm_hm.gbapal.lz");
+
+const u32 gItemIconPalette_FairyTMHM[] = INCBIN_U32("graphics/items/icon_palettes/fairy_tm_hm.gbapal.lz");
+
+const u32 gItemIconPalette_BugTMHM[] = INCBIN_U32("graphics/items/icon_palettes/bug_tm_hm.gbapal.lz");
 
 const u32 gItemIcon_HM[] = INCBIN_U32("graphics/items/icons/hm.4bpp.lz");
 

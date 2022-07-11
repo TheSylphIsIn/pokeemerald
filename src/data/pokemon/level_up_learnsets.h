@@ -2918,7 +2918,7 @@ static const u16 sScizorLevelUpLearnset[] = {
 };
 
 static const u16 sShuckleLevelUpLearnset[] = {
-    LEVEL_UP_MOVE( 1, MOVE_CONSTRICT),
+    LEVEL_UP_MOVE( 1, MOVE_CLOSE_COMBAT),
     LEVEL_UP_MOVE( 1, MOVE_WITHDRAW),
     LEVEL_UP_MOVE( 9, MOVE_WRAP),
     LEVEL_UP_MOVE(14, MOVE_ENCORE),
