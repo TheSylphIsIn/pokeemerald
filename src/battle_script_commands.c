@@ -75,6 +75,8 @@ static void DrawLevelUpWindow2(void);
 static void PutMonIconOnLvlUpBanner(void);
 static void DrawLevelUpBannerText(void);
 static void SpriteCB_MonIconOnLvlUpBanner(struct Sprite* sprite);
+static bool8 AbilityIsAte(u8 ability);
+static s32 SetAteMoveType(u8 ability);
 
 static void Cmd_attackcanceler(void);
 static void Cmd_accuracycheck(void);
@@ -918,13 +920,44 @@ static const u16 sBadgeFlags[8] = {
 
 static const u16 sWhiteOutBadgeMoney[9] = { 8, 16, 24, 36, 48, 60, 80, 100, 120 };
 
+static const u16 sAteAbilityTypes[ABILITIES_NUM_ATES] = {
+	TYPE_ICE, TYPE_MYSTERY, TYPE_FLYING, TYPE_ELECTRIC, TYPE_FIRE
+};
+
+static bool8 AbilityIsAte(u8 ability)
+{
+	u8 i;
+
+	for (i = ABILITIES_ATE_START; i < ABILITIES_ATE_END; i++)
+	{
+		if (i == ability) 
+			return TRUE;
+	}
+	return FALSE;
+}
+
+static s32 SetAteMoveType(u8 ability)
+{
+	u8 i;
+	s32 moveType = TYPE_NORMAL;
+	
+	for (i = 0; i <= (ABILITIES_ATE_END - ABILITIES_ATE_START); i++)
+	{
+		if (ability == (i + ABILITIES_ATE_START)) 
+			moveType = sAteAbilityTypes[i];
+	}
+	
+	return moveType;
+}
+
 static void Cmd_attackcanceler(void)
 {
     s32 i, moveType;
 	
 	GET_MOVE_TYPE(gCurrentMove, moveType);
-	if (gBattleMons[gBattlerAttacker].ability == ABILITY_REFRIGERATE && moveType == TYPE_NORMAL)
-		moveType = TYPE_ICE;
+	
+	if (AbilityIsAte(gBattleMons[gBattlerAttacker].ability) && moveType == TYPE_NORMAL)
+		moveType = SetAteMoveType(gBattleMons[gBattlerAttacker].ability);
 
 	if (WEATHER_HAS_EFFECT && gBattleMoves[gCurrentMove].power)
     {
@@ -1393,8 +1426,9 @@ static void Cmd_typecalc(void)
     }
 
     GET_MOVE_TYPE(gCurrentMove, moveType);
-	if (gBattleMons[gBattlerAttacker].ability == ABILITY_REFRIGERATE && moveType == TYPE_NORMAL)
-		moveType = TYPE_ICE;
+	
+	if (AbilityIsAte(gBattleMons[gBattlerAttacker].ability) && moveType == TYPE_NORMAL)
+		moveType = SetAteMoveType(gBattleMons[gBattlerAttacker].ability);
 
     // check stab
     if (IS_BATTLER_OF_TYPE(gBattlerAttacker, moveType))
@@ -1487,8 +1521,9 @@ static void CheckWonderGuardAndLevitate(void)
         return;
 
     GET_MOVE_TYPE(gCurrentMove, moveType);
-	if (gBattleMons[gBattlerAttacker].ability == ABILITY_REFRIGERATE && moveType == TYPE_NORMAL)
-		moveType = TYPE_ICE;
+	
+	if (AbilityIsAte(gBattleMons[gBattlerAttacker].ability) && moveType == TYPE_NORMAL)
+		moveType = SetAteMoveType(gBattleMons[gBattlerAttacker].ability);
 
     if (gBattleMons[gBattlerTarget].ability == ABILITY_LEVITATE && moveType == TYPE_GROUND)
     {
@@ -1598,8 +1633,9 @@ u8 TypeCalc(u16 move, u8 attacker, u8 defender)
         return 0;
 
     moveType = gBattleMoves[move].type;
-	if (gBattleMons[gBattlerAttacker].ability == ABILITY_REFRIGERATE && moveType == TYPE_NORMAL)
-		moveType = TYPE_ICE;
+	
+	if (AbilityIsAte(gBattleMons[gBattlerAttacker].ability) && moveType == TYPE_NORMAL)
+		moveType = SetAteMoveType(gBattleMons[gBattlerAttacker].ability);
 
     // check stab
     if (IS_BATTLER_OF_TYPE(attacker, moveType))
@@ -1659,8 +1695,9 @@ u8 AI_TypeCalc(u16 move, u16 targetSpecies, u8 targetAbility)
         return 0;
 
     moveType = gBattleMoves[move].type;
-	if (gBattleMons[gBattlerAttacker].ability == ABILITY_REFRIGERATE && moveType == TYPE_NORMAL)
-		moveType = TYPE_ICE;
+	
+	if (AbilityIsAte(gBattleMons[gBattlerAttacker].ability) && moveType == TYPE_NORMAL)
+		moveType = SetAteMoveType(gBattleMons[gBattlerAttacker].ability);
 
     if (targetAbility == ABILITY_LEVITATE && moveType == TYPE_GROUND)
     {
@@ -1908,8 +1945,9 @@ static void Cmd_datahpupdate(void)
     else
 	{
         moveType = gBattleMoves[gCurrentMove].type;
-		if (gBattleMons[gBattlerAttacker].ability == ABILITY_REFRIGERATE && moveType == TYPE_NORMAL)
-			moveType = TYPE_ICE;
+		
+		if (AbilityIsAte(gBattleMons[gBattlerAttacker].ability) && moveType == TYPE_NORMAL)
+		moveType = SetAteMoveType(gBattleMons[gBattlerAttacker].ability);
 	}
 
     if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
@@ -4276,8 +4314,9 @@ static void Cmd_moveend(void)
 
     choicedMoveAtk = &gBattleStruct->choicedMove[gBattlerAttacker];
     GET_MOVE_TYPE(gCurrentMove, moveType);
-	if (gBattleMons[gBattlerAttacker].ability == ABILITY_REFRIGERATE && moveType == TYPE_NORMAL)
-		moveType = TYPE_ICE;
+	
+	if (AbilityIsAte(gBattleMons[gBattlerAttacker].ability) && moveType == TYPE_NORMAL)
+		moveType = SetAteMoveType(gBattleMons[gBattlerAttacker].ability);
 
     do
     {
@@ -4543,8 +4582,8 @@ static void Cmd_typecalc2(void)
     s32 i = 0;
     u8 moveType = gBattleMoves[gCurrentMove].type;
 	
-	if (gBattleMons[gBattlerAttacker].ability == ABILITY_REFRIGERATE && moveType == TYPE_NORMAL)
-		moveType = TYPE_ICE;
+	if (AbilityIsAte(gBattleMons[gBattlerAttacker].ability) && moveType == TYPE_NORMAL)
+		moveType = SetAteMoveType(gBattleMons[gBattlerAttacker].ability);
 
     if (gBattleMons[gBattlerTarget].ability == ABILITY_LEVITATE && moveType == TYPE_GROUND)
     {

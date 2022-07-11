@@ -2918,7 +2918,7 @@ static const u16 sScizorLevelUpLearnset[] = {
 };
 
 static const u16 sShuckleLevelUpLearnset[] = {
-    LEVEL_UP_MOVE( 1, MOVE_CLOSE_COMBAT),
+    LEVEL_UP_MOVE( 1, MOVE_CONSTRICT),
     LEVEL_UP_MOVE( 1, MOVE_WITHDRAW),
     LEVEL_UP_MOVE( 9, MOVE_WRAP),
     LEVEL_UP_MOVE(14, MOVE_ENCORE),
@@ -3763,7 +3763,7 @@ static const u16 sMightyenaLevelUpLearnset[] = {
 };
 
 static const u16 sZigzagoonLevelUpLearnset[] = {
-    LEVEL_UP_MOVE( 1, MOVE_FREEZE_DRY),
+    LEVEL_UP_MOVE( 1, MOVE_TACKLE),
     LEVEL_UP_MOVE( 5, MOVE_TAIL_WHIP),
     LEVEL_UP_MOVE( 9, MOVE_HEADBUTT),
     LEVEL_UP_MOVE(13, MOVE_SAND_ATTACK),

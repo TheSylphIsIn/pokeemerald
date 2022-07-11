@@ -3242,7 +3242,8 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
 		attack = (150 * attack) / 100;
 	if (attacker->ability == ABILITY_WHITEOUT && (WEATHER_HAS_EFFECT2 && (gBattleWeather & B_WEATHER_HAIL)))
 		attack = (150 * attack) / 100;
-	if (attacker->ability == ABILITY_REFRIGERATE && type == TYPE_NORMAL)
+	if ((attacker->ability >= ABILITIES_ATE_START && attacker->ability < ABILITIES_ATE_END)
+		&& type == TYPE_NORMAL)
 		gBattleMovePower = (120 * gBattleMovePower) / 100;
 
     // Self-destruct / Explosion cut defense in half

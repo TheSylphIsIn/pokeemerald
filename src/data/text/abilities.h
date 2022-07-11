@@ -87,6 +87,10 @@ static const u8 sSandRushDescription[] = _("SPEED up in sandstorm.");
 static const u8 sSnowCloakDescription[] = _("Ups evasion in a hailstorm.");
 static const u8 sWhiteoutDescription[] = _("Trade HP for ATK in hail.");
 static const u8 sRefrigerateDescription[] = _("Turns NORMAL moves to ICE.");
+static const u8 sPixilateDescription[] = _("Turns NORMAL to FAIRY.");
+static const u8 sAerialateDescription[] = _("Turns NORMAL to FLYING.");
+static const u8 sGalvanizeDescription[] = _("Turns NORMAL to ELECTRIC.");
+static const u8 sBurninateDescription[] = _("Turns NORMAL moves to FIRE.");
 static const u8 sFurCoatDescription[] = _("Raises DEFENSE.");
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
@@ -274,5 +278,9 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 	[ABILITY_SNOW_CLOAK] = sSnowCloakDescription,
 	[ABILITY_WHITEOUT] = sWhiteoutDescription,
 	[ABILITY_REFRIGERATE] = sRefrigerateDescription,
+	[ABILITY_PIXILATE] = sPixilateDescription,
+	[ABILITY_AERIALATE] = sAerialateDescription,
+	[ABILITY_GALVANIZE] = sGalvanizeDescription,
+	[ABILITY_BURNINATE] = sBurninateDescription,
 	[ABILITY_FUR_COAT] = sFurCoatDescription,
 };
