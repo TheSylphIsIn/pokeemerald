@@ -2997,6 +2997,8 @@ static void Cmd_seteffectwithchance(void)
 
     if (gBattleMons[gBattlerAttacker].ability == ABILITY_SERENE_GRACE)
         percentChance = gBattleMoves[gCurrentMove].secondaryEffectChance * 2;
+	else if (gBattleMons[gBattlerAttacker].ability == ABILITY_SHEER_FORCE)
+		percentChance = 0;
     else
         percentChance = gBattleMoves[gCurrentMove].secondaryEffectChance;
 
