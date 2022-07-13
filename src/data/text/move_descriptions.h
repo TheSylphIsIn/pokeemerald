@@ -1508,6 +1508,18 @@ static const u8 sHarpoonLashDescription[] = _(
 static const u8 sLightningDescription[] = _(
 	"A high-voltage bolt that's\n"
 	"super-effective on GRASS.");
+	
+static const u8 sBoomburstDescription[] = _(
+	"Attacks all nearby targets\n"
+	"with an explosive sound.");
+	
+static const u8 sBugBuzzDescription[] = _(
+	"Generates harsh vibrations\n"
+	"that may lower SP. DEF.");
+	
+static const u8 sBuzzBlitzDescription[] = _(
+	"Makes cacophonous noise\n"
+	"but damages the user too.");
 
 
 // MOVE_NONE is ignored in this table. Make sure to always subtract 1 before getting the right pointer.
@@ -1880,4 +1892,7 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
 	[MOVE_SCALE_PIERCE - 1] = sScalePierceDescription,
 	[MOVE_HARPOON_LASH - 1] = sHarpoonLashDescription,
 	[MOVE_LIGHTNING - 1] = sLightningDescription,
+	[MOVE_BOOMBURST - 1] = sBoomburstDescription,
+	[MOVE_BUG_BUZZ - 1] = sBugBuzzDescription,
+	[MOVE_BUZZ_BLITZ - 1] = sBuzzBlitzDescription,
 };

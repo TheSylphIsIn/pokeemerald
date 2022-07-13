@@ -420,6 +420,9 @@ gBattleAnims_Moves::
 	.4byte Move_SCALE_PIERCE
 	.4byte Move_HARPOON_LASH
 	.4byte Move_LIGHTNING
+	.4byte Move_BOOMBURST
+	.4byte Move_BUG_BUZZ
+	.4byte Move_BUZZ_BLITZ
 	.4byte Move_COUNT @ cannot be reached, because last move is Psycho Boost
 
 	.align 2
@@ -9869,6 +9872,9 @@ Move_FREEZE_DRY:
 Move_SCALE_PIERCE:
 Move_HARPOON_LASH:
 Move_LIGHTNING:
+Move_BOOMBURST:
+Move_BUG_BUZZ:
+Move_BUZZ_BLITZ:
 
 Move_KNOCK_OFF:
 	loadspritegfx ANIM_TAG_SLAM_HIT_2

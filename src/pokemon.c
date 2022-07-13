@@ -3113,6 +3113,13 @@ static const u16 sPunchMovesTable[] =
     MOVE_MEGA_PUNCH, MOVE_SHADOW_PUNCH, MOVE_SKY_UPPERCUT, MOVE_METEOR_MASH, 0xFFFF
 };
 
+static const u16 sSoundMovesTable[] =
+{
+    MOVE_GROWL, MOVE_ROAR, MOVE_SING, MOVE_SUPERSONIC, MOVE_SCREECH, MOVE_SNORE,
+    MOVE_UPROAR, MOVE_METAL_SOUND, MOVE_GRASS_WHISTLE, MOVE_HYPER_VOICE, MOVE_CHARMING_CRY,
+	MOVE_BOOMBURST, MOVE_BUG_BUZZ, MOVE_BUZZ_BLITZ, 0xFFFF
+};
+
 s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *defender, u32 move, u16 sideStatus, u16 powerOverride, u8 typeOverride, u8 battlerIdAtk, u8 battlerIdDef)
 {
     u32 i;
@@ -3263,6 +3270,26 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
 		}
 		if (sPunchMovesTable[i] != 0xFFFF)
 			gBattleMovePower = (130 * gBattleMovePower) / 100;
+	}
+	if (attacker->ability == ABILITY_CACOPHONY)
+	{
+		for (i = 0; sSoundMovesTable[i] != 0xFFFF; i++)
+		{
+			if (sSoundMovesTable[i] == gCurrentMove)
+				break;
+		}
+		if (sSoundMovesTable[i] != 0xFFFF)
+			gBattleMovePower = (130 * gBattleMovePower) / 100;
+	}
+	if (defender->ability == ABILITY_CACOPHONY)
+	{
+		for (i = 0; sSoundMovesTable[i] != 0xFFFF; i++)
+		{
+			if (sSoundMovesTable[i] == gCurrentMove)
+				break;
+		}
+		if (sSoundMovesTable[i] != 0xFFFF)
+			gBattleMovePower /= 2;
 	}
 
     // Self-destruct / Explosion cut defense in half
