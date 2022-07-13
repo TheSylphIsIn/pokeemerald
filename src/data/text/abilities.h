@@ -95,6 +95,8 @@ static const u8 sFurCoatDescription[] = _("Raises DEFENSE.");
 static const u8 sSheerForceDescription[] = _("Damage up, effects down.");
 static const u8 sTintedLensDescription[] = _("Weakens type resistance.");
 static const u8 sIronFistDescription[] = _("Fist power + toughness up.");
+static const u8 sAdaptabilityDescription[] = _("Same-type power bonus up.");
+static const u8 sSuperToughDescription[] = _("Resists “super effective”.");
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
 {
@@ -195,6 +197,8 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
 	[ABILITY_SHEER_FORCE] = _("SHEER FORCE"),
 	[ABILITY_TINTED_LENS] = _("TINTED LENS"),
 	[ABILITY_IRON_FIST] = _("IRON FIST"),
+	[ABILITY_ADAPTABILITY] = _("ADAPTABILITY"),
+	[ABILITY_SUPER_TOUGH] =_("SUPER-TOUGH"),
 };
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
@@ -296,4 +300,6 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 	[ABILITY_SHEER_FORCE] = sSheerForceDescription,
 	[ABILITY_TINTED_LENS] = sTintedLensDescription,
 	[ABILITY_IRON_FIST] = sIronFistDescription,
+	[ABILITY_ADAPTABILITY] = sAdaptabilityDescription,
+	[ABILITY_SUPER_TOUGH] = sSuperToughDescription,
 };

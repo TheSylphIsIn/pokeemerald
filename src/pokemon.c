@@ -3245,7 +3245,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         gBattleMovePower = (150 * gBattleMovePower) / 100;
 	if (attacker->ability == ABILITY_SOLAR_POWER && (WEATHER_HAS_EFFECT2 && (gBattleWeather & B_WEATHER_SUN)))
 		spAttack = (150 * spAttack) / 100;
-	if (attacker->ability == ABILITY_SAND_RUSH && (WEATHER_HAS_EFFECT2 && (gBattleWeather & B_WEATHER_SANDSTORM)))
+	if (attacker->ability == ABILITY_SAND_FORCE && (WEATHER_HAS_EFFECT2 && (gBattleWeather & B_WEATHER_SANDSTORM)))
 		attack = (150 * attack) / 100;
 	if (attacker->ability == ABILITY_WHITEOUT && (WEATHER_HAS_EFFECT2 && (gBattleWeather & B_WEATHER_HAIL)))
 		attack = (150 * attack) / 100;
