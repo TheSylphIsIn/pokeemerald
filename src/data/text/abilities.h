@@ -93,6 +93,8 @@ static const u8 sGalvanizeDescription[] = _("Turns NORMAL to ELECTRIC.");
 static const u8 sBurninateDescription[] = _("Turns NORMAL moves to FIRE.");
 static const u8 sFurCoatDescription[] = _("Raises DEFENSE.");
 static const u8 sSheerForceDescription[] = _("Damage up, effects down.");
+static const u8 sTintedLensDescription[] = _("Weakens type resistance.");
+static const u8 sIronFistDescription[] = _("Fist power + toughness up.");
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
 {
@@ -191,6 +193,8 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
 	[ABILITY_BURNINATE] = _("BURNINATE"),
 	[ABILITY_FUR_COAT] = _("FUR COAT"),
 	[ABILITY_SHEER_FORCE] = _("SHEER FORCE"),
+	[ABILITY_TINTED_LENS] = _("TINTED LENS"),
+	[ABILITY_IRON_FIST] = _("IRON FIST"),
 };
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
@@ -290,4 +294,6 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 	[ABILITY_BURNINATE] = sBurninateDescription,
 	[ABILITY_FUR_COAT] = sFurCoatDescription,
 	[ABILITY_SHEER_FORCE] = sSheerForceDescription,
+	[ABILITY_TINTED_LENS] = sTintedLensDescription,
+	[ABILITY_IRON_FIST] = sIronFistDescription,
 };

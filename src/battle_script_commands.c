@@ -1396,6 +1396,8 @@ static void ModulateDmgByType(u8 multiplier)
     case TYPE_MUL_NOT_EFFECTIVE:
         if (gBattleMoves[gCurrentMove].power && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
         {
+			if (gBattleMons[gBattlerAttacker].ability == ABILITY_TINTED_LENS)
+				gBattleMoveDamage *= 2;
             if (gMoveResultFlags & MOVE_RESULT_SUPER_EFFECTIVE)
                 gMoveResultFlags &= ~MOVE_RESULT_SUPER_EFFECTIVE;
             else

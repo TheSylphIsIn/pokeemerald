@@ -3106,6 +3106,13 @@ void DeleteFirstMoveAndGiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move)
     (var) /= (gStatStageRatios)[(mon)->statStages[(statIndex)]][1];                 \
 }
 
+static const u16 sPunchMovesTable[] =
+{
+    MOVE_BULLET_PUNCH, MOVE_COMET_PUNCH, MOVE_DYNAMIC_PUNCH, MOVE_FIRE_PUNCH,
+	MOVE_THUNDER_PUNCH, MOVE_ICE_PUNCH, MOVE_FOCUS_PUNCH, MOVE_MACH_PUNCH, 
+    MOVE_MEGA_PUNCH, MOVE_SHADOW_PUNCH, MOVE_SKY_UPPERCUT, MOVE_METEOR_MASH, 0xFFFF
+};
+
 s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *defender, u32 move, u16 sideStatus, u16 powerOverride, u8 typeOverride, u8 battlerIdAtk, u8 battlerIdDef)
 {
     u32 i;
@@ -3247,6 +3254,16 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
 		gBattleMovePower = (120 * gBattleMovePower) / 100;
 	if (attacker->ability == ABILITY_SHEER_FORCE && gBattleMoves[gCurrentMove].secondaryEffectChance != 0)
 		gBattleMovePower = (130 * gBattleMovePower) / 100;
+	if (attacker->ability == ABILITY_IRON_FIST)
+	{
+		for (i = 0; sPunchMovesTable[i] != 0xFFFF; i++)
+		{
+			if (sPunchMovesTable[i] == gCurrentMove)
+				break;
+		}
+		if (sPunchMovesTable[i] != 0xFFFF)
+			gBattleMovePower = (130 * gBattleMovePower) / 100;
+	}
 
     // Self-destruct / Explosion cut defense in half
     if (gBattleMoves[gCurrentMove].effect == EFFECT_EXPLOSION)
