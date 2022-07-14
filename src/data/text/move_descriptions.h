@@ -1520,7 +1520,22 @@ static const u8 sBugBuzzDescription[] = _(
 static const u8 sBuzzBlitzDescription[] = _(
 	"Makes cacophonous noise\n"
 	"but damages the user too.");
+	
+static const u8 sQuiverDanceDescription[] = _(
+	"A beautiful dance that\n"
+	"ups user SPECIAL and SPEED.");
+	
+static const u8 sCoilDescription[] = _(
+	"A defensive position that\n"
+	"ups ATK, DEF, and ACCURACY.");
+	
+static const u8 sUTurnDescription[] = _(
+	"Hits the foe, then switches\n"
+	"to another party member.");
 
+static const u8 sVoltSwitchDescription[] = _(
+	"Hits the foe, then switches\n"
+	"to another party member.");
 
 // MOVE_NONE is ignored in this table. Make sure to always subtract 1 before getting the right pointer.
 const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
@@ -1895,4 +1910,8 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
 	[MOVE_BOOMBURST - 1] = sBoomburstDescription,
 	[MOVE_BUG_BUZZ - 1] = sBugBuzzDescription,
 	[MOVE_BUZZ_BLITZ - 1] = sBuzzBlitzDescription,
+	[MOVE_QUIVER_DANCE - 1] = sQuiverDanceDescription,
+	[MOVE_COIL - 1] = sCoilDescription,
+	[MOVE_U_TURN - 1] = sUTurnDescription,
+	[MOVE_VOLT_SWITCH - 1] = sVoltSwitchDescription,
 };

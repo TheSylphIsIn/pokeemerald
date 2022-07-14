@@ -5697,4 +5697,60 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .flags = FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_PROTECT_AFFECTED | FLAG_MAKES_CONTACT,
 		.category = MOVE_CATEGORY_SPECIAL,
     },
+	
+	[MOVE_QUIVER_DANCE] = 
+	{
+		.effect = EFFECT_QUIVER_DANCE,
+		.power = 0,
+		.type = TYPE_BUG,
+		.accuracy = 100,
+		.pp = 10,
+		.secondaryEffectChance = 0,
+		.target = MOVE_TARGET_USER,
+		.priority = 0,
+		.flags = FLAG_SNATCH_AFFECTED,
+		.category = MOVE_CATEGORY_STATUS,
+	},
+	
+	[MOVE_COIL] = 
+	{
+		.effect = EFFECT_COIL,
+		.power = 0,
+		.type = TYPE_POISON,
+		.accuracy = 100,
+		.pp = 20,
+		.secondaryEffectChance = 0,
+		.target = MOVE_TARGET_USER,
+		.priority = 0,
+		.flags = FLAG_SNATCH_AFFECTED,
+		.category = MOVE_CATEGORY_STATUS,
+	},
+	
+	[MOVE_U_TURN] = 
+	{
+		.effect = EFFECT_HIT_SWITCH,
+		.power = 70,
+		.type = TYPE_BUG,
+		.accuracy = 100,
+		.pp = 15,
+		.secondaryEffectChance = 0,
+		.target = MOVE_TARGET_SELECTED,
+		.priority = 0,
+		.flags = FLAG_MAKES_CONTACT | FLAG_KINGS_ROCK_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_PROTECT_AFFECTED,
+		.category = MOVE_CATEGORY_PHYSICAL,
+	},
+	
+	[MOVE_VOLT_SWITCH] = 
+	{
+		.effect = EFFECT_HIT_SWITCH,
+		.power = 70,
+		.type = TYPE_ELECTRIC,
+		.accuracy = 100,
+		.pp = 15,
+		.secondaryEffectChance = 0,
+		.target = MOVE_TARGET_SELECTED,
+		.priority = 0,
+		.flags = FLAG_KINGS_ROCK_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_PROTECT_AFFECTED,
+		.category = MOVE_CATEGORY_SPECIAL,
+	},
 };

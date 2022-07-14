@@ -3275,7 +3275,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
 	{
 		for (i = 0; sSoundMovesTable[i] != 0xFFFF; i++)
 		{
-			if (sSoundMovesTable[i] == gCurrentMove)
+			if (sSoundMovesTable[i] == gCurrentMove && gBattleMoves[gCurrentMove].power != 0)
 				break;
 		}
 		if (sSoundMovesTable[i] != 0xFFFF)
@@ -3285,7 +3285,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
 	{
 		for (i = 0; sSoundMovesTable[i] != 0xFFFF; i++)
 		{
-			if (sSoundMovesTable[i] == gCurrentMove)
+			if (sSoundMovesTable[i] == gCurrentMove && gBattleMoves[gCurrentMove].power != 0)
 				break;
 		}
 		if (sSoundMovesTable[i] != 0xFFFF)

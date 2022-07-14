@@ -77,7 +77,7 @@
 #define ABILITY_WHITE_SMOKE 73
 #define ABILITY_PURE_POWER 74
 #define ABILITY_SHELL_ARMOR 75
-#define ABILITY_CACOPHONY 76
+#define ABILITY_CACOPHONY 76 // has punk rock's effects
 #define ABILITY_AIR_LOCK 77
 #define ABILITY_DOWNPOUR 78 // primordial sea but permanent
 #define ABILITY_DESOLATION 79 // desolate land but permanent
@@ -88,7 +88,7 @@
 #define ABILITY_SAND_FORCE 84 // physical sand solar power
 #define ABILITY_SAND_RUSH 85
 #define ABILITY_SNOW_CLOAK 86
-#define ABILITY_WHITEOUT 87 // physical ice solar power
+#define ABILITY_WHITEOUT 87 // physical hail solar power
 #define ABILITY_REFRIGERATE 88
 #define ABILITY_PIXILATE 89
 #define ABILITY_AERIALATE 90
