@@ -1194,7 +1194,11 @@ static void Cmd_accuracycheck(void)
         else
         {
             u8 acc = gBattleMons[gBattlerAttacker].statStages[STAT_ACC];
-            buff = acc + DEFAULT_STAT_STAGE - gBattleMons[gBattlerTarget].statStages[STAT_EVASION];
+			buff = DEFAULT_STAT_STAGE;
+			if (gBattleMons[gBattlerTarget].ability != ABILITY_UNAWARE)
+				buff = acc;
+			if (gBattleMons[gBattlerAttacker].ability != ABILITY_UNAWARE)
+				buff = buff + DEFAULT_STAT_STAGE - gBattleMons[gBattlerTarget].statStages[STAT_EVASION];
         }
 
         if (buff < MIN_STAT_STAGE)

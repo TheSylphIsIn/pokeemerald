@@ -3175,7 +3175,8 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
 
     if (attacker->ability == ABILITY_HUGE_POWER || attacker->ability == ABILITY_PURE_POWER)
         attack *= 2;
-	
+	if (attacker->ability == ABILITY_BRAIN_POWER)
+		spAttack *= 2;
 	if (defender->ability == ABILITY_FUR_COAT)
 		defense *= 2;
 
@@ -3236,6 +3237,8 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         spAttack = (150 * spAttack) / 100;
     if (attacker->ability == ABILITY_GUTS && attacker->status1)
         attack = (150 * attack) / 100;
+	if (attacker->ability == ABILITY_RESOLVE && attacker->status1)
+		spAttack = (150 * spAttack) / 100;
     if (defender->ability == ABILITY_MARVEL_SCALE && defender->status1)
         defense = (150 * defense) / 100;
     if (type == TYPE_ELECTRIC && AbilityBattleEffects(ABILITYEFFECT_FIELD_SPORT, 0, 0, ABILITYEFFECT_MUD_SPORT, 0))
@@ -3298,31 +3301,35 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
 
     if (IS_MOVE_PHYSICAL(gCurrentMove))
     {
-        if (gCritMultiplier == 2)
-        {
-            // Critical hit, if attacker has lost attack stat stages then ignore stat drop
-            if (attacker->statStages[STAT_ATK] > DEFAULT_STAT_STAGE)
-                APPLY_STAT_MOD(damage, attacker, attack, STAT_ATK)
-            else
-                damage = attack;
-        }
-        else
-            APPLY_STAT_MOD(damage, attacker, attack, STAT_ATK)
-
+		if (defender->ability != ABILITY_UNAWARE)
+		{
+			if (gCritMultiplier == 2)
+			{
+				// Critical hit, if attacker has lost attack stat stages then ignore stat drop
+				if (attacker->statStages[STAT_ATK] > DEFAULT_STAT_STAGE)
+					APPLY_STAT_MOD(damage, attacker, attack, STAT_ATK)
+				else
+					damage = attack;
+			}
+			else
+				APPLY_STAT_MOD(damage, attacker, attack, STAT_ATK)
+		}
         damage = damage * gBattleMovePower;
         damage *= (2 * attacker->level / 5 + 2);
 
-        if (gCritMultiplier == 2)
-        {
-            // Critical hit, if defender has gained defense stat stages then ignore stat increase
-            if (defender->statStages[STAT_DEF] < DEFAULT_STAT_STAGE)
-                APPLY_STAT_MOD(damageHelper, defender, defense, STAT_DEF)
-            else
-                damageHelper = defense;
-        }
-        else
-            APPLY_STAT_MOD(damageHelper, defender, defense, STAT_DEF)
-
+		if (attacker->ability != ABILITY_UNAWARE)
+		{
+			if (gCritMultiplier == 2)
+			{
+				// Critical hit, if defender has gained defense stat stages then ignore stat increase
+				if (defender->statStages[STAT_DEF] < DEFAULT_STAT_STAGE)
+					APPLY_STAT_MOD(damageHelper, defender, defense, STAT_DEF)
+				else
+					damageHelper = defense;
+			}
+			else
+				APPLY_STAT_MOD(damageHelper, defender, defense, STAT_DEF)
+		}
         damage = damage / damageHelper;
         damage /= 50;
 
@@ -3353,6 +3360,8 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
 
     if (IS_MOVE_SPECIAL(gCurrentMove))
     {
+		if (defender->ability != ABILITY_UNAWARE)
+		{
         if (gCritMultiplier == 2)
         {
             // Critical hit, if attacker has lost sp. attack stat stages then ignore stat drop
@@ -3363,10 +3372,13 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         }
         else
             APPLY_STAT_MOD(damage, attacker, spAttack, STAT_SPATK)
-
+		}
+		
         damage = damage * gBattleMovePower;
         damage *= (2 * attacker->level / 5 + 2);
 
+		if (attacker->ability != ABILITY_UNAWARE)
+		{
         if (gCritMultiplier == 2)
         {
             // Critical hit, if defender has gained sp. defense stat stages then ignore stat increase
@@ -3377,11 +3389,12 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         }
         else
             APPLY_STAT_MOD(damageHelper, defender, spDefense, STAT_SPDEF)
-
+		}
+		
         damage = (damage / damageHelper);
         damage /= 50;
 		
-		if ((attacker->status1 & STATUS1_FREEZE) && attacker->ability != ABILITY_GUTS)
+		if ((attacker->status1 & STATUS1_FREEZE) && attacker->ability != ABILITY_RESOLVE)
             damage /= 2;
 
         // Apply Lightscreen

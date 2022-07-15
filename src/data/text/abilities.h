@@ -97,6 +97,9 @@ static const u8 sTintedLensDescription[] = _("Pierces type resistance.");
 static const u8 sIronFistDescription[] = _("Fist power + toughness up.");
 static const u8 sAdaptabilityDescription[] = _("Same-type power bonus up.");
 static const u8 sSuperToughDescription[] = _("Resists “super effective”.");
+static const u8 sResolveDescription[] = _("Ups SP.ATK if suffering.");
+static const u8 sBrainPowerDescription[] = _("Raises SPECIAL ATTACK.");
+static const u8 sUnawareDescription[] = _("Ignores foe's stat changes.");
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
 {
@@ -199,6 +202,9 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
 	[ABILITY_IRON_FIST] = _("IRON FIST"),
 	[ABILITY_ADAPTABILITY] = _("ADAPTABILITY"),
 	[ABILITY_SUPER_TOUGH] =_("SUPER-TOUGH"),
+	[ABILITY_RESOLVE] = _("RESOLVE"),
+	[ABILITY_BRAIN_POWER] = _("BRAIN POWER"),
+	[ABILITY_UNAWARE] = _("UNAWARE"),
 };
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
@@ -302,4 +308,7 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 	[ABILITY_IRON_FIST] = sIronFistDescription,
 	[ABILITY_ADAPTABILITY] = sAdaptabilityDescription,
 	[ABILITY_SUPER_TOUGH] = sSuperToughDescription,
+	[ABILITY_RESOLVE] = sResolveDescription,
+	[ABILITY_BRAIN_POWER] = sBrainPowerDescription,
+	[ABILITY_UNAWARE] = sUnawareDescription,
 };
