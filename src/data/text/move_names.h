@@ -411,4 +411,5 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] =
 	[MOVE_COIL] = _("COIL"),
 	[MOVE_U_TURN] = _("U-TURN"),
 	[MOVE_VOLT_SWITCH] = _("VOLT SWITCH"),
+	[MOVE_SHELL_SMASH] = _("SHELL SMASH"),
 };

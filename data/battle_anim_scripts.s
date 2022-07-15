@@ -427,6 +427,7 @@ gBattleAnims_Moves::
 	.4byte Move_COIL
 	.4byte Move_U_TURN
 	.4byte Move_VOLT_SWITCH
+	.4byte Move_SHELL_SMASH
 	.4byte Move_COUNT @ cannot be reached, because last move is Psycho Boost
 
 	.align 2
@@ -9931,6 +9932,39 @@ Move_VOLT_SWITCH:
 	playsewithpan SE_M_BATON_PASS, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendColorCycle, 2, F_PAL_BG | F_PAL_BATTLERS, 1, 2, 0, 11, RGB(31, 22, 30)
 	createsprite gBatonPassPokeballSpriteTemplate, ANIM_ATTACKER, 2
+	end
+	
+Move_SHELL_SMASH:
+	loadspritegfx ANIM_TAG_ROCKS
+	loadspritegfx ANIM_TAG_IMPACT
+	loadspritegfx ANIM_TAG_HANDS_AND_FEET
+	loadspritegfx ANIM_TAG_BREATH
+	playsewithpan SE_M_HEADBUTT, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_Withdraw, 5
+	waitforvisualfinish
+	monbg ANIM_DEF_PARTNER
+	setalpha 12, 8
+	delay 1
+	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 3, 0, 0, ANIM_TARGET, 1
+	playsewithpan SE_M_VITAL_THROW2, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 5, 1
+	waitforvisualfinish
+	playsewithpan SE_M_ROCK_THROW, SOUND_PAN_TARGET
+	createsprite gRockFragmentSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, 20, 24, 14, 2
+	createsprite gRockFragmentSpriteTemplate, ANIM_ATTACKER, 2, 5, 0, -20, 24, 14, 1
+	createsprite gRockFragmentSpriteTemplate, ANIM_ATTACKER, 2, 0, 5, 20, -24, 14, 2
+	createsprite gRockFragmentSpriteTemplate, ANIM_ATTACKER, 2, -5, 0, -20, -24, 14, 2
+	createsprite gRockFragmentSpriteTemplate, ANIM_ATTACKER, 2, 0, -5, 30, 18, 8, 2
+	createsprite gRockFragmentSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, 30, -18, 8, 2
+	createsprite gRockFragmentSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, -30, 18, 8, 2
+	createsprite gRockFragmentSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, -30, -18, 8, 2
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 0, 3, 7, 1
+	waitforvisualfinish
+	clearmonbg ANIM_DEF_PARTNER
+	blendoff
+	createsprite gBreathPuffSpriteTemplate, ANIM_ATTACKER, 2
+	loopsewithpan SE_M_SWAGGER, SOUND_PAN_ATTACKER, 4, 2
+	waitforvisualfinish
 	end
 
 Move_KNOCK_OFF:

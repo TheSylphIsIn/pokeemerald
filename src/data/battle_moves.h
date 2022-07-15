@@ -5753,4 +5753,18 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.flags = FLAG_KINGS_ROCK_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_PROTECT_AFFECTED,
 		.category = MOVE_CATEGORY_SPECIAL,
 	},
+	
+	[MOVE_SHELL_SMASH] = 
+	{
+		.effect = EFFECT_SHELL_SMASH,
+		.power = 0,
+		.type = TYPE_NORMAL,
+		.accuracy = 100,
+		.pp = 5,
+		.secondaryEffectChance = 0,
+		.target = MOVE_TARGET_USER,
+		.priority = 0,
+		.flags = FLAG_SNATCH_AFFECTED,
+		.category = MOVE_CATEGORY_STATUS,
+	},
 };

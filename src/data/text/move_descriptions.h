@@ -1536,6 +1536,10 @@ static const u8 sUTurnDescription[] = _(
 static const u8 sVoltSwitchDescription[] = _(
 	"Hits the foe, then switches\n"
 	"to another party member.");
+	
+static const u8 sShellSmashDescription[] = _(
+	"Sharply boosts offensive\n"
+	"but drop defensive stats.");
 
 // MOVE_NONE is ignored in this table. Make sure to always subtract 1 before getting the right pointer.
 const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
@@ -1914,4 +1918,5 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
 	[MOVE_COIL - 1] = sCoilDescription,
 	[MOVE_U_TURN - 1] = sUTurnDescription,
 	[MOVE_VOLT_SWITCH - 1] = sVoltSwitchDescription,
+	[MOVE_SHELL_SMASH - 1] = sShellSmashDescription,
 };
