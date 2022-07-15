@@ -1508,10 +1508,10 @@ static void Cmd_typecalc(void)
 			 gBattleMons[gBattlerTarget].type2 == TYPE_FLYING)))
 			 ModulateDmgByType(20);
 			 
-		if (flags & MOVE_RESULT_NOT_VERY_EFFECTIVE && !(flags & MOVE_RESULT_SUPER_EFFECTIVE)
+		if (gMoveResultFlags & MOVE_RESULT_NOT_VERY_EFFECTIVE && !(gMoveResultFlags & MOVE_RESULT_SUPER_EFFECTIVE)
 			&& gBattleMons[gBattlerAttacker].ability == ABILITY_TINTED_LENS)
 			gBattleMoveDamage *= 2;
-		if (flags & MOVE_RESULT_SUPER_EFFECTIVE && !(flags & MOVE_RESULT_NOT_VERY_EFFECTIVE)
+		if (gMoveResultFlags & MOVE_RESULT_SUPER_EFFECTIVE && !(gMoveResultFlags & MOVE_RESULT_NOT_VERY_EFFECTIVE)
 			&& gBattleMons[gBattlerTarget].ability == ABILITY_SUPER_TOUGH)
 			gBattleMoveDamage = (gBattleMoveDamage * 75) / 100;
     }
