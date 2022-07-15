@@ -1208,7 +1208,8 @@ static void Cmd_accuracycheck(void)
 
         moveAcc = gBattleMoves[move].accuracy;
         // check Thunder on sunny weather
-        if (WEATHER_HAS_EFFECT && gBattleWeather & B_WEATHER_SUN && gBattleMoves[move].effect == EFFECT_THUNDER)
+        if (WEATHER_HAS_EFFECT && gBattleWeather & B_WEATHER_SUN && 
+			(gBattleMoves[move].effect == EFFECT_THUNDER || gBattleMoves[move].effect == EFFECT_HURRICANE))
             moveAcc = 50;
 
         calc = sAccuracyStageRatios[buff].dividend * moveAcc;
@@ -1219,7 +1220,7 @@ static void Cmd_accuracycheck(void)
         if (WEATHER_HAS_EFFECT && gBattleMons[gBattlerTarget].ability == ABILITY_SAND_VEIL && gBattleWeather & B_WEATHER_SANDSTORM)
             calc = (calc * 80) / 100; // 1.2 sand veil loss
 		if (WEATHER_HAS_EFFECT && gBattleMons[gBattlerTarget].ability == ABILITY_SNOW_CLOAK && gBattleWeather & B_WEATHER_HAIL)
-			calc = (calc * 80) / 100;
+			calc = (calc * 80) / 100; // 1.2 snow cloak loss
         if (gBattleMons[gBattlerAttacker].ability == ABILITY_HUSTLE && IS_MOVE_PHYSICAL(move))
             calc = (calc * 80) / 100; // 1.2 hustle loss
 
@@ -1400,8 +1401,8 @@ static void ModulateDmgByType(u8 multiplier)
     case TYPE_MUL_NOT_EFFECTIVE:
         if (gBattleMoves[gCurrentMove].power && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
         {
-			if (gBattleMons[gBattlerAttacker].ability == ABILITY_TINTED_LENS)
-				gBattleMoveDamage *= 2;
+			if (gBattleMons[gBattlerAttacker].ability == ABILITY_EXPLOITATIVE)
+				gBattleMoveDamage = (gBattleMoveDamage * 67) / 100;
             if (gMoveResultFlags & MOVE_RESULT_SUPER_EFFECTIVE)
                 gMoveResultFlags &= ~MOVE_RESULT_SUPER_EFFECTIVE;
             else
@@ -1411,8 +1412,8 @@ static void ModulateDmgByType(u8 multiplier)
     case TYPE_MUL_SUPER_EFFECTIVE:
         if (gBattleMoves[gCurrentMove].power && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
         {
-			if (gBattleMons[gBattlerTarget].ability == ABILITY_SUPER_TOUGH)
-				gBattleMoveDamage = (gBattleMoveDamage * 75) / 100;
+			if (gBattleMons[gBattlerAttacker].ability == ABILITY_EXPLOITATIVE)
+				gBattleMoveDamage = (gBattleMoveDamage * 150) / 100;
             if (gMoveResultFlags & MOVE_RESULT_NOT_VERY_EFFECTIVE)
                 gMoveResultFlags &= ~MOVE_RESULT_NOT_VERY_EFFECTIVE;
             else
@@ -1445,6 +1446,8 @@ static void Cmd_typecalc(void)
 			gBattleMoveDamage = gBattleMoveDamage * 20;
 		else
 			gBattleMoveDamage = gBattleMoveDamage * 15;
+		if (gBattleMons[gBattlerAttacker].ability == ABILITY_SPECIALIST)
+			gBattleMoveDamage = (gBattleMoveDamage * 15) / 10;
         gBattleMoveDamage = gBattleMoveDamage / 10;
     }
 
@@ -1483,7 +1486,8 @@ static void Cmd_typecalc(void)
 				}
                 // check type2
                 if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[gBattlerTarget].type2 &&
-                    gBattleMons[gBattlerTarget].type1 != gBattleMons[gBattlerTarget].type2)
+                    (gBattleMons[gBattlerTarget].type1 != gBattleMons[gBattlerTarget].type2
+					|| gBattleMons[gBattlerTarget].ability == ABILITY_SPECIALIST))
                 {
 					if ((gBattleMoves[gCurrentMove].effect == EFFECT_FREEZE_DRY && 
 					gBattleMons[gBattlerTarget].type2 == TYPE_WATER) || 
@@ -1502,7 +1506,14 @@ static void Cmd_typecalc(void)
 			(gBattleMoves[gCurrentMove].effect == EFFECT_HARPOON_LASH && 
 			(gBattleMons[gBattlerTarget].type1 == TYPE_FLYING || 
 			 gBattleMons[gBattlerTarget].type2 == TYPE_FLYING)))
-			 ModulateDmgByType(20);		
+			 ModulateDmgByType(20);
+			 
+		if (flags & MOVE_RESULT_NOT_VERY_EFFECTIVE && !(flags & MOVE_RESULT_SUPER_EFFECTIVE)
+			&& gBattleMons[gBattlerAttacker].ability == ABILITY_TINTED_LENS)
+			gBattleMoveDamage *= 2;
+		if (flags & MOVE_RESULT_SUPER_EFFECTIVE && !(flags & MOVE_RESULT_NOT_VERY_EFFECTIVE)
+			&& gBattleMons[gBattlerTarget].ability == ABILITY_SUPER_TOUGH)
+			gBattleMoveDamage = (gBattleMoveDamage * 75) / 100;
     }
 
     if (gBattleMons[gBattlerTarget].ability == ABILITY_WONDER_GUARD && AttacksThisTurn(gBattlerAttacker, gCurrentMove) == 2
@@ -1616,6 +1627,8 @@ static void ModulateDmgByType2(u8 multiplier, u16 move, u8* flags) // same as Mo
     case TYPE_MUL_NOT_EFFECTIVE:
         if (gBattleMoves[move].power && !(*flags & MOVE_RESULT_NO_EFFECT))
         {
+			if (gBattleMons[gBattlerAttacker].ability == ABILITY_EXPLOITATIVE)
+				gBattleMoveDamage = (gBattleMoveDamage * 67) / 100;
             if (*flags & MOVE_RESULT_SUPER_EFFECTIVE)
                 *flags &= ~MOVE_RESULT_SUPER_EFFECTIVE;
             else
@@ -1625,6 +1638,8 @@ static void ModulateDmgByType2(u8 multiplier, u16 move, u8* flags) // same as Mo
     case TYPE_MUL_SUPER_EFFECTIVE:
         if (gBattleMoves[move].power && !(*flags & MOVE_RESULT_NO_EFFECT))
         {
+			if (gBattleMons[gBattlerAttacker].ability == ABILITY_EXPLOITATIVE)
+				gBattleMoveDamage = (gBattleMoveDamage * 150) / 100;
             if (*flags & MOVE_RESULT_NOT_VERY_EFFECTIVE)
                 *flags &= ~MOVE_RESULT_NOT_VERY_EFFECTIVE;
             else
@@ -1649,9 +1664,14 @@ u8 TypeCalc(u16 move, u8 attacker, u8 defender)
 		moveType = SetAteMoveType(gBattleMons[gBattlerAttacker].ability);
 
     // check stab
-    if (IS_BATTLER_OF_TYPE(attacker, moveType))
+    if (IS_BATTLER_OF_TYPE(gBattlerAttacker, moveType))
     {
-        gBattleMoveDamage = gBattleMoveDamage * 15;
+		if (gBattleMons[gBattlerAttacker].ability == ABILITY_ADAPTABILITY)
+			gBattleMoveDamage = gBattleMoveDamage * 20;
+		else
+			gBattleMoveDamage = gBattleMoveDamage * 15;
+		if (gBattleMons[gBattlerAttacker].ability == ABILITY_SPECIALIST)
+			gBattleMoveDamage = (gBattleMoveDamage * 15) / 10;
         gBattleMoveDamage = gBattleMoveDamage / 10;
     }
 
@@ -1678,11 +1698,18 @@ u8 TypeCalc(u16 move, u8 attacker, u8 defender)
                     ModulateDmgByType2(TYPE_EFFECT_MULTIPLIER(i), move, &flags);
                 // check type2
                 if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[defender].type2 &&
-                    gBattleMons[defender].type1 != gBattleMons[defender].type2)
+                    (gBattleMons[defender].type1 != gBattleMons[defender].type2
+					|| gBattleMons[defender].ability == ABILITY_SPECIALIST))
                     ModulateDmgByType2(TYPE_EFFECT_MULTIPLIER(i), move, &flags);
             }
             i += 3;
         }
+		if (flags & MOVE_RESULT_NOT_VERY_EFFECTIVE && !(flags & MOVE_RESULT_SUPER_EFFECTIVE)
+			&& gBattleMons[gBattlerAttacker].ability == ABILITY_TINTED_LENS)
+			gBattleMoveDamage *= 2;
+		if (flags & MOVE_RESULT_SUPER_EFFECTIVE && !(flags & MOVE_RESULT_NOT_VERY_EFFECTIVE)
+			&& gBattleMons[gBattlerTarget].ability == ABILITY_SUPER_TOUGH)
+			gBattleMoveDamage = (gBattleMoveDamage * 75) / 100;
     }
 
     if (gBattleMons[defender].ability == ABILITY_WONDER_GUARD && !(flags & MOVE_RESULT_MISSED)

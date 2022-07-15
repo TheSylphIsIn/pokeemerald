@@ -3179,6 +3179,8 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
 		spAttack *= 2;
 	if (defender->ability == ABILITY_FUR_COAT)
 		defense *= 2;
+	if (defender->ability == ABILITY_SLIME_COAT)
+		spDefense *= 2;
 
     if (ShouldGetStatBadgeBoost(FLAG_BADGE01_GET, battlerIdAtk))
         attack = (110 * attack) / 100;

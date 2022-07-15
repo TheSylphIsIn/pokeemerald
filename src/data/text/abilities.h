@@ -100,6 +100,9 @@ static const u8 sSuperToughDescription[] = _("Resists “super effective”.");
 static const u8 sResolveDescription[] = _("Ups SP.ATK if suffering.");
 static const u8 sBrainPowerDescription[] = _("Raises SPECIAL ATTACK.");
 static const u8 sUnawareDescription[] = _("Ignores foe's stat changes.");
+static const u8 sSlimeCoatDescription[] = _("Raises SPECIAL DEFENSE.");
+static const u8 sSpecialistDescription[] = _("Own type effects doubled.");
+static const u8 sExploitativeDescription[] = _("Type matchup power up.");
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
 {
@@ -205,6 +208,9 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
 	[ABILITY_RESOLVE] = _("RESOLVE"),
 	[ABILITY_BRAIN_POWER] = _("BRAIN POWER"),
 	[ABILITY_UNAWARE] = _("UNAWARE"),
+	[ABILITY_SLIME_COAT] = _("SLIME COAT"),
+	[ABILITY_SPECIALIST] = _("SPECIALIST"),
+	[ABILITY_EXPLOITATIVE] = _("EXPLOITATIVE"),
 };
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
@@ -311,4 +317,7 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 	[ABILITY_RESOLVE] = sResolveDescription,
 	[ABILITY_BRAIN_POWER] = sBrainPowerDescription,
 	[ABILITY_UNAWARE] = sUnawareDescription,
+	[ABILITY_SLIME_COAT] = sSlimeCoatDescription,
+	[ABILITY_SPECIALIST] = sSpecialistDescription,
+	[ABILITY_EXPLOITATIVE] = sExploitativeDescription,
 };

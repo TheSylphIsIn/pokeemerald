@@ -100,11 +100,14 @@
 #define ABILITY_IRON_FIST 96
 #define ABILITY_ADAPTABILITY 97
 #define ABILITY_SUPER_TOUGH 98 // solid rock/filter
-#define ABILITY_RESOLVE 99
-#define ABILITY_BRAIN_POWER 100
+#define ABILITY_RESOLVE 99 // special guts
+#define ABILITY_BRAIN_POWER 100 // special huge power
 #define ABILITY_UNAWARE 101
+#define ABILITY_SLIME_COAT 102 // special fur coat
+#define ABILITY_SPECIALIST 103 // double-single type
+#define ABILITY_EXPLOITATIVE 104 //SE moves do 3x damage; resisted moves do 1/3 damage
 
-#define ABILITIES_COUNT 102
+#define ABILITIES_COUNT 105
 #define ABILITIES_ATE_START ABILITY_REFRIGERATE
 #define ABILITIES_ATE_END ABILITY_BURNINATE + 1
 #define ABILITIES_NUM_ATES ABILITIES_ATE_END - ABILITIES_ATE_START
