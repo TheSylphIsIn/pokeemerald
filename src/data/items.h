@@ -3037,7 +3037,7 @@ const struct Item gItems[] =
     {
         .name = _("EVIOLITE"),
         .itemId = ITEM_EVIOLITE,
-        .price = 0,
+        .price = 1000,
 		.holdEffect = HOLD_EFFECT_EVIOLITE,
 		.holdEffectParam = 0,
         .description = sEvioliteDesc,
@@ -3046,12 +3046,14 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_0F7] =
+    [ITEM_LIFE_ORB] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
-        .price = 0,
-        .description = sDummyDesc,
+        .name = _("LIFE ORB"),
+        .itemId = ITEM_LIFE_ORB,
+        .price = 5000,
+		.holdEffect = HOLD_EFFECT_LIFE_ORB,
+		.holdEffectParam = 0,
+        .description = sLifeOrbDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,

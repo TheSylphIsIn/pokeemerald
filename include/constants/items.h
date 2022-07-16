@@ -274,7 +274,7 @@
 #define ITEM_FIERCE_SOUL 244
 #define ITEM_MYSTIC_SOUL 245
 #define ITEM_EVIOLITE 246
-#define ITEM_0F7 247
+#define ITEM_LIFE_ORB 247
 #define ITEM_0F8 248
 #define ITEM_0F9 249
 #define ITEM_0FA 250

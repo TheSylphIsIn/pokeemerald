@@ -613,6 +613,9 @@ const u32 gItemIconPalette_Eviolite[] = INCBIN_U32("graphics/items/icons/eviolit
 const u32 gItemIcon_CandiedBerry[] = INCBIN_U32("graphics/items/icons/candied_berry.4bpp.lz");
 const u32 gItemIconPalette_CandiedBerry[] = INCBIN_U32("graphics/items/icon_palettes/candied_berry.gbapal.lz");
 
+const u32 gItemIcon_LifeOrb[] = INCBIN_U32("graphics/items/icons/life_orb.4bpp.lz");
+const u32 gItemIconPalette_LifeOrb[] = INCBIN_U32("graphics/items/icon_palettes/life_orb.gbapal.lz");
+
 // const u32 gItemIcon_[] = INCBIN_U32("graphics/items/icons/.4bpp.lz");
 // const u32 gItemIconPalette_[] = INCBIN_U32("graphics/items/icon_palettes/.gbapal.lz");
 

@@ -870,6 +870,7 @@ BattleScript_MoveMissedDoDamage::
 	resultmessage
 	waitmessage B_WAIT_TIME_LONG
 	jumpifbyte CMP_COMMON_BITS, gMoveResultFlags, MOVE_RESULT_DOESNT_AFFECT_FOE, BattleScript_MoveEnd
+	jumpifability BS_ATTACKER, ABILITY_MAGIC_GUARD, BattleScript_MoveEnd
 	printstring STRINGID_PKMNCRASHED
 	waitmessage B_WAIT_TIME_LONG
 	damagecalc
@@ -3045,7 +3046,9 @@ BattleScript_EffectHitSwitch::
 	jumpifmovehadnoeffect BattleScript_MoveEnd
 	seteffectwithchance
 	tryfaintmon BS_TARGET
-	jumpifbyte CMP_NOT_EQUAL, gBattleOutcome, 0, BattleScript_MoveEnd
+	checkteamslost BattleScript_HitSwitchTrySwitch
+BattleScript_HitSwitchTrySwitch::
+	jumpifbyte CMP_NOT_EQUAL, gBattleOutcome, 0, BattleScript_HitSwitchEnd
 	jumpifbattletype BATTLE_TYPE_ARENA, BattleScript_MoveEnd
 	jumpifcantswitch SWITCH_IGNORE_ESCAPE_PREVENTION | BS_ATTACKER, BattleScript_MoveEnd
 	openpartyscreen BS_ATTACKER, BattleScript_ButItFailed
@@ -3060,7 +3063,8 @@ BattleScript_EffectHitSwitch::
 	switchinanim BS_ATTACKER, TRUE
 	waitstate
 	switchineffects BS_ATTACKER
-	goto BattleScript_MoveEnd
+BattleScript_HitSwitchEnd::
+	end
 	
 BattleScript_EffectShellSmash::
 	attackcanceler
@@ -4045,6 +4049,7 @@ BattleScript_MonWokeUpInUproar::
 	end2
 
 BattleScript_PoisonTurnDmg::
+	jumpifability BS_ATTACKER, ABILITY_MAGIC_GUARD, BattleScript_DoTurnDmgEnd
 	printstring STRINGID_PKMNHURTBYPOISON
 	waitmessage B_WAIT_TIME_LONG
 BattleScript_DoStatusTurnDmg::
@@ -4248,6 +4253,7 @@ BattleScript_MoveEffectConfusion::
 BattleScript_MoveEffectRecoil::
 	jumpifmove MOVE_STRUGGLE, BattleScript_DoRecoil
 	jumpifability BS_ATTACKER, ABILITY_ROCK_HEAD, BattleScript_RecoilEnd
+	jumpifability BS_ATTACKER, ABILITY_MAGIC_GUARD, BattleScript_RecoilEnd
 BattleScript_DoRecoil::
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_PASSIVE_DAMAGE
 	healthbarupdate BS_ATTACKER
@@ -4685,8 +4691,15 @@ BattleScript_ItemHealHP_End2::
 	end2
 
 BattleScript_ItemHealHP_Ret::
-	playanimation BS_ATTACKER, B_ANIM_HELD_ITEM_EFFECT
 	printstring STRINGID_PKMNSITEMRESTOREDHPALITTLE
+	waitmessage B_WAIT_TIME_LONG
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
+	healthbarupdate BS_ATTACKER
+	datahpupdate BS_ATTACKER
+	return
+	
+BattleScript_ItemDrainHP_Ret::
+	printstring STRINGID_PKMNSITEMDRAINEDHPALITTLE
 	waitmessage B_WAIT_TIME_LONG
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
 	healthbarupdate BS_ATTACKER

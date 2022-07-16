@@ -103,6 +103,7 @@ static const u8 sUnawareDescription[] = _("Ignores foe's stat changes.");
 static const u8 sSlimeCoatDescription[] = _("Raises SPECIAL DEFENSE.");
 static const u8 sSpecialistDescription[] = _("Own type effects doubled.");
 static const u8 sExploitativeDescription[] = _("Type matchup power up.");
+static const u8 sMagicGuardDescription[] = _("Only hurt by moves.");
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
 {
@@ -211,6 +212,7 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
 	[ABILITY_SLIME_COAT] = _("SLIME COAT"),
 	[ABILITY_SPECIALIST] = _("SPECIALIST"),
 	[ABILITY_EXPLOITATIVE] = _("EXPLOITATIVE"),
+	[ABILITY_MAGIC_GUARD] = _("MAGIC GUARD"),
 };
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
@@ -320,4 +322,5 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 	[ABILITY_SLIME_COAT] = sSlimeCoatDescription,
 	[ABILITY_SPECIALIST] = sSpecialistDescription,
 	[ABILITY_EXPLOITATIVE] = sExploitativeDescription,
+	[ABILITY_MAGIC_GUARD] = sMagicGuardDescription,
 };

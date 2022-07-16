@@ -3227,6 +3227,8 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
 		defense = (150 * defense) / 100;
 		spDefense = (150 * spDefense) / 100;
 	}
+	if (attackerHoldEffect == HOLD_EFFECT_LIFE_ORB)
+		gBattleMovePower = (gBattleMovePower * 130) / 100;
 
     // Apply abilities / field sports
     if (defender->ability == ABILITY_THICK_FAT && (type == TYPE_FIRE || type == TYPE_ICE))

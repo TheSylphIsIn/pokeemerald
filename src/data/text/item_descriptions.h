@@ -1092,6 +1092,11 @@ static const u8 sCandiedBerryDesc[] = _(
 	"that raises LEVEL\n"
 	"by one.");
 	
+static const u8 sLifeOrbDesc[] = _(
+	"Boosts move power\n"
+	"but hurts the user\n"
+	"after each move.");
+	
 static const u8 sRedScarfDesc[] = _(
     "A hold item that\n"
     "raises COOL in\n"

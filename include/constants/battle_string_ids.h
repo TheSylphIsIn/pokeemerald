@@ -389,8 +389,9 @@
 #define STRINGID_PKMNABSORBEDLIGHTNINGROD	389
 #define STRINGID_PLAYERLOSTTOENEMYTRAINER   390
 #define STRINGID_PLAYERPAIDPRIZEMONEY       391
+#define STRINGID_PKMNSITEMDRAINEDHPALITTLE  392
 
-#define BATTLESTRINGS_COUNT                 392
+#define BATTLESTRINGS_COUNT                 393
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,

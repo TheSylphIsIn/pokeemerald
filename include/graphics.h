@@ -3809,6 +3809,8 @@ extern const u32 gItemIconPalette_FairyTMHM[];
 extern const u32 gItemIconPalette_BugTMHM[];
 extern const u32 gItemIcon_CandiedBerry[];
 extern const u32 gItemIconPalette_CandiedBerry[];
+extern const u32 gItemIcon_LifeOrb[];
+extern const u32 gItemIconPalette_LifeOrb[];
 // extern const u32 gItemIcon_[];
 // extern const u32 gItemIconPalette_[];
 // Contest hold items
