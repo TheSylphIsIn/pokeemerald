@@ -616,6 +616,8 @@ const u32 gItemIconPalette_CandiedBerry[] = INCBIN_U32("graphics/items/icon_pale
 const u32 gItemIcon_LifeOrb[] = INCBIN_U32("graphics/items/icons/life_orb.4bpp.lz");
 const u32 gItemIconPalette_LifeOrb[] = INCBIN_U32("graphics/items/icon_palettes/life_orb.gbapal.lz");
 
+const u32 gItemIcon_PinkBow[] = INCBIN_U32("graphics/items/icons/pink_bow.4bpp.lz");
+
 // const u32 gItemIcon_[] = INCBIN_U32("graphics/items/icons/.4bpp.lz");
 // const u32 gItemIconPalette_[] = INCBIN_U32("graphics/items/icon_palettes/.gbapal.lz");
 

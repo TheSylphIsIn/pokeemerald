@@ -1944,6 +1944,28 @@ static const u8 sHoldEffectToType[][2] =
 	{HOLD_EFFECT_FAIRY_POWER, TYPE_MYSTERY},
 };
 
+static const u8 sSoulToType[][2] =
+{
+	{ITEM_CALM_SOUL, TYPE_NORMAL},
+	{ITEM_LIVING_SOUL, TYPE_GRASS},
+	{ITEM_BURNING_SOUL, TYPE_FIRE},
+	{ITEM_DROWNED_SOUL, TYPE_WATER},
+	{ITEM_FREE_SOUL, TYPE_FLYING},
+	{ITEM_CREEPY_SOUL, TYPE_BUG},
+	{ITEM_STATIC_SOUL, TYPE_ELECTRIC},
+	{ITEM_DECAYED_SOUL, TYPE_POISON},
+	{ITEM_VIGOR_SOUL, TYPE_FIGHTING},
+	{ITEM_VIM_SOUL, TYPE_PSYCHIC},
+	{ITEM_SOLID_SOUL, TYPE_ROCK},
+	{ITEM_SHAKY_SOUL, TYPE_GROUND},
+	{ITEM_HOLLOW_SOUL, TYPE_STEEL},
+	{ITEM_PHANTOM_SOUL, TYPE_GHOST},
+	{ITEM_WICKED_SOUL, TYPE_DARK},
+	{ITEM_COLD_SOUL, TYPE_ICE},
+	{ITEM_FIERCE_SOUL, TYPE_DRAGON},
+	{ITEM_MYSTIC_SOUL, TYPE_MYSTERY},
+};
+	
 const struct SpriteTemplate gBattlerSpriteTemplates[MAX_BATTLERS_COUNT] =
 {
     [B_POSITION_PLAYER_LEFT] = {
@@ -3192,6 +3214,18 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         spDefense = (110 * spDefense) / 100;
 
     // Apply type-bonus hold item
+	if (attackerHoldEffect == HOLD_EFFECT_SOUL)
+		for (i = 0; i < ARRAY_COUNT(sSoulToType); i++)
+		{
+			if (attacker->item == sSoulToType[i][0]
+            && type == sSoulToType[i][1])
+			{
+				attack = (attack * (attackerHoldEffectParam + 100)) / 100;
+				spAttack = (spAttack * (attackerHoldEffectParam + 100)) / 100;
+				break;
+			}
+		}
+	
     for (i = 0; i < ARRAY_COUNT(sHoldEffectToType); i++)
     {
         if (attackerHoldEffect == sHoldEffectToType[i][0]

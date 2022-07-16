@@ -963,93 +963,93 @@ static const u8 sChoiceScarfDesc[] = _(
     "first chosen move.");
 	
 static const u8 sCalmSoulDesc[] = _(
-	"Unshakeable. When\n"
-	"held, maximizes\n"
+	"Unshakeable. Lose\n"
+	"HP to maximize\n"
 	"NORMAL power.");
 
 static const u8 sLivingSoulDesc[] = _(
-	"Pleasant. When\n"
-	"held, maximizes\n"
+	"Pleasant. Trades\n"
+	"HP to maximize\n"
 	"GRASS power.");
 
 static const u8 sBurningSoulDesc[] = _(
-	"Untameable. When\n"
-	"held, maximizes\n"
+	"Untameable. Trades\n"
+	"HP to maximize\n"
 	"FIRE power.");
 
 static const u8 sDrownedSoulDesc[] = _(
-	"Lost at sea. When\n"
-	"held, maximizes\n"
+	"Lost at sea. Lose\n"
+	"HP to maximize\n"
 	"WATER power.");
 
 static const u8 sFreeSoulDesc[] = _(
-	"Carefree. When\n"
-	"held, maximizes\n"
+	"Carefree. Trades\n"
+	"HP to maximize\n"
 	"FLYING power.");
 
 static const u8 sCreepySoulDesc[] = _(
-	"Unnerving. When\n"
-	"held, maximizes\n"
+	"Unnerving. Trades\n"
+	"HP to maximize\n"
 	"BUG power.");
 
 static const u8 sStaticSoulDesc[] = _(
-	"Unchanging. When\n"
-	"held, maximizes\n"
+	"Unchanging. Trades\n"
+	"HP to maximize\n"
 	"ELECTRIC power.");
 
 static const u8 sDecayedSoulDesc[] = _(
-	"Far gone. When\n"
-	"held, maximizes\n"
+	"Far gone. Trades\n"
+	"HP to maximize\n"
 	"POISON power.");
 
 static const u8 sVigorSoulDesc[] = _(
-	"Powerful. When\n"
-	"held, maximizes\n"
+	"Powerful. Trades\n"
+	"HP to maximize\n"
 	"FIGHTING power.");
 
 static const u8 sVimSoulDesc[] = _(
-	"Relentless. When\n"
-	"held, maximizes\n"
+	"Relentless. Trades\n"
+	"HP to maximize\n"
 	"PSYCHIC power.");
 
 static const u8 sSolidSoulDesc[] = _(
-	"Steadfast. When\n"
-	"held, maximizes\n"
+	"Steadfast. Trades\n"
+	"HP to maximize\n"
 	"ROCK power.");
 
 static const u8 sShakySoulDesc[] = _(
-	"Wavering. When\n"
-	"held, maximizes\n"
+	"Wavering. Trades\n"
+	"HP to maximize\n"
 	"GROUND power.");
 
 static const u8 sHollowSoulDesc[] = _(
-	"Unthinking. When\n"
-	"held, maximizes\n"
+	"Unthinking. Trades\n"
+	"HP to maximize\n"
 	"STEEL power.");
 
 static const u8 sPhantomSoulDesc[] = _(
-	"Unknowable. When\n"
-	"held, maximizes\n"
+	"Unknowable. Trades\n"
+	"HP to maximize\n"
 	"GHOST power.");
 
 static const u8 sWickedSoulDesc[] = _(
-	"Unbelieveable. When\n"
-	"held, maximizes\n"
+	"Unbelieveable. Lose\n"
+	"HP to maximize\n"
 	"DARK power.");
 
 static const u8 sColdSoulDesc[] = _(
-	"Unfeeling. When\n"
-	"held, maximizes\n"
+	"Unfeeling. Trades\n"
+	"HP to maximize\n"
 	"ICE power.");
 
 static const u8 sFierceSoulDesc[] = _(
-	"Insurpassable. When\n"
-	"held, maximizes\n"
+	"Insurpassable. Lose\n"
+	"HP to maximize\n"
 	"DRAGON power.");
 
 static const u8 sMysticSoulDesc[] = _(
-	"Inscrutable. When\n"
-	"held, maximizes\n"
+	"Inscrutable. Lose\n"
+	"HP to maximize\n"
 	"FAIRY power.");
 	
 static const u8 sEvioliteDesc[] = _(
@@ -1097,6 +1097,11 @@ static const u8 sLifeOrbDesc[] = _(
 	"but hurts the user\n"
 	"after each move.");
 	
+static const u8 sPinkBowDesc[] = _(
+	"A hold item that\n"
+	"slightly boosts\n"
+	"FAIRY moves.");
+
 static const u8 sRedScarfDesc[] = _(
     "A hold item that\n"
     "raises COOL in\n"

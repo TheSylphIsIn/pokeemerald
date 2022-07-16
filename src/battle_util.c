@@ -3947,6 +3947,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                 }
                 break;
 			case HOLD_EFFECT_LIFE_ORB:
+			case HOLD_EFFECT_SOUL:
 				if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
                     && gSpecialStatuses[gBattlerTarget].dmg != 0
                     && gSpecialStatuses[gBattlerTarget].dmg != 0xFFFF
@@ -3967,7 +3968,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                     gBattlescriptCurrInstr = BattleScript_ItemDrainHP_Ret;
                     effect++;
 				}
-				
+				break;
             }
         }
         break;
