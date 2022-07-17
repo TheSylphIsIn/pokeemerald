@@ -1148,7 +1148,8 @@ static bool8 AccuracyCalcHelper(u16 move)
     if ((WEATHER_HAS_EFFECT && (gBattleWeather & B_WEATHER_RAIN) && gBattleMoves[move].effect == (EFFECT_THUNDER || EFFECT_HURRICANE))
      || (gBattleMoves[move].effect == EFFECT_ALWAYS_HIT || gBattleMoves[move].effect == EFFECT_VITAL_THROW) ||
      (WEATHER_HAS_EFFECT && (gBattleWeather & B_WEATHER_HAIL) && gBattleMoves[move].effect == EFFECT_FREEZE_HIT) ||
-	 (IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_POISON) && gBattleMoves[move].effect == EFFECT_TOXIC))
+	 (IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_POISON) && gBattleMoves[move].effect == EFFECT_TOXIC)
+	 || gBattleMons[gBattlerAttacker].ability == ABILITY_NO_GUARD || gBattleMons[gBattlerTarget].ability == ABILITY_NO_GUARD)
     {
         JumpIfMoveFailed(7, move);
         return TRUE;

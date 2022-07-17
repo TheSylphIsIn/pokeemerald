@@ -3763,7 +3763,7 @@ static const u16 sMightyenaLevelUpLearnset[] = {
 };
 
 static const u16 sZigzagoonLevelUpLearnset[] = {
-    LEVEL_UP_MOVE( 1, MOVE_TACKLE),
+    LEVEL_UP_MOVE( 1, MOVE_THUNDER_SHOCK),
     LEVEL_UP_MOVE( 5, MOVE_TAIL_WHIP),
     LEVEL_UP_MOVE( 9, MOVE_HEADBUTT),
     LEVEL_UP_MOVE(13, MOVE_SAND_ATTACK),
@@ -5618,7 +5618,7 @@ static const u16 sChimechoLevelUpLearnset[] = {
 static const u16 sDubsnakeLevelUpLearnset[] = {
 	LEVEL_UP_MOVE( 1, MOVE_ICE_SHARD),
 	LEVEL_UP_MOVE( 1, MOVE_SMOG),
-	LEVEL_UP_MOVE( 6, MOVE_WRAP),
+	LEVEL_UP_MOVE( 6, MOVE_LAVA_PLUME),
 	LEVEL_UP_MOVE(11, MOVE_ACID),
 	LEVEL_UP_MOVE(11, MOVE_POWDER_SNOW),
 	LEVEL_UP_MOVE(16, MOVE_BITE),
