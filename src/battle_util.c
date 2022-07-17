@@ -2852,6 +2852,16 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                         }
                     }
                     break;
+				case ABILITY_MAGMA_ARMOR:
+					if (moveType == TYPE_ICE)
+					{
+						if (gProtectStructs[gBattlerAttacker].notFirstStrike)
+                            gBattlescriptCurrInstr = BattleScript_MonMadeMoveUseless;
+                        else
+                            gBattlescriptCurrInstr = BattleScript_MonMadeMoveUseless_PPLoss;
+						effect = 2;
+					}
+					break;
                 }
                 if (effect == 1)
                 {

@@ -7748,6 +7748,7 @@ static void Cmd_weatherdamage(void)
 				&& gBattleMons[gBattlerAttacker].ability != ABILITY_SNOW_CLOAK
 				&& gBattleMons[gBattlerAttacker].ability != ABILITY_SLUSH_RUSH
 				&& gBattleMons[gBattlerAttacker].ability != ABILITY_MAGIC_GUARD
+				&& gBattleMons[gBattlerAttacker].ability != ABILITY_MAGMA_ARMOR
                 && !(gStatuses3[gBattlerAttacker] & STATUS3_UNDERGROUND)
                 && !(gStatuses3[gBattlerAttacker] & STATUS3_UNDERWATER))
             {

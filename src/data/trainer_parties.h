@@ -1,3 +1,18 @@
+/*
+	static const struct TrainerMon sParty_[] = {
+    {
+    .iv = 255, // IV * 31 / 255
+    .lvl = 5,
+	.evs = {hp, atk, def, speed, spatk, spdef}, // only for ItemCustomMoves
+	.nature = NATURE_ //if you want default, do Docile. Only for ItemCustomMoves
+    .species = SPECIES_TORCHIC,
+	.ability = 1, // for CustomMoves, with or without items
+	.heldItem = ITEM_ORAN_BERRY, // with items
+	.moves = {MOVE_SCRATCH, MOVE_PECK, MOVE_NONE, MOVE_NONE}, // with custom moves
+    }
+};
+*/
+
 static const struct TrainerMonNoItemDefaultMoves sParty_Sawyer1[] = {
     {
     .iv = 0,
