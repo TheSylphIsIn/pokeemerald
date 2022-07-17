@@ -4371,15 +4371,15 @@ void ItemUseCB_Medicine(u8 taskId, TaskFunc task)
             ResetHPTaskData(taskId, 0, hp);
             return;
         }
-		else if (item == ITEM_ABILITY_PILL)
+		else if (item == ITEM_ABILITY_PILL) // ability pills swap slots without changing between normal/hidden.
 		{
 			value = GetMonData(mon, MON_DATA_ABILITY_NUM, NULL);
-			if (value == 0)
+			if (value == 0 || value == 2) // if ability is 0/2, set it to 1/3.
 			{
 				value++;
 				SetMonData(mon, MON_DATA_ABILITY_NUM, &value);
 			}
-			else
+			else // if ability is 1/3, set it to 0/2.
 			{
 				value--;
 				SetMonData(mon, MON_DATA_ABILITY_NUM, &value);
@@ -4391,26 +4391,41 @@ void ItemUseCB_Medicine(u8 taskId, TaskFunc task)
 			ScheduleBgCopyTilemapToVram(2);
 			gTasks[taskId].func = task;
 		}
-		// else if (item == ITEM_DREAM_PILL)
-		// {
-			// GetMonData(mon, MON_DATA_ABILITY_NUM, value);
-			// if (value >= 1)
-			// {
-				// value += 2;
-				// SetMonData(mon, MON_DATA_ABILITY_NUM, &value);
-			// }
-			// else
-			// {
-				// value -= 2;
-				// SetMonData(mon, MON_DATA_ABILITY_NUM, &value);
-			// }
-			// GetMonNickname(mon, gStringVar1);
-			// gStringVar2 = StringGet_Nickname(gAbilityNames[value]);
-			// StringExpandPlaceholders(gStringVar4, gText_PkmnAbilityChanged);
-			// DisplayPartyMenuMessage(gStringVar4, TRUE);
-			// ScheduleBgCopyTilemapToVram(2);
-			// gTasks[taskId].func = Task_ClosePartyMenuAfterText;
-		// }
+		else if (item == ITEM_DREAM_PILL) // dream pills swap between normal/hidden without changing ability slots*.
+		{
+			value = GetMonData(mon, MON_DATA_ABILITY_NUM, NULL);
+			if (value == 3 && gBaseStats[GetMonData(mon, MON_DATA_SPECIES, NULL)].abilities[1] == 0)
+			/*
+			If a mon has one normal ability but two hidden abilities
+			(e.g. {ABILITY_OVERGROW, ABILITY_NONE, ABILITY_CHLOROPHYLL, ABILITY_THICK_FAT}),
+			this allows dream pill to change ability from hidden to normal without needing to
+			use an ability pill to change from hidden 2 to hidden 1 first.
+			*/
+			{
+				value = 0;
+				SetMonData(mon, MON_DATA_ABILITY_NUM, &value);
+			}
+			else if (value < 2)
+			{ /* 
+			If mon has its normal ability, change to the corresponding hidden slot.
+			Note that if a mon does not have two different hidden abilities,
+			The second hidden slot should be set to the same as the first, not ABILITY_NONE.
+			*/
+				value += 2;
+				SetMonData(mon, MON_DATA_ABILITY_NUM, &value);
+			}
+			else
+			{ // If a mon has its hidden ability, change to the corresponding normal slot.
+				value -= 2;
+				SetMonData(mon, MON_DATA_ABILITY_NUM, &value);
+			}
+			GetMonNickname(mon, gStringVar1);
+			StringCopy(gStringVar2, gAbilityNames[gBaseStats[GetMonData(mon, MON_DATA_SPECIES, NULL)].abilities[value]]);
+			StringExpandPlaceholders(gStringVar4, gText_PkmnAbilityChanged);
+			DisplayPartyMenuMessage(gStringVar4, FALSE);
+			ScheduleBgCopyTilemapToVram(2);
+			gTasks[taskId].func = task;
+		}
         else
         {
             GetMonNickname(mon, gStringVar1);

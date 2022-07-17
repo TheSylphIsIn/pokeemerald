@@ -2539,7 +2539,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     gBattleScripting.battler = battler;
                     effect++;
 				}
-                else if (!(gBattleWeather & B_WEATHER_RAIN_PERMANENT || B_WEATHER_RAIN_DOWNPOUR))
+                else if (!((gBattleWeather & B_WEATHER_RAIN_PERMANENT) || (gBattleWeather & B_WEATHER_RAIN_DOWNPOUR)))
                 {
                     gBattleWeather = (B_WEATHER_RAIN_PERMANENT | B_WEATHER_RAIN_TEMPORARY);
                     BattleScriptPushCursorAndCallback(BattleScript_DrizzleActivates);
@@ -2575,7 +2575,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     gBattleScripting.battler = battler;
                     effect++;
 				}
-                else if (!(gBattleWeather & B_WEATHER_SUN_PERMANENT || B_WEATHER_INTENSE_SUN))
+                else if (!((gBattleWeather & B_WEATHER_SUN_PERMANENT) || (gBattleWeather & B_WEATHER_INTENSE_SUN)))
                 {
                     gBattleWeather = B_WEATHER_SUN;
                     BattleScriptPushCursorAndCallback(BattleScript_DroughtActivates);

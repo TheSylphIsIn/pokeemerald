@@ -701,16 +701,16 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_RareCandy,
     },
 	
-	[ITEM_036] =
-    {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
-        .price = 0,
-        .description = sDummyDesc,
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
-    },
+	[ITEM_DREAM_PILL] = 
+	{
+		.name = _("HIDDEN TAB"),
+		.itemId = ITEM_DREAM_PILL,
+		.price = 10000,
+		.description = sDreamPillDesc,
+		.pocket = POCKET_ITEMS,
+		.type = ITEM_USE_PARTY_MENU,
+		.fieldUseFunc = ItemUseOutOfBattle_Medicine,
+	},
 
 
     [ITEM_037] =

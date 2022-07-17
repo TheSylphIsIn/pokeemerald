@@ -1101,6 +1101,11 @@ static const u8 sPinkBowDesc[] = _(
 	"A hold item that\n"
 	"slightly boosts\n"
 	"FAIRY moves.");
+	
+static const u8 sDreamPillDesc[] = _(
+	"A capsule that\n"
+	"gives a POKéMON\n"
+	"its HIDDEN ABILITY.");
 
 static const u8 sRedScarfDesc[] = _(
     "A hold item that\n"

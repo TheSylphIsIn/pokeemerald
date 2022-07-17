@@ -4640,11 +4640,7 @@ u8 GetMonsStateToDoubles_2(void)
 
 u8 GetAbilityBySpecies(u16 species, u8 abilityNum)
 {
-    if (abilityNum)
-        gLastUsedAbility = gBaseStats[species].abilities[1];
-    else
-        gLastUsedAbility = gBaseStats[species].abilities[0];
-
+    gLastUsedAbility = gBaseStats[species].abilities[abilityNum];
     return gLastUsedAbility;
 }
 
@@ -4794,7 +4790,6 @@ void CopyPlayerPartyMonToBattleData(u8 battlerId, u8 partyIndex)
     gBattleMons[battlerId].speed = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPEED, NULL);
     gBattleMons[battlerId].spAttack = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPATK, NULL);
     gBattleMons[battlerId].spDefense = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPDEF, NULL);
-    gBattleMons[battlerId].isEgg = GetMonData(&gPlayerParty[partyIndex], MON_DATA_IS_EGG, NULL);
     gBattleMons[battlerId].abilityNum = GetMonData(&gPlayerParty[partyIndex], MON_DATA_ABILITY_NUM, NULL);
     gBattleMons[battlerId].otId = GetMonData(&gPlayerParty[partyIndex], MON_DATA_OT_ID, NULL);
     gBattleMons[battlerId].type1 = gBaseStats[gBattleMons[battlerId].species].type1;
@@ -4846,6 +4841,52 @@ bool8 ExecuteTableBasedItemEffect(struct Pokemon *mon, u16 item, u8 partyIndex, 
     }                                                                                                   \
 }
 
+// when using an Ability/Hidden capsule, checks if the slot you're trying to change to exists.
+bool8 AbilitySlotExists(struct Pokemon *mon, u16 item)
+{
+	u8 abilityNum = GetMonData(mon, MON_DATA_ABILITY_NUM, NULL);
+	
+	switch (item)
+	{
+		case ITEM_ABILITY_PILL:
+			switch (abilityNum)
+			{
+				case 0: // if the mon has a second ability, pill can be used.
+					if (gBaseStats[GetMonData(mon, MON_DATA_SPECIES, NULL)].abilities[1] != 0)
+						return TRUE;
+					break;
+				case 1: // pill can always be used because no mon will have a slot 2 but not slot 1 ability.
+					return TRUE;
+				case 2: // mons with 1 hidden ability will have the same ability in both slots.
+				case 3: // so, to avoid pill waste, you can't use a normal pill on a hidden ability mon
+					if (gBaseStats[GetMonData(mon, MON_DATA_SPECIES, NULL)].abilities[3] != // if both hidden slots have
+						gBaseStats[GetMonData(mon, MON_DATA_SPECIES, NULL)].abilities[2]) // the same ability in them.
+						return TRUE;
+					break;
+				default:
+					break;
+			}
+			return FALSE;
+		case ITEM_DREAM_PILL:
+			switch (abilityNum)
+			{
+				case 0: // if the mon has a hidden ability, dream pills can be used.
+				case 1:
+					if (gBaseStats[GetMonData(mon, MON_DATA_SPECIES, NULL)].abilities[2] != 0)
+						return TRUE;
+					break;
+				case 2: // mons will always have a slot 1 ability.
+				case 3: // the case of a mon having one normal ability but two hidden abilities
+					return TRUE; // is handled in dream pill's party_menu.c code.
+				default:
+					break;
+			}
+			return FALSE;
+		default:
+			break;
+	}
+	return FALSE;
+}
 // Returns TRUE if the item has no effect on the Pokémon, FALSE otherwise
 bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 moveIndex, bool8 usedByAI)
 {
@@ -4866,8 +4907,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
     s8 evChange;
     u16 evCount;
 
-	if (item == ITEM_ABILITY_PILL && gBaseStats[GetMonData(mon, MON_DATA_SPECIES, NULL)].abilities[1] != 0)
-		//|| item == ITEM_DREAM_PILL && gBaseStats[GetMonData(mon, MON_DATA_SPECIES, NULL).abilities[2] != 0)
+	if (AbilitySlotExists(mon, item))
 	{
 		return FALSE;
 	}
