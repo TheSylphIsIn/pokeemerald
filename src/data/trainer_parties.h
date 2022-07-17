@@ -3383,23 +3383,32 @@ static const struct TrainerMonItemCustomMoves sParty_Roxanne1[] = {
     {
     .iv = 100,
     .lvl = 12,
+	.evs = {40, 40, 0, 0, 0, 0},
+	.nature = NATURE_RASH,
     .species = SPECIES_GEODUDE,
+	.ability = 0,
     .heldItem = ITEM_NONE,
-    .moves = {MOVE_TACKLE, MOVE_DEFENSE_CURL, MOVE_ROCK_THROW, MOVE_ROCK_TOMB}
+    .moves = {MOVE_TACKLE, MOVE_DEFENSE_CURL, MOVE_MAGNITUDE, MOVE_ROCK_TOMB}
     },
     {
     .iv = 100,
-    .lvl = 12,
-    .species = SPECIES_GEODUDE,
-    .heldItem = ITEM_NONE,
-    .moves = {MOVE_TACKLE, MOVE_DEFENSE_CURL, MOVE_ROCK_THROW, MOVE_ROCK_TOMB}
+    .lvl = 14,
+	.evs = {0, 0, 0, 0, 40, 40},
+	.nature = NATURE_MILD,
+    .species = SPECIES_CORSOLA,
+	.ability = 0,
+    .heldItem = ITEM_PECHA_BERRY,
+    .moves = {MOVE_WATER_GUN, MOVE_TACKLE, MOVE_COLD_SNAP, MOVE_ROCK_TOMB}
     },
     {
     .iv = 200,
     .lvl = 15,
+	.evs = {100, 0, 0, 0, 0, 0},
+	.nature = NATURE_IMPISH,
     .species = SPECIES_NOSEPASS,
+	.ability = 0,
     .heldItem = ITEM_ORAN_BERRY,
-    .moves = {MOVE_BLOCK, MOVE_HARDEN, MOVE_TACKLE, MOVE_ROCK_TOMB}
+    .moves = {MOVE_BLOCK, MOVE_SPARK, MOVE_TACKLE, MOVE_ROCK_TOMB}
     }
 };
 

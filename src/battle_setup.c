@@ -1614,8 +1614,7 @@ static bool32 UpdateRandomTrainerRematches(const struct RematchTrainer *table, u
                 // Trainer already wants a rematch. Don't bother updating it.
                 ret = TRUE;
             }
-            else if (FlagGet(FLAG_MATCH_CALL_REGISTERED + i)
-             && (Random() % 100) <= 30)  // 31% chance of getting a rematch.
+            else if (FlagGet(FLAG_MATCH_CALL_REGISTERED + i))
             {
                 SetRematchIdForTrainer(table, i);
                 ret = TRUE;
@@ -1751,12 +1750,9 @@ static u32 GetTrainerMatchCallFlag(u32 trainerId)
 
 static void RegisterTrainerInMatchCall(void)
 {
-    if (FlagGet(FLAG_HAS_MATCH_CALL))
-    {
         u32 matchCallFlagId = GetTrainerMatchCallFlag(gTrainerBattleOpponent_A);
         if (matchCallFlagId != 0xFFFF)
             FlagSet(matchCallFlagId);
-    }
 }
 
 static bool8 WasSecondRematchWon(const struct RematchTrainer *table, u16 firstBattleTrainerId)
@@ -1771,38 +1767,19 @@ static bool8 WasSecondRematchWon(const struct RematchTrainer *table, u16 firstBa
     return TRUE;
 }
 
-static bool32 HasAtLeastFiveBadges(void)
-{
-    s32 i, count;
-
-    for (count = 0, i = 0; i < ARRAY_COUNT(sBadgeFlags); i++)
-    {
-        if (FlagGet(sBadgeFlags[i]) == TRUE)
-        {
-            if (++count >= 5)
-                return TRUE;
-        }
-    }
-
-    return FALSE;
-}
-
 #define STEP_COUNTER_MAX 255
 
 void IncrementRematchStepCounter(void)
 {
-    if (HasAtLeastFiveBadges())
-    {
         if (gSaveBlock1Ptr->trainerRematchStepCounter >= STEP_COUNTER_MAX)
             gSaveBlock1Ptr->trainerRematchStepCounter = STEP_COUNTER_MAX;
         else
             gSaveBlock1Ptr->trainerRematchStepCounter++;
-    }
 }
 
 static bool32 IsRematchStepCounterMaxed(void)
 {
-    if (HasAtLeastFiveBadges() && gSaveBlock1Ptr->trainerRematchStepCounter >= STEP_COUNTER_MAX)
+    if (gSaveBlock1Ptr->trainerRematchStepCounter >= STEP_COUNTER_MAX)
         return TRUE;
     else
         return FALSE;
