@@ -108,6 +108,7 @@ static const u8 sNoGuardDescription[] = _("Never misses or dodges.");
 static const u8 sToughClawsDescription[] = _("Contact move power up.");
 static const u8 sHydrationDescription[] = _("Cures status in rain.");
 static const u8 sLeafGuardDescription[] = _("Cures status in sun.");
+static const u8 sDefenderDescription[] = _("Shielding lasts longer.");
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
 {
@@ -221,6 +222,7 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
 	[ABILITY_TOUGH_CLAWS] = _("TOUGH CLAWS"),
 	[ABILITY_HYDRATION] = _("HYDRATION"),
 	[ABILITY_LEAF_GUARD] = _("LEAF GUARD"),
+	[ABILITY_DEFENDER] = _("DEFENDER"),
 };
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
@@ -335,4 +337,5 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 	[ABILITY_TOUGH_CLAWS] = sToughClawsDescription,
 	[ABILITY_HYDRATION] = sHydrationDescription,
 	[ABILITY_LEAF_GUARD] = sLeafGuardDescription,
+	[ABILITY_DEFENDER] = sDefenderDescription,
 };

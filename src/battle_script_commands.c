@@ -6856,6 +6856,9 @@ static void Cmd_setreflect(void)
         gSideStatuses[GET_BATTLER_SIDE(gBattlerAttacker)] |= SIDE_STATUS_REFLECT;
         gSideTimers[GET_BATTLER_SIDE(gBattlerAttacker)].reflectTimer = 5;
         gSideTimers[GET_BATTLER_SIDE(gBattlerAttacker)].reflectBattlerId = gBattlerAttacker;
+		
+		if (gBattleMons[gBattlerAttacker].ability == ABILITY_DEFENDER)
+			gSideTimers[GET_BATTLER_SIDE(gBattlerAttacker)].reflectTimer += 3;
 
         if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && CountAliveMonsInBattle(BATTLE_ALIVE_ATK_SIDE) == 2)
             gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SET_REFLECT_DOUBLE;
@@ -7588,6 +7591,9 @@ static void Cmd_setlightscreen(void)
         gSideTimers[GET_BATTLER_SIDE(gBattlerAttacker)].lightscreenTimer = 5;
         gSideTimers[GET_BATTLER_SIDE(gBattlerAttacker)].lightscreenBattlerId = gBattlerAttacker;
 
+		if (gBattleMons[gBattlerAttacker].ability == ABILITY_DEFENDER)
+			gSideTimers[GET_BATTLER_SIDE(gBattlerAttacker)].lightscreenTimer += 3;
+		
         if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && CountAliveMonsInBattle(BATTLE_ALIVE_ATK_SIDE) == 2)
             gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SET_LIGHTSCREEN_DOUBLE;
         else
@@ -7864,6 +7870,9 @@ static void Cmd_setmist(void)
         gSideTimers[GET_BATTLER_SIDE(gBattlerAttacker)].mistTimer = 5;
         gSideTimers[GET_BATTLER_SIDE(gBattlerAttacker)].mistBattlerId = gBattlerAttacker;
         gSideStatuses[GET_BATTLER_SIDE(gBattlerAttacker)] |= SIDE_STATUS_MIST;
+		if (gBattleMons[gBattlerAttacker].ability == ABILITY_DEFENDER)
+			gSideTimers[GET_BATTLER_SIDE(gBattlerAttacker)].mistTimer += 5;
+
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SET_MIST;
     }
     gBattlescriptCurrInstr++;
@@ -8760,6 +8769,10 @@ static void Cmd_setsafeguard(void)
         gSideStatuses[GET_BATTLER_SIDE(gBattlerAttacker)] |= SIDE_STATUS_SAFEGUARD;
         gSideTimers[GET_BATTLER_SIDE(gBattlerAttacker)].safeguardTimer = 5;
         gSideTimers[GET_BATTLER_SIDE(gBattlerAttacker)].safeguardBattlerId = gBattlerAttacker;
+		
+		if (gBattleMons[gBattlerAttacker].ability == ABILITY_DEFENDER)
+			gSideTimers[GET_BATTLER_SIDE(gBattlerAttacker)].safeguardTimer += 5;
+		
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SET_SAFEGUARD;
     }
 
