@@ -416,5 +416,8 @@ const u8 *const gMonFootprintTable[] =
 	[SPECIES_HYDROIL] = gMonFootprint_Hydroil,
 	[SPECIES_WYCERN] = gMonFootprint_Wycern,
 	[SPECIES_BITTERAGON] = gMonFootprint_Bitteragon,
+	[SPECIES_CACTUMBRA] = gMonFootprint_Cactumbra,
+	[SPECIES_OBSICARGO] = gMonFootprint_Obsicargo,
+	[SPECIES_NORWHALE] = gMonFootprint_Norwhale,
     [SPECIES_EGG] = gMonFootprint_Bulbasaur,
 };

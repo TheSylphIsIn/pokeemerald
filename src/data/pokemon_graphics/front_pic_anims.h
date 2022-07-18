@@ -4622,6 +4622,33 @@ static const union AnimCmd sAnim_BITTERAGON_1[] =
 	ANIMCMD_END
 };
 
+static const union AnimCmd sAnim_CACTUMBRA_1[] = 
+{
+	ANIMCMD_FRAME(0, 30),
+	ANIMCMD_FRAME(1, 60),
+	ANIMCMD_FRAME(0, 10),
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_OBSICARGO_1[] = 
+{
+	ANIMCMD_FRAME(0, 15),
+	ANIMCMD_FRAME(1, 15),
+	ANIMCMD_FRAME(0, 15),
+	ANIMCMD_FRAME(1, 15),
+	ANIMCMD_FRAME(0, 15),
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_NORWHALE_1[] = 
+{
+	ANIMCMD_FRAME(0, 10),
+	ANIMCMD_FRAME(1, 40),
+	ANIMCMD_FRAME(0, 40),
+	ANIMCMD_FRAME(1, 20),
+	ANIMCMD_FRAME(0, 20),
+	ANIMCMD_END
+};
 
 // static const union AnimCmd sAnim__1[] = 
 // {
@@ -6873,6 +6900,20 @@ static const union AnimCmd *const sAnims_BITTERAGON[] ={
 	sAnim_BITTERAGON_1,
 };
 
+static const union AnimCmd *const sAnims_CACTUMBRA[] ={
+	sAnim_GeneralFrame0,
+	sAnim_CACTUMBRA_1,
+};
+
+static const union AnimCmd *const sAnims_OBSICARGO[] ={
+	sAnim_GeneralFrame0,
+	sAnim_OBSICARGO_1,
+};
+
+static const union AnimCmd *const sAnims_NORWHALE[] ={
+	sAnim_GeneralFrame0,
+	sAnim_NORWHALE_1,
+};
 
 // static const union AnimCmd *const sAnims_[] ={
 	// sAnim_GeneralFrame0,
@@ -7440,6 +7481,9 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[] =
 	ANIM_CMD(HYDROIL),
 	ANIM_CMD(WYCERN),
 	ANIM_CMD(BITTERAGON),
+	ANIM_CMD(CACTUMBRA),
+	ANIM_CMD(OBSICARGO),
+	ANIM_CMD(NORWHALE),
     ANIM_CMD(EGG),
     ANIM_CMD(UNOWN_B),
     ANIM_CMD(UNOWN_C),

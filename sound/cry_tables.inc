@@ -392,6 +392,9 @@ gCryTable::
 	cry Cry_Hydroil
 	cry Cry_Wycern
 	cry Cry_Bitteragon
+	cry Cry_Cactumbra
+	cry Cry_Obsicargo
+	cry Cry_Norwhale
 
 	.align 2
 gCryTable_Reverse::
@@ -787,3 +790,6 @@ gCryTable_Reverse::
 	cry_reverse Cry_Hydroil
 	cry_reverse Cry_Wycern
 	cry_reverse Cry_Bitteragon
+	cry_reverse Cry_Cactumbra
+	cry_reverse Cry_Obsicargo
+	cry_reverse Cry_Norwhale

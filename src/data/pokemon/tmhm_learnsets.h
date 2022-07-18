@@ -1961,6 +1961,30 @@ static const u8 sHydroilTMHMLearnset[] =
 	TMHM_LEARNSET_END,
 };
 
+static const u8 sWycernTMHMLearnset[] = 
+{
+	TMHM_LEARNSET_END,
+};
+
+static const u8 sBitteragonTMHMLearnset[] = 
+{
+	TMHM_LEARNSET_END,
+};
+
+static const u8 sCactumbraTMHMLearnset[] = 
+{
+	TMHM_LEARNSET_END,
+};
+
+static const u8 sObsicargoTMHMLearnset[] = 
+{
+	TMHM_LEARNSET_END,
+};
+
+static const u8 sNorwhaleTMHMLearnset[] = 
+{
+	TMHM_LEARNSET_END,
+};
 
 const u8 *const gTMHMLearnsets[] =
 {
@@ -2377,5 +2401,10 @@ const u8 *const gTMHMLearnsets[] =
     [SPECIES_DEOXYS] = sDeoxysTMHMLearnset,
     [SPECIES_CHIMECHO] = sChimechoTMHMLearnset,
 	[SPECIES_DUBSNAKE] = sDubsnakeTMHMLearnset,
-	[SPECIES_HYDROIL] = sHydroilTMHMLearnset
+	[SPECIES_HYDROIL] = sHydroilTMHMLearnset,
+	[SPECIES_WYCERN] = sWycernTMHMLearnset,
+	[SPECIES_BITTERAGON] = sBitteragonTMHMLearnset,
+	[SPECIES_CACTUMBRA] = sCactumbraTMHMLearnset,
+	[SPECIES_OBSICARGO] = sObsicargoTMHMLearnset,
+	[SPECIES_NORWHALE] = sNorwhaleTMHMLearnset
 };

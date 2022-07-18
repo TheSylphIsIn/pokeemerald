@@ -5754,6 +5754,12 @@ static const u32 sTutorLearnsets[] =
 	[SPECIES_WYCERN] = (0),
 	
 	[SPECIES_BITTERAGON] = (0),
+	
+	[SPECIES_CACTUMBRA] = (0),
+	
+	[SPECIES_OBSICARGO] = (0),
+	
+	[SPECIES_NORWHALE] = (0),
 
 };
 

@@ -416,4 +416,7 @@ const u16 *const gLevelUpLearnsets[NUM_SPECIES] =
 	[SPECIES_HYDROIL] = sHydroilLevelUpLearnset,
 	[SPECIES_WYCERN] = sWycernLevelUpLearnset,
 	[SPECIES_BITTERAGON] = sBitteragonLevelUpLearnset,
+	[SPECIES_CACTUMBRA] = sCactumbraLevelUpLearnset,
+	[SPECIES_OBSICARGO] = sObsicargoLevelUpLearnset,
+	[SPECIES_NORWHALE] = sNorwhaleLevelUpLearnset,
 };

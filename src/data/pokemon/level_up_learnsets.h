@@ -5685,3 +5685,15 @@ static const u16 sBitteragonLevelUpLearnset[] = {
 	LEVEL_UP_MOVE(60, MOVE_OUTRAGE),
 	LEVEL_UP_END
 };
+
+static const u16 sCactumbraLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sObsicargoLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sNorwhaleLevelUpLearnset[] = {
+	LEVEL_UP_END
+};

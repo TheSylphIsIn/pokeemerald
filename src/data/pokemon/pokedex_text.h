@@ -2343,3 +2343,21 @@ const u8 gBitteragonPokedexText[] = _(
 	"Its fridge is strong enough to whip up\n"
 	"blizzards, which it vents out its back.\n"
 	"Its fury can be calmed by choral singing.");
+	
+const u8 gCactumbraPokedexText[] = _(
+	"CACTUMBRA leaves its group when\n"
+	"it evolves. It is strong enough\n"
+	"to win one-on-one fights, but still\n"
+	"prefers prey that can't fight back.");
+	
+const u8 gObsicargoPokedexText[] = _(
+	"Its magma body has thoroughly\n"
+	"cooled into volcanic glass, but\n"
+	"it lives on. The glass protrusions\n"
+	"on its body are sharper than razors.");
+	
+const u8 gNorwhalePokedexText[] = _(
+	"Its curly horn is mostly\n"
+	"decorative, being used to break ice\n"
+	"floes, not hunt. However, it's sharp\n"
+	"enough to fight with if provoked.");

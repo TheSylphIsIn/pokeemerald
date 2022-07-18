@@ -1953,6 +1953,18 @@ Cry_Wycern::
 	.align 2
 Cry_Bitteragon::
 	.incbin "sound/direct_sound_samples/cries/venusaur.bin"
+	
+	.align 2
+Cry_Cactumbra::
+	.incbin "sound/direct_sound_samples/cries/cacturne.bin"
+	
+	.align 2
+Cry_Obsicargo::
+	.incbin "sound/direct_sound_samples/cries/magcargo.bin"
+	
+	.align 2
+Cry_Norwhale::
+	.incbin "sound/direct_sound_samples/cries/dewgong.bin"
 
 	.align 2
 DirectSoundWaveData_register_noise::

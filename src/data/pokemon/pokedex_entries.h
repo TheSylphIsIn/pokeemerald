@@ -4691,4 +4691,40 @@ const struct PokedexEntry gPokedexEntries[] =
 		.trainerScale = 290,
 		.trainerOffset = 0,
 	},
+	
+	[NATIONAL_DEX_CACTUMBRA] = 
+	{
+		.categoryName = _("SCAVENGER"),
+		.height = 19,
+		.weight = 994,
+		.description = gCactumbraPokedexText,
+		.pokemonScale = 256,
+        .pokemonOffset = 0,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+	},
+	
+	[NATIONAL_DEX_OBSICARGO] =
+	{
+		.categoryName = _("GLASS SHARD"),
+		.height = 8,
+		.weight = 610,
+		.description = gObsicargoPokedexText,
+		.pokemonScale = 332,
+        .pokemonOffset = 15,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+	},
+	
+	[NATIONAL_DEX_NORWHALE] = 
+	{
+		.categoryName = _("SEA LION"),
+		.height = 20,
+		.weight = 1500,
+		.description = gNorwhalePokedexText,
+		.pokemonScale = 256,
+        .pokemonOffset = 0,
+        .trainerScale = 275,
+        .trainerOffset = 0,
+	},
 };
