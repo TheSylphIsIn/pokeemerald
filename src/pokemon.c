@@ -3362,6 +3362,8 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
 		if (sSlashMovesTable[i] != 0xFFFF)
 			gBattleMovePower = (120 * gBattleMovePower) / 100;
 	}
+	if (attacker->ability == ABILITY_TOUGH_CLAWS && (gBattleMoves[gCurrentMove].flags & FLAG_MAKES_CONTACT))
+		gBattleMovePower = (gBattleMovePower * 130) / 100;
 
     // Self-destruct / Explosion cut defense in half
     if (gBattleMoves[gCurrentMove].effect == EFFECT_EXPLOSION)

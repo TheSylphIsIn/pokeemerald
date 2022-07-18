@@ -105,6 +105,7 @@ static const u8 sSpecialistDescription[] = _("Own type effects doubled.");
 static const u8 sExploitativeDescription[] = _("Type matchup power up.");
 static const u8 sMagicGuardDescription[] = _("Only hurt by moves.");
 static const u8 sNoGuardDescription[] = _("Never misses or dodges.");
+static const u8 sToughClawsDescription[] = _("Contact move power up.");
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
 {
@@ -215,6 +216,7 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
 	[ABILITY_EXPLOITATIVE] = _("EXPLOITATIVE"),
 	[ABILITY_MAGIC_GUARD] = _("MAGIC GUARD"),
 	[ABILITY_NO_GUARD] = _("NO GUARD"),
+	[ABILITY_TOUGH_CLAWS] = _("TOUGH CLAWS"),
 };
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
@@ -326,4 +328,5 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 	[ABILITY_EXPLOITATIVE] = sExploitativeDescription,
 	[ABILITY_MAGIC_GUARD] = sMagicGuardDescription,
 	[ABILITY_NO_GUARD] = sNoGuardDescription,
+	[ABILITY_TOUGH_CLAWS] = sToughClawsDescription,
 };
