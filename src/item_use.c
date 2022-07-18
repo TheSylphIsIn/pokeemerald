@@ -743,6 +743,12 @@ static void ItemUseOnFieldCB_WailmerPailSudowoodo(u8 taskId)
     DestroyTask(taskId);
 }
 
+void ItemUseOutOfBattle_AbilityScanner(u8 taskId)
+{
+	gItemUseCB = ItemUseCB_AbilityScanner;
+	SetUpItemUseCallback(taskId);
+}
+
 void ItemUseOutOfBattle_Medicine(u8 taskId)
 {
     gItemUseCB = ItemUseCB_Medicine;

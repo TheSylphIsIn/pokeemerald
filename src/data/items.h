@@ -4555,15 +4555,17 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_15B] =
+    [ITEM_ABILITY_SCANNER] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
+        .name = _("ABIL. SCANNER"),
+        .itemId = ITEM_ABILITY_SCANNER,
         .price = 0,
-        .description = sDummyDesc,
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .description = sAbilityScannerDesc,
+        .importance = 1,
+        .registrability = FALSE,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_AbilityScanner,
     },
 
     [ITEM_15C] =

@@ -4315,6 +4315,44 @@ static bool8 ExecuteTableBasedItemEffect_(u8 partyMonIndex, u16 item, u8 monMove
         return ExecuteTableBasedItemEffect(&gPlayerParty[partyMonIndex], item, partyMonIndex, monMoveIndex);
 }
 
+void ItemUseCB_AbilityScanner(u8 taskId, TaskFunc task)
+{
+    struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
+	u32 value;
+
+    if (GetMonData(mon, MON_DATA_IS_EGG, NULL))
+    {
+        gPartyMenuUseExitCallback = FALSE;
+        PlaySE(SE_SELECT);
+        DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
+        ScheduleBgCopyTilemapToVram(2);
+        gTasks[taskId].func = task;
+    }
+    else
+    {
+        gPartyMenuUseExitCallback = TRUE;
+        PlaySE(SE_PC_LOGIN);
+		value = GetMonData(mon, MON_DATA_SPECIES, NULL);
+		StringCopy(gStringVar2, gAbilityNames[gBaseStats[value].abilities[0]]);
+		if (gBaseStats[value].abilities[1]) // appends ",  <second ability name>" to the string if mon has two abilities
+		{
+			StringAppend(gStringVar2, gText_EmptySpace);
+			StringAppend(gStringVar2, gAbilityNames[gBaseStats[value].abilities[1]]);
+		}
+		StringCopy(gStringVar3, gAbilityNames[gBaseStats[value].abilities[2]]);
+		if (gBaseStats[value].abilities[2] != gBaseStats[value].abilities[3]) // doesn't display the same name twice
+		{
+			StringAppend(gStringVar3, gText_EmptySpace);
+			StringAppend(gStringVar3, gAbilityNames[gBaseStats[value].abilities[3]]);
+		}
+		StringExpandPlaceholders(gStringVar4, gText_ReadOutAbilities);
+		DisplayPartyMenuMessage(gStringVar4, TRUE);
+		ScheduleBgCopyTilemapToVram(2);
+		gTasks[taskId].func = task;
+	}
+		
+}
+
 void ItemUseCB_Medicine(u8 taskId, TaskFunc task)
 {
     u16 hp = 0;

@@ -491,7 +491,7 @@
 #define ITEM_HM08_DIVE ITEM_HM08
 
 // Unknown
-#define ITEM_15B 372
+#define ITEM_ABILITY_SCANNER 372
 #define ITEM_15C 373
 
 // FireRed/LeafGreen
