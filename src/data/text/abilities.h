@@ -106,6 +106,8 @@ static const u8 sExploitativeDescription[] = _("Type matchup power up.");
 static const u8 sMagicGuardDescription[] = _("Only hurt by moves.");
 static const u8 sNoGuardDescription[] = _("Never misses or dodges.");
 static const u8 sToughClawsDescription[] = _("Contact move power up.");
+static const u8 sHydrationDescription[] = _("Cures status in rain.");
+static const u8 sLeafGuardDescription[] = _("Cures status in sun.");
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
 {
@@ -217,6 +219,8 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
 	[ABILITY_MAGIC_GUARD] = _("MAGIC GUARD"),
 	[ABILITY_NO_GUARD] = _("NO GUARD"),
 	[ABILITY_TOUGH_CLAWS] = _("TOUGH CLAWS"),
+	[ABILITY_HYDRATION] = _("HYDRATION"),
+	[ABILITY_LEAF_GUARD] = _("LEAF GUARD"),
 };
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
@@ -329,4 +333,6 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 	[ABILITY_MAGIC_GUARD] = sMagicGuardDescription,
 	[ABILITY_NO_GUARD] = sNoGuardDescription,
 	[ABILITY_TOUGH_CLAWS] = sToughClawsDescription,
+	[ABILITY_HYDRATION] = sHydrationDescription,
+	[ABILITY_LEAF_GUARD] = sLeafGuardDescription,
 };
