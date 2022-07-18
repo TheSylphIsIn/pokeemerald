@@ -428,6 +428,7 @@ gBattleAnims_Moves::
 	.4byte Move_U_TURN
 	.4byte Move_VOLT_SWITCH
 	.4byte Move_SHELL_SMASH
+	.4byte Move_SKYDIVE
 	.4byte Move_COUNT @ cannot be reached, because last move is Psycho Boost
 
 	.align 2
@@ -9966,6 +9967,8 @@ Move_SHELL_SMASH:
 	loopsewithpan SE_M_SWAGGER, SOUND_PAN_ATTACKER, 4, 2
 	waitforvisualfinish
 	end
+	
+Move_SKYDIVE:
 
 Move_KNOCK_OFF:
 	loadspritegfx ANIM_TAG_SLAM_HIT_2
