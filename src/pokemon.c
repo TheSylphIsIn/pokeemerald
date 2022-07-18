@@ -3155,6 +3155,13 @@ static const u16 sSoundMovesTable[] =
 	MOVE_BOOMBURST, MOVE_BUG_BUZZ, MOVE_BUZZ_BLITZ, 0xFFFF
 };
 
+static const u16 sSlashMovesTable[] = 
+{
+	MOVE_SCRATCH, MOVE_CUT, MOVE_FURY_SWIPES, MOVE_SLASH, MOVE_FALSE_SWIPE, MOVE_FURY_CUTTER,
+	MOVE_METAL_CLAW, MOVE_CRUSH_CLAW, MOVE_AERIAL_ACE, MOVE_DRAGON_CLAW, MOVE_POISON_TAIL,
+	MOVE_LEAF_BLADE, MOVE_X_SCISSOR, MOVE_NIGHT_SLASH, 0xFFFF
+};
+
 s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *defender, u32 move, u16 sideStatus, u16 powerOverride, u8 typeOverride, u8 battlerIdAtk, u8 battlerIdDef)
 {
     u32 i;
@@ -3344,6 +3351,16 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
 		}
 		if (sSoundMovesTable[i] != 0xFFFF)
 			gBattleMovePower /= 2;
+	}
+	if (attacker->ability == ABILITY_HYPER_CUTTER)
+	{
+		for (i = 0; sSlashMovesTable[i] != 0xFFFF; i++)
+		{
+			if (sSlashMovesTable[i] == gCurrentMove)
+				break;
+		}
+		if (sSlashMovesTable[i] != 0xFFFF)
+			gBattleMovePower = (120 * gBattleMovePower) / 100;
 	}
 
     // Self-destruct / Explosion cut defense in half
