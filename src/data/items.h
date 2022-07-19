@@ -3072,12 +3072,14 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_0F9] =
+    [ITEM_BERSERK_GENE] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
-        .price = 0,
-        .description = sDummyDesc,
+        .name = _("BERSERK GENE"),
+        .itemId = ITEM_BERSERK_GENE,
+        .price = 1000,
+		.holdEffect = HOLD_EFFECT_BERSERK,
+		.holdEffectParam = 0,
+        .description = sBerserkGeneDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,

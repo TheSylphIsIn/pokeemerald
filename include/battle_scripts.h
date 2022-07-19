@@ -233,5 +233,6 @@ extern const u8 BattleScript_DownpourFireFail[];
 extern const u8 BattleScript_DesolationWaterFail[];
 extern const u8 BattleScript_LightningRod_PPLoss[];
 extern const u8 BattleScript_LightningRod[];
+extern const u8 BattleScript_BerserkGene[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

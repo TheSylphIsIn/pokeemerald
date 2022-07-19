@@ -3068,7 +3068,8 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     }
                     break;
                 case ABILITY_OWN_TEMPO:
-                    if (gBattleMons[battler].status2 & STATUS2_CONFUSION)
+                    if (gBattleMons[battler].status2 & STATUS2_CONFUSION
+						&& !(gBattleMons[battler].status2 & STATUS2_BERSERK))
                     {
                         StringCopy(gBattleTextBuff1, gStatusConditionString_ConfusionJpn);
                         effect = 2;
@@ -3511,6 +3512,21 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                 BattleScriptExecute(BattleScript_WhiteHerbEnd2);
             }
             break;
+		case HOLD_EFFECT_BERSERK:
+			if (gBattleMons[battlerId].statStages[STAT_ATK] < MAX_STAT_STAGE)
+			{
+				gBattleMons[battlerId].status2 &= STATUS2_BERSERK;
+				effect = ITEM_STATS_CHANGE; 
+			}
+			if (effect)
+			{
+				gBattleScripting.battler = battlerId;
+				gPotentialItemEffectBattler = battlerId;
+				gActiveBattler = gBattlerAttacker = battlerId;
+				BattleScriptExecute(BattleScript_BerserkGene); 
+				gBattleMons[battlerId].statStages[STAT_ATK] = (MAX_STAT_STAGE - 2);				
+			}
+			break;
         }
         break;
     case ITEMEFFECT_NORMAL:

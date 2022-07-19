@@ -4961,3 +4961,16 @@ BattleScript_LightningRod::
 	seteffectwithchance
 	moveendall
 	end
+	
+BattleScript_BerserkGene::
+	playstatchangeanimation BS_ATTACKER, BIT_ATK, 0
+	setstatchanger STAT_ATK, 2, FALSE
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_BUFF_ALLOW_PTR, BattleScript_BerserkGeneContinue
+BattleScript_BerserkGeneContinue::
+	printstring STRINGID_PKMNWENTBERSERK
+	waitmessage B_WAIT_TIME_LONG
+	setmoveeffect MOVE_EFFECT_CONFUSION | MOVE_EFFECT_AFFECTS_USER
+	seteffectprimary
+	removeitem BS_ATTACKER
+	end2
+

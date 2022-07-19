@@ -1111,6 +1111,11 @@ static const u8 sAbilityScannerDesc[] = _(
 	"Displays chosen\n"
 	"POKéMON species'\n"
 	"possible abilities.");
+	
+static const u8 sBerserkGeneDesc[] = _(
+	"Maximizes holder's\n"
+	"ATTACK, but\n"
+	"CONFUSEs forever.");
 
 static const u8 sRedScarfDesc[] = _(
     "A hold item that\n"

@@ -2646,14 +2646,21 @@ void SetMoveEffect(bool8 primary, u8 certain)
             switch (gBattleCommunication[MOVE_EFFECT_BYTE])
             {
             case MOVE_EFFECT_CONFUSION:
-                if (gBattleMons[gEffectBattler].ability == ABILITY_OWN_TEMPO
+				if (gCurrentMove == MOVE_SWAGGER)
+					gBattleMons[gEffectBattler].status2 &= STATUS2_BERSERK;
+				
+                if ((gBattleMons[gEffectBattler].ability == ABILITY_OWN_TEMPO
                     || gBattleMons[gEffectBattler].status2 & STATUS2_CONFUSION)
+					&& !(gBattleMons[gEffectBattler].status2 & STATUS2_BERSERK))
                 {
                     gBattlescriptCurrInstr++;
                 }
                 else
                 {
-                    gBattleMons[gEffectBattler].status2 |= STATUS2_CONFUSION_TURN(((Random()) % 4) + 2); // 2-5 turns
+					if (gBattleMons[gEffectBattler].status2 & STATUS2_BERSERK)
+						gBattleMons[gEffectBattler].status2 |= STATUS2_CONFUSION_TURN(255);
+					else
+						gBattleMons[gEffectBattler].status2 |= STATUS2_CONFUSION_TURN(((Random()) % 4) + 2); // 2-5 turns
 
                     BattleScriptPush(gBattlescriptCurrInstr + 1);
                     gBattlescriptCurrInstr = sMoveEffectBS_Ptrs[gBattleCommunication[MOVE_EFFECT_BYTE]];
