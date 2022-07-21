@@ -3,8 +3,8 @@ NewMap1_MapScripts::
 	
 
 ActivateSurf::
-	finditem ITEM_HM03
 	setflag FLAG_BADGE05_GET
+	finditem ITEM_HM03
 	end
 
 SurfDashing::

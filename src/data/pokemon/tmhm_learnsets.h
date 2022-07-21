@@ -442,6 +442,7 @@ static const u8 sDodrioTMHMLearnset[] =
 
 static const u8 sSeelTMHMLearnset[] =
 {
+	TMHM(HM03_SURF),
     TMHM_LEARNSET_END,
 };
 

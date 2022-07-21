@@ -92,11 +92,15 @@ Route103_EventScript_StartBrendanBattleMudkip::
 
 Route103_EventScript_AfterMayBattle::
 	msgbox Route103_Text_MayTimeToHeadBack, MSGBOX_DEFAULT
+	giveitem ITEM_ABILITY_SCANNER
+	msgbox Route103_Text_MayGoToLab, MSGBOX_DEFAULT
 	goto Route103_EventScript_RivalExit
 	end
 
 Route103_EventScript_AfterBrendanBattle::
 	msgbox Route103_Text_BrendanTimeToHeadBack, MSGBOX_DEFAULT
+	giveitem ITEM_ABILITY_SCANNER
+	msgbox Route103_Text_BrendanGoToLab, MSGBOX_DEFAULT
 	goto Route103_EventScript_RivalExit
 	end
 
@@ -289,15 +293,21 @@ Route103_EventScript_Isabelle::
 	end
 
 Route103_Text_MayRoute103Pokemon:
-	.string "MAY: Let's see… The POKéMON found\n"
-	.string "on ROUTE 103 include…$"
+	.string "MAY: Let's see… ZIGZAGOON can\n"
+	.string "have abilities like…$"
 
 Route103_Text_MayLetsBattle:
 	.string "Oh, hi, {PLAYER}{KUN}!\p"
 	.string "…Oh, I see, my dad gave you\n"
 	.string "a POKéMON as a gift.\p"
-	.string "Since we're here, let's have a quick\n"
-	.string "battle!\p"
+	.string "Well, I got a gift too!\n"
+	.string "It's a scanner that shows what\l"
+	.string "abilities a POKéMON can have.\p"
+	.string "Did you know a POKéMON can have one\n"
+	.string "of up to 4 different abilities?\p"
+	.string "I thought that was interesting…\p"
+	.string "Well, since we're here, let's have a\n"
+	.string "quick battle!\p"
 	.string "I'll give you a taste of what being\n"
 	.string "a TRAINER is like.$"
 
@@ -312,16 +322,33 @@ Route103_Text_MayTimeToHeadBack:
 	.string "but it already likes you.\p"
 	.string "You might be able to befriend any\n"
 	.string "kind of POKéMON easily.\p"
+	.string "In fact, here! You should take this!$"
+	
+Route103_Text_MayGoToLab:
+	.string "That ABILITY SCANNER should help\n"
+	.string "you get better as a TRAINER.\p"
+	.string "Knowing what your POKéMON's\n"
+	.string "best ABILITY would be is…\p"
+	.string "Well, it'll be useful once we\n"
+	.string "find a way to activate its\l"
+	.string "HIDDEN ABILITY, at least! Until then…\p"
 	.string "Well, it's time to head back to\n"
-	.string "the LAB.$"
+	.string "the LAB.\p"
+	.string "You should come too, {PLAYER}{KUN}.\n"
+	.string "My dad probably wants to see you.$"
 
 Route103_Text_BrendanRoute103Pokemon:
-	.string "BRENDAN: Okay, so it's this one and\n"
-	.string "that one that live on ROUTE 103…$"
+	.string "BRENDAN: Okay, so POOCHYENA's\n"
+	.string "abilities are…$"
 
 Route103_Text_BrendanLetsBattle:
 	.string "Hey, it's {PLAYER}!\p"
 	.string "…Oh, yeah, Dad gave you a POKéMON.\p"
+	.string "I was just using this new device\n"
+	.string "we got. It's called…\p"
+	.string "An ABILITY SCANNER! It shows what\n"
+	.string "ABILITIES a POKéMON can have.\l"
+	.string "Handy, huh?\p"
 	.string "Since we're here, how about a little\n"
 	.string "battle?\p"
 	.string "I'll teach you what being a TRAINER's\n"
@@ -338,7 +365,19 @@ Route103_Text_BrendanTimeToHeadBack:
 	.string "even though you just got it.\p"
 	.string "{PLAYER}, I get the feeling that you\n"
 	.string "could befriend any POKéMON with ease.\p"
-	.string "We should head back to the LAB.$"
+	.string "Here, you should take one of these,\n"
+	.string "then.$"
+	
+Route103_Text_BrendanGoToLab:
+	.string "Try that out. It should help you\n"
+	.string "figure out which POKéMON are strong.\p"
+	.string "We haven't actually figured out\n"
+	.string "a way to bring out the HIDDEN\l"
+	.string "ABILITY yet, but I have a feeling\l"
+	.string "we will soon.\p"
+	.string "In any case, wee should head back\n"
+	.string "to the LAB. Follow me, {PLAYER}.\l"
+	.string "I bet my dad'll want to see you.$"
 
 Route103_Text_ShouldHaveBroughtPotion:
 	.string "My POKéMON is staggeringly tired…\n"

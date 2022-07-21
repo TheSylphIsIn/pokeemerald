@@ -6407,6 +6407,7 @@ u32 CanMonLearnTMHM(struct Pokemon *mon, u8 tm)
 {
     u16 species = GetMonData(mon, MON_DATA_SPECIES2, 0);
     const u8 *learnableMoves;
+	u8 adjustedTm = tm;
     
     if (species == SPECIES_EGG)
         return 0;
@@ -6414,7 +6415,7 @@ u32 CanMonLearnTMHM(struct Pokemon *mon, u8 tm)
     learnableMoves = gTMHMLearnsets[species];
     while(*learnableMoves != 0xFF)
     {
-        if(*learnableMoves == tm)
+        if(*learnableMoves == adjustedTm)
             return TRUE;
         
         learnableMoves++;
