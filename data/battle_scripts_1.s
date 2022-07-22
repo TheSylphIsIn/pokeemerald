@@ -648,7 +648,9 @@ BattleScript_DoMultiHit::
 	waitmessage 1
 	addbyte sMULTIHIT_STRING + 4, 1
 	moveendto MOVEEND_NEXT_TARGET
+	jumpifability BS_TARGET, ABILITY_STURDY, BattleScript_MultiHitSturdy
 	jumpifbyte CMP_COMMON_BITS, gMoveResultFlags, MOVE_RESULT_FOE_ENDURED, BattleScript_MultiHitPrintStrings
+BattleScript_MultiHitSturdy::
 	decrementmultihit BattleScript_MultiHitLoop
 	goto BattleScript_MultiHitPrintStrings
 BattleScript_MultiHitNoMoreHits::
