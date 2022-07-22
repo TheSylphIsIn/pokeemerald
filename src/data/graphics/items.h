@@ -618,6 +618,9 @@ const u32 gItemIconPalette_LifeOrb[] = INCBIN_U32("graphics/items/icon_palettes/
 
 const u32 gItemIcon_PinkBow[] = INCBIN_U32("graphics/items/icons/pink_bow.4bpp.lz");
 
+const u32 gItemIcon_FocusSash[] = INCBIN_U32("graphics/items/icons/focus_sash.4bpp.lz");
+const u32 gItemIconPalette_FocusSash[] = INCBIN_U32("graphics/items/icon_palettes/focus_sash.gbapal.lz");
+
 // const u32 gItemIcon_[] = INCBIN_U32("graphics/items/icons/.4bpp.lz");
 // const u32 gItemIconPalette_[] = INCBIN_U32("graphics/items/icon_palettes/.gbapal.lz");
 

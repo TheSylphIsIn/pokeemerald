@@ -1825,7 +1825,7 @@ static const u16 sLaprasLevelUpLearnset[] = {
 };
 
 static const u16 sDittoLevelUpLearnset[] = {
-    LEVEL_UP_MOVE( 1, MOVE_TRANSFORM),
+    LEVEL_UP_MOVE( 1, MOVE_BULLET_SEED),
     LEVEL_UP_END
 };
 

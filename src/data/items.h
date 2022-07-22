@@ -3085,12 +3085,14 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_0FA] =
+    [ITEM_FOCUS_SASH] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
-        .price = 0,
-        .description = sDummyDesc,
+        .name = _("FOCUS SASH"),
+        .itemId = ITEM_FOCUS_SASH,
+        .price = 2000,
+		.holdEffect = HOLD_EFFECT_FOCUS_SASH,
+		.holdEffectParam = 0,
+        .description = sFocusSash,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,

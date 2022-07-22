@@ -4711,6 +4711,8 @@ BattleScript_SelectingNotAllowedMoveChoiceItem::
 	endselectionscript
 
 BattleScript_FocusBandActivates::
+	removeitem BS_TARGET
+BattleScript_FocusBandActivatesNoRemoval::
 	playanimation BS_TARGET, B_ANIM_FOCUS_BAND
 	printstring STRINGID_PKMNHUNGONWITHX
 	waitmessage B_WAIT_TIME_LONG

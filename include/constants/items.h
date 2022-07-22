@@ -277,7 +277,7 @@
 #define ITEM_LIFE_ORB 247
 #define ITEM_PINK_BOW 248
 #define ITEM_BERSERK_GENE 249
-#define ITEM_0FA 250
+#define ITEM_FOCUS_SASH 250
 #define ITEM_0FB 251
 #define ITEM_0FC 252
 #define ITEM_0FD 253

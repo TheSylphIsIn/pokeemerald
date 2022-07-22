@@ -1116,6 +1116,11 @@ static const u8 sBerserkGeneDesc[] = _(
 	"Maximizes holder's\n"
 	"ATTACK, but\n"
 	"CONFUSEs forever.");
+	
+static const u8 sFocusSash[] = _(
+	"Prevents fainting\n"
+	"if holder's HP is\n"
+	"Full. Single-use.");
 
 static const u8 sRedScarfDesc[] = _(
     "A hold item that\n"

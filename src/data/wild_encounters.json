@@ -80,9 +80,9 @@
             "encounter_rate": 20,
             "mons": [
               {
-                "min_level": 2,
-                "max_level": 2,
-                "species": "SPECIES_WYCERN"
+                "min_level": 50,
+                "max_level": 50,
+                "species": "SPECIES_DITTO"
               },
               {
                 "min_level": 2,
