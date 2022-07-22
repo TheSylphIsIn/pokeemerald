@@ -111,6 +111,7 @@ static const u8 sLeafGuardDescription[] = _("Cures status in sun.");
 static const u8 sDefenderDescription[] = _("Shielding lasts longer.");
 static const u8 sSoporificDescription[] = _("Foes sleep for longer.");
 static const u8 sTechnicianDescription[] = _("Weak move power up.");
+static const u8 sSkillLinkDescription[] = _("Multi-hits land max hits.");
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
 {
@@ -227,6 +228,7 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
 	[ABILITY_DEFENDER] = _("DEFENDER"),
 	[ABILITY_SOPORIFIC] = _("SOPORIFIC"),
 	[ABILITY_TECHNICIAN] = _("TECHNICIAN"),
+	[ABILITY_SKILL_LINK] = _("SKILL LINK"),
 };
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
@@ -344,4 +346,5 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 	[ABILITY_DEFENDER] = sDefenderDescription,
 	[ABILITY_SOPORIFIC] = sSoporificDescription,
 	[ABILITY_TECHNICIAN] = sTechnicianDescription,
+	[ABILITY_SKILL_LINK] = sSkillLinkDescription,
 };
