@@ -4596,6 +4596,7 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
     u8 holdEffect = 0;
     u8 holdEffectParam = 0;
     u16 moveBattler1 = 0, moveBattler2 = 0;
+	u8 priority1, priority2;
 
     if (WEATHER_HAS_EFFECT)
     {
@@ -4721,12 +4722,18 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
         else
             moveBattler2 = MOVE_NONE;
     }
-
+	
+	priority1 = gBattleMoves[moveBattler1].priority;
+	priority2 = gBattleMoves[moveBattler2].priority;
+	if (gBattleMons[battler1].ability == ABILITY_PRANKSTER && gBattleMoves[moveBattler1].category == MOVE_CATEGORY_STATUS)
+		priority1++;
+	if (gBattleMons[battler2].ability == ABILITY_PRANKSTER && gBattleMoves[moveBattler2].category == MOVE_CATEGORY_STATUS)
+		priority2++;
     // both move priorities are different than 0
-    if (gBattleMoves[moveBattler1].priority != 0 || gBattleMoves[moveBattler2].priority != 0)
+    if (priority1 != 0 || priority2 != 0)
     {
         // both priorities are the same
-        if (gBattleMoves[moveBattler1].priority == gBattleMoves[moveBattler2].priority)
+        if (priority1 == priority2)
         {
             if (speedBattler1 == speedBattler2 && Random() & 1)
                 strikesFirst = 2; // same speeds, same priorities
@@ -4735,7 +4742,7 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
 
             // else battler1 has more speed
         }
-        else if (gBattleMoves[moveBattler1].priority < gBattleMoves[moveBattler2].priority)
+        else if (priority1 < priority2)
             strikesFirst = 1; // battler2's move has greater priority
 
         // else battler1's move has greater priority
