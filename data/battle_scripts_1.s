@@ -3985,7 +3985,13 @@ BattleScript_MagicCoatBounce::
 	attackstring
 	ppreduce
 	pause B_WAIT_TIME_SHORT
+	jumpifability BS_TARGET, ABILITY_MAGIC_BOUNCE, BattleScript_MagicBounce
 	printstring STRINGID_PKMNMOVEBOUNCED
+	goto BattleScript_MagicCoatBounceEnd
+BattleScript_MagicBounce::
+	printstring STRINGID_PKMNMOVEMAGICBOUNCED
+	goto BattleScript_MagicCoatBounceEnd
+BattleScript_MagicCoatBounceEnd::
 	waitmessage B_WAIT_TIME_LONG
 	orword gHitMarker, HITMARKER_ATTACKSTRING_PRINTED | HITMARKER_NO_PPDEDUCT | HITMARKER_ALLOW_NO_PP
 	setmagiccoattarget BS_ATTACKER

@@ -113,6 +113,7 @@ static const u8 sSoporificDescription[] = _("Foes sleep for longer.");
 static const u8 sTechnicianDescription[] = _("Weak move power up.");
 static const u8 sSkillLinkDescription[] = _("Multi-hits land max hits.");
 static const u8 sPranksterDescription[] = _("Status moves go first.");
+static const u8 sMagicBounceDescription[] = _("Reflects status moves.");
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
 {
@@ -231,6 +232,7 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
 	[ABILITY_TECHNICIAN] = _("TECHNICIAN"),
 	[ABILITY_SKILL_LINK] = _("SKILL LINK"),
 	[ABILITY_PRANKSTER] = _("PRANKSTER"),
+	[ABILITY_MAGIC_BOUNCE] = _("MAGIC BOUNCE"),
 };
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
@@ -350,4 +352,5 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 	[ABILITY_TECHNICIAN] = sTechnicianDescription,
 	[ABILITY_SKILL_LINK] = sSkillLinkDescription,
 	[ABILITY_PRANKSTER] = sPranksterDescription,
+	[ABILITY_MAGIC_BOUNCE] = sMagicBounceDescription,
 };

@@ -1018,6 +1018,8 @@ static void Cmd_attackcanceler(void)
 
     gHitMarker |= HITMARKER_OBEYS;
 
+	if (gBattleMons[gBattlerTarget].ability == ABILITY_MAGIC_BOUNCE)
+		gProtectStructs[gBattlerTarget].bounceMove = 1;
     if (gProtectStructs[gBattlerTarget].bounceMove && gBattleMoves[gCurrentMove].flags & FLAG_MAGIC_COAT_AFFECTED)
     {
         PressurePPLose(gBattlerAttacker, gBattlerTarget, MOVE_MAGIC_COAT);
