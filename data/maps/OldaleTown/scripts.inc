@@ -75,7 +75,10 @@ OldaleTown_EventScript_GoToMartEast::
 
 OldaleTown_EventScript_ExplainPokemonMart::
 	msgbox OldaleTown_Text_ThisIsAPokemonMart, MSGBOX_DEFAULT
-	giveitem ITEM_FOCUS_SASH
+	giveitem ITEM_TOXIC_ORB
+	giveitem ITEM_FLAME_ORB
+	giveitem ITEM_STATIC_ORB
+	giveitem ITEM_CHILLING_ORB
 	goto_if_eq VAR_RESULT, FALSE, OldaleTown_EventScript_BagIsFull
 	msgbox OldaleTown_Text_PotionExplanation, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_POTION_OLDALE

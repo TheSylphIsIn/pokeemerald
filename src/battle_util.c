@@ -3456,11 +3456,16 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
         battlerHoldEffect = gEnigmaBerries[battlerId].holdEffect;
         battlerHoldEffectParam = gEnigmaBerries[battlerId].holdEffectParam;
     }
-    else
+    else if (gBattleMons[battlerId].ability != ABILITY_KLUTZ)
     {
         battlerHoldEffect = ItemId_GetHoldEffect(gLastUsedItem);
         battlerHoldEffectParam = ItemId_GetHoldEffectParam(gLastUsedItem);
     }
+	else
+	{
+		battlerHoldEffect = HOLD_EFFECT_NONE;
+		battlerHoldEffectParam = 0;
+	}
 
     atkItem = gBattleMons[gBattlerAttacker].item;
     if (atkItem == ITEM_ENIGMA_BERRY)
@@ -3468,11 +3473,16 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
         atkHoldEffect = gEnigmaBerries[gBattlerAttacker].holdEffect;
         atkHoldEffectParam = gEnigmaBerries[gBattlerAttacker].holdEffectParam;
     }
-    else
+    else if (gBattleMons[gBattlerAttacker].ability != ABILITY_KLUTZ)
     {
         atkHoldEffect = ItemId_GetHoldEffect(atkItem);
         atkHoldEffectParam = ItemId_GetHoldEffectParam(atkItem);
     }
+	else
+	{
+		atkHoldEffect = HOLD_EFFECT_NONE;
+		atkHoldEffectParam = 0;
+	}
 
     // def variables are unused
     defItem = gBattleMons[gBattlerTarget].item;
@@ -3481,11 +3491,16 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
         defHoldEffect = gEnigmaBerries[gBattlerTarget].holdEffect;
         defHoldEffectParam = gEnigmaBerries[gBattlerTarget].holdEffectParam;
     }
-    else
+    else if (gBattleMons[gBattlerTarget].ability != ABILITY_KLUTZ)
     {
         defHoldEffect = ItemId_GetHoldEffect(defItem);
         defHoldEffectParam = ItemId_GetHoldEffectParam(defItem);
     }
+	else 
+	{
+		defHoldEffect = HOLD_EFFECT_NONE;
+		defHoldEffectParam = 0;
+	}
 
     switch (caseID)
     {
@@ -3624,6 +3639,68 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                     RecordItemEffectBattle(battlerId, battlerHoldEffect);
                 }
                 break;
+			case HOLD_EFFECT_TOXIC_ORB:
+				if (gBattleMons[battlerId].hp != 0 && 
+					!((gSideStatuses[GetBattlerSide(battlerId)] & SIDE_STATUS_SAFEGUARD)
+					|| gBattleMons[battlerId].ability == ABILITY_IMMUNITY
+					|| (gBattleMons[battlerId].status1 & STATUS1_ANY)
+					|| gBattleMons[battlerId].type1 == TYPE_POISON
+					|| gBattleMons[battlerId].type1 == TYPE_STEEL
+					|| gBattleMons[battlerId].type2 == TYPE_POISON
+					|| gBattleMons[battlerId].type2 == TYPE_STEEL)
+					&& !moveTurn)
+				{
+					effect = ITEM_STATUS_CHANGE;
+					gBattleMons[battlerId].status1 = STATUS1_TOXIC_POISON;
+					BattleScriptExecute(BattleScript_ToxicOrb);
+					RecordItemEffectBattle(battlerId, battlerHoldEffect);
+				}
+				break;
+			case HOLD_EFFECT_FLAME_ORB:
+				if (gBattleMons[battlerId].hp != 0 && 
+					!((gSideStatuses[GetBattlerSide(battlerId)] & SIDE_STATUS_SAFEGUARD)
+					|| gBattleMons[battlerId].ability == ABILITY_WATER_VEIL
+					|| (gBattleMons[battlerId].status1 & STATUS1_ANY)
+					|| gBattleMons[battlerId].type1 == TYPE_FIRE
+					|| gBattleMons[battlerId].type2 == TYPE_FIRE)
+					&& !moveTurn)
+				{
+					effect = ITEM_STATUS_CHANGE;
+					gBattleMons[battlerId].status1 = STATUS1_BURN;
+					BattleScriptExecute(BattleScript_FlameOrb);
+					RecordItemEffectBattle(battlerId, battlerHoldEffect);
+				}
+				break;
+			case HOLD_EFFECT_STATIC_ORB:
+				if (gBattleMons[battlerId].hp != 0 && 
+					!((gSideStatuses[GetBattlerSide(battlerId)] & SIDE_STATUS_SAFEGUARD)
+					|| gBattleMons[battlerId].ability == ABILITY_LIMBER
+					|| (gBattleMons[battlerId].status1 & STATUS1_ANY))
+					&& !moveTurn)
+				{
+					effect = ITEM_STATUS_CHANGE;
+					gBattleMons[battlerId].status1 = STATUS1_PARALYSIS;
+					BattleScriptExecute(BattleScript_StaticOrb);
+					RecordItemEffectBattle(battlerId, battlerHoldEffect);
+				}
+				break;
+			case HOLD_EFFECT_CHILLING_ORB:
+				if (gBattleMons[battlerId].hp != 0 && 
+					!((gSideStatuses[GetBattlerSide(battlerId)] & SIDE_STATUS_SAFEGUARD)
+					|| gBattleMons[battlerId].ability == ABILITY_MAGMA_ARMOR
+					|| (gBattleMons[battlerId].status1 & STATUS1_ANY)
+					|| gBattleMons[battlerId].type1 == TYPE_FIRE
+					|| gBattleMons[battlerId].type2 == TYPE_FIRE
+					|| gBattleMons[battlerId].type1 == TYPE_ICE
+					|| gBattleMons[battlerId].type2 == TYPE_ICE)
+					&& !moveTurn)
+				{
+					effect = ITEM_STATUS_CHANGE;
+					gBattleMons[battlerId].status1 = STATUS1_FREEZE;
+					BattleScriptExecute(BattleScript_ChillingOrb);
+					RecordItemEffectBattle(battlerId, battlerHoldEffect);
+				}
+				break;
             case HOLD_EFFECT_CONFUSE_SPICY:
                 TRY_EAT_CONFUSE_BERRY(FLAVOR_SPICY);
                 break;

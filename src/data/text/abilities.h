@@ -115,6 +115,7 @@ static const u8 sSkillLinkDescription[] = _("Multi-hits land max hits.");
 static const u8 sPranksterDescription[] = _("Status moves go first.");
 static const u8 sMagicBounceDescription[] = _("Reflects status moves.");
 static const u8 sQuickFeetDescription[] = _("Ups SPEED if suffering.");
+static const u8 sKlutzDescription[] = _("Can't use held items.");
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
 {
@@ -235,6 +236,7 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
 	[ABILITY_PRANKSTER] = _("PRANKSTER"),
 	[ABILITY_MAGIC_BOUNCE] = _("MAGIC BOUNCE"),
 	[ABILITY_QUICK_FEET] = _("QUICK FEET"),
+	[ABILITY_KLUTZ]= _("KLUTZ"),
 };
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
@@ -356,4 +358,5 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 	[ABILITY_PRANKSTER] = sPranksterDescription,
 	[ABILITY_MAGIC_BOUNCE] = sMagicBounceDescription,
 	[ABILITY_QUICK_FEET] = sQuickFeetDescription,
+	[ABILITY_KLUTZ] = sKlutzDescription,
 };

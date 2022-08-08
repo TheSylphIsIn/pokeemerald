@@ -3092,40 +3092,59 @@ const struct Item gItems[] =
         .price = 2000,
 		.holdEffect = HOLD_EFFECT_FOCUS_SASH,
 		.holdEffectParam = 0,
-        .description = sFocusSash,
+        .description = sFocusSashDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_0FB] =
+    [ITEM_TOXIC_ORB] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
-        .price = 0,
-        .description = sDummyDesc,
+        .name = _("TOXIC ORB"),
+        .itemId = ITEM_TOXIC_ORB,
+        .price = 2000,
+		.holdEffect = HOLD_EFFECT_TOXIC_ORB,
+		.holdEffectParam = 0,
+        .description = sToxicOrbDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_0FC] =
+    [ITEM_FLAME_ORB] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
-        .price = 0,
-        .description = sDummyDesc,
+        .name = _("FLAME ORB"),
+        .itemId = ITEM_FLAME_ORB,
+        .price = 2000,
+		.holdEffect = HOLD_EFFECT_FLAME_ORB,
+		.holdEffectParam = 0,
+        .description = sFlameOrbDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_0FD] =
+    [ITEM_STATIC_ORB] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
-        .price = 0,
-        .description = sDummyDesc,
+        .name = _("STATIC ORB"),
+        .itemId = ITEM_STATIC_ORB,
+        .price = 2000,
+		.holdEffect = HOLD_EFFECT_STATIC_ORB,
+		.holdEffectParam = 0,
+        .description = sStaticOrbDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+	
+	[ITEM_CHILLING_ORB] =
+    {
+        .name = _("CHILLING ORB"),
+        .itemId = ITEM_CHILLING_ORB,
+        .price = 2000,
+		.holdEffect = HOLD_EFFECT_CHILLING_ORB,
+		.holdEffectParam = 0,
+        .description = sChillingOrbDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,

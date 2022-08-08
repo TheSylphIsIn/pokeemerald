@@ -1117,10 +1117,30 @@ static const u8 sBerserkGeneDesc[] = _(
 	"ATTACK, but\n"
 	"CONFUSEs forever.");
 	
-static const u8 sFocusSash[] = _(
+static const u8 sFocusSashDesc[] = _(
 	"Prevents fainting\n"
 	"if holder's HP is\n"
 	"Full. Single-use.");
+
+static const u8 sToxicOrbDesc[] = _(
+	"BADLY POISONS the\n"
+	"holder at the end\n"
+	"of each turn.");
+	
+static const u8 sFlameOrbDesc[] = _(
+	"BURNS the holder\n"
+	"at the end of\n"
+	"each turn.");
+	
+static const u8 sStaticOrbDesc[] = _(
+	"PARALYZES the\n"
+	"holder at the end\n"
+	"of each turn.");
+	
+static const u8 sChillingOrbDesc[] = _(
+	"Gives the holder\n"
+	"FROSTBITE at the\n"
+	"end of each turn.");
 
 static const u8 sRedScarfDesc[] = _(
     "A hold item that\n"

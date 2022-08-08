@@ -269,9 +269,10 @@ const u32 *const gItemIconTable[][2] =
     [ITEM_PINK_BOW] = {gItemIcon_PinkBow, gItemIconPalette_PinkScarf},
     [ITEM_BERSERK_GENE] = {gItemIcon_BattleStatItem, gItemIconPalette_XAttack},
     [ITEM_FOCUS_SASH] = {gItemIcon_FocusSash, gItemIconPalette_FocusSash},
-    [ITEM_0FB] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark},
-    [ITEM_0FC] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark},
-    [ITEM_0FD] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark},
+    [ITEM_TOXIC_ORB] = {gItemIcon_ToxicOrb, gItemIconPalette_ToxicOrb},
+    [ITEM_FLAME_ORB] = {gItemIcon_FlameOrb, gItemIconPalette_FlameOrb},
+    [ITEM_STATIC_ORB] = {gItemIcon_ToxicOrb, gItemIconPalette_StaticOrb},
+	[ITEM_CHILLING_ORB] = {gItemIcon_FlameOrb, gItemIconPalette_ChillingOrb},
     // Contest hold items
     [ITEM_RED_SCARF] = {gItemIcon_Scarf, gItemIconPalette_RedScarf},
     [ITEM_BLUE_SCARF] = {gItemIcon_Scarf, gItemIconPalette_BlueScarf},

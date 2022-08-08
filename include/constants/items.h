@@ -278,9 +278,9 @@
 #define ITEM_PINK_BOW 248
 #define ITEM_BERSERK_GENE 249
 #define ITEM_FOCUS_SASH 250
-#define ITEM_0FB 251
-#define ITEM_0FC 252
-#define ITEM_0FD 253
+#define ITEM_TOXIC_ORB 251
+#define ITEM_FLAME_ORB 252
+#define ITEM_STATIC_ORB 253
 
 // Contest held items
 #define ITEM_RED_SCARF 254
@@ -526,7 +526,9 @@
 #define ITEM_MAGMA_EMBLEM 400
 #define ITEM_OLD_SEA_MAP 401
 
-#define ITEMS_COUNT 402
+#define ITEM_CHILLING_ORB 402
+
+#define ITEMS_COUNT 403
 #define ITEM_FIELD_ARROW ITEMS_COUNT
 
 // Range of berries given out by various NPCS
