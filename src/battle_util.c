@@ -2624,6 +2624,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 }
                 break;
             case ABILITY_INTIMIDATE:
+			case ABILITY_LULL:
                 if (!(gSpecialStatuses[battler].intimidatedMon))
                 {
                     gStatuses3[battler] |= STATUS3_INTIMIDATE_POKES;
@@ -2867,6 +2868,17 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                             gBattlescriptCurrInstr = BattleScript_LightningRod;
                         else
                             gBattlescriptCurrInstr = BattleScript_LightningRod_PPLoss;
+
+                        effect = 1;
+                    }
+                    break;
+				case ABILITY_MOTOR_DRIVE:
+                    if (moveType == TYPE_ELECTRIC)
+                    {
+                        if (gProtectStructs[gBattlerAttacker].notFirstStrike)
+                            gBattlescriptCurrInstr = BattleScript_MotorDrive;
+                        else
+                            gBattlescriptCurrInstr = BattleScript_MotorDrive_PPLoss;
 
                         effect = 1;
                     }
@@ -3199,6 +3211,15 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     effect++;
                     break;
                 }
+				if (gBattleMons[i].ability == ABILITY_LULL && gStatuses3[i] & STATUS3_INTIMIDATE_POKES)
+                {
+                    gLastUsedAbility = ABILITY_LULL;
+                    gStatuses3[i] &= ~STATUS3_INTIMIDATE_POKES;
+                    BattleScriptPushCursorAndCallback(BattleScript_LullActivatesEnd3);
+                    gBattleStruct->intimidateBattler = i;
+                    effect++;
+                    break;
+                }
             }
             break;
         case ABILITYEFFECT_TRACE: // 11
@@ -3267,6 +3288,16 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     gStatuses3[i] &= ~STATUS3_INTIMIDATE_POKES;
                     BattleScriptPushCursor();
                     gBattlescriptCurrInstr = BattleScript_IntimidateActivates;
+                    gBattleStruct->intimidateBattler = i;
+                    effect++;
+                    break;
+                }
+				if (gBattleMons[i].ability == ABILITY_LULL && (gStatuses3[i] & STATUS3_INTIMIDATE_POKES))
+                {
+                    gLastUsedAbility = ABILITY_LULL;
+                    gStatuses3[i] &= ~STATUS3_INTIMIDATE_POKES;
+                    BattleScriptPushCursor();
+                    gBattlescriptCurrInstr = BattleScript_LullActivates;
                     gBattleStruct->intimidateBattler = i;
                     effect++;
                     break;

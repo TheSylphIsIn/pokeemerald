@@ -118,7 +118,7 @@ static const u8 sStarterLabelCoords[STARTER_MON_COUNT][2] =
 static const u16 sStarterMon0[STARTER_MON_COUNT] =
 {
     SPECIES_CACNEA,
-    SPECIES_SLUGMA,
+    SPECIES_DUNSPARCE,
     SPECIES_SEEL,
 };
 

@@ -116,6 +116,8 @@ static const u8 sPranksterDescription[] = _("Status moves go first.");
 static const u8 sMagicBounceDescription[] = _("Reflects status moves.");
 static const u8 sQuickFeetDescription[] = _("Ups SPEED if suffering.");
 static const u8 sKlutzDescription[] = _("Can't use held items.");
+static const u8 sMotorDriveDescription[] = _("ELECTRIC moves up SPEED.");
+static const u8 sLullDescription[] = _("Lowers the foe's SP. ATK.");
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
 {
@@ -236,7 +238,9 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
 	[ABILITY_PRANKSTER] = _("PRANKSTER"),
 	[ABILITY_MAGIC_BOUNCE] = _("MAGIC BOUNCE"),
 	[ABILITY_QUICK_FEET] = _("QUICK FEET"),
-	[ABILITY_KLUTZ]= _("KLUTZ"),
+	[ABILITY_KLUTZ] = _("KLUTZ"),
+	[ABILITY_MOTOR_DRIVE] = _("MOTOR DRIVE"),
+	[ABILITY_LULL] = _("LULL"),
 };
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
@@ -359,4 +363,6 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 	[ABILITY_MAGIC_BOUNCE] = sMagicBounceDescription,
 	[ABILITY_QUICK_FEET] = sQuickFeetDescription,
 	[ABILITY_KLUTZ] = sKlutzDescription,
+	[ABILITY_MOTOR_DRIVE] = sMotorDriveDescription,
+	[ABILITY_LULL] = sLullDescription,
 };

@@ -5007,4 +5007,48 @@ BattleScript_ChillingOrb::
 	copybyte gEffectBattler, gBattlerAttacker
 	call BattleScript_MoveEffectFreeze
 	end2
+	
+BattleScript_MotorDrive_PPLoss::
+	ppreduce
+BattleScript_MotorDrive::
+	attackstring
+	pause B_WAIT_TIME_SHORT
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
+	printstring STRINGID_PKMNABSORBEDLIGHTNINGROD
+	waitmessage B_WAIT_TIME_LONG
+	setmoveeffect MOVE_EFFECT_SPD_PLUS_1 | MOVE_EFFECT_CERTAIN
+	seteffectwithchance
+	moveendall
+	end
+	
+BattleScript_LullActivatesEnd3::
+	call BattleScript_PauseLullActivates
+	end3
+
+BattleScript_PauseLullActivates:
+	pause B_WAIT_TIME_SHORT
+BattleScript_LullActivates::
+	setbyte gBattlerTarget, 0
+	setstatchanger STAT_SPATK, 1, TRUE
+BattleScript_LullActivatesLoop:
+	trygetintimidatetarget BattleScript_LullActivatesReturn
+	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_IntimidateActivatesLoopIncrement
+	jumpifability BS_TARGET, ABILITY_CLEAR_BODY, BattleScript_IntimidatePrevented
+	jumpifability BS_TARGET, ABILITY_WHITE_SMOKE, BattleScript_IntimidatePrevented
+	statbuffchange STAT_BUFF_NOT_PROTECT_AFFECTED | STAT_BUFF_ALLOW_PTR, BattleScript_LullActivatesLoopIncrement
+	jumpifbyte CMP_GREATER_THAN, cMULTISTRING_CHOOSER, 1, BattleScript_LullActivatesLoopIncrement
+	setgraphicalstatchangevalues
+	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	printstring STRINGID_PKMNCUTSSPATTACKWITH
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_LullActivatesLoopIncrement:
+	addbyte gBattlerTarget, 1
+	goto BattleScript_LullActivatesLoop
+BattleScript_LullActivatesReturn:
+	return
+BattleScript_LullPrevented:
+	pause B_WAIT_TIME_SHORT
+	printstring STRINGID_PREVENTEDFROMWORKING
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_LullActivatesLoopIncrement
 

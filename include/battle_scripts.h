@@ -239,5 +239,8 @@ extern const u8 BattleScript_ToxicOrb[];
 extern const u8 BattleScript_FlameOrb[];
 extern const u8 BattleScript_StaticOrb[];
 extern const u8 BattleScript_ChillingOrb[];
-
+extern const u8 BattleScript_MotorDrive_PPLoss[];
+extern const u8 BattleScript_MotorDrive[];
+extern const u8 BattleScript_LullActivatesEnd3[];
+extern const u8 BattleScript_LullActivates[];
 #endif // GUARD_BATTLE_SCRIPTS_H
