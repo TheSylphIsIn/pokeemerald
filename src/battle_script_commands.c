@@ -1472,7 +1472,8 @@ static void Cmd_typecalc(void)
         {
             if (TYPE_EFFECT_ATK_TYPE(i) == TYPE_FORESIGHT)
             {
-                if (gBattleMons[gBattlerTarget].status2 & STATUS2_FORESIGHT)
+                if (gBattleMons[gBattlerTarget].status2 & STATUS2_FORESIGHT 
+					|| gBattleMons[gBattlerAttacker].ability == ABILITY_SCRAPPY)
                     break;
                 i += 3;
                 continue;
@@ -1482,7 +1483,10 @@ static void Cmd_typecalc(void)
                 // check type1
                 if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[gBattlerTarget].type1)
 				{
-					if ((gBattleMoves[gCurrentMove].effect == EFFECT_FREEZE_DRY && 
+					if (moveType == TYPE_PSYCHIC && TYPE_EFFECT_DEF_TYPE(i) == TYPE_DARK
+						&& gBattleMons[gBattlerAttacker].ability == ABILITY_TRUESIGHT)
+						break;
+					else if ((gBattleMoves[gCurrentMove].effect == EFFECT_FREEZE_DRY && 
 					gBattleMons[gBattlerTarget].type1 == TYPE_WATER) ||
 					(gBattleMoves[gCurrentMove].effect == EFFECT_LIGHTNING && 
 					gBattleMons[gBattlerTarget].type1 == TYPE_GRASS))
@@ -1495,7 +1499,10 @@ static void Cmd_typecalc(void)
                     (gBattleMons[gBattlerTarget].type1 != gBattleMons[gBattlerTarget].type2
 					|| (gBattleMons[gBattlerTarget].ability == ABILITY_SPECIALIST && AbilityIsActive())))
                 {
-					if ((gBattleMoves[gCurrentMove].effect == EFFECT_FREEZE_DRY && 
+					if (moveType == TYPE_PSYCHIC && TYPE_EFFECT_DEF_TYPE(i) == TYPE_DARK
+						&& gBattleMons[gBattlerAttacker].ability == ABILITY_TRUESIGHT)
+						break;
+					else if ((gBattleMoves[gCurrentMove].effect == EFFECT_FREEZE_DRY && 
 					gBattleMons[gBattlerTarget].type2 == TYPE_WATER) || 
 					(gBattleMoves[gCurrentMove].effect == EFFECT_LIGHTNING && 
 					gBattleMons[gBattlerTarget].type2 == TYPE_GRASS))
@@ -1691,7 +1698,8 @@ u8 TypeCalc(u16 move, u8 attacker, u8 defender)
         {
             if (TYPE_EFFECT_ATK_TYPE(i) == TYPE_FORESIGHT)
             {
-                if (gBattleMons[defender].status2 & STATUS2_FORESIGHT)
+                if (gBattleMons[defender].status2 & STATUS2_FORESIGHT
+					|| gBattleMons[attacker].ability == ABILITY_SCRAPPY)
                     break;
                 i += 3;
                 continue;
@@ -4688,7 +4696,8 @@ static void Cmd_typecalc2(void)
         {
             if (TYPE_EFFECT_ATK_TYPE(i) == TYPE_FORESIGHT)
             {
-                if (gBattleMons[gBattlerTarget].status2 & STATUS2_FORESIGHT)
+                if (gBattleMons[gBattlerTarget].status2 & STATUS2_FORESIGHT
+					|| gBattleMons[gBattlerAttacker].ability == ABILITY_SCRAPPY)
                 {
                     break;
                 }
@@ -4706,6 +4715,8 @@ static void Cmd_typecalc2(void)
                 {
                     if (TYPE_EFFECT_MULTIPLIER(i) == TYPE_MUL_NO_EFFECT)
                     {
+						if (TYPE_EFFECT_DEF_TYPE(i) == TYPE_DARK && gBattleMons[gBattlerAttacker].ability == ABILITY_TRUESIGHT)
+							break;
                         gMoveResultFlags |= MOVE_RESULT_DOESNT_AFFECT_FOE;
                         break;
                     }

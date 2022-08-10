@@ -121,6 +121,8 @@ static const u8 sLullDescription[] = _("Lowers the foe's SP. ATK.");
 static const u8 sMoldBreakerDescription[] = _("Moves ignore foe's ability.");
 static const u8 sStormDrainDescription[] = _("Draws in WATER moves.");
 static const u8 sWaterCompactionDescription[] = _("WATER damage ups DEFENSE.");
+static const u8 sScrappyDescription[] = _("NORMAL, FIGHT hit GHOST.");
+static const u8 sTruesightDescription[] = _("PSYCHIC hits DARK.");
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
 {
@@ -249,6 +251,8 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
 	[ABILITY_WATER_COMPACTION] = _("WATER HARDEN"),
 	[ABILITY_TERAVOLT] = _("TERAVOLT"),
 	[ABILITY_TURBOBLAZE] = _("TURBOBLAZE"),
+	[ABILITY_SCRAPPY] = _("SCRAPPY"),
+	[ABILITY_TRUESIGHT] = _("TRUESIGHT"),
 };
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
@@ -378,4 +382,6 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 	[ABILITY_WATER_COMPACTION] = sWaterCompactionDescription,
 	[ABILITY_TERAVOLT] = sMoldBreakerDescription,
 	[ABILITY_TURBOBLAZE] = sMoldBreakerDescription,
+	[ABILITY_SCRAPPY] = sScrappyDescription,
+	[ABILITY_TRUESIGHT] = sTruesightDescription,
 };
