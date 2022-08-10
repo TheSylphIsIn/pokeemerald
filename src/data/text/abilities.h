@@ -118,6 +118,9 @@ static const u8 sQuickFeetDescription[] = _("Ups SPEED if suffering.");
 static const u8 sKlutzDescription[] = _("Can't use held items.");
 static const u8 sMotorDriveDescription[] = _("ELECTRIC moves up SPEED.");
 static const u8 sLullDescription[] = _("Lowers the foe's SP. ATK.");
+static const u8 sMoldBreakerDescription[] = _("Moves ignore foe's ability.");
+static const u8 sStormDrainDescription[] = _("Draws in WATER moves.");
+static const u8 sWaterCompactionDescription[] = _("WATER damage ups DEFENSE.");
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
 {
@@ -241,6 +244,11 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
 	[ABILITY_KLUTZ] = _("KLUTZ"),
 	[ABILITY_MOTOR_DRIVE] = _("MOTOR DRIVE"),
 	[ABILITY_LULL] = _("LULL"),
+	[ABILITY_MOLD_BREAKER] = _("MOLD BREAKER"),
+	[ABILITY_STORM_DRAIN] = _("STORM DRAIN"),
+	[ABILITY_WATER_COMPACTION] = _("WATER HARDEN"),
+	[ABILITY_TERAVOLT] = _("TERAVOLT"),
+	[ABILITY_TURBOBLAZE] = _("TURBOBLAZE"),
 };
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
@@ -365,4 +373,9 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 	[ABILITY_KLUTZ] = sKlutzDescription,
 	[ABILITY_MOTOR_DRIVE] = sMotorDriveDescription,
 	[ABILITY_LULL] = sLullDescription,
+	[ABILITY_MOLD_BREAKER] = sMoldBreakerDescription,
+	[ABILITY_STORM_DRAIN] = sStormDrainDescription,
+	[ABILITY_WATER_COMPACTION] = sWaterCompactionDescription,
+	[ABILITY_TERAVOLT] = sMoldBreakerDescription,
+	[ABILITY_TURBOBLAZE] = sMoldBreakerDescription,
 };

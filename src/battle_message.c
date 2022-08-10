@@ -277,6 +277,7 @@ static const u8 sText_PkmnCutsSpAttackWith[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX
 static const u8 sText_PkmnPreventsStatLossWith[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nprevents stat loss!");
 static const u8 sText_PkmnHurtsWith[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nhurt {B_ATK_NAME_WITH_PREFIX}!");
 static const u8 sText_PkmnTraced[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} TRACED\n{B_BUFF1}'s {B_BUFF2}!");
+static const u8 sText_PkmnIgnoresAbilities[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} ignores\nabilities with {B_SCR_ACTIVE_ABILITY}!");
 static const u8 sText_PkmnsXPreventsBurns[] = _("{B_EFF_NAME_WITH_PREFIX}'s {B_EFF_ABILITY}\nprevents burns!");
 static const u8 sText_PkmnsXBlocksY[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nblocks {B_CURRENT_MOVE}!");
 static const u8 sText_PkmnsXBlocksY2[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nblocks {B_CURRENT_MOVE}!");
@@ -287,6 +288,7 @@ static const u8 sText_WithSturdy[] = _("{B_DEF_NAME_WITH_PREFIX} ENDURED\nthe hi
 static const u8 sText_MoveWashedOut[] = _("{B_ATK_NAME_WITH_PREFIX}'s FIRE move\nwas doused!");
 static const u8 sText_MoveEvaporated[] = _("{B_ATK_NAME_WITH_PREFIX}'s WATER move\nevaporated!");
 static const u8 sText_PkmnAbsorbedLightningRod[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_LAST_ABILITY}\nabsorbed the move!");
+static const u8 sText_PkmnAbsorbedMoveForEffect[] = _("The move activated\n{B_DEF_NAME_WITH_PREFIX}'s {B_LAST_ABILITY}!");
 static const u8 sText_PlayerLostToEnemyTrainer[] = _("{B_PLAYER_NAME} is out of\nusable POKéMON!\pPlayer lost against\n{B_TRAINER1_CLASS} {B_TRAINER1_NAME}!{PAUSE_UNTIL_PRESS}");
 static const u8 sText_PlayerPaidPrizeMoney[] = _("{B_PLAYER_NAME} paid ¥{B_BUFF1} as the prize\nmoney…\p… … … …\p{B_PLAYER_NAME} whited out!{PAUSE_UNTIL_PRESS}");
 static const u8 sText_PkmnsXWhippedUpSandstorm[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nwhipped up a sandstorm!");
@@ -915,6 +917,8 @@ const u8 * const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_S
 	[STRINGID_WITHSTURDY - BATTLESTRINGS_TABLE_START] = sText_WithSturdy,
 	[STRINGID_PKMNMOVEMAGICBOUNCED - BATTLESTRINGS_TABLE_START] = sText_PkmnMoveMagicBounced,
 	[STRINGID_PKMNCUTSSPATTACKWITH - BATTLESTRINGS_TABLE_START] = sText_PkmnCutsSpAttackWith,
+	[STRINGID_PKMNIGNORESABILITIES - BATTLESTRINGS_TABLE_START] = sText_PkmnIgnoresAbilities,
+	[STRINGID_PKMNABSORBEDMOVEFOREFFECT - BATTLESTRINGS_TABLE_START] = sText_PkmnAbsorbedMoveForEffect,
 };
 
 const u16 gMissStringIds[] =

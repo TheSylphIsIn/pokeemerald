@@ -5052,3 +5052,17 @@ BattleScript_LullPrevented:
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_LullActivatesLoopIncrement
 
+BattleScript_MoldBreakerActivates::
+	pause B_WAIT_TIME_SHORT
+	printstring STRINGID_PKMNIGNORESABILITIES
+	waitmessage B_WAIT_TIME_LONG
+	end3
+	
+BattleScript_WaterCompactionActivates::
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
+	printstring STRINGID_PKMNABSORBEDMOVEFOREFFECT
+	waitmessage B_WAIT_TIME_LONG
+	setmoveeffect MOVE_EFFECT_DEF_PLUS_1 | MOVE_EFFECT_CERTAIN
+	seteffectwithchance
+	return
+

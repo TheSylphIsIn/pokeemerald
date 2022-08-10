@@ -4459,7 +4459,7 @@ const struct Trainer gTrainers[] = {
         .trainerPic = TRAINER_PIC_YOUNGSTER,
         .trainerName = _("CALVIN"),
         .items = {},
-        .doubleBattle = FALSE,
+        .doubleBattle = TRUE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
         .partySize = ARRAY_COUNT(sParty_Calvin1),
         .party = {.NoItemDefaultMoves = sParty_Calvin1},

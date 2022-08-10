@@ -243,4 +243,6 @@ extern const u8 BattleScript_MotorDrive_PPLoss[];
 extern const u8 BattleScript_MotorDrive[];
 extern const u8 BattleScript_LullActivatesEnd3[];
 extern const u8 BattleScript_LullActivates[];
+extern const u8 BattleScript_MoldBreakerActivates[];
+extern const u8 BattleScript_WaterCompactionActivates[];
 #endif // GUARD_BATTLE_SCRIPTS_H
