@@ -631,6 +631,9 @@ const u32 gItemIconPalette_StaticOrb[] = INCBIN_U32("graphics/items/icon_palette
 
 const u32 gItemIconPalette_ChillingOrb[] = INCBIN_U32("graphics/items/icon_palettes/chilling_orb.gbapal.lz");
 
+const u32 gItemIcon_WideLens[] = INCBIN_U32("graphics/items/icons/wide_lens.4bpp.lz");
+const u32 gItemIconPalette_WideLens[] = INCBIN_U32("graphics/items/icon_palettes/wide_lens.gbapal.lz");
+
 // const u32 gItemIcon_[] = INCBIN_U32("graphics/items/icons/.4bpp.lz");
 // const u32 gItemIconPalette_[] = INCBIN_U32("graphics/items/icon_palettes/.gbapal.lz");
 

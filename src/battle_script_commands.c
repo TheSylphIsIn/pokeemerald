@@ -1018,7 +1018,7 @@ static void Cmd_attackcanceler(void)
 
     gHitMarker |= HITMARKER_OBEYS;
 
-	if (gBattleMons[gBattlerTarget].ability == ABILITY_MAGIC_BOUNCE)
+	if (gBattleMons[gBattlerTarget].ability == ABILITY_MAGIC_BOUNCE && AbilityIsActive())
 		gProtectStructs[gBattlerTarget].bounceMove = 1;
     if (gProtectStructs[gBattlerTarget].bounceMove && gBattleMoves[gCurrentMove].flags & FLAG_MAGIC_COAT_AFFECTED)
     {
@@ -1220,9 +1220,9 @@ static void Cmd_accuracycheck(void)
 
         if (gBattleMons[gBattlerAttacker].ability == ABILITY_COMPOUND_EYES || gBattleMons[gBattlerAttacker].ability == ABILITY_ILLUMINATE)
             calc = (calc * 130) / 100; // 1.3 compound eyes boost
-        if (WEATHER_HAS_EFFECT && gBattleMons[gBattlerTarget].ability == ABILITY_SAND_VEIL && gBattleWeather & B_WEATHER_SANDSTORM)
+        if (WEATHER_HAS_EFFECT && gBattleMons[gBattlerTarget].ability == ABILITY_SAND_VEIL && AbilityIsActive() && gBattleWeather & B_WEATHER_SANDSTORM)
             calc = (calc * 80) / 100; // 1.2 sand veil loss
-		if (WEATHER_HAS_EFFECT && gBattleMons[gBattlerTarget].ability == ABILITY_SNOW_CLOAK && gBattleWeather & B_WEATHER_HAIL)
+		if (WEATHER_HAS_EFFECT && gBattleMons[gBattlerTarget].ability == ABILITY_SNOW_CLOAK && AbilityIsActive() && gBattleWeather & B_WEATHER_HAIL)
 			calc = (calc * 80) / 100; // 1.2 snow cloak loss
         if (gBattleMons[gBattlerAttacker].ability == ABILITY_HUSTLE && IS_MOVE_PHYSICAL(move))
             calc = (calc * 80) / 100; // 1.2 hustle loss
@@ -1242,6 +1242,9 @@ static void Cmd_accuracycheck(void)
 
         if (holdEffect == HOLD_EFFECT_EVASION_UP)
             calc = (calc * (100 - param)) / 100;
+		
+		if (holdEffect == HOLD_EFFECT_ACCURACY_UP)
+			calc = (calc * (100 + param)) / 100;
 
         // final calculation
         if ((Random() % 100 + 1) > calc)
@@ -1346,7 +1349,7 @@ static void Cmd_critcalc(void)
     if (critChance >= ARRAY_COUNT(sCriticalHitChance))
         critChance = ARRAY_COUNT(sCriticalHitChance) - 1;
 
-    if ((gBattleMons[gBattlerTarget].ability != ABILITY_BATTLE_ARMOR && gBattleMons[gBattlerTarget].ability != ABILITY_SHELL_ARMOR)
+    if (((gBattleMons[gBattlerTarget].ability != ABILITY_BATTLE_ARMOR && gBattleMons[gBattlerTarget].ability != ABILITY_SHELL_ARMOR) || !(AbilityIsActive()))
      && !(gStatuses3[gBattlerAttacker] & STATUS3_CANT_SCORE_A_CRIT)
      && !(gBattleTypeFlags & (BATTLE_TYPE_WALLY_TUTORIAL | BATTLE_TYPE_FIRST_BATTLE))
      && !(Random() % sCriticalHitChance[critChance]))
@@ -1454,7 +1457,7 @@ static void Cmd_typecalc(void)
         gBattleMoveDamage = gBattleMoveDamage / 10;
     }
 
-    if (gBattleMons[gBattlerTarget].ability == ABILITY_LEVITATE && moveType == TYPE_GROUND)
+    if (gBattleMons[gBattlerTarget].ability == ABILITY_LEVITATE && moveType == TYPE_GROUND && AbilityIsActive())
     {
         gLastUsedAbility = gBattleMons[gBattlerTarget].ability;
         gMoveResultFlags |= (MOVE_RESULT_MISSED | MOVE_RESULT_DOESNT_AFFECT_FOE);
@@ -1490,7 +1493,7 @@ static void Cmd_typecalc(void)
                 // check type2
                 if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[gBattlerTarget].type2 &&
                     (gBattleMons[gBattlerTarget].type1 != gBattleMons[gBattlerTarget].type2
-					|| gBattleMons[gBattlerTarget].ability == ABILITY_SPECIALIST))
+					|| (gBattleMons[gBattlerTarget].ability == ABILITY_SPECIALIST && AbilityIsActive())))
                 {
 					if ((gBattleMoves[gCurrentMove].effect == EFFECT_FREEZE_DRY && 
 					gBattleMons[gBattlerTarget].type2 == TYPE_WATER) || 
@@ -1515,7 +1518,7 @@ static void Cmd_typecalc(void)
 			&& gBattleMons[gBattlerAttacker].ability == ABILITY_TINTED_LENS)
 			gBattleMoveDamage *= 2;
 		if (gMoveResultFlags & MOVE_RESULT_SUPER_EFFECTIVE && !(gMoveResultFlags & MOVE_RESULT_NOT_VERY_EFFECTIVE)
-			&& gBattleMons[gBattlerTarget].ability == ABILITY_SUPER_TOUGH)
+			&& gBattleMons[gBattlerTarget].ability == ABILITY_SUPER_TOUGH && AbilityIsActive())
 			gBattleMoveDamage = (gBattleMoveDamage * 75) / 100;
     }
 
@@ -1550,7 +1553,7 @@ static void CheckWonderGuardAndLevitate(void)
 	if (AbilityIsAte(gBattleMons[gBattlerAttacker].ability) && moveType == TYPE_NORMAL)
 		moveType = SetAteMoveType(gBattleMons[gBattlerAttacker].ability);
 
-    if (gBattleMons[gBattlerTarget].ability == ABILITY_LEVITATE && moveType == TYPE_GROUND)
+    if (gBattleMons[gBattlerTarget].ability == ABILITY_LEVITATE && moveType == TYPE_GROUND && AbilityIsActive())
     {
         gLastUsedAbility = ABILITY_LEVITATE;
         gBattleCommunication[MISS_TYPE] = B_MSG_GROUND_MISS;
@@ -1678,7 +1681,7 @@ u8 TypeCalc(u16 move, u8 attacker, u8 defender)
         gBattleMoveDamage = gBattleMoveDamage / 10;
     }
 
-    if (gBattleMons[defender].ability == ABILITY_LEVITATE && moveType == TYPE_GROUND)
+    if (gBattleMons[defender].ability == ABILITY_LEVITATE && moveType == TYPE_GROUND && AbilityIsActive())
     {
         flags |= (MOVE_RESULT_MISSED | MOVE_RESULT_DOESNT_AFFECT_FOE);
     }
@@ -1702,7 +1705,7 @@ u8 TypeCalc(u16 move, u8 attacker, u8 defender)
                 // check type2
                 if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[defender].type2 &&
                     (gBattleMons[defender].type1 != gBattleMons[defender].type2
-					|| gBattleMons[defender].ability == ABILITY_SPECIALIST))
+					|| (gBattleMons[defender].ability == ABILITY_SPECIALIST && AbilityIsActive())))
                     ModulateDmgByType2(TYPE_EFFECT_MULTIPLIER(i), move, &flags);
             }
             i += 3;
@@ -1711,7 +1714,7 @@ u8 TypeCalc(u16 move, u8 attacker, u8 defender)
 			&& gBattleMons[gBattlerAttacker].ability == ABILITY_TINTED_LENS)
 			gBattleMoveDamage *= 2;
 		if (flags & MOVE_RESULT_SUPER_EFFECTIVE && !(flags & MOVE_RESULT_NOT_VERY_EFFECTIVE)
-			&& gBattleMons[gBattlerTarget].ability == ABILITY_SUPER_TOUGH)
+			&& gBattleMons[gBattlerTarget].ability == ABILITY_SUPER_TOUGH && AbilityIsActive())
 			gBattleMoveDamage = (gBattleMoveDamage * 75) / 100;
     }
 
@@ -1740,7 +1743,7 @@ u8 AI_TypeCalc(u16 move, u16 targetSpecies, u8 targetAbility)
 	if (AbilityIsAte(gBattleMons[gBattlerAttacker].ability) && moveType == TYPE_NORMAL)
 		moveType = SetAteMoveType(gBattleMons[gBattlerAttacker].ability);
 
-    if (targetAbility == ABILITY_LEVITATE && moveType == TYPE_GROUND)
+    if (targetAbility == ABILITY_LEVITATE && moveType == TYPE_GROUND && AbilityIsActive())
     {
         flags = MOVE_RESULT_MISSED | MOVE_RESULT_DOESNT_AFFECT_FOE;
     }
@@ -1817,7 +1820,7 @@ static void Cmd_adjustnormaldamage(void)
         RecordItemEffectBattle(gBattlerTarget, holdEffect);
         gSpecialStatuses[gBattlerTarget].focusBanded = 1;
     }
-	if (gBattleMons[gBattlerTarget].ability == ABILITY_STURDY 
+	if (gBattleMons[gBattlerTarget].ability == ABILITY_STURDY && AbilityIsActive()
 		&& gBattleMons[gBattlerTarget].hp == gBattleMons[gBattlerTarget].maxHP)
 	{
 		gLastUsedAbility = ABILITY_STURDY;
@@ -1870,7 +1873,7 @@ static void Cmd_adjustnormaldamage2(void) // The same as adjustnormaldamage exce
         RecordItemEffectBattle(gBattlerTarget, holdEffect);
         gSpecialStatuses[gBattlerTarget].focusBanded = 1;
     }
-	if (gBattleMons[gBattlerTarget].ability == ABILITY_STURDY 
+	if (gBattleMons[gBattlerTarget].ability == ABILITY_STURDY && AbilityIsActive()
 		&& gBattleMons[gBattlerTarget].hp == gBattleMons[gBattlerTarget].maxHP)
 	{
 		gLastUsedAbility = ABILITY_STURDY;
@@ -2399,7 +2402,7 @@ void SetMoveEffect(bool8 primary, u8 certain)
         gBattleScripting.battler = gBattlerAttacker;
     }
 
-    if (gBattleMons[gEffectBattler].ability == ABILITY_SHIELD_DUST && !(gHitMarker & HITMARKER_IGNORE_SAFEGUARD)
+    if (gBattleMons[gEffectBattler].ability == ABILITY_SHIELD_DUST && AbilityIsActive() && !(gHitMarker & HITMARKER_IGNORE_SAFEGUARD)
         && !primary && gBattleCommunication[MOVE_EFFECT_BYTE] <= 9)
         INCREMENT_RESET_RETURN
 
@@ -2435,16 +2438,16 @@ void SetMoveEffect(bool8 primary, u8 certain)
                 break;
             if (gActiveBattler != gBattlersCount)
                 break;
-            if (gBattleMons[gEffectBattler].ability == ABILITY_VITAL_SPIRIT)
+            if (gBattleMons[gEffectBattler].ability == ABILITY_VITAL_SPIRIT && AbilityIsActive())
                 break;
-            if (gBattleMons[gEffectBattler].ability == ABILITY_INSOMNIA)
+            if (gBattleMons[gEffectBattler].ability == ABILITY_INSOMNIA && AbilityIsActive())
                 break;
 
             CancelMultiTurnMoves(gEffectBattler);
             statusChanged = TRUE;
             break;
         case STATUS1_POISON:
-            if (gBattleMons[gEffectBattler].ability == ABILITY_IMMUNITY
+            if (gBattleMons[gEffectBattler].ability == ABILITY_IMMUNITY && AbilityIsActive()
                 && (primary == TRUE || certain == MOVE_EFFECT_CERTAIN))
             {
                 gLastUsedAbility = ABILITY_IMMUNITY;
@@ -2480,13 +2483,13 @@ void SetMoveEffect(bool8 primary, u8 certain)
                 break;
             if (gBattleMons[gEffectBattler].status1)
                 break;
-            if (gBattleMons[gEffectBattler].ability == ABILITY_IMMUNITY)
+            if (gBattleMons[gEffectBattler].ability == ABILITY_IMMUNITY && AbilityIsActive())
                 break;
 
             statusChanged = TRUE;
             break;
         case STATUS1_BURN:
-            if (gBattleMons[gEffectBattler].ability == ABILITY_WATER_VEIL
+            if (gBattleMons[gEffectBattler].ability == ABILITY_WATER_VEIL && AbilityIsActive()
                 && (primary == TRUE || certain == MOVE_EFFECT_CERTAIN))
             {
                 gLastUsedAbility = ABILITY_WATER_VEIL;
@@ -2517,7 +2520,7 @@ void SetMoveEffect(bool8 primary, u8 certain)
             }
             if (IS_BATTLER_OF_TYPE(gEffectBattler, TYPE_FIRE))
                 break;
-            if (gBattleMons[gEffectBattler].ability == ABILITY_WATER_VEIL)
+            if (gBattleMons[gEffectBattler].ability == ABILITY_WATER_VEIL && AbilityIsActive())
                 break;
             if (gBattleMons[gEffectBattler].status1)
                 break;
@@ -2533,14 +2536,14 @@ void SetMoveEffect(bool8 primary, u8 certain)
                 break;
             if (noSunCanFreeze == 0)
                 break;
-            if (gBattleMons[gEffectBattler].ability == ABILITY_MAGMA_ARMOR)
+            if (gBattleMons[gEffectBattler].ability == ABILITY_MAGMA_ARMOR && AbilityIsActive())
                 break;
 
             CancelMultiTurnMoves(gEffectBattler);
             statusChanged = TRUE;
             break;
         case STATUS1_PARALYSIS:
-            if (gBattleMons[gEffectBattler].ability == ABILITY_LIMBER)
+            if (gBattleMons[gEffectBattler].ability == ABILITY_LIMBER && AbilityIsActive())
             {
                 if (primary == TRUE || certain == MOVE_EFFECT_CERTAIN)
                 {
@@ -2570,7 +2573,8 @@ void SetMoveEffect(bool8 primary, u8 certain)
             statusChanged = TRUE;
             break;
         case STATUS1_TOXIC_POISON:
-            if (gBattleMons[gEffectBattler].ability == ABILITY_IMMUNITY && (primary == TRUE || certain == MOVE_EFFECT_CERTAIN))
+            if (gBattleMons[gEffectBattler].ability == ABILITY_IMMUNITY && AbilityIsActive()
+			&& (primary == TRUE || certain == MOVE_EFFECT_CERTAIN))
             {
                 gLastUsedAbility = ABILITY_IMMUNITY;
                 RecordAbilityBattle(gEffectBattler, ABILITY_IMMUNITY);
@@ -2603,7 +2607,7 @@ void SetMoveEffect(bool8 primary, u8 certain)
                 break;
             if (!IS_BATTLER_OF_TYPE(gEffectBattler, TYPE_POISON) && !IS_BATTLER_OF_TYPE(gEffectBattler, TYPE_STEEL))
             {
-                if (gBattleMons[gEffectBattler].ability == ABILITY_IMMUNITY)
+                if (gBattleMons[gEffectBattler].ability == ABILITY_IMMUNITY && AbilityIsActive())
                     break;
 
                 // It's redundant, because at this point we know the status1 value is 0.
@@ -2682,7 +2686,7 @@ void SetMoveEffect(bool8 primary, u8 certain)
 				if (gCurrentMove == MOVE_SWAGGER)
 					gBattleMons[gEffectBattler].status2 &= STATUS2_BERSERK;
 				
-                if ((gBattleMons[gEffectBattler].ability == ABILITY_OWN_TEMPO
+                if (((gBattleMons[gEffectBattler].ability == ABILITY_OWN_TEMPO && AbilityIsActive())
                     || gBattleMons[gEffectBattler].status2 & STATUS2_CONFUSION)
 					&& !(gBattleMons[gEffectBattler].status2 & STATUS2_BERSERK))
                 {
@@ -2700,7 +2704,7 @@ void SetMoveEffect(bool8 primary, u8 certain)
                 }
                 break;
             case MOVE_EFFECT_FLINCH:
-                if (gBattleMons[gEffectBattler].ability == ABILITY_INNER_FOCUS)
+                if (gBattleMons[gEffectBattler].ability == ABILITY_INNER_FOCUS && AbilityIsActive())
                 {
                     if (primary == TRUE || certain == MOVE_EFFECT_CERTAIN)
                     {
@@ -2932,7 +2936,7 @@ void SetMoveEffect(bool8 primary, u8 certain)
                         gBattlescriptCurrInstr++;
                     }
                     else if (gBattleMons[gBattlerTarget].item
-                        && gBattleMons[gBattlerTarget].ability == ABILITY_STICKY_HOLD)
+                        && gBattleMons[gBattlerTarget].ability == ABILITY_STICKY_HOLD && AbilityIsActive())
                     {
                         BattleScriptPushCursor();
                         gBattlescriptCurrInstr = BattleScript_NoItemSteal;
@@ -3029,7 +3033,7 @@ void SetMoveEffect(bool8 primary, u8 certain)
                 }
                 break;
             case MOVE_EFFECT_KNOCK_OFF:
-                if (gBattleMons[gEffectBattler].ability == ABILITY_STICKY_HOLD)
+                if (gBattleMons[gEffectBattler].ability == ABILITY_STICKY_HOLD && AbilityIsActive())
                 {
                     if (gBattleMons[gEffectBattler].item == 0)
                     {
@@ -3307,7 +3311,7 @@ static void Cmd_jumpifability(void)
     else
     {
         battlerId = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
-        if (gBattleMons[battlerId].ability == ability)
+        if (gBattleMons[battlerId].ability == ability && AbilityIsActive())
         {
             gLastUsedAbility = ability;
             gBattlescriptCurrInstr = jumpPtr;
@@ -4305,10 +4309,11 @@ static void Cmd_playstatchangeanimation(void)
                     }
                 }
                 else if (!gSideTimers[GET_BATTLER_SIDE(gActiveBattler)].mistTimer
-                        && gBattleMons[gActiveBattler].ability != ABILITY_CLEAR_BODY
+                        && ((gBattleMons[gActiveBattler].ability != ABILITY_CLEAR_BODY
                         && gBattleMons[gActiveBattler].ability != ABILITY_WHITE_SMOKE
                         && !(gBattleMons[gActiveBattler].ability == ABILITY_KEEN_EYE && currStat == STAT_ACC)
                         && !(gBattleMons[gActiveBattler].ability == ABILITY_HYPER_CUTTER && currStat == STAT_ATK))
+						|| !(AbilityIsActive())))
                 {
                     if (gBattleMons[gActiveBattler].statStages[currStat] > MIN_STAT_STAGE)
                     {
@@ -4669,7 +4674,7 @@ static void Cmd_typecalc2(void)
 	if (AbilityIsAte(gBattleMons[gBattlerAttacker].ability) && moveType == TYPE_NORMAL)
 		moveType = SetAteMoveType(gBattleMons[gBattlerAttacker].ability);
 
-    if (gBattleMons[gBattlerTarget].ability == ABILITY_LEVITATE && moveType == TYPE_GROUND)
+    if (gBattleMons[gBattlerTarget].ability == ABILITY_LEVITATE && moveType == TYPE_GROUND && AbilityIsActive())
     {
         gLastUsedAbility = gBattleMons[gBattlerTarget].ability;
         gMoveResultFlags |= (MOVE_RESULT_MISSED | MOVE_RESULT_DOESNT_AFFECT_FOE);
@@ -6073,7 +6078,8 @@ static void Cmd_adjustsetdamage(void) // The same as adjustnormaldamage, except 
         gSpecialStatuses[gBattlerTarget].focusBanded = 1;
     }
 	if (gBattleMons[gBattlerTarget].ability == ABILITY_STURDY 
-		&& gBattleMons[gBattlerTarget].hp == gBattleMons[gBattlerTarget].maxHP)
+		&& gBattleMons[gBattlerTarget].hp == gBattleMons[gBattlerTarget].maxHP
+		&& AbilityIsActive())
 	{
 		gLastUsedAbility = ABILITY_STURDY;
 		gProtectStructs[gBattlerTarget].endured = 1;
@@ -6740,7 +6746,7 @@ static void Cmd_faintifabilitynotdamp(void)
 
     for (gBattlerTarget = 0; gBattlerTarget < gBattlersCount; gBattlerTarget++)
     {
-        if (gBattleMons[gBattlerTarget].ability == ABILITY_DAMP)
+        if (gBattleMons[gBattlerTarget].ability == ABILITY_DAMP && AbilityIsActive())
             break;
     }
 
@@ -7040,8 +7046,8 @@ static void Cmd_jumpifcantmakeasleep(void)
     {
         gBattlescriptCurrInstr = jumpPtr;
     }
-    else if (gBattleMons[gBattlerTarget].ability == ABILITY_INSOMNIA
-            || gBattleMons[gBattlerTarget].ability == ABILITY_VITAL_SPIRIT)
+    else if ((gBattleMons[gBattlerTarget].ability == ABILITY_INSOMNIA
+            || gBattleMons[gBattlerTarget].ability == ABILITY_VITAL_SPIRIT) && AbilityIsActive())
     {
         gLastUsedAbility = gBattleMons[gBattlerTarget].ability;
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STAYED_AWAKE_USING;
@@ -7192,7 +7198,7 @@ static u8 ChangeStatBuffs(s8 statValue, u8 statId, u8 flags, const u8 *BS_ptr)
             return STAT_BUFF_DIDNT_WORK;
         }
         else if ((gBattleMons[gActiveBattler].ability == ABILITY_CLEAR_BODY
-                  || gBattleMons[gActiveBattler].ability == ABILITY_WHITE_SMOKE)
+                  || gBattleMons[gActiveBattler].ability == ABILITY_WHITE_SMOKE) && AbilityIsActive()
                  && !certain && gCurrentMove != MOVE_CURSE)
         {
             if (flags == STAT_BUFF_ALLOW_PTR)
@@ -7214,7 +7220,7 @@ static u8 ChangeStatBuffs(s8 statValue, u8 statId, u8 flags, const u8 *BS_ptr)
             return STAT_BUFF_DIDNT_WORK;
         }
         else if (gBattleMons[gActiveBattler].ability == ABILITY_KEEN_EYE
-                 && !certain && statId == STAT_ACC)
+                 && !certain && statId == STAT_ACC && AbilityIsActive())
         {
             if (flags == STAT_BUFF_ALLOW_PTR)
             {
@@ -7227,7 +7233,7 @@ static u8 ChangeStatBuffs(s8 statValue, u8 statId, u8 flags, const u8 *BS_ptr)
             return STAT_BUFF_DIDNT_WORK;
         }
         else if (gBattleMons[gActiveBattler].ability == ABILITY_HYPER_CUTTER
-                 && !certain && statId == STAT_ATK)
+                 && !certain && statId == STAT_ATK && AbilityIsActive())
         {
             if (flags == STAT_BUFF_ALLOW_PTR)
             {
@@ -7239,7 +7245,7 @@ static u8 ChangeStatBuffs(s8 statValue, u8 statId, u8 flags, const u8 *BS_ptr)
             }
             return STAT_BUFF_DIDNT_WORK;
         }
-        else if (gBattleMons[gActiveBattler].ability == ABILITY_SHIELD_DUST && flags == 0)
+        else if (gBattleMons[gActiveBattler].ability == ABILITY_SHIELD_DUST && flags == 0 && AbilityIsActive())
         {
             return STAT_BUFF_DIDNT_WORK;
         }
@@ -7686,7 +7692,7 @@ static void Cmd_tryKO(void)
         gSpecialStatuses[gBattlerTarget].focusBanded = 1;
     }
 
-    if (gBattleMons[gBattlerTarget].ability == ABILITY_STURDY)
+    if (gBattleMons[gBattlerTarget].ability == ABILITY_STURDY && AbilityIsActive())
     {
         gMoveResultFlags |= MOVE_RESULT_MISSED;
         gLastUsedAbility = ABILITY_STURDY;
@@ -7863,7 +7869,7 @@ static void Cmd_tryinfatuating(void)
     speciesTarget = GetMonData(monTarget, MON_DATA_SPECIES);
     personalityTarget = GetMonData(monTarget, MON_DATA_PERSONALITY);
 
-    if (gBattleMons[gBattlerTarget].ability == ABILITY_OBLIVIOUS)
+    if (gBattleMons[gBattlerTarget].ability == ABILITY_OBLIVIOUS && AbilityIsActive())
     {
         gBattlescriptCurrInstr = BattleScript_ObliviousPreventsAttraction;
         gLastUsedAbility = ABILITY_OBLIVIOUS;
@@ -8693,7 +8699,7 @@ static void Cmd_trysetperishsong(void)
     for (i = 0; i < gBattlersCount; i++)
     {
         if (gStatuses3[i] & STATUS3_PERISH_SONG
-            || gBattleMons[i].ability == ABILITY_SOUNDPROOF)
+            || (gBattleMons[i].ability == ABILITY_SOUNDPROOF && AbilityIsActive()))
         {
             notAffectedCount++;
         }
@@ -9403,7 +9409,7 @@ static void Cmd_tryswapitems(void) // trick
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
         }
         // check if ability prevents swapping
-        else if (gBattleMons[gBattlerTarget].ability == ABILITY_STICKY_HOLD)
+        else if (gBattleMons[gBattlerTarget].ability == ABILITY_STICKY_HOLD && AbilityIsActive())
         {
             gBattlescriptCurrInstr = BattleScript_StickyHoldActivates;
             gLastUsedAbility = gBattleMons[gBattlerTarget].ability;

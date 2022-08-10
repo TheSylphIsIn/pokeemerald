@@ -3219,9 +3219,9 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         attack *= 2;
 	if (attacker->ability == ABILITY_BRAIN_POWER)
 		spAttack *= 2;
-	if (defender->ability == ABILITY_FUR_COAT)
+	if (defender->ability == ABILITY_FUR_COAT && AbilityIsActive())
 		defense *= 2;
-	if (defender->ability == ABILITY_SLIME_COAT)
+	if (defender->ability == ABILITY_SLIME_COAT && AbilityIsActive())
 		spDefense *= 2;
 
     if (ShouldGetStatBadgeBoost(FLAG_BADGE01_GET, battlerIdAtk))
@@ -3285,7 +3285,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
 		gBattleMovePower = (gBattleMovePower * 130) / 100;
 
     // Apply abilities / field sports
-    if (defender->ability == ABILITY_THICK_FAT && (type == TYPE_FIRE || type == TYPE_ICE))
+    if (defender->ability == ABILITY_THICK_FAT && (type == TYPE_FIRE || type == TYPE_ICE) && AbilityIsActive())
         gBattleMovePower /= 2;
     if (attacker->ability == ABILITY_HUSTLE)
         attack = (150 * attack) / 100;
@@ -3297,7 +3297,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         attack = (150 * attack) / 100;
 	if (attacker->ability == ABILITY_RESOLVE && attacker->status1)
 		spAttack = (150 * spAttack) / 100;
-    if (defender->ability == ABILITY_MARVEL_SCALE && defender->status1)
+    if (defender->ability == ABILITY_MARVEL_SCALE && defender->status1 && AbilityIsActive())
         defense = (150 * defense) / 100;
     if (type == TYPE_ELECTRIC && AbilityBattleEffects(ABILITYEFFECT_FIELD_SPORT, 0, 0, ABILITYEFFECT_MUD_SPORT, 0))
         gBattleMovePower /= 2;
@@ -3342,7 +3342,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
 		if (sSoundMovesTable[i] != 0xFFFF)
 			gBattleMovePower = (130 * gBattleMovePower) / 100;
 	}
-	if (defender->ability == ABILITY_CACOPHONY)
+	if (defender->ability == ABILITY_CACOPHONY && AbilityIsActive())
 	{
 		for (i = 0; sSoundMovesTable[i] != 0xFFFF; i++)
 		{
@@ -3373,7 +3373,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
 
     if (IS_MOVE_PHYSICAL(gCurrentMove))
     {
-		if (defender->ability != ABILITY_UNAWARE)
+		if (defender->ability != ABILITY_UNAWARE || !(AbilityIsActive()))
 		{
 			if (gCritMultiplier == 2)
 			{
@@ -3432,7 +3432,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
 
     if (IS_MOVE_SPECIAL(gCurrentMove))
     {
-		if (defender->ability != ABILITY_UNAWARE)
+		if (defender->ability != ABILITY_UNAWARE || !(AbilityIsActive()))
 		{
         if (gCritMultiplier == 2)
         {

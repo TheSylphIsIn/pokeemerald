@@ -273,6 +273,7 @@ const u32 *const gItemIconTable[][2] =
     [ITEM_FLAME_ORB] = {gItemIcon_FlameOrb, gItemIconPalette_FlameOrb},
     [ITEM_STATIC_ORB] = {gItemIcon_ToxicOrb, gItemIconPalette_StaticOrb},
 	[ITEM_CHILLING_ORB] = {gItemIcon_FlameOrb, gItemIconPalette_ChillingOrb},
+	[ITEM_WIDE_LENS] = {gItemIcon_WideLens, gItemIconPalette_WideLens},
     // Contest hold items
     [ITEM_RED_SCARF] = {gItemIcon_Scarf, gItemIconPalette_RedScarf},
     [ITEM_BLUE_SCARF] = {gItemIcon_Scarf, gItemIconPalette_BlueScarf},

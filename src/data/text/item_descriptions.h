@@ -1141,6 +1141,11 @@ static const u8 sChillingOrbDesc[] = _(
 	"Gives the holder\n"
 	"FROSTBITE at the\n"
 	"end of each turn.");
+	
+static const u8 sWideLensDesc[] = _(
+	"A hold item that\n"
+	"ups ACCURACY a\n"
+	"little bit.");
 
 static const u8 sRedScarfDesc[] = _(
     "A hold item that\n"

@@ -719,5 +719,6 @@ extern u8 gHealthboxSpriteIds[MAX_BATTLERS_COUNT];
 extern u8 gMultiUsePlayerCursor;
 extern u8 gNumberOfMovesToChoose;
 extern u8 gBattleControllerData[MAX_BATTLERS_COUNT];
+extern bool8 AbilityIsActive(void); // returns TRUE if attacker doesn't have Mold Breaker, Teravolt, or Turboblaze; false otherwise
 
 #endif // GUARD_BATTLE_H

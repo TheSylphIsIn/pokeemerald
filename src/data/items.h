@@ -3149,6 +3149,19 @@ const struct Item gItems[] =
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
+	
+	[ITEM_WIDE_LENS] =
+    {
+        .name = _("WIDE LENS"),
+        .itemId = ITEM_WIDE_LENS,
+        .price = 2000,
+		.holdEffect = HOLD_EFFECT_ACCURACY_UP,
+		.holdEffectParam = 10,
+        .description = sWideLensDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
 
     [ITEM_RED_SCARF] =
     {

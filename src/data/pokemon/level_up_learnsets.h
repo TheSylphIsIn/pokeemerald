@@ -3571,7 +3571,7 @@ static const u16 sSpecies276LevelUpLearnset[] = {
 
 static const u16 sTreeckoLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_WATER_GUN),
-    LEVEL_UP_MOVE( 1, MOVE_THUNDER_SHOCK),
+    LEVEL_UP_MOVE( 1, MOVE_THUNDER_WAVE),
     LEVEL_UP_MOVE( 6, MOVE_ABSORB),
     LEVEL_UP_MOVE(11, MOVE_QUICK_ATTACK),
     LEVEL_UP_MOVE(16, MOVE_PURSUIT),
@@ -3728,7 +3728,7 @@ static const u16 sSwampertLevelUpLearnset[] = {
 };
 
 static const u16 sPoochyenaLevelUpLearnset[] = {
-    LEVEL_UP_MOVE( 1, MOVE_THUNDER_SHOCK),
+    LEVEL_UP_MOVE( 1, MOVE_TACKLE),
     LEVEL_UP_MOVE( 5, MOVE_HOWL),
     LEVEL_UP_MOVE( 9, MOVE_SAND_ATTACK),
     LEVEL_UP_MOVE(13, MOVE_BITE),

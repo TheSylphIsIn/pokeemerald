@@ -526,9 +526,11 @@
 #define ITEM_MAGMA_EMBLEM 400
 #define ITEM_OLD_SEA_MAP 401
 
+// Further hold items 
 #define ITEM_CHILLING_ORB 402
+#define ITEM_WIDE_LENS 403
 
-#define ITEMS_COUNT 403
+#define ITEMS_COUNT 404
 #define ITEM_FIELD_ARROW ITEMS_COUNT
 
 // Range of berries given out by various NPCS
