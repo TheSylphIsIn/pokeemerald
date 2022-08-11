@@ -1485,7 +1485,7 @@ static void Cmd_typecalc(void)
 				{
 					if (moveType == TYPE_PSYCHIC && TYPE_EFFECT_DEF_TYPE(i) == TYPE_DARK
 						&& gBattleMons[gBattlerAttacker].ability == ABILITY_TRUESIGHT)
-						break;
+						continue;
 					else if ((gBattleMoves[gCurrentMove].effect == EFFECT_FREEZE_DRY && 
 					gBattleMons[gBattlerTarget].type1 == TYPE_WATER) ||
 					(gBattleMoves[gCurrentMove].effect == EFFECT_LIGHTNING && 
@@ -1501,7 +1501,7 @@ static void Cmd_typecalc(void)
                 {
 					if (moveType == TYPE_PSYCHIC && TYPE_EFFECT_DEF_TYPE(i) == TYPE_DARK
 						&& gBattleMons[gBattlerAttacker].ability == ABILITY_TRUESIGHT)
-						break;
+						continue;
 					else if ((gBattleMoves[gCurrentMove].effect == EFFECT_FREEZE_DRY && 
 					gBattleMons[gBattlerTarget].type2 == TYPE_WATER) || 
 					(gBattleMoves[gCurrentMove].effect == EFFECT_LIGHTNING && 
@@ -4716,7 +4716,7 @@ static void Cmd_typecalc2(void)
                     if (TYPE_EFFECT_MULTIPLIER(i) == TYPE_MUL_NO_EFFECT)
                     {
 						if (TYPE_EFFECT_DEF_TYPE(i) == TYPE_DARK && gBattleMons[gBattlerAttacker].ability == ABILITY_TRUESIGHT)
-							break;
+							continue;
                         gMoveResultFlags |= MOVE_RESULT_DOESNT_AFFECT_FOE;
                         break;
                     }
@@ -7179,6 +7179,11 @@ static u8 ChangeStatBuffs(s8 statValue, u8 statId, u8 flags, const u8 *BS_ptr)
         notProtectAffected++;
     flags &= ~STAT_BUFF_NOT_PROTECT_AFFECTED;
 
+	if (gBattleMons[gActiveBattler].ability == ABILITY_SIMPLE)
+    {
+        statValue = (SET_STAT_BUFF_VALUE(GET_STAT_BUFF_VALUE(statValue) * 2)) | ((statValue <= -1) ? STAT_BUFF_NEGATIVE : 0);
+    }
+	
     PREPARE_STAT_BUFFER(gBattleTextBuff1, statId)
 
     if (statValue <= -1) // Stat decrease.
@@ -7272,6 +7277,13 @@ static u8 ChangeStatBuffs(s8 statValue, u8 statId, u8 flags, const u8 *BS_ptr)
                 gBattleTextBuff2[3] = STRINGID_STATHARSHLY >> 8;
                 index = 4;
             }
+			else if (statValue <= -3)
+            {
+                gBattleTextBuff2[1] = B_BUFF_STRING;
+                gBattleTextBuff2[2] = STRINGID_STATSEVERELY & 0xFF;
+                gBattleTextBuff2[3] = STRINGID_STATSEVERELY >> 8;
+                index = 4;
+            }
             gBattleTextBuff2[index] = B_BUFF_STRING;
             index++;
             gBattleTextBuff2[index] = STRINGID_STATFELL;
@@ -7297,6 +7309,13 @@ static u8 ChangeStatBuffs(s8 statValue, u8 statId, u8 flags, const u8 *BS_ptr)
             gBattleTextBuff2[1] = B_BUFF_STRING;
             gBattleTextBuff2[2] = STRINGID_STATSHARPLY;
             gBattleTextBuff2[3] = STRINGID_STATSHARPLY >> 8;
+            index = 4;
+        }
+		else if (statValue >= 3)
+        {
+            gBattleTextBuff2[1] = B_BUFF_STRING;
+            gBattleTextBuff2[2] = STRINGID_STATDRASTICALLY & 0xFF;
+            gBattleTextBuff2[3] = STRINGID_STATDRASTICALLY >> 8;
             index = 4;
         }
         gBattleTextBuff2[index] = B_BUFF_STRING;
@@ -9789,6 +9808,16 @@ static void Cmd_switchoutabilities(void)
                                      gBitTable[*(gBattleStruct->battlerPartyIndexes + gActiveBattler)],
                                      sizeof(gBattleMons[gActiveBattler].status1),
                                      &gBattleMons[gActiveBattler].status1);
+        MarkBattlerForControllerExec(gActiveBattler);
+        break;
+	case ABILITY_REGENERATOR:
+		gBattleMons[gActiveBattler].hp += ((gBattleMons[gActiveBattler].maxHP * 20) / 100);
+		if (gBattleMons[gActiveBattler].hp > gBattleMons[gActiveBattler].maxHP)
+			gBattleMons[gActiveBattler].hp = gBattleMons[gActiveBattler].maxHP;
+		BtlController_EmitSetMonData(BUFFER_A, REQUEST_HP_BATTLE, 
+                                     gBitTable[*(gBattleStruct->battlerPartyIndexes + gActiveBattler)],
+                                     sizeof(gBattleMons[gActiveBattler].hp),
+                                     &gBattleMons[gActiveBattler].hp);
         MarkBattlerForControllerExec(gActiveBattler);
         break;
     }

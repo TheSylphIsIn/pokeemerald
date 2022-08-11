@@ -4959,15 +4959,14 @@ BattleScript_DesolationWaterFail::
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 	
-BattleScript_LightningRod_PPLoss::
+BattleScript_AbsorbMoveStatBoost_PPLoss::
 	ppreduce
-BattleScript_LightningRod::
+BattleScript_AbsorbMoveStatBoost::
 	attackstring
 	pause B_WAIT_TIME_SHORT
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
 	printstring STRINGID_PKMNABSORBEDLIGHTNINGROD
-	waitmessage B_WAIT_TIME_LONG
-	setmoveeffect MOVE_EFFECT_SP_ATK_PLUS_1 | MOVE_EFFECT_CERTAIN
+	waitmessage B_WAIT_TIME_SHORT
 	seteffectwithchance
 	moveendall
 	end
@@ -5008,19 +5007,6 @@ BattleScript_ChillingOrb::
 	call BattleScript_MoveEffectFreeze
 	end2
 	
-BattleScript_MotorDrive_PPLoss::
-	ppreduce
-BattleScript_MotorDrive::
-	attackstring
-	pause B_WAIT_TIME_SHORT
-	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
-	printstring STRINGID_PKMNABSORBEDLIGHTNINGROD
-	waitmessage B_WAIT_TIME_LONG
-	setmoveeffect MOVE_EFFECT_SPD_PLUS_1 | MOVE_EFFECT_CERTAIN
-	seteffectwithchance
-	moveendall
-	end
-	
 BattleScript_LullActivatesEnd3::
 	call BattleScript_PauseLullActivates
 	end3
@@ -5058,11 +5044,35 @@ BattleScript_MoldBreakerActivates::
 	waitmessage B_WAIT_TIME_LONG
 	end3
 	
-BattleScript_WaterCompactionActivates::
+BattleScript_StatBoostOnHit::
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
 	printstring STRINGID_PKMNABSORBEDMOVEFOREFFECT
-	waitmessage B_WAIT_TIME_LONG
-	setmoveeffect MOVE_EFFECT_DEF_PLUS_1 | MOVE_EFFECT_CERTAIN
+	waitmessage B_WAIT_TIME_SHORT
 	seteffectwithchance
+	return
+	
+BattleScript_WeakArmorActivates::
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
+	printstring STRINGID_PKMNABSORBEDMOVEFOREFFECT
+	waitmessage B_WAIT_TIME_SHORT
+	jumpifstat BS_TARGET, CMP_GREATER_THAN, STAT_DEF, MIN_STAT_STAGE, BattleScript_WeakArmorTryDropDef
+	jumpifstat BS_TARGET, CMP_EQUAL, STAT_SPEED, MAX_STAT_STAGE, BattleScript_WeakArmorEnd
+BattleScript_WeakArmorTryDropDef::
+	setbyte sSTAT_ANIM_PLAYED, FALSE
+	playstatchangeanimation BS_TARGET, BIT_DEF, STAT_CHANGE_NEGATIVE
+	setstatchanger STAT_DEF, 1, TRUE
+	statbuffchange STAT_BUFF_ALLOW_PTR, BattleScript_WeakArmorTrySpeed
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_INCREASE, BattleScript_WeakArmorTrySpeed
+	printfromtable gStatDownStringIds
+	waitmessage B_WAIT_TIME_SHORT
+BattleScript_WeakArmorTrySpeed::
+	setbyte sSTAT_ANIM_PLAYED, FALSE
+	playstatchangeanimation BS_TARGET, BIT_SPEED, STAT_CHANGE_BY_TWO
+	setstatchanger STAT_SPEED, 2, FALSE
+	statbuffchange STAT_BUFF_ALLOW_PTR, BattleScript_WeakArmorEnd
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_INCREASE, BattleScript_WeakArmorEnd
+	printfromtable gStatUpStringIds
+	waitmessage B_WAIT_TIME_SHORT
+BattleScript_WeakArmorEnd::
 	return
 

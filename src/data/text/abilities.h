@@ -28,7 +28,7 @@ static const u8 sLevitateDescription[] = _("Not hit by GROUND attacks.");
 static const u8 sEffectSporeDescription[] = _("Leaves spores on contact.");
 static const u8 sSynchronizeDescription[] = _("Passes on status problems.");
 static const u8 sClearBodyDescription[] = _("Prevents stat reduction.");
-static const u8 sNaturalCureDescription[] = _("Heals upon switching out.");
+static const u8 sNaturalCureDescription[] = _("Cures upon switching out.");
 static const u8 sLightningRodDescription[] = _("Draws electrical moves.");
 static const u8 sSereneGraceDescription[] = _("Promotes added effects.");
 static const u8 sSwiftSwimDescription[] = _("Raises SPEED in rain.");
@@ -123,6 +123,12 @@ static const u8 sStormDrainDescription[] = _("Draws in WATER moves.");
 static const u8 sWaterCompactionDescription[] = _("WATER damage ups DEFENSE.");
 static const u8 sScrappyDescription[] = _("NORMAL, FIGHT hit GHOST.");
 static const u8 sTruesightDescription[] = _("PSYCHIC hits DARK.");
+static const u8 sWeakArmorDescription[] = _("Physical hits up SPEED.");
+static const u8 sMoxieDescription[] = _("Defeating foes ups ATTACK.");
+static const u8 sRegeneratorDescription[] = _("Heals upon switching out.");
+static const u8 sSapSipperDescription[] = _("Absorbs GRASS to up ATTACK.");
+static const u8 sSimpleDescription[] = _("Stat changes are doubled.");
+static const u8 sStaminaDescription[] = _("Ups DEFENSE when hit.");
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
 {
@@ -253,6 +259,11 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
 	[ABILITY_TURBOBLAZE] = _("TURBOBLAZE"),
 	[ABILITY_SCRAPPY] = _("SCRAPPY"),
 	[ABILITY_TRUESIGHT] = _("TRUESIGHT"),
+	[ABILITY_WEAK_ARMOR] = _("WEAK ARMOR"),
+	[ABILITY_MOXIE] = _("MOXIE"),
+	[ABILITY_REGENERATOR] = _("REGENERATOR"),
+	[ABILITY_SAP_SIPPER] = _("SAP SIPPER"),
+	[ABILITY_SIMPLE] = _("SIMPLE"),
 };
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
@@ -384,4 +395,10 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 	[ABILITY_TURBOBLAZE] = sMoldBreakerDescription,
 	[ABILITY_SCRAPPY] = sScrappyDescription,
 	[ABILITY_TRUESIGHT] = sTruesightDescription,
+	[ABILITY_WEAK_ARMOR] = sWeakArmorDescription,
+	[ABILITY_MOXIE] = sMoxieDescription,
+	[ABILITY_REGENERATOR] = sRegeneratorDescription,
+	[ABILITY_SAP_SIPPER] = sSapSipperDescription,
+	[ABILITY_SIMPLE] = sSimpleDescription,
+	
 };

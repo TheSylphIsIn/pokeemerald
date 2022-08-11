@@ -2885,10 +2885,11 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
 				case ABILITY_LIGHTNING_ROD:
                     if (moveType == TYPE_ELECTRIC)
                     {
+						gBattleCommunication[MOVE_EFFECT_BYTE] = MOVE_EFFECT_SP_ATK_PLUS_1 | MOVE_EFFECT_CERTAIN;
                         if (gProtectStructs[gBattlerAttacker].notFirstStrike)
-                            gBattlescriptCurrInstr = BattleScript_LightningRod;
+                            gBattlescriptCurrInstr = BattleScript_AbsorbMoveStatBoost;
                         else
-                            gBattlescriptCurrInstr = BattleScript_LightningRod_PPLoss;
+                            gBattlescriptCurrInstr = BattleScript_AbsorbMoveStatBoost_PPLoss;
 
                         effect = 2;
                     }
@@ -2896,10 +2897,23 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
 				case ABILITY_STORM_DRAIN:
 					if (moveType == TYPE_WATER)
 					{
+						gBattleCommunication[MOVE_EFFECT_BYTE] = MOVE_EFFECT_SP_ATK_PLUS_1 | MOVE_EFFECT_CERTAIN;
 						if (gProtectStructs[gBattlerAttacker].notFirstStrike)
-                            gBattlescriptCurrInstr = BattleScript_LightningRod;
+                            gBattlescriptCurrInstr = BattleScript_AbsorbMoveStatBoost;
                         else
-                            gBattlescriptCurrInstr = BattleScript_LightningRod_PPLoss;
+                            gBattlescriptCurrInstr = BattleScript_AbsorbMoveStatBoost_PPLoss;
+
+                        effect = 2;
+                    }
+					break;
+				case ABILITY_SAP_SIPPER:
+					if (moveType == TYPE_GRASS)
+					{
+						gBattleCommunication[MOVE_EFFECT_BYTE] = MOVE_EFFECT_ATK_PLUS_1 | MOVE_EFFECT_CERTAIN;
+						if (gProtectStructs[gBattlerAttacker].notFirstStrike)
+                            gBattlescriptCurrInstr = BattleScript_AbsorbMoveStatBoost;
+                        else
+                            gBattlescriptCurrInstr = BattleScript_AbsorbMoveStatBoost_PPLoss;
 
                         effect = 2;
                     }
@@ -2907,10 +2921,11 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
 				case ABILITY_MOTOR_DRIVE:
                     if (moveType == TYPE_ELECTRIC)
                     {
+						gBattleCommunication[MOVE_EFFECT_BYTE] = MOVE_EFFECT_SPD_PLUS_1 | MOVE_EFFECT_CERTAIN;
                         if (gProtectStructs[gBattlerAttacker].notFirstStrike)
-                            gBattlescriptCurrInstr = BattleScript_MotorDrive;
+                            gBattlescriptCurrInstr = BattleScript_AbsorbMoveStatBoost;
                         else
-                            gBattlescriptCurrInstr = BattleScript_MotorDrive_PPLoss;
+                            gBattlescriptCurrInstr = BattleScript_AbsorbMoveStatBoost_PPLoss;
 
                         effect = 2;
                     }
@@ -3006,13 +3021,41 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 }
                 break;
 			case ABILITY_WATER_COMPACTION:
-				if (moveType == TYPE_WATER && gBattleMoves[move].power != 0)
+				if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
+                 && moveType == TYPE_WATER
+                 && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
+                 && TARGET_TURN_DAMAGED)
 				{
+					gBattleCommunication[MOVE_EFFECT_BYTE] = MOVE_EFFECT_DEF_PLUS_1 | MOVE_EFFECT_CERTAIN;
 					BattleScriptPushCursor();
-                    gBattlescriptCurrInstr = BattleScript_WaterCompactionActivates;
+                    gBattlescriptCurrInstr = BattleScript_StatBoostOnHit;
                     effect++;
                 }
 				break;
+			case ABILITY_STAMINA:
+				if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
+                 && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
+                 && TARGET_TURN_DAMAGED)
+				{
+					gBattleCommunication[MOVE_EFFECT_BYTE] = MOVE_EFFECT_DEF_PLUS_1 | MOVE_EFFECT_CERTAIN;
+					BattleScriptPushCursor();
+                    gBattlescriptCurrInstr = BattleScript_StatBoostOnHit;
+                    effect++;
+                }
+				break;
+			case ABILITY_WEAK_ARMOR:
+				if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
+                 && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
+                 && TARGET_TURN_DAMAGED
+				 && gBattleMoves[move].category == MOVE_CATEGORY_PHYSICAL
+				 && (gBattleMons[gBattlerTarget].statStages[STAT_DEF] > MIN_STAT_STAGE
+				  || gBattleMons[gBattlerTarget].statStages[STAT_SPEED] < MAX_STAT_STAGE))
+				 {
+					BattleScriptPushCursor();
+                    gBattlescriptCurrInstr = BattleScript_WeakArmorActivates;
+                    effect++;
+				 }
+				 break;
             case ABILITY_EFFECT_SPORE:
                 if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
                  && gBattleMons[gBattlerAttacker].hp != 0

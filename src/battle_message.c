@@ -316,6 +316,8 @@ static const u8 sText_StatSharply[] = _("sharply ");
 const u8 gText_StatRose[] = _("rose!");
 static const u8 sText_StatHarshly[] = _("harshly ");
 static const u8 sText_StatFell[] = _("fell!");
+static const u8 sText_StatDrastically[] = _("drastically ");
+static const u8 sText_StatSeverely[] = _("severely ");
 static const u8 sText_AttackersStatRose[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_BUFF1}\n{B_BUFF2}");
 const u8 gText_DefendersStatRose[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_BUFF1}\n{B_BUFF2}");
 static const u8 sText_UsingItemTheStatOfPkmnRose[] = _("Using {B_LAST_ITEM}, the {B_BUFF1}\nof {B_SCR_ACTIVE_NAME_WITH_PREFIX} {B_BUFF2}");
@@ -919,6 +921,8 @@ const u8 * const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_S
 	[STRINGID_PKMNCUTSSPATTACKWITH - BATTLESTRINGS_TABLE_START] = sText_PkmnCutsSpAttackWith,
 	[STRINGID_PKMNIGNORESABILITIES - BATTLESTRINGS_TABLE_START] = sText_PkmnIgnoresAbilities,
 	[STRINGID_PKMNABSORBEDMOVEFOREFFECT - BATTLESTRINGS_TABLE_START] = sText_PkmnAbsorbedMoveForEffect,
+	[STRINGID_STATDRASTICALLY - BATTLESTRINGS_TABLE_START] = sText_StatDrastically,
+	[STRINGID_STATSEVERELY - BATTLESTRINGS_TABLE_START] = sText_StatSeverely,
 };
 
 const u16 gMissStringIds[] =
