@@ -6710,6 +6710,20 @@ static void Cmd_various(void)
         BtlController_EmitPlayFanfareOrBGM(BUFFER_A, MUS_VICTORY_TRAINER, TRUE);
         MarkBattlerForControllerExec(gActiveBattler);
         break;
+	case VARIOUS_TRY_MOXIE:
+        if ((gBattleMons[gActiveBattler].ability == ABILITY_MOXIE)
+			&& gBattleOutcome == 0
+            && gBattleMons[gBattlerAttacker].statStages[STAT_ATK] < MAX_STAT_STAGE)
+        {
+            gBattleMons[gBattlerAttacker].statStages[STAT_ATK]++;
+            SET_STATCHANGER(STAT_ATK, 1, FALSE);
+            PREPARE_STAT_BUFFER(gBattleTextBuff1, STAT_ATK);
+            BattleScriptPush(gBattlescriptCurrInstr + 3);
+            gLastUsedAbility = ABILITY_MOXIE;
+            gBattlescriptCurrInstr = BattleScript_StatChangeOnFaint;
+            return;
+        }
+        break;
     }
 
     gBattlescriptCurrInstr += 3;

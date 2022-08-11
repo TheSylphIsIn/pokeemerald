@@ -3129,6 +3129,7 @@ BattleScript_FaintTarget::
 	dofaintanimation BS_TARGET
 	cleareffectsonfaint BS_TARGET
 	printstring STRINGID_TARGETFAINTED
+	trymoxie BS_ATTACKER
 	return
 
 BattleScript_GiveExp::
@@ -5074,5 +5075,12 @@ BattleScript_WeakArmorTrySpeed::
 	printfromtable gStatUpStringIds
 	waitmessage B_WAIT_TIME_SHORT
 BattleScript_WeakArmorEnd::
+	return
+
+BattleScript_StatChangeOnFaint::
+	playstatchangeanimation BS_ATTACKER, BIT_ATK, 0
+	waitanimation
+	printstring STRINGID_LASTABILITYRAISEDSTAT
+	waitmessage B_WAIT_TIME_LONG
 	return
 

@@ -3024,7 +3024,8 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
 				if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
                  && moveType == TYPE_WATER
                  && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
-                 && TARGET_TURN_DAMAGED)
+                 && TARGET_TURN_DAMAGED
+				 && gBattleMons[gBattlerTarget].hp != 0)
 				{
 					gBattleCommunication[MOVE_EFFECT_BYTE] = MOVE_EFFECT_DEF_PLUS_1 | MOVE_EFFECT_CERTAIN;
 					BattleScriptPushCursor();
@@ -3035,7 +3036,8 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
 			case ABILITY_STAMINA:
 				if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
                  && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
-                 && TARGET_TURN_DAMAGED)
+                 && TARGET_TURN_DAMAGED
+				 && gBattleMons[gBattlerTarget].hp != 0)
 				{
 					gBattleCommunication[MOVE_EFFECT_BYTE] = MOVE_EFFECT_DEF_PLUS_1 | MOVE_EFFECT_CERTAIN;
 					BattleScriptPushCursor();
@@ -3049,7 +3051,8 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                  && TARGET_TURN_DAMAGED
 				 && gBattleMoves[move].category == MOVE_CATEGORY_PHYSICAL
 				 && (gBattleMons[gBattlerTarget].statStages[STAT_DEF] > MIN_STAT_STAGE
-				  || gBattleMons[gBattlerTarget].statStages[STAT_SPEED] < MAX_STAT_STAGE))
+				  || gBattleMons[gBattlerTarget].statStages[STAT_SPEED] < MAX_STAT_STAGE)
+				  && gBattleMons[gBattlerTarget].hp != 0)
 				 {
 					BattleScriptPushCursor();
                     gBattlescriptCurrInstr = BattleScript_WeakArmorActivates;

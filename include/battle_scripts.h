@@ -244,4 +244,5 @@ extern const u8 BattleScript_LullActivates[];
 extern const u8 BattleScript_MoldBreakerActivates[];
 extern const u8 BattleScript_StatBoostOnHit[];
 extern const u8 BattleScript_WeakArmorActivates[];
+extern const u8 BattleScript_StatChangeOnFaint[];
 #endif // GUARD_BATTLE_SCRIPTS_H
