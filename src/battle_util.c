@@ -2978,6 +2978,16 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
 						effect = 2;
 					}
 					break;
+				case ABILITY_DAZZLING:
+					if (AdjustPriority(gBattleMons[gBattlerAttacker].ability, move) > 0)
+					{
+						if (gProtectStructs[gBattlerAttacker].notFirstStrike)
+                            gBattlescriptCurrInstr = BattleScript_MonMadeMoveUseless;
+                        else
+                            gBattlescriptCurrInstr = BattleScript_MonMadeMoveUseless_PPLoss;
+						effect = 2;
+					}
+					break;
                 }
                 if (effect == 1)
                 {

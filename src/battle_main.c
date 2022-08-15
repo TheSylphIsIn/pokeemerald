@@ -4596,7 +4596,7 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
     u8 holdEffect = 0;
     u8 holdEffectParam = 0;
     u16 moveBattler1 = 0, moveBattler2 = 0;
-	u8 priority1, priority2;
+	s8 priority1, priority2;
 
     if (WEATHER_HAS_EFFECT)
     {
@@ -4655,11 +4655,12 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
 		speedBattler1 = (speedBattler1 * 150) / 100;
 	
     if ((gBattleMons[battler1].status1 & STATUS1_PARALYSIS) && gBattleMons[battler1].ability != ABILITY_QUICK_FEET)
-        speedBattler1 /= 4;
-	
+        speedBattler1 /= 4;	
 
     if (holdEffect == HOLD_EFFECT_QUICK_CLAW && gRandomTurnNumber < (0xFFFF * holdEffectParam) / 100)
         speedBattler1 = UINT_MAX;
+	else if (gBattleMons[battler1].ability == ABILITY_STALL)
+		speedBattler1 = 1;
 
     // check second battlerId's speed
 
@@ -4700,6 +4701,8 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
 
     if (holdEffect == HOLD_EFFECT_QUICK_CLAW && gRandomTurnNumber < (0xFFFF * holdEffectParam) / 100)
         speedBattler2 = UINT_MAX;
+	else if (gBattleMons[battler2].ability == ABILITY_STALL)
+		speedBattler2 = 1;
 
     if (ignoreChosenMoves)
     {
@@ -4729,12 +4732,9 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
             moveBattler2 = MOVE_NONE;
     }
 	
-	priority1 = gBattleMoves[moveBattler1].priority;
-	priority2 = gBattleMoves[moveBattler2].priority;
-	if (gBattleMons[battler1].ability == ABILITY_PRANKSTER && gBattleMoves[moveBattler1].category == MOVE_CATEGORY_STATUS)
-		priority1++;
-	if (gBattleMons[battler2].ability == ABILITY_PRANKSTER && gBattleMoves[moveBattler2].category == MOVE_CATEGORY_STATUS)
-		priority2++;
+	priority1 = AdjustPriority(gBattleMons[battler1].ability, moveBattler1);
+	priority2 = AdjustPriority(gBattleMons[battler2].ability, moveBattler2);
+	
     // both move priorities are different than 0
     if (priority1 != 0 || priority2 != 0)
     {
@@ -4765,6 +4765,30 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
     }
 
     return strikesFirst;
+}
+
+s8 AdjustPriority(u8 ability, u16 move)
+{
+	s8 priority = gBattleMoves[move].priority;
+	switch (ability)
+	{
+		case ABILITY_PRANKSTER:
+			if (gBattleMoves[move].category == MOVE_CATEGORY_STATUS)
+				priority++;
+			break;
+		case ABILITY_TIME_SLIP:
+			if (gBattleMoves[move].type == TYPE_GROUND)
+				priority++;
+			break;
+		case ABILITY_GALE_WINGS:
+			if (gBattleMoves[move].type == TYPE_FLYING)
+				priority++;
+			break;
+		default:
+			break;
+	}
+	
+	return priority;
 }
 
 static void SetActionsAndBattlersTurnOrder(void)
