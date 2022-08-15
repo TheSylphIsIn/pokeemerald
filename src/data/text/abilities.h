@@ -135,6 +135,7 @@ static const u8 sStallDescription[] = _("User moves very slowly.");
 static const u8 sTimeSlipDescription[] = _("GROUND moves go first.");
 static const u8 sGaleWingsDescription[] = _("FLYING moves go first.");
 static const u8 sDazzlingDescription[] = _("Priority moves don't hit.");
+static const u8 sSniperDescription[] = _("Critical hits hurt more.");
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
 {
@@ -276,6 +277,7 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
 	[ABILITY_TIME_SLIP] = _("TIME SLIP"),
 	[ABILITY_GALE_WINGS] = _("GALE WINGS"),
 	[ABILITY_DAZZLING] = _("DAZZLING"),
+	[ABILITY_SNIPER] = _("SNIPER"),
 };
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
@@ -418,4 +420,5 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 	[ABILITY_TIME_SLIP] = sTimeSlipDescription,
 	[ABILITY_GALE_WINGS] = sGaleWingsDescription,
 	[ABILITY_DAZZLING] = sDazzlingDescription,
+	[ABILITY_SNIPER] = sSniperDescription,
 };
