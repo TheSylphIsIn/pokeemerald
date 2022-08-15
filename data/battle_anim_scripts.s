@@ -9929,10 +9929,6 @@ Move_VOLT_SWITCH:
 	createvisualtask AnimTask_BlendColorCycle, 2, F_PAL_TARGET, -31, 2, 0, 6, RGB(31, 31, 22)
 	call ElectricityEffect
 	waitforvisualfinish
-	delay 4
-	playsewithpan SE_M_BATON_PASS, SOUND_PAN_ATTACKER
-	createvisualtask AnimTask_BlendColorCycle, 2, F_PAL_BG | F_PAL_BATTLERS, 1, 2, 0, 11, RGB(31, 22, 30)
-	createsprite gBatonPassPokeballSpriteTemplate, ANIM_ATTACKER, 2
 	end
 	
 Move_SHELL_SMASH:

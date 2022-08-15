@@ -129,6 +129,8 @@ static const u8 sRegeneratorDescription[] = _("Heals upon switching out.");
 static const u8 sSapSipperDescription[] = _("Absorbs GRASS to up ATTACK.");
 static const u8 sSimpleDescription[] = _("Stat changes are doubled.");
 static const u8 sStaminaDescription[] = _("Ups DEFENSE when hit.");
+static const u8 sCorrosionDescription[] = _("POISON ignores immunities.");
+static const u8 sForewarnDescription[] = _("Tells foe's strongest move.");
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
 {
@@ -264,6 +266,8 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
 	[ABILITY_REGENERATOR] = _("REGENERATOR"),
 	[ABILITY_SAP_SIPPER] = _("SAP SIPPER"),
 	[ABILITY_SIMPLE] = _("SIMPLE"),
+	[ABILITY_CORROSION] = _("CORROSION"),
+	[ABILITY_FOREWARN] = _("FOREWARN"),
 };
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
@@ -400,5 +404,7 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 	[ABILITY_REGENERATOR] = sRegeneratorDescription,
 	[ABILITY_SAP_SIPPER] = sSapSipperDescription,
 	[ABILITY_SIMPLE] = sSimpleDescription,
+	[ABILITY_CORROSION] = sCorrosionDescription,
+	[ABILITY_FOREWARN] = sForewarnDescription,
 	
 };

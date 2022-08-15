@@ -129,7 +129,7 @@ struct SpecialStatus
     u32 statLowered:1;
     u32 lightningRodRedirected:1;
     u32 restoredBattlerSprite: 1;
-    u32 intimidatedMon:1;
+    u32 switchInAbility:1;
     u32 traced:1;
     u32 ppNotAffectedByPressure:1;
     u32 faintedHasReplacement:1;

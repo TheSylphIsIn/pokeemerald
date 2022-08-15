@@ -3048,12 +3048,13 @@ BattleScript_EffectHitSwitch::
 	jumpifmovehadnoeffect BattleScript_MoveEnd
 	seteffectwithchance
 	tryfaintmon BS_TARGET
-	checkteamslost BattleScript_HitSwitchTrySwitch
-BattleScript_HitSwitchTrySwitch::
+	moveendto MOVEEND_ATTACKER_VISIBLE
+	moveendfrom MOVEEND_TARGET_VISIBLE
+	jumpifbattleend BattleScript_HitSwitchEnd
 	jumpifbyte CMP_NOT_EQUAL, gBattleOutcome, 0, BattleScript_HitSwitchEnd
-	jumpifbattletype BATTLE_TYPE_ARENA, BattleScript_MoveEnd
-	jumpifcantswitch SWITCH_IGNORE_ESCAPE_PREVENTION | BS_ATTACKER, BattleScript_MoveEnd
-	openpartyscreen BS_ATTACKER, BattleScript_ButItFailed
+	jumpifbattletype BATTLE_TYPE_ARENA, BattleScript_HitSwitchEnd
+	jumpifcantswitch SWITCH_IGNORE_ESCAPE_PREVENTION | BS_ATTACKER, BattleScript_HitSwitchEnd
+	openpartyscreen BS_ATTACKER, BattleScript_HitSwitchEnd
 	switchoutabilities BS_ATTACKER
 	waitstate
 	switchhandleorder BS_ATTACKER, 2
@@ -3061,11 +3062,13 @@ BattleScript_HitSwitchTrySwitch::
 	getswitchedmondata BS_ATTACKER
 	switchindataupdate BS_ATTACKER
 	hpthresholds BS_ATTACKER
+	printstring STRINGID_EMPTYSTRING3
+	waitmessage 1
 	printstring STRINGID_SWITCHINMON
 	switchinanim BS_ATTACKER, TRUE
 	waitstate
 	switchineffects BS_ATTACKER
-BattleScript_HitSwitchEnd::
+BattleScript_HitSwitchEnd:
 	end
 	
 BattleScript_EffectShellSmash::
@@ -5083,4 +5086,12 @@ BattleScript_StatChangeOnFaint::
 	printstring STRINGID_LASTABILITYRAISEDSTAT
 	waitmessage B_WAIT_TIME_LONG
 	return
+	
+BattleScript_ForewarnActivates::
+	pause 0x20
+	printstring STRINGID_PKMNFOREWARNED
+	waitmessage B_WAIT_TIME_LONG
+	end3
+
+
 

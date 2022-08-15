@@ -43,6 +43,8 @@ match the ROM; this is also why sSoundMovesTable's declaration is in the middle 
 functions instead of at the top of the file with the other declarations.
 */
 
+static void ForewarnChooseMove(u32 battler);
+
 extern const u8 *const gBattleScriptsForMoveEffects[];
 extern const u8 *const gBattlescriptsForBallThrow[];
 extern const u8 *const gBattlescriptsForRunningByItem[];
@@ -2639,12 +2641,22 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 break;
             case ABILITY_INTIMIDATE:
 			case ABILITY_LULL:
-                if (!(gSpecialStatuses[battler].intimidatedMon))
+                if (!(gSpecialStatuses[battler].switchInAbility))
                 {
                     gStatuses3[battler] |= STATUS3_INTIMIDATE_POKES;
-                    gSpecialStatuses[battler].intimidatedMon = 1;
+                    gSpecialStatuses[battler].switchInAbility = 1;
                 }
                 break;
+			case ABILITY_FOREWARN:
+				if (!(gSpecialStatuses[battler].switchInAbility))
+				{
+					ForewarnChooseMove(battler);
+					gSpecialStatuses[battler].switchInAbility = 1;
+					BattleScriptPushCursorAndCallback(BattleScript_ForewarnActivates);
+                    gBattleScripting.battler = battler;
+                    effect++;
+				}
+				break;
             case ABILITY_FORECAST:
                 effect = CastformDataTypeChange(battler);
                 if (effect)
@@ -4468,4 +4480,47 @@ u8 IsMonDisobedient(void)
             return 1;
         }
     }
+}
+
+static void ForewarnChooseMove(u32 battler)
+{
+    u16 i, j, bestMove, bestMon, effPower;
+	
+    // Put all moves
+    for (bestMon = 0, i = 0, bestMove = 0; i < MAX_BATTLERS_COUNT; i++)
+    {
+        if (gBattleMons[i].hp != 0 && GetBattlerSide(i) != GetBattlerSide(battler))
+        {
+            for (j = 0; j < MAX_MON_MOVES; j++)
+            {
+                if (gBattleMons[i].moves[j] == MOVE_NONE)
+                    continue;
+                switch (gBattleMoves[gBattleMons[i].moves[j]].effect)
+                {
+                case EFFECT_OHKO:
+                    effPower = 150;
+                    break;
+                case EFFECT_COUNTER:
+                case EFFECT_MIRROR_COAT:
+                    effPower = 120;
+                    break;
+                default:
+                    if (gBattleMoves[gBattleMons[i].moves[j]].power == 1)
+                        effPower = 60;
+                    else
+                        effPower = gBattleMoves[gBattleMons[i].moves[j]].power;
+                    break;
+                }
+                if (effPower > gBattleMoves[bestMove].power)
+				{
+					bestMove = gBattleMons[i].moves[j];
+					bestMon = i;
+				}
+            }
+        }
+    }
+
+    gBattlerTarget = bestMon;
+    PREPARE_MOVE_BUFFER(gBattleTextBuff1, bestMove)
+	PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff2, bestMon, gBattlerPartyIndexes[bestMon])
 }

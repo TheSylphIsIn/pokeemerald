@@ -77,6 +77,9 @@ static void DrawLevelUpBannerText(void);
 static void SpriteCB_MonIconOnLvlUpBanner(struct Sprite* sprite);
 static bool8 AbilityIsAte(u8 ability);
 static s32 SetAteMoveType(u8 ability);
+static bool32 NoAliveMonsForPlayer(void);
+static bool32 NoAliveMonsForOpponent(void);
+static bool32 NoAliveMonsForEitherParty(void);
 
 static void Cmd_attackcanceler(void);
 static void Cmd_accuracycheck(void);
@@ -6567,7 +6570,7 @@ static void Cmd_various(void)
             gBattleCommunication[0] = FALSE;
         break;
     case VARIOUS_RESET_INTIMIDATE_TRACE_BITS:
-        gSpecialStatuses[gActiveBattler].intimidatedMon = 0;
+        gSpecialStatuses[gActiveBattler].switchInAbility = 0;
         gSpecialStatuses[gActiveBattler].traced = 0;
         break;
     case VARIOUS_UPDATE_CHOICE_MOVE_ON_LVL_UP:
@@ -6712,7 +6715,7 @@ static void Cmd_various(void)
         break;
 	case VARIOUS_TRY_MOXIE:
         if ((gBattleMons[gActiveBattler].ability == ABILITY_MOXIE)
-			&& gBattleOutcome == 0
+			&& !(NoAliveMonsForEitherParty())
             && gBattleMons[gBattlerAttacker].statStages[STAT_ATK] < MAX_STAT_STAGE)
         {
             gBattleMons[gBattlerAttacker].statStages[STAT_ATK]++;
@@ -6724,6 +6727,12 @@ static void Cmd_various(void)
             return;
         }
         break;
+	case VARIOUS_JUMP_IF_BATTLE_END:
+        if (NoAliveMonsForEitherParty())
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+        else
+            gBattlescriptCurrInstr += 7;
+        return;
     }
 
     gBattlescriptCurrInstr += 3;
@@ -10583,3 +10592,57 @@ static void Cmd_trainerslideout(void)
 
     gBattlescriptCurrInstr += 2;
 }
+
+static bool32 NoAliveMonsForPlayer(void)
+{
+    u32 i;
+    u32 HP_count = 0;
+
+    // Get total HP for the player's party to determine if the player has lost
+    if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER && (gPartnerTrainerId == TRAINER_STEVEN_PARTNER))
+    {
+        // In multi battle with Steven, skip his Pokémon
+        for (i = 0; i < MULTI_PARTY_SIZE; i++)
+        {
+            if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
+                HP_count += GetMonData(&gPlayerParty[i], MON_DATA_HP);
+        }
+    }
+    else
+    {
+        for (i = 0; i < PARTY_SIZE; i++)
+        {
+            if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG)
+             && (!(gBattleTypeFlags & BATTLE_TYPE_ARENA) || !(gBattleStruct->arenaLostPlayerMons & gBitTable[i])))
+            {
+                HP_count += GetMonData(&gPlayerParty[i], MON_DATA_HP);
+            }
+        }
+    }
+
+    return (HP_count == 0);
+}
+
+static bool32 NoAliveMonsForOpponent(void)
+{
+    u32 i;
+    u32 HP_count = 0;
+
+    // Get total HP for the enemy's party to determine if the player has won
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        if (GetMonData(&gEnemyParty[i], MON_DATA_SPECIES) && !GetMonData(&gEnemyParty[i], MON_DATA_IS_EGG)
+         && (!(gBattleTypeFlags & BATTLE_TYPE_ARENA) || !(gBattleStruct->arenaLostOpponentMons & gBitTable[i])))
+        {
+            HP_count += GetMonData(&gEnemyParty[i], MON_DATA_HP);
+        }
+    }
+
+    return (HP_count == 0);
+}
+
+bool32 NoAliveMonsForEitherParty(void)
+{
+    return (NoAliveMonsForPlayer() || NoAliveMonsForOpponent());
+}
+

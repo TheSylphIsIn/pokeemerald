@@ -3570,9 +3570,8 @@ static const u16 sSpecies276LevelUpLearnset[] = {
 };
 
 static const u16 sTreeckoLevelUpLearnset[] = {
-    LEVEL_UP_MOVE( 1, MOVE_SWORDS_DANCE),
     LEVEL_UP_MOVE( 1, MOVE_POUND),
-    LEVEL_UP_MOVE( 6, MOVE_ABSORB),
+    LEVEL_UP_MOVE( 1, MOVE_TOXIC),
     LEVEL_UP_MOVE(11, MOVE_QUICK_ATTACK),
     LEVEL_UP_MOVE(16, MOVE_PURSUIT),
     LEVEL_UP_MOVE(21, MOVE_SCREECH),
@@ -3675,7 +3674,7 @@ static const u16 sBlazikenLevelUpLearnset[] = {
 
 static const u16 sMudkipLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_TACKLE),
-    LEVEL_UP_MOVE( 1, MOVE_SHELL_SMASH),
+    LEVEL_UP_MOVE( 1, MOVE_VOLT_SWITCH),
     LEVEL_UP_MOVE( 6, MOVE_VOLT_SWITCH),
     LEVEL_UP_MOVE(10, MOVE_WATER_GUN),
     LEVEL_UP_MOVE(15, MOVE_BIDE),
@@ -3763,9 +3762,9 @@ static const u16 sMightyenaLevelUpLearnset[] = {
 };
 
 static const u16 sZigzagoonLevelUpLearnset[] = {
-    LEVEL_UP_MOVE( 1, MOVE_WATERFALL),
-    LEVEL_UP_MOVE( 5, MOVE_TAIL_WHIP),
-    LEVEL_UP_MOVE( 9, MOVE_HEADBUTT),
+    LEVEL_UP_MOVE( 1, MOVE_TACKLE),
+    LEVEL_UP_MOVE( 1, MOVE_HEADBUTT),
+    LEVEL_UP_MOVE( 1, MOVE_TAIL_WHIP),
     LEVEL_UP_MOVE(13, MOVE_SAND_ATTACK),
     LEVEL_UP_MOVE(17, MOVE_ODOR_SLEUTH),
     LEVEL_UP_MOVE(21, MOVE_MUD_SPORT),

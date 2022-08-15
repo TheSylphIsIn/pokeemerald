@@ -514,6 +514,7 @@ static const u8 sText_PkmnsItemDrainedHPALittle[] = _("{B_SCR_ACTIVE_NAME_WITH_P
 static const u8 sText_ItemAllowsOnlyYMove[] = _("{B_LAST_ITEM} allows the\nuse of only {B_CURRENT_MOVE}!\p");
 static const u8 sText_PkmnHungOnWithX[] = _("{B_DEF_NAME_WITH_PREFIX} hung on\nusing its {B_LAST_ITEM}!");
 static const u8 sText_LastAbilityRaisedStat[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_LAST_ABILITY}\nraised its {B_BUFF1}!");
+static const u8 sText_PkmnForewarned[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} was FOREWARNED\nof {B_BUFF2}'s {B_BUFF1}!");
 const u8 gText_EmptyString3[] = _("");
 static const u8 sText_YouThrowABallNowRight[] = _("You throw a BALL now, right?\nI… I'll do my best!");
 
@@ -925,6 +926,7 @@ const u8 * const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_S
 	[STRINGID_STATDRASTICALLY - BATTLESTRINGS_TABLE_START] = sText_StatDrastically,
 	[STRINGID_STATSEVERELY - BATTLESTRINGS_TABLE_START] = sText_StatSeverely,
 	[STRINGID_LASTABILITYRAISEDSTAT - BATTLESTRINGS_TABLE_START] = sText_LastAbilityRaisedStat,
+	[STRINGID_PKMNFOREWARNED - BATTLESTRINGS_TABLE_START] = sText_PkmnForewarned,
 };
 
 const u16 gMissStringIds[] =
