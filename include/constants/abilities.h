@@ -111,7 +111,7 @@
 #define ABILITY_TOUGH_CLAWS 107
 #define ABILITY_HYDRATION 108
 #define ABILITY_LEAF_GUARD 109 // sun hydration
-#define ABILITY_DEFENDER 110 // defensive field effect duration up
+#define ABILITY_DEFENDER 110 // defensive field effect (e.g. reflect) duration up
 #define ABILITY_SOPORIFIC 111 // when user inflicts sleep, it lasts for max turns
 #define ABILITY_TECHNICIAN 112
 #define ABILITY_SKILL_LINK 113
@@ -141,8 +141,10 @@
 #define ABILITY_GALE_WINGS 137
 #define ABILITY_DAZZLING 138
 #define ABILITY_SNIPER 139
+#define ABILITY_STEELWORKER 140
+#define ABILITY_FIRE_AFFINITY 141
 
-#define ABILITIES_COUNT 140
+#define ABILITIES_COUNT 142
 #define ABILITIES_ATE_START ABILITY_REFRIGERATE
 #define ABILITIES_ATE_END ABILITY_BURNINATE + 1
 #define ABILITIES_NUM_ATES ABILITIES_ATE_END - ABILITIES_ATE_START

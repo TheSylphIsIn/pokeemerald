@@ -1464,6 +1464,11 @@ static void Cmd_typecalc(void)
 			gBattleMoveDamage = (gBattleMoveDamage * 15) / 10;
         gBattleMoveDamage = gBattleMoveDamage / 10;
     }
+	
+	if ((gBattleMons[gBattlerAttacker].ability == ABILITY_STEELWORKER &&
+		moveType == TYPE_STEEL) || (gBattleMons[gBattlerAttacker].ability == ABILITY_FIRE_AFFINITY
+		&& moveType == TYPE_FIRE))
+		gBattleMoveDamage == (gBattleMoveDamage * 15) / 10;
 
     if (gBattleMons[gBattlerTarget].ability == ABILITY_LEVITATE && moveType == TYPE_GROUND && AbilityIsActive())
     {

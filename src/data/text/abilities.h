@@ -136,6 +136,8 @@ static const u8 sTimeSlipDescription[] = _("GROUND moves go first.");
 static const u8 sGaleWingsDescription[] = _("FLYING moves go first.");
 static const u8 sDazzlingDescription[] = _("Priority moves don't hit.");
 static const u8 sSniperDescription[] = _("Critical hits hurt more.");
+static const u8 sSteelworkerDescription[] = _("STEEL attack power up.");
+static const u8 sFireAffinityDescription[] = _("FIRE attack power up.");
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
 {
@@ -278,6 +280,8 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
 	[ABILITY_GALE_WINGS] = _("GALE WINGS"),
 	[ABILITY_DAZZLING] = _("DAZZLING"),
 	[ABILITY_SNIPER] = _("SNIPER"),
+	[ABILITY_STEELWORKER] = _("STEELWORKER"),
+	[ABILITY_FIRE_AFFINITY] = _("FIRE AFINITY"),
 };
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
@@ -421,4 +425,6 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 	[ABILITY_GALE_WINGS] = sGaleWingsDescription,
 	[ABILITY_DAZZLING] = sDazzlingDescription,
 	[ABILITY_SNIPER] = sSniperDescription,
+	[ABILITY_STEELWORKER] = sSteelworkerDescription,
+	[ABILITY_FIRE_AFFINITY] = sFireAffinityDescription,
 };
