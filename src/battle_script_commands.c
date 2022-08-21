@@ -1229,6 +1229,8 @@ static void Cmd_accuracycheck(void)
 			calc = (calc * 80) / 100; // 1.2 snow cloak loss
         if (gBattleMons[gBattlerAttacker].ability == ABILITY_HUSTLE && IS_MOVE_PHYSICAL(move))
             calc = (calc * 80) / 100; // 1.2 hustle loss
+		if (gBattleMons[gBattlerTarget].ability == ABILITY_UMBRALAMP && gBattleMons[gBattlerAttacker].ability != ABILITY_ILLUMINATE)
+			calc = (calc * 66) / 100; // 1.33 umbralamp loss
 
         if (gBattleMons[gBattlerTarget].item == ITEM_ENIGMA_BERRY)
         {
