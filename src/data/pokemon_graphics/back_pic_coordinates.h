@@ -2099,6 +2099,21 @@ const struct MonCoords gMonBackPicCoords[] =
 		.size = MON_COORDS_SIZE(64, 50),
 		.y_offset = 0,
 	},
+	[SPECIES_CASTFORM_SUNNY] =
+    {
+        .size = MON_COORDS_SIZE(32, 40),
+        .y_offset = 13,
+    },
+	[SPECIES_CASTFORM_RAINY] =
+    {
+        .size = MON_COORDS_SIZE(32, 40),
+        .y_offset = 13,
+    },
+	[SPECIES_CASTFORM_SNOWY] =
+    {
+        .size = MON_COORDS_SIZE(32, 40),
+        .y_offset = 13,
+    },
     [SPECIES_EGG] =
     {
         .size = MON_COORDS_SIZE(24, 48),

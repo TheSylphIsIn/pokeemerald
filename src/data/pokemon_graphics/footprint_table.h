@@ -420,4 +420,7 @@ const u8 *const gMonFootprintTable[] =
 	[SPECIES_OBSICARGO] = gMonFootprint_Obsicargo,
 	[SPECIES_NORWHALE] = gMonFootprint_Norwhale,
     [SPECIES_EGG] = gMonFootprint_Bulbasaur,
+	[SPECIES_CASTFORM_SUNNY] = gMonFootprint_Castform,
+	[SPECIES_CASTFORM_RAINY] = gMonFootprint_Castform,
+	[SPECIES_CASTFORM_SNOWY] = gMonFootprint_Castform,
 };

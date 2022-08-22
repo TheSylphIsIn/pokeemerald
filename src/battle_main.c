@@ -236,6 +236,8 @@ EWRAM_DATA struct BattleHealthboxInfo *gBattleControllerOpponentFlankHealthboxDa
 EWRAM_DATA u16 gBattleMovePower = 0;
 EWRAM_DATA u16 gMoveToLearn = 0;
 EWRAM_DATA u8 gBattleMonForms[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u16 gOriginalSpecies[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u16 gTransformedSpecies[MAX_BATTLERS_COUNT] = {0};
 
 void (*gPreBattleCallback1)(void);
 void (*gBattleMainFunc)(void);
@@ -300,6 +302,30 @@ const struct OamData gOamData_BattleSpritePlayerSide =
     .paletteNum = 2,
     .affineParam = 0,
 };
+
+void RecalcBattlerStats(u32 battler, u16 species)
+{
+	struct Pokemon *mon;
+	
+	if (GetBattlerSide(battler) == B_SIDE_OPPONENT)
+        mon = &gEnemyParty[gBattlerPartyIndexes[battler]]; // the changes stay after battle, probably due to this.
+    else
+        mon = &gPlayerParty[gBattlerPartyIndexes[battler]];
+	SetMonData(mon, MON_DATA_SPECIES, &species);
+	CalculateMonStats(mon);
+    gBattleMons[battler].level = GetMonData(mon, MON_DATA_LEVEL);
+    gBattleMons[battler].hp = GetMonData(mon, MON_DATA_HP);
+    gBattleMons[battler].maxHP = GetMonData(mon, MON_DATA_MAX_HP);
+    gBattleMons[battler].attack = GetMonData(mon, MON_DATA_ATK);
+    gBattleMons[battler].defense = GetMonData(mon, MON_DATA_DEF);
+    gBattleMons[battler].speed = GetMonData(mon, MON_DATA_SPEED);
+    gBattleMons[battler].spAttack = GetMonData(mon, MON_DATA_SPATK);
+    gBattleMons[battler].spDefense = GetMonData(mon, MON_DATA_SPDEF);
+    gBattleMons[battler].ability = GetMonAbility(mon);
+    gBattleMons[battler].type1 = gBaseStats[gBattleMons[battler].species].type1;
+    gBattleMons[battler].type2 = gBaseStats[gBattleMons[battler].species].type2;
+}
+
 
 // Unknown and unused data. Feel free to remove.
 static const u16 sUnused1[] = {0, 5, 0xfffe, 0};
@@ -3236,6 +3262,8 @@ void SwitchInClearSetData(void)
     gLastResultingMoves[gActiveBattler] = 0;
     gLastPrintedMoves[gActiveBattler] = 0;
     gLastHitBy[gActiveBattler] = 0xFF;
+	gOriginalSpecies[gActiveBattler] = 0;
+	gTransformedSpecies[gActiveBattler] = 0;
 
     *(gBattleStruct->lastTakenMove + gActiveBattler * 2 + 0) = 0;
     *(gBattleStruct->lastTakenMove + gActiveBattler * 2 + 1) = 0;
@@ -3328,6 +3356,8 @@ void FaintClearSetData(void)
     gLastResultingMoves[gActiveBattler] = 0;
     gLastPrintedMoves[gActiveBattler] = 0;
     gLastHitBy[gActiveBattler] = 0xFF;
+	gOriginalSpecies[gActiveBattler] = 0;
+	gTransformedSpecies[gActiveBattler] = 0;
 
     *(u8*)((u8*)(&gBattleStruct->choicedMove[gActiveBattler]) + 0) = 0;
     *(u8*)((u8*)(&gBattleStruct->choicedMove[gActiveBattler]) + 1) = 0;
@@ -5135,6 +5165,7 @@ static void HandleEndTurn_MonFled(void)
 
 static void HandleEndTurn_FinishBattle(void)
 {
+	u8 i;
     if (gCurrentActionFuncId == B_ACTION_TRY_FINISH || gCurrentActionFuncId == B_ACTION_FINISHED)
     {
         if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK
@@ -5177,6 +5208,11 @@ static void HandleEndTurn_FinishBattle(void)
             TryPutBreakingNewsOnAir();
         }
 
+		for (i = 0; i < MAX_BATTLERS_COUNT; i++)
+		{
+			if (gTransformedSpecies[i])
+				RecalcBattlerStats(i, gOriginalSpecies[i]);
+		}
         RecordedBattle_SetPlaybackFinished();
         BeginFastPaletteFade(3);
         FadeOutMapMusic(5);

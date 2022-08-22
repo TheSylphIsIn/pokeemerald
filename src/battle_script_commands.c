@@ -3201,6 +3201,8 @@ static void Cmd_tryfaintmon(void)
             gHitMarker |= HITMARKER_FAINTED(gActiveBattler);
             BattleScriptPush(gBattlescriptCurrInstr + 7);
             gBattlescriptCurrInstr = BS_ptr;
+			if (gTransformedSpecies[gActiveBattler])
+				RecalcBattlerStats(gActiveBattler, gOriginalSpecies[gActiveBattler]);
             if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
             {
                 gHitMarker |= HITMARKER_PLAYER_FAINTED;
@@ -9855,6 +9857,9 @@ static void Cmd_switchoutabilities(void)
                                      &gBattleMons[gActiveBattler].hp);
         MarkBattlerForControllerExec(gActiveBattler);
         break;
+	case ABILITY_FORECAST:
+		RecalcBattlerStats(gActiveBattler, gOriginalSpecies[gActiveBattler]);
+		break;
     }
 
     gBattlescriptCurrInstr += 2;
@@ -10018,7 +10023,7 @@ static void Cmd_docastformchangeanimation(void)
 
     if (gBattleMons[gActiveBattler].status2 & STATUS2_SUBSTITUTE)
         *(&gBattleStruct->formToChangeInto) |= CASTFORM_SUBSTITUTE;
-
+	RecalcBattlerStats(gActiveBattler, gTransformedSpecies[gActiveBattler]);
     BtlController_EmitBattleAnimation(BUFFER_A, B_ANIM_CASTFORM_CHANGE, gBattleStruct->formToChangeInto);
     MarkBattlerForControllerExec(gActiveBattler);
 
@@ -10030,7 +10035,7 @@ static void Cmd_trycastformdatachange(void)
     u8 form;
 
     gBattlescriptCurrInstr++;
-    form = CastformDataTypeChange(gBattleScripting.battler);
+    form = TryFormChange(gBattleScripting.battler);
     if (form)
     {
         BattleScriptPushCursorAndCallback(BattleScript_CastformChange);

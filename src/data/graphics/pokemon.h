@@ -2522,6 +2522,24 @@ const u32 gMonShinyPalette_Castform[] = INCBIN_U32("graphics/pokemon/castform/sh
 const u8 gMonIcon_Castform[] = INCBIN_U8("graphics/pokemon/castform/icon.4bpp");
 const u8 gMonFootprint_Castform[] = INCBIN_U8("graphics/pokemon/castform/footprint.1bpp");
 
+const u32 gMonStillFrontPic_CastformSunny[] = INCBIN_U32("graphics/pokemon/castform_sunny/front_sunny_form.4bpp.lz");
+const u32 gMonPalette_CastformSunny[] = INCBIN_U32("graphics/pokemon/castform_sunny/normal_sunny_form.gbapal.lz");
+const u32 gMonBackPic_CastformSunny[] = INCBIN_U32("graphics/pokemon/castform_sunny/back_sunny_form.4bpp.lz");
+const u32 gMonShinyPalette_CastformSunny[] = INCBIN_U32("graphics/pokemon/castform_sunny/shiny_sunny_form.gbapal.lz");
+const u8 gMonIcon_CastformSunny[] = INCBIN_U8("graphics/pokemon/castform_sunny/icon.4bpp");
+
+const u32 gMonStillFrontPic_CastformRainy[] = INCBIN_U32("graphics/pokemon/castform_rainy/front_rainy_form.4bpp.lz");
+const u32 gMonPalette_CastformRainy[] = INCBIN_U32("graphics/pokemon/castform_rainy/normal_rainy_form.gbapal.lz");
+const u32 gMonBackPic_CastformRainy[] = INCBIN_U32("graphics/pokemon/castform_rainy/back_rainy_form.4bpp.lz");
+const u32 gMonShinyPalette_CastformRainy[] = INCBIN_U32("graphics/pokemon/castform_rainy/shiny_rainy_form.gbapal.lz");
+const u8 gMonIcon_CastformRainy[] = INCBIN_U8("graphics/pokemon/castform_rainy/icon.4bpp");
+
+const u32 gMonStillFrontPic_CastformSnowy[] = INCBIN_U32("graphics/pokemon/castform_snowy/front_snowy_form.4bpp.lz");
+const u32 gMonPalette_CastformSnowy[] = INCBIN_U32("graphics/pokemon/castform_snowy/normal_snowy_form.gbapal.lz");
+const u32 gMonBackPic_CastformSnowy[] = INCBIN_U32("graphics/pokemon/castform_snowy/back_snowy_form.4bpp.lz");
+const u32 gMonShinyPalette_CastformSnowy[] = INCBIN_U32("graphics/pokemon/castform_snowy/shiny_snowy_form.gbapal.lz");
+const u8 gMonIcon_CastformSnowy[] = INCBIN_U8("graphics/pokemon/castform_snowy/icon.4bpp");
+
 const u32 gMonStillFrontPic_Volbeat[] = INCBIN_U32("graphics/pokemon/volbeat/front.4bpp.lz");
 const u32 gMonPalette_Volbeat[] = INCBIN_U32("graphics/pokemon/volbeat/normal.gbapal.lz");
 const u32 gMonBackPic_Volbeat[] = INCBIN_U32("graphics/pokemon/volbeat/back.4bpp.lz");

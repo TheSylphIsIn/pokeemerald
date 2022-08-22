@@ -2413,39 +2413,72 @@ bool8 HasNoMonsToSwitch(u8 battler, u8 partyIdBattlerOn1, u8 partyIdBattlerOn2)
     }
 }
 
-u8 CastformDataTypeChange(u8 battler)
+u8 TryFormChange(u8 battler)
 {
-    u8 formChange = 0;
-    if (gBattleMons[battler].species != SPECIES_CASTFORM || gBattleMons[battler].ability != ABILITY_FORECAST || gBattleMons[battler].hp == 0)
-        return 0; // No change
-    if (!WEATHER_HAS_EFFECT && !IS_BATTLER_OF_TYPE(battler, TYPE_NORMAL))
-    {
-        SET_BATTLER_TYPE(battler, TYPE_NORMAL);
-        return CASTFORM_NORMAL + 1;
-    }
-    if (!WEATHER_HAS_EFFECT)
-        return 0; // No change
-    if (!(gBattleWeather & (B_WEATHER_RAIN | B_WEATHER_SUN | B_WEATHER_HAIL)) && !IS_BATTLER_OF_TYPE(battler, TYPE_NORMAL))
-    {
-        SET_BATTLER_TYPE(battler, TYPE_NORMAL);
-        formChange = CASTFORM_NORMAL + 1;
-    }
-    if (gBattleWeather & B_WEATHER_SUN && !IS_BATTLER_OF_TYPE(battler, TYPE_FIRE))
-    {
-        SET_BATTLER_TYPE(battler, TYPE_FIRE);
-        formChange = CASTFORM_FIRE + 1;
-    }
-    if (gBattleWeather & B_WEATHER_RAIN && !IS_BATTLER_OF_TYPE(battler, TYPE_WATER))
-    {
-        SET_BATTLER_TYPE(battler, TYPE_WATER);
-        formChange = CASTFORM_WATER + 1;
-    }
-    if (gBattleWeather & B_WEATHER_HAIL && !IS_BATTLER_OF_TYPE(battler, TYPE_ICE))
-    {
-        SET_BATTLER_TYPE(battler, TYPE_ICE);
-        formChange = CASTFORM_ICE + 1;
-    }
-    return formChange;
+	if (!gOriginalSpecies[battler])
+		gOriginalSpecies[battler] = gBattleMons[battler].species;
+	switch (gBattleMons[battler].species)
+	{
+		case SPECIES_CASTFORM:
+		case SPECIES_CASTFORM_SUNNY:
+		case SPECIES_CASTFORM_RAINY:
+		case SPECIES_CASTFORM_SNOWY:
+			if (gBattleMons[battler].ability == ABILITY_FORECAST && gBattleMons[battler].hp != 0)
+			{
+				if ((!WEATHER_HAS_EFFECT || !(gBattleWeather & (B_WEATHER_RAIN | B_WEATHER_SUN | B_WEATHER_HAIL)))
+						&& gBattleMons[battler].species != SPECIES_CASTFORM)
+					gTransformedSpecies[battler] = SPECIES_CASTFORM;
+				else if (gBattleWeather & B_WEATHER_SUN && gBattleMons[battler].species != SPECIES_CASTFORM_SUNNY)
+					gTransformedSpecies[battler] = SPECIES_CASTFORM_SUNNY;
+				else if (gBattleWeather & B_WEATHER_RAIN && gBattleMons[battler].species != SPECIES_CASTFORM_RAINY)
+					gTransformedSpecies[battler] = SPECIES_CASTFORM_RAINY;
+				else if (gBattleWeather & B_WEATHER_HAIL && gBattleMons[battler].species != SPECIES_CASTFORM_SNOWY)
+					gTransformedSpecies[battler] = SPECIES_CASTFORM_SNOWY;
+			}
+			break;
+		default:
+			break;
+	}
+    // if ((gBattleMons[battler].species != SPECIES_CASTFORM &&
+		// gBattleMons[battler].species != SPECIES_CASTFORM_SUNNY &&
+		// gBattleMons[battler].species != SPECIES_CASTFORM_RAINY &&
+		// gBattleMons[battler].species != SPECIES_CASTFORM_SNOWY)
+		// || gBattleMons[battler].ability != ABILITY_FORECAST || gBattleMons[battler].hp == 0)
+        // return FALSE; // No change
+    // if (!WEATHER_HAS_EFFECT && gBattleMons[battler].species != SPECIES_CASTFORM)
+    // {
+        // targetSpecies = SPECIES_CASTFORM;
+        // return TRUE;
+    // }
+    // if (!WEATHER_HAS_EFFECT)
+        // return 0; // No change
+    // if (!(gBattleWeather & (B_WEATHER_RAIN | B_WEATHER_SUN | B_WEATHER_HAIL)) && gBattleMons[battler].species != SPECIES_CASTFORM)
+    // {
+        // targetSpecies = SPECIES_CASTFORM;
+        // formChange = CASTFORM_NORMAL + 1;
+    // }
+    // if (gBattleWeather & B_WEATHER_SUN && gBattleMons[battler].species != SPECIES_CASTFORM_SUNNY)
+    // {
+        // targetSpecies = SPECIES_CASTFORM_SUNNY;
+        // formChange = CASTFORM_FIRE + 1;
+    // }
+    // if (gBattleWeather & B_WEATHER_RAIN && gBattleMons[battler].species != SPECIES_CASTFORM_RAINY)
+    // {
+        // targetSpecies = SPECIES_CASTFORM_RAINY;
+        // formChange = CASTFORM_WATER + 1;
+    // }
+    // if (gBattleWeather & B_WEATHER_HAIL && gBattleMons[battler].species != SPECIES_CASTFORM_SNOWY)
+    // {
+        // targetSpecies = SPECIES_CASTFORM_SNOWY;
+        // formChange = CASTFORM_ICE + 1;
+    // }
+	if (gTransformedSpecies[battler] && gTransformedSpecies[battler] != gBattleMons[battler].species)
+	{
+		gBattleMons[battler].species = gTransformedSpecies[battler];
+		return TRUE;
+	}
+	else 
+		return FALSE;
 }
 
 u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveArg)
@@ -2535,7 +2568,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     case WEATHER_DROUGHT:
                         if (!(gBattleWeather & B_WEATHER_SUN))
                         {
-                            gBattleWeather = B_WEATHER_SUN;
+                            gBattleWeather = B_WEATHER_SUN_PERMANENT;
                             gBattleScripting.animArg1 = B_ANIM_SUN_CONTINUES;
                             gBattleScripting.battler = battler;
                             effect++;
@@ -2558,7 +2591,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
 				}
                 else if (!((gBattleWeather & B_WEATHER_RAIN_PERMANENT) || (gBattleWeather & B_WEATHER_RAIN_DOWNPOUR)))
                 {
-                    gBattleWeather = (B_WEATHER_RAIN_PERMANENT | B_WEATHER_RAIN_TEMPORARY);
+                    gBattleWeather = (B_WEATHER_RAIN_PERMANENT);
                     BattleScriptPushCursorAndCallback(BattleScript_DrizzleActivates);
                     gBattleScripting.battler = battler;
                     effect++;
@@ -2579,7 +2612,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
 				}
                 else if (!(gBattleWeather & B_WEATHER_SANDSTORM_PERMANENT))
                 {
-                    gBattleWeather = B_WEATHER_SANDSTORM;
+                    gBattleWeather = B_WEATHER_SANDSTORM_PERMANENT;
                     BattleScriptPushCursorAndCallback(BattleScript_SandstreamActivates);
                     gBattleScripting.battler = battler;
                     effect++;
@@ -2594,7 +2627,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
 				}
                 else if (!((gBattleWeather & B_WEATHER_SUN_PERMANENT) || (gBattleWeather & B_WEATHER_INTENSE_SUN)))
                 {
-                    gBattleWeather = B_WEATHER_SUN;
+                    gBattleWeather = B_WEATHER_SUN_PERMANENT;
                     BattleScriptPushCursorAndCallback(BattleScript_DroughtActivates);
                     gBattleScripting.battler = battler;
                     effect++;
@@ -2658,7 +2691,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
 				}
 				break;
             case ABILITY_FORECAST:
-                effect = CastformDataTypeChange(battler);
+                effect = TryFormChange(battler);
                 if (effect)
                 {
                     BattleScriptPushCursorAndCallback(BattleScript_CastformChange);
@@ -2686,7 +2719,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     // that's a weird choice for a variable, why not use i or battler?
                     for (target1 = 0; target1 < gBattlersCount; target1++)
                     {
-                        effect = CastformDataTypeChange(target1);
+                        effect = TryFormChange(target1);
                         if (effect)
                         {
                             BattleScriptPushCursorAndCallback(BattleScript_CastformChange);
@@ -3264,7 +3297,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
             {
                 if (gBattleMons[battler].ability == ABILITY_FORECAST)
                 {
-                    effect = CastformDataTypeChange(battler);
+                    effect = TryFormChange(battler);
                     if (effect)
                     {
                         BattleScriptPushCursorAndCallback(BattleScript_CastformChange);

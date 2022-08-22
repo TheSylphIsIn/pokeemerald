@@ -80,6 +80,7 @@ void RunBattleScriptCommands(void);
 bool8 TryRunFromBattle(u8 battlerId);
 void SpecialStatusesClear(void);
 s8 AdjustPriority(u8 ability, u16 move);
+void RecalcBattlerStats(u32, u16);
 
 extern struct MultiPartnerMenuPokemon gMultiPartnerParty[MULTI_PARTY_SIZE];
 

@@ -933,6 +933,10 @@ static const u16 sSpeciesToNationalPokedexNum[NUM_SPECIES - 1] =
 	SPECIES_TO_NATIONAL(HYDROIL),
 	SPECIES_TO_NATIONAL(WYCERN),
 	SPECIES_TO_NATIONAL(BITTERAGON),
+	
+	[SPECIES_CASTFORM_SUNNY - 1] = NATIONAL_DEX_CASTFORM,
+	[SPECIES_CASTFORM_RAINY - 1] = NATIONAL_DEX_CASTFORM,
+	[SPECIES_CASTFORM_SNOWY - 1] = NATIONAL_DEX_CASTFORM,
 };
 
 // Assigns all Hoenn Dex Indexes to a National Dex Index
@@ -1798,6 +1802,9 @@ static const u8 sMonFrontAnimIdsTable[NUM_SPECIES - 1] =
 	[SPECIES_HYDROIL - 1] = ANIM_H_SHAKE,
 	[SPECIES_WYCERN - 1] = ANIM_RAPID_H_HOPS,
 	[SPECIES_BITTERAGON - 1] = ANIM_H_SHAKE,
+	[SPECIES_CASTFORM_SUNNY - 1]    = ANIM_H_SLIDE_WOBBLE,
+	[SPECIES_CASTFORM_RAINY - 1]    = ANIM_H_SLIDE_WOBBLE,
+	[SPECIES_CASTFORM_SNOWY - 1]    = ANIM_H_SLIDE_WOBBLE,
 };
 
 static const u8 sMonAnimationDelayTable[NUM_SPECIES - 1] =
@@ -6564,7 +6571,11 @@ void ClearBattleMonForms(void)
 {
     int i;
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)
+	{
         gBattleMonForms[i] = 0;
+		gOriginalSpecies[i] = 0;
+		gTransformedSpecies[i] = 0;
+	}
 }
 
 u16 GetBattleBGM(void)
@@ -7124,6 +7135,9 @@ const u8 *GetTrainerNameFromId(u16 trainerId)
 bool8 HasTwoFramesAnimation(u16 species)
 {
     return (species != SPECIES_CASTFORM
+		 && species != SPECIES_CASTFORM_SUNNY
+		 && species != SPECIES_CASTFORM_RAINY
+		 && species != SPECIES_CASTFORM_SNOWY
          && species != SPECIES_DEOXYS
          && species != SPECIES_SPINDA
          && species != SPECIES_UNOWN);

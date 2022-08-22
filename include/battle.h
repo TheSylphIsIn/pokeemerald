@@ -383,7 +383,7 @@ struct BattleStruct
     u8 safariCatchFactor;
     u8 linkBattleVsSpriteId_V; // The letter "V"
     u8 linkBattleVsSpriteId_S; // The letter "S"
-    u8 formToChangeInto;
+    u8 formToChangeInto; // effectively unused now
     u8 chosenMovePositions[MAX_BATTLERS_COUNT];
     u8 stateIdAfterSelScript[MAX_BATTLERS_COUNT];
     u8 unused_3[3];
@@ -709,6 +709,8 @@ extern struct BattleHealthboxInfo *gBattleControllerOpponentFlankHealthboxData;
 extern u16 gBattleMovePower;
 extern u16 gMoveToLearn;
 extern u8 gBattleMonForms[MAX_BATTLERS_COUNT];
+extern u16 gOriginalSpecies[MAX_BATTLERS_COUNT];
+extern u16 gTransformedSpecies[MAX_BATTLERS_COUNT];
 
 extern void (*gPreBattleCallback1)(void);
 extern void (*gBattleMainFunc)(void);

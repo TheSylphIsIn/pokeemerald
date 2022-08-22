@@ -419,4 +419,7 @@ const u16 *const gLevelUpLearnsets[NUM_SPECIES] =
 	[SPECIES_CACTUMBRA] = sCactumbraLevelUpLearnset,
 	[SPECIES_OBSICARGO] = sObsicargoLevelUpLearnset,
 	[SPECIES_NORWHALE] = sNorwhaleLevelUpLearnset,
+	[SPECIES_CASTFORM_SUNNY] = sCastformLevelUpLearnset,
+	[SPECIES_CASTFORM_RAINY] = sCastformLevelUpLearnset,
+	[SPECIES_CASTFORM_SNOWY] = sCastformLevelUpLearnset,
 };
