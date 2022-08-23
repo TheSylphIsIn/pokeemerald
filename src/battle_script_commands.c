@@ -977,6 +977,8 @@ static void Cmd_attackcanceler(void)
             return;
         }
     }
+	if (AbilityBattleEffects(ABILITYEFFECT_ATTACKER, 0, 0, 0, gCurrentMove))
+		return;		
 	
     if (gBattleOutcome != 0)
     {
@@ -10035,12 +10037,15 @@ static void Cmd_trycastformdatachange(void)
     u8 form;
 
     gBattlescriptCurrInstr++;
-    form = TryFormChange(gBattleScripting.battler);
-    if (form)
-    {
-        BattleScriptPushCursorAndCallback(BattleScript_CastformChange);
-        *(&gBattleStruct->formToChangeInto) = form - 1;
-    }
+	if (gBattleMons[gBattleScripting.battler].ability == ABILITY_FORECAST)
+	{
+		form = TryFormChange(gBattleScripting.battler, 0);
+		if (form)
+		{
+			BattleScriptPushCursorAndCallback(BattleScript_CastformChange);
+			*(&gBattleStruct->formToChangeInto) = form - 1;
+		}
+	}
 }
 
 static void Cmd_settypebasedhalvers(void) // water and mud sport

@@ -5093,5 +5093,7 @@ BattleScript_ForewarnActivates::
 	waitmessage B_WAIT_TIME_LONG
 	end3
 
-
+BattleScript_FormChangeFromMove::
+	call BattleScript_DoCastformChange
+	return
 

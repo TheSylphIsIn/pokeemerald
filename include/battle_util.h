@@ -29,6 +29,7 @@
 #define ABILITYEFFECT_COUNT_BATTLER_SIDE         17
 #define ABILITYEFFECT_COUNT_ON_FIELD             18
 #define ABILITYEFFECT_CHECK_ON_FIELD             19
+#define ABILITYEFFECT_ATTACKER					 20
 #define ABILITYEFFECT_MUD_SPORT                  253
 #define ABILITYEFFECT_WATER_SPORT                254
 #define ABILITYEFFECT_SWITCH_IN_WEATHER          255
@@ -87,7 +88,7 @@ bool8 HandleFaintedMonActions(void);
 void TryClearRageStatuses(void);
 u8 AtkCanceller_UnableToUseMove(void);
 bool8 HasNoMonsToSwitch(u8 battlerId, u8 r1, u8 r2);
-u8 TryFormChange(u8 battlerId);
+u8 TryFormChange(u8 battlerId, u16 move);
 u8 AbilityBattleEffects(u8 caseID, u8 battlerId, u8 ability, u8 special, u16 moveArg);
 void BattleScriptExecute(const u8* BS_ptr);
 void BattleScriptPushCursorAndCallback(const u8* BS_ptr);

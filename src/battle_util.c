@@ -2413,7 +2413,7 @@ bool8 HasNoMonsToSwitch(u8 battler, u8 partyIdBattlerOn1, u8 partyIdBattlerOn2)
     }
 }
 
-u8 TryFormChange(u8 battler)
+u8 TryFormChange(u8 battler, u16 move)
 {
 	if (!gOriginalSpecies[battler])
 		gOriginalSpecies[battler] = gBattleMons[battler].species;
@@ -2435,6 +2435,14 @@ u8 TryFormChange(u8 battler)
 				else if (gBattleWeather & B_WEATHER_HAIL && gBattleMons[battler].species != SPECIES_CASTFORM_SNOWY)
 					gTransformedSpecies[battler] = SPECIES_CASTFORM_SNOWY;
 			}
+			break;
+		case SPECIES_BULBASAUR:
+			if (gBattleMoves[move].power && gBattleMons[battler].ability == ABILITY_SPELL_SWAP)
+				gTransformedSpecies[battler] = SPECIES_CATERPIE;
+			break;
+		case SPECIES_CATERPIE:
+			if (move == MOVE_PROTECT && gBattleMons[battler].ability == ABILITY_SPELL_SWAP)
+				gTransformedSpecies[battler] = SPECIES_BULBASAUR;
 			break;
 		default:
 			break;
@@ -2691,7 +2699,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
 				}
 				break;
             case ABILITY_FORECAST:
-                effect = TryFormChange(battler);
+                effect = TryFormChange(battler, 0);
                 if (effect)
                 {
                     BattleScriptPushCursorAndCallback(BattleScript_CastformChange);
@@ -2719,7 +2727,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     // that's a weird choice for a variable, why not use i or battler?
                     for (target1 = 0; target1 < gBattlersCount; target1++)
                     {
-                        effect = TryFormChange(target1);
+                        effect = TryFormChange(target1, 0);
                         if (effect)
                         {
                             BattleScriptPushCursorAndCallback(BattleScript_CastformChange);
@@ -3292,12 +3300,28 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 }
             }
             break;
+		case ABILITYEFFECT_ATTACKER:
+			switch (gBattleMons[gBattlerAttacker].ability)
+			{
+				case ABILITY_SPELL_SWAP:
+					if (TryFormChange(battler, move))
+					{
+						effect++;
+						BattleScriptPushCursor();
+						gBattlescriptCurrInstr = BattleScript_FormChangeFromMove;
+						gBattleScripting.battler = battler;
+					}
+					break;
+				default:
+					break;
+			}
+			break;
         case ABILITYEFFECT_FORECAST: // 6
             for (battler = 0; battler < gBattlersCount; battler++)
             {
                 if (gBattleMons[battler].ability == ABILITY_FORECAST)
                 {
-                    effect = TryFormChange(battler);
+                    effect = TryFormChange(battler, 0);
                     if (effect)
                     {
                         BattleScriptPushCursorAndCallback(BattleScript_CastformChange);

@@ -139,6 +139,7 @@ static const u8 sSniperDescription[] = _("Critical hits hurt more.");
 static const u8 sSteelworkerDescription[] = _("STEEL attack power up.");
 static const u8 sFireAffinityDescription[] = _("FIRE attack power up.");
 static const u8 sUmbralampDescription[] = _("EVASION up in darkness.");
+static const u8 sSpellSwapDescription[] = _("Swaps forms to use moves.");
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
 {
@@ -284,6 +285,7 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
 	[ABILITY_STEELWORKER] = _("STEELWORKER"),
 	[ABILITY_FIRE_AFFINITY] = _("FIRE AFINITY"),
 	[ABILITY_UMBRALAMP] = _("UMBRALAMP"),
+	[ABILITY_SPELL_SWAP] = _("SPELL SWAP"),
 };
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
@@ -430,4 +432,5 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 	[ABILITY_STEELWORKER] = sSteelworkerDescription,
 	[ABILITY_FIRE_AFFINITY] = sFireAffinityDescription,
 	[ABILITY_UMBRALAMP] = sUmbralampDescription,
+	[ABILITY_SPELL_SWAP] = sSpellSwapDescription,
 };
