@@ -940,14 +940,14 @@ void HandleSpeciesGfxDataChange(u8 battlerAtk, u8 battlerDef, bool8 castform)
 			if (GetBattlerSide(battlerDef) == B_SIDE_OPPONENT)
 			{
 				if (castform)
-					targetSpecies = gBattleMons[battlerAtk].species;
+					targetSpecies = gTransformedSpecies[battlerAtk];
 				else
 					targetSpecies = GetMonData(&gEnemyParty[gBattlerPartyIndexes[battlerDef]], MON_DATA_SPECIES);
             }
 			else
 			{
 				if (castform)
-					targetSpecies = gBattleMons[battlerAtk].species;
+					targetSpecies = gTransformedSpecies[battlerAtk];
 				else
 					targetSpecies = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerDef]], MON_DATA_SPECIES);
 			}

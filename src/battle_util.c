@@ -3301,7 +3301,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
             }
             break;
 		case ABILITYEFFECT_ATTACKER:
-			switch (gBattleMons[gBattlerAttacker].ability)
+			switch (gLastUsedAbility)
 			{
 				case ABILITY_SPELL_SWAP:
 					if (TryFormChange(battler, move))

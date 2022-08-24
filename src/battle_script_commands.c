@@ -977,9 +977,12 @@ static void Cmd_attackcanceler(void)
             return;
         }
     }
-	if (AbilityBattleEffects(ABILITYEFFECT_ATTACKER, 0, 0, 0, gCurrentMove))
+	if (AbilityBattleEffects(ABILITYEFFECT_ATTACKER, gBattlerAttacker, 0, 0, gCurrentMove))
+	{
+		gBattleScripting.battler = gBattlerAttacker;
 		return;		
-	
+	}
+
     if (gBattleOutcome != 0)
     {
         gCurrentActionFuncId = B_ACTION_FINISHED;

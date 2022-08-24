@@ -5094,6 +5094,7 @@ BattleScript_ForewarnActivates::
 	end3
 
 BattleScript_FormChangeFromMove::
+	printstring STRINGID_EMPTYSTRING3
 	call BattleScript_DoCastformChange
 	return
 
