@@ -2415,10 +2415,10 @@ bool8 HasNoMonsToSwitch(u8 battler, u8 partyIdBattlerOn1, u8 partyIdBattlerOn2)
 
 u8 TryFormChange(u8 battler, u16 move)
 {
-	if (!gOriginalSpecies[battler])
-		gOriginalSpecies[battler] = gBattleMons[battler].species;
-	switch (gBattleMons[battler].species)
-	{
+	if (!gOriginalSpecies[battler]) // stores original species so it can change back after battle, but doesn't
+		gOriginalSpecies[battler] = gBattleMons[battler].species; // overwrite it if it transforms more than once
+	switch (gBattleMons[battler].species) // checks transformation conditions per species.
+	{ // since species to transform into is hard-coded, this prevents skill swap jank
 		case SPECIES_CASTFORM:
 		case SPECIES_CASTFORM_SUNNY:
 		case SPECIES_CASTFORM_RAINY:
@@ -2444,44 +2444,22 @@ u8 TryFormChange(u8 battler, u16 move)
 			if (move == MOVE_PROTECT && gBattleMons[battler].ability == ABILITY_SPELL_SWAP)
 				gTransformedSpecies[battler] = SPECIES_BULBASAUR;
 			break;
+		case SPECIES_TORCHIC:
+			if (gBattleMons[battler].hp < (gBattleMons[battler].maxHP / 2)
+				&& gBattleMons[battler].ability == ABILITY_SHIELDS_DOWN)
+				gTransformedSpecies[battler] = SPECIES_WURMPLE; // once minior is real, make this a switch (personality % 6)?
+			break; // actually, fuck that, just have SPECIES_MINIOR_CORE be rainbow and only have one
+		case SPECIES_WURMPLE:
+			if (gBattleMons[battler].hp >= (gBattleMons[battler].maxHP / 2)
+				&& gBattleMons[battler].ability == ABILITY_SHIELDS_UP)
+				gTransformedSpecies[battler] = SPECIES_TORCHIC;
+			break;
 		default:
 			break;
 	}
-    // if ((gBattleMons[battler].species != SPECIES_CASTFORM &&
-		// gBattleMons[battler].species != SPECIES_CASTFORM_SUNNY &&
-		// gBattleMons[battler].species != SPECIES_CASTFORM_RAINY &&
-		// gBattleMons[battler].species != SPECIES_CASTFORM_SNOWY)
-		// || gBattleMons[battler].ability != ABILITY_FORECAST || gBattleMons[battler].hp == 0)
-        // return FALSE; // No change
-    // if (!WEATHER_HAS_EFFECT && gBattleMons[battler].species != SPECIES_CASTFORM)
-    // {
-        // targetSpecies = SPECIES_CASTFORM;
-        // return TRUE;
-    // }
-    // if (!WEATHER_HAS_EFFECT)
-        // return 0; // No change
-    // if (!(gBattleWeather & (B_WEATHER_RAIN | B_WEATHER_SUN | B_WEATHER_HAIL)) && gBattleMons[battler].species != SPECIES_CASTFORM)
-    // {
-        // targetSpecies = SPECIES_CASTFORM;
-        // formChange = CASTFORM_NORMAL + 1;
-    // }
-    // if (gBattleWeather & B_WEATHER_SUN && gBattleMons[battler].species != SPECIES_CASTFORM_SUNNY)
-    // {
-        // targetSpecies = SPECIES_CASTFORM_SUNNY;
-        // formChange = CASTFORM_FIRE + 1;
-    // }
-    // if (gBattleWeather & B_WEATHER_RAIN && gBattleMons[battler].species != SPECIES_CASTFORM_RAINY)
-    // {
-        // targetSpecies = SPECIES_CASTFORM_RAINY;
-        // formChange = CASTFORM_WATER + 1;
-    // }
-    // if (gBattleWeather & B_WEATHER_HAIL && gBattleMons[battler].species != SPECIES_CASTFORM_SNOWY)
-    // {
-        // targetSpecies = SPECIES_CASTFORM_SNOWY;
-        // formChange = CASTFORM_ICE + 1;
-    // }
+    
 	if (gTransformedSpecies[battler] && gTransformedSpecies[battler] != gBattleMons[battler].species)
-	{
+	{ // continues transformation sequence if it's indicated that the mon should transform
 		gBattleMons[battler].species = gTransformedSpecies[battler];
 		return TRUE;
 	}
@@ -2680,6 +2658,15 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     effect++;
                 }
                 break;
+			case ABILITY_SHIELDS_DOWN:
+			case ABILITY_SHIELDS_UP:
+					effect = TryFormChange(battler, 0);
+					if (effect)
+					{
+						BattleScriptPushCursorAndCallback(BattleScript_CastformChange);
+						gBattleScripting.battler = battler;
+					}
+					break;
             case ABILITY_INTIMIDATE:
 			case ABILITY_LULL:
                 if (!(gSpecialStatuses[battler].switchInAbility))
@@ -2888,6 +2875,15 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 case ABILITY_TRUANT:
                     gDisableStructs[gBattlerAttacker].truantCounter ^= 1;
                     break;
+				case ABILITY_SHIELDS_DOWN:
+				case ABILITY_SHIELDS_UP:
+					effect = TryFormChange(battler, 0);
+					if (effect)
+					{
+						BattleScriptPushCursorAndCallback(BattleScript_CastformChange);
+						gBattleScripting.battler = battler;
+					}
+					break;
                 }
             }
             break;
@@ -3300,7 +3296,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 }
             }
             break;
-		case ABILITYEFFECT_ATTACKER:
+		case ABILITYEFFECT_ATTACKER: // this is called in attackcanceler
 			switch (gLastUsedAbility)
 			{
 				case ABILITY_SPELL_SWAP:
@@ -3839,6 +3835,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
 				if (gBattleMons[battlerId].hp != 0 && 
 					!((gSideStatuses[GetBattlerSide(battlerId)] & SIDE_STATUS_SAFEGUARD)
 					|| gBattleMons[battlerId].ability == ABILITY_IMMUNITY
+					|| gBattleMons[battlerId].ability == ABILITY_SHIELDS_DOWN
 					|| (gBattleMons[battlerId].status1 & STATUS1_ANY)
 					|| gBattleMons[battlerId].type1 == TYPE_POISON
 					|| gBattleMons[battlerId].type1 == TYPE_STEEL
@@ -3856,6 +3853,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
 				if (gBattleMons[battlerId].hp != 0 && 
 					!((gSideStatuses[GetBattlerSide(battlerId)] & SIDE_STATUS_SAFEGUARD)
 					|| gBattleMons[battlerId].ability == ABILITY_WATER_VEIL
+					|| gBattleMons[battlerId].ability == ABILITY_SHIELDS_DOWN
 					|| (gBattleMons[battlerId].status1 & STATUS1_ANY)
 					|| gBattleMons[battlerId].type1 == TYPE_FIRE
 					|| gBattleMons[battlerId].type2 == TYPE_FIRE)
@@ -3871,6 +3869,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
 				if (gBattleMons[battlerId].hp != 0 && 
 					!((gSideStatuses[GetBattlerSide(battlerId)] & SIDE_STATUS_SAFEGUARD)
 					|| gBattleMons[battlerId].ability == ABILITY_LIMBER
+					|| gBattleMons[battlerId].ability == ABILITY_SHIELDS_DOWN
 					|| (gBattleMons[battlerId].status1 & STATUS1_ANY))
 					&& !moveTurn)
 				{
@@ -3884,6 +3883,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
 				if (gBattleMons[battlerId].hp != 0 && 
 					!((gSideStatuses[GetBattlerSide(battlerId)] & SIDE_STATUS_SAFEGUARD)
 					|| gBattleMons[battlerId].ability == ABILITY_MAGMA_ARMOR
+					|| gBattleMons[battlerId].ability == ABILITY_SHIELDS_DOWN
 					|| (gBattleMons[battlerId].status1 & STATUS1_ANY)
 					|| gBattleMons[battlerId].type1 == TYPE_FIRE
 					|| gBattleMons[battlerId].type2 == TYPE_FIRE

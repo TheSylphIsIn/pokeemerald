@@ -2470,16 +2470,18 @@ void SetMoveEffect(bool8 primary, u8 certain)
                 break;
             if (gBattleMons[gEffectBattler].ability == ABILITY_INSOMNIA && AbilityIsActive())
                 break;
+			if (gBattleMons[gEffectBattler].ability == ABILITY_SHIELDS_DOWN && AbilityIsActive())
+                break;
 
             CancelMultiTurnMoves(gEffectBattler);
             statusChanged = TRUE;
             break;
         case STATUS1_POISON:
-            if (gBattleMons[gEffectBattler].ability == ABILITY_IMMUNITY && AbilityIsActive()
+            if (gBattleMons[gEffectBattler].ability == (ABILITY_IMMUNITY || ABILITY_SHIELDS_DOWN) && AbilityIsActive()
                 && (primary == TRUE || certain == MOVE_EFFECT_CERTAIN))
             {
-                gLastUsedAbility = ABILITY_IMMUNITY;
-                RecordAbilityBattle(gEffectBattler, ABILITY_IMMUNITY);
+                gLastUsedAbility = gBattleMons[gEffectBattler].ability;
+                RecordAbilityBattle(gEffectBattler, gBattleMons[gEffectBattler].ability);
 
                 BattleScriptPush(gBattlescriptCurrInstr + 1);
                 gBattlescriptCurrInstr = BattleScript_PSNPrevention;
@@ -2513,15 +2515,17 @@ void SetMoveEffect(bool8 primary, u8 certain)
                 break;
             if (gBattleMons[gEffectBattler].ability == ABILITY_IMMUNITY && AbilityIsActive())
                 break;
+			if (gBattleMons[gEffectBattler].ability == ABILITY_SHIELDS_DOWN && AbilityIsActive())
+                break;
 
             statusChanged = TRUE;
             break;
         case STATUS1_BURN:
-            if (gBattleMons[gEffectBattler].ability == ABILITY_WATER_VEIL && AbilityIsActive()
+            if (gBattleMons[gEffectBattler].ability == (ABILITY_WATER_VEIL || ABILITY_SHIELDS_DOWN) && AbilityIsActive()
                 && (primary == TRUE || certain == MOVE_EFFECT_CERTAIN))
             {
-                gLastUsedAbility = ABILITY_WATER_VEIL;
-                RecordAbilityBattle(gEffectBattler, ABILITY_WATER_VEIL);
+                gLastUsedAbility = gBattleMons[gEffectBattler].ability;
+                RecordAbilityBattle(gEffectBattler, gBattleMons[gEffectBattler].ability);
 
                 BattleScriptPush(gBattlescriptCurrInstr + 1);
                 gBattlescriptCurrInstr = BattleScript_BRNPrevention;
@@ -2550,6 +2554,8 @@ void SetMoveEffect(bool8 primary, u8 certain)
                 break;
             if (gBattleMons[gEffectBattler].ability == ABILITY_WATER_VEIL && AbilityIsActive())
                 break;
+			if (gBattleMons[gEffectBattler].ability == ABILITY_SHIELDS_DOWN && AbilityIsActive())
+                break;
             if (gBattleMons[gEffectBattler].status1)
                 break;
 
@@ -2566,17 +2572,18 @@ void SetMoveEffect(bool8 primary, u8 certain)
                 break;
             if (gBattleMons[gEffectBattler].ability == ABILITY_MAGMA_ARMOR && AbilityIsActive())
                 break;
+			if (gBattleMons[gEffectBattler].ability == ABILITY_SHIELDS_DOWN && AbilityIsActive())
+                break;
 
-            CancelMultiTurnMoves(gEffectBattler);
             statusChanged = TRUE;
             break;
         case STATUS1_PARALYSIS:
-            if (gBattleMons[gEffectBattler].ability == ABILITY_LIMBER && AbilityIsActive())
+            if (gBattleMons[gEffectBattler].ability == (ABILITY_LIMBER || ABILITY_SHIELDS_DOWN) && AbilityIsActive())
             {
                 if (primary == TRUE || certain == MOVE_EFFECT_CERTAIN)
                 {
-                    gLastUsedAbility = ABILITY_LIMBER;
-                    RecordAbilityBattle(gEffectBattler, ABILITY_LIMBER);
+                    gLastUsedAbility = gBattleMons[gEffectBattler].ability;
+                    RecordAbilityBattle(gEffectBattler, gBattleMons[gEffectBattler].ability);
 
                     BattleScriptPush(gBattlescriptCurrInstr + 1);
                     gBattlescriptCurrInstr = BattleScript_PRLZPrevention;
@@ -2601,11 +2608,11 @@ void SetMoveEffect(bool8 primary, u8 certain)
             statusChanged = TRUE;
             break;
         case STATUS1_TOXIC_POISON:
-            if (gBattleMons[gEffectBattler].ability == ABILITY_IMMUNITY && AbilityIsActive()
+            if (gBattleMons[gEffectBattler].ability == (ABILITY_IMMUNITY || ABILITY_SHIELDS_DOWN) && AbilityIsActive()
 			&& (primary == TRUE || certain == MOVE_EFFECT_CERTAIN))
             {
-                gLastUsedAbility = ABILITY_IMMUNITY;
-                RecordAbilityBattle(gEffectBattler, ABILITY_IMMUNITY);
+                gLastUsedAbility = gBattleMons[gEffectBattler].ability;
+                RecordAbilityBattle(gEffectBattler, gBattleMons[gEffectBattler].ability);
 
                 BattleScriptPush(gBattlescriptCurrInstr + 1);
                 gBattlescriptCurrInstr = BattleScript_PSNPrevention;
@@ -2636,6 +2643,8 @@ void SetMoveEffect(bool8 primary, u8 certain)
             if (!IS_BATTLER_OF_TYPE(gEffectBattler, TYPE_POISON) && !IS_BATTLER_OF_TYPE(gEffectBattler, TYPE_STEEL))
             {
                 if (gBattleMons[gEffectBattler].ability == ABILITY_IMMUNITY && AbilityIsActive())
+                    break;
+				if (gBattleMons[gEffectBattler].ability == ABILITY_SHIELDS_DOWN && AbilityIsActive())
                     break;
 
                 // It's redundant, because at this point we know the status1 value is 0.
