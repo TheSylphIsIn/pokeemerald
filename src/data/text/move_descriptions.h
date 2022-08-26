@@ -1648,6 +1648,10 @@ static const u8 sShellSmashDescription[] = _(
 static const u8 sSkydiveDescription[] = _(
 	"Dives at the foe from above.\n"
 	"User takes large recoil.");
+	
+static const u8 sInfernoRayDescription[] = _(
+	"Blasts the foe with 3\n"
+	"escalating searing beams.");
 
 // MOVE_NONE is ignored in this table. Make sure to always subtract 1 before getting the right pointer.
 const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
@@ -2064,4 +2068,5 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
 	[MOVE_VOLT_SWITCH - 1] = sVoltSwitchDescription,
 	[MOVE_SHELL_SMASH - 1] = sShellSmashDescription,
 	[MOVE_SKYDIVE - 1] = sSkydiveDescription,
+	[MOVE_INFERNO_RAY - 1] = sInfernoRayDescription,
 };
