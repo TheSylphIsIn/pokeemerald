@@ -419,8 +419,10 @@ const u8 *const gMonFootprintTable[] =
 	[SPECIES_CACTUMBRA] = gMonFootprint_Cactumbra,
 	[SPECIES_OBSICARGO] = gMonFootprint_Obsicargo,
 	[SPECIES_NORWHALE] = gMonFootprint_Norwhale,
-    [SPECIES_EGG] = gMonFootprint_Bulbasaur,
+	[SPECIES_MINIOR_METEOR] = gMonFootprint_Minior,
+	[SPECIES_MINIOR_CORE] = gMonFootprint_Minior,
 	[SPECIES_CASTFORM_SUNNY] = gMonFootprint_Castform,
 	[SPECIES_CASTFORM_RAINY] = gMonFootprint_Castform,
 	[SPECIES_CASTFORM_SNOWY] = gMonFootprint_Castform,
+	[SPECIES_EGG] = gMonFootprint_Bulbasaur,
 };

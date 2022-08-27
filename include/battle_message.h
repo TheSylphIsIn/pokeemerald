@@ -288,6 +288,14 @@ extern const u8 gText_EmptyString3[];
 extern const u8 gText_RecordBattleToPass[];
 extern const u8 gText_BattleRecordedOnPass[];
 extern const u8 gText_BattleTourney[];
+extern const u8 gText_OvercastForm[];
+extern const u8 gText_SunnyForm[];
+extern const u8 gText_RainyForm[];
+extern const u8 gText_SnowyForm[];
+extern const u8 gText_MeteorForm[];
+extern const u8 gText_CoreForm[];
+extern const u8 gText_EvocationForm[];
+extern const u8 gText_AbjurationForm[];
 
 extern const u16 gMissStringIds[];
 extern const u16 gTrappingMoves[];

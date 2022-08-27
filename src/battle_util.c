@@ -2427,32 +2427,56 @@ u8 TryFormChange(u8 battler, u16 move)
 			{
 				if ((!WEATHER_HAS_EFFECT || !(gBattleWeather & (B_WEATHER_RAIN | B_WEATHER_SUN | B_WEATHER_HAIL)))
 						&& gBattleMons[battler].species != SPECIES_CASTFORM)
+				{
 					gTransformedSpecies[battler] = SPECIES_CASTFORM;
+					StringCopy(gBattleTextBuff1, gText_OvercastForm);
+				}
 				else if (gBattleWeather & B_WEATHER_SUN && gBattleMons[battler].species != SPECIES_CASTFORM_SUNNY)
+				{
 					gTransformedSpecies[battler] = SPECIES_CASTFORM_SUNNY;
+					StringCopy(gBattleTextBuff1, gText_SunnyForm);
+				}
 				else if (gBattleWeather & B_WEATHER_RAIN && gBattleMons[battler].species != SPECIES_CASTFORM_RAINY)
+				{
 					gTransformedSpecies[battler] = SPECIES_CASTFORM_RAINY;
+					StringCopy(gBattleTextBuff1, gText_RainyForm);
+				}
 				else if (gBattleWeather & B_WEATHER_HAIL && gBattleMons[battler].species != SPECIES_CASTFORM_SNOWY)
+				{
 					gTransformedSpecies[battler] = SPECIES_CASTFORM_SNOWY;
+					StringCopy(gBattleTextBuff1, gText_SnowyForm);
+				}
 			}
 			break;
 		case SPECIES_BULBASAUR:
 			if (gBattleMoves[move].power && gBattleMons[battler].ability == ABILITY_SPELL_SWAP)
+			{
 				gTransformedSpecies[battler] = SPECIES_CATERPIE;
+				StringCopy(gBattleTextBuff1, gText_EvocationForm);
+			}
 			break;
 		case SPECIES_CATERPIE:
 			if (move == MOVE_PROTECT && gBattleMons[battler].ability == ABILITY_SPELL_SWAP)
+			{
 				gTransformedSpecies[battler] = SPECIES_BULBASAUR;
+				StringCopy(gBattleTextBuff1, gText_AbjurationForm);
+			}
 			break;
-		case SPECIES_TORCHIC:
-			if (gBattleMons[battler].hp < (gBattleMons[battler].maxHP / 2)
+		case SPECIES_MINIOR_METEOR:
+			if (gBattleMons[battler].hp <= (gBattleMons[battler].maxHP / 2)
 				&& gBattleMons[battler].ability == ABILITY_SHIELDS_DOWN)
-				gTransformedSpecies[battler] = SPECIES_WURMPLE; // once minior is real, make this a switch (personality % 6)?
-			break; // actually, fuck that, just have SPECIES_MINIOR_CORE be rainbow and only have one
-		case SPECIES_WURMPLE:
-			if (gBattleMons[battler].hp >= (gBattleMons[battler].maxHP / 2)
+			{
+				gTransformedSpecies[battler] = SPECIES_MINIOR_CORE; 
+				StringCopy(gBattleTextBuff1, gText_CoreForm);
+			}
+			break; 
+		case SPECIES_MINIOR_CORE:
+			if (gBattleMons[battler].hp > (gBattleMons[battler].maxHP / 2)
 				&& gBattleMons[battler].ability == ABILITY_SHIELDS_UP)
-				gTransformedSpecies[battler] = SPECIES_TORCHIC;
+			{
+				gTransformedSpecies[battler] = SPECIES_MINIOR_METEOR;
+				StringCopy(gBattleTextBuff1, gText_MeteorForm);
+			}
 			break;
 		default:
 			break;

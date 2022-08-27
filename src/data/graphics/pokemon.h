@@ -2779,6 +2779,19 @@ const u32 gMonStillFrontPic_Norwhale[] = INCBIN_U32("graphics/pokemon/norwhale/f
 const u8 gMonIcon_Norwhale[] = INCBIN_U8("graphics/pokemon/norwhale/icon.4bpp");
 const u8 gMonFootprint_Norwhale[] = INCBIN_U8("graphics/pokemon/norwhale/footprint.1bpp");
 
+const u32 gMonPalette_Minior[] = INCBIN_U32("graphics/pokemon/minior/normal.gbapal.lz");
+const u32 gMonBackPic_Minior[] = INCBIN_U32("graphics/pokemon/minior/back.4bpp.lz");
+const u32 gMonShinyPalette_Minior[] = INCBIN_U32("graphics/pokemon/minior/shiny.gbapal.lz");
+const u32 gMonStillFrontPic_Minior[] = INCBIN_U32("graphics/pokemon/minior/front.4bpp.lz");
+const u8 gMonIcon_Minior[] = INCBIN_U8("graphics/pokemon/minior/icon.4bpp");
+const u8 gMonFootprint_Minior[] = INCBIN_U8("graphics/pokemon/minior/footprint.1bpp");
+
+const u32 gMonPalette_MiniorCore[] = INCBIN_U32("graphics/pokemon/minior/core/normal.gbapal.lz");
+const u32 gMonBackPic_MiniorCore[] = INCBIN_U32("graphics/pokemon/minior/core/back.4bpp.lz");
+const u32 gMonShinyPalette_MiniorCore[] = INCBIN_U32("graphics/pokemon/minior/core/shiny.gbapal.lz");
+const u32 gMonStillFrontPic_MiniorCore[] = INCBIN_U32("graphics/pokemon/minior/core/front.4bpp.lz");
+const u8 gMonIcon_MiniorCore[] = INCBIN_U8("graphics/pokemon/minior/core/icon.4bpp");
+
 // const u32 gMonPalette_[] = INCBIN_U32("graphics/pokemon//normal.gbapal.lz");
 // const u32 gMonBackPic_[] = INCBIN_U32("graphics/pokemon//back.4bpp.lz");
 // const u32 gMonShinyPalette_[] = INCBIN_U32("graphics/pokemon//shiny.gbapal.lz");

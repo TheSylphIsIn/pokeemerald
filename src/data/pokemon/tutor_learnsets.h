@@ -5761,6 +5761,10 @@ static const u32 sTutorLearnsets[] =
 	
 	[SPECIES_NORWHALE] = (0),
 	
+	[SPECIES_MINIOR_METEOR] = (0),
+	
+	[SPECIES_MINIOR_CORE] = (0),
+	
 	[SPECIES_CASTFORM_SUNNY] = (0),
 	
 	[SPECIES_CASTFORM_RAINY] = (0),

@@ -2361,3 +2361,9 @@ const u8 gNorwhalePokedexText[] = _(
 	"decorative, being used to break ice\n"
 	"floes, not hunt. However, it's sharp\n"
 	"enough to fight with if provoked.");
+	
+const u8 gMiniorPokedexText[] = _(
+	"It travels freely between the upper\n"
+	"atmosphere and the surface. Its many-\n"
+	"-colored core is easy to spot, so it\n"
+	"covers itself in dust and rock to hide.");

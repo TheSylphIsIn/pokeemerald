@@ -4727,4 +4727,16 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerScale = 275,
         .trainerOffset = 0,
 	},
+	
+	[NATIONAL_DEX_MINIOR_METEOR] = 
+	{
+		.categoryName = _("METEOR"),
+        .height = 3,
+        .weight = 40,
+        .description = gMiniorPokedexText,
+        .pokemonScale = 288,
+        .pokemonOffset = -9,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+	}
 };

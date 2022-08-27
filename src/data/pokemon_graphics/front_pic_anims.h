@@ -4650,6 +4650,27 @@ static const union AnimCmd sAnim_NORWHALE_1[] =
 	ANIMCMD_END
 };
 
+static const union AnimCmd sAnim_MINIOR_METEOR_1[] = 
+{
+	ANIMCMD_FRAME(0, 10),
+    ANIMCMD_FRAME(1, 43),
+    ANIMCMD_FRAME(1, 60),
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_FRAME(1, 40),
+    ANIMCMD_FRAME(0, 15),
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_MINIOR_CORE_1[] = 
+{
+	ANIMCMD_FRAME(0, 28),
+    ANIMCMD_FRAME(1, 28),
+    ANIMCMD_FRAME(0, 28),
+    ANIMCMD_FRAME(1, 28),
+    ANIMCMD_FRAME(0, 10),
+	ANIMCMD_END
+};
+
 // static const union AnimCmd sAnim__1[] = 
 // {
 	// ANIMCMD_END
@@ -6915,6 +6936,16 @@ static const union AnimCmd *const sAnims_NORWHALE[] ={
 	sAnim_NORWHALE_1,
 };
 
+static const union AnimCmd *const sAnims_MINIOR_METEOR[] ={
+	sAnim_GeneralFrame0,
+	sAnim_MINIOR_METEOR_1,
+};
+
+static const union AnimCmd *const sAnims_MINIOR_CORE[] ={
+	sAnim_GeneralFrame0,
+	sAnim_MINIOR_CORE_1,
+};
+
 // static const union AnimCmd *const sAnims_[] ={
 	// sAnim_GeneralFrame0,
 	// sAnim__1,
@@ -7484,6 +7515,8 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[] =
 	ANIM_CMD(CACTUMBRA),
 	ANIM_CMD(OBSICARGO),
 	ANIM_CMD(NORWHALE),
+	ANIM_CMD(MINIOR_METEOR),
+	ANIM_CMD(MINIOR_CORE),
 	[SPECIES_CASTFORM_SUNNY] = sAnims_CASTFORM,
 	[SPECIES_CASTFORM_RAINY] = sAnims_CASTFORM,
 	[SPECIES_CASTFORM_SNOWY] = sAnims_CASTFORM,

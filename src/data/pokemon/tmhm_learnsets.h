@@ -1992,6 +1992,11 @@ static const u8 sNorwhaleTMHMLearnset[] =
 	TMHM_LEARNSET_END,
 };
 
+static const u8 sMiniorTMHMLearnset[] = 
+{
+	TMHM_LEARNSET_END,
+};
+
 const u8 *const gTMHMLearnsets[] =
 {
     [SPECIES_NONE] = sNoneTMHMLearnset,
@@ -2412,5 +2417,7 @@ const u8 *const gTMHMLearnsets[] =
 	[SPECIES_BITTERAGON] = sBitteragonTMHMLearnset,
 	[SPECIES_CACTUMBRA] = sCactumbraTMHMLearnset,
 	[SPECIES_OBSICARGO] = sObsicargoTMHMLearnset,
-	[SPECIES_NORWHALE] = sNorwhaleTMHMLearnset
+	[SPECIES_NORWHALE] = sNorwhaleTMHMLearnset,
+	[SPECIES_MINIOR_METEOR] = sMiniorTMHMLearnset,
+	[SPECIES_MINIOR_CORE] = sMiniorTMHMLearnset
 };

@@ -5696,3 +5696,11 @@ static const u16 sObsicargoLevelUpLearnset[] = {
 static const u16 sNorwhaleLevelUpLearnset[] = {
 	LEVEL_UP_END
 };
+
+static const u16 sMiniorLevelUpLearnset[] = {
+	LEVEL_UP_MOVE( 1, MOVE_TACKLE),
+	LEVEL_UP_MOVE( 2, MOVE_THUNDER_WAVE),
+	LEVEL_UP_MOVE( 3, MOVE_COLD_SNAP),
+	LEVEL_UP_MOVE( 4, MOVE_VINE_WHIP),
+	LEVEL_UP_END
+};
