@@ -3039,6 +3039,16 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
 						effect = 2;
 					}
 					break;
+				case ABILITY_PURITY:
+					if (moveType == TYPE_POISON)
+					{
+						if (gProtectStructs[gBattlerAttacker].notFirstStrike)
+                            gBattlescriptCurrInstr = BattleScript_MonMadeMoveUseless;
+                        else
+                            gBattlescriptCurrInstr = BattleScript_MonMadeMoveUseless_PPLoss;
+						effect = 2;
+					}
+					break;
 				case ABILITY_DAZZLING:
 					if (AdjustPriority(gBattleMons[gBattlerAttacker].ability, move) > 0)
 					{
@@ -3243,6 +3253,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 switch (gBattleMons[battler].ability)
                 {
                 case ABILITY_IMMUNITY:
+				case ABILITY_PURITY:
                     if (gBattleMons[battler].status1 & (STATUS1_POISON | STATUS1_TOXIC_POISON | STATUS1_TOXIC_COUNTER))
                     {
                         StringCopy(gBattleTextBuff1, gStatusConditionString_PoisonJpn);
@@ -3860,6 +3871,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
 					!((gSideStatuses[GetBattlerSide(battlerId)] & SIDE_STATUS_SAFEGUARD)
 					|| gBattleMons[battlerId].ability == ABILITY_IMMUNITY
 					|| gBattleMons[battlerId].ability == ABILITY_SHIELDS_DOWN
+					|| gBattleMons[battlerId].ability == ABILITY_PURITY
 					|| (gBattleMons[battlerId].status1 & STATUS1_ANY)
 					|| gBattleMons[battlerId].type1 == TYPE_POISON
 					|| gBattleMons[battlerId].type1 == TYPE_STEEL

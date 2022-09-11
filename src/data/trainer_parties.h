@@ -4229,14 +4229,14 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Shelby5[] = {
 
 static const struct TrainerMonNoItemDefaultMoves sParty_Calvin1[] = {
     {
-    .iv = 0,
+    .iv = 255,
     .lvl = 5,
     .species = SPECIES_POOCHYENA,
     },
 	{
-	.iv = 0,
+	.iv = 255,
 	.lvl = 5,
-	.species = SPECIES_ZIGZAGOON,
+	.species = SPECIES_POOCHYENA,
 	}
 };
 
@@ -6990,7 +6990,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_MayRoute103Treecko[] = {
     {
     .iv = 0,
     .lvl = 5,
-    .species = SPECIES_MINIOR_METEOR,
+    .species = SPECIES_TORCHIC,
     }
 };
 

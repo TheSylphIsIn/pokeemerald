@@ -3381,6 +3381,9 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
 		gBattleMovePower = (gBattleMovePower * 150) / 100;
 	if (defender->ability == ABILITY_WATER_COMPACTION && AbilityIsActive() && type == TYPE_WATER)
 		gBattleMovePower /= 2;
+	if (attacker->ability == ABILITY_ANALYTIC && gBattlerByTurnOrder[gBattlerAttacker] == gBattlersCount - 1)
+		gBattleMovePower = (gBattleMovePower * 200) / 100; // seems to work in singles but not doubles.
+	// also don't forget to revert dubsnake's stupid changes
 	
     // Self-destruct / Explosion cut defense in half
     if (gBattleMoves[gCurrentMove].effect == EFFECT_EXPLOSION)

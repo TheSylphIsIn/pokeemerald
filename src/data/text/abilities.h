@@ -142,6 +142,8 @@ static const u8 sUmbralampDescription[] = _("EVASION up in darkness.");
 static const u8 sSpellSwapDescription[] = _("Swaps forms to use moves.");
 static const u8 sShieldsDownDescription[] = _("Shield breaks at low HP.");
 static const u8 sShieldsUpDescription[] = _("Shield heals at high HP.");
+static const u8 sPurityDescription[] = _("Repels POISON.");
+static const u8 sAnalyticDescription[] = _("Power up if moving last.");
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
 {
@@ -288,8 +290,10 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
 	[ABILITY_FIRE_AFFINITY] = _("FIRE AFINITY"),
 	[ABILITY_UMBRALAMP] = _("UMBRALAMP"),
 	[ABILITY_SPELL_SWAP] = _("SPELL SWAP"),
-	[ABILITY_SHIELDS_DOWN] = _("SHIELDS UP"),
-	[ABILITY_SHIELDS_UP] = _("SHIELDS DOWN"),
+	[ABILITY_SHIELDS_DOWN] = _("SHIELDS UP"), // THIS IS NOT A MISTAKE! Meteor Minior has the original ability label, but it 
+	[ABILITY_SHIELDS_UP] = _("SHIELDS DOWN"), // displays as "shields up", the state it's in. Core has its shields down.
+	[ABILITY_PURITY] = _("PURITY"),
+	[ABILITY_ANALYTIC] = _("ANALYTIC"),
 };
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
@@ -439,4 +443,6 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 	[ABILITY_SPELL_SWAP] = sSpellSwapDescription,
 	[ABILITY_SHIELDS_DOWN] = sShieldsDownDescription,
 	[ABILITY_SHIELDS_UP] = sShieldsUpDescription,
+	[ABILITY_PURITY] = sPurityDescription,
+	[ABILITY_ANALYTIC] = sAnalyticDescription,
 };

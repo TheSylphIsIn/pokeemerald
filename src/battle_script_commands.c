@@ -2477,8 +2477,8 @@ void SetMoveEffect(bool8 primary, u8 certain)
             statusChanged = TRUE;
             break;
         case STATUS1_POISON:
-            if (gBattleMons[gEffectBattler].ability == (ABILITY_IMMUNITY || ABILITY_SHIELDS_DOWN) && AbilityIsActive()
-                && (primary == TRUE || certain == MOVE_EFFECT_CERTAIN))
+            if (gBattleMons[gEffectBattler].ability == (ABILITY_IMMUNITY || ABILITY_SHIELDS_DOWN || ABILITY_PURITY)
+				&& AbilityIsActive() && (primary == TRUE || certain == MOVE_EFFECT_CERTAIN))
             {
                 gLastUsedAbility = gBattleMons[gEffectBattler].ability;
                 RecordAbilityBattle(gEffectBattler, gBattleMons[gEffectBattler].ability);
@@ -2517,6 +2517,8 @@ void SetMoveEffect(bool8 primary, u8 certain)
                 break;
 			if (gBattleMons[gEffectBattler].ability == ABILITY_SHIELDS_DOWN && AbilityIsActive())
                 break;
+			if (gBattleMons[gEffectBattler].ability == ABILITY_PURITY && AbilityIsActive())
+				break;
 
             statusChanged = TRUE;
             break;
@@ -2608,8 +2610,8 @@ void SetMoveEffect(bool8 primary, u8 certain)
             statusChanged = TRUE;
             break;
         case STATUS1_TOXIC_POISON:
-            if (gBattleMons[gEffectBattler].ability == (ABILITY_IMMUNITY || ABILITY_SHIELDS_DOWN) && AbilityIsActive()
-			&& (primary == TRUE || certain == MOVE_EFFECT_CERTAIN))
+            if (gBattleMons[gEffectBattler].ability == (ABILITY_IMMUNITY || ABILITY_SHIELDS_DOWN || ABILITY_PURITY)
+				&& AbilityIsActive() && (primary == TRUE || certain == MOVE_EFFECT_CERTAIN))
             {
                 gLastUsedAbility = gBattleMons[gEffectBattler].ability;
                 RecordAbilityBattle(gEffectBattler, gBattleMons[gEffectBattler].ability);
@@ -2646,6 +2648,7 @@ void SetMoveEffect(bool8 primary, u8 certain)
                     break;
 				if (gBattleMons[gEffectBattler].ability == ABILITY_SHIELDS_DOWN && AbilityIsActive())
                     break;
+				if (gBattleMons[gEffectBattler].ability == ABILITY_PURITY && AbilityIsActive())
 
                 // It's redundant, because at this point we know the status1 value is 0.
                 gBattleMons[gEffectBattler].status1 &= ~STATUS1_TOXIC_POISON;
@@ -9871,8 +9874,9 @@ static void Cmd_switchoutabilities(void)
                                      &gBattleMons[gActiveBattler].hp);
         MarkBattlerForControllerExec(gActiveBattler);
         break;
-	case ABILITY_FORECAST:
-		RecalcBattlerStats(gActiveBattler, gOriginalSpecies[gActiveBattler]);
+	default:
+		if (gTransformedSpecies[gActiveBattler])
+			RecalcBattlerStats(gActiveBattler, gOriginalSpecies[gActiveBattler]);
 		break;
     }
 
