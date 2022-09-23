@@ -4630,6 +4630,56 @@
       "secondary_tileset": "gTileset_Petalburg",
       "border_filepath": "data/layouts/DreamyAbyss/border.bin",
       "blockdata_filepath": "data/layouts/DreamyAbyss/map.bin"
+    },
+    {
+      "id": "LAYOUT_DROPPER_POINT",
+      "name": "DropperPoint_Layout",
+      "width": 30,
+      "height": 20,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Slateport",
+      "border_filepath": "data/layouts/DropperPoint/border.bin",
+      "blockdata_filepath": "data/layouts/DropperPoint/map.bin"
+    },
+    {
+      "id": "LAYOUT_FIRST_TRAIL",
+      "name": "FirstTrail_Layout",
+      "width": 36,
+      "height": 24,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Slateport",
+      "border_filepath": "data/layouts/FirstTrail/border.bin",
+      "blockdata_filepath": "data/layouts/FirstTrail/map.bin"
+    },
+    {
+      "id": "LAYOUT_CRAN_TOWN",
+      "name": "CranTown_Layout",
+      "width": 20,
+      "height": 28,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Petalburg",
+      "border_filepath": "data/layouts/CranTown/border.bin",
+      "blockdata_filepath": "data/layouts/CranTown/map.bin"
+    },
+    {
+      "id": "LAYOUT_CRAN_CLEARING",
+      "name": "CranClearing_Layout",
+      "width": 32,
+      "height": 32,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Rustboro",
+      "border_filepath": "data/layouts/CranClearing/border.bin",
+      "blockdata_filepath": "data/layouts/CranClearing/map.bin"
+    },
+    {
+      "id": "LAYOUT_STONEFACE_WAY",
+      "name": "StonefaceWay_Layout",
+      "width": 32,
+      "height": 36,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_SeaRoute",
+      "border_filepath": "data/layouts/StonefaceWay/border.bin",
+      "blockdata_filepath": "data/layouts/StonefaceWay/map.bin"
     }
   ]
 }

@@ -272,6 +272,7 @@ static void (*const sMovementTypeCallbacks[])(struct Sprite *) =
     [MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_UP] = MovementType_WalkSlowlyInPlace,
     [MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_LEFT] = MovementType_WalkSlowlyInPlace,
     [MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_RIGHT] = MovementType_WalkSlowlyInPlace,
+	[MOVEMENT_TYPE_SPIN_CLOCKWISE_DELAY] = MovementType_SpinClockwiseDelay,
 };
 
 static const bool8 sMovementTypeHasRange[NUM_MOVEMENT_TYPES] = {
@@ -400,6 +401,7 @@ const u8 gInitialMovementTypeFacingDirections[] = {
     [MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_UP] = DIR_NORTH,
     [MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_LEFT] = DIR_WEST,
     [MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_RIGHT] = DIR_EAST,
+	[MOVEMENT_TYPE_SPIN_CLOCKWISE_DELAY] = DIR_WEST,
 };
 
 #define OBJ_EVENT_PAL_TAG_BRENDAN                 0x1100
@@ -3731,6 +3733,49 @@ bool8 MovementType_RotateClockwise_Step3(struct ObjectEvent *objectEvent, struct
     return TRUE;
 }
 
+movement_type_def(MovementType_SpinClockwiseDelay, gMovementTypeFuncs_SpinClockwiseDelay)
+
+bool8 MovementType_SpinClockwiseDelay_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+{
+    ClearObjectEventMovement(objectEvent, sprite);
+    ObjectEventSetSingleMovement(objectEvent, sprite, GetFaceDirectionMovementAction(objectEvent->facingDirection));
+    sprite->sTypeFuncId = 1;
+    return TRUE;
+}
+
+bool8 MovementType_SpinClockwiseDelay_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+{
+    if (ObjectEventExecSingleMovementAction(objectEvent, sprite))
+    {
+		if (objectEvent->facingDirection == DIR_NORTH)
+			SetMovementDelay(sprite, 120);
+		else
+			SetMovementDelay(sprite, 12);
+        sprite->sTypeFuncId = 2;
+    }
+    return FALSE;
+}
+
+bool8 MovementType_SpinClockwiseDelay_Step2(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+{
+    if (WaitForMovementDelay(sprite) || ObjectEventIsTrainerAndCloseToPlayer(objectEvent))
+        sprite->sTypeFuncId = 3;
+    return FALSE;
+}
+
+bool8 MovementType_SpinClockwiseDelay_Step3(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+{
+    u8 direction;
+    u8 directions[5];
+    memcpy(directions, gClockwiseDirections, sizeof gClockwiseDirections);
+    direction = TryGetTrainerEncounterDirection(objectEvent, RUNFOLLOW_ANY);
+    if (direction == DIR_NONE)
+        direction = directions[objectEvent->facingDirection];
+    SetObjectEventDirection(objectEvent, direction);
+    sprite->sTypeFuncId = 0;
+    return TRUE;
+}
+
 movement_type_def(MovementType_WalkBackAndForth, gMovementTypeFuncs_WalkBackAndForth)
 
 bool8 MovementType_WalkBackAndForth_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
@@ -4701,7 +4746,8 @@ static bool8 DoesObjectCollideWithObjectAt(struct ObjectEvent *objectEvent, s16 
         curObject = &gObjectEvents[i];
         if (curObject->active && curObject != objectEvent)
         {
-            if ((curObject->currentCoords.x == x && curObject->currentCoords.y == y) || (curObject->previousCoords.x == x && curObject->previousCoords.y == y))
+            if (((curObject->currentCoords.x == x && curObject->currentCoords.y == y) || (curObject->previousCoords.x == x && curObject->previousCoords.y == y))
+				 && gObjectEvents[i].graphicsId != OBJ_EVENT_GFX_STAR_PIECE)
             {
                 if (AreElevationsCompatible(objectEvent->currentElevation, curObject->currentElevation))
                     return TRUE;

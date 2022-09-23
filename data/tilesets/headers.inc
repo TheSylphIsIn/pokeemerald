@@ -841,3 +841,14 @@ gTileset_Soul_Rooms::
 	.4byte gMetatiles_Soul_Rooms
 	.4byte gMetatileAttributes_Soul_Rooms
 	.4byte NULL
+
+	.align 2
+gTileset_SeaRoute::
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0
+	.4byte gTilesetTiles_SeaRoute
+	.4byte gTilesetPalettes_SeaRoute
+	.4byte gMetatiles_SeaRoute
+	.4byte gMetatileAttributes_SeaRoute
+	.4byte NULL

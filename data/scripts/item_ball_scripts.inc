@@ -1,3 +1,7 @@
+Common_StarPiece::
+	finditem ITEM_STAR_PIECE
+	end
+
 Route102_EventScript_ItemPotion::
 	finditem ITEM_POTION
 	end

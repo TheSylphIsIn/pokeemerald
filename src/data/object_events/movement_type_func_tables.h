@@ -182,6 +182,13 @@ u8 (*const gMovementTypeFuncs_RotateClockwise[])(struct ObjectEvent *, struct Sp
     MovementType_RotateClockwise_Step3,
 };
 
+u8 (*const gMovementTypeFuncs_SpinClockwiseDelay[])(struct ObjectEvent *, struct Sprite *) = {
+    MovementType_SpinClockwiseDelay_Step0,
+    MovementType_SpinClockwiseDelay_Step1,
+    MovementType_SpinClockwiseDelay_Step2,
+    MovementType_SpinClockwiseDelay_Step3,
+};
+
 const u8 gClockwiseDirections[] = {DIR_SOUTH, DIR_WEST, DIR_EAST, DIR_NORTH, DIR_SOUTH};
 
 u8 (*const gMovementTypeFuncs_WalkBackAndForth[])(struct ObjectEvent *, struct Sprite *) = {

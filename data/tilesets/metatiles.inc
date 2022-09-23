@@ -565,3 +565,10 @@ gMetatiles_Soul_Rooms::
 	.align 1
 gMetatileAttributes_Soul_Rooms::
 	.incbin "data/tilesets/secondary/soul_rooms/metatile_attributes.bin"
+	.align 1
+gMetatiles_SeaRoute::
+	.incbin "data/tilesets/secondary/searoute/metatiles.bin"
+
+	.align 1
+gMetatileAttributes_SeaRoute::
+	.incbin "data/tilesets/secondary/searoute/metatile_attributes.bin"

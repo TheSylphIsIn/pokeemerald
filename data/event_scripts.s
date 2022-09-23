@@ -1099,3 +1099,13 @@ Common_EventScript_LegendaryFlewAway::
 	.include "data/maps/UnknownIsland/scripts.inc"
 
 	.include "data/maps/DreamyAbyss/scripts.inc"
+
+	.include "data/maps/DropperPoint/scripts.inc"
+
+	.include "data/maps/FirstTrail/scripts.inc"
+
+	.include "data/maps/CranTown/scripts.inc"
+
+	.include "data/maps/CranClearing/scripts.inc"
+
+	.include "data/maps/StonefaceWay/scripts.inc"

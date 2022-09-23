@@ -64,10 +64,7 @@
 #define MAP_UNDERWATER_ROUTE105 (55 | (0 << 8))
 #define MAP_UNDERWATER_ROUTE125 (56 | (0 << 8))
 #define MAP_LOVERS_PARK         (57 | (0 << 8))
-#define MAP_SHADED_PASS         (58 | (0 << 8))
-#define MAP_NEW_MAP1            (59 | (0 << 8))
-#define MAP_DEWFORD_WILDS       (60 | (0 << 8))
-#define MAP_NEW_MAP2            (61 | (0 << 8))
+#define MAP_DEWFORD_WILDS       (58 | (0 << 8))
 
 // gMapGroup_IndoorLittleroot
 #define MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F    (0 | (1 << 8))
@@ -613,6 +610,18 @@
 // gMapGroup_IndoorRoute124
 #define MAP_ROUTE124_DIVING_TREASURE_HUNTERS_HOUSE (0 | (33 << 8))
 
-#define MAP_GROUPS_COUNT 34
+// gMapGroup_TestingGroup
+#define MAP_NEW_MAP1 (0 | (34 << 8))
+#define MAP_NEW_MAP2 (1 | (34 << 8))
+
+// gMapGroup_FoneiOverworld
+#define MAP_SHADED_PASS   (0 | (35 << 8))
+#define MAP_DROPPER_POINT (1 | (35 << 8))
+#define MAP_FIRST_TRAIL   (2 | (35 << 8))
+#define MAP_CRAN_TOWN     (3 | (35 << 8))
+#define MAP_CRAN_CLEARING (4 | (35 << 8))
+#define MAP_STONEFACE_WAY (5 | (35 << 8))
+
+#define MAP_GROUPS_COUNT 36
 
 #endif // GUARD_CONSTANTS_MAP_GROUPS_H

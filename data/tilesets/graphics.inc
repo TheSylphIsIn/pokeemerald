@@ -1749,3 +1749,23 @@ gTilesetPalettes_Soul_Rooms::
 	.align 2
 gTilesetTiles_Soul_Rooms::
 	.incbin "data/tilesets/secondary/soul_rooms/tiles.4bpp.lz"
+
+	.align 2
+gTilesetPalettes_SeaRoute::
+	.incbin "data/tilesets/secondary/searoute/palettes/00.gbapal"
+	.incbin "data/tilesets/secondary/searoute/palettes/01.gbapal"
+	.incbin "data/tilesets/secondary/searoute/palettes/02.gbapal"
+	.incbin "data/tilesets/secondary/searoute/palettes/03.gbapal"
+	.incbin "data/tilesets/secondary/searoute/palettes/04.gbapal"
+	.incbin "data/tilesets/secondary/searoute/palettes/05.gbapal"
+	.incbin "data/tilesets/secondary/searoute/palettes/06.gbapal"
+	.incbin "data/tilesets/secondary/searoute/palettes/07.gbapal"
+	.incbin "data/tilesets/secondary/searoute/palettes/08.gbapal"
+	.incbin "data/tilesets/secondary/searoute/palettes/09.gbapal"
+	.incbin "data/tilesets/secondary/searoute/palettes/10.gbapal"
+	.incbin "data/tilesets/secondary/searoute/palettes/11.gbapal"
+	.incbin "data/tilesets/secondary/searoute/palettes/12.gbapal"
+
+	.align 2
+gTilesetTiles_SeaRoute::
+	.incbin "data/tilesets/secondary/searoute/tiles.4bpp.lz"
