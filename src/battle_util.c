@@ -2448,15 +2448,15 @@ u8 TryFormChange(u8 battler, u16 move)
 				}
 			}
 			break;
-		case SPECIES_BULBASAUR:
+		case SPECIES_BULBASAUR: // should be runicast-a
 			if (gBattleMoves[move].power && gBattleMons[battler].ability == ABILITY_SPELL_SWAP)
 			{
 				gTransformedSpecies[battler] = SPECIES_CATERPIE;
 				StringCopy(gBattleTextBuff1, gText_EvocationForm);
 			}
 			break;
-		case SPECIES_CATERPIE:
-			if (move == MOVE_PROTECT && gBattleMons[battler].ability == ABILITY_SPELL_SWAP)
+		case SPECIES_CATERPIE: // should be runicast-e
+			if (move == MOVE_PROTECT && gBattleMons[battler].ability == ABILITY_SPELL_SWAP) // should be rune shield
 			{
 				gTransformedSpecies[battler] = SPECIES_BULBASAUR;
 				StringCopy(gBattleTextBuff1, gText_AbjurationForm);
@@ -2477,6 +2477,10 @@ u8 TryFormChange(u8 battler, u16 move)
 				gTransformedSpecies[battler] = SPECIES_MINIOR_METEOR;
 				StringCopy(gBattleTextBuff1, gText_MeteorForm);
 			}
+			break;
+		case SPECIES_SPHEAL: // should be spookum
+			gTransformedSpecies[battler] = SPECIES_MACHOP;
+			StringCopy(gBattleTextBuff1, gText_BustedForm);
 			break;
 		default:
 			break;
@@ -3097,6 +3101,21 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     effect++;
                 }
                 break;
+			case ABILITY_DISGUISE:
+				if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
+                 && gBattleMoves[move].power != 0
+                 && TARGET_TURN_DAMAGED
+                 && gBattleMons[battler].hp != 0
+				 && !(gBattleMons[battler].status2 & STATUS2_SUBSTITUTE))
+				 {
+					effect = TryFormChange(battler, 0);
+					if (effect)
+					{
+						BattleScriptPushCursorAndCallback(BattleScript_CastformChange);
+						gBattleScripting.battler = battler;
+					}
+				 }
+					break;
             case ABILITY_ROUGH_SKIN:
                 if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
                  && gBattleMons[gBattlerAttacker].hp != 0

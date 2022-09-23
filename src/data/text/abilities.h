@@ -144,6 +144,7 @@ static const u8 sShieldsDownDescription[] = _("Shield breaks at low HP.");
 static const u8 sShieldsUpDescription[] = _("Shield heals at high HP.");
 static const u8 sPurityDescription[] = _("Repels POISON.");
 static const u8 sAnalyticDescription[] = _("Power up if moving last.");
+static const u8 sDisguiseDescription[] = _("Blocks one attack.");
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
 {
@@ -294,6 +295,7 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
 	[ABILITY_SHIELDS_UP] = _("SHIELDS DOWN"), // displays as "shields up", the state it's in. Core has its shields down.
 	[ABILITY_PURITY] = _("PURITY"),
 	[ABILITY_ANALYTIC] = _("ANALYTIC"),
+	[ABILITY_DISGUISE] = _("DISGUISE"),
 };
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
@@ -445,4 +447,5 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 	[ABILITY_SHIELDS_UP] = sShieldsUpDescription,
 	[ABILITY_PURITY] = sPurityDescription,
 	[ABILITY_ANALYTIC] = sAnalyticDescription,
+	[ABILITY_DISGUISE] = sDisguiseDescription,
 };

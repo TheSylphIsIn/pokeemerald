@@ -3228,6 +3228,12 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         defenderHoldEffectParam = ItemId_GetHoldEffectParam(defender->item);
     }
 
+	if (defender->ability == ABILITY_DISGUISE && defender->species == SPECIES_SPHEAL) // should be spookum
+		{
+			damage = (defender->maxHP / 8);
+			return damage;
+		}
+
     if (attacker->ability == ABILITY_HUGE_POWER || attacker->ability == ABILITY_PURE_POWER)
         attack *= 2;
 	if (attacker->ability == ABILITY_BRAIN_POWER)

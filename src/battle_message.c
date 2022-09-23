@@ -523,6 +523,7 @@ const u8 gText_MeteorForm[] = _("METEOR");
 const u8 gText_CoreForm[] = _("CORE");
 const u8 gText_EvocationForm[] = _("EVOCATION");
 const u8 gText_AbjurationForm[] = _("ABJURATION");
+const u8 gText_BustedForm[] = _("BUSTED");
 const u8 gText_EmptyString3[] = _("");
 static const u8 sText_YouThrowABallNowRight[] = _("You throw a BALL now, right?\nI… I'll do my best!");
 
