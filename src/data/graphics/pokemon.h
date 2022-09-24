@@ -2792,6 +2792,19 @@ const u32 gMonShinyPalette_MiniorCore[] = INCBIN_U32("graphics/pokemon/minior/co
 const u32 gMonStillFrontPic_MiniorCore[] = INCBIN_U32("graphics/pokemon/minior/core/front.4bpp.lz");
 const u8 gMonIcon_MiniorCore[] = INCBIN_U8("graphics/pokemon/minior/core/icon.4bpp");
 
+const u32 gMonPalette_Spookum[] = INCBIN_U32("graphics/pokemon/spookum/normal.gbapal.lz");
+const u32 gMonBackPic_Spookum[] = INCBIN_U32("graphics/pokemon/spookum/back.4bpp.lz");
+const u32 gMonShinyPalette_Spookum[] = INCBIN_U32("graphics/pokemon/spookum/shiny.gbapal.lz");
+const u32 gMonStillFrontPic_Spookum[] = INCBIN_U32("graphics/pokemon/spookum/front.4bpp.lz");
+const u8 gMonIcon_Spookum[] = INCBIN_U8("graphics/pokemon/spookum/icon.4bpp");
+const u8 gMonFootprint_Spookum[] = INCBIN_U8("graphics/pokemon/spookum/footprint.1bpp");
+
+const u32 gMonPalette_SpookumBusted[] = INCBIN_U32("graphics/pokemon/spookum/busted/normal.gbapal.lz");
+const u32 gMonBackPic_SpookumBusted[] = INCBIN_U32("graphics/pokemon/spookum/busted/back.4bpp.lz");
+const u32 gMonShinyPalette_SpookumBusted[] = INCBIN_U32("graphics/pokemon/spookum/busted/shiny.gbapal.lz");
+const u32 gMonStillFrontPic_SpookumBusted[] = INCBIN_U32("graphics/pokemon/spookum/busted/front.4bpp.lz");
+const u8 gMonIcon_SpookumBusted[] = INCBIN_U8("graphics/pokemon/spookum/busted/icon.4bpp");
+
 // const u32 gMonPalette_[] = INCBIN_U32("graphics/pokemon//normal.gbapal.lz");
 // const u32 gMonBackPic_[] = INCBIN_U32("graphics/pokemon//back.4bpp.lz");
 // const u32 gMonShinyPalette_[] = INCBIN_U32("graphics/pokemon//shiny.gbapal.lz");

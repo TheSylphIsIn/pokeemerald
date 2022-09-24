@@ -404,6 +404,8 @@ const u32 gMonFrontPic_Obsicargo[] = INCBIN_U32("graphics/pokemon/obsicargo/anim
 const u32 gMonFrontPic_Norwhale[] = INCBIN_U32("graphics/pokemon/norwhale/anim_front.4bpp.lz");
 const u32 gMonFrontPic_Minior[] = INCBIN_U32("graphics/pokemon/minior/anim_front.4bpp.lz");
 const u32 gMonFrontPic_MiniorCore[] = INCBIN_U32("graphics/pokemon/minior/core/anim_front.4bpp.lz");
+const u32 gMonFrontPic_Spookum[] = INCBIN_U32("graphics/pokemon/spookum/anim_front.4bpp.lz");
+const u32 gMonFrontPic_SpookumBusted[] = INCBIN_U32("graphics/pokemon/spookum/busted/anim_front.4bpp.lz");
 // const u32 gMonFrontPic_[] = INCBIN_U32("graphics/pokemon//anim_front.4bpp.lz");
 
 const u32 gMonFrontPic_Egg[] = INCBIN_U32("graphics/pokemon/egg/anim_front.4bpp.lz");

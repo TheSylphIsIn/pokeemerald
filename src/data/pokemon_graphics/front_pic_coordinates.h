@@ -2124,6 +2124,16 @@ const struct MonCoords gMonFrontPicCoords[] =
         .size = MON_COORDS_SIZE(24, 32),
         .y_offset = 17,
     },
+	[SPECIES_SPOOKUM] =
+    {
+        .size = MON_COORDS_SIZE(40, 48),
+        .y_offset = 14,
+    },
+	[SPECIES_SPOOKUM_BUSTED] =
+    {
+        .size = MON_COORDS_SIZE(40, 48),
+        .y_offset = 14,
+    },
     [SPECIES_EGG] =
     {
         .size = MON_COORDS_SIZE(24, 24),

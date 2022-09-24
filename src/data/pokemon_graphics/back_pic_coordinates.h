@@ -2124,6 +2124,16 @@ const struct MonCoords gMonBackPicCoords[] =
         .size = MON_COORDS_SIZE(32, 40),
         .y_offset = 13,
     },
+	[SPECIES_SPOOKUM] =
+    {
+        .size = MON_COORDS_SIZE(56, 56),
+        .y_offset = 6,
+    },
+	[SPECIES_SPOOKUM_BUSTED] =
+    {
+        .size = MON_COORDS_SIZE(56, 56),
+        .y_offset = 6,
+    },
     [SPECIES_EGG] =
     {
         .size = MON_COORDS_SIZE(24, 48),

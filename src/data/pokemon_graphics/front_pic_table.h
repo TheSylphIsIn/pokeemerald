@@ -424,6 +424,8 @@ const struct CompressedSpriteSheet gMonFrontPicTable[] =
 	SPECIES_SPRITE(CASTFORM_SNOWY, gMonFrontPic_CastformSnowy),
 	SPECIES_SPRITE(MINIOR_METEOR, gMonFrontPic_Minior),
 	SPECIES_SPRITE(MINIOR_CORE, gMonFrontPic_MiniorCore),
+	SPECIES_SPRITE(SPOOKUM, gMonFrontPic_Spookum),
+	SPECIES_SPRITE(SPOOKUM_BUSTED, gMonFrontPic_SpookumBusted),
 	// SPECIES_SPRITE(, gMonFrontPic_),
     SPECIES_SPRITE(EGG, gMonFrontPic_Egg),
     SPECIES_SPRITE(UNOWN_B, gMonFrontPic_UnownB),

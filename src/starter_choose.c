@@ -119,7 +119,7 @@ static const u16 sStarterMon0[STARTER_MON_COUNT] =
 {
     SPECIES_MINIOR_METEOR,
     SPECIES_CASTFORM,
-    SPECIES_SPHEAL,
+    SPECIES_SPOOKUM,
 };
 
 static const u16 sStarterMon1[STARTER_MON_COUNT] =

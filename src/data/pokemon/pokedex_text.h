@@ -2367,3 +2367,9 @@ const u8 gMiniorPokedexText[] = _(
 	"atmosphere and the surface. Its many-\n"
 	"-colored core is easy to spot, so it\n"
 	"covers itself in dust and rock to hide.");
+	
+const u8 gSpookumPokedexText[] = _(
+	"It sustains itself off of the fear\n"
+	"of others. It has two scaring methods:\n"
+	"Jumping out to make people scream, or\n"
+	"speaking to them in their own voice.");

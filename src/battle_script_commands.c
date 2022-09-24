@@ -9875,7 +9875,7 @@ static void Cmd_switchoutabilities(void)
         MarkBattlerForControllerExec(gActiveBattler);
         break;
 	default:
-		if (gTransformedSpecies[gActiveBattler])
+		if (gTransformedSpecies[gActiveBattler] && gBattleMons[gActiveBattler].species != SPECIES_SPOOKUM_BUSTED)
 			RecalcBattlerStats(gActiveBattler, gOriginalSpecies[gActiveBattler]);
 		break;
     }

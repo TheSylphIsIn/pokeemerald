@@ -4732,11 +4732,23 @@ const struct PokedexEntry gPokedexEntries[] =
 	{
 		.categoryName = _("METEOR"),
         .height = 3,
-        .weight = 40,
+        .weight = 400,
         .description = gMiniorPokedexText,
         .pokemonScale = 288,
         .pokemonOffset = -9,
         .trainerScale = 256,
         .trainerOffset = 0,
-	}
+	},
+	
+	[NATIONAL_DEX_SPOOKUM] = 
+	{
+		.categoryName = _("SCREAMER"),
+		.height = 5,
+		.weight = 45,
+		.description = gSpookumPokedexText,
+		.pokemonScale = 288,
+        .pokemonOffset = -9,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+	},
 };

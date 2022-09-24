@@ -1971,6 +1971,10 @@ Cry_Minior::
 	.incbin "sound/direct_sound_samples/cries/minior.bin"
 	.align 2
 
+Cry_Spookum::
+	.incbin "sound/direct_sound_samples/cries/shuppet.bin"
+	.align 2
+
 DirectSoundWaveData_register_noise::
 	.incbin "sound/direct_sound_samples/register_noise.bin"
 

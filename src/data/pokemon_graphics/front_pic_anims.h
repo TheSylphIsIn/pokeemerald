@@ -4671,6 +4671,31 @@ static const union AnimCmd sAnim_MINIOR_CORE_1[] =
 	ANIMCMD_END
 };
 
+static const union AnimCmd sAnim_SPOOKUM_1[] =
+{
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_FRAME(1, 15),
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_FRAME(1, 15),
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_FRAME(1, 15),
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_SPOOKUM_BUSTED_1[] =
+{
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_FRAME(1, 15),
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_FRAME(1, 15),
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_FRAME(1, 15),
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_END,
+};
+
+
 // static const union AnimCmd sAnim__1[] = 
 // {
 	// ANIMCMD_END
@@ -6946,6 +6971,16 @@ static const union AnimCmd *const sAnims_MINIOR_CORE[] ={
 	sAnim_MINIOR_CORE_1,
 };
 
+static const union AnimCmd *const sAnims_SPOOKUM[] ={
+    sAnim_GeneralFrame0,
+    sAnim_SPOOKUM_1,
+};
+
+static const union AnimCmd *const sAnims_SPOOKUM_BUSTED[] ={
+    sAnim_GeneralFrame0,
+    sAnim_SPOOKUM_BUSTED_1,
+};
+
 // static const union AnimCmd *const sAnims_[] ={
 	// sAnim_GeneralFrame0,
 	// sAnim__1,
@@ -7517,6 +7552,8 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[] =
 	ANIM_CMD(NORWHALE),
 	ANIM_CMD(MINIOR_METEOR),
 	ANIM_CMD(MINIOR_CORE),
+	ANIM_CMD(SPOOKUM),
+	ANIM_CMD(SPOOKUM_BUSTED),
 	[SPECIES_CASTFORM_SUNNY] = sAnims_CASTFORM,
 	[SPECIES_CASTFORM_RAINY] = sAnims_CASTFORM,
 	[SPECIES_CASTFORM_SNOWY] = sAnims_CASTFORM,

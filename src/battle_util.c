@@ -2478,8 +2478,8 @@ u8 TryFormChange(u8 battler, u16 move)
 				StringCopy(gBattleTextBuff1, gText_MeteorForm);
 			}
 			break;
-		case SPECIES_SPHEAL: // should be spookum
-			gTransformedSpecies[battler] = SPECIES_MACHOP;
+		case SPECIES_SPOOKUM:
+			gTransformedSpecies[battler] = SPECIES_SPOOKUM_BUSTED;
 			StringCopy(gBattleTextBuff1, gText_BustedForm);
 			break;
 		default:

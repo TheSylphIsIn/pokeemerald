@@ -514,6 +514,7 @@ static const u16 sSpeciesToHoennPokedexNum[NUM_SPECIES - 1] =
 	SPECIES_TO_HOENN(WYCERN),
 	SPECIES_TO_HOENN(BITTERAGON),
 	SPECIES_TO_HOENN(MINIOR_METEOR),
+	SPECIES_TO_HOENN(SPOOKUM),
 };
 
 // Assigns all species to the National Dex Index (Summary No. for National Dex)
@@ -935,11 +936,13 @@ static const u16 sSpeciesToNationalPokedexNum[NUM_SPECIES - 1] =
 	SPECIES_TO_NATIONAL(WYCERN),
 	SPECIES_TO_NATIONAL(BITTERAGON),
 	SPECIES_TO_NATIONAL(MINIOR_METEOR),
+	SPECIES_TO_NATIONAL(SPOOKUM),
 	
 	[SPECIES_MINIOR_CORE - 1] = NATIONAL_DEX_MINIOR_METEOR,
 	[SPECIES_CASTFORM_SUNNY - 1] = NATIONAL_DEX_CASTFORM,
 	[SPECIES_CASTFORM_RAINY - 1] = NATIONAL_DEX_CASTFORM,
 	[SPECIES_CASTFORM_SNOWY - 1] = NATIONAL_DEX_CASTFORM,
+	[SPECIES_SPOOKUM_BUSTED - 1] = NATIONAL_DEX_SPOOKUM,
 };
 
 // Assigns all Hoenn Dex Indexes to a National Dex Index
@@ -1336,6 +1339,7 @@ static const u16 sHoennToNationalOrder[NUM_SPECIES - 1] =
 	HOENN_TO_NATIONAL(WYCERN),
 	HOENN_TO_NATIONAL(BITTERAGON),
 	HOENN_TO_NATIONAL(MINIOR_METEOR),
+	HOENN_TO_NATIONAL(SPOOKUM),
     HOENN_TO_NATIONAL(OLD_UNOWN_B),
     HOENN_TO_NATIONAL(OLD_UNOWN_C),
     HOENN_TO_NATIONAL(OLD_UNOWN_D),
@@ -1808,6 +1812,8 @@ static const u8 sMonFrontAnimIdsTable[NUM_SPECIES - 1] =
 	[SPECIES_BITTERAGON - 1] = ANIM_H_SHAKE,
 	[SPECIES_MINIOR_METEOR - 1] = ANIM_SPIN,
 	[SPECIES_MINIOR_CORE - 1] = ANIM_TUMBLING_FRONT_FLIP_TWICE,
+	[SPECIES_SPOOKUM - 1] = ANIM_V_SLIDE_WOBBLE,
+	[SPECIES_SPOOKUM_BUSTED - 1] = ANIM_H_SHAKE,
 	[SPECIES_CASTFORM_SUNNY - 1]    = ANIM_H_SLIDE_WOBBLE,
 	[SPECIES_CASTFORM_RAINY - 1]    = ANIM_H_SLIDE_WOBBLE,
 	[SPECIES_CASTFORM_SNOWY - 1]    = ANIM_H_SLIDE_WOBBLE,
@@ -3228,7 +3234,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         defenderHoldEffectParam = ItemId_GetHoldEffectParam(defender->item);
     }
 
-	if (defender->ability == ABILITY_DISGUISE && defender->species == SPECIES_SPHEAL) // should be spookum
+	if (defender->ability == ABILITY_DISGUISE && defender->species == SPECIES_SPOOKUM)
 		{
 			damage = (defender->maxHP / 8);
 			return damage;

@@ -396,6 +396,7 @@ gCryTable::
 	cry Cry_Obsicargo
 	cry Cry_Norwhale
 	cry Cry_Minior
+	cry Cry_Spookum
 	.align 2
 gCryTable_Reverse::
 	cry_reverse Cry_Bulbasaur
@@ -794,3 +795,4 @@ gCryTable_Reverse::
 	cry_reverse Cry_Obsicargo
 	cry_reverse Cry_Norwhale
 	cry_reverse Cry_Minior
+	cry_reverse Cry_Spookum

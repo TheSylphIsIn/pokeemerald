@@ -1997,6 +1997,11 @@ static const u8 sMiniorTMHMLearnset[] =
 	TMHM_LEARNSET_END,
 };
 
+static const u8 sSpookumTMHMLearnset[] = 
+{
+	TMHM_LEARNSET_END
+};
+
 const u8 *const gTMHMLearnsets[] =
 {
     [SPECIES_NONE] = sNoneTMHMLearnset,
@@ -2419,5 +2424,7 @@ const u8 *const gTMHMLearnsets[] =
 	[SPECIES_OBSICARGO] = sObsicargoTMHMLearnset,
 	[SPECIES_NORWHALE] = sNorwhaleTMHMLearnset,
 	[SPECIES_MINIOR_METEOR] = sMiniorTMHMLearnset,
-	[SPECIES_MINIOR_CORE] = sMiniorTMHMLearnset
+	[SPECIES_MINIOR_CORE] = sMiniorTMHMLearnset,
+	[SPECIES_SPOOKUM] = sSpookumTMHMLearnset,
+	[SPECIES_SPOOKUM_BUSTED] = sSpookumTMHMLearnset
 };
