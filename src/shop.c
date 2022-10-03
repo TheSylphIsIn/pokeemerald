@@ -616,10 +616,10 @@ static void BuyMenuPrintPriceInList(u8 windowId, u32 item, u8 y, u8 itemPos)
             {
                 ConvertIntToDecimalStringN(
                     gStringVar1,
-                    ItemId_GetPrice(item) >> IsPokeNewsActive(POKENEWS_SLATEPORT),
+                    ItemId_GetSecondaryId(item),
                     STR_CONV_MODE_LEFT_ALIGN,
                     5);
-                StringExpandPlaceholders(gStringVar4, gText_PokedollarVar1);
+                StringExpandPlaceholders(gStringVar4, gText_StrVar1);
             }
         }
         else
@@ -988,16 +988,21 @@ static void Task_BuyMenu(u8 taskId)
             BuyMenuRemoveScrollIndicatorArrows();
             BuyMenuPrintCursor(tListTaskId, 2);
 
-            if (sMartInfo.martType == MART_TYPE_NORMAL || sMartInfo.martType == MART_TYPE_TM)
+            if (sMartInfo.martType == MART_TYPE_NORMAL)
             {
                 sShopData->totalCost = (ItemId_GetPrice(itemId) >> IsPokeNewsActive(POKENEWS_SLATEPORT));
             }
+			else if (sMartInfo.martType == MART_TYPE_TM)
+			{ // TM shops have price in Star Pieces. The Star Piece price is stored in secondary ID.
+				sShopData->totalCost = ItemId_GetSecondaryId(itemId);
+			}
             else
             {
                 sShopData->totalCost = gDecorations[itemId].price;
             }
 
-            if (!IsEnoughMoney(&gSaveBlock1Ptr->money, sShopData->totalCost))
+            if (!IsEnoughMoney(&gSaveBlock1Ptr->money, sShopData->totalCost) || 
+				(sMartInfo.martType == MART_TYPE_TM && !CheckBagHasItem(ITEM_STAR_PIECE, sShopData->totalCost)))
             {
                 BuyMenuDisplayMessage(taskId, gText_YouDontHaveMoney, BuyMenuReturnToItemList);
             }
@@ -1178,10 +1183,21 @@ static void BuyMenuTryMakePurchase(u8 taskId)
 
 static void BuyMenuSubtractMoney(u8 taskId)
 {
-    IncrementGameStat(GAME_STAT_SHOPPED);
-    RemoveMoney(&gSaveBlock1Ptr->money, sShopData->totalCost);
-    PlaySE(SE_SHOP);
-    PrintMoneyAmountInMoneyBox(0, GetMoney(&gSaveBlock1Ptr->money), 0);
+    if (sMartInfo.martType == MART_TYPE_TM)
+	{
+		IncrementGameStat(GAME_STAT_STAR_PIECE_SHOPPED);
+		RemoveBagItem(ITEM_STAR_PIECE, sShopData->totalCost);
+		PlaySE(SE_SHOP);
+		PrintMoneyAmountInMoneyBox(0, GetMoney(&gSaveBlock1Ptr->money), 0);
+	}
+	else
+	{
+		IncrementGameStat(GAME_STAT_SHOPPED);
+		RemoveMoney(&gSaveBlock1Ptr->money, sShopData->totalCost);
+		PlaySE(SE_SHOP);
+		PrintMoneyAmountInMoneyBox(0, GetMoney(&gSaveBlock1Ptr->money), 0);
+    }
+
 
     if (sMartInfo.martType == MART_TYPE_NORMAL)
     {

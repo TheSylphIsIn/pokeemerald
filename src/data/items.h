@@ -183,6 +183,7 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_Medicine,
         .battleUsage = ITEM_B_USE_MEDICINE,
         .battleUseFunc = ItemUseInBattle_Medicine,
+		.secondaryId = 1,
     },
 
     [ITEM_ANTIDOTE] =
@@ -196,6 +197,7 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_Medicine,
         .battleUsage = ITEM_B_USE_MEDICINE,
         .battleUseFunc = ItemUseInBattle_Medicine,
+		.secondaryId = 2,
     },
 
     [ITEM_BURN_HEAL] =
@@ -248,6 +250,7 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_Medicine,
         .battleUsage = ITEM_B_USE_MEDICINE,
         .battleUseFunc = ItemUseInBattle_Medicine,
+		.secondaryId = 5,
     },
 
     [ITEM_FULL_RESTORE] =
@@ -1344,9 +1347,10 @@ const struct Item gItems[] =
         .itemId = ITEM_STAR_PIECE,
         .price = 9800,
         .description = sStarPieceDesc,
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+		.importance = 3,
     },
 
     [ITEM_NUGGET] =
