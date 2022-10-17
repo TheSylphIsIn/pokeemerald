@@ -2448,17 +2448,17 @@ u8 TryFormChange(u8 battler, u16 move)
 				}
 			}
 			break;
-		case SPECIES_BULBASAUR: // should be runicast-a
+		case SPECIES_AEGISLASH_FONEI_A: // should be runicast-a
 			if (gBattleMoves[move].power && gBattleMons[battler].ability == ABILITY_SPELL_SWAP)
 			{
-				gTransformedSpecies[battler] = SPECIES_CATERPIE;
+				gTransformedSpecies[battler] = SPECIES_AEGISLASH_FONEI_E;
 				StringCopy(gBattleTextBuff1, gText_EvocationForm);
 			}
 			break;
-		case SPECIES_CATERPIE: // should be runicast-e
+		case SPECIES_AEGISLASH_FONEI_E: // should be runicast-e
 			if (move == MOVE_PROTECT && gBattleMons[battler].ability == ABILITY_SPELL_SWAP) // should be rune shield
 			{
-				gTransformedSpecies[battler] = SPECIES_BULBASAUR;
+				gTransformedSpecies[battler] = SPECIES_AEGISLASH_FONEI_A;
 				StringCopy(gBattleTextBuff1, gText_AbjurationForm);
 			}
 			break;

@@ -5709,3 +5709,160 @@ static const u16 sSpookumLevelUpLearnset[] = {
 	LEVEL_UP_MOVE( 1, MOVE_UPROAR),
 	LEVEL_UP_END
 };
+
+static const u16 sGlasmaLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sPlasmolyteLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sStormageLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sSandudeLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sSandrossLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sSanduelLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sEladriftLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sSlithurentLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sPrescyllonLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sSloshmoshLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sSlurpinskiLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sKeeshLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sHatchblingLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sHummblingLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sKeesightLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sKeespellLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sLarvoolLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sSpoolerLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sBilliarachLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sSlugmaFoneiLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sMagcargoFoneiLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sSunforestLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sHonedgeFoneiLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sDoubladeFoneiLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sAegislashFoneiALevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sAegislashFoneiELevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sElemptyLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sVenearthLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sMarsizzleLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sJuplasmaLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sMerlpoolLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sOphicalfLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sSerpentaurLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sGeodudeFoneiLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sGravelerFoneiLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sGolemFoneiLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sSudowoodoFoneiLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sGritwyrmLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sMolduneLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+

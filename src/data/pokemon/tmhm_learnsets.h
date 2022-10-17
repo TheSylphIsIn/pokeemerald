@@ -2002,6 +2002,208 @@ static const u8 sSpookumTMHMLearnset[] =
 	TMHM_LEARNSET_END
 };
 
+static const u8 sGlasmaTMHMLearnset[] =
+{
+	TMHM_LEARNSET_END
+};
+
+static const u8 sPlasmolyteTMHMLearnset[] =
+{
+	TMHM_LEARNSET_END
+};
+
+static const u8 sStormageTMHMLearnset[] =
+{
+	TMHM_LEARNSET_END
+};
+
+static const u8 sSandudeTMHMLearnset[] =
+{
+	TMHM_LEARNSET_END
+};
+
+static const u8 sSandrossTMHMLearnset[] =
+{
+	TMHM_LEARNSET_END
+};
+
+static const u8 sSanduelTMHMLearnset[] =
+{
+	TMHM_LEARNSET_END
+};
+
+static const u8 sEladriftTMHMLearnset[] =
+{
+	TMHM_LEARNSET_END
+};
+
+static const u8 sSlithurentTMHMLearnset[] =
+{
+	TMHM_LEARNSET_END
+};
+
+static const u8 sPrescyllonTMHMLearnset[] =
+{
+	TMHM_LEARNSET_END
+};
+
+static const u8 sSloshmoshTMHMLearnset[] =
+{
+	TMHM_LEARNSET_END
+};
+
+static const u8 sSlurpinskiTMHMLearnset[] =
+{
+	TMHM_LEARNSET_END
+};
+
+static const u8 sKeeshTMHMLearnset[] =
+{
+	TMHM_LEARNSET_END
+};
+
+static const u8 sHatchblingTMHMLearnset[] =
+{
+	TMHM_LEARNSET_END
+};
+
+static const u8 sHummblingTMHMLearnset[] =
+{
+	TMHM_LEARNSET_END
+};
+
+static const u8 sKeesightTMHMLearnset[] =
+{
+	TMHM_LEARNSET_END
+};
+
+static const u8 sKeespellTMHMLearnset[] =
+{
+	TMHM_LEARNSET_END
+};
+
+static const u8 sLarvoolTMHMLearnset[] =
+{
+	TMHM_LEARNSET_END
+};
+
+static const u8 sSpoolerTMHMLearnset[] =
+{
+	TMHM_LEARNSET_END
+};
+
+static const u8 sBilliarachTMHMLearnset[] =
+{
+	TMHM_LEARNSET_END
+};
+
+static const u8 sSlugmaFoneiTMHMLearnset[] =
+{
+	TMHM_LEARNSET_END
+};
+
+static const u8 sMagcargoFoneiTMHMLearnset[] =
+{
+	TMHM_LEARNSET_END
+};
+
+static const u8 sSunforestTMHMLearnset[] =
+{
+	TMHM_LEARNSET_END
+};
+
+static const u8 sHonedgeFoneiTMHMLearnset[] =
+{
+	TMHM_LEARNSET_END
+};
+
+static const u8 sDoubladeFoneiTMHMLearnset[] =
+{
+	TMHM_LEARNSET_END
+};
+
+static const u8 sAegislashFoneiATMHMLearnset[] =
+{
+	TMHM_LEARNSET_END
+};
+
+static const u8 sAegislashFoneiETMHMLearnset[] =
+{
+	TMHM_LEARNSET_END
+};
+
+static const u8 sElemptyTMHMLearnset[] =
+{
+	TMHM_LEARNSET_END
+};
+
+static const u8 sVenearthTMHMLearnset[] =
+{
+	TMHM_LEARNSET_END
+};
+
+static const u8 sMarsizzleTMHMLearnset[] =
+{
+	TMHM_LEARNSET_END
+};
+
+static const u8 sJuplasmaTMHMLearnset[] =
+{
+	TMHM_LEARNSET_END
+};
+
+static const u8 sMerlpoolTMHMLearnset[] =
+{
+	TMHM_LEARNSET_END
+};
+
+static const u8 sOphicalfTMHMLearnset[] =
+{
+	TMHM_LEARNSET_END
+};
+
+static const u8 sSerpentaurTMHMLearnset[] =
+{
+	TMHM_LEARNSET_END
+};
+
+static const u8 sGeodudeFoneiTMHMLearnset[] =
+{
+	TMHM_LEARNSET_END
+};
+
+static const u8 sGravelerFoneiTMHMLearnset[] =
+{
+	TMHM_LEARNSET_END
+};
+
+static const u8 sGolemFoneiTMHMLearnset[] =
+{
+	TMHM_LEARNSET_END
+};
+
+static const u8 sSudowoodoFoneiTMHMLearnset[] =
+{
+	TMHM_LEARNSET_END
+};
+
+static const u8 sGritwyrmTMHMLearnset[] =
+{
+	TMHM_LEARNSET_END
+};
+
+static const u8 sMolduneTMHMLearnset[] =
+{
+	TMHM_LEARNSET_END
+};
+
+/*
+static const u8 sSpcsTMHMLearnset[] =
+{
+	TMHM_LEARNSET_END,
+};
+*/
+
 const u8 *const gTMHMLearnsets[] =
 {
     [SPECIES_NONE] = sNoneTMHMLearnset,
@@ -2426,5 +2628,45 @@ const u8 *const gTMHMLearnsets[] =
 	[SPECIES_MINIOR_METEOR] = sMiniorTMHMLearnset,
 	[SPECIES_MINIOR_CORE] = sMiniorTMHMLearnset,
 	[SPECIES_SPOOKUM] = sSpookumTMHMLearnset,
-	[SPECIES_SPOOKUM_BUSTED] = sSpookumTMHMLearnset
+	[SPECIES_SPOOKUM_BUSTED] = sSpookumTMHMLearnset,
+	[SPECIES_GLASMA] = sGlasmaTMHMLearnset,
+	[SPECIES_PLASMOLYTE] = sPlasmolyteTMHMLearnset,
+	[SPECIES_STORMAGE] = sStormageTMHMLearnset,
+	[SPECIES_SANDUDE] = sSandudeTMHMLearnset,
+	[SPECIES_SANDROSS] = sSandrossTMHMLearnset,
+	[SPECIES_SANDUEL] = sSanduelTMHMLearnset,
+	[SPECIES_ELADRIFT] = sEladriftTMHMLearnset,
+	[SPECIES_SLITHURENT] = sSlithurentTMHMLearnset,
+	[SPECIES_PRESCYLLON] = sPrescyllonTMHMLearnset,
+	[SPECIES_SLOSHMOSH] = sSloshmoshTMHMLearnset,
+	[SPECIES_SLURPINSKI] = sSlurpinskiTMHMLearnset,
+	[SPECIES_KEESH] = sKeeshTMHMLearnset,
+	[SPECIES_HATCHBLING] = sHatchblingTMHMLearnset,
+	[SPECIES_HUMMBLING] = sHummblingTMHMLearnset,
+	[SPECIES_KEESIGHT] = sKeesightTMHMLearnset,
+	[SPECIES_KEESPELL] = sKeespellTMHMLearnset,
+	[SPECIES_LARVOOL] = sLarvoolTMHMLearnset,
+	[SPECIES_SPOOLER] = sSpoolerTMHMLearnset,
+	[SPECIES_BILLIARACH] = sBilliarachTMHMLearnset,
+	[SPECIES_SLUGMA_FONEI] = sSlugmaFoneiTMHMLearnset,
+	[SPECIES_MAGCARGO_FONEI] = sMagcargoFoneiTMHMLearnset,
+	[SPECIES_SUNFOREST] = sSunforestTMHMLearnset,
+	[SPECIES_HONEDGE_FONEI] = sHonedgeFoneiTMHMLearnset,
+	[SPECIES_DOUBLADE_FONEI] = sDoubladeFoneiTMHMLearnset,
+	[SPECIES_AEGISLASH_FONEI_A] = sAegislashFoneiATMHMLearnset,
+	[SPECIES_AEGISLASH_FONEI_E] = sAegislashFoneiETMHMLearnset,
+	[SPECIES_ELEMPTY] = sElemptyTMHMLearnset,
+	[SPECIES_VENEARTH] = sVenearthTMHMLearnset,
+	[SPECIES_MARSIZZLE] = sMarsizzleTMHMLearnset,
+	[SPECIES_JUPLASMA] = sJuplasmaTMHMLearnset,
+	[SPECIES_MERLPOOL] = sMerlpoolTMHMLearnset,
+	[SPECIES_OPHICALF] = sOphicalfTMHMLearnset,
+	[SPECIES_SERPENTAUR] = sSerpentaurTMHMLearnset,
+	[SPECIES_GEODUDE_FONEI] = sGeodudeFoneiTMHMLearnset,
+	[SPECIES_GRAVELER_FONEI] = sGravelerFoneiTMHMLearnset,
+	[SPECIES_GOLEM_FONEI] = sGolemFoneiTMHMLearnset,
+	[SPECIES_SUDOWOODO_FONEI] = sSudowoodoFoneiTMHMLearnset,
+	[SPECIES_GRITWYRM] = sGritwyrmTMHMLearnset,
+	[SPECIES_MOLDUNE] = sMolduneTMHMLearnset,
+	// [SPECIES_SPCS] = sSpcsTMHMLearnset
 };

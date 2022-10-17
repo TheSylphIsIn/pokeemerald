@@ -397,6 +397,46 @@ gCryTable::
 	cry Cry_Norwhale
 	cry Cry_Minior
 	cry Cry_Spookum
+	cry Cry_Glasma
+	cry Cry_Plasmolyte
+	cry Cry_Stormage
+	cry Cry_Sandude
+	cry Cry_Sandross
+	cry Cry_Sanduel
+	cry Cry_Eladrift
+	cry Cry_Slithurent
+	cry Cry_Prescyllon
+	cry Cry_Sloshmosh
+	cry Cry_Slurpinski
+	cry Cry_Keesh
+	cry Cry_Hatchbling
+	cry Cry_Hummbling
+	cry Cry_Keesight
+	cry Cry_Keespell
+	cry Cry_Larvool
+	cry Cry_Spooler
+	cry Cry_Billiarach
+	cry Cry_SlugmaFonei
+	cry Cry_MagcargoFonei
+	cry Cry_Sunforest
+	cry Cry_HonedgeFonei
+	cry Cry_DoubladeFonei
+	cry Cry_AegislashFoneiA
+	cry Cry_AegislashFoneiE
+	cry Cry_Elempty
+	cry Cry_Venearth
+	cry Cry_Marsizzle
+	cry Cry_Juplasma
+	cry Cry_Merlpool
+	cry Cry_Ophicalf
+	cry Cry_Serpentaur
+	cry Cry_GeodudeFonei
+	cry Cry_GravelerFonei
+	cry Cry_GolemFonei
+	cry Cry_SudowoodoFonei
+	cry Cry_Gritwyrm
+	cry Cry_Moldune
+	// cry Cry_Spcs
 	.align 2
 gCryTable_Reverse::
 	cry_reverse Cry_Bulbasaur
@@ -796,3 +836,43 @@ gCryTable_Reverse::
 	cry_reverse Cry_Norwhale
 	cry_reverse Cry_Minior
 	cry_reverse Cry_Spookum
+	cry_reverse Cry_Glasma
+	cry_reverse Cry_Plasmolyte
+	cry_reverse Cry_Stormage
+	cry_reverse Cry_Sandude
+	cry_reverse Cry_Sandross
+	cry_reverse Cry_Sanduel
+	cry_reverse Cry_Eladrift
+	cry_reverse Cry_Slithurent
+	cry_reverse Cry_Prescyllon
+	cry_reverse Cry_Sloshmosh
+	cry_reverse Cry_Slurpinski
+	cry_reverse Cry_Keesh
+	cry_reverse Cry_Hatchbling
+	cry_reverse Cry_Hummbling
+	cry_reverse Cry_Keesight
+	cry_reverse Cry_Keespell
+	cry_reverse Cry_Larvool
+	cry_reverse Cry_Spooler
+	cry_reverse Cry_Billiarach
+	cry_reverse Cry_SlugmaFonei
+	cry_reverse Cry_MagcargoFonei
+	cry_reverse Cry_Sunforest
+	cry_reverse Cry_HonedgeFonei
+	cry_reverse Cry_DoubladeFonei
+	cry_reverse Cry_AegislashFoneiA
+	cry_reverse Cry_AegislashFoneiE
+	cry_reverse Cry_Elempty
+	cry_reverse Cry_Venearth
+	cry_reverse Cry_Marsizzle
+	cry_reverse Cry_Juplasma
+	cry_reverse Cry_Merlpool
+	cry_reverse Cry_Ophicalf
+	cry_reverse Cry_Serpentaur
+	cry_reverse Cry_GeodudeFonei
+	cry_reverse Cry_GravelerFonei
+	cry_reverse Cry_GolemFonei
+	cry_reverse Cry_SudowoodoFonei
+	cry_reverse Cry_Gritwyrm
+	cry_reverse Cry_Moldune
+	// cry_reverse Cry_Spcs

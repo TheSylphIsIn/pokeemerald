@@ -2373,3 +2373,147 @@ const u8 gSpookumPokedexText[] = _(
 	"of others. It has two scaring methods:\n"
 	"Jumping out to make people scream, or\n"
 	"speaking to them in their own voice.");
+	
+const u8 gGlasmaPokedexText[] = _(
+	"GLASMA are born when special\n"
+	"lightning strikes sand. Its casing,\n"
+	"though glass, is surprisingly sturdy.\n"
+	"It uses magnetism to control its legs.");
+	
+const u8 gPlasmolytePokedexText[] = _("");
+const u8 gStormagePokedexText[] = _("");
+
+const u8 gSandudePokedexText[] = _(
+	"SANDUDE is a gathering of sand\n"
+	"given spirit. It tactically moistens\n"
+	"its body to keep its shape. If it dries,\n"
+	"it will collapse into a pile.");
+	
+const u8 gSandrossPokedexText[] = _("");
+const u8 gSanduelPokedexText[] = _("");
+
+const u8 gEladriftPokedexText[] = _(
+	"ELADRIFT prefer to stay still while\n"
+	"floating on the water's surface.\n"
+	"It will snap up anything that drifts\n"
+	"too close to its mouth.");
+
+const u8 gSlithurentPokedexText[] = _("");
+const u8 gPrescyllonPokedexText[] = _("");
+
+const u8 gSloshmoshPokedexText[] = _(
+	"It sloshes lazily about in wooded areas,\n"
+	"absorbing debris into its body. No one\n"
+	"knows where they come from - they seem\n"
+	"to spontaneously appear in calm forests.");
+
+const u8 gSlurpinskiPokedexText[] = _(
+	"Its slime body is incredibly acidic.\n"
+	"Anything it absorbs will dissolve in short\n"
+	"order. There are many wild theories as to why\n"
+	"its eye does not dissolve.");
+	
+const u8 gKeeshPokedexText[] = _(
+	"Two different POKéMON share this shelled\n"
+	"appearance. But before evolution, they are\n"
+	"impossible to tell apart, so both species\n"
+	"are known as KEESH.");
+
+const u8 gHatchblingPokedexText[] = _(
+	"Its feathers are laced with a fine glittery\n"
+	"dust, which coats everything it touches.\n"
+	"The shiny dust makes it difficult to focus\n"
+	"on and also attracts mates.");
+	
+const u8 gHummblingPokedexText[] = _(
+	"HUMMBLING is always easy to spot because\n"
+	"of its dazzling reflective plumage.\n"
+	"Avoid staring, though, as it may blind you\n"
+	"with a flash when it spreads its wings.");
+
+const u8 gKeesightPokedexText[] = _(
+	"By focusing its gaze, it can disrupt\n"
+	"the flow of energy around it.\n"
+	"It protects itself from SPECIAL attacks\n"
+	"using this technique.");
+	
+const u8 gKeespellPokedexText[] = _(
+	"It focuses its will through its domineering\n"
+	"eye to channel elemental power.\n"
+	"It is mostly helpless against ROCK POKéMON,\n"
+	"so it does its best to avoid them.");
+
+const u8 gLarvoolPokedexText[] = _(
+	"It spins a sturdy multicolored string.\n"
+	"Webs made from this string are easy to spot\n"
+	"but deceptively hard to avoid. Any contact\n"
+	"is enough to get ensnared.");
+	
+const u8 gSpoolerPokedexText[] = _("");
+
+const u8 gBilliarachPokedexText[] = _(
+	"BILLIARACH forgoes web-building. Instead,\n"
+	"it bundles its string into hard, bouncy\n"
+	"globs. It is an amazing judge of distance,\n"
+	"able to snipe targets with ricochets easily.");
+
+const u8 gSlugmaFoneiPokedexText[] = _(
+	"The FONEI form of SLUGMA.\n"
+	"Its lava body cooled and hardened into rock.\n"
+	"It doesn't seem bothered by that, though.\n"
+	"It is surprisingly mobile.");
+
+const u8 gMagcargoFoneiPokedexText[] = _(
+	"The FONEI form of MAGCARGO.\n"
+	"Its brittle shell is magnetic, and its body\n"
+	"is light, so it moves quickly by flinging\n"
+	"pieces of its shell and sliding toward them.");
+
+const u8 gSunforestPokedexText[] = _(
+	"Each SUNFLORA community has one SUNFOREST.\n"
+	"It acts as a shelter and protective turret\n"
+	"for its smaller brethren, blasting away\n"
+	"predatory birds with FIRE attacks.");
+
+const u8 gHonedgeFoneiPokedexText[] = _(
+	"The FONEI form of HONEDGE.\n"
+	"When dormant, they are indistinguishable\n"
+	"from normal sticks. The stream of energy\n"
+	"emerging from its top is not safe to touch.");
+	
+const u8 gDoubladeFoneiPokedexText[] = _(
+	"The FONEI form of DOUBLADE.\n"
+	"Though it appears to be two creatures,\n"
+	"It is actually one. They are held in\n"
+	"formation by a force similar to magnetism.");
+	
+const u8 gAegislashFoneiAPokedexText[] = _(
+	"The FONEI form of AEGISLASH.\n"
+	"It must lower its runic shield before it can\n"
+	"attack. It keeps rigorous mental track of\n"
+	"how much PP it uses in each battle.");
+	
+const u8 gAegislashFoneiEPokedexText[] = _("");
+const u8 gElemptyPokedexText[] = _("");
+const u8 gVenearthPokedexText[] = _("");
+const u8 gMarsizzlePokedexText[] = _("");
+const u8 gJuplasmaPokedexText[] = _("");
+const u8 gMerlpoolPokedexText[] = _("");
+const u8 gOphicalfPokedexText[] = _("");
+const u8 gSerpentaurPokedexText[] = _("");
+
+const u8 gGeodudeFoneiPokedexText[] = _(
+	"The FONEI form of GEODUDE.\n"
+	"The harsh winds of the FONEI tundra\n"
+	"erode the rock from its body, replacing\n"
+	"it with ice and snow.");
+	
+const u8 gGravelerFoneiPokedexText[] = _(
+	"The FONEI form of GRAVELER.\n"
+	"");
+const u8 gGolemFoneiPokedexText[] = _("");
+const u8 gSudowoodoFoneiPokedexText[] = _("");
+const u8 gGritwyrmPokedexText[] = _("");
+const u8 gMoldunePokedexText[] = _("");
+	
+// const u8 gSpcsPokedexText[] = _("");
