@@ -145,6 +145,7 @@ static const u8 sShieldsUpDescription[] = _("Shield heals at high HP.");
 static const u8 sPurityDescription[] = _("Repels POISON.");
 static const u8 sAnalyticDescription[] = _("Power up if moving last.");
 static const u8 sDisguiseDescription[] = _("Blocks one attack.");
+static const u8 sSuperLuckDescription[] = _("Heightens critical rate.");
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
 {
@@ -296,6 +297,7 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
 	[ABILITY_PURITY] = _("PURITY"),
 	[ABILITY_ANALYTIC] = _("ANALYTIC"),
 	[ABILITY_DISGUISE] = _("DISGUISE"),
+	[ABILITY_SUPER_LUCK] = _("SUPER LUCK"),
 };
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
@@ -448,4 +450,5 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 	[ABILITY_PURITY] = sPurityDescription,
 	[ABILITY_ANALYTIC] = sAnalyticDescription,
 	[ABILITY_DISGUISE] = sDisguiseDescription,
+	[ABILITY_SUPER_LUCK] = sSuperLuckDescription,
 };
