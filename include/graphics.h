@@ -3106,7 +3106,13 @@ extern const u32 gMonShinyPalette_Moldune[];
 extern const u32 gMonStillFrontPic_Moldune[];
 extern const u8 gMonIcon_Moldune[];
 extern const u8 gMonFootprint_Moldune[];
-
+extern const u32 gMonFrontPic_Wattitude[];
+extern const u32 gMonPalette_Wattitude[];
+extern const u32 gMonBackPic_Wattitude[];
+extern const u32 gMonShinyPalette_Wattitude[];
+extern const u32 gMonStillFrontPic_Wattitude[];
+extern const u8 gMonIcon_Wattitude[];
+extern const u8 gMonFootprint_Wattitude[];
 
 // extern const u32 gMonFrontPic_Spcs[];
 // extern const u32 gMonPalette_Spcs[];

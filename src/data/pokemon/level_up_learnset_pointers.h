@@ -462,6 +462,7 @@ const u16 *const gLevelUpLearnsets[NUM_SPECIES] =
 	[SPECIES_SUDOWOODO_FONEI] = sSudowoodoFoneiLevelUpLearnset,
 	[SPECIES_GRITWYRM] = sGritwyrmLevelUpLearnset,
 	[SPECIES_MOLDUNE] = sMolduneLevelUpLearnset,
+	[SPECIES_WATTITUDE] = sWattitudeLevelUpLearnset,
 	// [SPECIES_SPCS] = sSpcsLevelUpLearnset,
 	[SPECIES_CASTFORM_SUNNY] = sCastformLevelUpLearnset,
 	[SPECIES_CASTFORM_RAINY] = sCastformLevelUpLearnset,

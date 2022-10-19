@@ -1,6 +1,7 @@
 const u16 gPokedexOrder_Alphabetical[] =
 {
-    NATIONAL_DEX_OLD_UNOWN_B,
+    NATIONAL_DEX_WATTITUDE,
+	NATIONAL_DEX_OLD_UNOWN_B,
     NATIONAL_DEX_OLD_UNOWN_C,
     NATIONAL_DEX_OLD_UNOWN_D,
     NATIONAL_DEX_OLD_UNOWN_E,
@@ -465,6 +466,7 @@ const u16 gPokedexOrder_Alphabetical[] =
 
 const u16 gPokedexOrder_Weight[] =
 {
+	NATIONAL_DEX_WATTITUDE,
 	NATIONAL_DEX_GLASMA,
 	NATIONAL_DEX_PLASMOLYTE,
 	NATIONAL_DEX_STORMAGE,
@@ -903,6 +905,7 @@ const u16 gPokedexOrder_Weight[] =
 
 const u16 gPokedexOrder_Height[] =
 {
+	NATIONAL_DEX_WATTITUDE,
 	NATIONAL_DEX_GLASMA,
 	NATIONAL_DEX_PLASMOLYTE,
 	NATIONAL_DEX_STORMAGE,

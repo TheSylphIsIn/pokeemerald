@@ -695,13 +695,6 @@ void HandleAction_ActionFinished(void)
     gBattleResources->battleScriptsStack->size = 0;
 }
 
-static const u16 sSoundMovesTable[] =
-{
-    MOVE_GROWL, MOVE_ROAR, MOVE_SING, MOVE_SUPERSONIC, MOVE_SCREECH, MOVE_SNORE,
-    MOVE_UPROAR, MOVE_METAL_SOUND, MOVE_GRASS_WHISTLE, MOVE_HYPER_VOICE, MOVE_CHARMING_CRY,
-	MOVE_BOOMBURST, MOVE_BUG_BUZZ, MOVE_BUZZ_BLITZ, 0xFFFF
-};
-
 u8 GetBattlerForBattleScript(u8 caseId)
 {
     u8 ret = 0;
@@ -2916,21 +2909,14 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
             }
             break;
         case ABILITYEFFECT_MOVES_BLOCK: // 2
-            if (gLastUsedAbility == ABILITY_SOUNDPROOF && AbilityIsActive())
-            {
-                for (i = 0; sSoundMovesTable[i] != 0xFFFF; i++)
-                {
-                    if (sSoundMovesTable[i] == move)
-                        break;
+            if (gLastUsedAbility == ABILITY_SOUNDPROOF && AbilityIsActive()
+				&& gBattleMoves[move].attribute == MOVE_ATTRIBUTE_SOUND)
+				{
+				if (gBattleMons[gBattlerAttacker].status2 & STATUS2_MULTIPLETURNS)
+					gHitMarker |= HITMARKER_NO_PPDEDUCT;
+                gBattlescriptCurrInstr = BattleScript_SoundproofProtected;
+                effect = 1;
                 }
-                if (sSoundMovesTable[i] != 0xFFFF)
-                {
-                    if (gBattleMons[gBattlerAttacker].status2 & STATUS2_MULTIPLETURNS)
-                        gHitMarker |= HITMARKER_NO_PPDEDUCT;
-                    gBattlescriptCurrInstr = BattleScript_SoundproofProtected;
-                    effect = 1;
-                }
-            }
             break;
         case ABILITYEFFECT_ABSORBING: // 3
             if (move && AbilityIsActive())

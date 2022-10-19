@@ -62,6 +62,7 @@ static bool8 ShouldGetStatBadgeBoost(u16 flagId, u8 battlerId);
 static u16 GiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move);
 static bool8 ShouldSkipFriendshipChange(void);
 static u8 SendMonToPC(struct Pokemon* mon);
+static u8 MonKnowsAttributeMoves(struct Pokemon *mon, u8 attribute);
 
 EWRAM_DATA static u8 sLearningMoveTableID = 0;
 EWRAM_DATA u8 gPlayerPartyCount = 0;
@@ -554,6 +555,8 @@ static const u16 sSpeciesToHoennPokedexNum[NUM_SPECIES - 1] =
 	SPECIES_TO_HOENN(SUDOWOODO_FONEI),
 	SPECIES_TO_HOENN(GRITWYRM),
 	SPECIES_TO_HOENN(MOLDUNE),
+	SPECIES_TO_HOENN(WATTITUDE),
+
 };
 
 // Assigns all species to the National Dex Index (Summary No. for National Dex)
@@ -1015,6 +1018,8 @@ static const u16 sSpeciesToNationalPokedexNum[NUM_SPECIES - 1] =
 	SPECIES_TO_NATIONAL(SUDOWOODO_FONEI),
 	SPECIES_TO_NATIONAL(GRITWYRM),
 	SPECIES_TO_NATIONAL(MOLDUNE),
+	SPECIES_TO_NATIONAL(WATTITUDE),
+
 	
 	[SPECIES_MINIOR_CORE - 1] = NATIONAL_DEX_MINIOR_METEOR,
 	[SPECIES_CASTFORM_SUNNY - 1] = NATIONAL_DEX_CASTFORM,
@@ -1457,6 +1462,7 @@ static const u16 sHoennToNationalOrder[NUM_SPECIES - 1] =
 	HOENN_TO_NATIONAL(SUDOWOODO_FONEI),
 	HOENN_TO_NATIONAL(GRITWYRM),
 	HOENN_TO_NATIONAL(MOLDUNE),
+	HOENN_TO_NATIONAL(WATTITUDE),
     HOENN_TO_NATIONAL(OLD_UNOWN_B),
     HOENN_TO_NATIONAL(OLD_UNOWN_C),
     HOENN_TO_NATIONAL(OLD_UNOWN_D),
@@ -1970,6 +1976,7 @@ static const u8 sMonFrontAnimIdsTable[NUM_SPECIES - 1] =
 	[SPECIES_GRITWYRM- 1]	= ANIM_V_SHAKE,
 	[SPECIES_MOLDUNE- 1]	= ANIM_V_SHAKE,
 	[SPECIES_SPOOKUM_BUSTED - 1] = ANIM_H_SHAKE,
+	[SPECIES_WATTITUDE- 1]	= ANIM_FLASH_YELLOW,
 	[SPECIES_CASTFORM_SUNNY - 1]    = ANIM_H_SLIDE_WOBBLE,
 	[SPECIES_CASTFORM_RAINY - 1]    = ANIM_H_SLIDE_WOBBLE,
 	[SPECIES_CASTFORM_SNOWY - 1]    = ANIM_H_SLIDE_WOBBLE,
@@ -3316,27 +3323,6 @@ void DeleteFirstMoveAndGiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move)
     (var) /= (gStatStageRatios)[(mon)->statStages[(statIndex)]][1];                 \
 }
 
-static const u16 sPunchMovesTable[] =
-{
-    MOVE_BULLET_PUNCH, MOVE_COMET_PUNCH, MOVE_DYNAMIC_PUNCH, MOVE_FIRE_PUNCH,
-	MOVE_THUNDER_PUNCH, MOVE_ICE_PUNCH, MOVE_FOCUS_PUNCH, MOVE_MACH_PUNCH, MOVE_STAR_PUNCH,
-    MOVE_MEGA_PUNCH, MOVE_SHADOW_PUNCH, MOVE_SKY_UPPERCUT, MOVE_METEOR_MASH, 0xFFFF
-};
-
-static const u16 sSoundMovesTable[] =
-{
-    MOVE_GROWL, MOVE_ROAR, MOVE_SING, MOVE_SUPERSONIC, MOVE_SCREECH, MOVE_SNORE,
-    MOVE_UPROAR, MOVE_METAL_SOUND, MOVE_GRASS_WHISTLE, MOVE_HYPER_VOICE, MOVE_CHARMING_CRY,
-	MOVE_BOOMBURST, MOVE_BUG_BUZZ, MOVE_BUZZ_BLITZ, 0xFFFF
-};
-
-static const u16 sSlashMovesTable[] = 
-{
-	MOVE_SCRATCH, MOVE_CUT, MOVE_FURY_SWIPES, MOVE_SLASH, MOVE_FALSE_SWIPE, MOVE_FURY_CUTTER,
-	MOVE_METAL_CLAW, MOVE_CRUSH_CLAW, MOVE_AERIAL_ACE, MOVE_DRAGON_CLAW, MOVE_POISON_TAIL,
-	MOVE_LEAF_BLADE, MOVE_X_SCISSOR, MOVE_NIGHT_SLASH, 0xFFFF
-};
-
 s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *defender, u32 move, u16 sideStatus, u16 powerOverride, u8 typeOverride, u8 battlerIdAtk, u8 battlerIdDef)
 {
     u32 i;
@@ -3498,53 +3484,29 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
 		attack = (150 * attack) / 100;
 	if (attacker->ability == ABILITY_WHITEOUT && (WEATHER_HAS_EFFECT2 && (gBattleWeather & B_WEATHER_HAIL)))
 		attack = (150 * attack) / 100;
+	// Move-dependent abilities
 	if ((attacker->ability >= ABILITIES_ATE_START && attacker->ability < ABILITIES_ATE_END)
 		&& type == TYPE_NORMAL)
 		gBattleMovePower = (120 * gBattleMovePower) / 100;
 	if (attacker->ability == ABILITY_SHEER_FORCE && gBattleMoves[gCurrentMove].secondaryEffectChance != 0)
 		gBattleMovePower = (130 * gBattleMovePower) / 100;
-	if (attacker->ability == ABILITY_IRON_FIST)
-	{
-		for (i = 0; sPunchMovesTable[i] != 0xFFFF; i++)
-		{
-			if (sPunchMovesTable[i] == gCurrentMove)
-				break;
-		}
-		if (sPunchMovesTable[i] != 0xFFFF)
-			gBattleMovePower = (130 * gBattleMovePower) / 100;
-	}
-	if (attacker->ability == ABILITY_CACOPHONY)
-	{
-		for (i = 0; sSoundMovesTable[i] != 0xFFFF; i++)
-		{
-			if (sSoundMovesTable[i] == gCurrentMove && gBattleMoves[gCurrentMove].power != 0)
-				break;
-		}
-		if (sSoundMovesTable[i] != 0xFFFF)
-			gBattleMovePower = (130 * gBattleMovePower) / 100;
-	}
-	if (defender->ability == ABILITY_CACOPHONY && AbilityIsActive())
-	{
-		for (i = 0; sSoundMovesTable[i] != 0xFFFF; i++)
-		{
-			if (sSoundMovesTable[i] == gCurrentMove && gBattleMoves[gCurrentMove].power != 0)
-				break;
-		}
-		if (sSoundMovesTable[i] != 0xFFFF)
-			gBattleMovePower /= 2;
-	}
-	if (attacker->ability == ABILITY_HYPER_CUTTER)
-	{
-		for (i = 0; sSlashMovesTable[i] != 0xFFFF; i++)
-		{
-			if (sSlashMovesTable[i] == gCurrentMove)
-				break;
-		}
-		if (sSlashMovesTable[i] != 0xFFFF)
-			gBattleMovePower = (120 * gBattleMovePower) / 100;
-	}
+	// (attribute-dependent)
+	if (attacker->ability == ABILITY_IRON_FIST && gBattleMoves[gCurrentMove].attribute == MOVE_ATTRIBUTE_PUNCH)
+		gBattleMovePower = (130 * gBattleMovePower) / 100;
+	if (attacker->ability == ABILITY_CACOPHONY && gBattleMoves[gCurrentMove].attribute == MOVE_ATTRIBUTE_SOUND)
+		gBattleMovePower = (130 * gBattleMovePower) / 100;
+	if (defender->ability == ABILITY_CACOPHONY && AbilityIsActive() && gBattleMoves[gCurrentMove].attribute == MOVE_ATTRIBUTE_SOUND)
+		gBattleMovePower /= 2;
+	if (attacker->ability == ABILITY_HYPER_CUTTER && gBattleMoves[gCurrentMove].attribute == MOVE_ATTRIBUTE_SLASH)
+		gBattleMovePower = (120 * gBattleMovePower) / 100;
+	if (attacker->ability == ABILITY_STRONG_JAW && gBattleMoves[gCurrentMove].attribute == MOVE_ATTRIBUTE_BITE)
+		gBattleMovePower = (150 * gBattleMovePower) / 100;
+	if (attacker->ability == ABILITY_STRIKER && gBattleMoves[gCurrentMove].attribute == MOVE_ATTRIBUTE_KICK)
+		gBattleMovePower = (120 * gBattleMovePower) / 100;
+	if (attacker->ability == ABILITY_RECKLESS && gBattleMoves[gCurrentMove].attribute == MOVE_ATTRIBUTE_RISKY)
+		gBattleMovePower = (120 * gBattleMovePower) / 100;
 	if (attacker->ability == ABILITY_TOUGH_CLAWS && (gBattleMoves[gCurrentMove].flags & FLAG_MAKES_CONTACT))
-		gBattleMovePower = (gBattleMovePower * 130) / 100;
+		gBattleMovePower = (130 * gBattleMovePower) / 100;
 	if (attacker->ability == ABILITY_TECHNICIAN && gBattleMoves[gCurrentMove].power <= 60)
 		gBattleMovePower = (gBattleMovePower * 150) / 100;
 	if (defender->ability == ABILITY_WATER_COMPACTION && AbilityIsActive() && type == TYPE_WATER)
@@ -5938,6 +5900,22 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem)
                 if (MonKnowsMove(mon, gEvolutionTable[species][i].param))
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
+			case EVO_ATTRIBUTE_1:
+				if (MonKnowsAttributeMoves(mon, gEvolutionTable[species][i].param))
+					targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                break;
+			case EVO_ATTRIBUTE_2:
+				if (MonKnowsAttributeMoves(mon, gEvolutionTable[species][i].param) > 1)
+					targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                break;
+			case EVO_ATTRIBUTE_3:
+				if (MonKnowsAttributeMoves(mon, gEvolutionTable[species][i].param) > 2)
+					targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                break;
+			case EVO_ATTRIBUTE_TOP:
+				if (MonKnowsAttributeMoves(mon, MOVE_ATTRIBUTE_PUNCH) == 2 && MonKnowsAttributeMoves(mon, MOVE_ATTRIBUTE_KICK) == 2)
+					targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                break;
             }
         }
         break;
@@ -5975,6 +5953,19 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem)
     }
 
     return targetSpecies;
+}
+
+u8 MonKnowsAttributeMoves(struct Pokemon *mon, u8 attribute)
+{
+    u8 i;
+	u8 numAttributes = 0;
+
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        if (gBattleMoves[GetMonData(mon, MON_DATA_MOVE1 + i, 0)].attribute == attribute)
+            numAttributes++;
+    }
+    return numAttributes;
 }
 
 u16 HoennPokedexNumToSpecies(u16 hoennNum)

@@ -4893,6 +4893,18 @@ static const union AnimCmd sAnim_MOLDUNE_1[] =
 	ANIMCMD_END
 };
 
+static const union AnimCmd sAnim_WATTITUDE_1[] =
+{
+	ANIMCMD_FRAME(0, 20),
+	ANIMCMD_FRAME(1, 20),
+	ANIMCMD_FRAME(0, 20),
+	ANIMCMD_FRAME(1, 20),
+	ANIMCMD_FRAME(0, 20),
+	ANIMCMD_FRAME(1, 20),
+	ANIMCMD_FRAME(0, 20),
+	ANIMCMD_END
+};
+
 // static const union AnimCmd sAnim_SPCS_1[] = 
 // {
 	// ANIMCMD_END
@@ -7373,6 +7385,11 @@ static const union AnimCmd *const sAnims_MOLDUNE[] ={
 	sAnim_MOLDUNE_1,
 };
 
+static const union AnimCmd *const sAnims_WATTITUDE[] ={
+	sAnim_GeneralFrame0,
+	sAnim_WATTITUDE_1,
+};
+
 // static const union AnimCmd *const sAnims_SPCS[] ={
 	// sAnim_GeneralFrame0,
 	// sAnim_SPCS_1,
@@ -7985,6 +8002,7 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[] =
 	ANIM_CMD(SUDOWOODO_FONEI),
 	ANIM_CMD(GRITWYRM),
 	ANIM_CMD(MOLDUNE),
+	ANIM_CMD(WATTITUDE),
 	// ANIM_CMD(SPCS),
 	[SPECIES_CASTFORM_SUNNY] = sAnims_CASTFORM,
 	[SPECIES_CASTFORM_RAINY] = sAnims_CASTFORM,

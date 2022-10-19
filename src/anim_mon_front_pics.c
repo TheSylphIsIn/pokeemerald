@@ -445,6 +445,8 @@ const u32 gMonFrontPic_GolemFonei[] = INCBIN_U32("graphics/pokemon/golem_fonei/a
 const u32 gMonFrontPic_SudowoodoFonei[] = INCBIN_U32("graphics/pokemon/sudowoodo_fonei/anim_front.4bpp.lz");
 const u32 gMonFrontPic_Gritwyrm[] = INCBIN_U32("graphics/pokemon/gritwyrm/anim_front.4bpp.lz");
 const u32 gMonFrontPic_Moldune[] = INCBIN_U32("graphics/pokemon/moldune/anim_front.4bpp.lz");
+const u32 gMonFrontPic_Wattitude[] = INCBIN_U32("graphics/pokemon/wattitude/anim_front.4bpp.lz");
+
 // const u32 gMonFrontPic_Spcs[] = INCBIN_U32("graphics/pokemon/spcs/anim_front.4bpp.lz");
 
 const u32 gMonFrontPic_Egg[] = INCBIN_U32("graphics/pokemon/egg/anim_front.4bpp.lz");

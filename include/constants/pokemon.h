@@ -330,6 +330,10 @@
 #define EVO_LEVEL_SHEDINJA   14 // Pokémon reaches the specified level (special value for Shedinja)
 #define EVO_BEAUTY           15 // Pokémon levels up with beauty ≥ specified value
 #define EVO_MOVE			 16 // Pokemon levels up while knowing specified move
+#define EVO_ATTRIBUTE_1		 17 // Pokemon levels up while knowing 1 or more moves with the specified attribute
+#define EVO_ATTRIBUTE_2		 18 // Pokemon levels up while knowing 2 or more moves with the specified attribute
+#define EVO_ATTRIBUTE_3		 19 // Pokemon levels up while knowing 3 or more moves with the specified attribute
+#define EVO_ATTRIBUTE_TOP	 20 // Pokemon levels up while knowing 2 punch moves and 2 kick moves
 
 #define EVOS_PER_MON 8
 

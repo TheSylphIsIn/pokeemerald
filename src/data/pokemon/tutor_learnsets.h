@@ -5847,6 +5847,8 @@ static const u32 sTutorLearnsets[] =
 
 	[SPECIES_MOLDUNE] = (0),
 	
+	[SPECIES_WATTITUDE] = (0),
+	
 	// [SPECIES_SPCS] = (0),
 	
 	[SPECIES_CASTFORM_SUNNY] = (0),

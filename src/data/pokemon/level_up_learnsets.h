@@ -3228,6 +3228,12 @@ static const u16 sSmeargleLevelUpLearnset[] = {
 
 static const u16 sTyrogueLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_TACKLE),
+	LEVEL_UP_MOVE( 2, MOVE_MACH_PUNCH),
+	LEVEL_UP_MOVE( 3, MOVE_MEGA_PUNCH),
+	LEVEL_UP_MOVE( 4, MOVE_MEGA_KICK),
+	LEVEL_UP_MOVE( 6, MOVE_FIRE_PUNCH),
+	LEVEL_UP_MOVE( 7, MOVE_ROLLING_KICK),
+	LEVEL_UP_MOVE( 7, MOVE_JUMP_KICK),
     LEVEL_UP_END
 };
 
@@ -5863,6 +5869,11 @@ static const u16 sGritwyrmLevelUpLearnset[] = {
 };
 
 static const u16 sMolduneLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sWattitudeLevelUpLearnset[] = {
+	LEVEL_UP_MOVE( 1, MOVE_THUNDER_SHOCK),
 	LEVEL_UP_END
 };
 

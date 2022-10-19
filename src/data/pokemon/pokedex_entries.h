@@ -5220,6 +5220,18 @@ const struct PokedexEntry gPokedexEntries[] =
 		.trainerOffset = 0,
 	},
 	
+	[NATIONAL_DEX_WATTITUDE] =
+	{
+		.categoryName = _("LIGHT SPRITE"),
+		.height = 8,
+		.weight = 3,
+		.description = gWattitudePokedexText,
+		.pokemonScale = 256,
+		.pokemonOffset = 0,
+		.trainerScale = 256,
+		.trainerOffset = 0,
+	},
+	
 	/*
 	[NATIONAL_DEX_SPCS] = 
 	{

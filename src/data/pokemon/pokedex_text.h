@@ -2515,5 +2515,12 @@ const u8 gGolemFoneiPokedexText[] = _("");
 const u8 gSudowoodoFoneiPokedexText[] = _("");
 const u8 gGritwyrmPokedexText[] = _("");
 const u8 gMoldunePokedexText[] = _("");
+
+const u8 gWattitudePokedexText[] = _(
+	"It wags its finger tauntingly at those\n"
+	"too slow to catch it. It feeds off of\n"
+	"power lines, but never takes more than\n"
+	"its fair share, so it's not a pest.");
+
 	
 // const u8 gSpcsPokedexText[] = _("");

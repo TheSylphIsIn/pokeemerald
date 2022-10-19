@@ -489,6 +489,7 @@ const u8 *const gMonIconTable[] =
 	[SPECIES_SUDOWOODO_FONEI] =  gMonIcon_SudowoodoFonei,
 	[SPECIES_GRITWYRM] =  gMonIcon_Gritwyrm,
 	[SPECIES_MOLDUNE] =  gMonIcon_Moldune,
+	[SPECIES_WATTITUDE] =  gMonIcon_Wattitude,
     [SPECIES_EGG] = gMonIcon_Egg,
     [SPECIES_UNOWN_B] = gMonIcon_UnownB,
     [SPECIES_UNOWN_C] = gMonIcon_UnownC,
@@ -986,6 +987,8 @@ const u8 gMonIconPaletteIndices[] =
 	[SPECIES_SUDOWOODO_FONEI] = 0,
 	[SPECIES_GRITWYRM] = 0,
 	[SPECIES_MOLDUNE] = 0,
+	[SPECIES_WATTITUDE] = 0,
+
 	// [SPECIES_SPCS] = 0,
     [SPECIES_EGG] = 1,
     [SPECIES_UNOWN_B] = 0,

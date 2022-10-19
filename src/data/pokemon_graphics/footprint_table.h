@@ -462,6 +462,8 @@ const u8 *const gMonFootprintTable[] =
 	[SPECIES_SUDOWOODO_FONEI] = gMonFootprint_SudowoodoFonei,
 	[SPECIES_GRITWYRM] = gMonFootprint_Gritwyrm,
 	[SPECIES_MOLDUNE] = gMonFootprint_Moldune,
+	[SPECIES_WATTITUDE] = gMonFootprint_Wattitude,
+
 	//[SPECIES_SPCS] = gMonFootprint_Spcs,
 	[SPECIES_CASTFORM_SUNNY] = gMonFootprint_Castform,
 	[SPECIES_CASTFORM_RAINY] = gMonFootprint_Castform,

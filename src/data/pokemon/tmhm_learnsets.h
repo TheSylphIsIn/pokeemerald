@@ -2197,6 +2197,11 @@ static const u8 sMolduneTMHMLearnset[] =
 	TMHM_LEARNSET_END
 };
 
+static const u8 sWattitudeTMHMLearnset[] =
+{
+	TMHM_LEARNSET_END
+};
+
 /*
 static const u8 sSpcsTMHMLearnset[] =
 {
@@ -2668,5 +2673,7 @@ const u8 *const gTMHMLearnsets[] =
 	[SPECIES_SUDOWOODO_FONEI] = sSudowoodoFoneiTMHMLearnset,
 	[SPECIES_GRITWYRM] = sGritwyrmTMHMLearnset,
 	[SPECIES_MOLDUNE] = sMolduneTMHMLearnset,
+	[SPECIES_WATTITUDE] = sWattitudeTMHMLearnset,
+
 	// [SPECIES_SPCS] = sSpcsTMHMLearnset
 };

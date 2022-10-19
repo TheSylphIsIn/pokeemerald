@@ -14134,6 +14134,38 @@ const struct BaseStats gBaseStats[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+    },
+	
+	[SPECIES_WATTITUDE] =
+    {
+        .baseHP        = 68,
+        .baseAttack    = 99,
+        .baseDefense   = 67,
+        .baseSpeed     = 123,
+        .baseSpAttack  = 82,
+        .baseSpDefense = 52,
+        .type1 = TYPE_ELECTRIC,
+        .type2 = TYPE_ELECTRIC,
+        .catchRate = 123,
+        .expYield = 213,
+        .evYield_HP        = 0,
+        .evYield_Attack    = 0,
+        .evYield_Defense   = 0,
+        .evYield_Speed     = 2,
+        .evYield_SpAttack  = 0,
+        .evYield_SpDefense = 0,
+        .itemCommon = ITEM_NONE,
+        .itemRare   = ITEM_MAGNET,
+        .genderRatio = MON_GENDERLESS,
+        .eggCycles = 20,
+        .friendship = 70,
+        .growthRate = GROWTH_FAST,
+        .eggGroup1 = EGG_GROUP_AMORPHOUS,
+        .eggGroup2 = EGG_GROUP_AMORPHOUS,
+        .abilities = {ABILITY_LIGHTNING_ROD, ABILITY_PRANKSTER, ABILITY_SPECIALIST, ABILITY_TERAVOLT},
+        .safariZoneFleeRate = 0,
+        .bodyColor = BODY_COLOR_BLUE,
+        .noFlip = FALSE,
     }
 	
 	// [SPECIES_] =

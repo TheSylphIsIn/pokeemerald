@@ -436,6 +436,7 @@ gCryTable::
 	cry Cry_SudowoodoFonei
 	cry Cry_Gritwyrm
 	cry Cry_Moldune
+	cry Cry_Wattitude
 	// cry Cry_Spcs
 	.align 2
 gCryTable_Reverse::
@@ -875,4 +876,5 @@ gCryTable_Reverse::
 	cry_reverse Cry_SudowoodoFonei
 	cry_reverse Cry_Gritwyrm
 	cry_reverse Cry_Moldune
+	cry_reverse Cry_Wattitude
 	// cry_reverse Cry_Spcs

@@ -1159,7 +1159,8 @@ static bool8 AccuracyCalcHelper(u16 move)
      || (gBattleMoves[move].effect == EFFECT_ALWAYS_HIT || gBattleMoves[move].effect == EFFECT_VITAL_THROW) ||
      (WEATHER_HAS_EFFECT && (gBattleWeather & B_WEATHER_HAIL) && gBattleMoves[move].effect == EFFECT_FREEZE_HIT) ||
 	 (IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_POISON) && gBattleMoves[move].effect == EFFECT_TOXIC)
-	 || gBattleMons[gBattlerAttacker].ability == ABILITY_NO_GUARD || gBattleMons[gBattlerTarget].ability == ABILITY_NO_GUARD)
+	 || gBattleMons[gBattlerAttacker].ability == ABILITY_NO_GUARD || gBattleMons[gBattlerTarget].ability == ABILITY_NO_GUARD
+	 || (gBattleMons[gBattlerAttacker].ability == ABILITY_STRIKER && gBattleMoves[move].attribute == MOVE_ATTRIBUTE_KICK))
     {
         JumpIfMoveFailed(7, move);
         return TRUE;
@@ -1234,7 +1235,8 @@ static void Cmd_accuracycheck(void)
 			calc = (calc * 80) / 100; // 1.2 snow cloak loss
         if (gBattleMons[gBattlerAttacker].ability == ABILITY_HUSTLE && IS_MOVE_PHYSICAL(move))
             calc = (calc * 80) / 100; // 1.2 hustle loss
-		if (gBattleMons[gBattlerTarget].ability == ABILITY_UMBRALAMP && gBattleMons[gBattlerAttacker].ability != ABILITY_ILLUMINATE)
+		if (gBattleMons[gBattlerTarget].ability == ABILITY_UMBRALAMP && gBattleMons[gBattlerAttacker].ability != ABILITY_ILLUMINATE
+			&& gBattleMoves[move].attribute != MOVE_ATTRIBUTE_LIGHT)
 			calc = (calc * 66) / 100; // 1.33 umbralamp loss
 
         if (gBattleMons[gBattlerTarget].item == ITEM_ENIGMA_BERRY)

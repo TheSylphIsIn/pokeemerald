@@ -2131,6 +2131,10 @@ Cry_Moldune::
 
 	.align 2
 
+Cry_Wattitude::
+	.incbin "sound/direct_sound_samples/cries/unown.bin"
+
+	.align 2
 // Cry_Spcs::
 // 	.incbin "sound/direct_sound_samples/cries/abra.bin"
 //	.align 2

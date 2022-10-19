@@ -3078,6 +3078,13 @@ const u32 gMonStillFrontPic_Moldune[] = INCBIN_U32("graphics/pokemon/moldune/fro
 const u8 gMonIcon_Moldune[] = INCBIN_U8("graphics/pokemon/moldune/icon.4bpp");
 const u8 gMonFootprint_Moldune[] = INCBIN_U8("graphics/pokemon/moldune/footprint.1bpp");
 
+const u32 gMonPalette_Wattitude[] = INCBIN_U32("graphics/pokemon/wattitude/normal.gbapal.lz");
+const u32 gMonBackPic_Wattitude[] = INCBIN_U32("graphics/pokemon/wattitude/back.4bpp.lz");
+const u32 gMonShinyPalette_Wattitude[] = INCBIN_U32("graphics/pokemon/wattitude/shiny.gbapal.lz");
+const u32 gMonStillFrontPic_Wattitude[] = INCBIN_U32("graphics/pokemon/wattitude/front.4bpp.lz");
+const u8 gMonIcon_Wattitude[] = INCBIN_U8("graphics/pokemon/wattitude/icon.4bpp");
+const u8 gMonFootprint_Wattitude[] = INCBIN_U8("graphics/pokemon/wattitude/footprint.1bpp");
+
 // const u32 gMonPalette_Spcs[] = INCBIN_U32("graphics/pokemon/spcs/normal.gbapal.lz");
 // const u32 gMonBackPic_Spcs[] = INCBIN_U32("graphics/pokemon/spcs/back.4bpp.lz");
 // const u32 gMonShinyPalette_Spcs[] = INCBIN_U32("graphics/pokemon/spcs/shiny.gbapal.lz");
