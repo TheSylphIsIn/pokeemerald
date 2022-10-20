@@ -4697,9 +4697,9 @@ static const union AnimCmd sAnim_SPOOKUM_BUSTED_1[] =
 
 static const union AnimCmd sAnim_GLASMA_1[] =
 {
-	ANIMCMD_FRAME(0, 20),
-	ANIMCMD_FRAME(1, 60),
 	ANIMCMD_FRAME(0, 10),
+	ANIMCMD_FRAME(1, 60),
+	ANIMCMD_FRAME(0, 20),
 	ANIMCMD_END
 };
 

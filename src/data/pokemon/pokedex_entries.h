@@ -5222,7 +5222,7 @@ const struct PokedexEntry gPokedexEntries[] =
 	
 	[NATIONAL_DEX_WATTITUDE] =
 	{
-		.categoryName = _("LIGHT SPRITE"),
+		.categoryName = _("LIGHTSPRITE"),
 		.height = 8,
 		.weight = 3,
 		.description = gWattitudePokedexText,

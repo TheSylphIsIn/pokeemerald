@@ -2136,8 +2136,8 @@ const struct MonCoords gMonBackPicCoords[] =
     },
 	[SPECIES_GLASMA] =
 	{
-		.size = MON_COORDS_SIZE(64, 64),
-		.y_offset = 0,
+		.size = MON_COORDS_SIZE(44, 24),
+		.y_offset = 16,
 	},
 	[SPECIES_PLASMOLYTE] =
 	{

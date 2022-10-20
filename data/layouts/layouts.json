@@ -4647,7 +4647,7 @@
       "width": 36,
       "height": 24,
       "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_Slateport",
+      "secondary_tileset": "gTileset_Petalburg",
       "border_filepath": "data/layouts/FirstTrail/border.bin",
       "blockdata_filepath": "data/layouts/FirstTrail/map.bin"
     },

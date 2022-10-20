@@ -117,8 +117,8 @@ static const u8 sStarterLabelCoords[STARTER_MON_COUNT][2] =
 
 static const u16 sStarterMon0[STARTER_MON_COUNT] =
 {
-    SPECIES_MINIOR_METEOR,
-    SPECIES_WATTITUDE,
+    SPECIES_SLOSHMOSH,
+    SPECIES_KEESH,
     SPECIES_SPOOKUM,
 };
 

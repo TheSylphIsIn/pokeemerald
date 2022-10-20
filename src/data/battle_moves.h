@@ -3221,7 +3221,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .priority = 0,
         .flags = FLAG_SNATCH_AFFECTED,
 		.category = MOVE_CATEGORY_STATUS,
-		.attribute = MOVE_ATTRIBUTE_FIELD_EFFECT,
+		.attribute = MOVE_ATTRIBUTE_HEAL,
     },
 
     [MOVE_PAIN_SPLIT] =
