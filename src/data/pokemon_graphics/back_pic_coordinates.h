@@ -2151,7 +2151,7 @@ const struct MonCoords gMonBackPicCoords[] =
 	},
 	[SPECIES_SANDUDE] =
 	{
-		.size = MON_COORDS_SIZE(64, 64),
+		.size = MON_COORDS_SIZE(44, 32),
 		.y_offset = 0,
 	},
 	[SPECIES_SANDROSS] =
@@ -2166,7 +2166,7 @@ const struct MonCoords gMonBackPicCoords[] =
 	},
 	[SPECIES_ELADRIFT] =
 	{
-		.size = MON_COORDS_SIZE(64, 64),
+		.size = MON_COORDS_SIZE(44, 44),
 		.y_offset = 0,
 	},
 	[SPECIES_SLITHURENT] =

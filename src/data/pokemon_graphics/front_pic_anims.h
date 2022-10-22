@@ -4715,6 +4715,9 @@ static const union AnimCmd sAnim_STORMAGE_1[] =
 
 static const union AnimCmd sAnim_SANDUDE_1[] =
 {
+	ANIMCMD_FRAME(0, 5),
+	ANIMCMD_FRAME(1, 40),
+	ANIMCMD_FRAME(0, 15),
 	ANIMCMD_END
 };
 
