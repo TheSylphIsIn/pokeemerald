@@ -4748,6 +4748,13 @@ static const union AnimCmd sAnim_PRESCYLLON_1[] =
 
 static const union AnimCmd sAnim_SLOSHMOSH_1[] =
 {
+	ANIMCMD_FRAME(0, 10),
+	ANIMCMD_FRAME(1, 20),
+	ANIMCMD_FRAME(0, 15),
+	ANIMCMD_FRAME(1, 15),
+	ANIMCMD_FRAME(0, 15),
+	ANIMCMD_FRAME(1, 15),
+	ANIMCMD_FRAME(0, 10),
 	ANIMCMD_END
 };
 
@@ -4758,7 +4765,12 @@ static const union AnimCmd sAnim_SLURPINSKI_1[] =
 
 static const union AnimCmd sAnim_KEESH_1[] =
 {
-	ANIMCMD_END
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_FRAME(1, 10),
+    ANIMCMD_FRAME(0, 10),
+    ANIMCMD_FRAME(1, 20),
+    ANIMCMD_FRAME(0, 20),
+    ANIMCMD_END,
 };
 
 static const union AnimCmd sAnim_HATCHBLING_1[] =

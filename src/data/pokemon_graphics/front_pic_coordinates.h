@@ -2181,8 +2181,8 @@ const struct MonCoords gMonFrontPicCoords[] =
 	},
 	[SPECIES_SLOSHMOSH] =
 	{
-		.size = MON_COORDS_SIZE(64, 64),
-		.y_offset = 0,
+		.size = MON_COORDS_SIZE(36, 48),
+		.y_offset = 10,
 	},
 	[SPECIES_SLURPINSKI] =
 	{
@@ -2191,8 +2191,8 @@ const struct MonCoords gMonFrontPicCoords[] =
 	},
 	[SPECIES_KEESH] =
 	{
-		.size = MON_COORDS_SIZE(64, 64),
-		.y_offset = 0,
+		.size = MON_COORDS_SIZE(48, 32),
+		.y_offset = 14,
 	},
 	[SPECIES_HATCHBLING] =
 	{

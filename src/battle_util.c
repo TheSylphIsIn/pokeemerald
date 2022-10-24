@@ -180,8 +180,8 @@ void HandleAction_UseMove(void)
         {
             if (side != GetBattlerSide(gActiveBattler)
                 && *(gBattleStruct->moveTarget + gBattlerAttacker) != gActiveBattler
-                && (gBattleMons[gActiveBattler].ability == ABILITY_LIGHTNING_ROD
-				|| gBattleMons[gActiveBattler].ability == ABILITY_STORM_DRAIN)
+                && ((gBattleMons[gActiveBattler].ability == ABILITY_LIGHTNING_ROD && gBattleMoves[gCurrentMove].type == TYPE_ELECTRIC)
+				|| (gBattleMons[gActiveBattler].ability == ABILITY_STORM_DRAIN && gBattleMoves[gCurrentMove].type == TYPE_WATER))
 				&& AbilityIsActive()
                 && GetBattlerTurnOrderNum(gActiveBattler) < var)
             {

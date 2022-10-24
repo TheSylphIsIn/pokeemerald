@@ -3166,6 +3166,19 @@ const struct Item gItems[] =
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
+	
+	[ITEM_RAGE_BAND] =
+    {
+        .name = _("RAGE BAND"),
+        .itemId = ITEM_RAGE_BAND,
+        .price = 2000,
+		.holdEffect = HOLD_EFFECT_RAGE_BAND,
+		.holdEffectParam = 10,
+        .description = sRageBandDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
 
     [ITEM_RED_SCARF] =
     {

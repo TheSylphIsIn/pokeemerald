@@ -529,8 +529,9 @@
 // Further hold items 
 #define ITEM_CHILLING_ORB 402
 #define ITEM_WIDE_LENS 403
+#define ITEM_RAGE_BAND 404
 
-#define ITEMS_COUNT 404
+#define ITEMS_COUNT 405
 #define ITEM_FIELD_ARROW ITEMS_COUNT
 
 // Range of berries given out by various NPCS

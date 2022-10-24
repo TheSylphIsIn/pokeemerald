@@ -608,7 +608,7 @@ static const struct StatFractions sAccuracyStageRatios[] =
 };
 
 // The chance is 1/N for each stage.
-static const u16 sCriticalHitChance[] = {16, 8, 4, 3, 2, 1};
+static const u16 sCriticalHitChance[] = {1, 8, 4, 3, 2, 1};
 
 static const u32 sStatusFlagsForMoveEffects[NUM_MOVE_EFFECTS] =
 {
@@ -1349,20 +1349,36 @@ static void Cmd_critcalc(void)
 
     gPotentialItemEffectBattler = gBattlerAttacker;
 
-    critChance  = 2 * ((gBattleMons[gBattlerAttacker].status2 & STATUS2_FOCUS_ENERGY) != 0)
-                + (gBattleMoves[gCurrentMove].effect == EFFECT_HIGH_CRITICAL)
-                + (gBattleMoves[gCurrentMove].effect == EFFECT_SKY_ATTACK)
-                + (gBattleMoves[gCurrentMove].effect == EFFECT_BLAZE_KICK)
-                + (gBattleMoves[gCurrentMove].effect == EFFECT_POISON_TAIL)
-                + (holdEffect == HOLD_EFFECT_SCOPE_LENS)
-				+ 2 * (gBattleMons[gBattlerAttacker].ability == ABILITY_SUPER_LUCK)
-                + 2 * (holdEffect == HOLD_EFFECT_LUCKY_PUNCH && gBattleMons[gBattlerAttacker].species == SPECIES_CHANSEY)
-                + 2 * (holdEffect == HOLD_EFFECT_STICK && gBattleMons[gBattlerAttacker].species == SPECIES_FARFETCHD);
+    critChance  = 2 * ((gBattleMons[gBattlerAttacker].status2 & STATUS2_FOCUS_ENERGY) != 0) // cat 1
+                + (gBattleMoves[gCurrentMove].effect == EFFECT_HIGH_CRITICAL) // cat 2
+                + (gBattleMoves[gCurrentMove].effect == EFFECT_SKY_ATTACK) // cat 2
+                + (gBattleMoves[gCurrentMove].effect == EFFECT_BLAZE_KICK) // cat 2
+                + (gBattleMoves[gCurrentMove].effect == EFFECT_POISON_TAIL) // cat 2
+                + (holdEffect == HOLD_EFFECT_SCOPE_LENS) // cat 3
+				+ (holdEffect == HOLD_EFFECT_RAGE_BAND && gBattleMons[gBattlerAttacker].hp <= (gBattleMons[gBattlerAttacker].maxHP / 2)) // cat 3
+				+ (holdEffect == HOLD_EFFECT_RAGE_BAND && gBattleMons[gBattlerAttacker].hp <= (gBattleMons[gBattlerAttacker].maxHP / 5)) // cat 3
+				+ (holdEffect == HOLD_EFFECT_RAGE_BAND && gBattleMons[gBattlerAttacker].hp <= (gBattleMons[gBattlerAttacker].maxHP / 20)) // cat 3
+                + 2 * (holdEffect == HOLD_EFFECT_LUCKY_PUNCH && gBattleMons[gBattlerAttacker].species == SPECIES_CHANSEY) // cat 3
+                + 2 * (holdEffect == HOLD_EFFECT_STICK && gBattleMons[gBattlerAttacker].species == SPECIES_FARFETCHD) // cat 3
+				+ 2 * (gBattleMons[gBattlerAttacker].ability == ABILITY_SUPER_LUCK); // cat 4;
 
+	// Mons can only get one boost from each category. (Setup/Move/Item/Ability)
+	// Critical rate caps at 100% at +5 stages.
+	/* Max stages:
+	* Without super luck on any move: +3
+	* Without super luck on high crit move: +4
+	* With super luck: +5/6
+	* With rage band and near death: +5/6/7/8	
+	* Without focus energy: +1/2, (SL) +4/5, (RB+SL) +6
+	
+	* How hard should it be to max crit rate?
+	* Consuming moveslot+itemslot just for double damage when SD/NP does the same thing and more...
+	*/
     if (critChance >= ARRAY_COUNT(sCriticalHitChance))
         critChance = ARRAY_COUNT(sCriticalHitChance) - 1;
 
-    if (((gBattleMons[gBattlerTarget].ability != ABILITY_BATTLE_ARMOR && gBattleMons[gBattlerTarget].ability != ABILITY_SHELL_ARMOR) || !(AbilityIsActive()))
+    if (critChance != 0 // moves will not crit if crit chance is not boosted.
+	 && ((gBattleMons[gBattlerTarget].ability != ABILITY_BATTLE_ARMOR && gBattleMons[gBattlerTarget].ability != ABILITY_SHELL_ARMOR) || !(AbilityIsActive()))
      && !(gStatuses3[gBattlerAttacker] & STATUS3_CANT_SCORE_A_CRIT)
      && !(gBattleTypeFlags & (BATTLE_TYPE_WALLY_TUTORIAL | BATTLE_TYPE_FIRST_BATTLE))
      && !(Random() % sCriticalHitChance[critChance]))

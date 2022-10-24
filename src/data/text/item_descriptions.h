@@ -1146,6 +1146,11 @@ static const u8 sWideLensDesc[] = _(
 	"A hold item that\n"
 	"ups ACCURACY a\n"
 	"little bit.");
+	
+static const u8 sRageBandDesc[] = _(
+	"Boosts holder's\n"
+	"offenses as HP\n"
+	"gets lower.");
 
 static const u8 sRedScarfDesc[] = _(
     "A hold item that\n"

@@ -4862,9 +4862,9 @@ const struct PokedexEntry gPokedexEntries[] =
 
 	[NATIONAL_DEX_SLOSHMOSH] =
 	{
-		.categoryName = _(""),
-		.height = 1,
-		.weight = 1,
+		.categoryName = _("SLIME"),
+		.height = 12,
+		.weight = 34,
 		.description = gSloshmoshPokedexText,
 		.pokemonScale = 256,
 		.pokemonOffset = 0,
@@ -4874,9 +4874,9 @@ const struct PokedexEntry gPokedexEntries[] =
 
 	[NATIONAL_DEX_SLURPINSKI] =
 	{
-		.categoryName = _(""),
-		.height = 1,
-		.weight = 1,
+		.categoryName = _("PYRAMID"),
+		.height = 33,
+		.weight = 345,
 		.description = gSlurpinskiPokedexText,
 		.pokemonScale = 256,
 		.pokemonOffset = 0,
@@ -4886,9 +4886,9 @@ const struct PokedexEntry gPokedexEntries[] =
 
 	[NATIONAL_DEX_KEESH] =
 	{
-		.categoryName = _(""),
-		.height = 1,
-		.weight = 1,
+		.categoryName = _("EGG SHELL"),
+		.height = 6,
+		.weight = 5,
 		.description = gKeeshPokedexText,
 		.pokemonScale = 256,
 		.pokemonOffset = 0,
@@ -4898,7 +4898,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
 	[NATIONAL_DEX_HATCHBLING] =
 	{
-		.categoryName = _(""),
+		.categoryName = _("BIRD"),
 		.height = 1,
 		.weight = 1,
 		.description = gHatchblingPokedexText,
@@ -4910,7 +4910,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
 	[NATIONAL_DEX_HUMMBLING] =
 	{
-		.categoryName = _(""),
+		.categoryName = _("BIRD"),
 		.height = 1,
 		.weight = 1,
 		.description = gHummblingPokedexText,
@@ -4922,7 +4922,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
 	[NATIONAL_DEX_KEESIGHT] =
 	{
-		.categoryName = _(""),
+		.categoryName = _("BAT"),
 		.height = 1,
 		.weight = 1,
 		.description = gKeesightPokedexText,
@@ -4934,7 +4934,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
 	[NATIONAL_DEX_KEESPELL] =
 	{
-		.categoryName = _(""),
+		.categoryName = _("BAT"),
 		.height = 1,
 		.weight = 1,
 		.description = gKeespellPokedexText,

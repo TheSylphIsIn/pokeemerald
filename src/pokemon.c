@@ -1945,9 +1945,9 @@ static const u8 sMonFrontAnimIdsTable[NUM_SPECIES - 1] =
 	[SPECIES_ELADRIFT- 1]	= ANIM_H_SLIDE_WOBBLE,
 	[SPECIES_SLITHURENT- 1]	= ANIM_V_SHAKE,
 	[SPECIES_PRESCYLLON- 1]	= ANIM_V_SHAKE,
-	[SPECIES_SLOSHMOSH- 1]	= ANIM_V_SHAKE,
+	[SPECIES_SLOSHMOSH- 1]	= ANIM_H_SLIDE_WOBBLE,
 	[SPECIES_SLURPINSKI- 1]	= ANIM_V_SHAKE,
-	[SPECIES_KEESH- 1]		= ANIM_V_SHAKE,
+	[SPECIES_KEESH- 1]		= ANIM_V_STRETCH,
 	[SPECIES_HATCHBLING- 1]	= ANIM_V_SHAKE,
 	[SPECIES_HUMMBLING- 1]	= ANIM_V_SHAKE,
 	[SPECIES_KEESIGHT- 1]	= ANIM_V_SHAKE,
@@ -3450,6 +3450,15 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
 	}
 	if (attackerHoldEffect == HOLD_EFFECT_LIFE_ORB)
 		gBattleMovePower = (gBattleMovePower * 130) / 100;
+	if (attackerHoldEffect == HOLD_EFFECT_RAGE_BAND)
+	{
+		if (attacker->hp <= (attacker->maxHP / 20))
+			gBattleMovePower = (150 * gBattleMovePower) / 100;
+		else if (attacker->hp <= (attacker->maxHP / 5))
+			gBattleMovePower = (135 * gBattleMovePower) / 100;
+		else if (attacker->hp <= (attacker->maxHP / 2))
+			gBattleMovePower = (120 * gBattleMovePower) / 100;
+	}
 
     // Apply abilities / field sports
     if (defender->ability == ABILITY_THICK_FAT && (type == TYPE_FIRE || type == TYPE_ICE) && AbilityIsActive())
