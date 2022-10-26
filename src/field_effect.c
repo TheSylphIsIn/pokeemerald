@@ -2246,10 +2246,28 @@ static void EscapeRopeWarpOutEffect_Init(struct Task *task)
     task->tStartDir = GetPlayerFacingDirection();
 }
 
+/*
+	Used to allow the player to burrow.
+	* SYNTAX: {current map group, current map num, target map num, target warp}
+	* If player's group/num match an entry of the table, they will be sent to
+	* the target warp of the target num in the burrows map group instead of their heal spot.
+	
+	* If you want more than one burrow per map, add X/Y coords to this mess.
+*/
+
+static const u8 sBurrowMapTable[][4] = 
+{
+	{0, 0, 0, 0}, // the first entry is null because it would be treated as FALSE.
+	{MAP_GROUP(DROPPER_POINT), MAP_NUM(DROPPER_POINT), 1, 0},
+	{0xFF, 0xFF, 0xFF, 0xFF}
+};
+
 static void EscapeRopeWarpOutEffect_Spin(struct Task *task)
 {
     struct ObjectEvent *objectEvent;
     u8 spinDirections[5] =  {DIR_SOUTH, DIR_WEST, DIR_EAST, DIR_NORTH, DIR_SOUTH};
+	u8 i = 0;
+	
     if (task->tTimer != 0 && (--task->tTimer) == 0)
     {
         TryFadeOutOldMapMusic();
@@ -2261,7 +2279,19 @@ static void EscapeRopeWarpOutEffect_Spin(struct Task *task)
         if (task->tTimer == 0 && !gPaletteFade.active && BGMusicStopped() == TRUE)
         {
             SetObjectEventDirection(objectEvent, task->tStartDir);
-            SetWarpDestinationToEscapeWarp();
+			if (IsPlayerOnBurrowEntrance())
+			{
+				i = MapHasBurrow();
+				if (i)
+				{
+					SetWarpDestinationToMapWarp(MAP_GROUP(NEW_MAP1), sBurrowMapTable[i][2],
+							sBurrowMapTable[i][3]);
+				}
+				else
+					SetWarpDestinationToEscapeWarp();
+			}
+			else
+				SetWarpDestinationToEscapeWarp();
             WarpIntoMap();
             gFieldCallback = FieldCallback_EscapeRopeWarpIn;
             SetMainCallback2(CB2_LoadMap);
@@ -3877,5 +3907,31 @@ static void Task_MoveDeoxysRock(u8 taskId)
             }
             break;
     }
+}
+
+// returns TRUE if the tile the player is standing on should allow burrowing.
+bool8 IsPlayerOnBurrowEntrance(void)
+{
+	if (gObjectEvents[gPlayerAvatar.objectEventId].currentMetatileBehavior == MB_BURROW_ENTRANCE)
+		return TRUE;
+	else 
+		return FALSE;
+}
+
+// returns TRUE if the player's current map has a valid entry in sBurrowMapTable.
+bool8 MapHasBurrow(void)
+{
+	u8 i;
+	
+	for (i = 1; sBurrowMapTable[i][0] != 0xFF; i++)
+	{
+		if (sBurrowMapTable[i][0] == gSaveBlock1Ptr->location.mapGroup &&
+			sBurrowMapTable[i][1] == gSaveBlock1Ptr->location.mapNum)
+		{
+			return i;
+		}
+	}
+	
+	return FALSE;
 }
 

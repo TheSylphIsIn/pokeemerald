@@ -610,7 +610,7 @@
 // gMapGroup_IndoorRoute124
 #define MAP_ROUTE124_DIVING_TREASURE_HUNTERS_HOUSE (0 | (33 << 8))
 
-// gMapGroup_TestingGroup
+// gMapGroup_Burrows
 #define MAP_NEW_MAP1 (0 | (34 << 8))
 #define MAP_NEW_MAP2 (1 | (34 << 8))
 

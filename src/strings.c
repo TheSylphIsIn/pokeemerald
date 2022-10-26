@@ -473,6 +473,7 @@ const u8 gText_CancelBattle[] = _("Cancel the battle?");
 const u8 gText_ReturnToWaitingRoom[] = _("Return to the WAITING ROOM?");
 const u8 gText_CancelChallenge[] = _("Cancel the challenge?");
 const u8 gText_EscapeFromHere[] = _("Want to escape from here and return\nto {STR_VAR_1}?");
+const u8 gText_BurrowHere[] = _("Want to enter the burrow here?");
 const u8 gText_ReturnToHealingSpot[] = _("Want to return to the healing spot\nused last in {STR_VAR_1}?");
 const u8 gText_PauseUntilPress[] = _("{PAUSE_UNTIL_PRESS}");
 const u8 gJPText_AreYouSureYouWantToSpinTradeMon[] = _("{STR_VAR_1}を ぐるぐるこうかんに\nだして よろしいですか？");

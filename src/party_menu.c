@@ -3665,9 +3665,14 @@ static void CursorCb_FieldMove(u8 taskId)
                 sPartyMenuInternal->data[0] = fieldMove;
                 break;
             case FIELD_MOVE_DIG:
+				if (IsPlayerOnBurrowEntrance() && MapHasBurrow())
+					StringExpandPlaceholders(gStringVar4, gText_BurrowHere);
+				else
+				{
                 mapHeader = Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->escapeWarp.mapGroup, gSaveBlock1Ptr->escapeWarp.mapNum);
                 GetMapNameGeneric(gStringVar1, mapHeader->regionMapSectionId);
                 StringExpandPlaceholders(gStringVar4, gText_EscapeFromHere);
+				}
                 DisplayFieldMoveExitAreaMessage(taskId);
                 sPartyMenuInternal->data[0] = fieldMove;
                 break;

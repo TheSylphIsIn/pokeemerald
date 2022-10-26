@@ -35,7 +35,7 @@
     "gMapGroup_IndoorRoute123",
     "gMapGroup_IndoorRoute119",
     "gMapGroup_IndoorRoute124",
-    "gMapGroup_TestingGroup",
+    "gMapGroup_Burrows",
     "gMapGroup_FoneiOverworld"
   ],
   "gMapGroup_TownsAndRoutes": [
@@ -643,7 +643,7 @@
   "gMapGroup_IndoorRoute124": [
     "Route124_DivingTreasureHuntersHouse"
   ],
-  "gMapGroup_TestingGroup": [
+  "gMapGroup_Burrows": [
     "NewMap1",
     "NewMap2"
   ],

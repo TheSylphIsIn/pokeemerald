@@ -30,7 +30,7 @@
 #define MB_UNUSED_SOOTOPOLIS_DEEP_WATER_2 0x1A
 #define MB_STAIRS_OUTSIDE_ABANDONED_SHIP 0x1B
 #define MB_SHOAL_CAVE_ENTRANCE 0x1C
-#define MB_UNUSED_1D 0x1D
+#define MB_BURROW_ENTRANCE 0x1D // allows the tile to warp you somewhere fresh when you use dig
 #define MB_UNUSED_1E 0x1E
 #define MB_UNUSED_1F 0x1F
 #define MB_ICE 0x20
