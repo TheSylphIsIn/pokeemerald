@@ -1,61 +1,61 @@
 gText_Birch_Welcome::
-	.string "Hi! Sorry to keep you waiting!\p"
+	.string "Hey! Glad you finally made it!\p"
 	.string "Welcome to the world of POKéMON!\p"
-	.string "My name is BIRCH.\p"
-	.string "But everyone calls me the POKéMON\n"
-	.string "PROFESSOR.\p"
+	.string "My name is MANGROVE.\p"
+	.string "I'm a POKéMON PROFESSOR in the\n"
+	.string "FONEI region.\p"
 	.string "$"
 
 gText_Birch_Pokemon::
-	.string "This is what we call a “POKéMON.”\p"
+	.string "And this...is a FONEI POKéMON!\p"
 	.string "\n"
 	.string "$"
 
 gText_Birch_MainSpeech::
-	.string "This world is widely inhabited by\n"
-	.string "creatures known as POKéMON.\p"
-	.string "We humans live alongside POKéMON,\n"
-	.string "at times as friendly playmates, and\l"
-	.string "at times as cooperative workmates.\p"
-	.string "And sometimes, we band together\n"
-	.string "and battle others like us.\p"
-	.string "But despite our closeness, we don't\n"
-	.string "know everything about POKéMON.\p"
-	.string "In fact, there are many, many\n"
-	.string "secrets surrounding POKéMON.\p"
-	.string "To unravel POKéMON mysteries,\n"
-	.string "I've been undertaking research.\l"
-	.string "That's what I do.\p"
+	.string "There are countless varieties\n"
+	.string "of POKéMON in this world.\p"
+	.string "Some you've never even heard of!\n"
+	.string "And neither have I, for that matter.\l"
+	.string "FONEI has many wild, untamed places.\p"
+	.string "POKéMON lurk in every corner, some\n"
+	.string "old and some new.\p"
+	.string "Not many people have dared to venture\n"
+	.string "into the wild to meet these POKéMON.\p"
+	.string "That's my mission: to explore FONEI\n"
+	.string "and uncover its secrets!\p"
+	.string "Powerful POKéMON, mysterious ruins,\n"
+	.string "strange folklore…\l"
+	.string "There's so much for me to learn.\p"
 	.string "$"
 
 gText_Birch_AndYouAre::
-	.string "And you are?$"
+	.string "And what about you?$"
 
 gText_Birch_BoyOrGirl::
-	.string "Are you a boy?\n"
-	.string "Or are you a girl?$"
+	.string "What do you want to look like?\n"
+	.string "$"
 
 gText_Birch_WhatsYourName::
-	.string "All right.\n"
-	.string "What's your name?$"
+	.string "Alright.\n"
+	.string "And what do they call you?$"
 
 gText_Birch_SoItsPlayer::
-	.string "So it's {PLAYER}{KUN}?$"
+	.string "{PLAYER}{KUN}, is it?$"
 
 gText_Birch_YourePlayer::
-	.string "Ah, okay!\p"
-	.string "You're {PLAYER}{KUN} who's moving to my\n"
-	.string "hometown of LITTLEROOT.\l"
-	.string "I get it now!\p"
+	.string "I see!\p"
+	.string "So you're {PLAYER}{KUN}, and you want\n"
+	.string "to explore FONEI too.\l"
+	.string "Who wouldn't?\p"
 	.string "$"
 
 gText_Birch_AreYouReady::
-	.string "All right, are you ready?\p"
+	.string "Alright, are you ready?\p"
 	.string "Your very own adventure is about\n"
 	.string "to unfold.\p"
 	.string "Take courage, and leap into the\n"
 	.string "world of POKéMON where dreams,\l"
 	.string "adventure, and friendships await!\p"
-	.string "Well, I'll be expecting you later.\n"
-	.string "Come see me in my POKéMON LAB.\p"
+	.string "My POKéMON LAB is just up the road.\n"
+	.string "Come see me when you wake up!\p"
 	.string "$"

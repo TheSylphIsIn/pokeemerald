@@ -6047,4 +6047,19 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.category = MOVE_CATEGORY_SPECIAL,
 		.attribute = MOVE_ATTRIBUTE_ENERGY,
 	},
+	
+	[MOVE_AQUA_TAIL] = 
+	{
+		.effect = EFFECT_DEFENSE_DOWN_HIT,
+		.power = 95,
+		.type = TYPE_WATER,
+		.accuracy = 90,
+		.pp = 10,
+		.secondaryEffectChance = 20,
+		.target = MOVE_TARGET_SELECTED,
+		.priority = 0,
+		.flags = FLAG_MIRROR_MOVE_AFFECTED | FLAG_PROTECT_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_MAKES_CONTACT,
+		.category = MOVE_CATEGORY_PHYSICAL,
+		.attribute = MOVE_ATTRIBUTE_CRUSH,
+	},
 };

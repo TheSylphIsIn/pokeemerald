@@ -415,10 +415,11 @@
 #define MOVE_SHELL_SMASH 411
 #define MOVE_SKYDIVE 412
 #define MOVE_INFERNO_RAY 413
+#define MOVE_AQUA_TAIL 414
 // elemental fangs
 // energy ball (TM?)
 // body press (TM?)
 
-#define MOVES_COUNT 414
+#define MOVES_COUNT 415
 
 #endif  // GUARD_CONSTANTS_MOVES_H

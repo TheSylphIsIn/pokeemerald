@@ -16,8 +16,8 @@
 static const struct TrainerMonNoItemDefaultMoves sParty_Sawyer1[] = {
     {
     .iv = 0,
-    .lvl = 21,
-    .species = SPECIES_GEODUDE,
+    .lvl = 20,
+    .species = SPECIES_WYNAUT,
     }
 };
 

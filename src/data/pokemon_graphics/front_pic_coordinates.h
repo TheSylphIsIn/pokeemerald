@@ -2067,7 +2067,7 @@ const struct MonCoords gMonFrontPicCoords[] =
 	[SPECIES_DUBSNAKE] = 
 	{
 		.size = MON_COORDS_SIZE(46, 44),
-		.y_offset = 4,
+		.y_offset = 14,
 	},
 	[SPECIES_HYDROIL] = 
 	{
