@@ -79,12 +79,12 @@ static const u8 sGoNearCounterToEscapeFactor[] = {4, 4, 4, 4};
 
 bool8 AbilityIsActive(void)
 { 												\
-	if (gBattleMons[gBattlerAttacker].ability == ABILITY_MOLD_BREAKER 	
-		|| gBattleMons[gBattlerAttacker].ability == ABILITY_TERAVOLT 
-		|| gBattleMons[gBattlerAttacker].ability == ABILITY_TURBOBLAZE)	
-		return FALSE;													
-	else																
-		return TRUE;													
+	if (gBattleMons[gBattlerAttacker].ability == ABILITY_MOLD_BREAKER
+		|| gBattleMons[gBattlerAttacker].ability == ABILITY_TERAVOLT
+		|| gBattleMons[gBattlerAttacker].ability == ABILITY_TURBOBLAZE)
+		return FALSE;
+	else
+		return TRUE;
 }
 
 void HandleAction_UseMove(void)
@@ -323,6 +323,8 @@ void HandleAction_Switch(void)
 
     if (gBattleResults.playerSwitchesCounter < 255)
         gBattleResults.playerSwitchesCounter++;
+
+	RevertFormChange(gBattlerAttacker, GET_BATTLER_SIDE(gBattlerAttacker), TRUE);
 }
 
 void HandleAction_UseItem(void)
@@ -2459,10 +2461,10 @@ u8 TryFormChange(u8 battler, u16 move)
 			if (gBattleMons[battler].hp <= (gBattleMons[battler].maxHP / 2)
 				&& gBattleMons[battler].ability == ABILITY_SHIELDS_DOWN)
 			{
-				gTransformedSpecies[battler] = SPECIES_MINIOR_CORE; 
+				gTransformedSpecies[battler] = SPECIES_MINIOR_CORE;
 				StringCopy(gBattleTextBuff1, gText_CoreForm);
 			}
-			break; 
+			break;
 		case SPECIES_MINIOR_CORE:
 			if (gBattleMons[battler].hp > (gBattleMons[battler].maxHP / 2)
 				&& gBattleMons[battler].ability == ABILITY_SHIELDS_UP)
@@ -2478,13 +2480,13 @@ u8 TryFormChange(u8 battler, u16 move)
 		default:
 			break;
 	}
-    
+
 	if (gTransformedSpecies[battler] && gTransformedSpecies[battler] != gBattleMons[battler].species)
 	{ // continues transformation sequence if it's indicated that the mon should transform
 		gBattleMons[battler].species = gTransformedSpecies[battler];
 		return TRUE;
 	}
-	else 
+	else
 		return FALSE;
 }
 
@@ -3728,7 +3730,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
         defHoldEffect = ItemId_GetHoldEffect(defItem);
         defHoldEffectParam = ItemId_GetHoldEffectParam(defItem);
     }
-	else 
+	else
 	{
 		defHoldEffect = HOLD_EFFECT_NONE;
 		defHoldEffectParam = 0;
@@ -3764,15 +3766,15 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
 			if (gBattleMons[battlerId].statStages[STAT_ATK] < MAX_STAT_STAGE)
 			{
 				gBattleMons[battlerId].status2 &= STATUS2_BERSERK;
-				effect = ITEM_STATS_CHANGE; 
+				effect = ITEM_STATS_CHANGE;
 			}
 			if (effect)
 			{
 				gBattleScripting.battler = battlerId;
 				gPotentialItemEffectBattler = battlerId;
 				gActiveBattler = gBattlerAttacker = battlerId;
-				BattleScriptExecute(BattleScript_BerserkGene); 
-				gBattleMons[battlerId].statStages[STAT_ATK] = (MAX_STAT_STAGE - 2);				
+				BattleScriptExecute(BattleScript_BerserkGene);
+				gBattleMons[battlerId].statStages[STAT_ATK] = (MAX_STAT_STAGE - 2);
 			}
 			break;
         }
@@ -3872,7 +3874,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                 }
                 break;
 			case HOLD_EFFECT_TOXIC_ORB:
-				if (gBattleMons[battlerId].hp != 0 && 
+				if (gBattleMons[battlerId].hp != 0 &&
 					!((gSideStatuses[GetBattlerSide(battlerId)] & SIDE_STATUS_SAFEGUARD)
 					|| gBattleMons[battlerId].ability == ABILITY_IMMUNITY
 					|| gBattleMons[battlerId].ability == ABILITY_SHIELDS_DOWN
@@ -3891,7 +3893,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
 				}
 				break;
 			case HOLD_EFFECT_FLAME_ORB:
-				if (gBattleMons[battlerId].hp != 0 && 
+				if (gBattleMons[battlerId].hp != 0 &&
 					!((gSideStatuses[GetBattlerSide(battlerId)] & SIDE_STATUS_SAFEGUARD)
 					|| gBattleMons[battlerId].ability == ABILITY_WATER_VEIL
 					|| gBattleMons[battlerId].ability == ABILITY_SHIELDS_DOWN
@@ -3907,7 +3909,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
 				}
 				break;
 			case HOLD_EFFECT_STATIC_ORB:
-				if (gBattleMons[battlerId].hp != 0 && 
+				if (gBattleMons[battlerId].hp != 0 &&
 					!((gSideStatuses[GetBattlerSide(battlerId)] & SIDE_STATUS_SAFEGUARD)
 					|| gBattleMons[battlerId].ability == ABILITY_LIMBER
 					|| gBattleMons[battlerId].ability == ABILITY_SHIELDS_DOWN
@@ -3921,7 +3923,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
 				}
 				break;
 			case HOLD_EFFECT_CHILLING_ORB:
-				if (gBattleMons[battlerId].hp != 0 && 
+				if (gBattleMons[battlerId].hp != 0 &&
 					!((gSideStatuses[GetBattlerSide(battlerId)] & SIDE_STATUS_SAFEGUARD)
 					|| gBattleMons[battlerId].ability == ABILITY_MAGMA_ARMOR
 					|| gBattleMons[battlerId].ability == ABILITY_SHIELDS_DOWN
@@ -4074,7 +4076,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                 }
                 break;
             case HOLD_EFFECT_CURE_STATUS:
-                if (gBattleMons[battlerId].status1 & STATUS1_ANY || 
+                if (gBattleMons[battlerId].status1 & STATUS1_ANY ||
 				(gBattleMons[battlerId].status2 & STATUS2_CONFUSION && !(gBattleMons[battlerId].status2 & STATUS2_BERSERK)))
                 {
                     i = 0;
@@ -4235,7 +4237,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                 }
                 break;
             case HOLD_EFFECT_CURE_STATUS:
-                if (gBattleMons[battlerId].status1 & STATUS1_ANY || 
+                if (gBattleMons[battlerId].status1 & STATUS1_ANY ||
 				(gBattleMons[battlerId].status2 & STATUS2_CONFUSION && !(gBattleMons[battlerId].status2 & STATUS2_BERSERK)))
                 {
                     if (gBattleMons[battlerId].status1 & STATUS1_PSN_ANY)
@@ -4593,7 +4595,7 @@ u8 IsMonDisobedient(void)
 static void ForewarnChooseMove(u32 battler)
 {
     u16 i, j, bestMove, bestMon, effPower;
-	
+
     // Put all moves
     for (bestMon = 0, i = 0, bestMove = 0; i < MAX_BATTLERS_COUNT; i++)
     {
@@ -4632,3 +4634,16 @@ static void ForewarnChooseMove(u32 battler)
     PREPARE_MOVE_BUFFER(gBattleTextBuff1, bestMove)
 	PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff2, bestMon, gBattlerPartyIndexes[bestMon])
 }
+
+void RevertFormChange(u32 monId, u32 side, u32 switchOut)
+{
+	u32 i, species;
+	struct Pokemon *party = (side == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
+	species = GetMonData(&party[gBattlerPartyIndexes[monId]], MON_DATA_SPECIES, NULL);
+
+	if (species == SPECIES_SPOOKUM_BUSTED && !switchOut)
+		RecalcBattlerStats(monId, SPECIES_SPOOKUM);
+	else if (gTransformedSpecies[monId] && species != SPECIES_SPOOKUM_BUSTED)
+		RecalcBattlerStats(monId, gOriginalSpecies[monId]);
+}
+

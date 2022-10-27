@@ -645,7 +645,8 @@
   ],
   "gMapGroup_Burrows": [
     "NewMap1",
-    "NewMap2"
+    "NewMap2",
+    "BurrowFirstTrail"
   ],
   "gMapGroup_FoneiOverworld": [
     "ShadedPass",

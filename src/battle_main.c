@@ -308,7 +308,7 @@ void RecalcBattlerStats(u32 battler, u16 species)
 	struct Pokemon *mon;
 	
 	if (GetBattlerSide(battler) == B_SIDE_OPPONENT)
-        mon = &gEnemyParty[gBattlerPartyIndexes[battler]]; // the changes stay after battle, probably due to this.
+        mon = &gEnemyParty[gBattlerPartyIndexes[battler]];
     else
         mon = &gPlayerParty[gBattlerPartyIndexes[battler]];
 	SetMonData(mon, MON_DATA_SPECIES, &species);
@@ -5208,19 +5208,9 @@ static void HandleEndTurn_FinishBattle(void)
             TryPutBreakingNewsOnAir();
         }
 
-		for (i = 0; i < MAX_BATTLERS_COUNT; i++)
-		{
-			if (gTransformedSpecies[i])
-				RecalcBattlerStats(i, gOriginalSpecies[i]);
-		}
 		for (i = 0; i < PARTY_SIZE; i++)
-		{ // this is kind of disgusting but it should (?) convert switched out busted forms back to normal when battles end
-			if (GetMonData(gPlayerParty[i], MON_DATA_SPECIES, NULL) == SPECIES_SPOOKUM_BUSTED)
-			{// ...it didn't work.
-				gTransformedSpecies[0] = SPECIES_SPOOKUM;
-				SetMonData(&gPlayerParty[i], MON_DATA_SPECIES, &gTransformedSpecies[0]);
-				CalculateMonStats(&gPlayerParty[i]);
-			}
+		{ 
+			RevertFormChange(i, B_SIDE_PLAYER, FALSE);
 		}
         RecordedBattle_SetPlaybackFinished();
         BeginFastPaletteFade(3);
