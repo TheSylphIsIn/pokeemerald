@@ -3237,7 +3237,7 @@ static void Cmd_tryfaintmon(void)
             gHitMarker |= HITMARKER_FAINTED(gActiveBattler);
             BattleScriptPush(gBattlescriptCurrInstr + 7);
             gBattlescriptCurrInstr = BS_ptr;
-			RevertFormChange(gActiveBattler, GET_BATTLER_SIDE(gActiveBattler), TRUE);
+			RevertFormChange(gBattlerPartyIndexes[gActiveBattler], GET_BATTLER_SIDE(gActiveBattler), TRUE);
             if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
             {
                 gHitMarker |= HITMARKER_PLAYER_FAINTED;
@@ -10057,7 +10057,7 @@ static void Cmd_docastformchangeanimation(void)
 
     if (gBattleMons[gActiveBattler].status2 & STATUS2_SUBSTITUTE)
         *(&gBattleStruct->formToChangeInto) |= CASTFORM_SUBSTITUTE;
-	RecalcBattlerStats(gActiveBattler, gTransformedSpecies[gActiveBattler]);
+	RecalcBattlerStats(gBattlerPartyIndexes[gActiveBattler], gTransformedSpecies[gActiveBattler]);
     BtlController_EmitBattleAnimation(BUFFER_A, B_ANIM_CASTFORM_CHANGE, gBattleStruct->formToChangeInto);
     MarkBattlerForControllerExec(gActiveBattler);
 
@@ -10334,7 +10334,7 @@ static void Cmd_handleballthrow(void)
             MarkBattlerForControllerExec(gActiveBattler);
             gBattlescriptCurrInstr = BattleScript_SuccessBallThrow;
             SetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]], MON_DATA_POKEBALL, &gLastUsedItem);
-			RevertFormChange(gBattlerTarget, B_SIDE_OPPONENT, FALSE);
+			RevertFormChange(gBattlerPartyIndexes[gBattlerTarget], B_SIDE_OPPONENT, FALSE);
 
             if (CalculatePlayerPartyCount() == PARTY_SIZE)
                 gBattleCommunication[MULTISTRING_CHOOSER] = 0;
@@ -10360,7 +10360,7 @@ static void Cmd_handleballthrow(void)
             {
                 gBattlescriptCurrInstr = BattleScript_SuccessBallThrow;
                 SetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]], MON_DATA_POKEBALL, &gLastUsedItem);
-				RevertFormChange(gBattlerTarget, B_SIDE_OPPONENT, FALSE);
+				RevertFormChange(gBattlerPartyIndexes[gBattlerTarget], B_SIDE_OPPONENT, FALSE);
 
                 if (CalculatePlayerPartyCount() == PARTY_SIZE)
                     gBattleCommunication[MULTISTRING_CHOOSER] = 0;
