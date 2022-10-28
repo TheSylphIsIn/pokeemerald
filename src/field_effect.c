@@ -2258,7 +2258,7 @@ static void EscapeRopeWarpOutEffect_Init(struct Task *task)
 static const u8 sBurrowMapTable[][4] = 
 {
 	{0, 0, 0, 0}, // the first entry is null because it would be treated as FALSE.
-	{MAP_GROUP(DROPPER_POINT), MAP_NUM(DROPPER_POINT), 1, 0},
+	{MAP_GROUP(FIRST_TRAIL), MAP_NUM(FIRST_TRAIL), MAP_NUM(BURROW_FIRST_TRAIL), 0},
 	{0xFF, 0xFF, 0xFF, 0xFF}
 };
 

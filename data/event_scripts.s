@@ -1109,3 +1109,5 @@ Common_EventScript_LegendaryFlewAway::
 	.include "data/maps/CranClearing/scripts.inc"
 
 	.include "data/maps/StonefaceWay/scripts.inc"
+
+	.include "data/maps/BurrowFirstTrail/scripts.inc"
