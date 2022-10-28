@@ -324,7 +324,7 @@ void HandleAction_Switch(void)
     if (gBattleResults.playerSwitchesCounter < 255)
         gBattleResults.playerSwitchesCounter++;
 
-	RevertFormChange(gBattlerAttacker, GET_BATTLER_SIDE(gBattlerAttacker), TRUE);
+	RevertFormChange(gBattlerPartyIndexes[gBattlerAttacker], GET_BATTLER_SIDE(gBattlerAttacker), TRUE);
 }
 
 void HandleAction_UseItem(void)
@@ -4638,25 +4638,12 @@ static void ForewarnChooseMove(u32 battler)
 void RevertFormChange(u32 monId, u32 side, u32 switchOut)
 {
 	u32 i, species;
-	u32 revertSpecies = 0;
 	struct Pokemon *party = (side == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
-	
-	if (!switchOut)
-	{
-		species = GetMonData(&party[monId], MON_DATA_SPECIES, NULL);
-		if (species == SPECIES_SPOOKUM_BUSTED)
-			revertSpecies = SPECIES_SPOOKUM;
-		if (revertSpecies)
-		{
-			SetMonData(&party[monId], MON_DATA_SPECIES, &revertSpecies);
-			CalculateMonStats(&party[monId]);
-		}
-	}
-	else
-	{
-		species = GetMonData(&party[gBattlerPartyIndexes[monId]], MON_DATA_SPECIES, NULL);
-		if (gTransformedSpecies[monId] && species != SPECIES_SPOOKUM_BUSTED)
-			RecalcBattlerStats(monId, gOriginalSpecies[monId]);
-	}
+	species = GetMonData(&party[monId], MON_DATA_SPECIES, NULL);
+
+	if (species == SPECIES_SPOOKUM_BUSTED && !switchOut)
+		RecalcBattlerStats(monId, SPECIES_SPOOKUM);
+	else if (gTransformedSpecies[monId] && species != SPECIES_SPOOKUM_BUSTED)
+		RecalcBattlerStats(monId, gOriginalSpecies[monId]);
 }
 

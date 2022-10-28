@@ -305,24 +305,20 @@ const struct OamData gOamData_BattleSpritePlayerSide =
 
 void RecalcBattlerStats(u32 battler, u16 species)
 {
-	struct Pokemon *mon;
+	struct Pokemon *party = (GET_BATTLER_SIDE(battler) == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
 	
-	if (GetBattlerSide(battler) == B_SIDE_OPPONENT)
-        mon = &gEnemyParty[gBattlerPartyIndexes[battler]];
-    else
-        mon = &gPlayerParty[gBattlerPartyIndexes[battler]];
-	SetMonData(mon, MON_DATA_SPECIES, &species);
-	CalculateMonStats(mon);
-    gBattleMons[battler].level = GetMonData(mon, MON_DATA_LEVEL);
-    gBattleMons[battler].hp = GetMonData(mon, MON_DATA_HP);
-    gBattleMons[battler].maxHP = GetMonData(mon, MON_DATA_MAX_HP);
-    gBattleMons[battler].attack = GetMonData(mon, MON_DATA_ATK);
-    gBattleMons[battler].defense = GetMonData(mon, MON_DATA_DEF);
-    gBattleMons[battler].speed = GetMonData(mon, MON_DATA_SPEED);
-    gBattleMons[battler].spAttack = GetMonData(mon, MON_DATA_SPATK);
-    gBattleMons[battler].spDefense = GetMonData(mon, MON_DATA_SPDEF);
-    gBattleMons[battler].ability = GetMonAbility(mon);
-	gBattleMons[battler].type1 = gBaseStats[gBattleMons[battler].species].type1;
+	SetMonData(&party[battler], MON_DATA_SPECIES, &species);
+	CalculateMonStats(&party[battler]);
+    gBattleMons[battler].level = GetMonData(&party[battler], MON_DATA_LEVEL);
+    gBattleMons[battler].hp = GetMonData(&party[battler], MON_DATA_HP);
+    gBattleMons[battler].maxHP = GetMonData(&party[battler], MON_DATA_MAX_HP);
+    gBattleMons[battler].attack = GetMonData(&party[battler], MON_DATA_ATK);
+    gBattleMons[battler].defense = GetMonData(&party[battler], MON_DATA_DEF);
+    gBattleMons[battler].speed = GetMonData(&party[battler], MON_DATA_SPEED);
+    gBattleMons[battler].spAttack = GetMonData(&party[battler], MON_DATA_SPATK);
+    gBattleMons[battler].spDefense = GetMonData(&party[battler], MON_DATA_SPDEF);
+    gBattleMons[battler].ability = GetMonAbility(&party[battler]);
+    gBattleMons[battler].type1 = gBaseStats[gBattleMons[battler].species].type1;
     gBattleMons[battler].type2 = gBaseStats[gBattleMons[battler].species].type2;
 }
 
@@ -5208,11 +5204,6 @@ static void HandleEndTurn_FinishBattle(void)
             TryPutBreakingNewsOnAir();
         }
 
-		for (i = 0; i < MAX_BATTLERS_COUNT; i++)
-		{
-			if (gTransformedSpecies[i])
-				RecalcBattlerStats(i, gOriginalSpecies[i]);
-		}
 		for (i = 0; i < PARTY_SIZE; i++)
 		{ 
 			if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) != SPECIES_NONE
