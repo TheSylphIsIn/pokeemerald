@@ -11,7 +11,7 @@ DropperPoint_Sign::
 	
 DropperPoint_EventScript_Morgan::
 	lock
-	goto_if_eq VAR_ROUTE102_STATE, 1, DropperPoint_EventScript_MorganPanic
+	goto_if_eq VAR_FONEI_COAST_STATE, 1, DropperPoint_EventScript_MorganPanic
 	goto_if_set FLAG_WOKE_MORGAN, DropperPoint_EventScript_MorganAwake
 	msgbox DropperPoint_Text_MorganWake, MSGBOX_DEFAULT
 	closemessage
@@ -177,7 +177,7 @@ DropperPoint_TriggerScript_BagContinue::
 	closemessage
 	msgbox DropperPoint_Text_SlimeApproaching2, MSGBOX_DEFAULT
 	closemessage
-	setvar VAR_ROUTE102_STATE, 1
+	setvar VAR_FONEI_COAST_STATE, 1
 	release
 	end
 
