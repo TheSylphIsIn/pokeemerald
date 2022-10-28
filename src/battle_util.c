@@ -324,7 +324,7 @@ void HandleAction_Switch(void)
     if (gBattleResults.playerSwitchesCounter < 255)
         gBattleResults.playerSwitchesCounter++;
 
-	RevertFormChange(gBattlerPartyIndexes[gBattlerAttacker], GET_BATTLER_SIDE(gBattlerAttacker), TRUE);
+	RevertFormChange(gBattlerAttacker, GET_BATTLER_SIDE(gBattlerAttacker), TRUE);
 }
 
 void HandleAction_UseItem(void)
@@ -4639,7 +4639,7 @@ void RevertFormChange(u32 monId, u32 side, u32 switchOut)
 {
 	u32 i, species;
 	struct Pokemon *party = (side == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
-	species = GetMonData(&party[monId], MON_DATA_SPECIES, NULL);
+	species = GetMonData(&party[gBattlerPartyIndexes[monId]], MON_DATA_SPECIES, NULL);
 
 	if (species == SPECIES_SPOOKUM_BUSTED && !switchOut)
 		RecalcBattlerStats(monId, SPECIES_SPOOKUM);
