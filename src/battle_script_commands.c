@@ -3237,7 +3237,8 @@ static void Cmd_tryfaintmon(void)
             gHitMarker |= HITMARKER_FAINTED(gActiveBattler);
             BattleScriptPush(gBattlescriptCurrInstr + 7);
             gBattlescriptCurrInstr = BS_ptr;
-			RevertFormChange(gActiveBattler, GET_BATTLER_SIDE(gActiveBattler), TRUE);
+			if (gTransformedSpecies[gActiveBattler])
+				RecalcBattlerStats(gActiveBattler, gOriginalSpecies[gActiveBattler]);
             if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
             {
                 gHitMarker |= HITMARKER_PLAYER_FAINTED;
@@ -9893,6 +9894,8 @@ static void Cmd_switchoutabilities(void)
         MarkBattlerForControllerExec(gActiveBattler);
         break;
 	default:
+		if (gTransformedSpecies[gActiveBattler] && gBattleMons[gActiveBattler].species != SPECIES_SPOOKUM_BUSTED)
+			RecalcBattlerStats(gActiveBattler, gOriginalSpecies[gActiveBattler]);
 		break;
     }
 
@@ -10334,7 +10337,6 @@ static void Cmd_handleballthrow(void)
             MarkBattlerForControllerExec(gActiveBattler);
             gBattlescriptCurrInstr = BattleScript_SuccessBallThrow;
             SetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]], MON_DATA_POKEBALL, &gLastUsedItem);
-			RevertFormChange(gBattlerTarget, B_SIDE_OPPONENT, FALSE);
 
             if (CalculatePlayerPartyCount() == PARTY_SIZE)
                 gBattleCommunication[MULTISTRING_CHOOSER] = 0;
@@ -10360,7 +10362,6 @@ static void Cmd_handleballthrow(void)
             {
                 gBattlescriptCurrInstr = BattleScript_SuccessBallThrow;
                 SetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]], MON_DATA_POKEBALL, &gLastUsedItem);
-				RevertFormChange(gBattlerTarget, B_SIDE_OPPONENT, FALSE);
 
                 if (CalculatePlayerPartyCount() == PARTY_SIZE)
                     gBattleCommunication[MULTISTRING_CHOOSER] = 0;

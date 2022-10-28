@@ -4680,16 +4680,6 @@
       "secondary_tileset": "gTileset_SeaRoute",
       "border_filepath": "data/layouts/StonefaceWay/border.bin",
       "blockdata_filepath": "data/layouts/StonefaceWay/map.bin"
-    },
-    {
-      "id": "LAYOUT_BURROW_FIRST_TRAIL",
-      "name": "BurrowFirstTrail_Layout",
-      "width": 14,
-      "height": 12,
-      "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_Cave",
-      "border_filepath": "data/layouts/BurrowFirstTrail/border.bin",
-      "blockdata_filepath": "data/layouts/BurrowFirstTrail/map.bin"
     }
   ]
 }

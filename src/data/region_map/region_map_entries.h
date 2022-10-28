@@ -1,7 +1,7 @@
 #ifndef GUARD_DATA_REGION_MAP_REGION_MAP_ENTRIES_H
 #define GUARD_DATA_REGION_MAP_REGION_MAP_ENTRIES_H
 
-static const u8 sMapName_LittlerootTown[] = _("CRAN TOWN");
+static const u8 sMapName_LittlerootTown[] = _("LITTLEROOT TOWN");
 static const u8 sMapName_OldaleTown[] = _("OLDALE TOWN");
 static const u8 sMapName_DewfordTown[] = _("DEWFORD TOWN");
 static const u8 sMapName_LavaridgeTown[] = _("LAVARIDGE TOWN");
@@ -17,8 +17,8 @@ static const u8 sMapName_LilycoveCity[] = _("LILYCOVE CITY");
 static const u8 sMapName_MossdeepCity[] = _("MOSSDEEP CITY");
 static const u8 sMapName_SootopolisCity[] = _("SOOTOPOLIS CITY");
 static const u8 sMapName_EverGrandeCity[] = _("EVER GRANDE CITY");
-static const u8 sMapName_Route101[] = _("DROPPER POINT");
-static const u8 sMapName_Route102[] = _("FIRST TRAIL");
+static const u8 sMapName_Route101[] = _("ROUTE 101");
+static const u8 sMapName_Route102[] = _("ROUTE 102");
 static const u8 sMapName_Route103[] = _("ROUTE 103");
 static const u8 sMapName_Route104[] = _("ROUTE 104");
 static const u8 sMapName_Route105[] = _("ROUTE 105");
