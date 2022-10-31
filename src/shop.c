@@ -156,7 +156,7 @@ static void Task_ReturnToItemListAfterDecorationPurchase(u8 taskId);
 static void Task_HandleShopMenuBuy(u8 taskId);
 static void Task_HandleShopMenuSell(u8 taskId);
 static void BuyMenuPrintItemDescriptionAndShowItemIcon(s32 item, bool8 onInit, struct ListMenu *list);
-static void BuyMenuPrintPriceInList(u8 windowId, u32 item, u8 y, u8 itemPos);
+static void BuyMenuPrintPriceInList(u8 windowId, u32 item, u8 y);
 
 static const struct YesNoFuncTable sShopPurchaseYesNoFuncs =
 {
@@ -655,7 +655,7 @@ bool8 GetSetItemBought(u8 storeId, u16 itemPos, u8 caseId)
     return FALSE;
 }
 
-static void BuyMenuPrintPriceInList(u8 windowId, u32 item, u8 y, u8 itemPos)
+static void BuyMenuPrintPriceInList(u8 windowId, u32 item, u8 y)
 {
     u8 x;
 	s32 itemId = item;
@@ -673,7 +673,7 @@ static void BuyMenuPrintPriceInList(u8 windowId, u32 item, u8 y, u8 itemPos)
         }
         else if (sMartInfo.martType == MART_TYPE_TM)
         {
-            if (GetSetItemBought(sMartInfo.shopId, itemPos, FLAG_GET_BOUGHT))
+            if (GetSetItemBought(sMartInfo.shopId, 0, FLAG_GET_BOUGHT))
             {
                 StringCopy(gStringVar1, gText_SoldOut);
                 StringExpandPlaceholders(gStringVar4, gText_StrVar1);
@@ -1045,7 +1045,6 @@ static void Task_BuyMenu(u8 taskId)
 
             if (sMartInfo.martType == MART_TYPE_NORMAL)
                 sShopData->totalCost = (ItemId_GetPrice(itemId) >> IsPokeNewsActive(POKENEWS_SLATEPORT));
-            }
 			else if (sMartInfo.martType == MART_TYPE_TM)
 			{ // TM shops have price in Star Pieces. The Star Piece price is stored in secondary ID.
 				sShopData->totalCost = ItemId_GetSecondaryId(itemId);
@@ -1380,7 +1379,7 @@ void CreatePokemartMenu(const u16 *itemsForSale)
     SetShopItemsForSale(itemsForSale);
 	SetShopId(0);
     ClearItemPurchases();
-    SetShopMenuCallback(EnableBothScriptContexts);
+    SetShopMenuCallback(ScriptContext_Enable);
 }
 
 void CreateTMShopMenu(const u16 *itemsForSale, u8 shopId)

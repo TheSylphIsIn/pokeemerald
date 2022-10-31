@@ -24,9 +24,9 @@
       "direction": "right"
     },
     {
-      "map": "MAP_DEWFORD_WILDS"
+      "map": "MAP_DEWFORD_WILDS",
       "offset": 0,
-      "direction": "left",
+      "direction": "left"
     }
   ],
   "object_events": [

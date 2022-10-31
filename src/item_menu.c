@@ -944,7 +944,7 @@ static void BagMenu_MoveCursorCallback(s32 itemIndex, bool8 onInit, struct ListM
     }
 }
 
-static void BagMenu_ItemPrintCallback(u8 windowId, u32 itemIndex, u8 y, u8 listPos)
+static void BagMenu_ItemPrintCallback(u8 windowId, u32 itemIndex, u8 y)
 {
     u16 itemId;
     u16 itemQuantity;

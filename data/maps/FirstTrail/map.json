@@ -14,14 +14,14 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "direction": "left",
+      "map": "MAP_DROPPER_POINT",
       "offset": -4,
-      "map": "MAP_DROPPER_POINT"
+      "direction": "left"
     },
     {
-      "direction": "right",
+      "map": "MAP_CRAN_TOWN",
       "offset": -2,
-      "map": "MAP_CRAN_TOWN"
+      "direction": "right"
     }
   ],
   "object_events": [
@@ -110,7 +110,7 @@
       "y": 11,
       "elevation": 0,
       "dest_map": "MAP_BURROW_FIRST_TRAIL",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [

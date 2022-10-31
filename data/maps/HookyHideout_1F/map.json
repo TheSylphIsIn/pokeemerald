@@ -86,14 +86,14 @@
       "y": 12,
       "elevation": 0,
       "dest_map": "MAP_ROUTE115",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     },
     {
       "x": 3,
       "y": 11,
       "elevation": 0,
       "dest_map": "MAP_HOOKY_HIDEOUT_2F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [

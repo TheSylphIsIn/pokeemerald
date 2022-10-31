@@ -14,19 +14,19 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "direction": "left",
+      "map": "MAP_FIRST_TRAIL",
       "offset": 2,
-      "map": "MAP_FIRST_TRAIL"
+      "direction": "left"
     },
     {
-      "direction": "up",
+      "map": "MAP_CRAN_CLEARING",
       "offset": -5,
-      "map": "MAP_CRAN_CLEARING"
+      "direction": "up"
     },
     {
-      "direction": "right",
+      "map": "MAP_STONEFACE_WAY",
       "offset": -4,
-      "map": "MAP_STONEFACE_WAY"
+      "direction": "right"
     }
   ],
   "object_events": [
@@ -89,28 +89,28 @@
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_CRAN_TOWN",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 4,
       "y": 14,
       "elevation": 0,
       "dest_map": "MAP_CRAN_TOWN",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 13,
       "y": 19,
       "elevation": 0,
       "dest_map": "MAP_CRAN_TOWN",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 5,
       "y": 21,
       "elevation": 0,
       "dest_map": "MAP_CRAN_TOWN",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [

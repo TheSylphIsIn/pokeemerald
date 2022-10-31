@@ -21,12 +21,12 @@
     {
       "map": "MAP_DEWFORD_TOWN",
       "offset": 60,
-	  "direction": "down"
-	},
+      "direction": "down"
+    },
     {
-      "map": "MAP_DEWFORD_WILDS"
+      "map": "MAP_DEWFORD_WILDS",
       "offset": -20,
-      "direction": "down",
+      "direction": "down"
     }
   ],
   "object_events": [

@@ -22,28 +22,28 @@
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_LOST_MANSION3_1F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 11,
       "y": 4,
       "elevation": 0,
       "dest_map": "MAP_LOST_MANSION4_2F",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 17,
       "y": 4,
       "elevation": 0,
       "dest_map": "MAP_LOST_MANSION_EXIT",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 4,
       "y": 11,
       "elevation": 0,
       "dest_map": "MAP_LOST_MANSION4_1F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [

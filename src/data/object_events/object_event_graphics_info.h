@@ -4689,4 +4689,23 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_AltaMemberF = {
 	.anims = sAnimTable_Standard,
 	.images = sPicTable_AltaMemberF,
 	.affineAnims = gDummySpriteAffineAnimTable
-	};
+};
+	
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_StarPiece = {
+	.tileTag = TAG_NONE,
+	.paletteTag = OBJ_EVENT_PAL_TAG_NPC_3,
+	.reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+	.size = 128,
+	.width = 16,
+	.height = 16,
+	.paletteSlot = PALSLOT_NPC_4,
+	.shadowSize = SHADOW_SIZE_S,
+	.inanimate = FALSE,
+	.disableReflectionPaletteLoad = FALSE,
+	.tracks = TRACKS_NONE,
+	.oam = &gObjectEventBaseOam_16x16,
+	.subspriteTables = sOamTables_16x16,
+	.anims = sAnimTable_Standard,
+	.images = sPicTable_StarPiece,
+	.affineAnims = gDummySpriteAffineAnimTable
+};

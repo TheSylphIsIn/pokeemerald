@@ -45,6 +45,7 @@
 #include "constants/songs.h"
 #include "union_room.h"
 #include "constants/rgb.h"
+#include "constants/battle_frontier.h"
 
 // Menu actions
 enum
