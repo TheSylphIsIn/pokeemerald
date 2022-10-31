@@ -3376,12 +3376,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         defenderHoldEffectParam = ItemId_GetHoldEffectParam(defender->item);
     }
 
-	if (defender->ability == ABILITY_DISGUISE && defender->species == SPECIES_SPOOKUM)
-		{
-			damage = (defender->maxHP / 8);
-			return damage;
-		}
-
+		
     if (attacker->ability == ABILITY_HUGE_POWER || attacker->ability == ABILITY_PURE_POWER)
         attack *= 2;
 	if (attacker->ability == ABILITY_BRAIN_POWER)
@@ -3680,6 +3675,8 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         if ((gBattleResources->flags->flags[battlerIdAtk] & RESOURCE_FLAG_FLASH_FIRE) && type == TYPE_FIRE)
             damage = (15 * damage) / 10;
 
+	if (defender->ability == ABILITY_DISGUISE && defender->species == SPECIES_SPOOKUM)
+		damage /= 4;
     return damage + 2;
 }
 

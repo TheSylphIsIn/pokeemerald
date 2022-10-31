@@ -5208,20 +5208,13 @@ static void HandleEndTurn_FinishBattle(void)
             TryPutBreakingNewsOnAir();
         }
 
+		// reverts form changes at the end of the battle
 		for (i = 0; i < MAX_BATTLERS_COUNT; i++)
 		{
 			if (gTransformedSpecies[i])
 				RecalcBattlerStats(i, gOriginalSpecies[i]);
 		}
-		for (i = 0; i < PARTY_SIZE; i++)
-		{ // this is kind of disgusting but it should (?) convert switched out busted forms back to normal when battles end
-			if (GetMonData(gPlayerParty[i], MON_DATA_SPECIES, NULL) == SPECIES_SPOOKUM_BUSTED)
-			{// ...it didn't work.
-				gTransformedSpecies[0] = SPECIES_SPOOKUM;
-				SetMonData(&gPlayerParty[i], MON_DATA_SPECIES, &gTransformedSpecies[0]);
-				CalculateMonStats(&gPlayerParty[i]);
-			}
-		}
+		
         RecordedBattle_SetPlaybackFinished();
         BeginFastPaletteFade(3);
         FadeOutMapMusic(5);
