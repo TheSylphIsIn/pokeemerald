@@ -3,7 +3,7 @@
   "name": "StonefaceWay",
   "layout": "LAYOUT_STONEFACE_WAY",
   "music": "MUS_ROUTE104",
-  "region_map_section": "MAPSEC_ROUTE_104",
+  "region_map_section": "MAPSEC_ROUTE_107",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
   "map_type": "MAP_TYPE_ROUTE",
@@ -15,7 +15,7 @@
   "connections": [
     {
       "map": "MAP_CRAN_TOWN",
-      "offset": 4,
+      "offset": 2,
       "direction": "left"
     }
   ],

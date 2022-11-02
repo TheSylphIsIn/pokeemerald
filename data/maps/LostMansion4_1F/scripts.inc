@@ -7,5 +7,4 @@ LostMansion4_1F_EventScript_Posters::
 	
 LostMansion4_1F_Text_Posters:
 	.string "Please walk quietly in the halls.$"
-	
-	
+

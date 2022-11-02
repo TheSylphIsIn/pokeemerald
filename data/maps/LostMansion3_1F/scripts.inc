@@ -17,5 +17,4 @@ LostMansion3_1F_EventScript_Psychic::
 	
 LostMansion3_1F_Text_Psychic:
 	.string "Take a seat!$"
-	
-	
+

@@ -14,3 +14,4 @@ CranTown_MapScripts::
 // Old man script
 
 // trainer tips script
+

@@ -6,7 +6,7 @@
 #define GUARD_DATA_REGION_MAP_REGION_MAP_ENTRIES_H
 
 
-static const u8 sMapName_LITTLEROOT_TOWN[] = _("LITTLEROOT TOWN");
+static const u8 sMapName_CRAN_TOWN[] = _("CRAN TOWN");
 static const u8 sMapName_OLDALE_TOWN[] = _("OLDALE TOWN");
 static const u8 sMapName_DEWFORD_TOWN[] = _("DEWFORD TOWN");
 static const u8 sMapName_LAVARIDGE_TOWN[] = _("LAVARIDGE TOWN");
@@ -22,13 +22,13 @@ static const u8 sMapName_LILYCOVE_CITY[] = _("LILYCOVE CITY");
 static const u8 sMapName_MOSSDEEP_CITY[] = _("MOSSDEEP CITY");
 static const u8 sMapName_SOOTOPOLIS_CITY[] = _("SOOTOPOLIS CITY");
 static const u8 sMapName_EVER_GRANDE_CITY[] = _("EVER GRANDE CITY");
-static const u8 sMapName_ROUTE_101[] = _("ROUTE 101");
-static const u8 sMapName_ROUTE_102[] = _("ROUTE 102");
-static const u8 sMapName_ROUTE_103[] = _("ROUTE 103");
+static const u8 sMapName_DROPPER_POINT[] = _("DROPPER POINT");
+static const u8 sMapName_FIRST_TRAIL[] = _("FIRST TRAIL");
+static const u8 sMapName_GUPPAGE_POND[] = _("GUPPAGE POND");
 static const u8 sMapName_ROUTE_104[] = _("ROUTE 104");
 static const u8 sMapName_ROUTE_105[] = _("ROUTE 105");
 static const u8 sMapName_ROUTE_106[] = _("ROUTE 106");
-static const u8 sMapName_ROUTE_107[] = _("ROUTE 107");
+static const u8 sMapName_STONEFACE_WAY[] = _("STONEFACE WAY");
 static const u8 sMapName_ROUTE_108[] = _("ROUTE 108");
 static const u8 sMapName_ROUTE_109[] = _("ROUTE 109");
 static const u8 sMapName_ROUTE_110[] = _("ROUTE 110");
@@ -205,7 +205,7 @@ static const u8 sMapName_DESERT_UNDERPASS[] = _("DESERT UNDERPASS");
 static const u8 sMapName_TRAINER_HILL[] = _("TRAINER HILL");
 
 const struct RegionMapLocation gRegionMapEntries[] = {
-    [MAPSEC_LITTLEROOT_TOWN] = { 4, 11, 1, 1, sMapName_LITTLEROOT_TOWN},
+    [MAPSEC_LITTLEROOT_TOWN] = { 4, 11, 1, 1, sMapName_CRAN_TOWN},
     [MAPSEC_OLDALE_TOWN] = { 4, 9, 1, 1, sMapName_OLDALE_TOWN},
     [MAPSEC_DEWFORD_TOWN] = { 2, 14, 1, 1, sMapName_DEWFORD_TOWN},
     [MAPSEC_LAVARIDGE_TOWN] = { 5, 3, 1, 1, sMapName_LAVARIDGE_TOWN},
@@ -221,13 +221,13 @@ const struct RegionMapLocation gRegionMapEntries[] = {
     [MAPSEC_MOSSDEEP_CITY] = { 24, 5, 2, 1, sMapName_MOSSDEEP_CITY},
     [MAPSEC_SOOTOPOLIS_CITY] = { 21, 7, 1, 1, sMapName_SOOTOPOLIS_CITY},
     [MAPSEC_EVER_GRANDE_CITY] = { 27, 8, 1, 2, sMapName_EVER_GRANDE_CITY},
-    [MAPSEC_ROUTE_101] = { 4, 10, 1, 1, sMapName_ROUTE_101},
-    [MAPSEC_ROUTE_102] = { 2, 9, 2, 1, sMapName_ROUTE_102},
-    [MAPSEC_ROUTE_103] = { 4, 8, 4, 1, sMapName_ROUTE_103},
+    [MAPSEC_ROUTE_101] = { 4, 10, 1, 1, sMapName_DROPPER_POINT},
+    [MAPSEC_ROUTE_102] = { 2, 9, 2, 1, sMapName_FIRST_TRAIL},
+    [MAPSEC_ROUTE_103] = { 4, 8, 4, 1, sMapName_GUPPAGE_POND},
     [MAPSEC_ROUTE_104] = { 0, 7, 1, 3, sMapName_ROUTE_104},
     [MAPSEC_ROUTE_105] = { 0, 10, 1, 3, sMapName_ROUTE_105},
     [MAPSEC_ROUTE_106] = { 0, 13, 2, 1, sMapName_ROUTE_106},
-    [MAPSEC_ROUTE_107] = { 3, 14, 3, 1, sMapName_ROUTE_107},
+    [MAPSEC_ROUTE_107] = { 3, 14, 3, 1, sMapName_STONEFACE_WAY},
     [MAPSEC_ROUTE_108] = { 6, 14, 2, 1, sMapName_ROUTE_108},
     [MAPSEC_ROUTE_109] = { 8, 12, 1, 3, sMapName_ROUTE_109},
     [MAPSEC_ROUTE_110] = { 8, 7, 1, 3, sMapName_ROUTE_110},

@@ -275,7 +275,7 @@ Text_StarterSetInfo:
 	
 Route101_EventScript_BirchsBagContinue::
 	setflag FLAG_SYS_POKEMON_GET
-	setflag FLAG_RESCUED_BIRCH
+	setflag FLAG_MET_PROFESSOR
 	fadescreen FADE_TO_BLACK
 	removeobject LOCALID_ZIGZAGOON
 	setobjectxy OBJ_EVENT_ID_PLAYER, 6, 13

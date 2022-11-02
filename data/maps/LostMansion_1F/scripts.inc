@@ -24,5 +24,4 @@ LostMansion_1F_EventScript_Big_Drawer::
 	
 LostMansion_1F_Text_Big_Drawer:
 	.string "It won't open.$"
-	
-	
+

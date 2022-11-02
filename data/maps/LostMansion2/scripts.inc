@@ -4,6 +4,4 @@ LostMansion2_MapScripts::
 LostMansion2_EventScript_Item_1::
 	finditem ITEM_ULTRA_BALL
 	end
-	
-	
-	
+

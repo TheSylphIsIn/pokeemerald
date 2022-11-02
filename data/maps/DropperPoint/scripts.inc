@@ -1,5 +1,5 @@
 .set LOCALID_MORGAN, 3
-.set LOCALID_KYLE, 2
+.set LOCALID_CALVIN, 2
 .set LOCALID_SLOSHMOSH, 5
 
 DropperPoint_MapScripts::
@@ -24,17 +24,17 @@ DropperPoint_EventScript_Morgan::
 	release
 	end
 	
-DropperPoint_EventScript_Kyle::
+DropperPoint_EventScript_Calvin::
 	lock
-	goto_if_set FLAG_WOKE_KYLE, DropperPoint_EventScript_KyleAwake
-	msgbox DropperPoint_Text_KyleWake, MSGBOX_DEFAULT
+	goto_if_set FLAG_WOKE_CALVIN, DropperPoint_EventScript_CalvinAwake
+	msgbox DropperPoint_Text_CalvinWake, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_KYLE, DropperPoint_Movement_WakeUp
+	applymovement LOCALID_CALVIN, DropperPoint_Movement_WakeUp
 	waitmovement 0
 	faceplayer
-	msgbox DropperPoint_Text_KyleIntro, MSGBOX_DEFAULT
-	setflag FLAG_WOKE_KYLE
-	setobjectmovementtype LOCALID_KYLE, MOVEMENT_TYPE_LOOK_AROUND
+	msgbox DropperPoint_Text_CalvinIntro, MSGBOX_DEFAULT
+	setflag FLAG_WOKE_CALVIN
+	setobjectmovementtype LOCALID_CALVIN, MOVEMENT_TYPE_LOOK_AROUND
 	release
 	end
 	
@@ -42,8 +42,8 @@ DropperPoint_EventScript_MorganAwake::
 	msgbox DropperPoint_Text_Morgan2, MSGBOX_NPC
 	end
 	
-DropperPoint_EventScript_KyleAwake::
-	msgbox DropperPoint_Text_Kyle2, MSGBOX_NPC
+DropperPoint_EventScript_CalvinAwake::
+	msgbox DropperPoint_Text_Calvin2, MSGBOX_NPC
 	end
 
 DropperPoint_Text_Sign:
@@ -68,49 +68,49 @@ DropperPoint_Text_Morgan2:
 	.string "I took the dare to go to sleep in\l"
 	.string "front of those ruins, and then…$"
 	
-DropperPoint_Text_KyleWake:
+DropperPoint_Text_CalvinWake:
 	.string "Five more minutes, mom…\n"
 	.string "Zzzzzz-huh?$"
 	
-DropperPoint_Text_KyleIntro:
+DropperPoint_Text_CalvinIntro:
 	.string "Whoa! {PLAYER}!? What are you\n"
 	.string "doing in my…\p"
 	.string "Hey, this isn't my room!\n"
 	.string "Where are we? How'd we get here?\p"
 	.string "Huh…you don't remember me? From gym?\n"
-	.string "Name's KYLE. But really, where\l"
+	.string "Name's CALVIN. But really, where\l"
 	.string "are we, anyway…?$"
 	
-DropperPoint_Text_Kyle2:
+DropperPoint_Text_Calvin2:
 	.string "Last thing I remember was, uh…\n"
 	.string "I don't remember… … …\p"
 	.string "I need some coffee…$"
 	
 DropperPoint_TriggerScript_Bag::
 	lock
-	call_if_unset FLAG_WOKE_KYLE, DropperPoint_TriggerScript_KyleSleep
+	call_if_unset FLAG_WOKE_CALVIN, DropperPoint_TriggerScript_CalvinSleep
 	call_if_unset FLAG_WOKE_MORGAN, DropperPoint_TriggerScript_MorganSleep
 	// both rivals awake
 	msgbox DropperPoint_Text_BagText1, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_KYLE, DropperPoint_Movement_KyleGoToBag
+	applymovement LOCALID_CALVIN, DropperPoint_Movement_CalvinGoToBag
 	playse SE_BIKE_HOP
 	waitse
 	waitmovement 0
 	applymovement LOCALID_MORGAN, DropperPoint_Movement_MorganGoToBag
 	waitmovement 0
-	applymovement LOCALID_KYLE, Common_Movement_FaceLeft
+	applymovement LOCALID_CALVIN, Common_Movement_FaceLeft
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft
 	waitmovement 0
 	msgbox DropperPoint_Text_BagText2, MSGBOX_DEFAULT
 	closemessage
 	goto DropperPoint_TriggerScript_BagContinue
 	
-DropperPoint_TriggerScript_KyleSleep:
-	applymovement LOCALID_KYLE, DropperPoint_Movement_WakeUp
+DropperPoint_TriggerScript_CalvinSleep:
+	applymovement LOCALID_CALVIN, DropperPoint_Movement_WakeUp
 	waitmovement 0
-	applymovement LOCALID_KYLE, Common_Movement_FacePlayer
-	msgbox DropperPoint_Text_KyleQuickIntro, MSGBOX_DEFAULT
+	applymovement LOCALID_CALVIN, Common_Movement_FacePlayer
+	msgbox DropperPoint_Text_CalvinQuickIntro, MSGBOX_DEFAULT
 	closemessage
 	return
 
@@ -122,9 +122,9 @@ DropperPoint_TriggerScript_MorganSleep:
 	closemessage
 	return
 	
-DropperPoint_Text_KyleQuickIntro:
+DropperPoint_Text_CalvinQuickIntro:
 	.string "Huh…? {PLAYER}, is that you?\n"
-	.string "It's me, KYLE, from gym!\l"
+	.string "It's me, CALVIN, from gym!\l"
 	.string "Where am I?$"
 	
 DropperPoint_Text_MorganQuickIntro:
@@ -146,7 +146,7 @@ DropperPoint_TriggerScript_BagContinue::
 	waitmovement 0
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceRight
 	waitmovement 0
-	applymovement LOCALID_KYLE, Common_Movement_FaceRight
+	applymovement LOCALID_CALVIN, Common_Movement_FaceRight
 	waitmovement 0
 	msgbox DropperPoint_Text_SlimeApproaching1, MSGBOX_DEFAULT
 	closemessage
@@ -156,7 +156,7 @@ DropperPoint_TriggerScript_BagContinue::
 	playse SE_BALLOON_BLUE
 	waitse
 	waitmovement 0
-	applymovement LOCALID_KYLE, Common_Movement_FaceDown
+	applymovement LOCALID_CALVIN, Common_Movement_FaceDown
 	applymovement LOCALID_MORGAN, Common_Movement_FaceDown
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceDown
 	delay 60
@@ -167,7 +167,7 @@ DropperPoint_TriggerScript_BagContinue::
 	waitse
 	playse SE_BALLOON_BLUE
 	waitse
-	applymovement LOCALID_KYLE, Common_Movement_ExclamationMark
+	applymovement LOCALID_CALVIN, Common_Movement_ExclamationMark
 	applymovement LOCALID_MORGAN, DropperPoint_Movement_Jump
 	waitmovement 0
 	waitse
@@ -178,12 +178,13 @@ DropperPoint_TriggerScript_BagContinue::
 	msgbox DropperPoint_Text_SlimeApproaching2, MSGBOX_DEFAULT
 	closemessage
 	setvar VAR_FONEI_COAST_STATE, 1
+	setflag FLAG_HIDE_FONEI_COAST_NPCS
 	release
 	end
 
 DropperPoint_TriggerScript_Roadblock::
 	lock
-	goto_if_set FLAG_WOKE_KYLE, DropperPoint_TriggerScript_RoadblockKyle
+	goto_if_set FLAG_WOKE_CALVIN, DropperPoint_TriggerScript_RoadblockCalvin
 	msgbox DropperPoint_Text_CantLeave, MSGBOX_DEFAULT
 	closemessage
 	applymovement OBJ_EVENT_ID_PLAYER, DropperPoint_Movement_ComeBack
@@ -191,8 +192,8 @@ DropperPoint_TriggerScript_Roadblock::
 	release
 	end
 	
-DropperPoint_TriggerScript_RoadblockKyle:
-	msgbox DropperPoint_Text_KyleRoadblock, MSGBOX_DEFAULT
+DropperPoint_TriggerScript_RoadblockCalvin:
+	msgbox DropperPoint_Text_CalvinRoadblock, MSGBOX_DEFAULT
 	closemessage
 	applymovement OBJ_EVENT_ID_PLAYER, DropperPoint_Movement_ComeBack
 	waitmovement 0
@@ -202,8 +203,8 @@ DropperPoint_TriggerScript_RoadblockKyle:
 DropperPoint_Text_CantLeave:
 	.string "But what about those other people?$"
 	
-DropperPoint_Text_KyleRoadblock:
-	.string "KYLE: {PLAYER}! Where ya going?\n"
+DropperPoint_Text_CalvinRoadblock:
+	.string "CALVIN: {PLAYER}! Where ya going?\n"
 	.string "I see something back there!\n"
 	.string "Go check it out!$"
 	
@@ -224,18 +225,18 @@ DropperPoint_EventScript_Bag::
 	special ChooseStarter
 	waitstate
 	applymovement LOCALID_MORGAN, Common_Movement_FacePlayer
-	applymovement LOCALID_KYLE, Common_Movement_FacePlayer
+	applymovement LOCALID_CALVIN, Common_Movement_FacePlayer
 	applymovement OBJ_EVENT_ID_PLAYER, DropperPoint_Movement_StepBack
 	waitmovement 0
 	msgbox DropperPoint_Text_AfterBattle1, MSGBOX_DEFAULT
 	closemessage
 	special HealPlayerParty
-	applymovement LOCALID_KYLE, Common_Movement_FaceRight
+	applymovement LOCALID_CALVIN, Common_Movement_FaceRight
 	applymovement LOCALID_MORGAN, DropperPoint_Movement_MorganGoToBagAgain
 	waitmovement 0
 	msgbox DropperPoint_Text_AfterBattle2, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_KYLE, DropperPoint_Movement_KyleStartWalkingAway
+	applymovement LOCALID_CALVIN, DropperPoint_Movement_CalvinStartWalkingAway
 	applymovement LOCALID_MORGAN, DropperPoint_Movement_MorganStartWalkingAway
 	removeobject 1
 	waitmovement 0
@@ -243,40 +244,40 @@ DropperPoint_EventScript_Bag::
 	closemessage
 	applymovement LOCALID_MORGAN, DropperPoint_Movement_MorganFinishWalkingAway
 	waitmovement 0
-	removeobject LOCALID_KYLE
+	removeobject LOCALID_CALVIN
 	removeobject LOCALID_MORGAN
 	release
 	end
 	
 DropperPoint_Text_BagText1:
-	.string "KYLE: Hey, {PLAYER}, what'cha\n"
+	.string "CALVIN: Hey, {PLAYER}, what'cha\n"
 	.string "looking at?$"
 	
 DropperPoint_Text_BagText2:
 	.string "MORGAN: So… not to point out the\n"
 	.string "obvious, but we have no idea\l"
 	.string "where we are, right…?\p"
-	.string "KYLE: Well, I don't. You don't.\n"
+	.string "CALVIN: Well, I don't. You don't.\n"
 	.string "{PLAYER} doesn't. So, guess not.\p"
 	.string "MORGAN: I have a theory…\p"
 	.string "MORGAN: We all know each other, and\n"
 	.string "we all went to that creepy monument\l"
 	.string "in the woods, right?\p"
-	.string "KYLE: Um… yes, apparently.\p"
+	.string "CALVIN: Um… yes, apparently.\p"
 	.string "MORGAN: So what if we got teleported\n"
 	.string "to a parallel world?\p"
-	.string "KYLE: … … … … …\n"
+	.string "CALVIN: … … … … …\n"
 	.string "You read too much manga.\l"
 	.string "This doesn't look like a parallel\l"
 	.string "world to me…$"
 	
 DropperPoint_Text_SlimeApproaching1:
 	.string "MORGAN: W-what was that noise?\p"
-	.string "KYLE: Relax. It was just a wave, or…$"
+	.string "CALVIN: Relax. It was just a wave…$"
 	
 DropperPoint_Text_SlimeApproaching2:
 	.string "MORGAN: AAAAH! What is that thing!?\n"
-	.string "KYLE: {PLAYER}! Do something!$"
+	.string "CALVIN: {PLAYER}! Do something!$"
 
 DropperPoint_EventScript_Sloshmosh::
 	lock
@@ -317,7 +318,7 @@ DropperPoint_Movement_WakeUp:
 	delay_16
 	step_end
 	
-DropperPoint_Movement_KyleGoToBag:
+DropperPoint_Movement_CalvinGoToBag:
 	jump_2_up
 	walk_up
 	jump_2_up
@@ -351,19 +352,19 @@ DropperPoint_Movement_Jump:
 	step_end
 	
 DropperPoint_Text_AfterBattle1:
-	.string "KYLE: Where did you get that\n"
+	.string "CALVIN: Where did you get that\n"
 	.string "monster from?\p"
 	.string "MORGAN: The bag…? Wait, is that…?$"
 	
 DropperPoint_Text_AfterBattle2:
 	.string "MORGAN: Yes! I knew it!\n"
 	.string "POKé BALLS! These are POKéMON!\p"
-	.string "KYLE: POKéMON? Isn't that that\n"
+	.string "CALVIN: POKéMON? Isn't that that\n"
 	.string "game for nerds who don't have pets?\p"
 	.string "MORGAN: … … … … …\n"
 	.string "Well, I was right. We're not home\l"
 	.string "now. We're in the POKéMON world!\p"
-	.string "KYLE: … Well, if these things can\n"
+	.string "CALVIN: … Well, if these things can\n"
 	.string "protect us from monsters, then we\l"
 	.string "may as well take them.\p"
 	.string "I'm taking the one strong against\n"
@@ -389,7 +390,7 @@ DropperPoint_Movement_MorganGoToBagAgain:
 	face_up
 	step_end
 	
-DropperPoint_Movement_KyleStartWalkingAway:
+DropperPoint_Movement_CalvinStartWalkingAway:
 	jump_2_down
 	walk_down
 	walk_down

@@ -1,9 +1,9 @@
 #ifndef GUARD_REGIONMAPSEC_H
 #define GUARD_REGIONMAPSEC_H
 
-#define MAPSEC_LITTLEROOT_TOWN              0x00
+#define MAPSEC_LITTLEROOT_TOWN              0x00 // cran town
 #define MAPSEC_OLDALE_TOWN                  0x01
-#define MAPSEC_DEWFORD_TOWN                 0x02
+#define MAPSEC_DEWFORD_TOWN                 0x02 // RESERVED FOR VANILLA MAP
 #define MAPSEC_LAVARIDGE_TOWN               0x03
 #define MAPSEC_FALLARBOR_TOWN               0x04
 #define MAPSEC_VERDANTURF_TOWN              0x05
@@ -11,27 +11,27 @@
 #define MAPSEC_PETALBURG_CITY               0x07
 #define MAPSEC_SLATEPORT_CITY               0x08
 #define MAPSEC_MAUVILLE_CITY                0x09
-#define MAPSEC_RUSTBORO_CITY                0x0A
+#define MAPSEC_RUSTBORO_CITY                0x0A // RESERVED FOR VANILLA MAP
 #define MAPSEC_FORTREE_CITY                 0x0B
 #define MAPSEC_LILYCOVE_CITY                0x0C
 #define MAPSEC_MOSSDEEP_CITY                0x0D
 #define MAPSEC_SOOTOPOLIS_CITY              0x0E
 #define MAPSEC_EVER_GRANDE_CITY             0x0F
-#define MAPSEC_ROUTE_101                    0x10
-#define MAPSEC_ROUTE_102                    0x11
-#define MAPSEC_ROUTE_103                    0x12
-#define MAPSEC_ROUTE_104                    0x13
-#define MAPSEC_ROUTE_105                    0x14
-#define MAPSEC_ROUTE_106                    0x15
-#define MAPSEC_ROUTE_107                    0x16
+#define MAPSEC_ROUTE_101                    0x10 // dropper point
+#define MAPSEC_ROUTE_102                    0x11 // first trail
+#define MAPSEC_ROUTE_103                    0x12 // cran clearing
+#define MAPSEC_ROUTE_104                    0x13 // RESERVED FOR VANILLA MAP
+#define MAPSEC_ROUTE_105                    0x14 // RESERVED FOR VANILLA MAP
+#define MAPSEC_ROUTE_106                    0x15 // RESERVED FOR VANILLA MAP
+#define MAPSEC_ROUTE_107                    0x16 // stoneface way
 #define MAPSEC_ROUTE_108                    0x17
 #define MAPSEC_ROUTE_109                    0x18
 #define MAPSEC_ROUTE_110                    0x19
 #define MAPSEC_ROUTE_111                    0x1A
 #define MAPSEC_ROUTE_112                    0x1B
-#define MAPSEC_ROUTE_113                    0x1C
-#define MAPSEC_ROUTE_114                    0x1D
-#define MAPSEC_ROUTE_115                    0x1E
+#define MAPSEC_ROUTE_113                    0x1C // RESERVED FOR VANILLA MAP
+#define MAPSEC_ROUTE_114                    0x1D // RESERVED FOR VANILLA MAP
+#define MAPSEC_ROUTE_115                    0x1E // RESERVED FOR VANILLA MAP
 #define MAPSEC_ROUTE_116                    0x1F
 #define MAPSEC_ROUTE_117                    0x20
 #define MAPSEC_ROUTE_118                    0x21

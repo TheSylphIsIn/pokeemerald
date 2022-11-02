@@ -18,3 +18,4 @@ LostMansion_2F_2_Text_Boys:
 	
 LostMansion_2F_2_Text_Girls:
 	.string "It will be so awesome!$"
+

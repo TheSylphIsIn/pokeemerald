@@ -18,3 +18,4 @@ CranClearing_MapScripts::
 // surf hiker
 // surf item
 // surf hidden item
+

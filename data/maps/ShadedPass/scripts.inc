@@ -14,3 +14,4 @@ ShadedPass_EventTile_HideGirl::
 	setvar VAR_TEMP_1, 1
 	setflag FLAG_HIDE_SHADED_PASS_GIRL
 	end
+	

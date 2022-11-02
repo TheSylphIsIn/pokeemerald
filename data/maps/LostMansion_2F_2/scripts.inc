@@ -218,4 +218,4 @@ LostMansion_2F_2_Text_CorrectSign:
 	
 LostMansion_2F_2_Text_CorrectSign2:
 	.string "Something clicked...$"
-	
+
