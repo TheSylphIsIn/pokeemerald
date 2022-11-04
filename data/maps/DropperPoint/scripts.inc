@@ -224,6 +224,19 @@ DropperPoint_EventScript_Bag::
 	setvar VAR_STARTER_SET, 1
 	special ChooseStarter
 	waitstate
+	bufferleadmonspeciesname STR_VAR_1
+	msgbox DropperPoint_Text_NicknamePrompt, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, YES, DropperPoint_EventScript_NicknameStarter
+	goto_if_eq VAR_RESULT, NO, DropperPoint_EventScript_BagContinue
+	end
+
+DropperPoint_EventScript_NicknameStarter:
+	setvar VAR_0x8004, 0
+	call Common_EventScript_NameReceivedPartyMon
+	goto DropperPoint_EventScript_BagContinue
+	end
+	
+DropperPoint_EventScript_BagContinue:
 	applymovement LOCALID_MORGAN, Common_Movement_FacePlayer
 	applymovement LOCALID_CALVIN, Common_Movement_FacePlayer
 	applymovement OBJ_EVENT_ID_PLAYER, DropperPoint_Movement_StepBack
@@ -302,6 +315,9 @@ DropperPoint_Text_MorganPanic:
 	
 DropperPoint_Text_SloshmoshYell:
 	.string "Spchwerrrrrr!$"
+	
+DropperPoint_Text_NicknamePrompt:
+	.string "Give a nickname to your {STR_VAR_1}?$"
 	
 DropperPoint_Movement_WakeUp:
 	face_left

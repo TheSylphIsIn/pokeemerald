@@ -34,7 +34,7 @@
       "flag": "FLAG_SYS_POKEMON_GET"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_MAN_3",
+      "graphics_id": "OBJ_EVENT_GFX_RIVAL_CALVIN",
       "x": 17,
       "y": 12,
       "elevation": 3,
@@ -47,7 +47,7 @@
       "flag": "FLAG_SYS_POKEMON_GET"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_WOMAN_2",
+      "graphics_id": "OBJ_EVENT_GFX_RIVAL_MORGAN",
       "x": 11,
       "y": 9,
       "elevation": 3,

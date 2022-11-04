@@ -1111,3 +1111,12 @@ Common_EventScript_LegendaryFlewAway::
 	.include "data/maps/StonefaceWay/scripts.inc"
 
 	.include "data/maps/BurrowFirstTrail/scripts.inc"
+
+	.include "data/maps/IsleOfCalm/scripts.inc"
+
+	.include "data/maps/IsleOfCalmCave/scripts.inc"
+
+	.include "data/maps/CliffFaceClimb/scripts.inc"
+
+	.include "data/maps/CliffEdgeClimbOutside/scripts.inc"
+

@@ -1,6 +1,11 @@
 {
   "layouts_table_label": "gMapLayouts",
   "group_order": [
+    "gMapGroup_FoneiOverworld",
+    "gMapGroup_Burrows",
+    "gMapGroup_FoneiUnderworld",
+    "gMapGroup_FoneiDungeons",
+    "gMapGroup_DimensionWarps",
     "gMapGroup_TownsAndRoutes",
     "gMapGroup_IndoorLittleroot",
     "gMapGroup_IndoorOldale",
@@ -34,9 +39,41 @@
     "gMapGroup_IndoorRoute113",
     "gMapGroup_IndoorRoute123",
     "gMapGroup_IndoorRoute119",
-    "gMapGroup_IndoorRoute124",
-    "gMapGroup_Burrows",
-    "gMapGroup_FoneiOverworld"
+    "gMapGroup_IndoorRoute124"
+  ],
+  "gMapGroup_FoneiOverworld": [
+    "ShadedPass",
+    "DropperPoint",
+    "FirstTrail",
+    "CranTown",
+    "CranClearing",
+    "StonefaceWay"
+  ],
+  "gMapGroup_Burrows": [
+    "NewMap1",
+    "NewMap2",
+    "BurrowFirstTrail"
+  ],
+  "gMapGroup_FoneiUnderworld": [
+    "CliffFaceClimb",
+    "CliffEdgeClimbOutside"
+  ],
+  "gMapGroup_FoneiDungeons": [
+
+  ],
+  "gMapGroup_DimensionWarps": [
+    "IsleOfCalm",
+    "IsleOfCalmCave",
+    "Route104",
+    "Route105",
+    "Route106",
+    "Route107",
+    "Route113",
+    "Route114",
+    "Route115",
+    "DewfordTown",
+    "DewfordWilds",
+    "FallarborTown"
   ],
   "gMapGroup_TownsAndRoutes": [
     "PetalburgCity",
@@ -50,26 +87,17 @@
     "EverGrandeCity",
     "LittlerootTown",
     "OldaleTown",
-    "DewfordTown",
     "LavaridgeTown",
-    "FallarborTown",
     "VerdanturfTown",
     "PacifidlogTown",
     "Route101",
     "Route102",
     "Route103",
-    "Route104",
-    "Route105",
-    "Route106",
-    "Route107",
     "Route108",
     "Route109",
     "Route110",
     "Route111",
     "Route112",
-    "Route113",
-    "Route114",
-    "Route115",
     "Route116",
     "Route117",
     "Route118",
@@ -96,8 +124,7 @@
     "Underwater_Route129",
     "Underwater_Route105",
     "Underwater_Route125",
-    "LoversPark",
-    "DewfordWilds"
+    "LoversPark"
   ],
   "gMapGroup_IndoorLittleroot": [
     "LittlerootTown_BrendansHouse_1F",
@@ -642,18 +669,5 @@
   ],
   "gMapGroup_IndoorRoute124": [
     "Route124_DivingTreasureHuntersHouse"
-  ],
-  "gMapGroup_Burrows": [
-    "NewMap1",
-    "NewMap2",
-    "BurrowFirstTrail"
-  ],
-  "gMapGroup_FoneiOverworld": [
-    "ShadedPass",
-    "DropperPoint",
-    "FirstTrail",
-    "CranTown",
-    "CranClearing",
-    "StonefaceWay"
   ]
 }

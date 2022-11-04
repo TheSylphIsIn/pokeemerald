@@ -19,11 +19,6 @@
       "direction": "left"
     },
     {
-      "map": "MAP_CRAN_CLEARING",
-      "offset": -3,
-      "direction": "up"
-    },
-    {
       "map": "MAP_STONEFACE_WAY",
       "offset": -2,
       "direction": "right"
@@ -88,7 +83,7 @@
       "x": 4,
       "y": 11,
       "elevation": 0,
-      "dest_map": "MAP_CRAN_TOWN",
+      "dest_map": "MAP_NEW_MAP1",
       "dest_warp_id": "0"
     },
     {
@@ -111,6 +106,27 @@
       "elevation": 0,
       "dest_map": "MAP_CRAN_TOWN",
       "dest_warp_id": "0"
+    },
+    {
+      "x": 12,
+      "y": 5,
+      "elevation": 0,
+      "dest_map": "MAP_CRAN_CLEARING",
+      "dest_warp_id": "1"
+    },
+    {
+      "x": 13,
+      "y": 5,
+      "elevation": 0,
+      "dest_map": "MAP_CRAN_CLEARING",
+      "dest_warp_id": "2"
+    },
+    {
+      "x": 14,
+      "y": 5,
+      "elevation": 0,
+      "dest_map": "MAP_CRAN_CLEARING",
+      "dest_warp_id": "3"
     }
   ],
   "coord_events": [

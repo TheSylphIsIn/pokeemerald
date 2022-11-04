@@ -4690,6 +4690,46 @@
       "secondary_tileset": "gTileset_Cave",
       "border_filepath": "data/layouts/BurrowFirstTrail/border.bin",
       "blockdata_filepath": "data/layouts/BurrowFirstTrail/map.bin"
+    },
+    {
+      "id": "LAYOUT_ISLE_OF_CALM",
+      "name": "IsleOfCalm_Layout",
+      "width": 60,
+      "height": 60,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Rustboro",
+      "border_filepath": "data/layouts/IsleOfCalm/border.bin",
+      "blockdata_filepath": "data/layouts/IsleOfCalm/map.bin"
+    },
+    {
+      "id": "LAYOUT_ISLE_OF_CALM_CAVE",
+      "name": "IsleOfCalmCave_Layout",
+      "width": 70,
+      "height": 70,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Cave",
+      "border_filepath": "data/layouts/IsleOfCalmCave/border.bin",
+      "blockdata_filepath": "data/layouts/IsleOfCalmCave/map.bin"
+    },
+    {
+      "id": "LAYOUT_CLIFF_FACE_CLIMB",
+      "name": "CliffFaceClimb_Layout",
+      "width": 24,
+      "height": 20,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Cave",
+      "border_filepath": "data/layouts/CliffFaceClimb/border.bin",
+      "blockdata_filepath": "data/layouts/CliffFaceClimb/map.bin"
+    },
+    {
+      "id": "LAYOUT_CLIFF_EDGE_CLIMB_OUTSIDE",
+      "name": "CliffEdgeClimbOutside_Layout",
+      "width": 40,
+      "height": 32,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_SeaRoute",
+      "border_filepath": "data/layouts/CliffEdgeClimbOutside/border.bin",
+      "blockdata_filepath": "data/layouts/CliffEdgeClimbOutside/map.bin"
     }
-  ]
+	]
 }

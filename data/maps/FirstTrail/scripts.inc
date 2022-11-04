@@ -59,7 +59,7 @@ FirstTrail_TriggerScript_ProfessorMeeting::
 	applymovement LOCALID_CALVIN, Common_Movement_FaceUp
 	applymovement LOCALID_CALVIN, Common_Movement_ExclamationMark
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp
-	waitmovement 0
+	waitmovement LOCALID_MORGAN
 	msgbox FirstTrail_Text_Prof2, MSGBOX_DEFAULT
 	closemessage
 	applymovement LOCALID_MANGROVE, FirstTrail_Movement_ProfCheckMons
@@ -129,10 +129,9 @@ FirstTrail_Text_MorganTrigger:
 	.string "It's a complicated story!$"
 
 FirstTrail_Text_CalvinTrigger:
-	.string "CALVIN: Heh, guess we gotta\n"
-	.string "trust this lady. Unless you\l"
-	.string "wanna swim home.\p"
-	.string "Catch up, okay, {PLAYER}?$"
+	.string "CALVIN: Heh, guess we gotta trust\n"
+	.string "this lady, unless you wanna swim\l"
+	.string "home. Catch up, okay, {PLAYER}?$"
 
 FirstTrail_Movement_ProfJumpFromTree:
 	jump_2_down
