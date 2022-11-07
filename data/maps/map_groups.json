@@ -47,7 +47,9 @@
     "FirstTrail",
     "CranTown",
     "CranClearing",
-    "StonefaceWay"
+    "StonefaceWay",
+    "CliffFaceExit",
+    "PenzelCity"
   ],
   "gMapGroup_Burrows": [
     "NewMap1",
@@ -56,7 +58,9 @@
   ],
   "gMapGroup_FoneiUnderworld": [
     "CliffFaceClimb",
-    "CliffEdgeClimbOutside"
+    "CliffEdgeClimbOutside",
+    "CliffFaceClimb2F",
+    "CliffFaceClimb3F"
   ],
   "gMapGroup_FoneiDungeons": [
 

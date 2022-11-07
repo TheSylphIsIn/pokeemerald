@@ -6,12 +6,14 @@
 //
 
 // gMapGroup_FoneiOverworld
-#define MAP_SHADED_PASS   (0 | (0 << 8))
-#define MAP_DROPPER_POINT (1 | (0 << 8))
-#define MAP_FIRST_TRAIL   (2 | (0 << 8))
-#define MAP_CRAN_TOWN     (3 | (0 << 8))
-#define MAP_CRAN_CLEARING (4 | (0 << 8))
-#define MAP_STONEFACE_WAY (5 | (0 << 8))
+#define MAP_SHADED_PASS     (0 | (0 << 8))
+#define MAP_DROPPER_POINT   (1 | (0 << 8))
+#define MAP_FIRST_TRAIL     (2 | (0 << 8))
+#define MAP_CRAN_TOWN       (3 | (0 << 8))
+#define MAP_CRAN_CLEARING   (4 | (0 << 8))
+#define MAP_STONEFACE_WAY   (5 | (0 << 8))
+#define MAP_CLIFF_FACE_EXIT (6 | (0 << 8))
+#define MAP_PENZEL_CITY     (7 | (0 << 8))
 
 // gMapGroup_Burrows
 #define MAP_NEW_MAP1           (0 | (1 << 8))
@@ -21,7 +23,8 @@
 // gMapGroup_FoneiUnderworld
 #define MAP_CLIFF_FACE_CLIMB         (0 | (2 << 8))
 #define MAP_CLIFF_EDGE_CLIMB_OUTSIDE (1 | (2 << 8))
-#define MAP_NEW_MAP3                 (2 | (2 << 8))
+#define MAP_CLIFF_FACE_CLIMB2F       (2 | (2 << 8))
+#define MAP_CLIFF_FACE_CLIMB3F       (3 | (2 << 8))
 
 // gMapGroup_FoneiDungeons
 

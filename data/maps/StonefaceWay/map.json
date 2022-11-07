@@ -17,13 +17,18 @@
       "map": "MAP_CRAN_TOWN",
       "offset": 2,
       "direction": "left"
+    },
+    {
+      "map": "MAP_CLIFF_EDGE_CLIMB_OUTSIDE",
+      "offset": 7,
+      "direction": "up"
     }
   ],
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_STAR_PIECE",
-      "x": 23,
-      "y": 11,
+      "x": 20,
+      "y": 2,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_SPIN_CLOCKWISE_DELAY",
       "movement_range_x": 0,
@@ -83,7 +88,15 @@
     }
   ],
   "coord_events": [
-
+    {
+      "type": "trigger",
+      "x": 22,
+      "y": 5,
+      "elevation": 0,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "NULL"
+    }
   ],
   "bg_events": [
 

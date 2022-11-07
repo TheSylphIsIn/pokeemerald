@@ -2102,6 +2102,7 @@ static const u8 sSanduelTMHMLearnset[] =
 
 static const u8 sEladriftTMHMLearnset[] =
 {
+	TMHM(HM01_CUT),
 	TMHM_LEARNSET_END
 };
 
@@ -2269,6 +2270,76 @@ static const u8 sWattitudeTMHMLearnset[] =
 {
 	TMHM_LEARNSET_END
 };
+
+// static const u8 sRaltsFoneiTMHMLearnset[] =
+// {
+	// TMHM_LEARNSET_END
+// };
+
+// static const u8 sKirliaFoneiTMHMLearnset[] =
+// {
+	// TMHM_LEARNSET_END
+// };
+
+// static const u8 sGardevoirFoneiTMHMLearnset[] =
+// {
+	// TMHM_LEARNSET_END
+// };
+
+// static const u8 sGalladeFoneiTMHMLearnset[] =
+// {
+	// TMHM_LEARNSET_END
+// };
+
+// static const u8 sWoobatTMHMLearnset[] =
+// {
+	// TMHM_LEARNSET_END
+// };
+
+// static const u8 sSwoobatTMHMLearnset[] =
+// {
+	// TMHM_LEARNSET_END
+// };
+
+// static const u8 sTruebatTMHMLearnset[] =
+// {
+	// TMHM_LEARNSET_END
+// };
+
+// static const u8 sHomboneTMHMLearnset[] =
+// {
+	// TMHM_LEARNSET_END
+// };
+
+// static const u8 sHombeastTMHMLearnset[] =
+// {
+	// TMHM_LEARNSET_END
+// };
+
+// static const u8 sQwilsharkTMHMLearnset[] =
+// {
+	// TMHM_LEARNSET_END
+// };
+
+// static const u8 sKrissyTMHMLearnset[] =
+// {
+	// TMHM_LEARNSET_END
+// };
+
+// static const u8 sKrakodemonTMHMLearnset[] =
+// {
+	// TMHM_LEARNSET_END
+// };
+
+// static const u8 sWeatherbaneTMHMLearnset[] =
+// {
+	// TMHM_LEARNSET_END
+// };
+
+// static const u8 s0xb-?ketsuTMHMLearnset[] =
+// {
+	// TMHM_LEARNSET_END
+// };
 
 /*
 static const u8 sSpcsTMHMLearnset[] =
@@ -2742,6 +2813,20 @@ const u8 *const gTMHMLearnsets[] =
 	[SPECIES_GRITWYRM] = sGritwyrmTMHMLearnset,
 	[SPECIES_MOLDUNE] = sMolduneTMHMLearnset,
 	[SPECIES_WATTITUDE] = sWattitudeTMHMLearnset,
+	// [SPECIES_RALTS_FONEI] = sRaltsFoneiTMHMLearnset,
+	// [SPECIES_KIRLIA_FONEI] = sKirliaFoneiTMHMLearnset,
+	// [SPECIES_GARDEVOIR_FONEI] = sGardevoirFoneiTMHMLearnset,
+	// [SPECIES_GALLADE_FONEI] = sGalladeFoneiTMHMLearnset,
+	// [SPECIES_WOOBAT] = sWoobatTMHMLearnset,
+	// [SPECIES_SWOOBAT] = sSwoobatTMHMLearnset,
+	// [SPECIES_TRUEBAT] = sTruebatTMHMLearnset,
+	// [SPECIES_HOMBONE] = sHomboneTMHMLearnset,
+	// [SPECIES_HOMBEAST] = sHombeastTMHMLearnset,
+	// [SPECIES_QWILSHARK] = sQwilsharkTMHMLearnset,
+	// [SPECIES_KRISSY] = sKrissyTMHMLearnset,
+	// [SPECIES_KRAKODEMON] = sKrakodemonTMHMLearnset,
+	// [SPECIES_WEATHERBANE] = sWeatherbaneTMHMLearnset,
+	// [SPECIES_0xB-?ketsu] = s0xb-?ketsuTMHMLearnset,
 
 	// [SPECIES_SPCS] = sSpcsTMHMLearnset
 };

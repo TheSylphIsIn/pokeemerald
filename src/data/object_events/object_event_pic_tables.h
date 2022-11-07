@@ -898,6 +898,13 @@ static const struct SpriteFrameImage sPicTable_CuttableTree[] = {
     overworld_frame(gObjectEventPic_CuttableTree, 2, 2, 3),
 };
 
+static const struct SpriteFrameImage sPicTable_CuttableFence[] = {
+    overworld_frame(gObjectEventPic_CuttableFence, 2, 2, 0),
+    overworld_frame(gObjectEventPic_CuttableFence, 2, 2, 1),
+    overworld_frame(gObjectEventPic_CuttableFence, 2, 2, 2),
+    overworld_frame(gObjectEventPic_CuttableFence, 2, 2, 3),
+};
+
 static const struct SpriteFrameImage sPicTable_MartEmployee[] = {
     overworld_frame(gObjectEventPic_MartEmployee, 2, 4, 0),
     overworld_frame(gObjectEventPic_MartEmployee, 2, 4, 1),

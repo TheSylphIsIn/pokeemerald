@@ -1120,3 +1120,11 @@ Common_EventScript_LegendaryFlewAway::
 
 	.include "data/maps/CliffEdgeClimbOutside/scripts.inc"
 
+
+	.include "data/maps/CliffFaceClimb2F/scripts.inc"
+
+	.include "data/maps/CliffFaceClimb3F/scripts.inc"
+
+	.include "data/maps/CliffFaceExit/scripts.inc"
+
+	.include "data/maps/PenzelCity/scripts.inc"

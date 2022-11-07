@@ -4724,12 +4724,52 @@
     {
       "id": "LAYOUT_CLIFF_EDGE_CLIMB_OUTSIDE",
       "name": "CliffEdgeClimbOutside_Layout",
-      "width": 40,
-      "height": 32,
+      "width": 72,
+      "height": 24,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_SeaRoute",
       "border_filepath": "data/layouts/CliffEdgeClimbOutside/border.bin",
       "blockdata_filepath": "data/layouts/CliffEdgeClimbOutside/map.bin"
+    },
+    {
+      "id": "LAYOUT_CLIFF_FACE_CLIMB2F",
+      "name": "CliffFaceClimb2F_Layout",
+      "width": 40,
+      "height": 20,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Cave",
+      "border_filepath": "data/layouts/CliffFaceClimb2F/border.bin",
+      "blockdata_filepath": "data/layouts/CliffFaceClimb2F/map.bin"
+    },
+    {
+      "id": "LAYOUT_CLIFF_FACE_CLIMB3F",
+      "name": "CliffFaceClimb3F_Layout",
+      "width": 20,
+      "height": 32,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Cave",
+      "border_filepath": "data/layouts/CliffFaceClimb3F/border.bin",
+      "blockdata_filepath": "data/layouts/CliffFaceClimb3F/map.bin"
+    },
+    {
+      "id": "LAYOUT_CLIFF_FACE_EXIT",
+      "name": "CliffFaceExit_Layout",
+      "width": 18,
+      "height": 20,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_SeaRoute",
+      "border_filepath": "data/layouts/CliffFaceExit/border.bin",
+      "blockdata_filepath": "data/layouts/CliffFaceExit/map.bin"
+    },
+    {
+      "id": "LAYOUT_PENZEL_CITY",
+      "name": "PenzelCity_Layout",
+      "width": 32,
+      "height": 32,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Rustboro",
+      "border_filepath": "data/layouts/PenzelCity/border.bin",
+      "blockdata_filepath": "data/layouts/PenzelCity/map.bin"
     }
-	]
+  ]
 }
