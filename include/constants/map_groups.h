@@ -14,11 +14,13 @@
 #define MAP_STONEFACE_WAY   (5 | (0 << 8))
 #define MAP_CLIFF_FACE_EXIT (6 | (0 << 8))
 #define MAP_PENZEL_CITY     (7 | (0 << 8))
+#define MAP_LUMEN_LAKE      (8 | (0 << 8))
 
 // gMapGroup_Burrows
 #define MAP_NEW_MAP1           (0 | (1 << 8))
 #define MAP_NEW_MAP2           (1 | (1 << 8))
 #define MAP_BURROW_FIRST_TRAIL (2 | (1 << 8))
+#define MAP_BURROW_PENZEL_CITY (3 | (1 << 8))
 
 // gMapGroup_FoneiUnderworld
 #define MAP_CLIFF_FACE_CLIMB         (0 | (2 << 8))

@@ -49,12 +49,14 @@
     "CranClearing",
     "StonefaceWay",
     "CliffFaceExit",
-    "PenzelCity"
+    "PenzelCity",
+    "LumenLake"
   ],
   "gMapGroup_Burrows": [
     "NewMap1",
     "NewMap2",
-    "BurrowFirstTrail"
+    "BurrowFirstTrail",
+    "BurrowPenzelCity"
   ],
   "gMapGroup_FoneiUnderworld": [
     "CliffFaceClimb",

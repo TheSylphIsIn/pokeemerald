@@ -2271,6 +2271,8 @@ static const u8 sBurrowMapTable[][4] =
 {
 	{0, 0, 0, 0}, // the first entry is null because it would be treated as FALSE.
 	{MAP_GROUP(FIRST_TRAIL), MAP_NUM(FIRST_TRAIL), MAP_NUM(BURROW_FIRST_TRAIL), 0},
+	{MAP_GROUP(CLIFF_FACE_EXIT), MAP_NUM(CLIFF_FACE_EXIT), MAP_NUM(BURROW_FIRST_TRAIL), 1},
+	{MAP_GROUP(PENZEL_CITY), MAP_NUM(PENZEL_CITY), MAP_NUM(BURROW_PENZEL_CITY), 0},
 	{0xFF, 0xFF, 0xFF, 0xFF}
 };
 

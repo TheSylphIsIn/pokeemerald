@@ -17,6 +17,11 @@
       "map": "MAP_STONEFACE_WAY",
       "offset": -7,
       "direction": "down"
+    },
+    {
+      "map": "MAP_CLIFF_FACE_EXIT",
+      "offset": 31,
+      "direction": "up"
     }
   ],
   "object_events": [

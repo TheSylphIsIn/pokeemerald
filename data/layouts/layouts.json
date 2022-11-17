@@ -4764,12 +4764,32 @@
     {
       "id": "LAYOUT_PENZEL_CITY",
       "name": "PenzelCity_Layout",
-      "width": 32,
-      "height": 32,
+      "width": 40,
+      "height": 38,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Rustboro",
       "border_filepath": "data/layouts/PenzelCity/border.bin",
       "blockdata_filepath": "data/layouts/PenzelCity/map.bin"
+    },
+    {
+      "id": "LAYOUT_BURROW_PENZEL_CITY",
+      "name": "BurrowPenzelCity_Layout",
+      "width": 16,
+      "height": 14,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Cave",
+      "border_filepath": "data/layouts/BurrowPenzelCity/border.bin",
+      "blockdata_filepath": "data/layouts/BurrowPenzelCity/map.bin"
+    },
+    {
+      "id": "LAYOUT_LUMEN_LAKE",
+      "name": "LumenLake_Layout",
+      "width": 54,
+      "height": 32,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Rustboro",
+      "border_filepath": "data/layouts/LumenLake/border.bin",
+      "blockdata_filepath": "data/layouts/LumenLake/map.bin"
     }
   ]
 }
