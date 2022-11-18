@@ -1132,3 +1132,5 @@ Common_EventScript_LegendaryFlewAway::
 	.include "data/maps/BurrowPenzelCity/scripts.inc"
 
 	.include "data/maps/LumenLake/scripts.inc"
+
+	.include "data/maps/OptionsRoom/scripts.inc"

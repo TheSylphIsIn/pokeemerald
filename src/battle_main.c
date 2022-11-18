@@ -1984,6 +1984,17 @@ static void SpriteCB_UnusedBattleInit_Main(struct Sprite *sprite)
 
 static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 firstTrainer)
 {
+	/*
+	 * DIFFICULTY MODES POSSIBILITY: Produce copies of gTrainers[] array:
+	 * gHardTrainers[] and gUnfairTrainers[]. Then, here:
+	 const struct Trainer trainer;
+	 If (FLAG_HARD_MODE)
+		 trainer = gHardTrainers[trainerNum];
+	 else
+		 trainer = gTrainers[trainerNum];
+	 * this might be memory-inefficient, but...quick maths say it would only cost .3% of total memory,
+	 * which seems acceptable considering battles are the main point of the game.
+	*/
     u32 nameHash = 0;
     u32 personalityValue;
     u8 fixedIV;

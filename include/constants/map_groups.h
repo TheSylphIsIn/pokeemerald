@@ -43,6 +43,7 @@
 #define MAP_DEWFORD_TOWN      (9 | (4 << 8))
 #define MAP_DEWFORD_WILDS     (10 | (4 << 8))
 #define MAP_FALLARBOR_TOWN    (11 | (4 << 8))
+#define MAP_OPTIONS_ROOM      (12 | (4 << 8))
 
 // gMapGroup_TownsAndRoutes
 #define MAP_PETALBURG_CITY      (0 | (5 << 8))

@@ -68,6 +68,7 @@ static bool8 TryStartMiscWalkingScripts(u16);
 static bool8 TryStartStepCountScript(u16);
 static void UpdateFriendshipStepCounter(void);
 static bool8 UpdatePoisonStepCounter(void);
+static bool32 TryProcessCheatCode(void);
 
 void FieldClearPlayerInput(struct FieldInput *input)
 {
@@ -185,6 +186,9 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
         ShowStartMenu();
         return TRUE;
     }
+	if (TryProcessCheatCode() == TRUE)
+		return TRUE;
+	
     if (input->pressedSelectButton && UseRegisteredKeyItemOnField() == TRUE)
         return TRUE;
 
@@ -1003,3 +1007,20 @@ int SetCableClubWarp(void)
     SetupWarp(&gMapHeader, GetWarpEventAtMapPosition(&gMapHeader, &position), &position);
     return 0;
 }
+
+#define OPTIONS_ROOM_BUTTON_COMBO (L_BUTTON | R_BUTTON | B_BUTTON)
+
+static bool32 TryProcessCheatCode(void)
+{
+    if (FlagGet(FLAG_ACCEPT_CHEAT_CODES))
+    {
+		if (JOY_HELD(OPTIONS_ROOM_BUTTON_COMBO) == OPTIONS_ROOM_BUTTON_COMBO)
+		{
+			ScriptContext_SetupScript(EventScript_WarpToOptionsRoom);
+			return TRUE;
+		}
+    }
+    return FALSE;
+}
+
+

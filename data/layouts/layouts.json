@@ -4790,6 +4790,16 @@
       "secondary_tileset": "gTileset_Rustboro",
       "border_filepath": "data/layouts/LumenLake/border.bin",
       "blockdata_filepath": "data/layouts/LumenLake/map.bin"
+    },
+    {
+      "id": "LAYOUT_OPTIONS_ROOM",
+      "name": "OptionsRoom_Layout",
+      "width": 14,
+      "height": 8,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_BattleFactory",
+      "border_filepath": "data/layouts/OptionsRoom/border.bin",
+      "blockdata_filepath": "data/layouts/OptionsRoom/map.bin"
     }
   ]
 }
