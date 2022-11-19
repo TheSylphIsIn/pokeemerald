@@ -2521,6 +2521,22 @@ const u8 gWattitudePokedexText[] = _(
 	"too slow to catch it. It feeds off of\n"
 	"power lines, but never takes more than\n"
 	"its fair share, so it's not a pest.");
+	
+const u8 gRaltsFoneiPokedexText[] = _("");
+const u8 gKirliaFoneiPokedexText[] = _("");
+const u8 gGardevoirFoneiPokedexText[] = _("");
+const u8 gGalladeFoneiPokedexText[] = _("");
+const u8 gWoobatPokedexText[] = _("");
+const u8 gSwoobatPokedexText[] = _("");
+const u8 gTruebatPokedexText[] = _("");
+const u8 gHombonePokedexText[] = _("");
+const u8 gHombeastPokedexText[] = _("");
+const u8 gQwilsharkPokedexText[] = _("");
+const u8 gKrissyPokedexText[] = _("");
+const u8 gKrakodemonPokedexText[] = _("");
+const u8 gWeatherbanePokedexText[] = _("");
+const u8 gKetsubanPokedexText[] = _("");
+
 
 	
 // const u8 gSpcsPokedexText[] = _("");

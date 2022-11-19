@@ -2135,10 +2135,66 @@ Cry_Wattitude::
 	.incbin "sound/direct_sound_samples/cries/unown.bin"
 
 	.align 2
+Cry_RaltsFonei::
+	.incbin "sound/direct_sound_samples/cries/unown.bin"
+
+	.align 2
+Cry_KirliaFonei::
+	.incbin "sound/direct_sound_samples/cries/unown.bin"
+
+	.align 2
+Cry_GardevoirFonei::
+	.incbin "sound/direct_sound_samples/cries/unown.bin"
+
+	.align 2
+Cry_GalladeFonei::
+	.incbin "sound/direct_sound_samples/cries/unown.bin"
+
+	.align 2
+Cry_Woobat::
+	.incbin "sound/direct_sound_samples/cries/unown.bin"
+
+	.align 2
+Cry_Swoobat::
+	.incbin "sound/direct_sound_samples/cries/unown.bin"
+
+	.align 2
+Cry_Truebat::
+	.incbin "sound/direct_sound_samples/cries/unown.bin"
+
+	.align 2
+Cry_Hombone::
+	.incbin "sound/direct_sound_samples/cries/unown.bin"
+
+	.align 2
+Cry_Hombeast::
+	.incbin "sound/direct_sound_samples/cries/unown.bin"
+
+	.align 2
+Cry_Qwilshark::
+	.incbin "sound/direct_sound_samples/cries/unown.bin"
+
+	.align 2
+Cry_Krissy::
+	.incbin "sound/direct_sound_samples/cries/unown.bin"
+
+	.align 2
+Cry_Krakodemon::
+	.incbin "sound/direct_sound_samples/cries/unown.bin"
+
+	.align 2
+Cry_Weatherbane::
+	.incbin "sound/direct_sound_samples/cries/unown.bin"
+
+	.align 2
+Cry_Ketsuban::
+	.incbin "sound/direct_sound_samples/cries/unown.bin"
+	
 // Cry_Spcs::
 // 	.incbin "sound/direct_sound_samples/cries/abra.bin"
 //	.align 2
 
+	.align 2
 DirectSoundWaveData_register_noise::
 	.incbin "sound/direct_sound_samples/register_noise.bin"
 

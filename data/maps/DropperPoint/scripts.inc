@@ -21,6 +21,7 @@ DropperPoint_EventScript_Morgan::
 	msgbox DropperPoint_Text_MorganIntro, MSGBOX_DEFAULT
 	setflag FLAG_WOKE_MORGAN
 	setobjectmovementtype LOCALID_MORGAN, MOVEMENT_TYPE_LOOK_AROUND
+	addvar VAR_PENDING_ACHIEVEMENTS, 1
 	release
 	end
 	

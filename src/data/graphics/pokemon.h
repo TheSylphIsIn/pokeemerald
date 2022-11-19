@@ -3085,6 +3085,104 @@ const u32 gMonStillFrontPic_Wattitude[] = INCBIN_U32("graphics/pokemon/wattitude
 const u8 gMonIcon_Wattitude[] = INCBIN_U8("graphics/pokemon/wattitude/icon.4bpp");
 const u8 gMonFootprint_Wattitude[] = INCBIN_U8("graphics/pokemon/wattitude/footprint.1bpp");
 
+const u32 gMonPalette_RaltsFonei[] = INCBIN_U32("graphics/pokemon/ralts_fonei/normal.gbapal.lz");
+const u32 gMonBackPic_RaltsFonei[] = INCBIN_U32("graphics/pokemon/ralts_fonei/back.4bpp.lz");
+const u32 gMonShinyPalette_RaltsFonei[] = INCBIN_U32("graphics/pokemon/ralts_fonei/shiny.gbapal.lz");
+const u32 gMonStillFrontPic_RaltsFonei[] = INCBIN_U32("graphics/pokemon/ralts_fonei/front.4bpp.lz");
+const u8 gMonIcon_RaltsFonei[] = INCBIN_U8("graphics/pokemon/ralts_fonei/icon.4bpp");
+const u8 gMonFootprint_RaltsFonei[] = INCBIN_U8("graphics/pokemon/ralts_fonei/footprint.1bpp");
+
+const u32 gMonPalette_KirliaFonei[] = INCBIN_U32("graphics/pokemon/kirlia_fonei/normal.gbapal.lz");
+const u32 gMonBackPic_KirliaFonei[] = INCBIN_U32("graphics/pokemon/kirlia_fonei/back.4bpp.lz");
+const u32 gMonShinyPalette_KirliaFonei[] = INCBIN_U32("graphics/pokemon/kirlia_fonei/shiny.gbapal.lz");
+const u32 gMonStillFrontPic_KirliaFonei[] = INCBIN_U32("graphics/pokemon/kirlia_fonei/front.4bpp.lz");
+const u8 gMonIcon_KirliaFonei[] = INCBIN_U8("graphics/pokemon/kirlia_fonei/icon.4bpp");
+const u8 gMonFootprint_KirliaFonei[] = INCBIN_U8("graphics/pokemon/kirlia_fonei/footprint.1bpp");
+
+const u32 gMonPalette_GardevoirFonei[] = INCBIN_U32("graphics/pokemon/gardevoir_fonei/normal.gbapal.lz");
+const u32 gMonBackPic_GardevoirFonei[] = INCBIN_U32("graphics/pokemon/gardevoir_fonei/back.4bpp.lz");
+const u32 gMonShinyPalette_GardevoirFonei[] = INCBIN_U32("graphics/pokemon/gardevoir_fonei/shiny.gbapal.lz");
+const u32 gMonStillFrontPic_GardevoirFonei[] = INCBIN_U32("graphics/pokemon/gardevoir_fonei/front.4bpp.lz");
+const u8 gMonIcon_GardevoirFonei[] = INCBIN_U8("graphics/pokemon/gardevoir_fonei/icon.4bpp");
+const u8 gMonFootprint_GardevoirFonei[] = INCBIN_U8("graphics/pokemon/gardevoir_fonei/footprint.1bpp");
+
+const u32 gMonPalette_GalladeFonei[] = INCBIN_U32("graphics/pokemon/gallade_fonei/normal.gbapal.lz");
+const u32 gMonBackPic_GalladeFonei[] = INCBIN_U32("graphics/pokemon/gallade_fonei/back.4bpp.lz");
+const u32 gMonShinyPalette_GalladeFonei[] = INCBIN_U32("graphics/pokemon/gallade_fonei/shiny.gbapal.lz");
+const u32 gMonStillFrontPic_GalladeFonei[] = INCBIN_U32("graphics/pokemon/gallade_fonei/front.4bpp.lz");
+const u8 gMonIcon_GalladeFonei[] = INCBIN_U8("graphics/pokemon/gallade_fonei/icon.4bpp");
+const u8 gMonFootprint_GalladeFonei[] = INCBIN_U8("graphics/pokemon/gallade_fonei/footprint.1bpp");
+
+const u32 gMonPalette_Woobat[] = INCBIN_U32("graphics/pokemon/woobat/normal.gbapal.lz");
+const u32 gMonBackPic_Woobat[] = INCBIN_U32("graphics/pokemon/woobat/back.4bpp.lz");
+const u32 gMonShinyPalette_Woobat[] = INCBIN_U32("graphics/pokemon/woobat/shiny.gbapal.lz");
+const u32 gMonStillFrontPic_Woobat[] = INCBIN_U32("graphics/pokemon/woobat/front.4bpp.lz");
+const u8 gMonIcon_Woobat[] = INCBIN_U8("graphics/pokemon/woobat/icon.4bpp");
+const u8 gMonFootprint_Woobat[] = INCBIN_U8("graphics/pokemon/woobat/footprint.1bpp");
+
+const u32 gMonPalette_Swoobat[] = INCBIN_U32("graphics/pokemon/swoobat/normal.gbapal.lz");
+const u32 gMonBackPic_Swoobat[] = INCBIN_U32("graphics/pokemon/swoobat/back.4bpp.lz");
+const u32 gMonShinyPalette_Swoobat[] = INCBIN_U32("graphics/pokemon/swoobat/shiny.gbapal.lz");
+const u32 gMonStillFrontPic_Swoobat[] = INCBIN_U32("graphics/pokemon/swoobat/front.4bpp.lz");
+const u8 gMonIcon_Swoobat[] = INCBIN_U8("graphics/pokemon/swoobat/icon.4bpp");
+const u8 gMonFootprint_Swoobat[] = INCBIN_U8("graphics/pokemon/swoobat/footprint.1bpp");
+
+const u32 gMonPalette_Truebat[] = INCBIN_U32("graphics/pokemon/truebat/normal.gbapal.lz");
+const u32 gMonBackPic_Truebat[] = INCBIN_U32("graphics/pokemon/truebat/back.4bpp.lz");
+const u32 gMonShinyPalette_Truebat[] = INCBIN_U32("graphics/pokemon/truebat/shiny.gbapal.lz");
+const u32 gMonStillFrontPic_Truebat[] = INCBIN_U32("graphics/pokemon/truebat/front.4bpp.lz");
+const u8 gMonIcon_Truebat[] = INCBIN_U8("graphics/pokemon/truebat/icon.4bpp");
+const u8 gMonFootprint_Truebat[] = INCBIN_U8("graphics/pokemon/truebat/footprint.1bpp");
+
+const u32 gMonPalette_Hombone[] = INCBIN_U32("graphics/pokemon/hombone/normal.gbapal.lz");
+const u32 gMonBackPic_Hombone[] = INCBIN_U32("graphics/pokemon/hombone/back.4bpp.lz");
+const u32 gMonShinyPalette_Hombone[] = INCBIN_U32("graphics/pokemon/hombone/shiny.gbapal.lz");
+const u32 gMonStillFrontPic_Hombone[] = INCBIN_U32("graphics/pokemon/hombone/front.4bpp.lz");
+const u8 gMonIcon_Hombone[] = INCBIN_U8("graphics/pokemon/hombone/icon.4bpp");
+const u8 gMonFootprint_Hombone[] = INCBIN_U8("graphics/pokemon/hombone/footprint.1bpp");
+
+const u32 gMonPalette_Hombeast[] = INCBIN_U32("graphics/pokemon/hombeast/normal.gbapal.lz");
+const u32 gMonBackPic_Hombeast[] = INCBIN_U32("graphics/pokemon/hombeast/back.4bpp.lz");
+const u32 gMonShinyPalette_Hombeast[] = INCBIN_U32("graphics/pokemon/hombeast/shiny.gbapal.lz");
+const u32 gMonStillFrontPic_Hombeast[] = INCBIN_U32("graphics/pokemon/hombeast/front.4bpp.lz");
+const u8 gMonIcon_Hombeast[] = INCBIN_U8("graphics/pokemon/hombeast/icon.4bpp");
+const u8 gMonFootprint_Hombeast[] = INCBIN_U8("graphics/pokemon/hombeast/footprint.1bpp");
+
+const u32 gMonPalette_Qwilshark[] = INCBIN_U32("graphics/pokemon/qwilshark/normal.gbapal.lz");
+const u32 gMonBackPic_Qwilshark[] = INCBIN_U32("graphics/pokemon/qwilshark/back.4bpp.lz");
+const u32 gMonShinyPalette_Qwilshark[] = INCBIN_U32("graphics/pokemon/qwilshark/shiny.gbapal.lz");
+const u32 gMonStillFrontPic_Qwilshark[] = INCBIN_U32("graphics/pokemon/qwilshark/front.4bpp.lz");
+const u8 gMonIcon_Qwilshark[] = INCBIN_U8("graphics/pokemon/qwilshark/icon.4bpp");
+const u8 gMonFootprint_Qwilshark[] = INCBIN_U8("graphics/pokemon/qwilshark/footprint.1bpp");
+
+const u32 gMonPalette_Krissy[] = INCBIN_U32("graphics/pokemon/krissy/normal.gbapal.lz");
+const u32 gMonBackPic_Krissy[] = INCBIN_U32("graphics/pokemon/krissy/back.4bpp.lz");
+const u32 gMonShinyPalette_Krissy[] = INCBIN_U32("graphics/pokemon/krissy/shiny.gbapal.lz");
+const u32 gMonStillFrontPic_Krissy[] = INCBIN_U32("graphics/pokemon/krissy/front.4bpp.lz");
+const u8 gMonIcon_Krissy[] = INCBIN_U8("graphics/pokemon/krissy/icon.4bpp");
+const u8 gMonFootprint_Krissy[] = INCBIN_U8("graphics/pokemon/krissy/footprint.1bpp");
+
+const u32 gMonPalette_Krakodemon[] = INCBIN_U32("graphics/pokemon/krakodemon/normal.gbapal.lz");
+const u32 gMonBackPic_Krakodemon[] = INCBIN_U32("graphics/pokemon/krakodemon/back.4bpp.lz");
+const u32 gMonShinyPalette_Krakodemon[] = INCBIN_U32("graphics/pokemon/krakodemon/shiny.gbapal.lz");
+const u32 gMonStillFrontPic_Krakodemon[] = INCBIN_U32("graphics/pokemon/krakodemon/front.4bpp.lz");
+const u8 gMonIcon_Krakodemon[] = INCBIN_U8("graphics/pokemon/krakodemon/icon.4bpp");
+const u8 gMonFootprint_Krakodemon[] = INCBIN_U8("graphics/pokemon/krakodemon/footprint.1bpp");
+
+const u32 gMonPalette_Weatherbane[] = INCBIN_U32("graphics/pokemon/weatherbane/normal.gbapal.lz");
+const u32 gMonBackPic_Weatherbane[] = INCBIN_U32("graphics/pokemon/weatherbane/back.4bpp.lz");
+const u32 gMonShinyPalette_Weatherbane[] = INCBIN_U32("graphics/pokemon/weatherbane/shiny.gbapal.lz");
+const u32 gMonStillFrontPic_Weatherbane[] = INCBIN_U32("graphics/pokemon/weatherbane/front.4bpp.lz");
+const u8 gMonIcon_Weatherbane[] = INCBIN_U8("graphics/pokemon/weatherbane/icon.4bpp");
+const u8 gMonFootprint_Weatherbane[] = INCBIN_U8("graphics/pokemon/weatherbane/footprint.1bpp");
+
+const u32 gMonPalette_Ketsuban[] = INCBIN_U32("graphics/pokemon/0xb-ketsu/normal.gbapal.lz");
+const u32 gMonBackPic_Ketsuban[] = INCBIN_U32("graphics/pokemon/0xb-ketsu/back.4bpp.lz");
+const u32 gMonShinyPalette_Ketsuban[] = INCBIN_U32("graphics/pokemon/0xb-ketsu/shiny.gbapal.lz");
+const u32 gMonStillFrontPic_Ketsuban[] = INCBIN_U32("graphics/pokemon/0xb-ketsu/front.4bpp.lz");
+const u8 gMonIcon_Ketsuban[] = INCBIN_U8("graphics/pokemon/0xb-ketsu/icon.4bpp");
+const u8 gMonFootprint_Ketsuban[] = INCBIN_U8("graphics/pokemon/0xb-ketsu/footprint.1bpp");
+
 // const u32 gMonPalette_Spcs[] = INCBIN_U32("graphics/pokemon/spcs/normal.gbapal.lz");
 // const u32 gMonBackPic_Spcs[] = INCBIN_U32("graphics/pokemon/spcs/back.4bpp.lz");
 // const u32 gMonShinyPalette_Spcs[] = INCBIN_U32("graphics/pokemon/spcs/shiny.gbapal.lz");

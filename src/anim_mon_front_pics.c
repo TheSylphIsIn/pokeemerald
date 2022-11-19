@@ -446,6 +446,20 @@ const u32 gMonFrontPic_SudowoodoFonei[] = INCBIN_U32("graphics/pokemon/sudowoodo
 const u32 gMonFrontPic_Gritwyrm[] = INCBIN_U32("graphics/pokemon/gritwyrm/anim_front.4bpp.lz");
 const u32 gMonFrontPic_Moldune[] = INCBIN_U32("graphics/pokemon/moldune/anim_front.4bpp.lz");
 const u32 gMonFrontPic_Wattitude[] = INCBIN_U32("graphics/pokemon/wattitude/anim_front.4bpp.lz");
+const u32 gMonFrontPic_RaltsFonei[] = INCBIN_U32("graphics/pokemon/ralts_fonei/anim_front.4bpp.lz");
+const u32 gMonFrontPic_KirliaFonei[] = INCBIN_U32("graphics/pokemon/kirlia_fonei/anim_front.4bpp.lz");
+const u32 gMonFrontPic_GardevoirFonei[] = INCBIN_U32("graphics/pokemon/gardevoir_fonei/anim_front.4bpp.lz");
+const u32 gMonFrontPic_GalladeFonei[] = INCBIN_U32("graphics/pokemon/gallade_fonei/anim_front.4bpp.lz");
+const u32 gMonFrontPic_Woobat[] = INCBIN_U32("graphics/pokemon/woobat/anim_front.4bpp.lz");
+const u32 gMonFrontPic_Swoobat[] = INCBIN_U32("graphics/pokemon/swoobat/anim_front.4bpp.lz");
+const u32 gMonFrontPic_Truebat[] = INCBIN_U32("graphics/pokemon/truebat/anim_front.4bpp.lz");
+const u32 gMonFrontPic_Hombone[] = INCBIN_U32("graphics/pokemon/hombone/anim_front.4bpp.lz");
+const u32 gMonFrontPic_Hombeast[] = INCBIN_U32("graphics/pokemon/hombeast/anim_front.4bpp.lz");
+const u32 gMonFrontPic_Qwilshark[] = INCBIN_U32("graphics/pokemon/qwilshark/anim_front.4bpp.lz");
+const u32 gMonFrontPic_Krissy[] = INCBIN_U32("graphics/pokemon/krissy/anim_front.4bpp.lz");
+const u32 gMonFrontPic_Krakodemon[] = INCBIN_U32("graphics/pokemon/krakodemon/anim_front.4bpp.lz");
+const u32 gMonFrontPic_Weatherbane[] = INCBIN_U32("graphics/pokemon/weatherbane/anim_front.4bpp.lz");
+const u32 gMonFrontPic_Ketsuban[] = INCBIN_U32("graphics/pokemon/0xb-ketsu/anim_front.4bpp.lz");
 
 // const u32 gMonFrontPic_Spcs[] = INCBIN_U32("graphics/pokemon/spcs/anim_front.4bpp.lz");
 

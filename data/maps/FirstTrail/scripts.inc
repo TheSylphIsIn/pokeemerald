@@ -22,6 +22,8 @@ FirstTrail_Text_MorganIdle:
 // calvin idle script
 FirstTrail_EventScript_Calvin::
 	msgbox FirstTrail_Text_CalvinIdle, MSGBOX_NPC
+	giveitem ITEM_TM06_TOXIC
+	giveitem ITEM_HM05_FLASH
 	end
 
 FirstTrail_Text_CalvinIdle:

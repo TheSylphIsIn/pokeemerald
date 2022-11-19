@@ -292,3 +292,16 @@ EventScript_WarpToOptionsRoom::
 	waitstate
 	release
 	end
+
+EventScript_AwardAchievement::
+	lock
+	playse SE_PIN
+	msgbox Text_AchievementGet, MSGBOX_POKENAV
+	release
+	end
+	
+Text_AchievementGet:
+	.string "ACHIEVEMENT UNLOCKED!\n"
+	.string "Buffer achievement text.$"
+
+

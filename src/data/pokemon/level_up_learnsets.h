@@ -5922,3 +5922,60 @@ static const u16 sWattitudeLevelUpLearnset[] = {
 	LEVEL_UP_END
 };
 
+static const u16 sRaltsFoneiLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sKirliaFoneiLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sGardevoirFoneiLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sGalladeFoneiLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sWoobatLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sSwoobatLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sTruebatLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sHomboneLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sHombeastLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sQwilsharkLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sKrissyLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sKrakodemonLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sWeatherbaneLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sKetsubanLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+

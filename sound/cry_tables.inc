@@ -437,6 +437,21 @@ gCryTable::
 	cry Cry_Gritwyrm
 	cry Cry_Moldune
 	cry Cry_Wattitude
+	cry Cry_RaltsFonei
+	cry Cry_KirliaFonei
+	cry Cry_GardevoirFonei
+	cry Cry_GalladeFonei
+	cry Cry_Woobat
+	cry Cry_Swoobat
+	cry Cry_Truebat
+	cry Cry_Hombone
+	cry Cry_Hombeast
+	cry Cry_Qwilshark
+	cry Cry_Krissy
+	cry Cry_Krakodemon
+	cry Cry_Weatherbane
+	cry Cry_Ketsuban
+
 	// cry Cry_Spcs
 	.align 2
 gCryTable_Reverse::
@@ -877,4 +892,19 @@ gCryTable_Reverse::
 	cry_reverse Cry_Gritwyrm
 	cry_reverse Cry_Moldune
 	cry_reverse Cry_Wattitude
+	cry_reverse Cry_RaltsFonei
+	cry_reverse Cry_KirliaFonei
+	cry_reverse Cry_GardevoirFonei
+	cry_reverse Cry_GalladeFonei
+	cry_reverse Cry_Woobat
+	cry_reverse Cry_Swoobat
+	cry_reverse Cry_Truebat
+	cry_reverse Cry_Hombone
+	cry_reverse Cry_Hombeast
+	cry_reverse Cry_Qwilshark
+	cry_reverse Cry_Krissy
+	cry_reverse Cry_Krakodemon
+	cry_reverse Cry_Weatherbane
+	cry_reverse Cry_Ketsuban
+
 	// cry_reverse Cry_Spcs

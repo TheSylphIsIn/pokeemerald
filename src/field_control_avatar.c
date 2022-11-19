@@ -69,6 +69,7 @@ static bool8 TryStartStepCountScript(u16);
 static void UpdateFriendshipStepCounter(void);
 static bool8 UpdatePoisonStepCounter(void);
 static bool32 TryProcessCheatCode(void);
+static bool32 TryUnlockAchievement(void);
 
 void FieldClearPlayerInput(struct FieldInput *input)
 {
@@ -145,6 +146,10 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     GetPlayerPosition(&position);
     metatileBehavior = MapGridGetMetatileBehaviorAt(position.x, position.y);
 
+	if (VarGet(VAR_PENDING_ACHIEVEMENTS) != 0)
+		if (TryUnlockAchievement())
+			return TRUE;
+	
     if (CheckForTrainersWantingBattle() == TRUE)
         return TRUE;
 
@@ -1010,6 +1015,10 @@ int SetCableClubWarp(void)
 
 #define OPTIONS_ROOM_BUTTON_COMBO (L_BUTTON | R_BUTTON | B_BUTTON)
 
+// Checks if the player is inputting a button combination for a cheat code. If so, activates
+// the code's effect via a script.
+// Will only trigger the script if FLAG_ACCEPT_CHEAT_CODES is set.
+
 static bool32 TryProcessCheatCode(void)
 {
     if (FlagGet(FLAG_ACCEPT_CHEAT_CODES))
@@ -1021,6 +1030,21 @@ static bool32 TryProcessCheatCode(void)
 		}
     }
     return FALSE;
+}
+
+// Tries to award the player an achievement
+static bool32 TryUnlockAchievement(void)
+{
+	VarSet(VAR_PENDING_ACHIEVEMENTS, (VarGet(VAR_PENDING_ACHIEVEMENTS) - 1));
+	if (FlagGet(FLAG_WOKE_MORGAN) && !FlagGet(FLAG_BADGE08_GET))
+	{
+		FlagSet(FLAG_BADGE08_GET);
+
+		ScriptContext_SetupScript(EventScript_AwardAchievement);
+		return TRUE;
+	}
+	
+	return FALSE;
 }
 
 

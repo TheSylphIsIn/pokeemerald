@@ -5232,6 +5232,174 @@ const struct PokedexEntry gPokedexEntries[] =
 		.trainerOffset = 0,
 	},
 	
+	[NATIONAL_DEX_RALTS_FONEI] =
+	{
+		.categoryName = _(""),
+		.height = 1,
+		.weight = 1,
+		.description = gRaltsFoneiPokedexText,
+		.pokemonScale = 256,
+		.pokemonOffset = 0,
+		.trainerScale = 256,
+		.trainerOffset = 0,
+	},
+
+	[NATIONAL_DEX_KIRLIA_FONEI] =
+	{
+		.categoryName = _(""),
+		.height = 1,
+		.weight = 1,
+		.description = gKirliaFoneiPokedexText,
+		.pokemonScale = 256,
+		.pokemonOffset = 0,
+		.trainerScale = 256,
+		.trainerOffset = 0,
+	},
+
+	[NATIONAL_DEX_GARDEVOIR_FONEI] =
+	{
+		.categoryName = _(""),
+		.height = 1,
+		.weight = 1,
+		.description = gGardevoirFoneiPokedexText,
+		.pokemonScale = 256,
+		.pokemonOffset = 0,
+		.trainerScale = 256,
+		.trainerOffset = 0,
+	},
+
+	[NATIONAL_DEX_GALLADE_FONEI] =
+	{
+		.categoryName = _(""),
+		.height = 1,
+		.weight = 1,
+		.description = gGalladeFoneiPokedexText,
+		.pokemonScale = 256,
+		.pokemonOffset = 0,
+		.trainerScale = 256,
+		.trainerOffset = 0,
+	},
+
+	[NATIONAL_DEX_WOOBAT] =
+	{
+		.categoryName = _(""),
+		.height = 1,
+		.weight = 1,
+		.description = gWoobatPokedexText,
+		.pokemonScale = 256,
+		.pokemonOffset = 0,
+		.trainerScale = 256,
+		.trainerOffset = 0,
+	},
+
+	[NATIONAL_DEX_SWOOBAT] =
+	{
+		.categoryName = _(""),
+		.height = 1,
+		.weight = 1,
+		.description = gSwoobatPokedexText,
+		.pokemonScale = 256,
+		.pokemonOffset = 0,
+		.trainerScale = 256,
+		.trainerOffset = 0,
+	},
+
+	[NATIONAL_DEX_TRUEBAT] =
+	{
+		.categoryName = _(""),
+		.height = 1,
+		.weight = 1,
+		.description = gTruebatPokedexText,
+		.pokemonScale = 256,
+		.pokemonOffset = 0,
+		.trainerScale = 256,
+		.trainerOffset = 0,
+	},
+
+	[NATIONAL_DEX_HOMBONE] =
+	{
+		.categoryName = _(""),
+		.height = 1,
+		.weight = 1,
+		.description = gHombonePokedexText,
+		.pokemonScale = 256,
+		.pokemonOffset = 0,
+		.trainerScale = 256,
+		.trainerOffset = 0,
+	},
+
+	[NATIONAL_DEX_HOMBEAST] =
+	{
+		.categoryName = _(""),
+		.height = 1,
+		.weight = 1,
+		.description = gHombeastPokedexText,
+		.pokemonScale = 256,
+		.pokemonOffset = 0,
+		.trainerScale = 256,
+		.trainerOffset = 0,
+	},
+
+	[NATIONAL_DEX_QWILSHARK] =
+	{
+		.categoryName = _(""),
+		.height = 1,
+		.weight = 1,
+		.description = gQwilsharkPokedexText,
+		.pokemonScale = 256,
+		.pokemonOffset = 0,
+		.trainerScale = 256,
+		.trainerOffset = 0,
+	},
+
+	[NATIONAL_DEX_KRISSY] =
+	{
+		.categoryName = _(""),
+		.height = 1,
+		.weight = 1,
+		.description = gKrissyPokedexText,
+		.pokemonScale = 256,
+		.pokemonOffset = 0,
+		.trainerScale = 256,
+		.trainerOffset = 0,
+	},
+
+	[NATIONAL_DEX_KRAKODEMON] =
+	{
+		.categoryName = _(""),
+		.height = 1,
+		.weight = 1,
+		.description = gKrakodemonPokedexText,
+		.pokemonScale = 256,
+		.pokemonOffset = 0,
+		.trainerScale = 256,
+		.trainerOffset = 0,
+	},
+
+	[NATIONAL_DEX_WEATHERBANE] =
+	{
+		.categoryName = _(""),
+		.height = 1,
+		.weight = 1,
+		.description = gWeatherbanePokedexText,
+		.pokemonScale = 256,
+		.pokemonOffset = 0,
+		.trainerScale = 256,
+		.trainerOffset = 0,
+	},
+
+	[NATIONAL_DEX_KETSUBAN] =
+	{
+		.categoryName = _(""),
+		.height = 1,
+		.weight = 1,
+		.description = gKetsubanPokedexText,
+		.pokemonScale = 256,
+		.pokemonOffset = 0,
+		.trainerScale = 256,
+		.trainerOffset = 0,
+	},
+	
 	/*
 	[NATIONAL_DEX_SPCS] = 
 	{

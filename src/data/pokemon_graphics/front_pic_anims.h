@@ -4920,6 +4920,76 @@ static const union AnimCmd sAnim_WATTITUDE_1[] =
 	ANIMCMD_END
 };
 
+static const union AnimCmd sAnim_RALTS_FONEI_1[] =
+{
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_KIRLIA_FONEI_1[] =
+{
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_GARDEVOIR_FONEI_1[] =
+{
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_GALLADE_FONEI_1[] =
+{
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_WOOBAT_1[] =
+{
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_SWOOBAT_1[] =
+{
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_TRUEBAT_1[] =
+{
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_HOMBONE_1[] =
+{
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_HOMBEAST_1[] =
+{
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_QWILSHARK_1[] =
+{
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_KRISSY_1[] =
+{
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_KRAKODEMON_1[] =
+{
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_WEATHERBANE_1[] =
+{
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_KETSUBAN_1[] =
+{
+	ANIMCMD_END
+};
+
 // static const union AnimCmd sAnim_SPCS_1[] = 
 // {
 	// ANIMCMD_END
@@ -7405,6 +7475,76 @@ static const union AnimCmd *const sAnims_WATTITUDE[] ={
 	sAnim_WATTITUDE_1,
 };
 
+static const union AnimCmd *const sAnims_RALTS_FONEI[] ={
+	sAnim_GeneralFrame0,
+	sAnim_RALTS_FONEI_1,
+};
+
+static const union AnimCmd *const sAnims_KIRLIA_FONEI[] ={
+	sAnim_GeneralFrame0,
+	sAnim_KIRLIA_FONEI_1,
+};
+
+static const union AnimCmd *const sAnims_GARDEVOIR_FONEI[] ={
+	sAnim_GeneralFrame0,
+	sAnim_GARDEVOIR_FONEI_1,
+};
+
+static const union AnimCmd *const sAnims_GALLADE_FONEI[] ={
+	sAnim_GeneralFrame0,
+	sAnim_GALLADE_FONEI_1,
+};
+
+static const union AnimCmd *const sAnims_WOOBAT[] ={
+	sAnim_GeneralFrame0,
+	sAnim_WOOBAT_1,
+};
+
+static const union AnimCmd *const sAnims_SWOOBAT[] ={
+	sAnim_GeneralFrame0,
+	sAnim_SWOOBAT_1,
+};
+
+static const union AnimCmd *const sAnims_TRUEBAT[] ={
+	sAnim_GeneralFrame0,
+	sAnim_TRUEBAT_1,
+};
+
+static const union AnimCmd *const sAnims_HOMBONE[] ={
+	sAnim_GeneralFrame0,
+	sAnim_HOMBONE_1,
+};
+
+static const union AnimCmd *const sAnims_HOMBEAST[] ={
+	sAnim_GeneralFrame0,
+	sAnim_HOMBEAST_1,
+};
+
+static const union AnimCmd *const sAnims_QWILSHARK[] ={
+	sAnim_GeneralFrame0,
+	sAnim_QWILSHARK_1,
+};
+
+static const union AnimCmd *const sAnims_KRISSY[] ={
+	sAnim_GeneralFrame0,
+	sAnim_KRISSY_1,
+};
+
+static const union AnimCmd *const sAnims_KRAKODEMON[] ={
+	sAnim_GeneralFrame0,
+	sAnim_KRAKODEMON_1,
+};
+
+static const union AnimCmd *const sAnims_WEATHERBANE[] ={
+	sAnim_GeneralFrame0,
+	sAnim_WEATHERBANE_1,
+};
+
+static const union AnimCmd *const sAnims_KETSUBAN[] ={
+	sAnim_GeneralFrame0,
+	sAnim_KETSUBAN_1,
+};
+
 // static const union AnimCmd *const sAnims_SPCS[] ={
 	// sAnim_GeneralFrame0,
 	// sAnim_SPCS_1,
@@ -8018,6 +8158,21 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[] =
 	ANIM_CMD(GRITWYRM),
 	ANIM_CMD(MOLDUNE),
 	ANIM_CMD(WATTITUDE),
+	ANIM_CMD(RALTS_FONEI),
+	ANIM_CMD(KIRLIA_FONEI),
+	ANIM_CMD(GARDEVOIR_FONEI),
+	ANIM_CMD(GALLADE_FONEI),
+	ANIM_CMD(WOOBAT),
+	ANIM_CMD(SWOOBAT),
+	ANIM_CMD(TRUEBAT),
+	ANIM_CMD(HOMBONE),
+	ANIM_CMD(HOMBEAST),
+	ANIM_CMD(QWILSHARK),
+	ANIM_CMD(KRISSY),
+	ANIM_CMD(KRAKODEMON),
+	ANIM_CMD(WEATHERBANE),
+	ANIM_CMD(KETSUBAN),
+
 	// ANIM_CMD(SPCS),
 	[SPECIES_CASTFORM_SUNNY] = sAnims_CASTFORM,
 	[SPECIES_CASTFORM_RAINY] = sAnims_CASTFORM,
