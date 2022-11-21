@@ -1217,8 +1217,8 @@
 #define FLAG_ITEM_SAFARI_ZONE_NORTH_EAST_NUGGET                     0x491
 #define FLAG_ITEM_SAFARI_ZONE_SOUTH_EAST_BIG_PEARL                  0x492
 
-#define FLAG_WOKE_MORGAN                                           0x493 // Talked to Morgan before getting starter
-#define FLAG_WOKE_CALVIN                                          0x494 // Talked to Kyle before getting starter
+#define FLAG_FAVORED_MORGAN 0x493 // These flags are set and cleared at various points depending on how you interact with your rivals.
+#define FLAG_FAVORED_CALVIN 0x494 // For example, battling them in the clearing sets their flag, which affects which one you battle on the cliffs.
 #define FLAG_UNUSED_0x495                                           0x495 // Unused Flag
 #define FLAG_UNUSED_0x496                                           0x496 // Unused Flag
 #define FLAG_UNUSED_0x497                                           0x497 // Unused Flag

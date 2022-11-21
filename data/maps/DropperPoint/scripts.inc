@@ -12,29 +12,28 @@ DropperPoint_Sign::
 DropperPoint_EventScript_Morgan::
 	lock
 	goto_if_eq VAR_FONEI_COAST_STATE, 1, DropperPoint_EventScript_MorganPanic
-	goto_if_set FLAG_WOKE_MORGAN, DropperPoint_EventScript_MorganAwake
+	goto_if_set FLAG_FAVORED_MORGAN, DropperPoint_EventScript_MorganAwake
 	msgbox DropperPoint_Text_MorganWake, MSGBOX_DEFAULT
 	closemessage
 	applymovement LOCALID_MORGAN, DropperPoint_Movement_WakeUp
 	waitmovement 0
 	faceplayer
 	msgbox DropperPoint_Text_MorganIntro, MSGBOX_DEFAULT
-	setflag FLAG_WOKE_MORGAN
+	setflag FLAG_FAVORED_MORGAN
 	setobjectmovementtype LOCALID_MORGAN, MOVEMENT_TYPE_LOOK_AROUND
-	addvar VAR_PENDING_ACHIEVEMENTS, 1
 	release
 	end
 	
 DropperPoint_EventScript_Calvin::
 	lock
-	goto_if_set FLAG_WOKE_CALVIN, DropperPoint_EventScript_CalvinAwake
+	goto_if_set FLAG_FAVORED_CALVIN, DropperPoint_EventScript_CalvinAwake
 	msgbox DropperPoint_Text_CalvinWake, MSGBOX_DEFAULT
 	closemessage
 	applymovement LOCALID_CALVIN, DropperPoint_Movement_WakeUp
 	waitmovement 0
 	faceplayer
 	msgbox DropperPoint_Text_CalvinIntro, MSGBOX_DEFAULT
-	setflag FLAG_WOKE_CALVIN
+	setflag FLAG_FAVORED_CALVIN
 	setobjectmovementtype LOCALID_CALVIN, MOVEMENT_TYPE_LOOK_AROUND
 	release
 	end
@@ -89,8 +88,8 @@ DropperPoint_Text_Calvin2:
 	
 DropperPoint_TriggerScript_Bag::
 	lock
-	call_if_unset FLAG_WOKE_CALVIN, DropperPoint_TriggerScript_CalvinSleep
-	call_if_unset FLAG_WOKE_MORGAN, DropperPoint_TriggerScript_MorganSleep
+	call_if_unset FLAG_FAVORED_CALVIN, DropperPoint_TriggerScript_CalvinSleep
+	call_if_unset FLAG_FAVORED_MORGAN, DropperPoint_TriggerScript_MorganSleep
 	// both rivals awake
 	msgbox DropperPoint_Text_BagText1, MSGBOX_DEFAULT
 	closemessage
@@ -186,7 +185,7 @@ DropperPoint_TriggerScript_BagContinue::
 
 DropperPoint_TriggerScript_Roadblock::
 	lock
-	goto_if_set FLAG_WOKE_CALVIN, DropperPoint_TriggerScript_RoadblockCalvin
+	goto_if_set FLAG_FAVORED_CALVIN, DropperPoint_TriggerScript_RoadblockCalvin
 	msgbox DropperPoint_Text_CantLeave, MSGBOX_DEFAULT
 	closemessage
 	applymovement OBJ_EVENT_ID_PLAYER, DropperPoint_Movement_ComeBack
@@ -261,6 +260,8 @@ DropperPoint_EventScript_BagContinue:
 	waitmovement 0
 	removeobject LOCALID_CALVIN
 	removeobject LOCALID_MORGAN
+	clearflag FLAG_FAVORED_MORGAN
+	clearflag FLAG_FAVORED_CALVIN
 	release
 	end
 	

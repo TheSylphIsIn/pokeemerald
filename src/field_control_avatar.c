@@ -1036,7 +1036,7 @@ static bool32 TryProcessCheatCode(void)
 static bool32 TryUnlockAchievement(void)
 {
 	VarSet(VAR_PENDING_ACHIEVEMENTS, (VarGet(VAR_PENDING_ACHIEVEMENTS) - 1));
-	if (FlagGet(FLAG_WOKE_MORGAN) && !FlagGet(FLAG_BADGE08_GET))
+	if (FlagGet(FLAG_FAVORED_MORGAN) && !FlagGet(FLAG_BADGE08_GET))
 	{
 		FlagSet(FLAG_BADGE08_GET);
 

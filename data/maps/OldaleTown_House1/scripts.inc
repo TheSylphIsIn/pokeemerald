@@ -6,10 +6,10 @@ OldaleTown_House1_EventScript_Woman::
 	end
 
 OldaleTown_House1_Text_LeftPokemonGoesOutFirst:
-	.string "When a POKéMON battle starts, the one\n"
-	.string "at the left of the list goes out first.\p"
-	.string "So, when you get more POKéMON in your\n"
-	.string "party, try switching around the order\l"
-	.string "of your POKéMON.\p"
-	.string "It could give you an advantage.$"
+	.string "What brings you to CRAN TOWN?\n"
+	.string "Not many people visit, lately.\p"
+	.string "There's not much to do around here,\n"
+	.string "But the natural beauty can't be beat.\p"
+	.string "Most people just stay in the big city\n"
+	.string "up the cliff, though. What a shame.$" 
 
