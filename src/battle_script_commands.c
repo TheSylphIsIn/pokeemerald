@@ -3505,7 +3505,8 @@ static void Cmd_getexp(void)
               | BATTLE_TYPE_FRONTIER
               | BATTLE_TYPE_SAFARI
               | BATTLE_TYPE_BATTLE_TOWER
-              | BATTLE_TYPE_EREADER_TRAINER)))
+              | BATTLE_TYPE_EREADER_TRAINER))
+			  || FlagGet(FLAG_DYNAMIC_LEVEL_ZONE))
         {
             gBattleScripting.getexpState = 6; // goto last case
         }
@@ -3597,6 +3598,7 @@ static void Cmd_getexp(void)
 
                 if (GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_HP))
                 {
+					// here is where EXP should be modified by level caps and such.
                     if (gBattleStruct->sentInPokes & 1)
                         gBattleMoveDamage = *exp;
                     else

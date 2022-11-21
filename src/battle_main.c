@@ -120,6 +120,9 @@ static void HandleEndTurn_MonFled(void);
 static void HandleEndTurn_FinishBattle(void);
 static void SpriteCB_UnusedBattleInit(struct Sprite *sprite);
 static void SpriteCB_UnusedBattleInit_Main(struct Sprite *sprite);
+static void SaveMonItems(void);
+static void LoadMonItems(void);
+static u8 AdjustTrainerLevelDynamic(u8 playerMaxLvl, u8 enemyMaxLvl, u8 enemyLvl);
 
 EWRAM_DATA u16 gBattle_BG0_X = 0;
 EWRAM_DATA u16 gBattle_BG0_Y = 0;
@@ -238,6 +241,7 @@ EWRAM_DATA u16 gMoveToLearn = 0;
 EWRAM_DATA u8 gBattleMonForms[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u16 gOriginalSpecies[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u16 gTransformedSpecies[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u16 partyHeldItems[PARTY_SIZE] = {0};
 
 void (*gPreBattleCallback1)(void);
 void (*gBattleMainFunc)(void);
@@ -732,6 +736,7 @@ static void CB2_InitBattleInternal(void)
 
     for (i = 0; i < PARTY_SIZE; i++)
         AdjustFriendship(&gPlayerParty[i], FRIENDSHIP_EVENT_LEAGUE_BATTLE);
+	SaveMonItems();
 
     gBattleCommunication[MULTIUSE_STATE] = 0;
 }
@@ -2000,6 +2005,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
     u8 fixedIV;
     s32 i, j;
     u8 monsCount;
+	u8 level, maxLevel = 0, playerMaxLevel;
 
     if (trainerNum == TRAINER_SECRET_BASE)
         return 0;
@@ -2045,9 +2051,18 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
                 for (j = 0; gSpeciesNames[partyData[i].species][j] != EOS; j++)
                     nameHash += gSpeciesNames[partyData[i].species][j];
 
+				level = partyData[i].lvl;
+				if (FlagGet(FLAG_DYNAMIC_LEVEL_ZONE))
+				{
+					for (j = 0; j < monsCount; j++)
+					if (partyData[j].lvl > maxLevel)
+						maxLevel = partyData[j].lvl;
+					playerMaxLevel = GetPlayerMaxLevel();
+					level = AdjustTrainerLevelDynamic(playerMaxLevel, maxLevel, level);
+				}
                 personalityValue += nameHash << 8;
                 fixedIV = partyData[i].iv * MAX_PER_STAT_IVS / 255;
-                CreateMon(&party[i], partyData[i].species, partyData[i].lvl, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
+                CreateMon(&party[i], partyData[i].species, level, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
                 break;
             }
             case F_TRAINER_PARTY_CUSTOM_MOVESET:
@@ -2057,15 +2072,24 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
                 for (j = 0; gSpeciesNames[partyData[i].species][j] != EOS; j++)
                     nameHash += gSpeciesNames[partyData[i].species][j];
 
+				level = partyData[i].lvl;
+				if (FlagGet(FLAG_DYNAMIC_LEVEL_ZONE))
+				{
+					for (j = 0; j < monsCount; j++)
+					if (partyData[j].lvl > maxLevel)
+						maxLevel = partyData[j].lvl;
+					playerMaxLevel = GetPlayerMaxLevel();
+					level = AdjustTrainerLevelDynamic(playerMaxLevel, maxLevel, level);
+				}
                 personalityValue += nameHash << 8;
                 fixedIV = partyData[i].iv * MAX_PER_STAT_IVS / 255;
-                CreateMon(&party[i], partyData[i].species, partyData[i].lvl, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
+                CreateMon(&party[i], partyData[i].species, level, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
 
 				SetMonData(&party[i], MON_DATA_ABILITY_NUM, &partyData[i].ability);
                 for (j = 0; j < MAX_MON_MOVES; j++)
                 {
                     SetMonData(&party[i], MON_DATA_MOVE1 + j, &partyData[i].moves[j]);
-                    SetMonData(&party[i], MON_DATA_PP1 + j, &gBattleMoves[partyData[i].moves[j]].pp);
+                    SetMonData(&party[i], MON_DATA_PP1 + j, &gBattleMoves[partyData[i].moves[j]]);
                 }
                 break;
             }
@@ -2076,9 +2100,19 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
                 for (j = 0; gSpeciesNames[partyData[i].species][j] != EOS; j++)
                     nameHash += gSpeciesNames[partyData[i].species][j];
 
+
+				level = partyData[i].lvl;
+				if (FlagGet(FLAG_DYNAMIC_LEVEL_ZONE))
+				{
+					for (j = 0; j < monsCount; j++)
+					if (partyData[j].lvl > maxLevel)
+						maxLevel = partyData[j].lvl;
+					playerMaxLevel = GetPlayerMaxLevel();
+					level = AdjustTrainerLevelDynamic(playerMaxLevel, maxLevel, level);
+				}
                 personalityValue += nameHash << 8;
                 fixedIV = partyData[i].iv * MAX_PER_STAT_IVS / 255;
-                CreateMon(&party[i], partyData[i].species, partyData[i].lvl, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
+                CreateMon(&party[i], partyData[i].species, level, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
 
                 SetMonData(&party[i], MON_DATA_HELD_ITEM, &partyData[i].heldItem);
                 break;
@@ -2090,12 +2124,21 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
                 for (j = 0; gSpeciesNames[partyData[i].species][j] != EOS; j++)
                     nameHash += gSpeciesNames[partyData[i].species][j];
 
+				level = partyData[i].lvl;
+				if (FlagGet(FLAG_DYNAMIC_LEVEL_ZONE))
+				{
+					for (j = 0; j < monsCount; j++)
+					if (partyData[j].lvl > maxLevel)
+						maxLevel = partyData[j].lvl;
+					playerMaxLevel = GetPlayerMaxLevel();
+					level = AdjustTrainerLevelDynamic(playerMaxLevel, maxLevel, level);
+				}
                 personalityValue += nameHash << 8;
                 fixedIV = partyData[i].iv * MAX_PER_STAT_IVS / 255;
 				if (partyData[i].nature != 0)
-					CreateEnemyMonWithNature(&party[i], partyData[i].species, partyData[i].lvl, fixedIV, partyData[i].nature);
+					CreateEnemyMonWithNature(&party[i], partyData[i].species, level, fixedIV, partyData[i].nature);
 				else 
-					CreateMon(&party[i], partyData[i].species, partyData[i].lvl, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
+					CreateMon(&party[i], partyData[i].species, level, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
 
                 SetMonData(&party[i], MON_DATA_HELD_ITEM, &partyData[i].heldItem);
 				SetMonData(&party[i], MON_DATA_ABILITY_NUM, &partyData[i].ability);
@@ -2119,6 +2162,25 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
     }
 
     return gTrainers[trainerNum].partySize;
+}
+
+static u8 AdjustTrainerLevelDynamic(u8 playerMaxLvl, u8 enemyMaxLvl, u8 enemyLvl)
+{
+	u8 adjustedLevel = playerMaxLvl;
+	
+	if (!FlagGet(FLAG_BOSS_FIGHT)) // Mook trainers are weaker than the player.
+		adjustedLevel -= 2;
+	else
+		adjustedLevel++; // Bosses are stronger than the player.
+	
+	adjustedLevel = adjustedLevel + (enemyLvl - enemyMaxLvl); // pokemon maintain their level difference from the "ace".
+	if (adjustedLevel < 10)
+		adjustedLevel = 10;
+	if (adjustedLevel > MAX_LEVEL)
+		adjustedLevel = MAX_LEVEL;
+	
+	DebugPrintf("Adjusted level from %d to %d.", enemyLvl, adjustedLevel);
+	return adjustedLevel;
 }
 
 // Unused
@@ -5223,6 +5285,8 @@ static void HandleEndTurn_FinishBattle(void)
 			if (gTransformedSpecies[i])
 				RecalcBattlerStats(i, gOriginalSpecies[i]);
 		}
+		// Restores held items to player party.
+		LoadMonItems();
 		
         RecordedBattle_SetPlaybackFinished();
         BeginFastPaletteFade(3);
@@ -5350,3 +5414,39 @@ void RunBattleScriptCommands(void)
     if (gBattleControllerExecFlags == 0)
         gBattleScriptingCommandsTable[gBattlescriptCurrInstr[0]]();
 }
+
+static void SaveMonItems(void)
+{
+	u32 i;
+	if (!FlagGet(FLAG_HELD_ITEMS_STORED) && FlagGet(FLAG_BOSS_FIGHT))
+	{
+		for (i = 0; i < PARTY_SIZE; i++)
+		{
+			if (GetMonData(&gPlayerParty[i], MON_DATA_SANITY_HAS_SPECIES) && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
+			{
+				partyHeldItems[i] = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
+				DebugPrintf("Saved item: %S", gItems[i].name);
+			}
+        }
+		FlagSet(FLAG_HELD_ITEMS_STORED);
+	}
+}
+
+static void LoadMonItems(void)
+{
+	u32 i;
+	if (FlagGet(FLAG_HELD_ITEMS_STORED))
+	{
+		for (i = 0; i < PARTY_SIZE; i++)
+		{
+			if (GetMonData(&gPlayerParty[i], MON_DATA_SANITY_HAS_SPECIES) && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
+			{
+				SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &partyHeldItems[i]);
+				DebugPrintf("Loaded item: %S", gItems[i].name);
+			}
+        }
+		FlagClear(FLAG_HELD_ITEMS_STORED);
+	}
+}
+
+

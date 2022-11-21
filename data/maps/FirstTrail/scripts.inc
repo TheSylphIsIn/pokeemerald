@@ -88,6 +88,7 @@ FirstTrail_TriggerScript_ProfessorMeeting::
 	removeobject LOCALID_CALVIN
 	removeobject LOCALID_MORGAN
 	removeobject LOCALID_MANGROVE
+	setflag FLAG_DYNAMIC_LEVEL_ZONE
 	releaseall
 	end
 	

@@ -1862,3 +1862,68 @@ u16 CountBattledRematchTeams(u16 trainerId)
 
     return i;
 }
+
+// Returns the level of the highest-leveled mon in the player's party.
+// For dynamic scaling purposes.
+u8 GetPlayerMaxLevel(void)
+{
+	u8 level = 1;
+	u8 pendingLevel = 0;
+	u32 i;
+	for (i = 0; i < PARTY_SIZE; i++)
+	{
+		if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != (SPECIES_NONE || SPECIES_EGG))
+		{	
+			pendingLevel = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
+			if (pendingLevel > level)
+				level = pendingLevel;
+		}		
+	}
+	
+	return level;
+}
+
+// Returns the level of the lowest-leveled mon in the player's party.
+// For dynamic scaling purposes. I might not use this one.
+u8 GetPlayerMinLevel(void)
+{
+	u8 level = 1;
+	u8 pendingLevel = 2;
+	u32 i;
+	for (i = 0; i < PARTY_SIZE; i++)
+	{
+		if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != (SPECIES_NONE || SPECIES_EGG))
+		{	
+			pendingLevel = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
+			if (pendingLevel < level)
+				level = pendingLevel;
+		}		
+	}
+	
+	return level;
+}
+
+u8 GetPlayerAvgLevel(void)
+{
+	u8 levelSum = 0;
+	u32 activeMons = 0;
+	u32 i;
+	
+	for (i = 0; i < PARTY_SIZE; i++)
+	{
+		if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != SPECIES_NONE && 
+			GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != SPECIES_EGG)
+		{	
+			DebugPrintf ("Mon %d: %d", activeMons, levelSum);
+			levelSum += GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
+			activeMons++;
+		}		
+	}
+	
+	if (activeMons == 0)
+		activeMons++;
+	DebugPrintf("Average: %d", levelSum / activeMons);
+	return levelSum / activeMons;
+}
+
+

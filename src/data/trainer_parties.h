@@ -4229,13 +4229,13 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Shelby5[] = {
 
 static const struct TrainerMonNoItemDefaultMoves sParty_Calvin1[] = {
     {
-    .iv = 255,
+    .iv = 0,
     .lvl = 5,
     .species = SPECIES_POOCHYENA,
     },
 	{
-	.iv = 255,
-	.lvl = 5,
+	.iv = 0,
+	.lvl = 7,
 	.species = SPECIES_POOCHYENA,
 	}
 };

@@ -263,7 +263,15 @@ static u8 ChooseWildMonLevel(const struct WildPokemon *wildPokemon)
     u8 rand;
 
     // Make sure minimum level is less than maximum level
-    if (wildPokemon->maxLevel >= wildPokemon->minLevel)
+	
+	if (FlagGet(FLAG_DYNAMIC_LEVEL_ZONE))
+	{
+		min = GetPlayerAvgLevel() - 5;
+		if (min < 5)
+			min = 5;
+		max = min + 2;
+	}
+    else if (wildPokemon->maxLevel >= wildPokemon->minLevel)
     {
         min = wildPokemon->minLevel;
         max = wildPokemon->maxLevel;
