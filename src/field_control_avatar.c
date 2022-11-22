@@ -37,6 +37,7 @@
 
 static EWRAM_DATA u8 sWildEncounterImmunitySteps = 0;
 static EWRAM_DATA u16 sPrevMetatileBehavior = 0;
+static EWRAM_DATA u16 sCheatCodeData[5] = {0};
 
 u8 gSelectedObjectEvent;
 
@@ -69,6 +70,8 @@ static bool8 TryStartStepCountScript(u16);
 static void UpdateFriendshipStepCounter(void);
 static bool8 UpdatePoisonStepCounter(void);
 static bool32 TryProcessCheatCode(void);
+static bool32 TryCheatSequence(void);
+static void ResetCheatSequenceProgress(void);
 static bool32 TryUnlockAchievement(void);
 
 void FieldClearPlayerInput(struct FieldInput *input)
@@ -1014,7 +1017,11 @@ int SetCableClubWarp(void)
 }
 
 #define OPTIONS_ROOM_BUTTON_COMBO (L_BUTTON | R_BUTTON | B_BUTTON)
-
+#define cState sCheatCodeData[0]
+#define cTimer sCheatCodeData[1]
+#define cInputIndex sCheatCodeData[2]
+#define cNextInput sCheatCodeData[3]
+#define cCodeIndex sCheatCodeData[4]
 // Checks if the player is inputting a button combination for a cheat code. If so, activates
 // the code's effect via a script.
 // Will only trigger the script if FLAG_ACCEPT_CHEAT_CODES is set.
@@ -1023,14 +1030,113 @@ static bool32 TryProcessCheatCode(void)
 {
     if (FlagGet(FLAG_ACCEPT_CHEAT_CODES))
     {
-		if (JOY_HELD(OPTIONS_ROOM_BUTTON_COMBO) == OPTIONS_ROOM_BUTTON_COMBO)
+		if (JOY_HELD(OPTIONS_ROOM_BUTTON_COMBO) == OPTIONS_ROOM_BUTTON_COMBO && !FlagGet(FLAG_SYS_POKEMON_GET))
 		{
 			ScriptContext_SetupScript(EventScript_WarpToOptionsRoom);
 			return TRUE;
 		}
+		
+		else if (TryCheatSequence())
+			return TRUE;
     }
     return FALSE;
 }
+
+static const u16 sRareCandySequence[4] = {B_BUTTON, A_BUTTON, B_BUTTON, DPAD_RIGHT};
+static const u16 sKonamiCode[10] = {DPAD_UP, DPAD_UP, DPAD_DOWN, DPAD_DOWN, DPAD_LEFT, DPAD_RIGHT, 
+									DPAD_LEFT, DPAD_RIGHT, B_BUTTON, A_BUTTON};
+// This is essentially a task. It tries to detect if the player is inputting
+// a valid button sequence cheat code.
+/*
+*/
+static bool32 TryCheatSequence(void)
+{
+	if (JOY_HELD_RAW(R_BUTTON))
+	{
+		cTimer = 30; // if R is released for more than 30 frames, resets code progress.
+		cNextInput = gMain.newKeys;
+		if ((cNextInput && !(cNextInput & R_BUTTON)) || cState == 3)
+		{
+			switch (cState)
+			{
+				case 0: // try to detect if a valid code is being input
+					if (cNextInput & sRareCandySequence[cInputIndex] || cNextInput & sKonamiCode[cInputIndex])
+					{
+						cInputIndex++;
+						cState++;
+					}
+					return FALSE;
+				case 1: // try to match the sequence to a code
+					if (cNextInput & sKonamiCode[cInputIndex])
+					{
+						cCodeIndex = 1;
+						cState++;
+						cInputIndex++;
+					}
+					else if (cNextInput & sRareCandySequence[cInputIndex])
+					{
+						cCodeIndex = 2;
+						cState++;
+						cInputIndex++;
+					}
+					else
+						ResetCheatSequenceProgress();
+					return FALSE;
+				case 2: // try to make sure the code sequence is completed
+					switch (cCodeIndex)
+					{
+						case 1: 
+							if (cNextInput & sKonamiCode[cInputIndex])
+								cInputIndex++;
+							else 
+								ResetCheatSequenceProgress();
+							if (cInputIndex > 9)
+								cState++;
+							break;
+						case 2:
+							if (cNextInput & sRareCandySequence[cInputIndex])
+								cInputIndex++;
+							else 
+								ResetCheatSequenceProgress();
+							if (cInputIndex > 3)
+								cState++;
+							break;
+						default:
+							ResetCheatSequenceProgress();
+							break;
+					}
+					return FALSE;
+				case 3: // code completed successfully.
+					gSpecialVar_Result = cCodeIndex; // this is used to select the script from a switch in field_move_scripts
+					ScriptContext_SetupScript(EventScript_DoCheatSequenceResult);
+					ResetCheatSequenceProgress();
+					return TRUE;
+			}
+		}
+	}
+	else // if you're not holding R, your sequence progress will expire.
+	{
+		if (cTimer == 0)
+			ResetCheatSequenceProgress();
+		else
+			cTimer--;
+	}
+	return FALSE;
+}
+
+static void ResetCheatSequenceProgress(void)
+{
+	cState = 0;
+	cInputIndex = 0;
+	cCodeIndex = 0;
+}
+
+#undef OPTIONS_ROOM_BUTTON_COMBO
+#undef cState
+#undef cTimer
+#undef cInputIndex
+#undef cNextInput
+#undef cCodeIndex
 
 // Tries to award the player an achievement
 static bool32 TryUnlockAchievement(void)

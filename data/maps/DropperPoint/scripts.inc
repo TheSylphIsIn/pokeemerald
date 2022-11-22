@@ -179,7 +179,6 @@ DropperPoint_TriggerScript_BagContinue::
 	closemessage
 	setvar VAR_FONEI_COAST_STATE, 1
 	setflag FLAG_HIDE_FONEI_COAST_NPCS
-	clearflag FLAG_ACCEPT_CHEAT_CODES
 	release
 	end
 

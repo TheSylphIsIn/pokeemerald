@@ -303,5 +303,29 @@ EventScript_AwardAchievement::
 Text_AchievementGet:
 	.string "ACHIEVEMENT UNLOCKED!\n"
 	.string "Buffer achievement text.$"
+	
+EventScript_DoCheatSequenceResult::
+	lock
+	switch VAR_RESULT
+	case 1, EventScript_KonamiCode
+	case 2, EventScript_RareCandyCode
+	goto EventScript_FailSweetScent
+	
+EventScript_KonamiCode:
+	message Text_GetItems
+	additem ITEM_MAX_REVIVE, 30
+	waitbuttonpress
+	release
+	end
+	
+EventScript_RareCandyCode:
+	message Text_GetItems
+	additem ITEM_RARE_CANDY, 40
+	waitbuttonpress
+	release
+	end
+	
+Text_GetItems:
+	.string "The cheat code gave you items!$"
 
 
