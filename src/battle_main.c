@@ -5422,7 +5422,8 @@ static void SaveMonItems(void)
 	{
 		for (i = 0; i < PARTY_SIZE; i++)
 		{
-			if (GetMonData(&gPlayerParty[i], MON_DATA_SANITY_HAS_SPECIES) && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
+			if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != SPECIES_NONE && 
+			GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != SPECIES_EGG)
 			{
 				partyHeldItems[i] = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
 				DebugPrintf("Saved item: %S", gItems[i].name);
@@ -5439,7 +5440,8 @@ static void LoadMonItems(void)
 	{
 		for (i = 0; i < PARTY_SIZE; i++)
 		{
-			if (GetMonData(&gPlayerParty[i], MON_DATA_SANITY_HAS_SPECIES) && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
+			if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != SPECIES_NONE && 
+			GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != SPECIES_EGG)
 			{
 				SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &partyHeldItems[i]);
 				DebugPrintf("Loaded item: %S", gItems[i].name);

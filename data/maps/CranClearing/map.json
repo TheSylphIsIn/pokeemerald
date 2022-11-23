@@ -16,8 +16,8 @@
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
-      "x": 8,
-      "y": 26,
+      "x": 4,
+      "y": 14,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -56,9 +56,9 @@
     {
       "graphics_id": "OBJ_EVENT_GFX_RIVAL_CALVIN",
       "x": 27,
-      "y": 23,
+      "y": 24,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
@@ -71,7 +71,7 @@
       "x": 16,
       "y": 21,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
@@ -130,6 +130,19 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Common_StarPiece",
       "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_CUTTABLE_TREE",
+      "x": 8,
+      "y": 27,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EventScript_CutTree",
+      "flag": "FLAG_TEMP_1"
     }
   ],
   "warp_events": [
@@ -165,30 +178,12 @@
   "coord_events": [
     {
       "type": "trigger",
-      "x": 12,
-      "y": 15,
-      "elevation": 0,
-      "var": "VAR_MORGAN_STATE",
-      "var_value": "0",
-      "script": "NULL"
-    },
-    {
-      "type": "trigger",
-      "x": 30,
-      "y": 9,
-      "elevation": 0,
-      "var": "VAR_CALVIN_STATE",
-      "var_value": "0",
-      "script": "NULL"
-    },
-    {
-      "type": "trigger",
       "x": 16,
       "y": 24,
       "elevation": 0,
       "var": "VAR_FONEI_COAST_STATE",
       "var_value": "4",
-      "script": "NULL"
+      "script": "CranClearing_TriggerScript_Morgan1"
     },
     {
       "type": "trigger",
@@ -197,7 +192,7 @@
       "elevation": 0,
       "var": "VAR_FONEI_COAST_STATE",
       "var_value": "4",
-      "script": "NULL"
+      "script": "CranClearing_TriggerScript_Calvin1"
     },
     {
       "type": "trigger",
@@ -206,7 +201,7 @@
       "elevation": 0,
       "var": "VAR_FONEI_COAST_STATE",
       "var_value": "4",
-      "script": "NULL"
+      "script": "CranClearing_TriggerScript_Morgan1"
     },
     {
       "type": "trigger",
@@ -215,7 +210,7 @@
       "elevation": 0,
       "var": "VAR_FONEI_COAST_STATE",
       "var_value": "4",
-      "script": "NULL"
+      "script": "CranClearing_TriggerScript_Calvin1"
     }
   ],
   "bg_events": [

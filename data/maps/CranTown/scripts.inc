@@ -6,26 +6,71 @@ CranTown_MapScripts::
 	.byte 0
 
 CranTown_OnFrame:
+	map_script_2 VAR_FONEI_COAST_STATE, 1, CranTown_MapScript_WipedBeforeMeetingProf
 	map_script_2 VAR_FONEI_COAST_STATE, 3, CranTown_MapScript_LeavingLab
 	.2byte 0
-// trigger scripts North
+
+CranTown_MapScript_WipedBeforeMeetingProf:
+	lock
+	addobject LOCALID_CALVIN
+	setobjectxy LOCALID_CALVIN, 9, 24
+	applymovement LOCALID_CALVIN, CranTown_Movement_CalvinCheckOnWipedPlayer
+	waitmovement 0
+	msgbox CranTown_Text_CalvinCheckOnWipedPlayer, MSGBOX_DEFAULT
+	closemessage
+	applymovement LOCALID_CALVIN, CranTown_Movement_CalvinWalkOffscreen
+	waitmovement 0
+	removeobject LOCALID_CALVIN
+	setvar VAR_FONEI_COAST_STATE, 2
+	setflag FLAG_MET_PROFESSOR
+	release
+	end
+	
+CranTown_Movement_CalvinCheckOnWipedPlayer:
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	face_left
+	step_end
+	
+CranTown_Movement_CalvinWalkOffscreen:
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	step_end
+
+CranTown_Text_CalvinCheckOnWipedPlayer:
+	.string "CALVIN: You okay, {PLAYER}? You got\n"
+	.string "punked by a wild POKéMON.\p"
+	.string "We rushed you here to get help.\n"
+	.string "On the way, we met a lady named\l"
+	.string "PROFESSOR MANGROVE who wants to\l"
+	.string "talk to us in her lab down here.\p"
+	.string "Oh, yeah, we're in the POKéMON\n"
+	.string "WORLD, by the way.\p"
+	.string "Come along when you're feeling\n"
+	.string "up to it, yeah?$"
+
 CranTown_TriggerScript_NorthBlock::
 	msgbox CranTown_Text_Block, MSGBOX_SIGN
 	applymovement OBJ_EVENT_ID_PLAYER, CranTown_Movement_StepDown
 	end
 	
-// trigger scripts East
-CranTown_TriggerScript_EastBlock::
-	goto_if_eq VAR_FONEI_COAST_STATE, 2, CranTown_TriggerScript_MeetProf
-	goto_if_eq VAR_FONEI_COAST_STATE, 3, CranTown_TriggerScript_Scanner
-	end
-	
-CranTown_TriggerScript_MeetProf:
+CranTown_TriggerScript_MeetProf::
 	msgbox CranTown_Text_Block, MSGBOX_SIGN
 	applymovement OBJ_EVENT_ID_PLAYER, CranTown_Movement_StepLeft
 	end
 	
-CranTown_TriggerScript_Scanner:
+CranTown_TriggerScript_Scanner::
 	msgbox CranTown_Text_Scanner, MSGBOX_SIGN
 	applymovement OBJ_EVENT_ID_PLAYER, CranTown_Movement_StepLeft
 	end
@@ -49,6 +94,7 @@ CranTown_Movement_StepLeft:
 CranTown_MapScript_LeavingLab::
 	lock
 	applymovement OBJ_EVENT_ID_PLAYER, CranTown_Movement_StepDown
+	waitmovement 0
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp
 	waitmovement 0
 	opendoor 15, 22
@@ -163,14 +209,37 @@ CranTown_Mart:
 	end
 // Old man script
 
-Test_Boss::
-	msgbox CranTown_Text_Block, MSGBOX_NPC
-	setflag FLAG_BOSS_FIGHT
+CranTown_Sign_TownSign::
+	msgbox CranTown_Text_TownSign, MSGBOX_SIGN
 	end
+	
+CranTown_Sign_TrainerTips::
+	msgbox CranTown_Text_TrainerTips, MSGBOX_SIGN
+	end
+	
+CranTown_Sign_FamilySign::
+	msgbox CranTown_Text_FamilySign, MSGBOX_SIGN
+	end
+	
+CranTown_Text_TownSign:
+	.string "CRAN TOWN\n"
+	.string "“A town of humble beginnings.”$"
+	
+CranTown_Text_FamilySign:
+	.string "MOVE MACHINE FAMILY\n"
+	.string "Home-made TMs and HMs!$"
+	
+CranTown_Text_TrainerTips:
+	.string "TRAINER TIPS\p"
+	.string "Be sure to read the MANUAL!\p"
+	.string "Even if you're a POKéMON\n"
+	.string "expert, it will still tell you\l"
+	.string "about this game's unique features!\p"
+	.string "For example, ICE resists GRASS,\n"
+	.string "GROUND, and FLYING.\p"
+	.string "You may even find something there\n"
+	.string "that makes you want to start over…\p"
+	.string "…sorry for breaking the FOURTH WALL.$"
 
-Test_Dynamic::
-	msgbox CranTown_Text_Block, MSGBOX_NPC
-	setflag FLAG_DYNAMIC_LEVEL_ZONE
-	end
-// trainer tips script
+
 

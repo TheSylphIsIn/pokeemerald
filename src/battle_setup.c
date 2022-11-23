@@ -1872,7 +1872,8 @@ u8 GetPlayerMaxLevel(void)
 	u32 i;
 	for (i = 0; i < PARTY_SIZE; i++)
 	{
-		if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != (SPECIES_NONE || SPECIES_EGG))
+		if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != SPECIES_NONE && 
+			GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != SPECIES_EGG)
 		{	
 			pendingLevel = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
 			if (pendingLevel > level)
@@ -1892,7 +1893,8 @@ u8 GetPlayerMinLevel(void)
 	u32 i;
 	for (i = 0; i < PARTY_SIZE; i++)
 	{
-		if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != (SPECIES_NONE || SPECIES_EGG))
+		if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != SPECIES_NONE && 
+			GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != SPECIES_EGG)
 		{	
 			pendingLevel = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
 			if (pendingLevel < level)

@@ -48,7 +48,7 @@ DropperPoint_EventScript_CalvinAwake::
 
 DropperPoint_Text_Sign:
 	.string "DROPPER POINT\n"
-	.string "The launching point of the world.$"
+	.string "“The launching point of the world.”$"
 
 DropperPoint_Text_MorganWake:
 	.string "Mmm…\n"
@@ -178,6 +178,7 @@ DropperPoint_TriggerScript_BagContinue::
 	msgbox DropperPoint_Text_SlimeApproaching2, MSGBOX_DEFAULT
 	closemessage
 	setvar VAR_FONEI_COAST_STATE, 1
+	setrespawn HEAL_LOCATION_CRAN_TOWN
 	setflag FLAG_HIDE_FONEI_COAST_NPCS
 	release
 	end

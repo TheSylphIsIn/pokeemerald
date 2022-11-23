@@ -6,7 +6,7 @@ OldaleTown_PokemonCenter_1F_MapScripts::
 	.byte 0
 
 OldaleTown_PokemonCenter_1F_OnTransition:
-	setrespawn HEAL_LOCATION_OLDALE_TOWN
+	setrespawn HEAL_LOCATION_CRAN_TOWN
 	call Common_EventScript_UpdateBrineyLocation
 	end
 
