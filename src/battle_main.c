@@ -2167,6 +2167,8 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
 static u8 AdjustTrainerLevelDynamic(u8 playerMaxLvl, u8 enemyMaxLvl, u8 enemyLvl)
 {
 	u8 adjustedLevel = playerMaxLvl;
+	if (adjustedLevel < 10) // sanity check so that level won't underflow.
+		adjustedLevel = 10;
 	
 	if (!FlagGet(FLAG_BOSS_FIGHT)) // Mook trainers are weaker than the player.
 		adjustedLevel -= 2;
@@ -2174,8 +2176,6 @@ static u8 AdjustTrainerLevelDynamic(u8 playerMaxLvl, u8 enemyMaxLvl, u8 enemyLvl
 		adjustedLevel++; // Bosses are stronger than the player.
 	
 	adjustedLevel = adjustedLevel + (enemyLvl - enemyMaxLvl); // pokemon maintain their level difference from the "ace".
-	if (adjustedLevel < 10)
-		adjustedLevel = 10;
 	if (adjustedLevel > MAX_LEVEL)
 		adjustedLevel = MAX_LEVEL;
 	

@@ -267,7 +267,7 @@ static u8 ChooseWildMonLevel(const struct WildPokemon *wildPokemon)
 	if (FlagGet(FLAG_DYNAMIC_LEVEL_ZONE))
 	{
 		min = GetPlayerAvgLevel() - 5;
-		if (min < 5)
+		if (GetPlayerAvgLevel() <= 5)
 			min = 5;
 		max = min + 2;
 	}

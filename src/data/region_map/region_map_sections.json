@@ -146,7 +146,7 @@
     },
     {
       "map_section": "MAPSEC_ROUTE_103",
-      "name": "GUPPAGE POND",
+      "name": "FISHEYE LAKE",
       "x": 4,
       "y": 8,
       "width": 4,
@@ -595,7 +595,7 @@
     },
     {
       "map_section": "MAPSEC_FIERY_PATH",
-      "name": "FIERY PATH",
+      "name": "CLIFF FACE CLIMB",
       "x": 6,
       "y": 3,
       "width": 1,

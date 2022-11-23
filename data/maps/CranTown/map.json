@@ -35,7 +35,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
+      "script": "CranTown_EventScript_Shop",
       "flag": "FLAG_HIDE_FONEI_COAST_NPCS"
     },
     {
@@ -49,7 +49,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Route102_EventScript_Calvin",
-      "flag": "0"
+      "flag": "FLAG_HIDE_FONEI_COAST_NPCS"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_LITTLE_GIRL",
@@ -61,8 +61,8 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Test_Dynamic",
-      "flag": "0"
+      "script": "CranTown_EventScript_Girl",
+      "flag": "FLAG_HIDE_FONEI_COAST_NPCS"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_LITTLE_BOY_3",
@@ -74,8 +74,34 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Test_Boss",
-      "flag": "0"
+      "script": "CranTown_EventScript_Boy",
+      "flag": "FLAG_HIDE_FONEI_COAST_NPCS"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_RIVAL_MORGAN",
+      "x": 15,
+      "y": 22,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "NULL",
+      "flag": "FLAG_SYS_POKEMON_GET"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_RIVAL_CALVIN",
+      "x": 15,
+      "y": 22,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "NULL",
+      "flag": "FLAG_SYS_POKEMON_GET"
     }
   ],
   "warp_events": [
@@ -95,7 +121,7 @@
     },
     {
       "x": 15,
-      "y": 21,
+      "y": 22,
       "elevation": 0,
       "dest_map": "MAP_LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB",
       "dest_warp_id": "0"
@@ -137,7 +163,7 @@
       "elevation": 0,
       "var": "VAR_FONEI_COAST_STATE",
       "var_value": "2",
-      "script": "NULL"
+      "script": "CranTown_TriggerScript_NorthBlock"
     },
     {
       "type": "trigger",
@@ -146,7 +172,7 @@
       "elevation": 0,
       "var": "VAR_FONEI_COAST_STATE",
       "var_value": "2",
-      "script": "NULL"
+      "script": "CranTown_TriggerScript_NorthBlock"
     },
     {
       "type": "trigger",
@@ -155,34 +181,34 @@
       "elevation": 0,
       "var": "VAR_FONEI_COAST_STATE",
       "var_value": "2",
-      "script": "NULL"
+      "script": "CranTown_TriggerScript_NorthBlock"
     },
     {
       "type": "trigger",
       "x": 21,
       "y": 9,
       "elevation": 0,
-      "var": "VAR_FONEI_COAST_STATE",
-      "var_value": "2",
-      "script": "NULL"
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "CranTown_TriggerScript_EastBlock"
     },
     {
       "type": "trigger",
       "x": 21,
       "y": 10,
       "elevation": 0,
-      "var": "VAR_FONEI_COAST_STATE",
-      "var_value": "2",
-      "script": "NULL"
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "CranTown_TriggerScript_EastBlock"
     },
     {
       "type": "trigger",
-      "x": 21,
-      "y": 11,
+      "x": 15,
+      "y": 23,
       "elevation": 0,
       "var": "VAR_FONEI_COAST_STATE",
-      "var_value": "2",
-      "script": "NULL"
+      "var_value": "3",
+      "script": "CranTown_TriggerScript_Lab"
     }
   ],
   "bg_events": [

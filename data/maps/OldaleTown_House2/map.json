@@ -46,15 +46,15 @@
       "x": 3,
       "y": 7,
       "elevation": 0,
-      "dest_map": "MAP_OLDALE_TOWN",
-      "dest_warp_id": "1"
+      "dest_map": "MAP_CRAN_TOWN",
+      "dest_warp_id": "13"
     },
     {
       "x": 4,
       "y": 7,
       "elevation": 0,
-      "dest_map": "MAP_OLDALE_TOWN",
-      "dest_warp_id": "1"
+      "dest_map": "MAP_CRAN_TOWN",
+      "dest_warp_id": "3"
     }
   ],
   "coord_events": [
