@@ -596,6 +596,18 @@ bool8 ScrCmd_checkflag(struct ScriptContext *ctx)
     return FALSE;
 }
 
+bool8 ScrCmd_giveachievement(struct ScriptContext *ctx)
+{
+    AchievementSetUnlocked(ScriptReadHalfword(ctx));
+    return FALSE;
+}
+
+bool8 ScrCmd_checkachievement(struct ScriptContext *ctx)
+{
+    ctx->comparisonResult = AchievementGetUnlocked(ScriptReadHalfword(ctx));
+    return FALSE;
+}
+
 bool8 ScrCmd_incrementgamestat(struct ScriptContext *ctx)
 {
     IncrementGameStat(ScriptReadByte(ctx));

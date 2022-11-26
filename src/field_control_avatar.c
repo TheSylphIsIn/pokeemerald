@@ -22,6 +22,8 @@
 #include "pokemon.h"
 #include "safari_zone.h"
 #include "script.h"
+#include "string_util.h"
+#include "strings.h"
 #include "secret_base.h"
 #include "sound.h"
 #include "start_menu.h"
@@ -1137,16 +1139,25 @@ static void ResetCheatSequenceProgress(void)
 #undef cNextInput
 #undef cCodeIndex
 
+static const u8 * const sAchievementNames[] = 
+{
+	[ACHIEVEMENT_GOT_STARTER] = gText_AchievementName_GotStarter
+};
 // Tries to award the player an achievement
 static bool32 TryUnlockAchievement(void)
 {
+	u32 i;
 	VarSet(VAR_PENDING_ACHIEVEMENTS, (VarGet(VAR_PENDING_ACHIEVEMENTS) - 1));
-	if (FlagGet(FLAG_FAVORED_MORGAN) && !FlagGet(FLAG_BADGE08_GET))
-	{
-		FlagSet(FLAG_BADGE08_GET);
 
-		ScriptContext_SetupScript(EventScript_AwardAchievement);
-		return TRUE;
+	for (i = 1; i < NUM_ACHIEVEMENTS; i++)
+	{
+		if (AchievementGetUnlocked(i) && !AchievementGetDisplayed(i))
+		{
+			AchievementSetDisplayed(i);
+			StringCopy(gStringVar1, sAchievementNames[i]);
+			ScriptContext_SetupScript(EventScript_AwardAchievement);
+			return TRUE;
+		}
 	}
 	
 	return FALSE;

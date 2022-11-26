@@ -236,3 +236,55 @@ bool8 FlagGet(u16 id)
 
     return TRUE;
 }
+
+// Achievements are 2 bits: one for unlocked, one for displayed (ACHIEVEMENT GET script played on overworld).
+u8 *GetAchievementPointer(u16 id)
+{
+    if (id == 0)
+        return NULL;
+    else
+        return &gSaveBlock1Ptr->achievementFlags[id / 4];
+}
+
+u8 AchievementSetUnlocked(u16 id)
+{
+    u8 *ptr = GetAchievementPointer(id);
+    if (ptr)
+        *ptr |= 1 << (id & 3);
+    return 0;
+}
+
+u8 AchievementSetDisplayed(u16 id)
+{
+    u8 *ptr = GetAchievementPointer(id);
+    if (ptr)
+        *ptr |= 1 << ((id & 3) + 4);
+    return 0;
+}
+
+bool8 AchievementGetUnlocked(u16 id)
+{
+    u8 *ptr = GetAchievementPointer(id);
+
+    if (!ptr)
+        return FALSE;
+
+    if (!(((*ptr) >> (id & 3)) & 1))
+        return FALSE;
+
+    return TRUE;
+}
+
+bool8 AchievementGetDisplayed(u16 id)
+{
+    u8 *ptr = GetAchievementPointer(id);
+
+    if (!ptr)
+        return FALSE;
+
+    if (!(((*ptr) >> ((id & 3) + 4)) & 1))
+        return FALSE;
+
+    return TRUE;
+}
+

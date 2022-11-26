@@ -1856,7 +1856,6 @@ u8 GetPlayerAvgLevel(void)
 		if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != SPECIES_NONE && 
 			GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != SPECIES_EGG)
 		{	
-			DebugPrintf ("Mon %d: %d", activeMons, levelSum);
 			levelSum += GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
 			activeMons++;
 		}		
@@ -1864,7 +1863,6 @@ u8 GetPlayerAvgLevel(void)
 	
 	if (activeMons == 0)
 		activeMons++;
-	DebugPrintf("Average: %d", levelSum / activeMons);
 	return levelSum / activeMons;
 }
 

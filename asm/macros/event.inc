@@ -1729,6 +1729,18 @@
 	.2byte \item
 	.2byte \quantity
 	.endm
+	
+	@ sets the specified achievement to unlocked/true
+	.macro giveachievement achievement:req
+	.byte 0xe3
+	.2byte \achievement
+	.endm
+	
+	@ gets the specified achievement's truth value
+	.macro checkachievement achievement:req
+	.byte 0xe4
+	.2byte \achievement
+	.endm
 
 
 @ Supplementary
@@ -1740,6 +1752,16 @@
 
 	.macro goto_if_set flag:req, dest:req
 	checkflag \flag
+	goto_if TRUE, \dest
+	.endm
+	
+	.macro goto_if_locked achievement:req, dest:req
+	checkachievement \achievement
+	goto_if FALSE, \dest
+	.endm
+
+	.macro goto_if_unlocked achievement:req, dest:req
+	checkachievement \achievement
 	goto_if TRUE, \dest
 	.endm
 

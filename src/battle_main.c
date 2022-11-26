@@ -2179,7 +2179,6 @@ static u8 AdjustTrainerLevelDynamic(u8 playerMaxLvl, u8 enemyMaxLvl, u8 enemyLvl
 	if (adjustedLevel > MAX_LEVEL)
 		adjustedLevel = MAX_LEVEL;
 	
-	DebugPrintf("Adjusted level from %d to %d.", enemyLvl, adjustedLevel);
 	return adjustedLevel;
 }
 
@@ -5426,7 +5425,6 @@ static void SaveMonItems(void)
 			GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != SPECIES_EGG)
 			{
 				partyHeldItems[i] = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
-				DebugPrintf("Saved item: %S", gItems[i].name);
 			}
         }
 		FlagSet(FLAG_HELD_ITEMS_STORED);
@@ -5444,7 +5442,6 @@ static void LoadMonItems(void)
 			GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != SPECIES_EGG)
 			{
 				SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &partyHeldItems[i]);
-				DebugPrintf("Loaded item: %S", gItems[i].name);
 			}
         }
 		FlagClear(FLAG_HELD_ITEMS_STORED);

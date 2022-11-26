@@ -302,7 +302,7 @@ EventScript_AwardAchievement::
 	
 Text_AchievementGet:
 	.string "ACHIEVEMENT UNLOCKED!\n"
-	.string "Buffer achievement text.$"
+	.string "{STR_VAR_1}!$"
 	
 EventScript_DoCheatSequenceResult::
 	lock
