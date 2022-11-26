@@ -1441,7 +1441,7 @@ static void Task_SpinPokenavIcon(u8 taskId)
 
 static bool32 TrainerIsEligibleForRematch(int matchCallId)
 {
-    return gSaveBlock1Ptr->trainerRematches[matchCallId] > 0;
+    return TRUE;
 }
 
 static u16 GetRematchTrainerLocation(int matchCallId)
@@ -1506,7 +1506,6 @@ bool32 SelectMatchCallMessage(int trainerId, u8 *str)
     {
         matchCallText = GetDifferentRouteMatchCallText(matchCallId, str);
         newRematchRequest = TRUE;
-        UpdateRematchIfDefeated(matchCallId);
     }
     else if (Random() % 3)
     {

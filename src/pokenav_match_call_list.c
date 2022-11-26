@@ -93,7 +93,7 @@ static u32 CB2_HandleMatchCallInput(struct Pokenav_MatchCallMenu *state)
         state->callback = CB2_HandleMatchCallOptionsInput;
         state->optionCursorPos = 0;
         selection = PokenavList_GetSelectedIndex();
-
+		// if (AchievementIsUnlocked(selection))
         if (!state->matchCallEntries[selection].isSpecialTrainer || MatchCall_HasCheckPage(state->matchCallEntries[selection].headerId))
         {
             state->matchCallOptions = sMatchCallOptionsHasCheckPage;
@@ -326,7 +326,7 @@ bool32 ShouldDrawRematchPokeballIcon(int index)
     if (index == REMATCH_TABLE_ENTRIES)
         return FALSE;
 
-    return gSaveBlock1Ptr->trainerRematches[index] != 0;
+    return TRUE;
 }
 
 int GetMatchCallTrainerPic(int index)
@@ -475,7 +475,7 @@ static bool32 HasRematchEntry(void)
 
     for (i = 0; i < REMATCH_TABLE_ENTRIES; i++)
     {
-        if (IsRematchEntryRegistered(i) && gSaveBlock1Ptr->trainerRematches[i])
+        if (IsRematchEntryRegistered(i))
             return TRUE;
     }
 
@@ -484,7 +484,6 @@ static bool32 HasRematchEntry(void)
         if (MatchCall_GetEnabled(i))
         {
             int index = MatchCall_GetRematchTableIdx(i);
-            if (gSaveBlock1Ptr->trainerRematches[index])
                 return TRUE;
         }
     }
@@ -500,7 +499,6 @@ static bool32 ShouldDoNearbyMessage(void)
     {
         if (GetMatchCallMapSec(selection) == gMapHeader.regionMapSectionId)
         {
-            if (!gSaveBlock1Ptr->trainerRematches[state->matchCallEntries[selection].headerId])
                 return TRUE;
         }
     }

@@ -66,20 +66,23 @@ CranClearing_EventScript_Morgan::
 	case 2, CranClearing_EventScript_MorganBattleEladrift
 	end
 	
-CranClearing_EventScript_MorganBattleTreecko::
+CranClearing_EventScript_MorganBattleGlasma::
 	trainerbattle_no_intro TRAINER_MAY_ROUTE_103_TREECKO, CranClearing_Text_MorganDefeated
 	goto CranClearing_EventScript_MorganAfterBattle
 	end
 
-CranClearing_EventScript_MorganBattleTorchic::
+CranClearing_EventScript_MorganBattleSandude::
 	trainerbattle_no_intro TRAINER_MAY_ROUTE_103_TORCHIC, CranClearing_Text_MorganDefeated
 	goto CranClearing_EventScript_MorganAfterBattle
 	end
 
-CranClearing_EventScript_MorganBattleMudkip::
+CranClearing_EventScript_MorganBattleEladrift::
 	trainerbattle_no_intro TRAINER_MAY_ROUTE_103_MUDKIP, CranClearing_Text_MorganDefeated
 	goto CranClearing_EventScript_MorganAfterBattle
 	end
+	
+CranClearing_Text_MorganDefeated:
+CranClearing_EventScript_MorganAfterBattle:
 	
 // boy battle script
 
