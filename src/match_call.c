@@ -1275,8 +1275,6 @@ static bool32 MatchCall_ReadyIntro(u8 taskId)
     s16 *data = gTasks[taskId].data;
     if (!IsDma3ManagerBusyWithBgCopy())
     {
-        // Note that "..." is not printed yet, just readied
-        InitMatchCallTextPrinter(tWindowId, sText_PokenavCallEllipsis);
         return TRUE;
     }
 
@@ -1297,16 +1295,14 @@ static bool32 MatchCall_SlideWindowIn(u8 taskId)
 static bool32 MatchCall_PrintIntro(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    if (!RunMatchCallTextPrinter(tWindowId))
-    {
-        FillWindowPixelBuffer(tWindowId, PIXEL_FILL(8));
+	FillWindowPixelBuffer(tWindowId, PIXEL_FILL(8));
 
-        // Ready the message
-        if (!sMatchCallState.triggeredFromScript)
-            SelectMatchCallMessage(sMatchCallState.trainerId, gStringVar4);
-        InitMatchCallTextPrinter(tWindowId, gStringVar4);
-        return TRUE;
-    }
+    // Ready the message
+    if (!sMatchCallState.triggeredFromScript)
+        SelectMatchCallMessage(sMatchCallState.trainerId, gStringVar4);
+    InitMatchCallTextPrinter(tWindowId, gStringVar4);
+    return TRUE;
+    
 
     return FALSE;
 }
