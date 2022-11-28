@@ -6,7 +6,7 @@ DropperPoint_MapScripts::
 	.byte 0
 
 DropperPoint_Sign::
-	msgbox DropperPoint_Text_Sign, MSGBOX_DEFAULT
+	msgbox DropperPoint_Text_Sign, MSGBOX_SIGN
 	end
 	
 DropperPoint_EventScript_Morgan::

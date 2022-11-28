@@ -124,8 +124,6 @@ static EWRAM_DATA struct MatchCallState sMatchCallState = {0};
 static EWRAM_DATA struct BattleFrontierStreakInfo sBattleFrontierStreakInfo = {0};
 
 static u32 GetCurrentTotalMinutes(struct Time *);
-static u32 GetNumRegisteredNPCs(void);
-static u32 GetActiveMatchCallTrainerId(u32);
 static int GetTrainerMatchCallId(int);
 static u16 GetRematchTrainerLocation(int);
 static bool32 TrainerIsEligibleForRematch(int);
@@ -1086,54 +1084,6 @@ static bool32 UpdateMatchCallStepCounter(void)
     {
         return FALSE;
     }
-}
-
-static bool32 SelectMatchCallTrainer(void)
-{
-    u32 matchCallId;
-    u32 numRegistered = GetNumRegisteredNPCs();
-    if (numRegistered == 0)
-        return FALSE;
-
-    sMatchCallState.trainerId = GetActiveMatchCallTrainerId(Random() % numRegistered);
-    sMatchCallState.triggeredFromScript = FALSE;
-    if (sMatchCallState.trainerId == REMATCH_TABLE_ENTRIES)
-        return FALSE;
-
-    matchCallId = GetTrainerMatchCallId(sMatchCallState.trainerId);
-    if (GetRematchTrainerLocation(matchCallId) == gMapHeader.regionMapSectionId && !TrainerIsEligibleForRematch(matchCallId))
-        return FALSE;
-
-    return TRUE;
-}
-
-static u32 GetNumRegisteredNPCs(void)
-{
-    u32 i, count;
-    for (i = 0, count = 0; i < REMATCH_SPECIAL_TRAINER_START; i++)
-    {
-        if (FlagGet(FLAG_MATCH_CALL_REGISTERED + i))
-            count++;
-    }
-
-    return count;
-}
-
-static u32 GetActiveMatchCallTrainerId(u32 activeMatchCallId)
-{
-    u32 i;
-    for (i = 0; i < REMATCH_SPECIAL_TRAINER_START; i++)
-    {
-        if (FlagGet(FLAG_MATCH_CALL_REGISTERED + i))
-        {
-            if (!activeMatchCallId)
-                return gRematchTable[i].trainerIds[0];
-
-            activeMatchCallId--;
-        }
-    }
-
-    return REMATCH_TABLE_ENTRIES;
 }
 
 /*
