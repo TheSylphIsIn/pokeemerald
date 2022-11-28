@@ -3041,4 +3041,8 @@ extern const u8 gText_TellHimTheWords[];
 
 extern const u8 gText_AchievementName_GotStarter[];
 
+// Exp. Share
+extern const u8 gText_ExpShareOn[];
+extern const u8 gText_ExpShareOff[];
+
 #endif // GUARD_STRINGS_H
