@@ -3536,10 +3536,10 @@ static void Cmd_getexp(void)
             }
 
             calculatedExp = gBaseStats[gBattleMons[gBattlerFainted].species].expYield * gBattleMons[gBattlerFainted].level / 7;
-
-            if (gSaveBlock2Ptr->expShare) // exp share is turned on
+			
+            if (gSaveBlock2Ptr->optionsExpShare) // exp share is turned on
             {
-                *exp = SAFE_DIV(calculatedExp / 2, viaSentIn);
+                *exp = calculatedExp / 2;
                 if (*exp == 0)
                     *exp = 1;
 
@@ -3549,7 +3549,7 @@ static void Cmd_getexp(void)
             }
             else
             {
-                *exp = SAFE_DIV(calculatedExp, viaSentIn);
+                *exp = calculatedExp;
                 if (*exp == 0)
                     *exp = 1;
                 gExpShareExp = 0;
@@ -3570,7 +3570,7 @@ static void Cmd_getexp(void)
             else
                 holdEffect = ItemId_GetHoldEffect(item);
 
-            if (!gSaveBlock2Ptr->expShare && !(gBattleStruct->sentInPokes & 1))
+            if (!gSaveBlock2Ptr->optionsExpShare && !(gBattleStruct->sentInPokes & 1))
             {
                 *(&gBattleStruct->sentInPokes) >>= 1;
                 gBattleScripting.getexpState = 5;
@@ -3600,7 +3600,7 @@ static void Cmd_getexp(void)
                     else
                         gBattleMoveDamage = 0;
 
-                    if (gSaveBlock2Ptr->expShare)
+                    if (gSaveBlock2Ptr->optionsExpShare)
                         gBattleMoveDamage += gExpShareExp;
                     if (holdEffect == HOLD_EFFECT_LUCKY_EGG)
                         gBattleMoveDamage = (gBattleMoveDamage * 150) / 100;
@@ -3642,7 +3642,8 @@ static void Cmd_getexp(void)
                     {
                         gBattleStruct->expGetterBattlerId = 0;
                     }
-
+					if (gBattleStruct->sentInPokes & 1)
+					{
                     PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, gBattleStruct->expGetterBattlerId, gBattleStruct->expGetterMonId);
                     // buffer 'gained' or 'gained a boosted'
                     PREPARE_STRING_BUFFER(gBattleTextBuff2, i);
@@ -3650,6 +3651,7 @@ static void Cmd_getexp(void)
 
                     PrepareStringBattle(STRINGID_PKMNGAINEDEXP, gBattleStruct->expGetterBattlerId);
                     MonGainEVs(&gPlayerParty[gBattleStruct->expGetterMonId], gBattleMons[gBattlerFainted].species);
+					}
                 }
                 gBattleStruct->sentInPokes >>= 1;
                 gBattleScripting.getexpState++;
@@ -3751,6 +3753,8 @@ static void Cmd_getexp(void)
     case 6: // increment instruction
         if (gBattleControllerExecFlags == 0)
         {
+			if (gSaveBlock2Ptr->optionsExpShare)
+				PrepareStringBattle(STRINGID_EXPSHAREMESSAGE, 0);
             // not sure why gf clears the item and ability here
             gBattleMons[gBattlerFainted].item = ITEM_NONE;
             gBattleMons[gBattlerFainted].ability = ABILITY_NONE;
