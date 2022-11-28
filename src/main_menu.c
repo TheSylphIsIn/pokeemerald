@@ -22,6 +22,7 @@
 #include "pokeball.h"
 #include "pokedex.h"
 #include "pokemon.h"
+#include "pokemon_icon.h"
 #include "random.h"
 #include "rtc.h"
 #include "save.h"
@@ -243,6 +244,7 @@ static void MainMenu_FormatSavegamePokedex(void);
 static void MainMenu_FormatSavegameTime(void);
 static void MainMenu_FormatSavegameBadges(void);
 static void NewGameBirchSpeech_CreateDialogueWindowBorder(u8, u8, u8, u8, u8, u8);
+static void MainMenu_DrawMonIcons(void);
 
 // .rodata
 
@@ -260,14 +262,14 @@ static const u16 sBirchSpeechPlatformBlackPal[] = {RGB_BLACK, RGB_BLACK, RGB_BLA
 #define MENU_TOP_WIN0 1
 #define MENU_TOP_WIN1 5
 #define MENU_TOP_WIN2 1
-#define MENU_TOP_WIN3 9
-#define MENU_TOP_WIN4 13
-#define MENU_TOP_WIN5 17
-#define MENU_TOP_WIN6 21
+#define MENU_TOP_WIN3 13
+#define MENU_TOP_WIN4 17
+#define MENU_TOP_WIN5 21
+#define MENU_TOP_WIN6 25
 #define MENU_WIDTH 26
 #define MENU_HEIGHT_WIN0 2
 #define MENU_HEIGHT_WIN1 2
-#define MENU_HEIGHT_WIN2 6
+#define MENU_HEIGHT_WIN2 10
 #define MENU_HEIGHT_WIN3 2
 #define MENU_HEIGHT_WIN4 2
 #define MENU_HEIGHT_WIN5 2
@@ -326,7 +328,7 @@ static const struct WindowTemplate sWindowTemplates_MainMenu[] =
         .width = MENU_WIDTH,
         .height = MENU_HEIGHT_WIN3,
         .paletteNum = 15,
-        .baseBlock = 0x9D
+        .baseBlock = 0x105
     },
     // OPTION / MYSTERY GIFT
     {
@@ -336,7 +338,7 @@ static const struct WindowTemplate sWindowTemplates_MainMenu[] =
         .width = MENU_WIDTH,
         .height = MENU_HEIGHT_WIN4,
         .paletteNum = 15,
-        .baseBlock = 0xD1
+        .baseBlock = 0x139
     },
     // OPTION / MYSTERY EVENTS
     {
@@ -346,7 +348,7 @@ static const struct WindowTemplate sWindowTemplates_MainMenu[] =
         .width = MENU_WIDTH,
         .height = MENU_HEIGHT_WIN5,
         .paletteNum = 15,
-        .baseBlock = 0x105
+        .baseBlock = 0x16D
     },
     // OPTION
     {
@@ -356,7 +358,7 @@ static const struct WindowTemplate sWindowTemplates_MainMenu[] =
         .width = MENU_WIDTH,
         .height = MENU_HEIGHT_WIN6,
         .paletteNum = 15,
-        .baseBlock = 0x139
+        .baseBlock = 0x1A1
     },
     // Error message window
     {
@@ -366,7 +368,7 @@ static const struct WindowTemplate sWindowTemplates_MainMenu[] =
         .width = MENU_WIDTH_ERROR,
         .height = MENU_HEIGHT_ERROR,
         .paletteNum = 15,
-        .baseBlock = 0x16D
+        .baseBlock = 0x1D5
     },
     DUMMY_WIN_TEMPLATE
 };
@@ -797,6 +799,7 @@ static void Task_DisplayMainMenu(u8 taskId)
                 AddTextPrinterParameterized3(3, FONT_NORMAL, 0, 1, sTextColor_Headers, TEXT_SKIP_DRAW, gText_MainMenuNewGame);
                 AddTextPrinterParameterized3(4, FONT_NORMAL, 0, 1, sTextColor_Headers, TEXT_SKIP_DRAW, gText_MainMenuOption);
                 MainMenu_FormatSavegameText();
+				MainMenu_DrawMonIcons();
                 PutWindowTilemap(2);
                 PutWindowTilemap(3);
                 PutWindowTilemap(4);
@@ -2301,3 +2304,21 @@ static void Task_NewGameBirchSpeech_ReturnFromNamingScreenShowTextbox(u8 taskId)
 }
 
 #undef tTimer
+
+// Draws player party's icons on the continue window.
+static void MainMenu_DrawMonIcons(void)
+{
+	u32 i;
+	u8 spriteId;
+	LoadMonIconPalettes();
+	{
+		for (i = 0; i < PARTY_SIZE; i++) 
+		{
+			if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != SPECIES_NONE)
+			{ // the X and Y coordinates here place the icons below the text, each with a 2 px gap between them.
+				spriteId = CreateMonIcon(GetMonData(&gPlayerParty[i], MON_DATA_SPECIES), SpriteCB_MonIcon, (35 + (34 * i)), 71, 4, GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY), TRUE);
+				gSprites[spriteId].oam.priority = 0; // moves the icons over the window instead of behind it.
+			}
+		}
+	}
+}

@@ -356,34 +356,34 @@
 #define MOVE_WATER_PULSE 352
 #define MOVE_DOOM_DESIRE 353
 #define MOVE_PSYCHO_BOOST 354
-#define MOVE_CONTACT 355
+#define MOVE_CONTACT 355 // physical, electric, 90 power
 #define MOVE_ZEN_HEADBUTT 356
-#define MOVE_BRAMBLE 357
+#define MOVE_BRAMBLE 357 // physical, grass, 85 power, chance to poison. maybe unnecessary?
 #define MOVE_WOOD_HAMMER 358
 #define MOVE_DRAGON_PULSE 359
 #define MOVE_FLARE_BLITZ 360
 #define MOVE_MOONBLAST 361
-#define MOVE_DAZZLE 362
+#define MOVE_DAZZLE 362 // dazzling gleam
 #define MOVE_FLASH_CANNON 363
-#define MOVE_PUPPY_EYES 364
-#define MOVE_CHARMING_CRY 365
-#define MOVE_TWINKLE_POP 366
-#define MOVE_DRAIN_KISS 367
-#define MOVE_PLAY_ROUGH 368
-#define MOVE_STAR_PUNCH 369
-#define MOVE_FAIRY_LIGHT 370
-#define MOVE_SPIRE 371
+#define MOVE_PUPPY_EYES 364 // baby doll eyes
+#define MOVE_CHARMING_CRY 365 // disarming voice
+#define MOVE_TWINKLE_POP 366 // physical, fairy, 55 power
+#define MOVE_DRAIN_KISS 367 
+#define MOVE_PLAY_ROUGH 368 // 120 power, 85 accuracy
+#define MOVE_STAR_PUNCH 369 // physical, fairy, 90 power, 95 accuracy
+#define MOVE_FAIRY_LIGHT 370 // status, lowers sp atk
+#define MOVE_SPIRE 371 // physical, rock, 80 power, 100 accuracy
 #define MOVE_STONE_EDGE 372
 #define MOVE_DARK_PULSE 373
 #define MOVE_AIR_SLASH 374
 #define MOVE_HURRICANE 375
 #define MOVE_FOCUS_BLAST 376
-#define MOVE_FOCUS_RUSH 377
+#define MOVE_FOCUS_RUSH 377 // physical, psychic, 100 power, vital throw effect
 #define MOVE_CLOSE_COMBAT 378
 #define MOVE_BULLET_PUNCH 379
 #define MOVE_DISCHARGE 380
 #define MOVE_LAVA_PLUME 381
-#define MOVE_DRAGON_RUSH 382
+#define MOVE_DRAGON_RUSH 382 // 120 power
 #define MOVE_EARTH_POWER 383
 #define MOVE_GIGA_IMPACT 384
 #define MOVE_GUNK_SHOT 385
@@ -395,26 +395,26 @@
 #define MOVE_POWER_GEM 391
 #define MOVE_SHADOW_SNEAK 392
 #define MOVE_X_SCISSOR 393
-#define MOVE_SHADOW_STALK 394
-#define MOVE_AURA_WAVE 395
-#define MOVE_COLD_SNAP 396
-#define MOVE_TOMBSTONER 397
+#define MOVE_SHADOW_STALK 394 // physical, ghost, 85 power, 95 accuracy
+#define MOVE_AURA_WAVE 395 // special, fighting, 65 power
+#define MOVE_COLD_SNAP 396 // will-o-wisp but for frostbite
+#define MOVE_TOMBSTONER 397 // physical, rock, 130 power, 80 accuracy. secret move.
 #define MOVE_NASTY_PLOT 398
-#define MOVE_GASLIGHT 399
+#define MOVE_GASLIGHT 399 // status. inflicts random status (brn/prz/psn/slp/frz) on first use, confusion on second use.
 #define MOVE_FREEZE_DRY 400
-#define MOVE_SCALE_PIERCE 401
-#define MOVE_HARPOON_LASH 402
-#define MOVE_LIGHTNING 403
+#define MOVE_SCALE_PIERCE 401 // freeze dry but fighting->dragon. starter sig
+#define MOVE_HARPOON_LASH 402 // freeze dry but dragon -> flying. starter sig.
+#define MOVE_LIGHTNING 403 // freeze dry but electric -> grass. starter sig.
 #define MOVE_BOOMBURST 404
 #define MOVE_BUG_BUZZ 405
-#define MOVE_BUZZ_BLITZ 406
+#define MOVE_BUZZ_BLITZ 406 // special bug double edge. sound move.
 #define MOVE_QUIVER_DANCE 407
 #define MOVE_COIL 408
 #define MOVE_U_TURN 409
 #define MOVE_VOLT_SWITCH 410
 #define MOVE_SHELL_SMASH 411
-#define MOVE_SKYDIVE 412
-#define MOVE_INFERNO_RAY 413
+#define MOVE_SKYDIVE 412 // brave bird
+#define MOVE_INFERNO_RAY 413 // special fire triple axel
 #define MOVE_AQUA_TAIL 414
 // elemental fangs
 // energy ball (TM?)
