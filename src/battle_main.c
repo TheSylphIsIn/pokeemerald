@@ -2046,8 +2046,14 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
             {
             case 0:
             {
-                const struct TrainerMonNoItemDefaultMoves *partyData = gTrainers[trainerNum].party.NoItemDefaultMoves;
-
+                const struct TrainerMonNoItemDefaultMoves *partyData;
+				if (gSaveBlock2Ptr->optionsBattleStyle == OPTIONS_DIFFICULTY_HARD)
+					partyData = gTrainers[trainerNum].hardParty.NoItemDefaultMoves;
+				else if (gSaveBlock2Ptr->optionsBattleStyle == OPTIONS_DIFFICULTY_UNFAIR)
+					partyData = gTrainers[trainerNum].unfairParty.NoItemDefaultMoves;
+				else
+					partyData = gTrainers[trainerNum].party.NoItemDefaultMoves;
+				
                 for (j = 0; gSpeciesNames[partyData[i].species][j] != EOS; j++)
                     nameHash += gSpeciesNames[partyData[i].species][j];
 
@@ -2055,8 +2061,10 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
 				if (FlagGet(FLAG_DYNAMIC_LEVEL_ZONE))
 				{
 					for (j = 0; j < monsCount; j++)
-					if (partyData[j].lvl > maxLevel)
-						maxLevel = partyData[j].lvl;
+					{
+						if (partyData[j].lvl > maxLevel)
+							maxLevel = partyData[j].lvl;
+					}
 					playerMaxLevel = GetPlayerMaxLevel();
 					level = AdjustTrainerLevelDynamic(playerMaxLevel, maxLevel, level);
 				}
@@ -2067,8 +2075,14 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
             }
             case F_TRAINER_PARTY_CUSTOM_MOVESET:
             {
-                const struct TrainerMonNoItemCustomMoves *partyData = gTrainers[trainerNum].party.NoItemCustomMoves;
-
+                const struct TrainerMonNoItemCustomMoves *partyData;
+				if (gSaveBlock2Ptr->optionsBattleStyle == OPTIONS_DIFFICULTY_HARD)
+					partyData = gTrainers[trainerNum].hardParty.NoItemCustomMoves;
+				else if (gSaveBlock2Ptr->optionsBattleStyle == OPTIONS_DIFFICULTY_UNFAIR)
+					partyData = gTrainers[trainerNum].unfairParty.NoItemCustomMoves;
+				else
+					partyData = gTrainers[trainerNum].party.NoItemCustomMoves;
+				
                 for (j = 0; gSpeciesNames[partyData[i].species][j] != EOS; j++)
                     nameHash += gSpeciesNames[partyData[i].species][j];
 
@@ -2076,8 +2090,10 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
 				if (FlagGet(FLAG_DYNAMIC_LEVEL_ZONE))
 				{
 					for (j = 0; j < monsCount; j++)
-					if (partyData[j].lvl > maxLevel)
-						maxLevel = partyData[j].lvl;
+					{
+						if (partyData[j].lvl > maxLevel)
+							maxLevel = partyData[j].lvl;
+					}
 					playerMaxLevel = GetPlayerMaxLevel();
 					level = AdjustTrainerLevelDynamic(playerMaxLevel, maxLevel, level);
 				}
@@ -2095,7 +2111,13 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
             }
             case F_TRAINER_PARTY_HELD_ITEM:
             {
-                const struct TrainerMonItemDefaultMoves *partyData = gTrainers[trainerNum].party.ItemDefaultMoves;
+                const struct TrainerMonItemDefaultMoves *partyData;
+				if (gSaveBlock2Ptr->optionsBattleStyle == OPTIONS_DIFFICULTY_HARD)
+					partyData = gTrainers[trainerNum].hardParty.ItemDefaultMoves;
+				else if (gSaveBlock2Ptr->optionsBattleStyle == OPTIONS_DIFFICULTY_UNFAIR)
+					partyData = gTrainers[trainerNum].unfairParty.ItemDefaultMoves;
+				else
+					partyData = gTrainers[trainerNum].party.ItemDefaultMoves;
 
                 for (j = 0; gSpeciesNames[partyData[i].species][j] != EOS; j++)
                     nameHash += gSpeciesNames[partyData[i].species][j];
@@ -2105,8 +2127,10 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
 				if (FlagGet(FLAG_DYNAMIC_LEVEL_ZONE))
 				{
 					for (j = 0; j < monsCount; j++)
-					if (partyData[j].lvl > maxLevel)
-						maxLevel = partyData[j].lvl;
+					{
+						if (partyData[j].lvl > maxLevel)
+							maxLevel = partyData[j].lvl;
+					}
 					playerMaxLevel = GetPlayerMaxLevel();
 					level = AdjustTrainerLevelDynamic(playerMaxLevel, maxLevel, level);
 				}
@@ -2119,7 +2143,13 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
             }
             case F_TRAINER_PARTY_CUSTOM_MOVESET | F_TRAINER_PARTY_HELD_ITEM:
             {
-                const struct TrainerMonItemCustomMoves *partyData = gTrainers[trainerNum].party.ItemCustomMoves;
+                const struct TrainerMonItemCustomMoves *partyData;
+				if (gSaveBlock2Ptr->optionsBattleStyle == OPTIONS_DIFFICULTY_HARD)
+					partyData = gTrainers[trainerNum].hardParty.ItemCustomMoves;
+				else if (gSaveBlock2Ptr->optionsBattleStyle == OPTIONS_DIFFICULTY_UNFAIR)
+					partyData = gTrainers[trainerNum].unfairParty.ItemCustomMoves;
+				else
+					partyData = gTrainers[trainerNum].party.ItemCustomMoves;
 
                 for (j = 0; gSpeciesNames[partyData[i].species][j] != EOS; j++)
                     nameHash += gSpeciesNames[partyData[i].species][j];
@@ -2128,8 +2158,10 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
 				if (FlagGet(FLAG_DYNAMIC_LEVEL_ZONE))
 				{
 					for (j = 0; j < monsCount; j++)
-					if (partyData[j].lvl > maxLevel)
-						maxLevel = partyData[j].lvl;
+					{
+						if (partyData[j].lvl > maxLevel)
+							maxLevel = partyData[j].lvl;
+					}
 					playerMaxLevel = GetPlayerMaxLevel();
 					level = AdjustTrainerLevelDynamic(playerMaxLevel, maxLevel, level);
 				}
@@ -2176,6 +2208,7 @@ static u8 AdjustTrainerLevelDynamic(u8 playerMaxLvl, u8 enemyMaxLvl, u8 enemyLvl
 		adjustedLevel++; // Bosses are stronger than the player.
 	
 	adjustedLevel = adjustedLevel + (enemyLvl - enemyMaxLvl); // pokemon maintain their level difference from the "ace".
+	adjustedLevel += (gSaveBlock2Ptr->optionsBattleStyle - 1); // pokemon are base 1 level lower on easy or 1-2 higher on hard/unfair
 	if (adjustedLevel > MAX_LEVEL)
 		adjustedLevel = MAX_LEVEL;
 	
