@@ -4794,8 +4794,8 @@
     {
       "id": "LAYOUT_OPTIONS_ROOM",
       "name": "OptionsRoom_Layout",
-      "width": 14,
-      "height": 8,
+      "width": 19,
+      "height": 11,
       "primary_tileset": "gTileset_Building",
       "secondary_tileset": "gTileset_BattleFactory",
       "border_filepath": "data/layouts/OptionsRoom/border.bin",
