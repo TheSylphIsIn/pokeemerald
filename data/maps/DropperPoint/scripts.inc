@@ -9,6 +9,14 @@ DropperPoint_Sign::
 	msgbox DropperPoint_Text_Sign, MSGBOX_SIGN
 	end
 	
+DropperPoint_Test_Keys::
+	additem ITEM_ACRO_BIKE, 1
+	additem ITEM_MACH_BIKE, 1
+	additem ITEM_OLD_ROD, 1
+	additem ITEM_GOOD_ROD, 1
+	release
+	end
+	
 DropperPoint_EventScript_Morgan::
 	lock
 	goto_if_eq VAR_FONEI_COAST_STATE, 1, DropperPoint_EventScript_MorganPanic

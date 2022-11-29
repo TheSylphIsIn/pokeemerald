@@ -7,7 +7,6 @@
 #include "malloc.h"
 #include "secret_base.h"
 #include "item_menu.h"
-#include "tx_registered_items_menu.h"
 #include "strings.h"
 #include "load_save.h"
 #include "item_use.h"
@@ -576,8 +575,6 @@ void CompactPCItems(void)
 
 void SwapRegisteredBike(void)
 {
-    u8 pos_ACRO = TxRegItemsMenu_GetRegisteredItemIndex(ITEM_ACRO_BIKE);
-    u8 pos_MACH = TxRegItemsMenu_GetRegisteredItemIndex(ITEM_MACH_BIKE);
     switch (gSaveBlock1Ptr->registeredItemSelect)
     {
     case ITEM_MACH_BIKE:
@@ -587,10 +584,15 @@ void SwapRegisteredBike(void)
         gSaveBlock1Ptr->registeredItemSelect = ITEM_MACH_BIKE;
         break;
     }
-    if (pos_ACRO != 0xFF)
-        gSaveBlock1Ptr->registeredItems[pos_ACRO].itemId = ITEM_MACH_BIKE;
-    else if (pos_MACH != 0xFF)
-        gSaveBlock1Ptr->registeredItems[pos_MACH].itemId = ITEM_ACRO_BIKE;
+    switch (gSaveBlock1Ptr->registeredItemR)
+    {
+    case ITEM_MACH_BIKE:
+        gSaveBlock1Ptr->registeredItemR = ITEM_ACRO_BIKE;
+        break;
+    case ITEM_ACRO_BIKE:
+        gSaveBlock1Ptr->registeredItemR = ITEM_MACH_BIKE;
+        break;
+    }
 }
 
 u16 BagGetItemIdByPocketPosition(u8 pocketId, u16 pocketPos)
