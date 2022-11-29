@@ -91,6 +91,7 @@ void FieldClearPlayerInput(struct FieldInput *input)
     input->input_field_1_2 = FALSE;
     input->input_field_1_3 = FALSE;
     input->dpadDirection = 0;
+    input->pressedRButton = FALSE;
 }
 
 void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
@@ -111,6 +112,8 @@ void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
                 input->pressedAButton = TRUE;
             if (newKeys & B_BUTTON)
                 input->pressedBButton = TRUE;
+            if (newKeys & R_BUTTON)
+                input->pressedRButton = TRUE;
         }
 
         if (heldKeys & (DPAD_UP | DPAD_DOWN | DPAD_LEFT | DPAD_RIGHT))
@@ -196,10 +199,11 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
         ShowStartMenu();
         return TRUE;
     }
+
 	if (TryProcessCheatCode() == TRUE)
 		return TRUE;
 	
-    if (input->pressedSelectButton && UseRegisteredKeyItemOnField() == TRUE)
+    if ((input->pressedSelectButton || input->pressedRButton) && UseRegisteredKeyItemOnField(input->pressedRButton) == TRUE)
         return TRUE;
 
     return FALSE;
