@@ -2,8 +2,18 @@
 .set LOCALID_MORGAN, 5
 
 CranClearing_MapScripts::
+	map_script MAP_SCRIPT_ON_TRANSITION, CranClearing_MapScript_OnTransition
 	.byte 0
 
+CranClearing_MapScript_OnTransition:
+	call_if_eq VAR_FONEI_COAST_STATE, 5, CranClearing_MapScript_SetRivalPositions
+	end
+	
+CranClearing_MapScript_SetRivalPositions:
+	setobjectxyperm LOCALID_MORGAN, 12, 15
+	setobjectxyperm LOCALID_CALVIN, 30, 7
+	return
+	
 // item 1
 
 // first girl script
@@ -14,6 +24,8 @@ CranClearing_TriggerScript_Morgan1::
 	closemessage
 	applymovement LOCALID_MORGAN, CranClearing_Movement_WalkToBattleZone
 	waitmovement 0
+	setobjectxy LOCALID_MORGAN, 12, 15
+	setobjectxy LOCALID_CALVIN, 30, 7
 	setobjectxyperm LOCALID_MORGAN, 12, 15
 	setobjectxyperm LOCALID_CALVIN, 30, 7
 	setvar VAR_FONEI_COAST_STATE, 5
@@ -27,7 +39,9 @@ CranClearing_TriggerScript_Calvin1::
 	closemessage
 	applymovement LOCALID_CALVIN, CranClearing_Movement_WalkToBattleZone
 	waitmovement 0
-	setobjectxyperm LOCALID_MORGAN, 12, 15
+	setobjectxy LOCALID_MORGAN, 12, 15
+	setobjectxy LOCALID_CALVIN, 30, 7
+	setobjectxyperm LOCALID_MORGAN, 12, 15 // add normal setobjectxys and a perm map script
 	setobjectxyperm LOCALID_CALVIN, 30, 7
 	setvar VAR_FONEI_COAST_STATE, 5
 	release
@@ -59,7 +73,9 @@ CranClearing_Movement_WalkToBattleZone:
 	
 // girl battle script
 CranClearing_EventScript_Morgan::
-	msgbox Route103_Text_MayLetsBattle, MSGBOX_DEFAULT
+	lock
+	faceplayer
+	msgbox CranClearing_Text_MorganBattleIntro, MSGBOX_DEFAULT
 	switch VAR_STARTER_MON
 	case 0, CranClearing_EventScript_MorganBattleGlasma
 	case 1, CranClearing_EventScript_MorganBattleSandude
@@ -67,22 +83,34 @@ CranClearing_EventScript_Morgan::
 	end
 	
 CranClearing_EventScript_MorganBattleGlasma::
-	trainerbattle_no_intro TRAINER_MAY_ROUTE_103_TREECKO, CranClearing_Text_MorganDefeated
+	trainerbattle_no_intro TRAINER_MORGAN_FISHEYE_LAKE_GLASMA, CranClearing_Text_MorganDefeated
 	goto CranClearing_EventScript_MorganAfterBattle
 	end
 
 CranClearing_EventScript_MorganBattleSandude::
-	trainerbattle_no_intro TRAINER_MAY_ROUTE_103_TORCHIC, CranClearing_Text_MorganDefeated
+	trainerbattle_no_intro TRAINER_MORGAN_FISHEYE_LAKE_SANDUDE, CranClearing_Text_MorganDefeated
 	goto CranClearing_EventScript_MorganAfterBattle
 	end
 
 CranClearing_EventScript_MorganBattleEladrift::
-	trainerbattle_no_intro TRAINER_MAY_ROUTE_103_MUDKIP, CranClearing_Text_MorganDefeated
+	trainerbattle_no_intro TRAINER_MORGAN_FISHEYE_LAKE_ELADRIFT, CranClearing_Text_MorganDefeated
 	goto CranClearing_EventScript_MorganAfterBattle
 	end
 	
+CranClearing_Text_MorganBattleIntro:
+	.string "MORGAN: {PLAYER}, I just realized…\n"
+	.string "We're POKéMON TRAINERS now!\p"
+	.string "Do you know what that means?\p"
+	.string "When our eyes meet… well, we have\n"
+	.string "to have a battle!\p"
+	.string "H-here I come!$"
+	
 CranClearing_Text_MorganDefeated:
+	.string "MORGAN: Whew… my first battle\n"
+	.string "as a real POKéMON TRAINER…$"
+
 CranClearing_EventScript_MorganAfterBattle:
+	end
 	
 // boy battle script
 

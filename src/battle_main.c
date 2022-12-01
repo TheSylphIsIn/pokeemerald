@@ -1990,16 +1990,11 @@ static void SpriteCB_UnusedBattleInit_Main(struct Sprite *sprite)
 static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 firstTrainer)
 {
 	/*
-	 * DIFFICULTY MODES POSSIBILITY: Produce copies of gTrainers[] array:
-	 * gHardTrainers[] and gUnfairTrainers[]. Then, here:
-	 const struct Trainer trainer;
-	 If (FLAG_HARD_MODE)
-		 trainer = gHardTrainers[trainerNum];
-	 else
-		 trainer = gTrainers[trainerNum];
-	 * this might be memory-inefficient, but...quick maths say it would only cost .3% of total memory,
-	 * which seems acceptable considering battles are the main point of the game.
-	*/
+	 * If the options menu option "DIFFICULTY" is set above normal, this loads slightly differet info.
+	 * HARD: hardParty instead of party
+	 * UNFAIR: unfairParty instead of party
+	 * BOTH: hardPartySize instead of partySize
+	 */
     u32 nameHash = 0;
     u32 personalityValue;
     u8 fixedIV;
@@ -2016,18 +2011,14 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
     {
         if (firstTrainer == TRUE)
             ZeroEnemyPartyMons();
+		
+		if (gSaveBlock2Ptr->optionsBattleStyle >= OPTIONS_DIFFICULTY_HARD)
+			monsCount = gTrainers[trainerNum].hardPartySize;
+		else
+			monsCount = gTrainers[trainerNum].partySize;
 
-        if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
-        {
-            if (gTrainers[trainerNum].partySize > PARTY_SIZE / 2)
-                monsCount = PARTY_SIZE / 2; // if party has more than 6 mons, only use 3
-            else
-                monsCount = gTrainers[trainerNum].partySize;
-        }
-        else // use full party in a single battle
-        {
-            monsCount = gTrainers[trainerNum].partySize;
-        }
+        if ((gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS) && monsCount > PARTY_SIZE / 2)
+            monsCount = PARTY_SIZE / 2; // if party has more than 3 mons, only use 3 of them
 
         for (i = 0; i < monsCount; i++)
         {
@@ -2069,7 +2060,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
 					level = AdjustTrainerLevelDynamic(playerMaxLevel, maxLevel, level);
 				}
                 personalityValue += nameHash << 8;
-                fixedIV = partyData[i].iv * MAX_PER_STAT_IVS / 255;
+                fixedIV = partyData[i].iv;
                 CreateMon(&party[i], partyData[i].species, level, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
                 break;
             }
@@ -2098,7 +2089,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
 					level = AdjustTrainerLevelDynamic(playerMaxLevel, maxLevel, level);
 				}
                 personalityValue += nameHash << 8;
-                fixedIV = partyData[i].iv * MAX_PER_STAT_IVS / 255;
+                fixedIV = partyData[i].iv;
                 CreateMon(&party[i], partyData[i].species, level, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
 
 				SetMonData(&party[i], MON_DATA_ABILITY_NUM, &partyData[i].ability);
@@ -2135,7 +2126,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
 					level = AdjustTrainerLevelDynamic(playerMaxLevel, maxLevel, level);
 				}
                 personalityValue += nameHash << 8;
-                fixedIV = partyData[i].iv * MAX_PER_STAT_IVS / 255;
+                fixedIV = partyData[i].iv;
                 CreateMon(&party[i], partyData[i].species, level, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
 
                 SetMonData(&party[i], MON_DATA_HELD_ITEM, &partyData[i].heldItem);
@@ -2166,7 +2157,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
 					level = AdjustTrainerLevelDynamic(playerMaxLevel, maxLevel, level);
 				}
                 personalityValue += nameHash << 8;
-                fixedIV = partyData[i].iv * MAX_PER_STAT_IVS / 255;
+                fixedIV = partyData[i].iv;
 				if (partyData[i].nature != 0)
 					CreateEnemyMonWithNature(&party[i], partyData[i].species, level, fixedIV, partyData[i].nature);
 				else 
@@ -2193,7 +2184,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
         gBattleTypeFlags |= gTrainers[trainerNum].doubleBattle;
     }
 
-    return gTrainers[trainerNum].partySize;
+    return gTrainers[trainerNum].partySize; // this return value isn't actually used for anything, so it doesn't need to check difficulty.
 }
 
 static u8 AdjustTrainerLevelDynamic(u8 playerMaxLvl, u8 enemyMaxLvl, u8 enemyLvl)

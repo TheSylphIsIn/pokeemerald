@@ -320,7 +320,6 @@
 #define TRAINER_SHELBY_4                    316
 #define TRAINER_SHELBY_5                    317
 #define TRAINER_CALVIN_1                    318
-#define TRAINER_BILLY                       319
 #define TRAINER_JOSH                        320
 #define TRAINER_TOMMY                       321
 #define TRAINER_JOEY                        322
@@ -856,6 +855,18 @@
 #define TRAINER_LEAF                        852
 #define TRAINER_BRENDAN_PLACEHOLDER         853
 #define TRAINER_MAY_PLACEHOLDER             854
+
+// Above are the old opponent constants. I'm not removing them because I can't be bothered to right now.
+// They're referenced by scripts and some code.
+
+#define TRAINER_MORGAN_FISHEYE_LAKE_GLASMA 		1
+#define TRAINER_MORGAN_FISHEYE_LAKE_SANDUDE 	2
+#define TRAINER_MORGAN_FISHEYE_LAKE_ELADRIFT 	3
+#define TRAINER_CALVIN_FISHEYE_LAKE_GLASMA		4
+#define TRAINER_CALVIN_FISHEYE_LAKE_SANDUDE		5
+#define TRAINER_CALVIN_FISHEYE_LAKE_ELADRIFT	6
+#define TRAINER_BILLY 							7
+#define TRAINER_KEY_GRUNT_FISHEYE_LAKE			8
 
 // NOTE: Because each Trainer uses a flag to determine when they are defeated, there is only space for 9 additional trainers before trainer flag space overflows
 //       More space can be made by shifting flags around in constants/flags.h or changing how trainer flags are handled

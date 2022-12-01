@@ -3518,15 +3518,12 @@ static void Cmd_getexp(void)
     case 1: // calculate experience points to redistribute
         {
             u16 calculatedExp;
-            s32 viaSentIn;
 
-            for (viaSentIn = 0, i = 0; i < PARTY_SIZE; i++)
+            for (i = 0; i < PARTY_SIZE; i++)
             {
                 if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) == SPECIES_NONE || GetMonData(&gPlayerParty[i], MON_DATA_HP) == 0)
                     continue;
-                if (gBitTable[i] & sentIn)
-                    viaSentIn++;
-
+                
                 item = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
 
                 if (item == ITEM_ENIGMA_BERRY)
@@ -3539,7 +3536,7 @@ static void Cmd_getexp(void)
 			
             if (gSaveBlock2Ptr->optionsExpShare) // exp share is turned on
             {
-                *exp = calculatedExp / 2;
+                *exp = calculatedExp / 2 + calculatedExp % 2; // preserves hanging experience point if exp yield is odd
                 if (*exp == 0)
                     *exp = 1;
 
@@ -3642,7 +3639,7 @@ static void Cmd_getexp(void)
                     {
                         gBattleStruct->expGetterBattlerId = 0;
                     }
-					if (gBattleStruct->sentInPokes & 1)
+					if (gBattleStruct->sentInPokes & 1) // exp share-only mons don't print a message or gain EVs
 					{
                     PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, gBattleStruct->expGetterBattlerId, gBattleStruct->expGetterMonId);
                     // buffer 'gained' or 'gained a boosted'
@@ -3737,6 +3734,8 @@ static void Cmd_getexp(void)
         }
         break;
     case 5: // looper increment
+	{
+		u32 viaSentIn;
         if (gBattleMoveDamage) // there is exp to give, goto case 3 that gives exp
         {
             gBattleScripting.getexpState = 3;
@@ -3747,14 +3746,27 @@ static void Cmd_getexp(void)
             if (gBattleStruct->expGetterMonId < PARTY_SIZE)
                 gBattleScripting.getexpState = 2; // loop again
             else
-                gBattleScripting.getexpState = 6; // we're done
+			{
+				gBattleScripting.getexpState = 6; // we're done
+				for (viaSentIn = 0, i = 0; i < PARTY_SIZE; i++)
+				{
+					if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) == SPECIES_NONE || GetMonData(&gPlayerParty[i], MON_DATA_HP) == 0)
+						continue;
+                
+					if (gBitTable[i] & sentIn)
+						viaSentIn++;
+				}
+				// only display Exp share message if mons actually got exp from it
+				if (gSaveBlock2Ptr->optionsExpShare && !(CalculatePlayerPartyCount() >= viaSentIn))
+					PrepareStringBattle(STRINGID_EXPSHAREMESSAGE, 0);
+			}
+				
         }
         break;
+	}
     case 6: // increment instruction
         if (gBattleControllerExecFlags == 0)
         {
-			if (gSaveBlock2Ptr->optionsExpShare)
-				PrepareStringBattle(STRINGID_EXPSHAREMESSAGE, 0);
             // not sure why gf clears the item and ability here
             gBattleMons[gBattlerFainted].item = ITEM_NONE;
             gBattleMons[gBattlerFainted].ability = ABILITY_NONE;

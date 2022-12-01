@@ -27,14 +27,14 @@ struct MonCoords
 
 struct TrainerMonNoItemDefaultMoves
 {
-    u16 iv;
+    u8 iv;
     u8 lvl;
     u16 species;
 };
 
 struct TrainerMonItemDefaultMoves
 {
-    u16 iv;
+    u8 iv;
     u8 lvl;
     u16 species;
     u16 heldItem;
@@ -42,7 +42,7 @@ struct TrainerMonItemDefaultMoves
 
 struct TrainerMonNoItemCustomMoves
 {
-    u16 iv;
+    u8 iv;
     u8 lvl;
     u16 species;
 	u8 ability;
@@ -51,7 +51,7 @@ struct TrainerMonNoItemCustomMoves
 
 struct TrainerMonItemCustomMoves
 {
-    u16 iv;
+    u8 iv;
     u8 lvl;
 	u8 evs[NUM_STATS];
 	u8 nature;
@@ -61,10 +61,18 @@ struct TrainerMonItemCustomMoves
     u16 moves[MAX_MON_MOVES];
 };
 
-#define NO_ITEM_DEFAULT_MOVES(party) { .NoItemDefaultMoves = party }, .partySize = ARRAY_COUNT(party), .partyFlags = 0
-#define NO_ITEM_CUSTOM_MOVES(party) { .NoItemCustomMoves = party }, .partySize = ARRAY_COUNT(party), .partyFlags = F_TRAINER_PARTY_CUSTOM_MOVESET
-#define ITEM_DEFAULT_MOVES(party) { .ItemDefaultMoves = party }, .partySize = ARRAY_COUNT(party), .partyFlags = F_TRAINER_PARTY_HELD_ITEM
-#define ITEM_CUSTOM_MOVES(party) { .ItemCustomMoves = party }, .partySize = ARRAY_COUNT(party), .partyFlags = F_TRAINER_PARTY_CUSTOM_MOVESET | F_TRAINER_PARTY_HELD_ITEM
+// appends passed label to the appropriate places to get sParty_Trainer, sHardParty_Trainer, sUnfairParty_Trainer, partySize, hardPartySize, and party flags.
+#define NO_ITEM_DEFAULT_MOVES(party) { .NoItemDefaultMoves = sParty_##party }, .partySize = ARRAY_COUNT(sParty_##party), .partyFlags = 0, .hardParty = { .NoItemDefaultMoves = sHardParty_##party }, .hardPartySize = ARRAY_COUNT(sHardParty_##party), .unfairParty = { .NoItemDefaultMoves = sUnfairParty_##party }
+#define NO_ITEM_CUSTOM_MOVES(party) { .NoItemCustomMoves = sParty_##party }, .partySize = ARRAY_COUNT(sParty_##party), .partyFlags = F_TRAINER_PARTY_CUSTOM_MOVESET, .hardParty = { .NoItemCustomMoves = sHardParty_##party }, .hardPartySize = ARRAY_COUNT(sHardParty_##party), .unfairParty = { .NoItemCustomMoves = sUnfairParty_##party }
+#define ITEM_DEFAULT_MOVES(party) { .ItemDefaultMoves = sParty_##party }, .partySize = ARRAY_COUNT(sParty_##party), .partyFlags = F_TRAINER_PARTY_HELD_ITEM, .hardParty = { .ItemDefaultMoves = sHardParty_##party }, .hardPartySize = ARRAY_COUNT(sHardParty_##party), .unfairParty = { .ItemDefaultMoves = sUnfairParty_##party }
+#define ITEM_CUSTOM_MOVES(party) { .ItemCustomMoves = sParty_##party }, .partySize = ARRAY_COUNT(sParty_##party), .partyFlags = F_TRAINER_PARTY_CUSTOM_MOVESET | F_TRAINER_PARTY_HELD_ITEM, .hardParty = { .ItemCustomMoves = sHardParty_##party }, .hardPartySize = ARRAY_COUNT(sHardParty_##party), .unfairParty = { .ItemCustomMoves = sUnfairParty_##party }
+
+// same as above macros, but uses normal mode parties for all fields. For trainers who do not have different parties in harder modes. Will probably only be used for throwaway trainers.
+#define NO_ITEM_DEFAULT_MOVES_NO_HARD(party) { .NoItemDefaultMoves = sParty_##party }, .partySize = ARRAY_COUNT(sParty_##party), .partyFlags = 0, .hardParty = { .NoItemDefaultMoves = sParty_##party }, .hardPartySize = ARRAY_COUNT(sParty_##party), .unfairParty = { .NoItemDefaultMoves = sParty_##party }
+#define NO_ITEM_CUSTOM_MOVES_NO_HARD(party) { .NoItemCustomMoves = sParty_##party }, .partySize = ARRAY_COUNT(sParty_##party), .partyFlags = F_TRAINER_PARTY_CUSTOM_MOVESET, .hardParty = { .NoItemCustomMoves = sParty_##party }, .hardPartySize = ARRAY_COUNT(sParty_##party), .unfairParty = { .NoItemCustomMoves = sParty_##party }
+#define ITEM_DEFAULT_MOVES_NO_HARD(party) { .ItemDefaultMoves = sParty_##party }, .partySize = ARRAY_COUNT(sParty_##party), .partyFlags = F_TRAINER_PARTY_HELD_ITEM, .hardParty = { .ItemDefaultMoves = sParty_##party }, .hardPartySize = ARRAY_COUNT(sParty_##party), .unfairParty = { .ItemDefaultMoves = sParty_##party }
+#define ITEM_CUSTOM_MOVES_NO_HARD(party) { .ItemCustomMoves = sParty_##party }, .partySize = ARRAY_COUNT(sParty_##party), .partyFlags = F_TRAINER_PARTY_CUSTOM_MOVESET | F_TRAINER_PARTY_HELD_ITEM, .hardParty = { .ItemCustomMoves = sParty_##party }, .hardPartySize = ARRAY_COUNT(sParty_##party), .unfairParty = { .ItemCustomMoves = sParty_##party }
+
 
 union TrainerMonPtr
 {
@@ -84,7 +92,8 @@ struct Trainer
     /*0x10*/ u16 items[MAX_TRAINER_ITEMS];
     /*0x18*/ bool8 doubleBattle;
     /*0x1C*/ u32 aiFlags;
-    /*0x20*/ u8 partySize;
+    /*0x20*/ u8 partySize:4; // normal party size
+			 u8 hardPartySize:4; // hard or unfair party size
     /*0x24*/ union TrainerMonPtr party;
 			 union TrainerMonPtr hardParty;
 			 union TrainerMonPtr unfairParty;
