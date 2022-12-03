@@ -80,6 +80,7 @@ static s32 SetAteMoveType(u8 ability);
 static bool32 NoAliveMonsForPlayer(void);
 static bool32 NoAliveMonsForOpponent(void);
 static bool32 NoAliveMonsForEitherParty(void);
+static bool8 AdjustExpByLevel(void);
 
 static void Cmd_attackcanceler(void);
 static void Cmd_accuracycheck(void);
@@ -3485,7 +3486,7 @@ static void Cmd_jumpiftype(void)
 
 static void Cmd_getexp(void)
 {
-    u16 item;
+    u16 item; // also used as a bool for experience being capped
     s32 i; // also used as stringId
     u8 holdEffect;
     s32 sentIn;
@@ -3591,7 +3592,6 @@ static void Cmd_getexp(void)
 
                 if (GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_HP) && !GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_IS_EGG))
                 {
-					// here is where EXP should be modified by level caps and such.
                     if (gBattleStruct->sentInPokes & 1)
                         gBattleMoveDamage = *exp;
                     else
@@ -3603,6 +3603,9 @@ static void Cmd_getexp(void)
                         gBattleMoveDamage = (gBattleMoveDamage * 150) / 100;
                     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
                         gBattleMoveDamage = (gBattleMoveDamage * 150) / 100;
+					
+					// Scale exp by level
+					item = AdjustExpByLevel();
 
                     if (IsTradedMon(&gPlayerParty[gBattleStruct->expGetterMonId]))
                     {
@@ -3617,6 +3620,10 @@ static void Cmd_getexp(void)
                             i = STRINGID_ABOOSTED;
                         }
                     }
+					else if (item) // if level has been capped
+					{
+						i = STRINGID_ACAPPED;
+					}
                     else
                     {
                         i = STRINGID_EMPTYSTRING4;
@@ -3642,7 +3649,7 @@ static void Cmd_getexp(void)
 					if (gBattleStruct->sentInPokes & 1) // exp share-only mons don't print a message or gain EVs
 					{
                     PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, gBattleStruct->expGetterBattlerId, gBattleStruct->expGetterMonId);
-                    // buffer 'gained' or 'gained a boosted'
+                    // buffer 'gained' or 'gained a boosted' or 'gained a capped'
                     PREPARE_STRING_BUFFER(gBattleTextBuff2, i);
                     PREPARE_WORD_NUMBER_BUFFER(gBattleTextBuff3, 5, gBattleMoveDamage);
 
@@ -5908,15 +5915,9 @@ static void Cmd_getmoneyreward(void)
     else
     {
         s32 i, count;
-        for (i = 0; i < PARTY_SIZE; i++)
-        {
-            if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) != SPECIES_NONE
-             && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) != SPECIES_EGG)
-            {
-                if (GetMonData(&gPlayerParty[i], MON_DATA_LEVEL) > sPartyLevel)
-                    sPartyLevel = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
-            }
-        }
+        
+		sPartyLevel = GetPlayerAvgLevel();
+		
         for (count = 0, i = 0; i < ARRAY_COUNT(sBadgeFlags); i++)
         {
             if (FlagGet(sBadgeFlags[i]) == TRUE)
@@ -10006,11 +10007,8 @@ static void Cmd_pickup(void)
             species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2);
             heldItem = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
 
-            if (GetMonData(&gPlayerParty[i], MON_DATA_ABILITY_NUM))
-                ability = gBaseStats[species].abilities[1];
-            else
-                ability = gBaseStats[species].abilities[0];
-
+            ability = GetMonData(&gPlayerParty[i], MON_DATA_ABILITY_NUM);
+            
             if (ability == ABILITY_PICKUP
                 && species != SPECIES_NONE
                 && species != SPECIES_EGG
@@ -10029,7 +10027,7 @@ static void Cmd_pickup(void)
 					heldItem = ITEM_CANDIED_BERRY;
 					SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &heldItem);
 				}						
-				else if (!(Random() % 16))
+				else if (!(Random() % 16) && heldItem != ITEM_BERRY_JUICE)
 				{
 					heldItem = ITEM_BERRY_JUICE;
 					SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &heldItem);
@@ -10044,11 +10042,8 @@ static void Cmd_pickup(void)
             species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2);
             heldItem = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
 
-            if (GetMonData(&gPlayerParty[i], MON_DATA_ABILITY_NUM))
-                ability = gBaseStats[species].abilities[1];
-            else
-                ability = gBaseStats[species].abilities[0];
-
+            ability = GetMonData(&gPlayerParty[i], MON_DATA_ABILITY_NUM);
+            
             if (ability == ABILITY_PICKUP
                 && species != SPECIES_NONE
                 && species != SPECIES_EGG
@@ -10084,7 +10079,7 @@ static void Cmd_pickup(void)
 					heldItem = ITEM_CANDIED_BERRY;
 					SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &heldItem);
 				}						
-				else if (!(Random() % 16))
+				else if (!(Random() % 16) && heldItem != ITEM_BERRY_JUICE)
 				{
 					heldItem = ITEM_BERRY_JUICE;
 					SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &heldItem);
@@ -10746,4 +10741,132 @@ bool32 NoAliveMonsForEitherParty(void)
 {
     return (NoAliveMonsForPlayer() || NoAliveMonsForOpponent());
 }
+
+static const u16 sProgressFlags[] = 
+	{
+		FLAG_BADGE01_GET, FLAG_BADGE02_GET, FLAG_BADGE03_GET, FLAG_BADGE04_GET
+	};
+	
+static const s16 sProgressLevelCaps[] = 
+	{
+		10, 15, 20, 25, 30
+	};
+	
+// the base multiplier (no change) is actually AVERAGE_MULTIPLIER_START. Every 2 levels changes the multiplier.
+// is applied to experience as (experience * multiplier) / 100. 19 entries
+/*
+	0. more than 14: 5x
+	1. 12-13 below: 4x
+	2. 10-11 below: 3x
+	3. 8-9 below: 2x
+	4. 6-7 below: 1.75x
+	5. 4-5 below: 1.5x
+	6. 3 below: 1.3x
+	7. 2 below: 1.2x
+	8. 1 below: 1.1x
+	9. even: 1.0x (no change)
+	10. 1 above: 0.95x
+	11. 2 above: 0.90x
+	12. 3 above: 0.80x
+	13. 4-5 above: 0.66x
+	14. 6-7 above: 0.5x
+	15. 8-9 above: 0.25x
+	16. 10-11 above: 0.12x
+	17. 12-13 above: 0.05x
+	18. more than 14: 0.01x
+*/
+
+static const u16 sPartyLevelGapMultipliers[] =
+	{
+		500, 400, 300, 200, 175, 150, 130, 120, 110, 100, 95, 90, 80, 66, 50, 25, 12, 5, 1 
+	};
+	
+// the index of the "no change" multiplier. +1 because the array has an odd number of entries.
+#define AVERAGE_MULTIPLIER_BASE ARRAY_COUNT(sPartyLevelGapMultipliers) / 2
+#define AVERAGE_MULTIPLIER_MIN_INDEX 0 // actually the highest multiplier
+#define AVERAGE_MULTIPLIER_MAX_INDEX ARRAY_COUNT(sPartyLevelGapMultipliers) - 1 // actually the lowest multiplier
+
+static bool8 AdjustExpByLevel(void)
+{
+	u32 i, progressCount;
+	u32 expGetterLevel = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_LEVEL);
+	u32 compareLevel = 0;
+	s32 levelDifference = 0; // used for both level difference and amount of Exp to drop
+	s32 expAdjust = 0; // used for amount of exp to subtract from progression cap, and modifier for party cap formula
+	bool8 capped = FALSE; // returned. set to true if level caps or party level lower exp gain.
+	
+	// adjust by level caps
+	
+	// get number of set progress flags.
+	for (i = 0, progressCount = 0; i < ARRAY_COUNT(sProgressFlags); i++)
+		progressCount += FlagGet(sProgressFlags[i]);
+	
+	compareLevel = sProgressLevelCaps[progressCount];
+	
+	levelDifference = expGetterLevel - compareLevel; // negative if below the cap.
+	
+	if (levelDifference > 0) // only alter exp if above the cap
+	{
+		switch (levelDifference)
+		{
+			case 1: // 1 level over: half exp
+				expAdjust = SAFE_DIV(gBattleMoveDamage, 2);
+				break;
+			case 2: // 2 levels over: 25% exp
+				expAdjust = SAFE_DIV(3 * gBattleMoveDamage, 4);
+				break;
+			case 3: // 3 levels over: 10% exp
+				expAdjust = SAFE_DIV(9 * gBattleMoveDamage, 10);
+				break;
+			default: // any more than that: no exp
+				expAdjust = gBattleMoveDamage;
+				break;
+		}
+	}
+	
+	// remove capped exp from exp get value
+	gBattleMoveDamage -= expAdjust;
+	
+	if (expAdjust > 0)
+		capped = TRUE;
+	
+	expAdjust = 0;
+	// progression cap done.
+	
+	// adjust by party level. turning off Exp. All deactivates this.
+	if (gSaveBlock1Ptr->optionsExpShare && gBattleMoveDamage)
+	{
+		compareLevel = GetPlayerAvgLevel();
+		levelDifference = expGetterLevel - compareLevel;
+		
+		// set expAdjust to be used as a modifier for the level difference formula.
+		if (levelDifference < -2)
+			expAdjust = -2;
+		else if (levelDifference < 0)
+			expAdjust = -1;
+		else if (levelDifference > 2)
+			expAdjust = 2;
+		else if (levelDifference > 0)
+			expAdjust = 1;
+		
+		// Convert levelDifference into an index for the multiplier array.
+		i = (levelDifference / 2) + AVERAGE_MULTIPLIER_BASE + expAdjust;
+		if (i < AVERAGE_MULTIPLIER_MIN_INDEX)
+			i = AVERAGE_MULTIPLIER_MIN_INDEX;
+		if (i > AVERAGE_MULTIPLIER_MAX_INDEX)
+			i = AVERAGE_MULTIPLIER_MAX_INDEX;
+		
+		gBattleMoveDamage = (gBattleMoveDamage * sPartyLevelGapMultipliers[i]) / 100;
+		
+		// only display the "capped" message from party scaling if it's more than a 20% loss
+		if (i > 12)
+			capped = TRUE;
+	}
+	
+	return capped;
+}
+
+#undef AVERAGE_MULTIPLIER_START
+#undef AVERAGE_MULTIPLIER_MIN
+#undef AVERAGE_MULTIPLIER_MAX
 
