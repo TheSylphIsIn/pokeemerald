@@ -188,7 +188,7 @@ CranTown_EventScript_Shop::
 	faceplayer
 	message CranTown_Text_ShopIntro
 	waitmessage
-	pokemart CranTown_Mart
+	pokemart CranTown_Mart, 1
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end

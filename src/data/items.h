@@ -601,6 +601,7 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_Medicine,
         .battleUsage = ITEM_B_USE_MEDICINE,
         .battleUseFunc = ItemUseInBattle_Medicine,
+		.secondaryId = 1,
     },
 
     [ITEM_SACRED_ASH] =

@@ -192,7 +192,7 @@ static void InitPocketScrollPositions(void);
 static u8 CreateBagInputHandlerTask(u8);
 static void DrawItemListBgRow(u8);
 static void BagMenu_MoveCursorCallback(s32, bool8, struct ListMenu *);
-static void BagMenu_ItemPrintCallback(u8, u32, u8);
+static void BagMenu_ItemPrintCallback(u8, u32, u8, u8);
 static void ItemMenu_UseOutOfBattle(u8);
 static void ItemMenu_Toss(u8);
 static void ItemMenu_RegisterSelect(u8);
@@ -950,7 +950,7 @@ static void BagMenu_MoveCursorCallback(s32 itemIndex, bool8 onInit, struct ListM
     }
 }
 
-static void BagMenu_ItemPrintCallback(u8 windowId, u32 itemIndex, u8 y)
+static void BagMenu_ItemPrintCallback(u8 windowId, u32 itemIndex, u8 y, u8 listPos)
 {
     u16 itemId;
     u16 itemQuantity;
@@ -1214,7 +1214,7 @@ static void PrintItemSoldAmount(int windowId, int numSold, int moneyEarned)
     ConvertIntToDecimalStringN(gStringVar1, numSold, STR_CONV_MODE_LEADING_ZEROS, numDigits);
     StringExpandPlaceholders(gStringVar4, gText_xVar1);
     AddTextPrinterParameterized(windowId, FONT_NORMAL, gStringVar4, 0, 1, TEXT_SKIP_DRAW, 0);
-    PrintMoneyAmount(windowId, 38, 1, moneyEarned, 0);
+    PrintMoneyAmount(windowId, 38, 1, moneyEarned, 0, FALSE);
 }
 
 static void Task_BagMenu_HandleInput(u8 taskId)
@@ -2227,7 +2227,7 @@ static void SellItem(u8 taskId)
     LoadBagItemListBuffers(gBagPosition.pocket);
     tListTaskId = ListMenuInit(&gMultiuseListMenuTemplate, *scrollPos, *cursorPos);
     BagMenu_PrintCursor(tListTaskId, COLORID_GRAY_CURSOR);
-    PrintMoneyAmountInMoneyBox(gBagMenu->windowIds[ITEMWIN_MONEY], GetMoney(&gSaveBlock1Ptr->money), 0);
+    PrintMoneyAmountInMoneyBox(gBagMenu->windowIds[ITEMWIN_MONEY], GetMoney(&gSaveBlock1Ptr->money), 0, FALSE);
     gTasks[taskId].func = WaitAfterItemSell;
 }
 
@@ -2579,7 +2579,7 @@ void BagMenu_YesNo(u8 taskId, u8 windowType, const struct YesNoFuncTable *funcTa
 static void DisplayCurrentMoneyWindow(void)
 {
     u8 windowId = BagMenu_AddWindow(ITEMWIN_MONEY);
-    PrintMoneyAmountInMoneyBoxWithBorder(windowId, 1, 14, GetMoney(&gSaveBlock1Ptr->money));
+    PrintMoneyAmountInMoneyBoxWithBorder(windowId, 1, 14, GetMoney(&gSaveBlock1Ptr->money), FALSE);
     AddMoneyLabelObject(19, 11);
 }
 

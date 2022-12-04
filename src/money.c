@@ -14,8 +14,11 @@
 
 EWRAM_DATA static u8 sMoneyBoxWindowId = 0;
 EWRAM_DATA static u8 sMoneyLabelSpriteId = 0;
+EWRAM_DATA static u8 sStarPieceLabelSpriteId = 0;
 
 #define MONEY_LABEL_TAG 0x2722
+#define PIECES_LABEL_TAG 0x2723
+#define STAR_LABEL_TAG 0x2724
 
 static const struct OamData sOamData_MoneyLabel =
 {
@@ -56,11 +59,47 @@ static const struct SpriteTemplate sSpriteTemplate_MoneyLabel =
     .callback = SpriteCallbackDummy
 };
 
+static const struct SpriteTemplate sSpriteTemplate_PiecesLabel =
+{
+    .tileTag = PIECES_LABEL_TAG,
+    .paletteTag = MONEY_LABEL_TAG,
+    .oam = &sOamData_MoneyLabel,
+    .anims = sSpriteAnimTable_MoneyLabel,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
+};
+
+static const struct SpriteTemplate sSpriteTemplate_StarLabel =
+{
+    .tileTag = STAR_LABEL_TAG,
+    .paletteTag = MONEY_LABEL_TAG,
+    .oam = &sOamData_MoneyLabel,
+    .anims = sSpriteAnimTable_MoneyLabel,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
+};
+
 static const struct CompressedSpriteSheet sSpriteSheet_MoneyLabel =
 {
     .data = gShopMenuMoney_Gfx,
     .size = 256,
     .tag = MONEY_LABEL_TAG,
+};
+
+static const struct CompressedSpriteSheet sSpriteSheet_StarLabel =
+{
+    .data = gShopMenuStar_Gfx,
+    .size = 256,
+    .tag = STAR_LABEL_TAG,
+};
+
+static const struct CompressedSpriteSheet sSpriteSheet_PiecesLabel =
+{
+    .data = gShopMenuPieces_Gfx,
+    .size = 256,
+    .tag = PIECES_LABEL_TAG,
 };
 
 static const struct CompressedSpritePalette sSpritePalette_MoneyLabel =
@@ -130,12 +169,12 @@ void SubtractMoneyFromVar0x8005(void)
     RemoveMoney(&gSaveBlock1Ptr->money, gSpecialVar_0x8005);
 }
 
-void PrintMoneyAmountInMoneyBox(u8 windowId, int amount, u8 speed)
+void PrintMoneyAmountInMoneyBox(u8 windowId, int amount, u8 speed, bool8 starPiece)
 {
-    PrintMoneyAmount(windowId, 38, 1, amount, speed);
+    PrintMoneyAmount(windowId, 38, 1, amount, speed, starPiece);
 }
 
-void PrintMoneyAmount(u8 windowId, u8 x, u8 y, int amount, u8 speed)
+void PrintMoneyAmount(u8 windowId, u8 x, u8 y, int amount, u8 speed, bool8 isStarPiece)
 {
     u8 *txtPtr;
     s32 strLength;
@@ -147,20 +186,23 @@ void PrintMoneyAmount(u8 windowId, u8 x, u8 y, int amount, u8 speed)
 
     while (strLength-- > 0)
         *(txtPtr++) = CHAR_SPACER;
-
-    StringExpandPlaceholders(txtPtr, gText_PokedollarVar1);
+	
+	if (isStarPiece)
+		StringExpandPlaceholders(txtPtr, gText_StrVar1);
+	else
+		StringExpandPlaceholders(txtPtr, gText_PokedollarVar1);
     AddTextPrinterParameterized(windowId, FONT_NORMAL, gStringVar4, x, y, speed, NULL);
 }
 
-void PrintMoneyAmountInMoneyBoxWithBorder(u8 windowId, u16 tileStart, u8 pallete, int amount)
+void PrintMoneyAmountInMoneyBoxWithBorder(u8 windowId, u16 tileStart, u8 pallete, int amount, bool8 starPiece)
 {
     DrawStdFrameWithCustomTileAndPalette(windowId, FALSE, tileStart, pallete);
-    PrintMoneyAmountInMoneyBox(windowId, amount, 0);
+    PrintMoneyAmountInMoneyBox(windowId, amount, 0, starPiece);
 }
 
 void ChangeAmountInMoneyBox(int amount)
 {
-    PrintMoneyAmountInMoneyBox(sMoneyBoxWindowId, amount, 0);
+    PrintMoneyAmountInMoneyBox(sMoneyBoxWindowId, amount, 0, FALSE);
 }
 
 void DrawMoneyBox(int amount, u8 x, u8 y)
@@ -172,7 +214,7 @@ void DrawMoneyBox(int amount, u8 x, u8 y)
     FillWindowPixelBuffer(sMoneyBoxWindowId, PIXEL_FILL(0));
     PutWindowTilemap(sMoneyBoxWindowId);
     CopyWindowToVram(sMoneyBoxWindowId, COPYWIN_MAP);
-    PrintMoneyAmountInMoneyBoxWithBorder(sMoneyBoxWindowId, 0x214, 14, amount);
+    PrintMoneyAmountInMoneyBoxWithBorder(sMoneyBoxWindowId, 0x214, 14, amount, FALSE);
     AddMoneyLabelObject((8 * x) + 19, (8 * y) + 11);
 }
 
@@ -194,4 +236,19 @@ void AddMoneyLabelObject(u16 x, u16 y)
 void RemoveMoneyLabelObject(void)
 {
     DestroySpriteAndFreeResources(&gSprites[sMoneyLabelSpriteId]);
+}
+
+void AddStarPieceLabelObject(u16 x, u16 y)
+{
+    LoadCompressedSpriteSheet(&sSpriteSheet_StarLabel);
+	LoadCompressedSpriteSheet(&sSpriteSheet_PiecesLabel);
+    LoadCompressedSpritePalette(&sSpritePalette_MoneyLabel);
+    sMoneyLabelSpriteId = CreateSprite(&sSpriteTemplate_StarLabel, x, y, 0);
+	sStarPieceLabelSpriteId = CreateSprite(&sSpriteTemplate_PiecesLabel, x + 30, y, 0);
+}
+
+void RemoveStarPieceLabelObject(void)
+{
+    DestroySpriteAndFreeResources(&gSprites[sMoneyLabelSpriteId]);
+	DestroySpriteAndFreeResources(&gSprites[sStarPieceLabelSpriteId]);
 }
