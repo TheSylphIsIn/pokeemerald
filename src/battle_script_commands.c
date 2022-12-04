@@ -10156,16 +10156,30 @@ static void Cmd_setweatherballtype(void)
     {
         if (gBattleWeather & B_WEATHER_ANY)
             gBattleScripting.dmgMultiplier = 2;
-        if (gBattleWeather & B_WEATHER_RAIN)
-            *(&gBattleStruct->dynamicMoveType) = TYPE_WATER | F_DYNAMIC_TYPE_2;
-        else if (gBattleWeather & B_WEATHER_SANDSTORM)
-            *(&gBattleStruct->dynamicMoveType) = TYPE_ROCK | F_DYNAMIC_TYPE_2;
-        else if (gBattleWeather & B_WEATHER_SUN)
-            *(&gBattleStruct->dynamicMoveType) = TYPE_FIRE | F_DYNAMIC_TYPE_2;
-        else if (gBattleWeather & B_WEATHER_HAIL)
-            *(&gBattleStruct->dynamicMoveType) = TYPE_ICE | F_DYNAMIC_TYPE_2;
+		if (gCurrentMove == MOVE_BOIL_OVER && (gBattleWeather & B_WEATHER_ANY))
+		{
+			if (gBattleWeather & B_WEATHER_RAIN)
+				*(&gBattleStruct->dynamicMoveType) = TYPE_FIRE | F_DYNAMIC_TYPE_2;
+			else if (gBattleWeather & B_WEATHER_SUN)
+				*(&gBattleStruct->dynamicMoveType) = TYPE_WATER | F_DYNAMIC_TYPE_2;
+			else if ((gBattleWeather & B_WEATHER_SANDSTORM) || (gBattleWeather & B_WEATHER_HAIL))
+				*(&gBattleStruct->dynamicMoveType) = TYPE_DRAGON | F_DYNAMIC_TYPE_2;
+			else
+				*(&gBattleStruct->dynamicMoveType) = TYPE_NORMAL | F_DYNAMIC_TYPE_2;
+		}
         else
-            *(&gBattleStruct->dynamicMoveType) = TYPE_NORMAL | F_DYNAMIC_TYPE_2;
+		{
+			if (gBattleWeather & B_WEATHER_RAIN)
+				*(&gBattleStruct->dynamicMoveType) = TYPE_WATER | F_DYNAMIC_TYPE_2;
+			else if (gBattleWeather & B_WEATHER_SANDSTORM)
+				*(&gBattleStruct->dynamicMoveType) = TYPE_ROCK | F_DYNAMIC_TYPE_2;
+			else if (gBattleWeather & B_WEATHER_SUN)
+				*(&gBattleStruct->dynamicMoveType) = TYPE_FIRE | F_DYNAMIC_TYPE_2;
+			else if (gBattleWeather & B_WEATHER_HAIL)
+				*(&gBattleStruct->dynamicMoveType) = TYPE_ICE | F_DYNAMIC_TYPE_2;
+			else
+				*(&gBattleStruct->dynamicMoveType) = TYPE_NORMAL | F_DYNAMIC_TYPE_2;
+		}
     }
 
     gBattlescriptCurrInstr++;
@@ -10834,7 +10848,7 @@ static bool8 AdjustExpByLevel(void)
 	// progression cap done.
 	
 	// adjust by party level. turning off Exp. All deactivates this.
-	if (gSaveBlock1Ptr->optionsExpShare && gBattleMoveDamage)
+	if (gSaveBlock2Ptr->optionsExpShare && gBattleMoveDamage)
 	{
 		compareLevel = GetPlayerAvgLevel();
 		levelDifference = expGetterLevel - compareLevel;

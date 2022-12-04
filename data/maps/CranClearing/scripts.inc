@@ -75,12 +75,24 @@ CranClearing_Movement_WalkToBattleZone:
 CranClearing_EventScript_Morgan::
 	lock
 	faceplayer
+	call_if_set FLAG_FAVORED_CALVIN, CranClearing_EventScript_MorganReactToCalvinDefeat
 	msgbox CranClearing_Text_MorganBattleIntro, MSGBOX_DEFAULT
+	applymovement LOCALID_MORGAN, CranClearing_Movement_MorganWalkToArena
+	delay 10
+	applymovement OBJ_EVENT_ID_PLAYER, CranClearing_Movement_PlayerWalkToMArena
+	waitmovement LOCALID_MORGAN
+	msgbox CranClearing_Text_MorganBattleIntro2, MSGBOX_DEFAULT
+	closemessage
 	switch VAR_STARTER_MON
 	case 0, CranClearing_EventScript_MorganBattleGlasma
 	case 1, CranClearing_EventScript_MorganBattleSandude
 	case 2, CranClearing_EventScript_MorganBattleEladrift
 	end
+	
+CranClearing_EventScript_MorganReactToCalvinDefeat:
+	msgbox CranClearing_Text_MorganCalvinBeaten, MSGBOX_DEFAULT
+	closemessage
+	return
 	
 CranClearing_EventScript_MorganBattleGlasma::
 	trainerbattle_no_intro TRAINER_MORGAN_FISHEYE_LAKE_GLASMA, CranClearing_Text_MorganDefeated
@@ -97,20 +109,90 @@ CranClearing_EventScript_MorganBattleEladrift::
 	goto CranClearing_EventScript_MorganAfterBattle
 	end
 	
+CranClearing_Text_MorganCalvinBeaten:
+	.string "MORGAN: Huh…? Did you already go\n"
+	.string "and beat CALVIN? Wow…$"
+	
 CranClearing_Text_MorganBattleIntro:
 	.string "MORGAN: {PLAYER}, I just realized…\n"
 	.string "We're POKéMON TRAINERS now!\p"
 	.string "Do you know what that means?\p"
 	.string "When our eyes meet… well, we have\n"
-	.string "to have a battle!\p"
+	.string "to have a battle! Come over here…$"
+	
+CranClearing_Text_MorganBattleIntro2:
 	.string "H-here I come!$"
 	
 CranClearing_Text_MorganDefeated:
 	.string "MORGAN: Whew… my first battle\n"
 	.string "as a real POKéMON TRAINER…$"
+	
+CranClearing_Movement_MorganWalkToArena:
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	delay_16
+	face_right
+	step_end
+
+CranClearing_Movement_PlayerWalkToMArena:
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	step_end
 
 CranClearing_EventScript_MorganAfterBattle:
+	msgbox CranClearing_Text_MorganAfterBattle1, MSGBOX_DEFAULT
+	closemessage
+	applymovement LOCALID_MORGAN, CranClearing_Movement_MorganGiveFlash
+	waitmovement 0
+	giveitem ITEM_HM05
+	msgbox CranClearing_Text_MorganExplainFlash, MSGBOX_DEFAULT
+	closemessage
+	applymovement LOCALID_MORGAN, CranClearing_Movement_MorganWalkOffscreen
+	waitmovement 0
+	removeobject LOCALID_MORGAN
+	setflag FLAG_FAVORED_MORGAN
 	end
+	
+CranClearing_Text_MorganAfterBattle1:
+	.string "MORGAN: That was exhilarating…!\n"
+	.string "I know it was a simple battle,\l"
+	.string "but still… wow!\p"
+	.string "I wanna battle again whenever\n"
+	.string "our POKéMON get stronger.\p"
+	.string "Okay, {PLAYER}?\n"
+	.string "Oh, speaking of which…\p"
+	.string "These friendly people in CRAN\n"
+	.string "TOWN gave me these.\p"
+	.string "You can have one too, {PLAYER}.$"
+
+CranClearing_Text_MorganExplainFlash:
+	.string "It's an HM for FLASH. Just like\n"
+	.string "in KANTO, remember?\p"
+	.string "I wonder if you'd…\n"
+	.string "… … u-um, never mind!\p"
+	.string "I'll go ahead to try to catch\n"
+	.string "the thief. See you!$"
+	
+CranClearing_Movement_MorganGiveFlash:
+	walk_right
+	delay_16
+	walk_in_place_slow_right
+	step_end
+	
+CranClearing_Movement_MorganWalkOffscreen:
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	step_end
 	
 // boy battle script
 

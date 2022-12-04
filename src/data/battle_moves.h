@@ -4546,7 +4546,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_WEATHER_BALL] =
     {
         .effect = EFFECT_WEATHER_BALL,
-        .power = 65,
+        .power = 55,
         .type = TYPE_NORMAL,
         .accuracy = 100,
         .pp = 10,
@@ -6061,5 +6061,80 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.flags = FLAG_MIRROR_MOVE_AFFECTED | FLAG_PROTECT_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_MAKES_CONTACT,
 		.category = MOVE_CATEGORY_PHYSICAL,
 		.attribute = MOVE_ATTRIBUTE_CRUSH,
+	},
+	
+	[MOVE_BOIL_OVER] =
+	{
+		.effect = EFFECT_WEATHER_BALL,
+		.power = 75,
+		.type = TYPE_NORMAL,
+		.accuracy = 100,
+		.pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+		.category = MOVE_CATEGORY_SPECIAL,
+		.attribute = MOVE_ATTRIBUTE_ENERGY,
+	},
+	
+	[MOVE_THUNDER_FANG] = 
+	{
+		.effect = EFFECT_PARALYZE_HIT,
+        .power = 65,
+        .type = TYPE_ELECTRIC,
+        .accuracy = 100,
+        .pp = 20,
+        .secondaryEffectChance = 10,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
+		.category = MOVE_CATEGORY_PHYSICAL,
+		.attribute = MOVE_ATTRIBUTE_BITE,
+	},
+	
+	[MOVE_FIRE_FANG] = 
+	{
+		.effect = EFFECT_BURN_HIT,
+        .power = 65,
+        .type = TYPE_FIRE,
+        .accuracy = 100,
+        .pp = 20,
+        .secondaryEffectChance = 10,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
+		.category = MOVE_CATEGORY_PHYSICAL,
+		.attribute = MOVE_ATTRIBUTE_BITE,
+	},
+	
+	[MOVE_ICE_FANG] = 
+	{
+		.effect = EFFECT_FREEZE_HIT,
+        .power = 65,
+        .type = TYPE_ICE,
+        .accuracy = 100,
+        .pp = 20,
+        .secondaryEffectChance = 10,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
+		.category = MOVE_CATEGORY_PHYSICAL,
+		.attribute = MOVE_ATTRIBUTE_BITE,
+	},
+	
+	[MOVE_ENERGY_BALL] =
+	{
+		.effect = EFFECT_SPECIAL_DEFENSE_DOWN_HIT,
+		.power = 90,
+		.type = TYPE_GRASS,
+		.accuracy = 100,
+		.pp = 15,
+		.secondaryEffectChance = 10,
+		.target = MOVE_TARGET_SELECTED,
+		.priority = 0,
+		.flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
+		.category = MOVE_CATEGORY_SPECIAL,
+		.attribute = MOVE_ATTRIBUTE_ENERGY,
 	},
 };

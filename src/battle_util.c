@@ -4358,6 +4358,19 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
 				}
 				break;
             }
+			
+			// dumb hack for fangs' secondary flinch chance
+			if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
+                    && TARGET_TURN_DAMAGED
+                    && (Random() % 100) < 10
+                    && (gCurrentMove == MOVE_FIRE_FANG || gCurrentMove == MOVE_THUNDER_FANG || gCurrentMove == MOVE_ICE_FANG)
+                    && gBattleMons[gBattlerTarget].hp)
+			{
+				gBattleCommunication[MOVE_EFFECT_BYTE] = MOVE_EFFECT_FLINCH;
+                BattleScriptPushCursor();
+                SetMoveEffect(FALSE, 0);
+                BattleScriptPop();
+			}
         }
         break;
     }
