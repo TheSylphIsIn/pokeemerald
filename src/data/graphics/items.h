@@ -636,6 +636,9 @@ const u32 gItemIconPalette_WideLens[] = INCBIN_U32("graphics/items/icon_palettes
 
 const u32 gItemIconPalette_RageBand[] = INCBIN_U32("graphics/items/icon_palettes/rage_band.gbapal.lz");
 
+const u32 gItemIcon_ZombieTooth[] = INCBIN_U32("graphics/items/icons/zombie_tooth.4bpp.lz");
+const u32 gItemIconPalette_ZombieTooth[] = INCBIN_U32("graphics/items/icon_palettes/zombie_tooth.gbapal.lz");
+
 // const u32 gItemIcon_[] = INCBIN_U32("graphics/items/icons/.4bpp.lz");
 // const u32 gItemIconPalette_[] = INCBIN_U32("graphics/items/icon_palettes/.gbapal.lz");
 

@@ -4800,6 +4800,16 @@
       "secondary_tileset": "gTileset_BattleFactory",
       "border_filepath": "data/layouts/OptionsRoom/border.bin",
       "blockdata_filepath": "data/layouts/OptionsRoom/map.bin"
+    },
+    {
+      "id": "LAYOUT_GLITCH_CITY",
+      "name": "GlitchCity_Layout",
+      "width": 20,
+      "height": 20,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_LavaridgeGym",
+      "border_filepath": "data/layouts/GlitchCity/border.bin",
+      "blockdata_filepath": "data/layouts/GlitchCity/map.bin"
     }
   ]
 }

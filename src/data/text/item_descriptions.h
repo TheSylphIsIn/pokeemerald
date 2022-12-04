@@ -1152,6 +1152,11 @@ static const u8 sRageBandDesc[] = _(
 	"offenses as HP\n"
 	"gets lower.");
 
+static const u8 sZombieToothDesc[] = _(
+	"A rotted tooth\n"
+	"suffused with\n"
+	"strange magic.");
+	
 static const u8 sRedScarfDesc[] = _(
     "A hold item that\n"
     "raises COOL in\n"

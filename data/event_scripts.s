@@ -1134,3 +1134,5 @@ Common_EventScript_LegendaryFlewAway::
 	.include "data/maps/LumenLake/scripts.inc"
 
 	.include "data/maps/OptionsRoom/scripts.inc"
+
+	.include "data/maps/GlitchCity/scripts.inc"

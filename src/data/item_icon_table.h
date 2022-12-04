@@ -59,7 +59,6 @@ const u32 *const gItemIconTable[ITEMS_COUNT + 1][2] =
     [ITEM_ABILITY_PILL] = {gItemIcon_Shard, gItemIconPalette_GreenShard},
     [ITEM_CANDIED_BERRY] = {gItemIcon_CandiedBerry, gItemIconPalette_CandiedBerry},
 	[ITEM_DREAM_PILL] = {gItemIcon_Shard, gItemIconPalette_RedShard},
-    [ITEM_037] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark},
     [ITEM_038] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark},
     [ITEM_039] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark},
     [ITEM_03A] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark},
@@ -275,6 +274,7 @@ const u32 *const gItemIconTable[ITEMS_COUNT + 1][2] =
 	[ITEM_CHILLING_ORB] = {gItemIcon_FlameOrb, gItemIconPalette_ChillingOrb},
 	[ITEM_WIDE_LENS] = {gItemIcon_WideLens, gItemIconPalette_WideLens},
 	[ITEM_RAGE_BAND] = {gItemIcon_FocusBand, gItemIconPalette_RageBand},
+	[ITEM_ZOMBIE_TOOTH] = {gItemIcon_ZombieTooth, gItemIconPalette_ZombieTooth},
     // Contest hold items
     [ITEM_RED_SCARF] = {gItemIcon_Scarf, gItemIconPalette_RedScarf},
     [ITEM_BLUE_SCARF] = {gItemIcon_Scarf, gItemIconPalette_BlueScarf},

@@ -1678,11 +1678,11 @@ static const u8 sEnergyBallDescription[] = _(
 	"the foe. May drop SP. DEF.");
 	
 static const u8 sBodyPressDescription[] = _(
-	"Crushes the foe under user's"
+	"Crushes the foe under user's\n"
 	"body. Attacks with DEFENSE.");
 	
 static const u8 sPsyshockDescription[] = _(
-	"Telekinetically tosses debris\n"
+	"Telekinetically throw debris\n"
 	"at the foe. Hits DEFENSE.");
 
 // MOVE_NONE is ignored in this table. Make sure to always subtract 1 before getting the right pointer.

@@ -4268,6 +4268,8 @@ extern const u32 gItemIconPalette_ChillingOrb[];
 extern const u32 gItemIcon_WideLens[];
 extern const u32 gItemIconPalette_WideLens[];
 extern const u32 gItemIconPalette_RageBand[];
+extern const u32 gItemIcon_ZombieTooth[];
+extern const u32 gItemIconPalette_ZombieTooth[];
 // extern const u32 gItemIcon_[];
 // extern const u32 gItemIconPalette_[];
 // Contest hold items

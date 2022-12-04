@@ -66,7 +66,7 @@
 #define ITEM_ABILITY_PILL 52
 #define ITEM_CANDIED_BERRY 53
 #define ITEM_DREAM_PILL 54
-#define ITEM_037 55
+#define ITEM_ZOMBIE_TOOTH 55
 #define ITEM_038 56
 #define ITEM_039 57
 #define ITEM_03A 58

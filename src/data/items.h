@@ -715,18 +715,6 @@ const struct Item gItems[] =
 		.fieldUseFunc = ItemUseOutOfBattle_Medicine,
 	},
 
-
-    [ITEM_037] =
-    {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
-        .price = 0,
-        .description = sDummyDesc,
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
-    },
-
     [ITEM_038] =
     {
         .name = _("????????"),
@@ -1273,6 +1261,17 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
     },
 
+	[ITEM_ZOMBIE_TOOTH] =
+    {
+        .name = _("ZOMBIE TOOTH"),
+        .itemId = ITEM_ZOMBIE_TOOTH,
+        .price = 2100,
+        .description = sZombieToothDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
+    },
+	
 // Valuable items
 
     [ITEM_TINY_MUSHROOM] =

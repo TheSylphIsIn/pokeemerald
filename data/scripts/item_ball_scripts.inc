@@ -1,6 +1,11 @@
 Common_StarPiece::
 	finditem ITEM_STAR_PIECE
 	end
+	
+Common_EventScript_FindItem::
+	callnative GetObjectEventTrainerRangeFromTemplate
+	finditem VAR_RESULT
+	end
 
 Route102_EventScript_ItemPotion::
 	finditem ITEM_POTION

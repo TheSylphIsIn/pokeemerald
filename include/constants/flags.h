@@ -1048,9 +1048,9 @@
 #define FLAG_ITEM_FIRST_TRAIL_POTION                                  0x3E8
 #define FLAG_STAR_PIECE_FIRST_TRAIL                               0x3E9
 #define FLAG_ITEM_FIRST_TRAIL_PP_UP                                   0x3EA
-#define FLAG_ITEM_ROUTE_105_IRON                                    0x3EB
-#define FLAG_ITEM_ROUTE_106_PROTEIN                                 0x3EC
-#define FLAG_ITEM_ROUTE_109_PP_UP                                   0x3ED
+#define FLAG_ITEM_FISHEYE_LAKE_GREAT_BALL                                 0x3EB
+#define FLAG_ITEM_FISHEYE_LAKE_SUPER_POTION                                 0x3EC
+#define FLAG_FISHEYE_LAKE_STAR_PIECE                                   0x3ED
 #define FLAG_ITEM_ROUTE_109_RARE_CANDY                              0x3EE
 #define FLAG_ITEM_ROUTE_110_DIRE_HIT                                0x3EF
 #define FLAG_ITEM_ROUTE_111_TM37                                    0x3F0

@@ -5,10 +5,6 @@
 FirstTrail_MapScripts::
 	.byte 0
 	
-FirstTrail_EventScript_SurfItem::
-	finditem ITEM_PP_UP
-	end
-
 // morgan idle script
 FirstTrail_EventScript_Morgan::
 	msgbox FirstTrail_Text_MorganIdle, MSGBOX_NPC
