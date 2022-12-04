@@ -416,11 +416,15 @@
 #define MOVE_SKYDIVE 412 // brave bird
 #define MOVE_INFERNO_RAY 413 // special fire triple axel
 #define MOVE_AQUA_TAIL 414
-// elemental fangs
-// energy ball (TM?)
-// body press (TM?)
+#define MOVE_BOIL_OVER 415 // hydroil signature
+#define MOVE_THUNDER_FANG 416
+#define MOVE_FIRE_FANG 417
+#define MOVE_ICE_FANG 418
+#define MOVE_ENERGY_BALL 419
+#define MOVE_BODY_PRESS 420
+#define MOVE_PSYSHOCK 421
 
-#define MOVES_COUNT 415
+#define MOVES_COUNT 422
 
 // Used for checks for moves affected by Disable, Mimic, etc.
 #define MOVE_UNAVAILABLE 0xFFFF

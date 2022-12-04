@@ -6137,4 +6137,34 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.category = MOVE_CATEGORY_SPECIAL,
 		.attribute = MOVE_ATTRIBUTE_ENERGY,
 	},
+	
+	[MOVE_BODY_PRESS] =
+	{
+		.effect = EFFECT_HIT_WITH_DEFENSE,
+		.power = 80,
+		.type = TYPE_FIGHTING,
+		.accuracy = 100,
+		.pp = 10,
+		.secondaryEffectChance = 0,
+		.target = MOVE_TARGET_SELECTED,
+		.priority = 0,
+		.flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+		.category = MOVE_CATEGORY_PHYSICAL,
+		.attribute = MOVE_ATTRIBUTE_CRUSH,
+	},
+	
+	[MOVE_PSYSHOCK] = 
+	{
+		.effect = EFFECT_HIT_OPPOSITE_DEFENSE,
+		.power = 80,
+		.type = TYPE_PSYCHIC,
+		.accuracy = 100,
+		.pp = 15,
+		.secondaryEffectChance = 0,
+		.target = MOVE_TARGET_SELECTED,
+		.priority = 0,
+		.flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+		.category = MOVE_CATEGORY_SPECIAL,
+		.attribute = MOVE_ATTRIBUTE_CRUSH,
+	}
 };

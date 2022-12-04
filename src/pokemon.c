@@ -64,6 +64,8 @@ static u16 GiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move);
 static bool8 ShouldSkipFriendshipChange(void);
 static u8 SendMonToPC(struct Pokemon *mon);
 static u8 MonKnowsAttributeMoves(struct Pokemon *mon, u8 attribute);
+static u16 ApplyAbility(struct BattlePokemon *mon, u16 stat, u8 statIndex, u8 moveType, bool8 defending);
+static u16 ApplyItems(struct BattlePokemon *mon, u16 stat, u8 effect, u8 effectParam, u8 type, u8 statIndex, bool8 defending);
 
 EWRAM_DATA static u8 sLearningMoveTableID = 0;
 EWRAM_DATA u8 gPlayerPartyCount = 0;
@@ -3391,9 +3393,11 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     s32 damage = 0;
     s32 damageHelper;
     u8 type;
-    u16 attack, defense;
-    u16 spAttack, spDefense;
-	u16 speed;
+	u16 offense = 0;
+	u16 defense = 0;
+	u8 offenseStatIndex;
+	u8 defenseStatIndex;
+	u8 category;
     u8 defenderHoldEffect;
     u8 defenderHoldEffectParam;
     u8 attackerHoldEffect;
@@ -3409,11 +3413,51 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     else
         type = typeOverride & DYNAMIC_TYPE_MASK;
 
-    attack = attacker->attack;
-    defense = defender->defense;
-    spAttack = attacker->spAttack;
-    spDefense = defender->spDefense;
-
+	// assign category from move
+    category = gBattleMoves[gCurrentMove].category;
+	if (category == MOVE_CATEGORY_DYNAMIC)
+	{
+		APPLY_STAT_MOD(damage, attacker, attacker->attack, STAT_ATK);
+		APPLY_STAT_MOD(damageHelper, attacker, attacker->spAttack, STAT_SPATK);
+		category = (damage > damageHelper) ? MOVE_CATEGORY_PHYSICAL : MOVE_CATEGORY_SPECIAL;
+		damage = 0;
+		damageHelper = 0;
+	}
+	
+	// assign offense and defense from category
+	switch (category)
+	{
+		case MOVE_CATEGORY_PHYSICAL:
+			offense = attacker->attack;
+			offenseStatIndex = STAT_ATK;
+			defense = defender->defense;
+			defenseStatIndex = STAT_DEF;
+			break;
+		case MOVE_CATEGORY_SPECIAL:
+			offense = attacker->spAttack;
+			offenseStatIndex = STAT_SPATK;
+			defense = defender->spDefense;
+			defenseStatIndex = STAT_SPDEF;
+			break;
+		case MOVE_CATEGORY_STATUS:
+			return 0;
+	}
+	
+	// special cases
+	switch (gBattleMoves[gCurrentMove].effect)
+	{
+		case EFFECT_HIT_WITH_DEFENSE:
+			offense = (category == MOVE_CATEGORY_PHYSICAL) ? attacker->defense : attacker->spDefense;
+			offenseStatIndex = (category == MOVE_CATEGORY_PHYSICAL) ? STAT_DEF : STAT_SPDEF;
+			break;
+		case EFFECT_HIT_OPPOSITE_DEFENSE:
+			defense = (category == MOVE_CATEGORY_PHYSICAL) ? defender->spDefense : defender->defense;
+			defenseStatIndex = (category == MOVE_CATEGORY_PHYSICAL) ? STAT_SPDEF : STAT_DEF;
+			break;
+		default:
+			break;
+	}
+	
     // Get attacker hold item info
     if (attacker->item == ITEM_ENIGMA_BERRY)
     {
@@ -3437,189 +3481,83 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         defenderHoldEffect = ItemId_GetHoldEffect(defender->item);
         defenderHoldEffectParam = ItemId_GetHoldEffectParam(defender->item);
     }
-
-		
-    if (attacker->ability == ABILITY_HUGE_POWER || attacker->ability == ABILITY_PURE_POWER)
-        attack *= 2;
-	if (attacker->ability == ABILITY_BRAIN_POWER)
-		spAttack *= 2;
-	if (defender->ability == ABILITY_FUR_COAT && AbilityIsActive())
-		defense *= 2;
-	if (defender->ability == ABILITY_SLIME_COAT && AbilityIsActive())
-		spDefense *= 2;
-
-    if (ShouldGetStatBadgeBoost(FLAG_BADGE01_GET, battlerIdAtk))
-        attack = (110 * attack) / 100;
-    if (ShouldGetStatBadgeBoost(FLAG_BADGE05_GET, battlerIdDef))
-        defense = (110 * defense) / 100;
-    if (ShouldGetStatBadgeBoost(FLAG_BADGE07_GET, battlerIdAtk))
-        spAttack = (110 * spAttack) / 100;
-    if (ShouldGetStatBadgeBoost(FLAG_BADGE07_GET, battlerIdDef))
-        spDefense = (110 * spDefense) / 100;
-
-    // Apply type-bonus hold item
-	if (attackerHoldEffect == HOLD_EFFECT_SOUL)
-		for (i = 0; i < ARRAY_COUNT(sSoulToType); i++)
-		{
-			if (attacker->item == sSoulToType[i][0]
-            && type == sSoulToType[i][1])
-			{
-				attack = (attack * (attackerHoldEffectParam + 100)) / 100;
-				spAttack = (spAttack * (attackerHoldEffectParam + 100)) / 100;
-				break;
-			}
-		}
 	
-    for (i = 0; i < ARRAY_COUNT(sHoldEffectToType); i++)
-    {
-        if (attackerHoldEffect == sHoldEffectToType[i][0]
-            && type == sHoldEffectToType[i][1])
-        {
-            attack = (attack * (attackerHoldEffectParam + 100)) / 100;
-            spAttack = (spAttack * (attackerHoldEffectParam + 100)) / 100;
-            break;
-        }
-    }
+	// apply badge boosts. kinda dumb but whatever.
+    if (ShouldGetStatBadgeBoost(FLAG_BADGE01_GET, battlerIdAtk) && offenseStatIndex == STAT_ATK)
+        offense = (110 * offense) / 100;
+    if (ShouldGetStatBadgeBoost(FLAG_BADGE05_GET, battlerIdAtk) && offenseStatIndex == STAT_DEF)
+        offense = (110 * offense) / 100;
+    if (ShouldGetStatBadgeBoost(FLAG_BADGE07_GET, battlerIdAtk) && offenseStatIndex == STAT_SPATK)
+        offense = (110 * offense) / 100;
+    if (ShouldGetStatBadgeBoost(FLAG_BADGE07_GET, battlerIdAtk) && offenseStatIndex == STAT_SPDEF)
+        offense = (110 * offense) / 100;
+	
+	if (ShouldGetStatBadgeBoost(FLAG_BADGE01_GET, battlerIdDef) && defenseStatIndex == STAT_ATK)
+        defense = (110 * defense) / 100;
+    if (ShouldGetStatBadgeBoost(FLAG_BADGE05_GET, battlerIdDef) && defenseStatIndex == STAT_DEF)
+        defense = (110 * defense) / 100;
+    if (ShouldGetStatBadgeBoost(FLAG_BADGE07_GET, battlerIdDef) && defenseStatIndex == STAT_SPATK)
+        defense = (110 * defense) / 100;
+    if (ShouldGetStatBadgeBoost(FLAG_BADGE07_GET, battlerIdDef) && defenseStatIndex == STAT_SPDEF)
+        defense = (110 * defense) / 100;
 
-    // Apply boosts from hold items
-    if (attackerHoldEffect == HOLD_EFFECT_CHOICE_BAND)
-        attack = (150 * attack) / 100;
-	if (attackerHoldEffect == HOLD_EFFECT_CHOICE_SPECS)
-        spAttack = (150 * spAttack) / 100;
-    if (attackerHoldEffect == HOLD_EFFECT_SOUL_DEW && !(gBattleTypeFlags & (BATTLE_TYPE_FRONTIER)) && (attacker->species == SPECIES_LATIAS || attacker->species == SPECIES_LATIOS))
-        spAttack = (150 * spAttack) / 100;
-    if (defenderHoldEffect == HOLD_EFFECT_SOUL_DEW && !(gBattleTypeFlags & (BATTLE_TYPE_FRONTIER)) && (defender->species == SPECIES_LATIAS || defender->species == SPECIES_LATIOS))
-        spDefense = (150 * spDefense) / 100;
-    if (attackerHoldEffect == HOLD_EFFECT_DEEP_SEA_TOOTH && attacker->species == SPECIES_CLAMPERL)
-        spAttack *= 2;
-    if (defenderHoldEffect == HOLD_EFFECT_DEEP_SEA_SCALE && defender->species == SPECIES_CLAMPERL)
-        spDefense *= 2;
-    if (attackerHoldEffect == HOLD_EFFECT_LIGHT_BALL && attacker->species == SPECIES_PIKACHU)
-        spAttack *= 2;
-    if (defenderHoldEffect == HOLD_EFFECT_METAL_POWDER && defender->species == SPECIES_DITTO)
-        defense *= 2;
-    if (attackerHoldEffect == HOLD_EFFECT_THICK_CLUB && (attacker->species == SPECIES_CUBONE || attacker->species == SPECIES_MAROWAK))
-        attack *= 2;
-	if (defenderHoldEffect == HOLD_EFFECT_EVIOLITE && gEvolutionTable[defender->species][0].method != 0
-		&& gEvolutionTable[defender->species][0].targetSpecies != SPECIES_ELEMPTY)
-	{
-		defense = (150 * defense) / 100;
-		spDefense = (150 * spDefense) / 100;
-	}
-	if (attackerHoldEffect == HOLD_EFFECT_LIFE_ORB)
-		gBattleMovePower = (gBattleMovePower * 130) / 100;
-	if (attackerHoldEffect == HOLD_EFFECT_RAGE_BAND)
-	{
-		if (attacker->hp <= (attacker->maxHP / 20))
-			gBattleMovePower = (150 * gBattleMovePower) / 100;
-		else if (attacker->hp <= (attacker->maxHP / 5))
-			gBattleMovePower = (135 * gBattleMovePower) / 100;
-		else if (attacker->hp <= (attacker->maxHP / 2))
-			gBattleMovePower = (120 * gBattleMovePower) / 100;
-	}
-
+	offense = ApplyAbility(attacker, offense, offenseStatIndex, type, FALSE);
+	if (AbilityIsActive())
+		defense = ApplyAbility(defender, defense, defenseStatIndex, type, TRUE);
+	
+	offense = ApplyItems(attacker, offense, attackerHoldEffect, attackerHoldEffectParam, type, offenseStatIndex, FALSE);
+	defense = ApplyItems(defender, defense, defenderHoldEffect, defenderHoldEffectParam, type, defenseStatIndex, TRUE);
+	
+	// apply items, pass:
+	// mon, item, item param, offense/defense, category, stat, defending
+	
     // Apply abilities / field sports
-    if (defender->ability == ABILITY_THICK_FAT && (type == TYPE_FIRE || type == TYPE_ICE) && AbilityIsActive())
-        gBattleMovePower /= 2;
-    if (attacker->ability == ABILITY_HUSTLE)
-        attack = (150 * attack) / 100;
-    if (attacker->ability == ABILITY_PLUS && ABILITY_ON_FIELD2(ABILITY_MINUS))
-        spAttack = (150 * spAttack) / 100;
-    if (attacker->ability == ABILITY_MINUS && ABILITY_ON_FIELD2(ABILITY_PLUS))
-        spAttack = (150 * spAttack) / 100;
-    if (attacker->ability == ABILITY_GUTS && attacker->status1)
-        attack = (150 * attack) / 100;
-	if (attacker->ability == ABILITY_RESOLVE && attacker->status1)
-		spAttack = (150 * spAttack) / 100;
-    if (defender->ability == ABILITY_MARVEL_SCALE && defender->status1 && AbilityIsActive())
-        defense = (150 * defense) / 100;
     if (type == TYPE_ELECTRIC && AbilityBattleEffects(ABILITYEFFECT_FIELD_SPORT, 0, 0, ABILITYEFFECT_MUD_SPORT, 0))
         gBattleMovePower /= 2;
     if (type == TYPE_FIRE && AbilityBattleEffects(ABILITYEFFECT_FIELD_SPORT, 0, 0, ABILITYEFFECT_WATER_SPORT, 0))
         gBattleMovePower /= 2;
-    if (type == TYPE_GRASS && attacker->ability == ABILITY_OVERGROW && attacker->hp <= (attacker->maxHP / 3))
-        gBattleMovePower = (150 * gBattleMovePower) / 100;
-    if (type == TYPE_FIRE && attacker->ability == ABILITY_BLAZE && attacker->hp <= (attacker->maxHP / 3))
-        gBattleMovePower = (150 * gBattleMovePower) / 100;
-    if (type == TYPE_WATER && attacker->ability == ABILITY_TORRENT && attacker->hp <= (attacker->maxHP / 3))
-        gBattleMovePower = (150 * gBattleMovePower) / 100;
-    if (type == TYPE_BUG && attacker->ability == ABILITY_SWARM && attacker->hp <= (attacker->maxHP / 3))
-        gBattleMovePower = (150 * gBattleMovePower) / 100;
-	if (attacker->ability == ABILITY_SOLAR_POWER && (WEATHER_HAS_EFFECT2 && (gBattleWeather & B_WEATHER_SUN)))
-		spAttack = (150 * spAttack) / 100;
-	if (attacker->ability == ABILITY_SAND_FORCE && (WEATHER_HAS_EFFECT2 && (gBattleWeather & B_WEATHER_SANDSTORM)))
-		attack = (150 * attack) / 100;
-	if (attacker->ability == ABILITY_WHITEOUT && (WEATHER_HAS_EFFECT2 && (gBattleWeather & B_WEATHER_HAIL)))
-		attack = (150 * attack) / 100;
-	// Move-dependent abilities
-	if ((attacker->ability >= ABILITIES_ATE_START && attacker->ability < ABILITIES_ATE_END)
-		&& type == TYPE_NORMAL)
-		gBattleMovePower = (120 * gBattleMovePower) / 100;
-	if (attacker->ability == ABILITY_SHEER_FORCE && gBattleMoves[gCurrentMove].secondaryEffectChance != 0)
-		gBattleMovePower = (130 * gBattleMovePower) / 100;
-	// (attribute-dependent)
-	if (attacker->ability == ABILITY_IRON_FIST && gBattleMoves[gCurrentMove].attribute == MOVE_ATTRIBUTE_PUNCH)
-		gBattleMovePower = (130 * gBattleMovePower) / 100;
-	if (attacker->ability == ABILITY_CACOPHONY && gBattleMoves[gCurrentMove].attribute == MOVE_ATTRIBUTE_SOUND)
-		gBattleMovePower = (130 * gBattleMovePower) / 100;
-	if (defender->ability == ABILITY_CACOPHONY && AbilityIsActive() && gBattleMoves[gCurrentMove].attribute == MOVE_ATTRIBUTE_SOUND)
-		gBattleMovePower /= 2;
-	if (attacker->ability == ABILITY_HYPER_CUTTER && gBattleMoves[gCurrentMove].attribute == MOVE_ATTRIBUTE_SLASH)
-		gBattleMovePower = (120 * gBattleMovePower) / 100;
-	if (attacker->ability == ABILITY_STRONG_JAW && gBattleMoves[gCurrentMove].attribute == MOVE_ATTRIBUTE_BITE)
-		gBattleMovePower = (150 * gBattleMovePower) / 100;
-	if (attacker->ability == ABILITY_STRIKER && gBattleMoves[gCurrentMove].attribute == MOVE_ATTRIBUTE_KICK)
-		gBattleMovePower = (120 * gBattleMovePower) / 100;
-	if (attacker->ability == ABILITY_RECKLESS && gBattleMoves[gCurrentMove].attribute == MOVE_ATTRIBUTE_RISKY)
-		gBattleMovePower = (120 * gBattleMovePower) / 100;
-	if (attacker->ability == ABILITY_TOUGH_CLAWS && (gBattleMoves[gCurrentMove].flags & FLAG_MAKES_CONTACT))
-		gBattleMovePower = (130 * gBattleMovePower) / 100;
-	if (attacker->ability == ABILITY_TECHNICIAN && gBattleMoves[gCurrentMove].power <= 60)
-		gBattleMovePower = (gBattleMovePower * 150) / 100;
-	if (defender->ability == ABILITY_WATER_COMPACTION && AbilityIsActive() && type == TYPE_WATER)
-		gBattleMovePower /= 2;
-	if (attacker->ability == ABILITY_ANALYTIC && gBattlerByTurnOrder[gBattlerAttacker] == gBattlersCount - 1)
-		gBattleMovePower = (gBattleMovePower * 200) / 100; // seems to work in singles but not doubles.
-	// also don't forget to revert dubsnake's stupid changes
 	
-    // Self-destruct / Explosion cut defense in half
+    // Explosion moves deal double damage.
     if (gBattleMoves[gCurrentMove].effect == EFFECT_EXPLOSION)
         defense /= 2;
 
-    if (IS_MOVE_PHYSICAL(gCurrentMove))
+	// main damage calculation
+	// apply attacker's stat stages
+	if (defender->ability != ABILITY_UNAWARE || !(AbilityIsActive()))
+	{
+		if (gCritMultiplier >= 2)
+		{
+			// Critical hit, if attacker has lost attack stat stages then ignore stat drop
+			if (attacker->statStages[offenseStatIndex] > DEFAULT_STAT_STAGE)
+				APPLY_STAT_MOD(damage, attacker, offense, offenseStatIndex)
+			else
+				damage = offense;
+		}
+		else
+			APPLY_STAT_MOD(damage, attacker, offense, offenseStatIndex)
+	}
+    damage = damage * gBattleMovePower;
+    damage *= (2 * attacker->level / 5 + 2);
+	
+	// apply defender's stat atages
+	if (attacker->ability != ABILITY_UNAWARE)
+	{
+		if (gCritMultiplier >= 2)
+		{
+			// Critical hit, if defender has gained defense stat stages then ignore stat increase
+			if (defender->statStages[defenseStatIndex] < DEFAULT_STAT_STAGE)
+				APPLY_STAT_MOD(damageHelper, defender, defense, defenseStatIndex)
+			else
+				damageHelper = defense;
+		}
+		else
+			APPLY_STAT_MOD(damageHelper, defender, defense, defenseStatIndex)
+	}
+    damage = damage / damageHelper;
+    damage /= 50;
+	
+	if (category == MOVE_CATEGORY_PHYSICAL)
     {
-		if (defender->ability != ABILITY_UNAWARE || !(AbilityIsActive()))
-		{
-			if (gCritMultiplier >= 2)
-			{
-				// Critical hit, if attacker has lost attack stat stages then ignore stat drop
-				if (attacker->statStages[STAT_ATK] > DEFAULT_STAT_STAGE)
-					APPLY_STAT_MOD(damage, attacker, attack, STAT_ATK)
-				else
-					damage = attack;
-			}
-			else
-				APPLY_STAT_MOD(damage, attacker, attack, STAT_ATK)
-		}
-        damage = damage * gBattleMovePower;
-        damage *= (2 * attacker->level / 5 + 2);
-
-		if (attacker->ability != ABILITY_UNAWARE)
-		{
-			if (gCritMultiplier >= 2)
-			{
-				// Critical hit, if defender has gained defense stat stages then ignore stat increase
-				if (defender->statStages[STAT_DEF] < DEFAULT_STAT_STAGE)
-					APPLY_STAT_MOD(damageHelper, defender, defense, STAT_DEF)
-				else
-					damageHelper = defense;
-			}
-			else
-				APPLY_STAT_MOD(damageHelper, defender, defense, STAT_DEF)
-		}
-        damage = damage / damageHelper;
-        damage /= 50;
-
         // Burn cuts attack in half
         if ((attacker->status1 & STATUS1_BURN) && attacker->ability != ABILITY_GUTS)
             damage /= 2;
@@ -3632,55 +3570,10 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
             else
                 damage /= 2;
         }
+	}
 
-        // Moves hitting both targets do half damage in double battles
-        if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && gBattleMoves[move].target == MOVE_TARGET_BOTH && CountAliveMonsInBattle(BATTLE_ALIVE_DEF_SIDE) == 2)
-            damage /= 2;
-
-        // Moves always do at least 1 damage.
-        if (damage == 0)
-            damage = 1;
-    }
-
-    // if (type == TYPE_MYSTERY)
-        // damage = 0; // is ??? type. does 0 damage.
-
-    if (IS_MOVE_SPECIAL(gCurrentMove))
+    if (category == MOVE_CATEGORY_SPECIAL)
     {
-		if (defender->ability != ABILITY_UNAWARE || !(AbilityIsActive()))
-		{
-        if (gCritMultiplier >= 2)
-        {
-            // Critical hit, if attacker has lost sp. attack stat stages then ignore stat drop
-            if (attacker->statStages[STAT_SPATK] > DEFAULT_STAT_STAGE)
-                APPLY_STAT_MOD(damage, attacker, spAttack, STAT_SPATK)
-            else
-                damage = spAttack;
-        }
-        else
-            APPLY_STAT_MOD(damage, attacker, spAttack, STAT_SPATK)
-		}
-		
-        damage = damage * gBattleMovePower;
-        damage *= (2 * attacker->level / 5 + 2);
-
-		if (attacker->ability != ABILITY_UNAWARE)
-		{
-        if (gCritMultiplier >= 2)
-        {
-            // Critical hit, if defender has gained sp. defense stat stages then ignore stat increase
-            if (defender->statStages[STAT_SPDEF] < DEFAULT_STAT_STAGE)
-                APPLY_STAT_MOD(damageHelper, defender, spDefense, STAT_SPDEF)
-            else
-                damageHelper = spDefense;
-        }
-        else
-            APPLY_STAT_MOD(damageHelper, defender, spDefense, STAT_SPDEF)
-		}
-		
-        damage = (damage / damageHelper);
-        damage /= 50;
-		
 		if ((attacker->status1 & STATUS1_FREEZE) && attacker->ability != ABILITY_RESOLVE)
             damage /= 2;
 
@@ -3692,55 +3585,61 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
             else
                 damage /= 2;
         }
+	}
+	
+	// Moves hitting both targets do half damage in double battles
+    if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && gBattleMoves[move].target == MOVE_TARGET_BOTH && CountAliveMonsInBattle(BATTLE_ALIVE_DEF_SIDE) == 2)
+        damage /= 2;
 
-        // Moves hitting both targets do half damage in double battles
-        if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && gBattleMoves[move].target == MOVE_TARGET_BOTH && CountAliveMonsInBattle(BATTLE_ALIVE_DEF_SIDE) == 2)
-            damage /= 2;
-    }
+    // Moves always do at least 1 damage.
+    if (damage == 0)
+        damage = 1;
+
 	
 	// Are effects of weather negated with cloud nine or air lock
-        if (WEATHER_HAS_EFFECT2)
+    if (WEATHER_HAS_EFFECT2)
+    {
+        // Rain weakens Fire, boosts Water
+        if (gBattleWeather & B_WEATHER_RAIN_TEMPORARY)
         {
-            // Rain weakens Fire, boosts Water
-            if (gBattleWeather & B_WEATHER_RAIN_TEMPORARY)
+            switch (type)
             {
-                switch (type)
-                {
-                case TYPE_FIRE:
-                    damage /= 2;
-                    break;
-                case TYPE_WATER:
-                    damage = (15 * damage) / 10;
-                    break;
-                }
-            }
-
-            // Any weather except sun weakens solar beam
-            if ((gBattleWeather & (B_WEATHER_RAIN | B_WEATHER_SANDSTORM | B_WEATHER_HAIL)) && gCurrentMove == MOVE_SOLAR_BEAM)
+            case TYPE_FIRE:
                 damage /= 2;
-
-            // Sun boosts Fire, weakens Water
-            if (gBattleWeather & B_WEATHER_SUN)
-            {
-                switch (type)
-                {
-                case TYPE_FIRE:
-                    damage = (15 * damage) / 10;
-                    break;
-                case TYPE_WATER:
-                    damage /= 2;
-                    break;
-                }
+                break;
+            case TYPE_WATER:
+                damage = (15 * damage) / 10;
+                break;
             }
         }
 
-        // Flash fire triggered
-        if ((gBattleResources->flags->flags[battlerIdAtk] & RESOURCE_FLAG_FLASH_FIRE) && type == TYPE_FIRE)
-            damage = (15 * damage) / 10;
+        // Any weather except sun weakens solar beam
+        if ((gBattleWeather & (B_WEATHER_RAIN | B_WEATHER_SANDSTORM | B_WEATHER_HAIL)) && gCurrentMove == MOVE_SOLAR_BEAM)
+            damage /= 2;
+
+        // Sun boosts Fire, weakens Water
+        if (gBattleWeather & B_WEATHER_SUN)
+        {
+            switch (type)
+            {
+            case TYPE_FIRE:
+                damage = (15 * damage) / 10;
+                break;
+            case TYPE_WATER:
+                damage /= 2;
+                break;
+            }
+        }
+    }
+
+    // Flash fire triggered
+    if ((gBattleResources->flags->flags[battlerIdAtk] & RESOURCE_FLAG_FLASH_FIRE) && type == TYPE_FIRE)
+        damage = (15 * damage) / 10;
 
 	if (defender->ability == ABILITY_DISGUISE && defender->species == SPECIES_SPOOKUM)
 		damage /= 4;
-    return damage + 2;
+    
+	return damage + 2;
 }
 
 u8 CountAliveMonsInBattle(u8 caseId)
@@ -7608,3 +7507,320 @@ u16 MonTryLearningNewMoveEvolution(struct Pokemon *mon, bool8 firstMove)
     }
     return 0;
 }
+
+static u16 ApplyAbility(struct BattlePokemon *mon, u16 stat, u8 statIndex, u8 type, bool8 defending)
+{
+	u32 i = 0;
+	
+	switch (statIndex)
+	{
+		case STAT_ATK:
+			switch (mon->ability)
+			{
+				case ABILITY_HUGE_POWER:
+				case ABILITY_PURE_POWER:
+					stat *= 2;
+					break;
+				case ABILITY_HUSTLE:
+					stat = (stat * 150) / 100;
+					break;
+				case ABILITY_GUTS:
+					if (mon->status1)
+						stat = (stat * 150) / 100;
+					break;
+				case ABILITY_SAND_FORCE:
+					if (WEATHER_HAS_EFFECT2 && (gBattleWeather & B_WEATHER_SANDSTORM))
+						stat = (stat * 150) / 100;
+					break;
+				case ABILITY_WHITEOUT:
+					if (WEATHER_HAS_EFFECT2 && (gBattleWeather & B_WEATHER_HAIL))
+						stat = (stat * 150) / 100;
+					break;
+			}
+			break;
+		case STAT_DEF:
+			switch (mon->ability)
+			{
+				case ABILITY_FUR_COAT:
+					stat *= 2;
+					break;
+				case ABILITY_MARVEL_SCALE:
+					if (mon->status1)
+						stat = (stat * 150) / 100;
+					break;
+			}
+			break;
+		case STAT_SPEED:
+			switch (mon->ability)
+			{
+				
+			}
+			break;
+		case STAT_SPATK:
+			switch (mon->ability)
+			{
+				case ABILITY_BRAIN_POWER:
+					stat *= 2;
+					break;
+				case ABILITY_PLUS:
+					if (ABILITY_ON_FIELD2(ABILITY_MINUS))
+						stat = (stat * 150) / 100;
+					break;
+				case ABILITY_MINUS:
+					if (ABILITY_ON_FIELD2(ABILITY_PLUS))
+						stat = (stat * 150) / 100;
+					break;
+				case ABILITY_RESOLVE:
+					if (mon->status1)
+						stat = (stat * 150) / 100;
+					break;
+				case ABILITY_SOLAR_POWER:
+					if (WEATHER_HAS_EFFECT2 && (gBattleWeather & B_WEATHER_SUN))
+						stat = (stat * 150) / 100;
+					break;
+				default:
+					break;
+			}
+			break;
+		case STAT_SPDEF:
+			switch (mon->ability)
+			{
+				case ABILITY_SLIME_COAT:
+					stat *= 2;
+					break;
+				default:
+					break;
+			}
+			break;
+		default:
+			break;
+	}
+	
+	// power-affecting abilities
+	if (defending)
+	{
+		switch (mon->ability)
+		{
+			case ABILITY_THICK_FAT:
+				if ((type == TYPE_FIRE || type == TYPE_ICE))
+					gBattleMovePower /= 2;
+				break;
+			case ABILITY_CACOPHONY:
+				if (gBattleMoves[gCurrentMove].attribute == MOVE_ATTRIBUTE_SOUND)
+					gBattleMovePower /= 2;
+				break;
+			case ABILITY_WATER_COMPACTION:
+				if (type == TYPE_WATER)
+					gBattleMovePower /= 2;
+			default:
+				break;
+		}
+	}
+	else
+	{
+		switch (mon->ability)
+		{
+			case ABILITY_OVERGROW:
+				if (type == TYPE_GRASS && mon->hp <= (mon->maxHP / 3))
+					gBattleMovePower = (gBattleMovePower * 150) / 100;
+				break;
+			case ABILITY_BLAZE:
+				if (type == TYPE_FIRE && mon->hp <= (mon->maxHP / 3))
+					gBattleMovePower = (gBattleMovePower * 150) / 100;
+				break;
+			case ABILITY_TORRENT:
+				if (type == TYPE_WATER && mon->hp <= (mon->maxHP / 3))
+					gBattleMovePower = (gBattleMovePower * 150) / 100;
+				break;
+			case ABILITY_SWARM:
+				if (type == TYPE_BUG && mon->hp <= (mon->maxHP / 3))
+					gBattleMovePower = (gBattleMovePower * 150) / 100;
+				break;
+			case ABILITY_SHEER_FORCE:
+				if (gBattleMoves[gCurrentMove].secondaryEffectChance != 0)
+					gBattleMovePower = (130 * gBattleMovePower) / 100;
+				break;
+			case ABILITY_IRON_FIST:
+				if (gBattleMoves[gCurrentMove].attribute == MOVE_ATTRIBUTE_PUNCH)
+					gBattleMovePower = (130 * gBattleMovePower) / 100;
+				break;
+			case ABILITY_CACOPHONY:
+				if (gBattleMoves[gCurrentMove].attribute == MOVE_ATTRIBUTE_SOUND)
+					gBattleMovePower = (130 * gBattleMovePower) / 100;
+				break;
+			case ABILITY_HYPER_CUTTER:
+				if (gBattleMoves[gCurrentMove].attribute == MOVE_ATTRIBUTE_SLASH)
+					gBattleMovePower = (130 * gBattleMovePower) / 100;
+				break;
+			case ABILITY_STRONG_JAW:
+				if (gBattleMoves[gCurrentMove].attribute == MOVE_ATTRIBUTE_BITE)
+					gBattleMovePower = (150 * gBattleMovePower) / 100;
+				break;
+			case ABILITY_STRIKER:
+				if (gBattleMoves[gCurrentMove].attribute == MOVE_ATTRIBUTE_KICK)
+					gBattleMovePower = (120 * gBattleMovePower) / 100;
+				break;
+			case ABILITY_RECKLESS:
+				if (gBattleMoves[gCurrentMove].attribute == MOVE_ATTRIBUTE_RISKY)
+					gBattleMovePower = (120 * gBattleMovePower) / 100;
+				break;
+			case ABILITY_TOUGH_CLAWS:
+				if (gBattleMoves[gCurrentMove].flags & FLAG_MAKES_CONTACT)
+					gBattleMovePower = (130 * gBattleMovePower) / 100;
+				break;
+			case ABILITY_TECHNICIAN:
+				if (gBattleMoves[gCurrentMove].power <= 60)
+					gBattleMovePower = (150 * gBattleMovePower) / 100;
+				break;
+			case ABILITY_ANALYTIC:
+				if (gBattlerByTurnOrder[gBattlerAttacker] == gBattlersCount - 1)
+					gBattleMovePower = (130 * gBattleMovePower) / 100;
+				break;
+			default:
+				break;
+		}
+	}
+	
+	// doesn't fit in the switches because it concerns multiple abilities
+	if ((mon->ability >= ABILITIES_ATE_START && mon->ability < ABILITIES_ATE_END)
+		&& type == TYPE_NORMAL)
+		gBattleMovePower = (120 * gBattleMovePower) / 100;
+		
+	return stat;
+}
+
+static u16 ApplyItems(struct BattlePokemon *mon, u16 stat, u8 effect, u8 effectParam, u8 type, u8 statIndex, bool8 defending)
+{
+	u32 i;
+	// stat-affecting abilities
+	switch (statIndex)
+	{
+		case STAT_ATK:
+			switch (effect)
+			{
+				case HOLD_EFFECT_CHOICE_BAND:
+					stat = (stat * 150) / 100;
+					break;
+				case HOLD_EFFECT_LIGHT_BALL:
+					if (mon->species == SPECIES_PIKACHU)
+						stat *= 2;
+					break;
+				case HOLD_EFFECT_THICK_CLUB:
+					if ((mon->species == SPECIES_CUBONE || mon->species == SPECIES_MAROWAK))
+						stat *= 2;
+					break;
+			}
+			break;
+		case STAT_DEF:
+			switch (effect)
+			{
+				case HOLD_EFFECT_METAL_POWDER:
+					if (mon->species == SPECIES_DITTO)
+						stat *= 2;
+					break;
+			}
+			break;
+		case STAT_SPEED:
+			switch (effect)
+			{
+				
+			}
+			break;
+		case STAT_SPATK:
+			switch (effect)
+			{
+				case HOLD_EFFECT_CHOICE_SPECS:
+					stat = (stat * 150) / 100;
+					break;
+				case HOLD_EFFECT_SOUL_DEW:
+					if ((mon->species == SPECIES_LATIAS || mon->species == SPECIES_LATIOS))
+						stat = (stat * 150) / 100;
+					break;
+				case HOLD_EFFECT_DEEP_SEA_TOOTH:
+					if (mon->species == SPECIES_CLAMPERL)
+						stat *= 2;
+					break;
+				case HOLD_EFFECT_LIGHT_BALL:
+					if (mon->species == SPECIES_PIKACHU)
+						stat *= 2;
+					break;
+			}
+			break;
+		case STAT_SPDEF:
+			switch (effect)
+			{
+				case HOLD_EFFECT_SOUL_DEW:
+					if ((mon->species == SPECIES_LATIAS || mon->species == SPECIES_LATIOS))
+						stat = (stat * 150) / 100;
+					break;
+				case HOLD_EFFECT_DEEP_SEA_SCALE:
+					if (mon->species == SPECIES_CLAMPERL)
+						stat *= 2;
+					break;
+			}
+			break;
+		default:
+			break;
+	}
+	
+	// items that always apply
+	if (defending)
+	{
+		switch (effect)
+		{
+			case HOLD_EFFECT_EVIOLITE:
+				if (gEvolutionTable[mon->species][0].method != 0
+					&& gEvolutionTable[mon->species][0].targetSpecies != SPECIES_ELEMPTY)
+					stat = (stat * 150) / 100;
+				break;
+			default:
+				break;
+		}
+	}
+	else
+	{
+		switch (effect)
+		{
+			case HOLD_EFFECT_LIFE_ORB:
+				gBattleMovePower = (gBattleMovePower * 130) / 100;
+				break;
+			case HOLD_EFFECT_RAGE_BAND:
+				if (mon->hp <= (mon->maxHP / 20))
+					gBattleMovePower = (150 * gBattleMovePower) / 100;
+				else if (mon->hp <= (mon->maxHP / 5))
+					gBattleMovePower = (135 * gBattleMovePower) / 100;
+				else if (mon->hp <= (mon->maxHP / 2))
+					gBattleMovePower = (120 * gBattleMovePower) / 100;
+				break;
+			case HOLD_EFFECT_SOUL:
+				for (i = 0; i < ARRAY_COUNT(sSoulToType); i++)
+				{
+					if (mon->item == sSoulToType[i][0]
+						&& type == sSoulToType[i][1])
+					{
+						gBattleMovePower = (gBattleMovePower * (effectParam + 100)) / 100;
+						break;
+					}
+				}
+				break;
+			default:
+				break;
+		}
+	
+		for (i = 0; i < ARRAY_COUNT(sHoldEffectToType); i++)
+		{
+			if (effect == sHoldEffectToType[i][0]
+				&& type == sHoldEffectToType[i][1])
+			{
+				gBattleMovePower = (gBattleMovePower * (effectParam + 100)) / 100;
+				break;
+			}
+		}
+	}
+	
+
+		
+	return stat;
+}
+
+

@@ -1656,6 +1656,34 @@ static const u8 sInfernoRayDescription[] = _(
 static const u8 sAquaTailDescription[] = _(
 	"Crushes the foe with a\n"
 	"wavelike tail. May drop DEF.");
+	
+static const u8 sBoilOverDescription[] = _(
+	"Throws a tantrum. Type\n"
+	"changes based on weather.");
+	
+static const u8 sThunderFangDescription[] = _(
+	"Bites with electrified\n"
+	"fangs. May paralyze/flinch.");
+
+static const u8 sFireFangDescription[] = _(
+	"Bites with flaming fangs.\n"
+	"May burn or flinch.");
+	
+static const u8 sIceFangDescription[] = _(
+	"Bites with cold fangs.\n"
+	"May burn or freeze.");
+	
+static const u8 sEnergyBallDescription[] = _(
+	"Launches natural energy at\n"
+	"the foe. May drop SP. DEF.");
+	
+static const u8 sBodyPressDescription[] = _(
+	"Crushes the foe under user's"
+	"body. Attacks with DEFENSE.");
+	
+static const u8 sPsyshockDescription[] = _(
+	"Telekinetically tosses debris\n"
+	"at the foe. Hits DEFENSE.");
 
 // MOVE_NONE is ignored in this table. Make sure to always subtract 1 before getting the right pointer.
 const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
@@ -2074,4 +2102,11 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
 	[MOVE_SKYDIVE - 1] = sSkydiveDescription,
 	[MOVE_INFERNO_RAY - 1] = sInfernoRayDescription,
 	[MOVE_AQUA_TAIL - 1] = sAquaTailDescription,
+	[MOVE_BOIL_OVER - 1] = sBoilOverDescription,
+	[MOVE_THUNDER_FANG - 1] = sThunderFangDescription,
+	[MOVE_FIRE_FANG - 1] = sFireFangDescription,
+	[MOVE_ICE_FANG - 1] = sIceFangDescription,
+	[MOVE_ENERGY_BALL - 1] = sEnergyBallDescription,
+	[MOVE_BODY_PRESS - 1] = sBodyPressDescription,
+	[MOVE_PSYSHOCK - 1] = sPsyshockDescription,
 };

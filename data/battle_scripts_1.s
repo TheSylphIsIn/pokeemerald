@@ -247,6 +247,8 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectCoil					 @ EFFECT_COIL
 	.4byte BattleScript_EffectHitSwitch				 @ EFFECT_HIT_SWITCH
 	.4byte BattleScript_EffectShellSmash			 @ EFFECT_SHELL_SMASH
+	.4byte BattleScript_EffectHitWithDefense		 @ EFFECT_HIT_WITH_DEFENSE
+	.4byte BattleScript_EffectHitOppositeDefense	 @ EFFECT_HIT_OPPOSITE_DEFENSE
 
 BattleScript_EffectHit::
 	jumpifnotmove MOVE_SURF, BattleScript_HitFromAtkCanceler
@@ -3129,6 +3131,12 @@ BattleScript_ShellSmashTryDropSpDef::
 	waitmessage B_WAIT_TIME_LONG
 BattleScript_ShellSmashEnd::
 	goto BattleScript_MoveEnd
+	
+BattleScript_EffectHitWithDefense::
+	goto BattleScript_EffectHit
+	
+BattleScript_EffectHitOppositeDefense::
+	goto BattleScript_EffectHit
 
 BattleScript_FaintAttacker::
 	playfaintcry BS_ATTACKER

@@ -430,6 +430,14 @@ gBattleAnims_Moves::
 	.4byte Move_SHELL_SMASH
 	.4byte Move_SKYDIVE
 	.4byte Move_INFERNO_RAY
+	.4byte Move_AQUA_TAIL
+	.4byte Move_BOIL_OVER
+	.4byte Move_THUNDER_FANG
+	.4byte Move_FIRE_FANG
+	.4byte Move_ICE_FANG
+	.4byte Move_ENERGY_BALL
+	.4byte Move_BODY_PRESS
+	.4byte Move_PSYSHOCK
 	.4byte Move_COUNT @ cannot be reached, because last move is Psycho Boost
 
 	.align 2
@@ -9639,6 +9647,27 @@ Move_CONTACT:
 	end
 	
 Move_ZEN_HEADBUTT:
+	call SetPsychicBackground
+	createvisualtask AnimTask_MeditateStretchAttacker, 2
+	playsewithpan SE_M_HEADBUTT, SOUND_PAN_ATTACKER
+	delay 16
+	playsewithpan SE_M_TAKE_DOWN, SOUND_PAN_ATTACKER
+	waitforvisualfinish
+	loadspritegfx ANIM_TAG_IMPACT
+	createsprite gBowMonSpriteTemplate, ANIM_ATTACKER, 2, 0
+	playsewithpan SE_M_HEADBUTT, SOUND_PAN_ATTACKER
+	waitforvisualfinish
+	delay 2
+	createsprite gBowMonSpriteTemplate, ANIM_ATTACKER, 2, 1
+	waitforvisualfinish
+	createvisualtask AnimTask_ShakeMonInPlace, 2, ANIM_ATTACKER, 2, 0, 4, 1
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 5, 0, 6, 1
+	createsprite gBowMonSpriteTemplate, ANIM_ATTACKER, 2, 2
+	createsprite gFlashingHitSplatSpriteTemplate, ANIM_TARGET, 3, 0, 0, ANIM_TARGET, 1
+	playsewithpan SE_M_VITAL_THROW2, SOUND_PAN_TARGET
+	waitforvisualfinish
+	call UnsetPsychicBackground
+	end
 Move_BRAMBLE:
 Move_WOOD_HAMMER:
 Move_DRAGON_PULSE:
@@ -10056,6 +10085,15 @@ InfernoRayThree:
 	delay 20
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 9, 0, RGB_RED
 	goto InfernoRayContinue
+	
+Move_AQUA_TAIL:
+Move_BOIL_OVER:
+Move_THUNDER_FANG:
+Move_FIRE_FANG:
+Move_ICE_FANG:
+Move_ENERGY_BALL:
+Move_BODY_PRESS:
+Move_PSYSHOCK:
 
 Move_KNOCK_OFF:
 	loadspritegfx ANIM_TAG_SLAM_HIT_2
