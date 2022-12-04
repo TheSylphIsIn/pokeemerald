@@ -9668,6 +9668,7 @@ Move_ZEN_HEADBUTT:
 	waitforvisualfinish
 	call UnsetPsychicBackground
 	end
+	
 Move_BRAMBLE:
 Move_WOOD_HAMMER:
 Move_DRAGON_PULSE:
@@ -9909,6 +9910,35 @@ Move_SCALE_PIERCE:
 Move_HARPOON_LASH:
 Move_LIGHTNING:
 Move_BOOMBURST:
+	loadspritegfx ANIM_TAG_EXPLOSION
+	loadspritegfx ANIM_TAG_THIN_RING
+	createvisualtask SoundTask_PlayCryWithEcho, 5, FALSE
+	call HyperVoiceEffect
+	waitforvisualfinish
+	delay 8
+	createvisualtask SoundTask_PlayCryWithEcho, 5, TRUE
+	call HyperVoiceEffect
+	waitforvisualfinish
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 4, 0, 16, 1
+	createsprite gExplosionSpriteTemplate, ANIM_TARGET, 4, 6, 5, 1, 0
+	playsewithpan SE_M_SELF_DESTRUCT, SOUND_PAN_TARGET
+	delay 3
+	createsprite gExplosionSpriteTemplate, ANIM_TARGET, 4, -16, -15, 1, 0
+	playsewithpan SE_M_SELF_DESTRUCT, SOUND_PAN_TARGET
+	delay 3
+	createsprite gExplosionSpriteTemplate, ANIM_TARGET, 4, 16, -5, 1, 0
+	playsewithpan SE_M_SELF_DESTRUCT, SOUND_PAN_TARGET
+	delay 3
+	createsprite gExplosionSpriteTemplate, ANIM_TARGET, 4, -12, 18, 1, 0
+	playsewithpan SE_M_SELF_DESTRUCT, SOUND_PAN_TARGET
+	delay 3
+	createsprite gExplosionSpriteTemplate, ANIM_TARGET, 4, 0, 5, 1, 0
+	playsewithpan SE_M_SELF_DESTRUCT, SOUND_PAN_TARGET
+	delay 3
+	createvisualtask SoundTask_PlayCryWithEcho, 5, TRUE
+	waitforvisualfinish
+	end
+
 Move_BUG_BUZZ:
 Move_BUZZ_BLITZ:
 Move_QUIVER_DANCE:

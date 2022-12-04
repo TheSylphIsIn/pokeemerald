@@ -3764,7 +3764,7 @@ static void Cmd_getexp(void)
 						viaSentIn++;
 				}
 				// only display Exp share message if mons actually got exp from it
-				if (gSaveBlock2Ptr->optionsExpShare && !(CalculatePlayerPartyCount() >= viaSentIn))
+				if (gSaveBlock2Ptr->optionsExpShare && viaSentIn < CalculatePlayerPartyCount())
 					PrepareStringBattle(STRINGID_EXPSHAREMESSAGE, 0);
 			}
 				
