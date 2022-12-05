@@ -1684,6 +1684,18 @@ static const u8 sBodyPressDescription[] = _(
 static const u8 sPsyshockDescription[] = _(
 	"Telekinetically throw debris\n"
 	"at the foe. Hits DEFENSE.");
+	
+static const u8 sChillTouchDescription[] = _(
+	"A necrotic touch that\n"
+	"inflicts a random status.");
+	
+static const u8 sLimberUpDescription[] = _(
+	"Stretches and rests to up\n"
+	"SPEED and restore HP.");
+	
+static const u8 sAcidSprayDescription[] = _(
+	"Sprays acid that drops\n"
+	"the foe's SP. DEF harshly.");
 
 // MOVE_NONE is ignored in this table. Make sure to always subtract 1 before getting the right pointer.
 const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
@@ -2109,4 +2121,7 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
 	[MOVE_ENERGY_BALL - 1] = sEnergyBallDescription,
 	[MOVE_BODY_PRESS - 1] = sBodyPressDescription,
 	[MOVE_PSYSHOCK - 1] = sPsyshockDescription,
+	[MOVE_CHILL_TOUCH - 1] = sChillTouchDescription,
+	[MOVE_LIMBER_UP - 1] = sLimberUpDescription,
+	[MOVE_ACID_SPRAY - 1] = sAcidSprayDescription,
 };

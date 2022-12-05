@@ -249,6 +249,9 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectShellSmash			 @ EFFECT_SHELL_SMASH
 	.4byte BattleScript_EffectHitWithDefense		 @ EFFECT_HIT_WITH_DEFENSE
 	.4byte BattleScript_EffectHitOppositeDefense	 @ EFFECT_HIT_OPPOSITE_DEFENSE
+	.4byte BattleScript_EffectGaslightHit			 @ EFFECT_GASLIGHT_HIT
+	.4byte BattleScript_EffectLimberUp				 @ EFFECT_LIMBER_UP
+	.4byte BattleScript_EffectSpecialDefenseDown2Hit @ EFFECT_SPECIAL_DEFENSE_DOWN_2_HIT
 
 BattleScript_EffectHit::
 	jumpifnotmove MOVE_SURF, BattleScript_HitFromAtkCanceler
@@ -3136,6 +3139,48 @@ BattleScript_EffectHitWithDefense::
 	goto BattleScript_EffectHit
 	
 BattleScript_EffectHitOppositeDefense::
+	goto BattleScript_EffectHit
+	
+BattleScript_EffectGaslightHit::
+	jumpifstatus BS_TARGET, STATUS1_ANY, BattleScript_EffectConfuseHit
+	setmoveeffect MOVE_EFFECT_GASLIGHT
+	goto BattleScript_EffectHit
+	
+BattleScript_EffectLimberUp::
+	attackcanceler 
+	attackstring
+	ppreduce
+	tryhealhalfhealth BattleScript_LimberUpCheckSpeed, BS_TARGET @check speed if HP is full
+BattleScript_LimberUpDoMoveAnim::
+	attackanimation
+	waitanimation
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
+	healthbarupdate BS_TARGET
+	datahpupdate BS_TARGET
+	printstring STRINGID_PKMNREGAINEDHEALTH
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_LimberUpTryIncreaseSpeed @ skip repeating animation if heal was completed
+BattleScript_LimberUpDoMoveAnimNoHeal:: @ play animation if only raising speed
+	attackanimation
+	waitanimation
+BattleScript_LimberUpTryIncreaseSpeed::
+	jumpifstat BS_ATTACKER, CMP_EQUAL, STAT_SPEED, MAX_STAT_STAGE, BattleScript_LimberUpEnd
+	setbyte sSTAT_ANIM_PLAYED, FALSE
+	playstatchangeanimation BS_ATTACKER, BIT_SPEED, 0
+	setstatchanger STAT_SPEED, 1, FALSE
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_CHANGE_ALLOW_PTR, BattleScript_LimberUpEnd
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_INCREASE, BattleScript_LimberUpEnd
+	printfromtable gStatUpStringIds
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_LimberUpEnd::
+	goto BattleScript_MoveEnd
+	
+BattleScript_LimberUpCheckSpeed:: @ if HP and speed are both capped, display fail message, else play animation
+	jumpifstat BS_ATTACKER, CMP_EQUAL, STAT_SPEED, MAX_STAT_STAGE, BattleScript_CantRaiseMultipleStats
+	goto BattleScript_LimberUpDoMoveAnimNoHeal
+
+BattleScript_EffectSpecialDefenseDown2Hit::
+	setmoveeffect MOVE_EFFECT_SP_DEF_MINUS_2
 	goto BattleScript_EffectHit
 
 BattleScript_FaintAttacker::

@@ -6166,5 +6166,50 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
 		.category = MOVE_CATEGORY_SPECIAL,
 		.attribute = MOVE_ATTRIBUTE_CRUSH,
-	}
+	},
+	
+	[MOVE_CHILL_TOUCH] = 
+	{
+		.effect = EFFECT_GASLIGHT_HIT,
+		.power = 65,
+		.type = TYPE_GHOST,
+		.accuracy = 95,
+		.pp = 15,
+		.secondaryEffectChance = 30,
+		.target = MOVE_TARGET_SELECTED,
+		.priority = 0,
+		.flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_MAKES_CONTACT,
+		.category = MOVE_CATEGORY_PHYSICAL,
+		.attribute = MOVE_ATTRIBUTE_ENERGY,
+	},
+	
+	[MOVE_LIMBER_UP] = 
+	{
+		.effect = EFFECT_LIMBER_UP,
+		.power = 0,
+		.type = TYPE_FIGHTING,
+		.accuracy = 0,
+		.pp = 10,
+		.secondaryEffectChance = 0,
+		.target = MOVE_TARGET_USER,
+		.priority = 0,
+		.flags = FLAG_SNATCH_AFFECTED,
+		.category = MOVE_CATEGORY_STATUS,
+		.attribute = MOVE_ATTRIBUTE_HEAL,
+	},
+	
+	[MOVE_ACID_SPRAY] = 
+	{
+		.effect = EFFECT_SPECIAL_DEFENSE_DOWN_2_HIT,
+		.power = 40,
+		.type = TYPE_POISON,
+		.accuracy = 100,
+		.pp = 25,
+		.secondaryEffectChance = 100,
+		.target = MOVE_TARGET_SELECTED,
+		.priority = 0,
+		.flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+		.category = MOVE_CATEGORY_SPECIAL,
+		.attribute = MOVE_ATTRIBUTE_BOMB,
+	},
 };

@@ -97,16 +97,16 @@ const struct Trainer gTrainers[] = {
         .party = NO_ITEM_DEFAULT_MOVES_NO_HARD(Billy),
     },
 	
-	[TRAINER_KEY_GRUNT_FISHEYE_LAKE] =
+	[TRAINER_KEY_LACKEY_FISHEYE_LAKE] =
 	{
         .trainerClass = TRAINER_CLASS_TEAM_MAGMA,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MAGMA,
         .trainerPic = TRAINER_PIC_MAGMA_GRUNT_M,
-        .trainerName = _("GRUNT"),
+        .trainerName = _("LACKEY"),
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE | AI_SCRIPT_TRY_TO_FAINT,
-        .party = NO_ITEM_DEFAULT_MOVES_NO_HARD(GruntFisheyeLake),
+        .party = NO_ITEM_DEFAULT_MOVES_NO_HARD(LackeyFisheyeLake),
     },
 	
 };

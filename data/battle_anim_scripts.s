@@ -438,6 +438,9 @@ gBattleAnims_Moves::
 	.4byte Move_ENERGY_BALL
 	.4byte Move_BODY_PRESS
 	.4byte Move_PSYSHOCK
+	.4byte Move_CHILL_TOUCH
+	.4byte Move_LIMBER_UP
+	.4byte Move_ACID_SPRAY
 	.4byte Move_COUNT @ cannot be reached, because last move is Psycho Boost
 
 	.align 2
@@ -10124,6 +10127,38 @@ Move_ICE_FANG:
 Move_ENERGY_BALL:
 Move_BODY_PRESS:
 Move_PSYSHOCK:
+
+Move_CHILL_TOUCH:
+
+Move_LIMBER_UP:
+	loadspritegfx ANIM_TAG_ORBS
+	loadspritegfx ANIM_TAG_BLUE_STAR
+	loadspritegfx ANIM_TAG_BREATH
+	createvisualtask AnimTask_TranslateMonEllipticalRespectSide, 2, ANIM_ATTACKER, 24, 6, 4, 4
+	playsewithpan SE_M_DOUBLE_TEAM, SOUND_PAN_ATTACKER
+	delay 12
+	playsewithpan SE_M_DOUBLE_TEAM, SOUND_PAN_ATTACKER
+	delay 12
+	playsewithpan SE_M_DOUBLE_TEAM, SOUND_PAN_ATTACKER
+	delay 12
+	playsewithpan SE_M_DOUBLE_TEAM, SOUND_PAN_ATTACKER
+	delay 12
+	playsewithpan SE_M_DOUBLE_TEAM, SOUND_PAN_ATTACKER
+	delay 12
+	waitforvisualfinish
+	createvisualtask AnimTask_GrowAndShrink, 2
+	playsewithpan SE_M_SWAGGER, SOUND_PAN_ATTACKER
+	waitforvisualfinish
+	createsprite gBreathPuffSpriteTemplate, ANIM_ATTACKER, 2
+	loopsewithpan SE_M_SWAGGER, SOUND_PAN_ATTACKER, 4, 2
+	waitforvisualfinish
+	delay 1
+	call HealingEffect
+	waitforvisualfinish
+	end
+
+
+Move_ACID_SPRAY:
 
 Move_KNOCK_OFF:
 	loadspritegfx ANIM_TAG_SLAM_HIT_2

@@ -866,7 +866,7 @@
 #define TRAINER_CALVIN_FISHEYE_LAKE_SANDUDE		5
 #define TRAINER_CALVIN_FISHEYE_LAKE_ELADRIFT	6
 #define TRAINER_BILLY 							7
-#define TRAINER_KEY_GRUNT_FISHEYE_LAKE			8
+#define TRAINER_KEY_LACKEY_FISHEYE_LAKE			8
 
 // NOTE: Because each Trainer uses a flag to determine when they are defeated, there is only space for 9 additional trainers before trainer flag space overflows
 //       More space can be made by shifting flags around in constants/flags.h or changing how trainer flags are handled

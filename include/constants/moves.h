@@ -423,8 +423,11 @@
 #define MOVE_ENERGY_BALL 419
 #define MOVE_BODY_PRESS 420
 #define MOVE_PSYSHOCK 421
+#define MOVE_CHILL_TOUCH 422
+#define MOVE_LIMBER_UP 423
+#define MOVE_ACID_SPRAY 424
 
-#define MOVES_COUNT 422
+#define MOVES_COUNT 425
 
 // Used for checks for moves affected by Disable, Mimic, etc.
 #define MOVE_UNAVAILABLE 0xFFFF
