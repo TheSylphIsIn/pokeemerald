@@ -721,5 +721,6 @@ extern u8 gMultiUsePlayerCursor;
 extern u8 gNumberOfMovesToChoose;
 extern u8 gBattleControllerData[MAX_BATTLERS_COUNT];
 extern bool8 AbilityIsActive(void); // returns TRUE if attacker doesn't have Mold Breaker, Teravolt, or Turboblaze; false otherwise
+extern u8 GetHiddenPowerType(u8, u8, u8, u8, u8, u8);
 
 #endif // GUARD_BATTLE_H

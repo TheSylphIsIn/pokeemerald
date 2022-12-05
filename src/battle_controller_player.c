@@ -1496,14 +1496,20 @@ static void MoveSelectionDisplayPpNumber(void)
 static void MoveSelectionDisplayMoveType(void)
 {
     u8 *txtPtr;
+	u8 type;
     struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleBufferA[gActiveBattler][4]);
+	
+	if (moveInfo->moves[gMoveSelectionCursor[gActiveBattler]] == MOVE_HIDDEN_POWER)
+		type = GetHiddenPowerType(gBattleMons[gActiveBattler].hpIV, gBattleMons[gActiveBattler].attackIV, gBattleMons[gActiveBattler].defenseIV, gBattleMons[gActiveBattler].speedIV, gBattleMons[gActiveBattler].spAttackIV, gBattleMons[gActiveBattler].spDefenseIV);
+	else
+		type = gBattleMoves[moveInfo->moves[gMoveSelectionCursor[gActiveBattler]]].type;
 
     txtPtr = StringCopy(gDisplayedStringBattle, gText_MoveInterfaceType);
     *(txtPtr)++ = EXT_CTRL_CODE_BEGIN;
     *(txtPtr)++ = EXT_CTRL_CODE_FONT;
     *(txtPtr)++ = FONT_NORMAL;
 
-    StringCopy(txtPtr, gTypeNames[gBattleMoves[moveInfo->moves[gMoveSelectionCursor[gActiveBattler]]].type]);
+    StringCopy(txtPtr, gTypeNames[type]);
     BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MOVE_TYPE);
 }
 

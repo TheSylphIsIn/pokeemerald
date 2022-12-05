@@ -164,6 +164,12 @@ static EWRAM_DATA struct PokemonSummaryScreenData
         u8 sanity; // 0x35
         u8 OTName[17]; // 0x36
         u32 OTID; // 0x48
+		u8 hpIv;
+		u8 atkIv;
+		u8 defIv;
+		u8 speedIv;
+		u8 spAtkIv;
+		u8 spDefIv;
     } summary;
     u16 bgTilemapBuffers[PSS_PAGE_COUNT][2][0x400];
     u8 mode;
@@ -747,7 +753,7 @@ static const struct OamData sOamData_SplitIcons =
 static const struct CompressedSpriteSheet sSpriteSheet_SplitIcons =
 {
     .data = sSplitIcons_Gfx,
-    .size = 16*16*3/2,
+    .size = 16*16*4/2,
     .tag = TAG_SPLIT_ICONS,
 };
 
@@ -775,11 +781,18 @@ static const union AnimCmd sSpriteAnim_SplitIcon2[] =
     ANIMCMD_END
 };
 
+static const union AnimCmd sSpriteAnim_SplitIcon3[] =
+{
+	ANIMCMD_FRAME(12, 0),
+	ANIMCMD_END
+};
+
 static const union AnimCmd *const sSpriteAnimTable_SplitIcons[] =
 {
     sSpriteAnim_SplitIcon0,
     sSpriteAnim_SplitIcon1,
     sSpriteAnim_SplitIcon2,
+	sSpriteAnim_SplitIcon3,
 };
 
 static const struct SpriteTemplate sSpriteTemplate_SplitIcons =
@@ -1487,6 +1500,12 @@ static bool8 ExtractMonDataToSummaryStruct(struct Pokemon *mon)
             sum->pp[i] = GetMonData(mon, MON_DATA_PP1+i);
         }
         sum->ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES);
+		sum->hpIv = GetMonData(mon, MON_DATA_HP_IV);
+		sum->atkIv = GetMonData(mon, MON_DATA_ATK_IV);
+		sum->defIv = GetMonData(mon, MON_DATA_DEF_IV);
+		sum->speedIv = GetMonData(mon, MON_DATA_SPEED_IV);
+		sum->spAtkIv = GetMonData(mon, MON_DATA_SPATK_IV);
+		sum->spDefIv = GetMonData(mon, MON_DATA_SPDEF_IV);
         break;
     case 2:
         if (sMonSummaryScreen->monList.mons == gPlayerParty || sMonSummaryScreen->mode == SUMMARY_MODE_BOX || sMonSummaryScreen->handleDeoxys == TRUE)
@@ -3908,12 +3927,19 @@ static void SetMonTypeIcons(void)
 static void SetMoveTypeIcons(void)
 {
     u8 i;
+	u8 type;
     struct PokeSummary *summary = &sMonSummaryScreen->summary;
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
         if (summary->moves[i] != MOVE_NONE)
-            SetTypeSpritePosAndPal(gBattleMoves[summary->moves[i]].type, 85, 32 + (i * 16), i + SPRITE_ARR_ID_TYPE);
-        else
+		{
+			if (summary->moves[i] == MOVE_HIDDEN_POWER)
+				type = GetHiddenPowerType(summary->hpIv, summary->atkIv, summary->defIv, summary->speedIv, summary->spAtkIv, summary->spDefIv);
+			else
+				type = gBattleMoves[summary->moves[i]].type;
+            SetTypeSpritePosAndPal(type, 85, 32 + (i * 16), i + SPRITE_ARR_ID_TYPE);
+        }
+		else
             SetSpriteInvisibility(i + SPRITE_ARR_ID_TYPE, TRUE);
     }
 }
@@ -3933,6 +3959,10 @@ static void SetContestMoveTypeIcons(void)
 
 static void SetNewMoveTypeIcon(void)
 {
+	u8 typeBits;
+	u8 type;
+    struct PokeSummary *summary = &sMonSummaryScreen->summary;
+	
     if (sMonSummaryScreen->newMove == MOVE_NONE)
     {
         SetSpriteInvisibility(SPRITE_ARR_ID_TYPE + 4, TRUE);
@@ -3940,8 +3970,15 @@ static void SetNewMoveTypeIcon(void)
     else
     {
         if (sMonSummaryScreen->currPageIndex == PSS_PAGE_BATTLE_MOVES)
-            SetTypeSpritePosAndPal(gBattleMoves[sMonSummaryScreen->newMove].type, 85, 96, SPRITE_ARR_ID_TYPE + 4);
-        else
+		{
+			if (sMonSummaryScreen->newMove == MOVE_HIDDEN_POWER)
+				type = GetHiddenPowerType(summary->hpIv, summary->atkIv, summary->defIv, summary->speedIv, summary->spAtkIv, summary->spDefIv);
+
+			else
+				type = gBattleMoves[sMonSummaryScreen->newMove].type;
+            SetTypeSpritePosAndPal(type, 85, 96, SPRITE_ARR_ID_TYPE + 4);
+        }
+		else
             SetTypeSpritePosAndPal(NUMBER_OF_MON_TYPES + gContestMoves[sMonSummaryScreen->newMove].contestCategory, 85, 96, SPRITE_ARR_ID_TYPE + 4);
     }
 }

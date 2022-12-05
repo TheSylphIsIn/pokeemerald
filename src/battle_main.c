@@ -5472,4 +5472,17 @@ static void LoadMonItems(void)
 	}
 }
 
+u8 GetHiddenPowerType(u8 hpIV, u8 atkIV, u8 defIV, u8 speedIV, u8 spAtkIV, u8 spDefIV)
+{
+	u8 typeBits  = ((hpIV & 1) << 0)
+                 | ((atkIV & 1) << 1)
+                 | ((defIV & 1) << 2)
+                 | ((speedIV & 1) << 3)
+                 | ((spAtkIV & 1) << 4)
+                 | ((spDefIV & 1) << 5);
+
+	// The -2 and subsequent +1 excludes NORMAL.
+    return ((NUMBER_OF_MON_TYPES - 2) * typeBits) / 63 + 1;
+}
+
 
