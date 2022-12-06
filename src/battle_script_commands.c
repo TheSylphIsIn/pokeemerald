@@ -1257,7 +1257,7 @@ static void Cmd_accuracycheck(void)
         if (holdEffect == HOLD_EFFECT_EVASION_UP)
             calc = (calc * (100 - param)) / 100;
 		
-		if (holdEffect == HOLD_EFFECT_ACCURACY_UP)
+		if (ItemId_GetHoldEffect(gBattleMons[gBattlerAttacker].item) == HOLD_EFFECT_ACCURACY_UP)
 			calc = (calc * (100 + param)) / 100;
 
         // final calculation
@@ -7016,7 +7016,7 @@ static void Cmd_setrain(void)
     {
         gBattleWeather = B_WEATHER_RAIN_TEMPORARY;
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STARTED_RAIN;
-        gWishFutureKnock.weatherDuration = 5;
+        gWishFutureKnock.weatherDuration = 5 + (3 * (ItemId_GetHoldEffect(gBattleMons[gBattlerAttacker].item) == HOLD_EFFECT_EXTEND_RAIN));
     }
     gBattlescriptCurrInstr++;
 }
@@ -7915,7 +7915,7 @@ static void Cmd_setsandstorm(void)
     {
         gBattleWeather = B_WEATHER_SANDSTORM_TEMPORARY;
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STARTED_SANDSTORM;
-        gWishFutureKnock.weatherDuration = 5;
+        gWishFutureKnock.weatherDuration = 5 + (3 * (ItemId_GetHoldEffect(gBattleMons[gBattlerAttacker].item) == HOLD_EFFECT_EXTEND_SAND));
     }
     gBattlescriptCurrInstr++;
 }
@@ -9097,7 +9097,7 @@ static void Cmd_setsunny(void)
     {
         gBattleWeather = B_WEATHER_SUN_TEMPORARY;
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STARTED_SUNLIGHT;
-        gWishFutureKnock.weatherDuration = 5;
+        gWishFutureKnock.weatherDuration = 5 + (3 * (ItemId_GetHoldEffect(gBattleMons[gBattlerAttacker].item) == HOLD_EFFECT_EXTEND_SUN));
     }
 
     gBattlescriptCurrInstr++;
@@ -9369,7 +9369,7 @@ static void Cmd_sethail(void)
     {
         gBattleWeather = B_WEATHER_HAIL_TEMPORARY;
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STARTED_HAIL;
-        gWishFutureKnock.weatherDuration = 5;
+        gWishFutureKnock.weatherDuration = 5 + (3 * (ItemId_GetHoldEffect(gBattleMons[gBattlerAttacker].item) == HOLD_EFFECT_EXTEND_HAIL));
     }
 
     gBattlescriptCurrInstr++;

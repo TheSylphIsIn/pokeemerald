@@ -639,6 +639,18 @@ const u32 gItemIconPalette_RageBand[] = INCBIN_U32("graphics/items/icon_palettes
 const u32 gItemIcon_ZombieTooth[] = INCBIN_U32("graphics/items/icons/zombie_tooth.4bpp.lz");
 const u32 gItemIconPalette_ZombieTooth[] = INCBIN_U32("graphics/items/icon_palettes/zombie_tooth.gbapal.lz");
 
+const u32 gItemIcon_HeatRock[] = INCBIN_U32("graphics/items/icons/heat_rock.4bpp.lz");
+const u32 gItemIconPalette_HeatRock[] = INCBIN_U32("graphics/items/icon_palettes/heat_rock.gbapal.lz");
+
+const u32 gItemIcon_DampRock[] = INCBIN_U32("graphics/items/icons/damp_rock.4bpp.lz");
+const u32 gItemIconPalette_DampRock[] = INCBIN_U32("graphics/items/icon_palettes/damp_rock.gbapal.lz");
+
+const u32 gItemIcon_SmoothRock[] = INCBIN_U32("graphics/items/icons/smooth_rock.4bpp.lz");
+const u32 gItemIconPalette_SmoothRock[] = INCBIN_U32("graphics/items/icon_palettes/smooth_rock.gbapal.lz");
+
+const u32 gItemIcon_IcyRock[] = INCBIN_U32("graphics/items/icons/icy_rock.4bpp.lz");
+const u32 gItemIconPalette_IcyRock[] = INCBIN_U32("graphics/items/icon_palettes/icy_rock.gbapal.lz");
+
 // const u32 gItemIcon_[] = INCBIN_U32("graphics/items/icons/.4bpp.lz");
 // const u32 gItemIconPalette_[] = INCBIN_U32("graphics/items/icon_palettes/.gbapal.lz");
 

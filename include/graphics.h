@@ -4270,6 +4270,14 @@ extern const u32 gItemIconPalette_WideLens[];
 extern const u32 gItemIconPalette_RageBand[];
 extern const u32 gItemIcon_ZombieTooth[];
 extern const u32 gItemIconPalette_ZombieTooth[];
+extern const u32 gItemIcon_HeatRock[];
+extern const u32 gItemIconPalette_HeatRock[];
+extern const u32 gItemIcon_DampRock[];
+extern const u32 gItemIconPalette_DampRock[];
+extern const u32 gItemIcon_SmoothRock[];
+extern const u32 gItemIconPalette_SmoothRock[];
+extern const u32 gItemIcon_IcyRock[];
+extern const u32 gItemIconPalette_IcyRock[];
 // extern const u32 gItemIcon_[];
 // extern const u32 gItemIconPalette_[];
 // Contest hold items

@@ -2595,11 +2595,12 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     gBattleScripting.battler = battler;
                     effect++;
 				}
-                else if (!((gBattleWeather & B_WEATHER_RAIN_PERMANENT) || (gBattleWeather & B_WEATHER_RAIN_DOWNPOUR)))
+                else if (!((gBattleWeather & B_WEATHER_RAIN)))
                 {
-                    gBattleWeather = (B_WEATHER_RAIN_PERMANENT);
+                    gBattleWeather = (B_WEATHER_RAIN_TEMPORARY);
                     BattleScriptPushCursorAndCallback(BattleScript_DrizzleActivates);
                     gBattleScripting.battler = battler;
+					gWishFutureKnock.weatherDuration = 5 + (3 * (ItemId_GetHoldEffect(gBattleMons[battler].item) == HOLD_EFFECT_EXTEND_RAIN))
                     effect++;
                 }
                 break;
@@ -2616,11 +2617,12 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     gBattleScripting.battler = battler;
                     effect++;
 				}
-                else if (!(gBattleWeather & B_WEATHER_SANDSTORM_PERMANENT))
+                else if (!(gBattleWeather & B_WEATHER_SANDSTORM))
                 {
-                    gBattleWeather = B_WEATHER_SANDSTORM_PERMANENT;
+                    gBattleWeather = B_WEATHER_SANDSTORM_TEMPORARY;
                     BattleScriptPushCursorAndCallback(BattleScript_SandstreamActivates);
                     gBattleScripting.battler = battler;
+					gWishFutureKnock.weatherDuration = 5 + (3 * (ItemId_GetHoldEffect(gBattleMons[battler].item) == HOLD_EFFECT_EXTEND_SAND))
                     effect++;
                 }
                 break;
@@ -2631,11 +2633,12 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     gBattleScripting.battler = battler;
                     effect++;
 				}
-                else if (!((gBattleWeather & B_WEATHER_SUN_PERMANENT) || (gBattleWeather & B_WEATHER_INTENSE_SUN)))
+                else if (!((gBattleWeather & B_WEATHER_SUN)))
                 {
-                    gBattleWeather = B_WEATHER_SUN_PERMANENT;
+                    gBattleWeather = B_WEATHER_SUN_TEMPORARY;
                     BattleScriptPushCursorAndCallback(BattleScript_DroughtActivates);
                     gBattleScripting.battler = battler;
+					gWishFutureKnock.weatherDuration = 5 + (3 * (ItemId_GetHoldEffect(gBattleMons[battler].item) == HOLD_EFFECT_EXTEND_SUN))
                     effect++;
                 }
                 break;
@@ -2652,11 +2655,12 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     gBattleScripting.battler = battler;
                     effect++;
 				}
-                else if (!(gBattleWeather & B_WEATHER_HAIL_PERMANENT))
+                else if (!(gBattleWeather & B_WEATHER_HAIL))
                 {
                     gBattleWeather = B_WEATHER_HAIL_PERMANENT;
                     BattleScriptPushCursorAndCallback(BattleScript_SnowWarningActivates);
                     gBattleScripting.battler = battler;
+					gWishFutureKnock.weatherDuration = 5 + (3 * (ItemId_GetHoldEffect(gBattleMons[battler].item) == HOLD_EFFECT_EXTEND_HAIL))
                     effect++;
                 }
                 break;

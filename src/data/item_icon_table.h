@@ -275,6 +275,10 @@ const u32 *const gItemIconTable[ITEMS_COUNT + 1][2] =
 	[ITEM_WIDE_LENS] = {gItemIcon_WideLens, gItemIconPalette_WideLens},
 	[ITEM_RAGE_BAND] = {gItemIcon_FocusBand, gItemIconPalette_RageBand},
 	[ITEM_ZOMBIE_TOOTH] = {gItemIcon_ZombieTooth, gItemIconPalette_ZombieTooth},
+	[ITEM_HEAT_ROCK] = {gItemIcon_HeatRock, gItemIconPalette_HeatRock},
+	[ITEM_DAMP_ROCK] = {gItemIcon_DampRock, gItemIconPalette_DampRock},
+	[ITEM_SMOOTH_ROCK] = {gItemIcon_SmoothRock, gItemIconPalette_SmoothRock},
+	[ITEM_ICY_ROCK] = {gItemIcon_IcyRock, gItemIconPalette_IcyRock},
     // Contest hold items
     [ITEM_RED_SCARF] = {gItemIcon_Scarf, gItemIconPalette_RedScarf},
     [ITEM_BLUE_SCARF] = {gItemIcon_Scarf, gItemIconPalette_BlueScarf},

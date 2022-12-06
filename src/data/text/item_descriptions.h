@@ -1156,6 +1156,26 @@ static const u8 sZombieToothDesc[] = _(
 	"A rotted tooth\n"
 	"suffused with\n"
 	"strange magic.");
+
+static const u8 sHeatRockDesc[] = _(
+	"A hold item that\n"
+	"extends user's\n"
+	"SUN by 3 turns.");
+	
+static const u8 sDampRockDesc[] = _(
+	"A hold item that\n"
+	"extends user's"
+	"RAIN by 3 turns.");
+	
+static const u8 sSmoothRockDesc[] = _(
+	"A hold item that\n"
+	"extends user's\n"
+	"SAND by 3 turns.");
+	
+static const u8 sIcyRockDesc[] = _(
+	"A hold item that\n"
+	"extends user's\n"
+	"HAIL by 3 turns.");
 	
 static const u8 sRedScarfDesc[] = _(
     "A hold item that\n"

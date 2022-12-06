@@ -529,8 +529,12 @@
 #define ITEM_CHILLING_ORB 402
 #define ITEM_WIDE_LENS 403
 #define ITEM_RAGE_BAND 404
+#define ITEM_HEAT_ROCK 405
+#define ITEM_DAMP_ROCK 406
+#define ITEM_SMOOTH_ROCK 407
+#define ITEM_ICY_ROCK 408
 
-#define ITEMS_COUNT 405
+#define ITEMS_COUNT 409
 #define ITEM_FIELD_ARROW ITEMS_COUNT
 
 // A special item id associated with "Cancel"/"Exit" etc. in a list of items or decorations

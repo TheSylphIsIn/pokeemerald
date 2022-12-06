@@ -3179,6 +3179,58 @@ const struct Item gItems[] =
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
+	
+	[ITEM_HEAT_ROCK] =
+    {
+        .name = _("HEAT ROCK"),
+        .itemId = ITEM_HEAT_ROCK,
+        .price = 100,
+        .holdEffect = HOLD_EFFECT_FLYING_POWER,
+        .holdEffectParam = 3,
+        .description = sHeatRockDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+	
+	[ITEM_DAMP_ROCK] =
+    {
+        .name = _("DAMP ROCK"),
+        .itemId = ITEM_DAMP_ROCK,
+        .price = 100,
+        .holdEffect = HOLD_EFFECT_FLYING_POWER,
+        .holdEffectParam = 3,
+        .description = sDampRockDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+	
+	[ITEM_SMOOTH_ROCK] =
+    {
+        .name = _("SMOOTH ROCK"),
+        .itemId = ITEM_SMOOTH_ROCK,
+        .price = 100,
+        .holdEffect = HOLD_EFFECT_EXTEND_SANDSTORM,
+        .holdEffectParam = 3,
+        .description = sSmoothRockDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+	
+	[ITEM_ICY_ROCK] =
+    {
+        .name = _("ICY ROCK"),
+        .itemId = ITEM_ICY_ROCK,
+        .price = 100,
+        .holdEffect = HOLD_EFFECT_FLYING_POWER,
+        .holdEffectParam = 3,
+        .description = sIcyRockDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
 
     [ITEM_RED_SCARF] =
     {
