@@ -1182,6 +1182,10 @@ static const u8 sWardAmuletDesc[] = _(
 	"reduces all damage\n"
 	"taken a little.");
 	
+static const u8 sLightClayDesc[] = _(
+	"A hold item that\n"
+	"extends shielding\n"
+	"effects' duration.");
 	
 static const u8 sRedScarfDesc[] = _(
     "A hold item that\n"

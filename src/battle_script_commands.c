@@ -7034,7 +7034,8 @@ static void Cmd_setreflect(void)
         gSideTimers[GET_BATTLER_SIDE(gBattlerAttacker)].reflectTimer = 5;
         gSideTimers[GET_BATTLER_SIDE(gBattlerAttacker)].reflectBattlerId = gBattlerAttacker;
 		
-		if (gBattleMons[gBattlerAttacker].ability == ABILITY_DEFENDER)
+		if (gBattleMons[gBattlerAttacker].ability == ABILITY_DEFENDER || 
+		ItemId_GetHoldEffect(gBattleMons[gBattlerTarget].item) == HOLD_EFFECT_EXTEND_SHIELDS)
 			gSideTimers[GET_BATTLER_SIDE(gBattlerAttacker)].reflectTimer += 3;
 
         if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && CountAliveMonsInBattle(BATTLE_ALIVE_ATK_SIDE) == 2)
@@ -7786,7 +7787,8 @@ static void Cmd_setlightscreen(void)
         gSideTimers[GET_BATTLER_SIDE(gBattlerAttacker)].lightscreenTimer = 5;
         gSideTimers[GET_BATTLER_SIDE(gBattlerAttacker)].lightscreenBattlerId = gBattlerAttacker;
 
-		if (gBattleMons[gBattlerAttacker].ability == ABILITY_DEFENDER)
+		if (gBattleMons[gBattlerAttacker].ability == ABILITY_DEFENDER || 
+		ItemId_GetHoldEffect(gBattleMons[gBattlerTarget].item) == HOLD_EFFECT_EXTEND_SHIELDS)
 			gSideTimers[GET_BATTLER_SIDE(gBattlerAttacker)].lightscreenTimer += 3;
 		
         if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && CountAliveMonsInBattle(BATTLE_ALIVE_ATK_SIDE) == 2)
@@ -8068,7 +8070,8 @@ static void Cmd_setmist(void)
         gSideTimers[GET_BATTLER_SIDE(gBattlerAttacker)].mistTimer = 5;
         gSideTimers[GET_BATTLER_SIDE(gBattlerAttacker)].mistBattlerId = gBattlerAttacker;
         gSideStatuses[GET_BATTLER_SIDE(gBattlerAttacker)] |= SIDE_STATUS_MIST;
-		if (gBattleMons[gBattlerAttacker].ability == ABILITY_DEFENDER)
+		if (gBattleMons[gBattlerAttacker].ability == ABILITY_DEFENDER || 
+		ItemId_GetHoldEffect(gBattleMons[gBattlerTarget].item) == HOLD_EFFECT_EXTEND_SHIELDS)
 			gSideTimers[GET_BATTLER_SIDE(gBattlerAttacker)].mistTimer += 5;
 
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SET_MIST;
@@ -8972,7 +8975,8 @@ static void Cmd_setsafeguard(void)
         gSideTimers[GET_BATTLER_SIDE(gBattlerAttacker)].safeguardTimer = 5;
         gSideTimers[GET_BATTLER_SIDE(gBattlerAttacker)].safeguardBattlerId = gBattlerAttacker;
 		
-		if (gBattleMons[gBattlerAttacker].ability == ABILITY_DEFENDER)
+		if (gBattleMons[gBattlerAttacker].ability == ABILITY_DEFENDER || 
+		ItemId_GetHoldEffect(gBattleMons[gBattlerTarget].item) == HOLD_EFFECT_EXTEND_SHIELDS)
 			gSideTimers[GET_BATTLER_SIDE(gBattlerAttacker)].safeguardTimer += 5;
 		
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SET_SAFEGUARD;

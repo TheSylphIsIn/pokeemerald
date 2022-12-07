@@ -4280,6 +4280,8 @@ extern const u32 gItemIcon_IcyRock[];
 extern const u32 gItemIconPalette_IcyRock[];
 extern const u32 gItemIcon_WardAmulet[];
 extern const u32 gItemIconPalette_WardAmulet[];
+extern const u32 gItemIcon_LightClay[];
+extern const u32 gItemIconPalette_LightClay[];
 // extern const u32 gItemIcon_[];
 // extern const u32 gItemIconPalette_[];
 // Contest hold items

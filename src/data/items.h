@@ -3232,14 +3232,27 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-		[ITEM_WARD_AMULET] =
+	[ITEM_WARD_DIAMOND] =
     {
-        .name = _("WARD AMULET"),
-        .itemId = ITEM_WARD_AMULET,
+        .name = _("WARD DIAMOND"),
+        .itemId = ITEM_WARD_DIAMOND,
         .price = 100,
         .holdEffect = HOLD_EFFECT_REDUCE_DAMAGE,
         .holdEffectParam = 10,
         .description = sWardAmuletDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+	
+	[ITEM_LIGHT_CLAY] =
+    {
+        .name = _("LIGHT CLAY"),
+        .itemId = ITEM_LIGHT_CLAY,
+        .price = 100,
+        .holdEffect = HOLD_EFFECT_EXTEND_SHIELDS,
+        .holdEffectParam = 0,
+        .description = sLightClayDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
