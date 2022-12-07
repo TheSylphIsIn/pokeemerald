@@ -214,7 +214,7 @@
 #define MOVE_RESULT_FOE_HUNG_ON        (1 << 7)
 #define MOVE_RESULT_NO_EFFECT          (MOVE_RESULT_MISSED | MOVE_RESULT_DOESNT_AFFECT_FOE | MOVE_RESULT_FAILED)
 
-// Battle Weather flags
+// Battle Weather flags (16 possible, 10 used)
 #define B_WEATHER_RAIN_TEMPORARY      (1 << 0)
 #define B_WEATHER_RAIN_DOWNPOUR       (1 << 1)  // unused
 #define B_WEATHER_RAIN_PERMANENT      (1 << 2)

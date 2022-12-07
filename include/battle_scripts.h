@@ -247,4 +247,5 @@ extern const u8 BattleScript_WeakArmorActivates[];
 extern const u8 BattleScript_StatChangeOnFaint[];
 extern const u8 BattleScript_ForewarnActivates[];
 extern const u8 BattleScript_FormChangeFromMove[];
+extern const u8 BattleScript_WardActivates[];
 #endif // GUARD_BATTLE_SCRIPTS_H

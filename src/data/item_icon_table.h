@@ -279,7 +279,7 @@ const u32 *const gItemIconTable[ITEMS_COUNT + 1][2] =
 	[ITEM_DAMP_ROCK] = {gItemIcon_DampRock, gItemIconPalette_DampRock},
 	[ITEM_SMOOTH_ROCK] = {gItemIcon_SmoothRock, gItemIconPalette_SmoothRock},
 	[ITEM_ICY_ROCK] = {gItemIcon_IcyRock, gItemIconPalette_IcyRock},
-	[ITEM_WARD_AMULET] = {gItemIcon_WardAmulet, gItemIconPalette_WardAmulet},
+	[ITEM_WARD_DIAMOND] = {gItemIcon_WardAmulet, gItemIconPalette_WardAmulet},
 	[ITEM_LIGHT_CLAY] = {gItemIcon_LightClay, gItemIconPalette_LightClay},
     // Contest hold items
     [ITEM_RED_SCARF] = {gItemIcon_Scarf, gItemIconPalette_RedScarf},

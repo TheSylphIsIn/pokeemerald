@@ -5003,6 +5003,13 @@ BattleScript_HeavyRainOverride::
 	call BattleScript_WeatherFormChanges
 	end3
 	
+BattleScript_WardActivates::
+	pause 0x20
+	playanimation BS_SCRIPTING, B_ANIM_SAFEGUARD_ACTIVATE, NULL
+	printstring STRINGID_PKMNUSEDSAFEGUARD2
+	waitmessage B_WAIT_TIME_LONG
+	end3
+	
 BattleScript_SolarPowerDrain::
 	printstring STRINGID_PKMNSXDRAINEDHP
 	waitmessage B_WAIT_TIME_LONG

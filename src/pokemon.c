@@ -7720,7 +7720,7 @@ static u16 ApplyItems(struct BattlePokemon *mon, u16 stat, u8 effect, u8 effectP
 					break;
 			}
 			// This doesn't really fit anywhere else. Hail boosts Ice defense by 1.5x
-			if (WEATHER_HAS_EFFECT2 && (gBattleWeather & B_WEATHER_HAIL) && (mon.type1 == TYPE_ICE || mon.type2 == TYPE_ICE))
+			if (WEATHER_HAS_EFFECT2 && (gBattleWeather & B_WEATHER_HAIL) && (mon->type1 == TYPE_ICE || mon->type2 == TYPE_ICE))
 				stat = (stat * 150) / 100;
 			break;
 		case STAT_SPEED:
@@ -7762,7 +7762,7 @@ static u16 ApplyItems(struct BattlePokemon *mon, u16 stat, u8 effect, u8 effectP
 					break;
 			}
 			// Sandstorm boosts Rock Sp. Defense by 1.5x
-			if (WEATHER_HAS_EFFECT2 && (gBattleWeather & B_WEATHER_SANDSTORM) && (mon.type1 == TYPE_ROCK || mon.type2 == TYPE_ROCK))
+			if (WEATHER_HAS_EFFECT2 && (gBattleWeather & B_WEATHER_SANDSTORM) && (mon->type1 == TYPE_ROCK || mon->type2 == TYPE_ROCK))
 				stat = (stat * 150) / 100;
 			break;
 		default:

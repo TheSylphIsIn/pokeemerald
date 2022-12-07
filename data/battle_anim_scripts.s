@@ -480,6 +480,7 @@ gBattleAnims_General::
 	.4byte General_FocusPunchSetUp          @ B_ANIM_FOCUS_PUNCH_SETUP
 	.4byte General_IngrainHeal              @ B_ANIM_INGRAIN_HEAL
 	.4byte General_WishHeal                 @ B_ANIM_WISH_HEAL
+	.4byte General_SafeguardActivate		@ B_ANIM_SAFEGUARD_ACTIVATE
 
 	.align 2
 gBattleAnims_Special::
@@ -11280,6 +11281,24 @@ General_WishHeal:
 	call HealingEffect
 	waitforvisualfinish
 	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, F_PAL_BG, 3, 10, 0, RGB_BLACK
+	end
+	
+General_SafeguardActivate:
+	loadspritegfx ANIM_TAG_GUARD_RING
+	monbg ANIM_ATK_PARTNER
+	setalpha 8, 8
+	playsewithpan SE_M_MILK_DRINK, SOUND_PAN_ATTACKER
+	createsprite gGuardRingSpriteTemplate, ANIM_ATTACKER, 2
+	delay 4
+	createsprite gGuardRingSpriteTemplate, ANIM_ATTACKER, 2
+	delay 4
+	createsprite gGuardRingSpriteTemplate, ANIM_ATTACKER, 2
+	waitforvisualfinish
+	playsewithpan SE_SHINY, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendColorCycle, 2, F_PAL_ATK_SIDE, 0, 2, 0, 10, RGB_WHITE
+	waitforvisualfinish
+	clearmonbg ANIM_ATK_PARTNER
+	blendoff
 	end
 
 SnatchMoveTrySwapFromSubstitute:
