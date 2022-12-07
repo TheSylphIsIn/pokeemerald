@@ -1177,6 +1177,12 @@ static const u8 sIcyRockDesc[] = _(
 	"extends user's\n"
 	"HAIL by 3 turns.");
 	
+static const u8 sWardAmuletDesc[] = _(
+	"A hold item that\n"
+	"reduces all damage\n"
+	"taken a little.");
+	
+	
 static const u8 sRedScarfDesc[] = _(
     "A hold item that\n"
     "raises COOL in\n"

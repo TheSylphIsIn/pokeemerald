@@ -533,8 +533,9 @@
 #define ITEM_DAMP_ROCK 406
 #define ITEM_SMOOTH_ROCK 407
 #define ITEM_ICY_ROCK 408
+#define ITEM_WARD_AMULET 409
 
-#define ITEMS_COUNT 409
+#define ITEMS_COUNT 410
 #define ITEM_FIELD_ARROW ITEMS_COUNT
 
 // A special item id associated with "Cancel"/"Exit" etc. in a list of items or decorations

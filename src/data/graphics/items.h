@@ -651,6 +651,9 @@ const u32 gItemIconPalette_SmoothRock[] = INCBIN_U32("graphics/items/icon_palett
 const u32 gItemIcon_IcyRock[] = INCBIN_U32("graphics/items/icons/icy_rock.4bpp.lz");
 const u32 gItemIconPalette_IcyRock[] = INCBIN_U32("graphics/items/icon_palettes/icy_rock.gbapal.lz");
 
+const u32 gItemIcon_WardAmulet[] = INCBIN_U32("graphics/items/icons/ward_amulet.4bpp.lz");
+const u32 gItemIconPalette_WardAmulet[] = INCBIN_U32("graphics/items/icon_palettes/ward_amulet.gbapal.lz");
+
 // const u32 gItemIcon_[] = INCBIN_U32("graphics/items/icons/.4bpp.lz");
 // const u32 gItemIconPalette_[] = INCBIN_U32("graphics/items/icon_palettes/.gbapal.lz");
 

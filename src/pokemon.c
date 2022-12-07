@@ -3600,7 +3600,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     if (WEATHER_HAS_EFFECT2)
     {
         // Rain weakens Fire, boosts Water
-        if (gBattleWeather & B_WEATHER_RAIN_TEMPORARY)
+        if (gBattleWeather & B_WEATHER_RAIN)
         {
             switch (type)
             {
@@ -7719,6 +7719,9 @@ static u16 ApplyItems(struct BattlePokemon *mon, u16 stat, u8 effect, u8 effectP
 						stat *= 2;
 					break;
 			}
+			// This doesn't really fit anywhere else. Hail boosts Ice defense by 1.5x
+			if (WEATHER_HAS_EFFECT2 && (gBattleWeather & B_WEATHER_HAIL) && (mon.type1 == TYPE_ICE || mon.type2 == TYPE_ICE))
+				stat = (stat * 150) / 100;
 			break;
 		case STAT_SPEED:
 			switch (effect)
@@ -7758,6 +7761,9 @@ static u16 ApplyItems(struct BattlePokemon *mon, u16 stat, u8 effect, u8 effectP
 						stat *= 2;
 					break;
 			}
+			// Sandstorm boosts Rock Sp. Defense by 1.5x
+			if (WEATHER_HAS_EFFECT2 && (gBattleWeather & B_WEATHER_SANDSTORM) && (mon.type1 == TYPE_ROCK || mon.type2 == TYPE_ROCK))
+				stat = (stat * 150) / 100;
 			break;
 		default:
 			break;
@@ -7773,6 +7779,8 @@ static u16 ApplyItems(struct BattlePokemon *mon, u16 stat, u8 effect, u8 effectP
 					&& gEvolutionTable[mon->species][0].targetSpecies != SPECIES_ELEMPTY)
 					stat = (stat * 150) / 100;
 				break;
+			case HOLD_EFFECT_REDUCE_DAMAGE:
+				stat = (stat * (effectParam + 100)) / 100;
 			default:
 				break;
 		}

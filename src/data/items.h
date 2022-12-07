@@ -3185,7 +3185,7 @@ const struct Item gItems[] =
         .name = _("HEAT ROCK"),
         .itemId = ITEM_HEAT_ROCK,
         .price = 100,
-        .holdEffect = HOLD_EFFECT_FLYING_POWER,
+        .holdEffect = HOLD_EFFECT_EXTEND_SUN,
         .holdEffectParam = 3,
         .description = sHeatRockDesc,
         .pocket = POCKET_ITEMS,
@@ -3198,7 +3198,7 @@ const struct Item gItems[] =
         .name = _("DAMP ROCK"),
         .itemId = ITEM_DAMP_ROCK,
         .price = 100,
-        .holdEffect = HOLD_EFFECT_FLYING_POWER,
+        .holdEffect = HOLD_EFFECT_EXTEND_RAIN,
         .holdEffectParam = 3,
         .description = sDampRockDesc,
         .pocket = POCKET_ITEMS,
@@ -3211,7 +3211,7 @@ const struct Item gItems[] =
         .name = _("SMOOTH ROCK"),
         .itemId = ITEM_SMOOTH_ROCK,
         .price = 100,
-        .holdEffect = HOLD_EFFECT_EXTEND_SANDSTORM,
+        .holdEffect = HOLD_EFFECT_EXTEND_SAND,
         .holdEffectParam = 3,
         .description = sSmoothRockDesc,
         .pocket = POCKET_ITEMS,
@@ -3224,7 +3224,7 @@ const struct Item gItems[] =
         .name = _("ICY ROCK"),
         .itemId = ITEM_ICY_ROCK,
         .price = 100,
-        .holdEffect = HOLD_EFFECT_FLYING_POWER,
+        .holdEffect = HOLD_EFFECT_EXTEND_HAIL,
         .holdEffectParam = 3,
         .description = sIcyRockDesc,
         .pocket = POCKET_ITEMS,
@@ -3232,6 +3232,19 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
+		[ITEM_WARD_AMULET] =
+    {
+        .name = _("WARD AMULET"),
+        .itemId = ITEM_WARD_AMULET,
+        .price = 100,
+        .holdEffect = HOLD_EFFECT_REDUCE_DAMAGE,
+        .holdEffectParam = 10,
+        .description = sWardAmuletDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+	
     [ITEM_RED_SCARF] =
     {
         .name = _("RED SCARF"),
