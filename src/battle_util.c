@@ -2764,6 +2764,29 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     gBattleScripting.battler = battler;
                     effect++;
 				}
+				break;
+			case ABILITY_TOLL_CALL:
+				for (i = 0; i < gBattlersCount; i++)
+				{
+					if (gStatuses3[i] & STATUS3_PERISH_SONG
+						|| (GET_BATTLER_SIDE(i) == GET_BATTLER_SIDE(battler))
+						|| (gBattleMons[i].ability == ABILITY_TOLL_CALL)
+						|| ItemId_GetHoldEffect(gBattleMons[i].item) == HOLD_EFFECT_DOUBLE_PRIZE
+						|| ItemId_GetHoldEffect(gBattleMons[i].item) == HOLD_EFFECT_GOLD)
+					{
+						continue;
+					}
+					else
+					{
+						gStatuses3[i] |= STATUS3_PERISH_SONG;
+						gDisableStructs[i].perishSongTimer = 3;
+						gDisableStructs[i].perishSongTimerStartValue = 3;
+					}
+				}
+				BattleScriptPushCursorAndCallback(BattleScript_TollCallActivates);
+                gBattleScripting.battler = battler;
+                effect++;
+				break;
             }
             break;
         case ABILITYEFFECT_ENDTURN: // 1

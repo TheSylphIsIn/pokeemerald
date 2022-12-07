@@ -130,6 +130,7 @@ static const u8 sText_PkmnRaisedDefALittle[] = _("{B_ATK_PREFIX2}'s {B_CURRENT_M
 static const u8 sText_PkmnCoveredByVeil[] = _("{B_ATK_PREFIX2}'s party is covered\nby a veil!");
 static const u8 sText_PkmnUsedSafeguard[] = _("{B_DEF_NAME_WITH_PREFIX}'s party is protected\nby SAFEGUARD!");
 static const u8 sText_PkmnUsedSafeguardBattleScriptBattler[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s party is protected\nby SAFEGUARD!");
+static const u8 sText_PkmnCalledForSouls[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} called for\nits opponent's soul!");
 static const u8 sText_PkmnSafeguardExpired[] = _("{B_ATK_PREFIX3}'s party is no longer\nprotected by SAFEGUARD!");
 static const u8 sText_PkmnWentToSleep[] = _("{B_ATK_NAME_WITH_PREFIX} went\nto sleep!");
 static const u8 sText_PkmnSleptHealthy[] = _("{B_ATK_NAME_WITH_PREFIX} slept and\nbecame healthy!");
@@ -942,6 +943,7 @@ const u8 * const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_S
 	[STRINGID_PKMNFOREWARNED - BATTLESTRINGS_TABLE_START] = sText_PkmnForewarned,
 	[STRINGID_EXPSHAREMESSAGE - BATTLESTRINGS_TABLE_START] = sText_ExpShareGained,
 	[STRINGID_ACAPPED - BATTLESTRINGS_TABLE_START] = sText_ACapped,
+	[STRINGID_PKMNCALLEDFORSOULS - BATTLESTRINGS_TABLE_START] = sText_PkmnCalledForSouls,
 };
 
 const u16 gMissStringIds[] =

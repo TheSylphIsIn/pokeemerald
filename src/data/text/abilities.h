@@ -150,6 +150,7 @@ static const u8 sStrikerDescription[] =  _("Powers up kicking moves.");
 static const u8 sStrongJawDescription[] = _("Powers up biting moves.");
 static const u8 sRecklessDescription[] = _("Powers up risky moves.");
 static const u8 sWardDescription[] = _("Sets SAFEGUARD in battle.");
+static const u8 sTollCallDescription[] = _("Opponents will perish.");
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
 {
@@ -306,6 +307,7 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
 	[ABILITY_STRONG_JAW] = _("STRONG JAW"),
 	[ABILITY_RECKLESS] = _("RECKLESS"),
 	[ABILITY_WARD] = _("WARD"),
+	[ABILITY_TOLL_CALL] = _("TOLL CALL"),
 };
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
@@ -463,4 +465,5 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 	[ABILITY_STRONG_JAW] = sStrongJawDescription,
 	[ABILITY_RECKLESS] = sRecklessDescription,
 	[ABILITY_WARD] = sWardDescription,
+	[ABILITY_TOLL_CALL] = sTollCallDescription,
 };

@@ -5010,6 +5010,12 @@ BattleScript_WardActivates::
 	waitmessage B_WAIT_TIME_LONG
 	end3
 	
+BattleScript_TollCallActivates::
+	pause 0x20
+	printstring STRINGID_PKMNCALLEDFORSOULS
+	waitmessage B_WAIT_TIME_LONG
+	end3
+	
 BattleScript_SolarPowerDrain::
 	printstring STRINGID_PKMNSXDRAINEDHP
 	waitmessage B_WAIT_TIME_LONG

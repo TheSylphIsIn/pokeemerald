@@ -248,4 +248,5 @@ extern const u8 BattleScript_StatChangeOnFaint[];
 extern const u8 BattleScript_ForewarnActivates[];
 extern const u8 BattleScript_FormChangeFromMove[];
 extern const u8 BattleScript_WardActivates[];
+extern const u8 BattleScript_TollCallActivates[];
 #endif // GUARD_BATTLE_SCRIPTS_H

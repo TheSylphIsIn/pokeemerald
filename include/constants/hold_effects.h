@@ -89,5 +89,6 @@
 #define HOLD_EFFECT_EXTEND_HAIL	   85
 #define HOLD_EFFECT_REDUCE_DAMAGE  86
 #define HOLD_EFFECT_EXTEND_SHIELDS 87
+#define HOLD_EFFECT_GOLD		   88 // protects holder from Toll Call
 
 #endif // GUARD_HOLD_EFFECTS_H
