@@ -2165,50 +2165,6 @@ const u16 gUnionRoomFacilityClasses[NUM_UNION_ROOM_CLASSES * GENDER_COUNT] =
     FACILITY_CLASS_PKMN_BREEDER_F,
     FACILITY_CLASS_BEAUTY
 };
-
-static const u8 sHoldEffectToType[][2] =
-{
-    {HOLD_EFFECT_BUG_POWER, TYPE_BUG},
-    {HOLD_EFFECT_STEEL_POWER, TYPE_STEEL},
-    {HOLD_EFFECT_GROUND_POWER, TYPE_GROUND},
-    {HOLD_EFFECT_ROCK_POWER, TYPE_ROCK},
-    {HOLD_EFFECT_GRASS_POWER, TYPE_GRASS},
-    {HOLD_EFFECT_DARK_POWER, TYPE_DARK},
-    {HOLD_EFFECT_FIGHTING_POWER, TYPE_FIGHTING},
-    {HOLD_EFFECT_ELECTRIC_POWER, TYPE_ELECTRIC},
-    {HOLD_EFFECT_WATER_POWER, TYPE_WATER},
-    {HOLD_EFFECT_FLYING_POWER, TYPE_FLYING},
-    {HOLD_EFFECT_POISON_POWER, TYPE_POISON},
-    {HOLD_EFFECT_ICE_POWER, TYPE_ICE},
-    {HOLD_EFFECT_GHOST_POWER, TYPE_GHOST},
-    {HOLD_EFFECT_PSYCHIC_POWER, TYPE_PSYCHIC},
-    {HOLD_EFFECT_FIRE_POWER, TYPE_FIRE},
-    {HOLD_EFFECT_DRAGON_POWER, TYPE_DRAGON},
-    {HOLD_EFFECT_NORMAL_POWER, TYPE_NORMAL},
-	{HOLD_EFFECT_FAIRY_POWER, TYPE_MYSTERY},
-};
-
-static const u8 sSoulToType[][2] =
-{
-	{ITEM_CALM_SOUL, TYPE_NORMAL},
-	{ITEM_LIVING_SOUL, TYPE_GRASS},
-	{ITEM_BURNING_SOUL, TYPE_FIRE},
-	{ITEM_DROWNED_SOUL, TYPE_WATER},
-	{ITEM_FREE_SOUL, TYPE_FLYING},
-	{ITEM_CREEPY_SOUL, TYPE_BUG},
-	{ITEM_STATIC_SOUL, TYPE_ELECTRIC},
-	{ITEM_DECAYED_SOUL, TYPE_POISON},
-	{ITEM_VIGOR_SOUL, TYPE_FIGHTING},
-	{ITEM_VIM_SOUL, TYPE_PSYCHIC},
-	{ITEM_SOLID_SOUL, TYPE_ROCK},
-	{ITEM_SHAKY_SOUL, TYPE_GROUND},
-	{ITEM_HOLLOW_SOUL, TYPE_STEEL},
-	{ITEM_PHANTOM_SOUL, TYPE_GHOST},
-	{ITEM_WICKED_SOUL, TYPE_DARK},
-	{ITEM_COLD_SOUL, TYPE_ICE},
-	{ITEM_FIERCE_SOUL, TYPE_DRAGON},
-	{ITEM_MYSTIC_SOUL, TYPE_MYSTERY},
-};
 	
 const struct SpriteTemplate gBattlerSpriteTemplates[MAX_BATTLERS_COUNT] =
 {
@@ -7691,8 +7647,7 @@ static u16 ApplyAbility(struct BattlePokemon *mon, u16 stat, u8 statIndex, u8 ty
 
 static u16 ApplyItems(struct BattlePokemon *mon, u16 stat, u8 effect, u8 effectParam, u8 type, u8 statIndex, bool8 defending)
 {
-	u32 i;
-	// stat-affecting abilities
+	// stat-affecting items
 	switch (statIndex)
 	{
 		case STAT_ATK:
@@ -7801,32 +7756,18 @@ static u16 ApplyItems(struct BattlePokemon *mon, u16 stat, u8 effect, u8 effectP
 					gBattleMovePower = (120 * gBattleMovePower) / 100;
 				break;
 			case HOLD_EFFECT_SOUL:
-				for (i = 0; i < ARRAY_COUNT(sSoulToType); i++)
-				{
-					if (mon->item == sSoulToType[i][0]
-						&& type == sSoulToType[i][1])
-					{
-						gBattleMovePower = (gBattleMovePower * (effectParam + 100)) / 100;
-						break;
-					}
-				}
+				if (type == ItemId_GetSecondaryId(mon->item))
+					gBattleMovePower = (gBattleMovePower * (effectParam + 100)) / 100;
 				break;
+			case HOLD_EFFECT_TYPE_POWER:
+				if (effect == HOLD_EFFECT_TYPE_POWER
+				&& type == ItemId_GetSecondaryId(mon->item))
+					gBattleMovePower = (gBattleMovePower * (effectParam + 100)) / 100;
+					break;
 			default:
 				break;
 		}
-	
-		for (i = 0; i < ARRAY_COUNT(sHoldEffectToType); i++)
-		{
-			if (effect == sHoldEffectToType[i][0]
-				&& type == sHoldEffectToType[i][1])
-			{
-				gBattleMovePower = (gBattleMovePower * (effectParam + 100)) / 100;
-				break;
-			}
-		}
 	}
-	
-
 		
 	return stat;
 }

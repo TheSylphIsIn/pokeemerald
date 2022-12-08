@@ -2305,7 +2305,8 @@ const struct Item gItems[] =
         .name = _("SILVERPOWDER"),
         .itemId = ITEM_SILVER_POWDER,
         .price = 100,
-        .holdEffect = HOLD_EFFECT_BUG_POWER,
+        .holdEffect = HOLD_EFFECT_TYPE_POWER,
+		.secondaryId = TYPE_BUG,
         .holdEffectParam = 20,
         .description = sSilverPowderDesc,
         .pocket = POCKET_ITEMS,
@@ -2440,7 +2441,8 @@ const struct Item gItems[] =
         .name = _("METAL COAT"),
         .itemId = ITEM_METAL_COAT,
         .price = 100,
-        .holdEffect = HOLD_EFFECT_STEEL_POWER,
+        .holdEffect = HOLD_EFFECT_TYPE_POWER,
+		.secondaryId = TYPE_STEEL,
         .holdEffectParam = 20,
         .description = sMetalCoatDesc,
         .pocket = POCKET_ITEMS,
@@ -2491,7 +2493,8 @@ const struct Item gItems[] =
         .name = _("SOFT SAND"),
         .itemId = ITEM_SOFT_SAND,
         .price = 100,
-        .holdEffect = HOLD_EFFECT_GROUND_POWER,
+        .holdEffect = HOLD_EFFECT_TYPE_POWER,
+		.secondaryId = TYPE_GROUND,
         .holdEffectParam = 20,
         .description = sSoftSandDesc,
         .pocket = POCKET_ITEMS,
@@ -2504,7 +2507,8 @@ const struct Item gItems[] =
         .name = _("HARD STONE"),
         .itemId = ITEM_HARD_STONE,
         .price = 100,
-        .holdEffect = HOLD_EFFECT_ROCK_POWER,
+        .holdEffect = HOLD_EFFECT_TYPE_POWER,
+		.secondaryId = TYPE_ROCK,
         .holdEffectParam = 20,
         .description = sHardStoneDesc,
         .pocket = POCKET_ITEMS,
@@ -2517,7 +2521,8 @@ const struct Item gItems[] =
         .name = _("MIRACLE SEED"),
         .itemId = ITEM_MIRACLE_SEED,
         .price = 100,
-        .holdEffect = HOLD_EFFECT_GRASS_POWER,
+        .holdEffect = HOLD_EFFECT_TYPE_POWER,
+		.secondaryId = TYPE_GRASS,
         .holdEffectParam = 20,
         .description = sMiracleSeedDesc,
         .pocket = POCKET_ITEMS,
@@ -2530,7 +2535,8 @@ const struct Item gItems[] =
         .name = _("BLACKGLASSES"),
         .itemId = ITEM_BLACK_GLASSES,
         .price = 100,
-        .holdEffect = HOLD_EFFECT_DARK_POWER,
+        .holdEffect = HOLD_EFFECT_TYPE_POWER,
+		.secondaryId = TYPE_DARK,
         .holdEffectParam = 20,
         .description = sBlackGlassesDesc,
         .pocket = POCKET_ITEMS,
@@ -2543,7 +2549,8 @@ const struct Item gItems[] =
         .name = _("BLACK BELT"),
         .itemId = ITEM_BLACK_BELT,
         .price = 100,
-        .holdEffect = HOLD_EFFECT_FIGHTING_POWER,
+        .holdEffect = HOLD_EFFECT_TYPE_POWER,
+		.secondaryId = TYPE_FIGHTING,
         .holdEffectParam = 20,
         .description = sBlackBeltDesc,
         .pocket = POCKET_ITEMS,
@@ -2556,7 +2563,8 @@ const struct Item gItems[] =
         .name = _("MAGNET"),
         .itemId = ITEM_MAGNET,
         .price = 100,
-        .holdEffect = HOLD_EFFECT_ELECTRIC_POWER,
+        .holdEffect = HOLD_EFFECT_TYPE_POWER,
+		.secondaryId = TYPE_ELECTRIC,
         .holdEffectParam = 20,
         .description = sMagnetDesc,
         .pocket = POCKET_ITEMS,
@@ -2569,7 +2577,8 @@ const struct Item gItems[] =
         .name = _("MYSTIC WATER"),
         .itemId = ITEM_MYSTIC_WATER,
         .price = 100,
-        .holdEffect = HOLD_EFFECT_WATER_POWER,
+        .holdEffect = HOLD_EFFECT_TYPE_POWER,
+		.secondaryId = TYPE_WATER,
         .holdEffectParam = 20,
         .description = sMysticWaterDesc,
         .pocket = POCKET_ITEMS,
@@ -2582,7 +2591,8 @@ const struct Item gItems[] =
         .name = _("SHARP BEAK"),
         .itemId = ITEM_SHARP_BEAK,
         .price = 100,
-        .holdEffect = HOLD_EFFECT_FLYING_POWER,
+        .holdEffect = HOLD_EFFECT_TYPE_POWER,
+		.secondaryId = TYPE_FLYING,
         .holdEffectParam = 20,
         .description = sSharpBeakDesc,
         .pocket = POCKET_ITEMS,
@@ -2595,7 +2605,8 @@ const struct Item gItems[] =
         .name = _("POISON BARB"),
         .itemId = ITEM_POISON_BARB,
         .price = 100,
-        .holdEffect = HOLD_EFFECT_POISON_POWER,
+        .holdEffect = HOLD_EFFECT_TYPE_POWER,
+		.secondaryId = TYPE_POISON,
         .holdEffectParam = 20,
         .description = sPoisonBarbDesc,
         .pocket = POCKET_ITEMS,
@@ -2608,7 +2619,8 @@ const struct Item gItems[] =
         .name = _("NEVERMELTICE"),
         .itemId = ITEM_NEVER_MELT_ICE,
         .price = 100,
-        .holdEffect = HOLD_EFFECT_ICE_POWER,
+        .holdEffect = HOLD_EFFECT_TYPE_POWER,
+		.secondaryId = TYPE_ICE,
         .holdEffectParam = 20,
         .description = sNeverMeltIceDesc,
         .pocket = POCKET_ITEMS,
@@ -2621,7 +2633,8 @@ const struct Item gItems[] =
         .name = _("SPELL TAG"),
         .itemId = ITEM_SPELL_TAG,
         .price = 100,
-        .holdEffect = HOLD_EFFECT_GHOST_POWER,
+        .holdEffect = HOLD_EFFECT_TYPE_POWER,
+		.secondaryId = TYPE_GHOST,
         .holdEffectParam = 20,
         .description = sSpellTagDesc,
         .pocket = POCKET_ITEMS,
@@ -2634,7 +2647,8 @@ const struct Item gItems[] =
         .name = _("TWISTEDSPOON"),
         .itemId = ITEM_TWISTED_SPOON,
         .price = 100,
-        .holdEffect = HOLD_EFFECT_PSYCHIC_POWER,
+        .holdEffect = HOLD_EFFECT_TYPE_POWER,
+		.secondaryId = TYPE_PSYCHIC,
         .holdEffectParam = 20,
         .description = sTwistedSpoonDesc,
         .pocket = POCKET_ITEMS,
@@ -2647,7 +2661,8 @@ const struct Item gItems[] =
         .name = _("CHARCOAL"),
         .itemId = ITEM_CHARCOAL,
         .price = 9800,
-        .holdEffect = HOLD_EFFECT_FIRE_POWER,
+        .holdEffect = HOLD_EFFECT_TYPE_POWER,
+		.secondaryId = TYPE_FIRE,
         .holdEffectParam = 20,
         .description = sCharcoalDesc,
         .pocket = POCKET_ITEMS,
@@ -2660,7 +2675,8 @@ const struct Item gItems[] =
         .name = _("DRAGON FANG"),
         .itemId = ITEM_DRAGON_FANG,
         .price = 100,
-        .holdEffect = HOLD_EFFECT_DRAGON_POWER,
+        .holdEffect = HOLD_EFFECT_TYPE_POWER,
+		.secondaryId = TYPE_DRAGON,
         .holdEffectParam = 20,
         .description = sDragonFangDesc,
         .pocket = POCKET_ITEMS,
@@ -2673,7 +2689,8 @@ const struct Item gItems[] =
         .name = _("SILK SCARF"),
         .itemId = ITEM_SILK_SCARF,
         .price = 100,
-        .holdEffect = HOLD_EFFECT_NORMAL_POWER,
+        .holdEffect = HOLD_EFFECT_TYPE_POWER,
+		.secondaryId = TYPE_NORMAL,
         .holdEffectParam = 20,
         .description = sSilkScarfDesc,
         .pocket = POCKET_ITEMS,
@@ -2711,7 +2728,8 @@ const struct Item gItems[] =
         .name = _("SEA INCENSE"),
         .itemId = ITEM_SEA_INCENSE,
         .price = 9600,
-        .holdEffect = HOLD_EFFECT_WATER_POWER,
+        .holdEffect = HOLD_EFFECT_TYPE_POWER,
+		.secondaryId = TYPE_WATER,
         .holdEffectParam = 10,
         .description = sSeaIncenseDesc,
         .pocket = POCKET_ITEMS,
@@ -2815,6 +2833,7 @@ const struct Item gItems[] =
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+		.secondaryId = TYPE_NORMAL,
     },
 
     [ITEM_LIVING_SOUL] =
@@ -2828,6 +2847,7 @@ const struct Item gItems[] =
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+		.secondaryId = TYPE_GRASS,
     },
 
     [ITEM_BURNING_SOUL] =
@@ -2841,6 +2861,7 @@ const struct Item gItems[] =
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+		.secondaryId = TYPE_FIRE,
     },
 
     [ITEM_DROWNED_SOUL] =
@@ -2854,6 +2875,7 @@ const struct Item gItems[] =
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+		.secondaryId = TYPE_WATER,
     },
 
     [ITEM_FREE_SOUL] =
@@ -2867,6 +2889,7 @@ const struct Item gItems[] =
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+		.secondaryId = TYPE_FLYING,
     },
 
     [ITEM_CREEPY_SOUL] =
@@ -2880,6 +2903,7 @@ const struct Item gItems[] =
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+		.secondaryId = TYPE_BUG,
     },
 
     [ITEM_STATIC_SOUL] =
@@ -2893,6 +2917,7 @@ const struct Item gItems[] =
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+		.secondaryId = TYPE_ELECTRIC,
     },
 
     [ITEM_DECAYED_SOUL] =
@@ -2906,6 +2931,7 @@ const struct Item gItems[] =
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+		.secondaryId = TYPE_POISON,
     },
 
     [ITEM_VIGOR_SOUL] =
@@ -2919,6 +2945,7 @@ const struct Item gItems[] =
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+		.secondaryId = TYPE_FIGHTING,
     },
 
     [ITEM_VIM_SOUL] =
@@ -2932,6 +2959,7 @@ const struct Item gItems[] =
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+		.secondaryId = TYPE_PSYCHIC,
     },
 
     [ITEM_SOLID_SOUL] =
@@ -2945,6 +2973,7 @@ const struct Item gItems[] =
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+		.secondaryId = TYPE_ROCK,
     },
 
     [ITEM_SHAKY_SOUL] =
@@ -2958,6 +2987,7 @@ const struct Item gItems[] =
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+		.secondaryId = TYPE_GROUND,
     },
 
     [ITEM_HOLLOW_SOUL] =
@@ -2971,6 +3001,7 @@ const struct Item gItems[] =
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+		.secondaryId = TYPE_STEEL,
     },
 
     [ITEM_PHANTOM_SOUL] =
@@ -2984,6 +3015,7 @@ const struct Item gItems[] =
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+		.secondaryId = TYPE_GHOST,
     },
 
     [ITEM_WICKED_SOUL] =
@@ -2997,6 +3029,7 @@ const struct Item gItems[] =
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+		.secondaryId = TYPE_DARK,
     },
 
     [ITEM_COLD_SOUL] =
@@ -3010,6 +3043,7 @@ const struct Item gItems[] =
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+		.secondaryId = TYPE_ICE,
     },
 	
     [ITEM_FIERCE_SOUL] =
@@ -3023,6 +3057,7 @@ const struct Item gItems[] =
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+		.secondaryId = TYPE_DRAGON,
     },
 
     [ITEM_MYSTIC_SOUL] =
@@ -3036,6 +3071,7 @@ const struct Item gItems[] =
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+		.secondaryId = TYPE_FAIRY,
     },
 
     [ITEM_EVIOLITE] =
@@ -3069,7 +3105,8 @@ const struct Item gItems[] =
         .name = _("PINK BOW"),
         .itemId = ITEM_PINK_BOW,
         .price = 1000,
-		.holdEffect = HOLD_EFFECT_FAIRY_POWER,
+		.holdEffect = HOLD_EFFECT_TYPE_POWER,
+		.secondaryId = TYPE_FAIRY,
 		.holdEffectParam = 20,
         .description = sPinkBowDesc,
         .pocket = POCKET_ITEMS,

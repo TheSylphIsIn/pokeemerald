@@ -2995,7 +2995,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     {
         .effect = EFFECT_ATTACK_DOWN_2,
         .power = 0,
-        .type = TYPE_MYSTERY,
+        .type = TYPE_FAIRY,
         .accuracy = 100,
         .pp = 20,
         .secondaryEffectChance = 0,
@@ -3460,7 +3460,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     {
         .effect = EFFECT_MOONLIGHT,
         .power = 0,
-        .type = TYPE_MYSTERY,
+        .type = TYPE_FAIRY,
         .accuracy = 0,
         .pp = 5,
         .secondaryEffectChance = 0,
@@ -5279,7 +5279,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 	{
 		.effect = EFFECT_SPECIAL_ATTACK_DOWN_HIT,
 		.power = 90,
-		.type = TYPE_MYSTERY,
+		.type = TYPE_FAIRY,
 		.accuracy = 100,
 		.pp = 15,
 		.secondaryEffectChance = 20,
@@ -5294,7 +5294,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 	{
 		.effect = EFFECT_FLINCH_HIT,
 		.power = 80,
-		.type = TYPE_MYSTERY,
+		.type = TYPE_FAIRY,
 		.accuracy = 100,
 		.pp = 20,
 		.secondaryEffectChance = 20,
@@ -5324,7 +5324,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 	{
 		.effect = EFFECT_ATTACK_DOWN,
 		.power = 0,
-		.type = TYPE_MYSTERY,
+		.type = TYPE_FAIRY,
 		.accuracy = 100,
 		.pp = 30,
 		.secondaryEffectChance = 0,
@@ -5339,7 +5339,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 	{
 		.effect = EFFECT_ALWAYS_HIT,
 		.power = 45,
-		.type = TYPE_MYSTERY,
+		.type = TYPE_FAIRY,
 		.accuracy = 0,
 		.pp = 15,
 		.secondaryEffectChance = 0,
@@ -5354,7 +5354,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 	{
 		.effect = EFFECT_ATTACK_DOWN_HIT,
 		.power = 55,
-		.type = TYPE_MYSTERY,
+		.type = TYPE_FAIRY,
 		.accuracy = 100,
 		.pp = 25,
 		.secondaryEffectChance = 20,
@@ -5369,7 +5369,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 	{
 		.effect = EFFECT_ABSORB,
 		.power = 55,
-		.type = TYPE_MYSTERY,
+		.type = TYPE_FAIRY,
 		.accuracy = 100,
 		.pp = 20,
 		.secondaryEffectChance = 0,
@@ -5383,7 +5383,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 	{
 		.effect = EFFECT_DEFENSE_DOWN_HIT,
 		.power = 120,
-		.type = TYPE_MYSTERY,
+		.type = TYPE_FAIRY,
 		.accuracy = 85,
 		.pp = 5,
 		.secondaryEffectChance = 10,
@@ -5397,7 +5397,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 	{
 		.effect = EFFECT_ATTACK_DOWN_HIT,
 		.power = 90,
-		.type = TYPE_MYSTERY,
+		.type = TYPE_FAIRY,
 		.accuracy = 95,
 		.pp = 15,
 		.secondaryEffectChance = 20,
@@ -5412,7 +5412,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 	{
 		.effect = EFFECT_SPECIAL_ATTACK_DOWN,
 		.power = 0,
-		.type = TYPE_MYSTERY,
+		.type = TYPE_FAIRY,
 		.accuracy = 100,
 		.pp = 40,
 		.secondaryEffectChance = 0,

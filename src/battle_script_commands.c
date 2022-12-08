@@ -926,7 +926,7 @@ static const u16 sBadgeFlags[8] = {
 static const u16 sWhiteOutBadgeMoney[9] = { 8, 16, 24, 36, 48, 60, 80, 100, 120 };
 
 static const u16 sAteAbilityTypes[ABILITIES_NUM_ATES] = {
-	TYPE_ICE, TYPE_MYSTERY, TYPE_FLYING, TYPE_ELECTRIC, TYPE_FIRE
+	TYPE_ICE, TYPE_FAIRY, TYPE_FLYING, TYPE_ELECTRIC, TYPE_FIRE
 };
 
 static bool8 AbilityIsAte(u8 ability)
@@ -7712,14 +7712,6 @@ static void Cmd_tryconversiontypechange(void)
     for (moveChecked = 0; moveChecked < validMoves; moveChecked++)
     {
         moveType = gBattleMoves[gBattleMons[gBattlerAttacker].moves[moveChecked]].type;
-
-        // if (moveType == TYPE_MYSTERY)
-        // {
-            // if (IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_GHOST))
-                // moveType = TYPE_GHOST;
-            // else
-                // moveType = TYPE_NORMAL;
-        // }
         if (moveType != gBattleMons[gBattlerAttacker].type1
             && moveType != gBattleMons[gBattlerAttacker].type2)
         {
@@ -7738,14 +7730,6 @@ static void Cmd_tryconversiontypechange(void)
             while ((moveChecked = Random() & (MAX_MON_MOVES - 1)) >= validMoves);
 
             moveType = gBattleMoves[gBattleMons[gBattlerAttacker].moves[moveChecked]].type;
-
-            // if (moveType == TYPE_MYSTERY)
-            // {
-                // if (IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_GHOST))
-                    // moveType = TYPE_GHOST;
-                // else
-                    // moveType = TYPE_NORMAL;
-            // }
         }
         while (moveType == gBattleMons[gBattlerAttacker].type1 || moveType == gBattleMons[gBattlerAttacker].type2);
 
