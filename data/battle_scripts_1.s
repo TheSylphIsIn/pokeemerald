@@ -252,6 +252,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectGaslightHit			 @ EFFECT_GASLIGHT_HIT
 	.4byte BattleScript_EffectLimberUp				 @ EFFECT_LIMBER_UP
 	.4byte BattleScript_EffectSpecialDefenseDown2Hit @ EFFECT_SPECIAL_DEFENSE_DOWN_2_HIT
+	.4byte BattleScript_EffectPsychUpHit			 @ EFFECT_PSYCH_UP_HIT
 
 BattleScript_EffectHit::
 	jumpifnotmove MOVE_SURF, BattleScript_HitFromAtkCanceler
@@ -3182,6 +3183,35 @@ BattleScript_LimberUpCheckSpeed:: @ if HP and speed are both capped, display fai
 BattleScript_EffectSpecialDefenseDown2Hit::
 	setmoveeffect MOVE_EFFECT_SP_DEF_MINUS_2
 	goto BattleScript_EffectHit
+	
+BattleScript_EffectPsychUpHit::
+	attackcanceler
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	attackstring
+	ppreduce
+	critcalc
+	damagecalc
+	typecalc
+	adjustnormaldamage
+	attackanimation
+	waitanimation
+	effectivenesssound
+	hitanimation BS_TARGET
+	waitstate
+	healthbarupdate BS_TARGET
+	datahpupdate BS_TARGET
+	critmessage
+	waitmessage B_WAIT_TIME_LONG
+	resultmessage
+	waitmessage B_WAIT_TIME_LONG
+	copyfoestats BattleScript_PsychUpHitSkipMessage
+	printstring STRINGID_PKMNCOPIEDSTATCHANGES
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_PsychUpHitSkipMessage::
+	seteffectwithchance
+	tryfaintmon BS_TARGET
+	goto BattleScript_MoveEnd
+
 
 BattleScript_FaintAttacker::
 	playfaintcry BS_ATTACKER

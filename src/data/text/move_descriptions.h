@@ -1462,8 +1462,8 @@ static const u8 sCharmingCryDescription[] = _(
 	"unavoidable shout.");
 	
 static const u8 sTwinklePopDescription[] = _(
-	"Bursts starry energy on\n"
-	"the foe. May lower ATTACK.");
+	"Bursts starry energy that\n"
+	"copies foe's stat changes.");
 	
 static const u8 sDrainingKissDescription[] = _(
 	"Damages the foe and\n"
