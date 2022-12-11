@@ -1952,10 +1952,10 @@ BattleScript_EffectThunder::
 	goto BattleScript_EffectHit
 
 BattleScript_EffectTeleport::
+	jumpifbattletype BATTLE_TYPE_TRAINER, BattleScript_EffectBatonPass
 	attackcanceler
 	attackstring
 	ppreduce
-	jumpifbattletype BATTLE_TYPE_TRAINER, BattleScript_ButItFailed
 	getifcantrunfrombattle BS_ATTACKER
 	jumpifbyte CMP_EQUAL, gBattleCommunication, BATTLE_RUN_FORBIDDEN, BattleScript_ButItFailed
 	jumpifbyte CMP_EQUAL, gBattleCommunication, BATTLE_RUN_FAILURE, BattleScript_PrintAbilityMadeIneffective
