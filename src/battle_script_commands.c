@@ -10779,42 +10779,44 @@ static bool8 AdjustExpByLevel(void)
 	bool8 capped = FALSE; // returned. set to true if level caps or party level lower exp gain.
 	
 	// adjust by level caps
-	
-	// get number of set progress flags.
-	for (i = 0, progressCount = 0; i < ARRAY_COUNT(sProgressFlags); i++)
-		progressCount += FlagGet(sProgressFlags[i]);
-	
-	compareLevel = sProgressLevelCaps[progressCount];
-	
-	levelDifference = expGetterLevel - compareLevel; // negative if below the cap.
-	
-	if (levelDifference > 0) // only alter exp if above the cap
+	if (!FlagGet(FLAG_SYS_NO_LEVEL_CAPS))
 	{
-		switch (levelDifference)
+		// get number of set progress flags.
+		for (i = 0, progressCount = 0; i < ARRAY_COUNT(sProgressFlags); i++)
+			progressCount += FlagGet(sProgressFlags[i]);
+		
+		compareLevel = sProgressLevelCaps[progressCount];
+		
+		levelDifference = expGetterLevel - compareLevel; // negative if below the cap.
+		
+		if (levelDifference > 0) // only alter exp if above the cap
 		{
-			case 1: // 1 level over: half exp
-				expAdjust = SAFE_DIV(gBattleMoveDamage, 2);
-				break;
-			case 2: // 2 levels over: 25% exp
-				expAdjust = SAFE_DIV(3 * gBattleMoveDamage, 4);
-				break;
-			case 3: // 3 levels over: 10% exp
-				expAdjust = SAFE_DIV(9 * gBattleMoveDamage, 10);
-				break;
-			default: // any more than that: no exp
-				expAdjust = gBattleMoveDamage;
-				break;
+			switch (levelDifference)
+			{
+				case 1: // 1 level over: half exp
+					expAdjust = SAFE_DIV(gBattleMoveDamage, 2);
+					break;
+				case 2: // 2 levels over: 25% exp
+					expAdjust = SAFE_DIV(3 * gBattleMoveDamage, 4);
+					break;
+				case 3: // 3 levels over: 10% exp
+					expAdjust = SAFE_DIV(9 * gBattleMoveDamage, 10);
+					break;
+				default: // any more than that: no exp
+					expAdjust = gBattleMoveDamage;
+					break;
+			}
 		}
+		
+		// remove capped exp from exp get value
+		gBattleMoveDamage -= expAdjust;
+		
+		if (expAdjust > 0)
+			capped = TRUE;
+		
+		expAdjust = 0;
+		// progression cap done.
 	}
-	
-	// remove capped exp from exp get value
-	gBattleMoveDamage -= expAdjust;
-	
-	if (expAdjust > 0)
-		capped = TRUE;
-	
-	expAdjust = 0;
-	// progression cap done.
 	
 	// adjust by party level. turning off Exp. All deactivates this.
 	if (gSaveBlock2Ptr->optionsExpShare && gBattleMoveDamage)

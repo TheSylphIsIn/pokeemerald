@@ -3400,7 +3400,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
 	}
 	
 	// special cases
-	switch (gBattleMoves[gCurrentMove].effect)
+	switch (gBattleMoves[move].effect)
 	{
 		case EFFECT_HIT_WITH_DEFENSE:
 			offense = (category == MOVE_CATEGORY_PHYSICAL) ? attacker->defense : attacker->spDefense;
@@ -3474,7 +3474,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         gBattleMovePower /= 2;
 	
     // Explosion moves deal double damage.
-    if (gBattleMoves[gCurrentMove].effect == EFFECT_EXPLOSION)
+    if (gBattleMoves[move].effect == EFFECT_EXPLOSION)
         defense /= 2;
 
 	// main damage calculation
@@ -3570,7 +3570,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         }
 
         // Any weather except sun weakens solar beam
-        if ((gBattleWeather & (B_WEATHER_RAIN | B_WEATHER_SANDSTORM | B_WEATHER_HAIL)) && gCurrentMove == MOVE_SOLAR_BEAM)
+        if ((gBattleWeather & (B_WEATHER_RAIN | B_WEATHER_SANDSTORM | B_WEATHER_HAIL)) && move == MOVE_SOLAR_BEAM)
             damage /= 2;
 
         // Sun boosts Fire, weakens Water
@@ -7606,7 +7606,7 @@ static u16 ApplyAbility(struct BattlePokemon *mon, u16 stat, u8 statIndex, u8 ty
 				break;
 			case ABILITY_HYPER_CUTTER:
 				if (gBattleMoves[gCurrentMove].attribute == MOVE_ATTRIBUTE_SLASH)
-					gBattleMovePower = (130 * gBattleMovePower) / 100;
+					gBattleMovePower = (150 * gBattleMovePower) / 100;
 				break;
 			case ABILITY_STRONG_JAW:
 				if (gBattleMoves[gCurrentMove].attribute == MOVE_ATTRIBUTE_BITE)

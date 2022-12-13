@@ -2182,7 +2182,7 @@ u8 AtkCanceller_UnableToUseMove(void)
                         gBattleCommunication[MULTISTRING_CHOOSER] = TRUE;
                         gBattlerTarget = gBattlerAttacker;
                         gBattleMoveDamage = CalculateBaseDamage(&gBattleMons[gBattlerAttacker], &gBattleMons[gBattlerAttacker], MOVE_POUND, 0, 40, 0, gBattlerAttacker, gBattlerAttacker);
-                        gProtectStructs[gBattlerAttacker].confusionSelfDmg = 1;
+						 gProtectStructs[gBattlerAttacker].confusionSelfDmg = 1;
                         gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
                     }
                     gBattlescriptCurrInstr = BattleScript_MoveUsedIsConfused;
@@ -3164,9 +3164,10 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                  && moveType == TYPE_WATER
                  && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
                  && TARGET_TURN_DAMAGED
-				 && gBattleMons[gBattlerTarget].hp != 0)
+				 && gBattleMons[gBattlerTarget].hp != 0
+				 && gBattleMons[gBattlerTarget].statStages[STAT_DEF] < MAX_STAT_STAGE)
 				{
-					gBattleCommunication[MOVE_EFFECT_BYTE] = MOVE_EFFECT_DEF_PLUS_1 | MOVE_EFFECT_CERTAIN;
+					gBattleCommunication[MOVE_EFFECT_BYTE] = MOVE_EFFECT_DEF_PLUS_2 | MOVE_EFFECT_CERTAIN;
 					BattleScriptPushCursor();
                     gBattlescriptCurrInstr = BattleScript_StatBoostOnHit;
                     effect++;
@@ -3176,7 +3177,8 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
 				if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
                  && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
                  && TARGET_TURN_DAMAGED
-				 && gBattleMons[gBattlerTarget].hp != 0)
+				 && gBattleMons[gBattlerTarget].hp != 0
+				 && gBattleMons[gBattlerTarget].statStages[STAT_DEF] < MAX_STAT_STAGE)
 				{
 					gBattleCommunication[MOVE_EFFECT_BYTE] = MOVE_EFFECT_DEF_PLUS_1 | MOVE_EFFECT_CERTAIN;
 					BattleScriptPushCursor();
