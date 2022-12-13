@@ -1832,5 +1832,9 @@ const u8 gText_PokeBalls[] = _("POKé BALLS");
 const u8 gText_Berry[] = _("BERRY");
 const u8 gText_Berries[] = _("BERRIES");
 
-const u8 gText_AchievementName_GotStarter[] = _("GETTING STARTED");
+const u8 gText_AchievementName_BeatFirstBoss[] = _("GENTRIFICATION");
+const u8 gText_AchievementName_BeatSecondBoss[] = _("PIRATE-FREE BAY");
+const u8 gText_AchievementName_BeatThirdBoss[] = _("BEAST MODE");
+const u8 gText_AchievementName_RegionWalk[] = _("I WOULD...");
+const u8 gText_AchievementName_RegionLoop[] = _("AND I WOULD...");
 

@@ -1145,7 +1145,11 @@ static void ResetCheatSequenceProgress(void)
 
 static const u8 * const sAchievementNames[] = 
 {
-	[ACHIEVEMENT_GOT_STARTER] = gText_AchievementName_GotStarter
+	[ACHIEVEMENT_BEAT_FIRST_BOSS] = gText_AchievementName_BeatFirstBoss,
+	[ACHIEVEMENT_BEAT_SECOND_BOSS] = gText_AchievementName_BeatSecondBoss,
+	[ACHIEVEMENT_BEAT_THIRD_BOSS] = gText_AchievementName_BeatThirdBoss,
+	[ACHIEVEMENT_REGION_WALK] = gText_AchievementName_RegionWalk,
+	[ACHIEVEMENT_REGION_LOOP] = gText_AchievementName_RegionLoop,
 };
 // Tries to award the player an achievement
 static bool32 TryUnlockAchievement(void)

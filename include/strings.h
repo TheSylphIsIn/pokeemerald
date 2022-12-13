@@ -3039,6 +3039,10 @@ extern const u8 gText_BoxName[];
 extern const u8 gText_PkmnsNickname[];
 extern const u8 gText_TellHimTheWords[];
 
-extern const u8 gText_AchievementName_GotStarter[];
+extern const u8 gText_AchievementName_BeatFirstBoss[];
+extern const u8 gText_AchievementName_BeatSecondBoss[];
+extern const u8 gText_AchievementName_BeatThirdBoss[];
+extern const u8 gText_AchievementName_RegionWalk[];
+extern const u8 gText_AchievementName_RegionLoop[];
 
 #endif // GUARD_STRINGS_H

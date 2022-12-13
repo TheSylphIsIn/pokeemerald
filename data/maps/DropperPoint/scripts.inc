@@ -263,8 +263,6 @@ DropperPoint_EventScript_BagContinue:
 	removeobject LOCALID_MORGAN
 	clearflag FLAG_FAVORED_MORGAN
 	clearflag FLAG_FAVORED_CALVIN
-	giveachievement ACHIEVEMENT_GOT_STARTER
-	addvar VAR_PENDING_ACHIEVEMENTS, 2
 	release
 	end
 	
