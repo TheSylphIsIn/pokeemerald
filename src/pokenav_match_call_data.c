@@ -63,14 +63,12 @@ struct MatchCallLocationOverride {
     u8 mapSec;
 };
 
-struct MatchCallWally {
-    u8 type;
-    u8 mapSec;
-    u16 flag;
-    u16 rematchTableIdx;
-    const u8 *desc;
-    const match_call_text_data_t *textData;
-    const struct MatchCallLocationOverride *locationData;
+struct Achievement {
+	u8 type; // expected by game.
+    u8 category; // type of achievement: battle, exploration, etc
+    u16 flag; // achievement will appear in list if this flag is set or it is unlocked.
+    const u8 *name; // name of achievement
+    const u8 *hint; // hint text that appears when you click "HINT" (formerly CALL)
 };
 
 struct MatchCallBirch {
@@ -94,7 +92,7 @@ typedef union {
     const struct MatchCallStructCommon *common;
     const struct MatchCallStructNPC *npc;
     const struct MatchCallStructTrainer *trainer;
-    const struct MatchCallWally *wally;
+    const struct Achievement *achievement;
     const struct MatchCallBirch *birch;
     const struct MatchCallRival *rival;
     const struct MatchCallStructTrainer *leader;
@@ -313,35 +311,6 @@ static const struct MatchCallRival sBrendanMatchCallHeader =
     .textData = sBrendanTextScripts
 };
 
-static const match_call_text_data_t sWallyTextScripts[] = {
-    { MatchCall_Text_Wally1, 0xFFFF,                              0xFFFF },
-    { MatchCall_Text_Wally2, FLAG_RUSTURF_TUNNEL_OPENED,          0xFFFF },
-    { MatchCall_Text_Wally3, FLAG_DEFEATED_LAVARIDGE_GYM,         0xFFFF },
-    { MatchCall_Text_Wally4, FLAG_RECEIVED_CASTFORM,              0xFFFF },
-    { MatchCall_Text_Wally5, FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT, 0xFFFF },
-    { MatchCall_Text_Wally6, FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN, 0xFFFF },
-    { MatchCall_Text_Wally7, FLAG_DEFEATED_WALLY_VICTORY_ROAD,    0xFFFF },
-    { NULL,                  0xFFFF,                              0xFFFF }
-};
-
-static const struct MatchCallLocationOverride sWallyLocationData[] = {
-    { FLAG_HIDE_MAUVILLE_CITY_WALLY,          MAPSEC_VERDANTURF_TOWN },
-    { FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT,    MAPSEC_NONE },
-    { FLAG_HIDE_VICTORY_ROAD_ENTRANCE_WALLY,  MAPSEC_VICTORY_ROAD },
-    { 0xFFFF,                                 MAPSEC_NONE }
-};
-
-static const struct MatchCallWally sWallyMatchCallHeader =
-{
-    .type = MC_TYPE_WALLY,
-    .mapSec = 0,
-    .flag = FLAG_ENABLE_WALLY_MATCH_CALL,
-    .rematchTableIdx = REMATCH_WALLY_VR,
-    .desc = gText_WallyMatchCallDesc,
-    .textData = sWallyTextScripts,
-    .locationData = sWallyLocationData
-};
-
 static const match_call_text_data_t sScottTextScripts[] = {
     { MatchCall_Text_Scott1, 0xFFFF,                              0xFFFF },
     { MatchCall_Text_Scott2, FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY,  0xFFFF },
@@ -352,7 +321,6 @@ static const match_call_text_data_t sScottTextScripts[] = {
     { MatchCall_Text_Scott7, FLAG_SYS_GAME_CLEAR,                 0xFFFF },
     { NULL,                  0xFFFF,                              0xFFFF }
 };
-
 
 static const struct MatchCallStructNPC sScottMatchCallHeader =
 {
@@ -577,28 +545,53 @@ static const struct MatchCallStructTrainer sWallaceMatchCallHeader =
     .textData = sWallaceTextScripts
 };
 
+static const struct Achievement sAchievementHeaderFirstBoss = {
+	.type = MC_TYPE_WALLY,
+    .category = ACHIEVEMENT_CATEGORY_BATTLE,
+    .flag = FLAG_SYS_POKEMON_GET,
+    .name = gText_AchievementName_BeatFirstBoss,
+    .hint = HintText_FirstBoss,
+};
+
+static const struct Achievement sAchievementHeaderSecondBoss = {
+	.type = MC_TYPE_WALLY,
+    .category = ACHIEVEMENT_CATEGORY_BATTLE,
+    .flag = FLAG_BADGE01_GET,
+    .name = gText_AchievementName_BeatSecondBoss,
+    .hint = HintText_SecondBoss,
+};
+
+static const struct Achievement sAchievementHeaderThirdBoss = {
+	.type = MC_TYPE_WALLY,
+    .category = ACHIEVEMENT_CATEGORY_BATTLE,
+    .flag = FLAG_BADGE01_GET,
+    .name = gText_AchievementName_BeatThirdBoss,
+    .hint = HintText_ThirdBoss,
+};
+
+static const struct Achievement sAchievementHeaderRegionWalk = {
+	.type = MC_TYPE_WALLY,
+    .category = ACHIEVEMENT_CATEGORY_EXPLORATION,
+    .flag = FLAG_SYS_POKEMON_GET,
+    .name = gText_AchievementName_RegionWalk,
+    .hint = HintText_RegionWalk,
+};
+
+static const struct Achievement sAchievementHeaderRegionLoop = {
+	.type = MC_TYPE_WALLY,
+    .category = ACHIEVEMENT_CATEGORY_EXPLORATION,
+    .flag = FLAG_SYS_POKEMON_GET,
+    .name = gText_AchievementName_RegionLoop,
+    .hint = HintText_RegionLoop,
+};
+
+
 static const match_call_t sMatchCallHeaders[] = {
-    [MC_HEADER_MR_STONE]   = {.npc    = &sMrStoneMatchCallHeader},
-    [MC_HEADER_PROF_BIRCH] = {.birch  = &sProfBirchMatchCallHeader},
-    [MC_HEADER_BRENDAN]    = {.rival  = &sBrendanMatchCallHeader},
-    [MC_HEADER_MAY]        = {.rival  = &sMayMatchCallHeader},
-    [MC_HEADER_WALLY]      = {.wally  = &sWallyMatchCallHeader},
-    [MC_HEADER_NORMAN]     = {.leader = &sNormanMatchCallHeader},
-    [MC_HEADER_MOM]        = {.npc    = &sMomMatchCallHeader},
-    [MC_HEADER_STEVEN]     = {.npc    = &sStevenMatchCallHeader},
-    [MC_HEADER_SCOTT]      = {.npc    = &sScottMatchCallHeader},
-    [MC_HEADER_ROXANNE]    = {.leader = &sRoxanneMatchCallHeader},
-    [MC_HEADER_BRAWLY]     = {.leader = &sBrawlyMatchCallHeader},
-    [MC_HEADER_WATTSON]    = {.leader = &sWattsonMatchCallHeader},
-    [MC_HEADER_FLANNERY]   = {.leader = &sFlanneryMatchCallHeader},
-    [MC_HEADER_WINONA]     = {.leader = &sWinonaMatchCallHeader},
-    [MC_HEADER_TATE_LIZA]  = {.leader = &sTateLizaMatchCallHeader},
-    [MC_HEADER_JUAN]       = {.leader = &sJuanMatchCallHeader},
-    [MC_HEADER_SIDNEY]     = {.leader = &sSidneyMatchCallHeader},
-    [MC_HEADER_PHOEBE]     = {.leader = &sPhoebeMatchCallHeader},
-    [MC_HEADER_GLACIA]     = {.leader = &sGlaciaMatchCallHeader},
-    [MC_HEADER_DRAKE]      = {.leader = &sDrakeMatchCallHeader},
-    [MC_HEADER_WALLACE]    = {.leader = &sWallaceMatchCallHeader}
+    [ACHIEVEMENT_BEAT_FIRST_BOSS] = { .achievement = &sAchievementHeaderFirstBoss },
+	[ACHIEVEMENT_BEAT_SECOND_BOSS] = { .achievement = &sAchievementHeaderSecondBoss },
+	[ACHIEVEMENT_BEAT_THIRD_BOSS] = { .achievement = &sAchievementHeaderThirdBoss },
+	[ACHIEVEMENT_REGION_WALK] = { .achievement = &sAchievementHeaderRegionWalk },
+	[ACHIEVEMENT_REGION_LOOP] = { .achievement = &sAchievementHeaderRegionLoop },
 };
 
 static bool32 (*const sMatchCallGetEnabledFuncs[])(match_call_t) = {
@@ -760,9 +753,9 @@ static bool32 MatchCall_GetEnabled_Trainer(match_call_t matchCall)
 
 static bool32 MatchCall_GetEnabled_Wally(match_call_t matchCall)
 {
-    if (matchCall.wally->flag == 0xFFFF)
+    if (matchCall.achievement->flag == 0xFFFF)
         return TRUE;
-    return FlagGet(matchCall.wally->flag);
+    return FlagGet(matchCall.achievement->flag);
 }
 
 static bool32 MatchCall_GetEnabled_Rival(match_call_t matchCall)
@@ -803,14 +796,7 @@ static u8 MatchCall_GetMapSec_Trainer(match_call_t matchCall)
 
 static u8 MatchCall_GetMapSec_Wally(match_call_t matchCall)
 {
-    s32 i;
-
-    for (i = 0; matchCall.wally->locationData[i].flag != 0xFFFF; i++)
-    {
-        if (!FlagGet(matchCall.wally->locationData[i].flag))
-            break;
-    }
-    return matchCall.wally->locationData[i].mapSec;
+	return matchCall.achievement->type;
 }
 
 static u8 MatchCall_GetMapSec_Rival(match_call_t matchCall)
@@ -930,7 +916,7 @@ static u32 MatchCall_GetRematchTableIdx_Trainer(match_call_t matchCall)
 
 static u32 MatchCall_GetRematchTableIdx_Wally(match_call_t matchCall)
 {
-    return matchCall.wally->rematchTableIdx;
+    return FALSE;
 }
 
 static u32 MatchCall_GetRematchTableIdx_Rival(match_call_t matchCall)
@@ -971,7 +957,7 @@ static void MatchCall_GetMessage_Trainer(match_call_t matchCall, u8 *dest)
 
 static void MatchCall_GetMessage_Wally(match_call_t matchCall, u8 *dest)
 {
-    MatchCall_BufferCallMessageText(matchCall.wally->textData, dest);
+   StringExpandPlaceholders(dest, matchCall.achievement->hint);
 }
 
 static void MatchCall_GetMessage_Rival(match_call_t matchCall, u8 *dest)
@@ -1067,8 +1053,8 @@ static void MatchCall_GetNameAndDesc_Trainer(match_call_t matchCall, const u8 **
 
 static void MatchCall_GetNameAndDesc_Wally(match_call_t matchCall, const u8 **desc, const u8 **name)
 {
-    MatchCall_GetNameAndDescByRematchIdx(matchCall.wally->rematchTableIdx, desc, name);
-    *desc = matchCall.wally->desc;
+    *desc = matchCall.achievement->name;
+    *name = gText_EmptyString2;
 }
 
 static void MatchCall_GetNameAndDesc_Rival(match_call_t matchCall, const u8 **desc, const u8 **name)

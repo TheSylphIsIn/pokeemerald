@@ -180,7 +180,6 @@ DropperPoint_TriggerScript_BagContinue::
 	setvar VAR_FONEI_COAST_STATE, 1
 	setrespawn HEAL_LOCATION_CRAN_TOWN
 	setflag FLAG_HIDE_FONEI_COAST_NPCS
-	addvar VAR_PENDING_ACHIEVEMENTS, 1
 	release
 	end
 
@@ -263,6 +262,11 @@ DropperPoint_EventScript_BagContinue:
 	removeobject LOCALID_MORGAN
 	clearflag FLAG_FAVORED_MORGAN
 	clearflag FLAG_FAVORED_CALVIN
+	setflag FLAG_SYS_POKENAV_GET
+	setflag FLAG_RECEIVED_POKENAV
+	setflag FLAG_ADDED_MATCH_CALL_TO_POKENAV
+	giveachievement ACHIEVEMENT_BEAT_FIRST_BOSS
+	addvar VAR_PENDING_ACHIEVEMENTS, 1
 	release
 	end
 	

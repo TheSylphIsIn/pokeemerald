@@ -603,10 +603,7 @@ static u32 DoMatchCallMessage(s32 state)
     case 1:
         if (IsDma3ManagerBusyWithBgCopy2(gfx))
             return LT_PAUSE;
-
-        PrintCallingDots(gfx);
-        PlaySE(SE_POKENAV_CALL);
-        gfx->skipHangUpSE = FALSE;
+        gfx->skipHangUpSE = TRUE;
         return LT_INC_AND_PAUSE;
     case 2:
         if (WaitForCallingDotsText(gfx))
@@ -1017,14 +1014,27 @@ static void PrintMatchCallInfoNumber(u16 windowId, const u8 *str, int top)
     AddTextPrinterParameterized(windowId, FONT_NARROW, str, x, y, TEXT_SKIP_DRAW, NULL);
 }
 
+static const u8 sText_AchievementCategoryName_Battle[] = _("BATTLE");
+static const u8 sText_AchievementCategoryName_Exploration[] = _("EXPLORATION");
+static const u8 sText_AchievementCategoryName_Pokemon[] = _("POKéMON");
+static const u8 sText_AchievementCategoryName_Quest[] = _("QUEST");
+
+static const u8 * const sCategoryNames[] = 
+{
+	[ACHIEVEMENT_CATEGORY_BATTLE] = sText_AchievementCategoryName_Battle,
+	[ACHIEVEMENT_CATEGORY_QUEST] = sText_AchievementCategoryName_Quest,
+	[ACHIEVEMENT_CATEGORY_EXPLORATION] = sText_AchievementCategoryName_Exploration,
+	[ACHIEVEMENT_CATEGORY_POKEMON] = sText_AchievementCategoryName_Pokemon,
+};
+
 static void PrintMatchCallLocation(struct Pokenav_MatchCallGfx *gfx, int delta)
 {
     u8 mapName[32];
     int x;
     int index = PokenavList_GetSelectedIndex() + delta;
-    int mapSec = GetMatchCallMapSec(index);
-    if (mapSec != MAPSEC_NONE)
-        GetMapName(mapName, mapSec, 0);
+    int category = GetMatchCallMapSec(index);
+    if (category < ACHIEVEMENT_CATEGORY_COUNT)
+        StringCopy(mapName, sCategoryNames[category]);
     else
         StringCopy(mapName, gText_Unknown);
 
@@ -1094,10 +1104,6 @@ static void DrawMsgBoxForMatchCallMsg(struct Pokenav_MatchCallGfx *gfx)
     FillWindowPixelBuffer(gfx->msgBoxWindowId, PIXEL_FILL(1));
     PutWindowTilemap(gfx->msgBoxWindowId);
     CopyWindowToVram(gfx->msgBoxWindowId, COPYWIN_FULL);
-    sprite = GetSpinningPokenavSprite();
-    sprite->x = 24;
-    sprite->y = 112;
-    sprite->y2 = 0;
 }
 
 static void DrawMsgBoxForCloseByMsg(struct Pokenav_MatchCallGfx *gfx)

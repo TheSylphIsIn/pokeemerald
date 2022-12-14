@@ -1,3 +1,24 @@
+HintText_FirstBoss::
+	.string "Progress the story in\n"
+	.string "PENZEL CITY!$"
+	
+HintText_SecondBoss::
+	.string "Progress the story in\n"
+	.string "PORT WANDER!$"
+	
+HintText_ThirdBoss::
+	.string "Progress the story in\n"
+	.string "ARKOL FOREST!$"
+	
+HintText_RegionWalk::
+	.string "Take the walking challenge\n"
+	.string "in placeholder city.$"
+
+HintText_RegionLoop::
+	.string "Complete the walking challenge,\n"
+	.string "and get back to the place\l"
+	.string "you started without failing it.$"
+
 MatchCall_WildBattleText1::
 	.string "Hi! {PLAYER}{KUN}, hello!\n"
 	.string "This is {STR_VAR_1}.\p"

@@ -3045,4 +3045,10 @@ extern const u8 gText_AchievementName_BeatThirdBoss[];
 extern const u8 gText_AchievementName_RegionWalk[];
 extern const u8 gText_AchievementName_RegionLoop[];
 
+extern const u8 HintText_FirstBoss[];
+extern const u8 HintText_SecondBoss[];
+extern const u8 HintText_ThirdBoss[];
+extern const u8 HintText_RegionWalk[];
+extern const u8 HintText_RegionLoop[];
+
 #endif // GUARD_STRINGS_H
