@@ -6570,7 +6570,7 @@ u8 GetMoveRelearnerMoves(struct Pokemon *mon, u16 *moves)
 	if (FlagGet(FLAG_EGG_MOVE_TUTOR))
 	{
 		// Species to pull egg moves from.
-		species = GetBaseForm(species);
+		species = GetBaseSpecies(species);
 		
 		k = GetEggMovesArraySize() - 1;
 		
@@ -6667,7 +6667,7 @@ u8 GetNumberOfRelearnableMoves(struct Pokemon *mon)
 	if (FlagGet(FLAG_EGG_MOVE_TUTOR))
 	{
 		// Species to pull egg moves from.
-		species = GetBaseForm(species);
+		species = GetBaseSpecies(species);
 		
 		k = GetEggMovesArraySize() - 1;
 		

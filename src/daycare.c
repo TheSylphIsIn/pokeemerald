@@ -380,7 +380,7 @@ static void ClearAllDaycareData(struct DayCare *daycare)
 // Determines what the species of an Egg would be based on the given species.
 // It determines this by working backwards through the evolution chain of the
 // given species.
-u16 GetBaseForm(u16 species)
+u16 GetBaseSpecies(u16 species)
 {
     int i, j, k;
     bool8 found;
@@ -800,7 +800,7 @@ static u16 DetermineEggSpeciesAndParentSlots(struct DayCare *daycare, u8 *parent
         }
     }
 
-    eggSpecies = GetBaseForm(species[parentSlots[0]]);
+    eggSpecies = GetBaseSpecies(species[parentSlots[0]]);
     if (eggSpecies == SPECIES_NIDORAN_F && daycare->offspringPersonality & EGG_GENDER_MALE)
     {
         eggSpecies = SPECIES_NIDORAN_M;
