@@ -10,6 +10,7 @@
 #include "battle_setup.h"
 #include "battle_tower.h"
 #include "data.h"
+#include "daycare.h"
 #include "event_data.h"
 #include "evolution_scene.h"
 #include "field_specials.h"
@@ -48,6 +49,7 @@
 #include "constants/trainers.h"
 #include "constants/union_room.h"
 
+
 struct SpeciesItem
 {
     u16 species;
@@ -76,6 +78,7 @@ EWRAM_DATA struct SpriteTemplate gMultiuseSpriteTemplate = {0};
 EWRAM_DATA static struct MonSpritesGfxManager *sMonSpritesGfxManagers[MON_SPR_GFX_MANAGERS_COUNT] = {NULL};
 
 #include "data/battle_moves.h"
+
 
 // Used in an unreferenced function in RS.
 // Unreferenced here and in FRLG.
@@ -6559,34 +6562,77 @@ u8 GetMoveRelearnerMoves(struct Pokemon *mon, u16 *moves)
     u8 level = GetMonData(mon, MON_DATA_LEVEL, 0);
     int i, j, k;
 
+	// writes currently known moves
     for (i = 0; i < MAX_MON_MOVES; i++)
         learnedMoves[i] = GetMonData(mon, MON_DATA_MOVE1 + i, 0);
+	
+	// Egg move tutor.
+	if (FlagGet(FLAG_EGG_MOVE_TUTOR))
+	{
+		// Species to pull egg moves from.
+		species = GetBaseForm(species);
+		
+		k = GetEggMovesArraySize() - 1;
+		
+		// Here, j is being used as the offset into gEggMoves.
+		for (i = 0; i < k; i++)
+		{
+			if (gEggMoves[i] == species + EGG_MOVES_SPECIES_OFFSET)
+			{
+				j = i + 1;
+				break;
+			}
+		}
 
-    for (i = 0; i < MAX_LEVEL_UP_MOVES; i++)
-    {
-        u16 moveLevel;
+		// Validates the move not being learned already, as normal.
+		for (i = 0; i < EGG_MOVES_ARRAY_COUNT; i++)
+		{
+			if (gEggMoves[j + i] > EGG_MOVES_SPECIES_OFFSET)
+				break;
+			for (k = 0; k < MAX_MON_MOVES && learnedMoves[k] != gEggMoves[j + i]; k++)
+						;
 
-        if (gLevelUpLearnsets[species][i] == LEVEL_UP_END)
-            break;
+			if (k == MAX_MON_MOVES)
+				moves[numMoves++] = gEggMoves[j + i];
+		}
 
-        moveLevel = gLevelUpLearnsets[species][i] & LEVEL_UP_MOVE_LV;
+		return numMoves;
+	}
+	// Level up move tutor
+	else
+	{
+		// for each entry in the mon's level up learnset:
+		for (i = 0; i < MAX_LEVEL_UP_MOVES; i++)
+		{
+			u16 moveLevel;
 
-        if (moveLevel <= (level << 9))
-        {
-            for (j = 0; j < MAX_MON_MOVES && learnedMoves[j] != (gLevelUpLearnsets[species][i] & LEVEL_UP_MOVE_ID); j++)
-                ;
+			if (gLevelUpLearnsets[species][i] == LEVEL_UP_END)
+				break;
 
-            if (j == MAX_MON_MOVES)
-            {
-                for (k = 0; k < numMoves && moves[k] != (gLevelUpLearnsets[species][i] & LEVEL_UP_MOVE_ID); k++)
-                    ;
+			moveLevel = gLevelUpLearnsets[species][i] & LEVEL_UP_MOVE_LV;
 
-                if (k == numMoves)
-                    moves[numMoves++] = gLevelUpLearnsets[species][i] & LEVEL_UP_MOVE_ID;
-            }
-        }
-    }
+			// if the move can be learned
+			if (moveLevel <= (level << 9))
+			{
+				// and the mon doesn't know the move already
+				for (j = 0; j < MAX_MON_MOVES && learnedMoves[j] != (gLevelUpLearnsets[species][i] & LEVEL_UP_MOVE_ID); j++)
+					;
 
+				if (j == MAX_MON_MOVES)
+				{
+					// and the move isn't already in the list of moves to learn
+					for (k = 0; k < numMoves && moves[k] != (gLevelUpLearnsets[species][i] & LEVEL_UP_MOVE_ID); k++)
+						;
+
+					// add the move to the array
+					if (k == numMoves)
+						moves[numMoves++] = gLevelUpLearnsets[species][i] & LEVEL_UP_MOVE_ID;
+				}
+			}
+		}
+	}
+	
+	// return the size of the array
     return numMoves;
 }
 
@@ -6613,34 +6659,77 @@ u8 GetNumberOfRelearnableMoves(struct Pokemon *mon)
     if (species == SPECIES_EGG)
         return 0;
 
+    // writes currently known moves
     for (i = 0; i < MAX_MON_MOVES; i++)
         learnedMoves[i] = GetMonData(mon, MON_DATA_MOVE1 + i, 0);
+	
+	// Egg move tutor.
+	if (FlagGet(FLAG_EGG_MOVE_TUTOR))
+	{
+		// Species to pull egg moves from.
+		species = GetBaseForm(species);
+		
+		k = GetEggMovesArraySize() - 1;
+		
+		// Here, j is being used as the offset into gEggMoves.
+		for (i = 0; i < k; i++)
+		{
+			if (gEggMoves[i] == species + EGG_MOVES_SPECIES_OFFSET)
+			{
+				j = i + 1;
+				break;
+			}
+		}
 
-    for (i = 0; i < MAX_LEVEL_UP_MOVES; i++)
-    {
-        u16 moveLevel;
+		// Validates the move not being learned already, as normal.
+		for (i = 0; i < EGG_MOVES_ARRAY_COUNT; i++)
+		{
+			if (gEggMoves[j + i] > EGG_MOVES_SPECIES_OFFSET)
+				break;
+			for (k = 0; k < numMoves && learnedMoves[k] != gEggMoves[j + i]; k++)
+						;
 
-        if (gLevelUpLearnsets[species][i] == LEVEL_UP_END)
-            break;
+			if (k == numMoves)
+				moves[numMoves++] = gEggMoves[j + i];
+		}
 
-        moveLevel = gLevelUpLearnsets[species][i] & LEVEL_UP_MOVE_LV;
+		return numMoves;
+	}
+	// Level up move tutor
+	else
+	{
+		// for each entry in the mon's level up learnset:
+		for (i = 0; i < MAX_LEVEL_UP_MOVES; i++)
+		{
+			u16 moveLevel;
 
-        if (moveLevel <= (level << 9))
-        {
-            for (j = 0; j < MAX_MON_MOVES && learnedMoves[j] != (gLevelUpLearnsets[species][i] & LEVEL_UP_MOVE_ID); j++)
-                ;
+			if (gLevelUpLearnsets[species][i] == LEVEL_UP_END)
+				break;
 
-            if (j == MAX_MON_MOVES)
-            {
-                for (k = 0; k < numMoves && moves[k] != (gLevelUpLearnsets[species][i] & LEVEL_UP_MOVE_ID); k++)
-                    ;
+			moveLevel = gLevelUpLearnsets[species][i] & LEVEL_UP_MOVE_LV;
 
-                if (k == numMoves)
-                    moves[numMoves++] = gLevelUpLearnsets[species][i] & LEVEL_UP_MOVE_ID;
-            }
-        }
-    }
+			// if the move can be learned
+			if (moveLevel <= (level << 9))
+			{
+				// and the mon doesn't know the move already
+				for (j = 0; j < MAX_MON_MOVES && learnedMoves[j] != (gLevelUpLearnsets[species][i] & LEVEL_UP_MOVE_ID); j++)
+					;
 
+				if (j == MAX_MON_MOVES)
+				{
+					// and the move isn't already in the list of moves to learn
+					for (k = 0; k < numMoves && moves[k] != (gLevelUpLearnsets[species][i] & LEVEL_UP_MOVE_ID); k++)
+						;
+
+					// add the move to the array
+					if (k == numMoves)
+						moves[numMoves++] = gLevelUpLearnsets[species][i] & LEVEL_UP_MOVE_ID;
+				}
+			}
+		}
+	}
+	
+	// return the size of the array
     return numMoves;
 }
 
