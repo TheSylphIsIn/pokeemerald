@@ -65,6 +65,8 @@
 #include "constants/weather.h"
 #include "constants/metatile_labels.h"
 #include "palette.h"
+#include "item.h"
+#include "item_menu.h"
 
 EWRAM_DATA bool8 gBikeCyclingChallenge = FALSE;
 EWRAM_DATA u8 gBikeCollisions = 0;
@@ -4194,3 +4196,51 @@ u8 Script_TryGainNewFanFromCounter(void)
 {
     return TryGainNewFanFromCounter(gSpecialVar_0x8004);
 }
+
+void ChooseItemFromBag(void)
+{
+    switch (VarGet(VAR_TEMP_D))
+    {
+    case ITEMS_POCKET:
+    case BALLS_POCKET:
+    case TMHM_POCKET:
+    case BERRIES_POCKET:
+    case KEYITEMS_POCKET:
+        GoToBagMenu(ITEMMENULOCATION_CHOOSE_ITEM, VarGet(VAR_TEMP_1), CB2_ReturnToFieldContinueScript);
+    default:
+        break;
+    }
+}
+
+static const u16 sRecipes[][3] = {
+	{ITEM_POTION, ITEM_POTION, ITEM_SUPER_POTION},
+	{ITEM_BERRY_JUICE, ITEM_BERRY_JUICE, ITEM_POTION},
+};
+
+void TryCombineItems(void)
+{
+	u32 item1;
+	u32 item2;
+	u32 i;
+	u16 result = ITEM_NONE;
+	
+	item1 = VarGet(VAR_TEMP_E);
+	item2 = VarGet(VAR_TEMP_F);
+	
+	DebugPrintf("Combining itemID %d and itemID %d", item1, item2);
+	
+	for (i = 0; i < ARRAY_COUNT(sRecipes); i++)
+	{
+		if ((sRecipes[i][0] == item1 && sRecipes[i][1] == item2) || (sRecipes[i][0] == item2 && sRecipes[i][1] == item1))
+		{
+			result = sRecipes[i][2];
+			break;
+			DebugPrintf("Made an itemID %d", result);
+		}
+	}
+	
+	gSpecialVar_ItemId = result;
+	
+	
+}
+
