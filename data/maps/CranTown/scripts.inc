@@ -231,15 +231,17 @@ CranTown_Text_FamilySign:
 	
 CranTown_Text_TrainerTips:
 	.string "TRAINER TIPS\p"
-	.string "Be sure to read the MANUAL!\p"
-	.string "Even if you're a POKéMON\n"
-	.string "expert, it will still tell you\l"
-	.string "about this game's unique features!\p"
-	.string "For example, ICE resists GRASS,\n"
-	.string "GROUND, and FLYING.\p"
-	.string "You may even find something there\n"
-	.string "that makes you want to start over…\p"
-	.string "…sorry for breaking the FOURTH WALL.$"
+	.string "The base chance of a CRITICAL HIT\n"
+	.string "occuring is zero.\p"
+	.string "This means CRITICAL HITS won't\n"
+	.string "occur if CRIT RATIO is not raised.\p"
+	.string "On the flip side, CRITICAL HITS are\n"
+	.string "certain with a ratio above four.\p"
+	.string "For reference, FOCUS ENERGY boosts\n"
+	.string "the ratio by two.\p"
+	.string "High critical rate moves only\n"
+	.string "boost it by one.\p"
+	.string "Enjoy!$"
 
 
 

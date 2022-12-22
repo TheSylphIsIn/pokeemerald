@@ -186,6 +186,7 @@ union PokemonSubstruct
     u16 raw[NUM_SUBSTRUCT_BYTES / 2]; // /2 because it's u16, not u8
 };
 
+// possible extra space from removing contest info: 9 bytes and 6 bits
 struct BoxPokemon
 {
     u32 personality;

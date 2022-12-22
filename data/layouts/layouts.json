@@ -4810,6 +4810,16 @@
       "secondary_tileset": "gTileset_LavaridgeGym",
       "border_filepath": "data/layouts/GlitchCity/border.bin",
       "blockdata_filepath": "data/layouts/GlitchCity/map.bin"
+    },
+    {
+      "id": "LAYOUT_HOT_HEART_PATH",
+      "name": "HotHeartPath_Layout",
+      "width": 24,
+      "height": 60,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Rustboro",
+      "border_filepath": "data/layouts/HotHeartPath/border.bin",
+      "blockdata_filepath": "data/layouts/HotHeartPath/map.bin"
     }
   ]
 }

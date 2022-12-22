@@ -201,6 +201,18 @@ CranClearing_Movement_MorganWalkOffscreen:
 // item 2
 
 // trainer tip sign
+CranClearing_EventScript_TrainerTipsSign::
+	msgbox CranClearing_Text_TrainerTips, MSGBOX_SIGN
+	end
+	
+CranClearing_Text_TrainerTips:
+	.string "TRAINER TIPS\p"
+	.string "Be sure to read the MANUAL!\p"
+	.string "Even if you're a POKéMON\n"
+	.string "expert, it will still tell you\l"
+	.string "about this game's unique features!\p"
+	.string "For example, ICE resists GRASS,\n"
+	.string "GROUND, and FLYING.$"
 
 // surf hiker
 // surf item
