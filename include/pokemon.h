@@ -352,8 +352,8 @@ struct BattleMove
     u8 target;
     s8 priority;
     u8 flags;
-	u8 category : 2;
-	u8 attribute : 6;
+	u8 category:2;
+	u8 attribute:6;
 };
 /*
 possible attributes

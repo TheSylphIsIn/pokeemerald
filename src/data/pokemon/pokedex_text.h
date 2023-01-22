@@ -2321,25 +2321,25 @@ const u8 gDeoxysPokedexText[] = _(
     "agility and speed.");
 	
 const u8 gDubsnakePokedexText[] = _(
-	"A POKéMON from the FONEI region.\n"
-	"Even though it can't always agree on where\n"
-	"to go, it's not easy prey because it can\n"
-	"attack from both ends.");
+	"Sometimes its two heads disagree on where\n"
+	"to go, leaving it stuck in place. However,\n"
+	"it's not easy prey because it can defend\n"
+	"itself from both ends.");
 	
 const u8 gHydroilPokedexText[] = _(
-	"A POKéMON from the FONEI region.\n"
 	"As its two heads bicker, they whip up a\n"
 	"cloud of hot vapors that make it difficult\n"
-	"to approach, then suddenly strike in unison.");
+	"to approach, then suddenly strike in unison.\n"
+	"Fresh liquid pours endlessly from its necks.");
 	
 const u8 gWycernPokedexText[] = _(
-	"A POKéMON from the FONEI region.\n"
 	"Its huge head is a biological\n"
 	"refrigerator. The cooled air is blasted out\n"
-	"the end of its tail as icicles.");
+	"the end of its tail as icicles, while\n"
+	"its mouth blows small flames.");
 	
 const u8 gBitteragonPokedexText[] = _(
-	"A POKéMON from the FONEI region.\n"
+	"It lives in secluded mountaintop caves.\n"
 	"Its fridge is strong enough to whip up\n"
 	"blizzards, which it vents out its back.\n"
 	"Its fury can be calmed by choral singing.");
@@ -2494,13 +2494,28 @@ const u8 gAegislashFoneiAPokedexText[] = _(
 	"how much PP it uses in each battle.");
 	
 const u8 gAegislashFoneiEPokedexText[] = _("");
-const u8 gElemptyPokedexText[] = _("");
+
+const u8 gElemptyPokedexText[] = _(
+	"ELEMPTY have weak control over almost\n"
+	"any TYPE. It is said that they will\n"
+	"appear before promising TRAINERS,\n"
+	"to form a mutual strengthening bond.");
+	
 const u8 gVenearthPokedexText[] = _("");
 const u8 gMarsizzlePokedexText[] = _("");
 const u8 gJuplasmaPokedexText[] = _("");
 const u8 gMerlpoolPokedexText[] = _("");
-const u8 gOphicalfPokedexText[] = _("");
-const u8 gSerpentaurPokedexText[] = _("");
+const u8 gOphicalfPokedexText[] = _(
+	"Legends say that eating the flesh of\n"
+	"an OPHICALF can make a human as strong\n"
+	"as a POKéMON. They were overhunted\n"
+	"for a time because of this.");
+
+const u8 gSerpentaurPokedexText[] = _(
+	"This species developed prescience in order\n"
+	"to protect themselves from overhunting.\n"
+	"Their population has stabilized, but they\n"
+	"still avoid other living creatures.");
 
 const u8 gGeodudeFoneiPokedexText[] = _(
 	"The FONEI form of GEODUDE.\n"

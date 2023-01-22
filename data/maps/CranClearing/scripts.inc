@@ -145,6 +145,7 @@ CranClearing_Movement_PlayerWalkToMArena:
 	step_end
 
 CranClearing_EventScript_MorganAfterBattle:
+	special HealPlayerParty
 	msgbox CranClearing_Text_MorganAfterBattle1, MSGBOX_DEFAULT
 	closemessage
 	applymovement LOCALID_MORGAN, CranClearing_Movement_MorganGiveFlash

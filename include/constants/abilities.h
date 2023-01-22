@@ -112,7 +112,7 @@
 #define ABILITY_HYDRATION 108
 #define ABILITY_LEAF_GUARD 109 // sun hydration
 #define ABILITY_DEFENDER 110 // defensive field effect (e.g. reflect) duration up
-#define ABILITY_SOPORIFIC 111 // when user inflicts sleep, it lasts for max turns
+#define ABILITY_SOPORIFIC 111 // when user inflicts sleep, it lasts for max turns. signature to Parasect.
 #define ABILITY_TECHNICIAN 112
 #define ABILITY_SKILL_LINK 113
 #define ABILITY_PRANKSTER 114
