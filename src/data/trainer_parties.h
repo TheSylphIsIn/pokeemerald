@@ -96,7 +96,7 @@ static const struct TrainerMonItemCustomMoves sHardParty_MorganFisheyeSandude[] 
 
 static const struct TrainerMonItemCustomMoves sHardParty_MorganFisheyeEladrift[] = {
     {
-    .iv = 31,
+    .iv = 20,
     .lvl = 6,
     .species = SPECIES_SANDUDE,
 	.ability = 0,

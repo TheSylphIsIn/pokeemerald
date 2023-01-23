@@ -10261,52 +10261,52 @@
           "map": "MAP_CRAN_CLEARING",
           "base_label": "gCranClearing0",
           "land_mons": {
-            "encounter_rate": 0,
+            "encounter_rate": 20,
             "mons": [
               {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_NONE"
+                "min_level": 3,
+                "max_level": 4,
+                "species": "SPECIES_NIDORAN_F"
+              },
+              {
+                "min_level": 3,
+                "max_level": 4,
+                "species": "SPECIES_ELECTRIKE"
+              },
+              {
+                "min_level": 3,
+                "max_level": 3,
+                "species": "SPECIES_WOOPER"
+              },
+              {
+                "min_level": 4,
+                "max_level": 4,
+                "species": "SPECIES_WOOPER"
+              },
+              {
+                "min_level": 3,
+                "max_level": 3,
+                "species": "SPECIES_SLOSHMOSH"
+              },
+              {
+                "min_level": 4,
+                "max_level": 4,
+                "species": "SPECIES_SLOSHMOSH"
+              },
+              {
+                "min_level": 3,
+                "max_level": 3,
+                "species": "SPECIES_CATERPIE"
+              },
+              {
+                "min_level": 4,
+                "max_level": 4,
+                "species": "SPECIES_CATERPIE"
               },
               {
                 "min_level": 5,
                 "max_level": 5,
-                "species": "SPECIES_NONE"
-              },
-              {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_NONE"
-              },
-              {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_NONE"
-              },
-              {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_NONE"
-              },
-              {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_NONE"
-              },
-              {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_NONE"
-              },
-              {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_NONE"
-              },
-              {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_NONE"
+                "species": "SPECIES_TANGELA"
               }
             ]
           },

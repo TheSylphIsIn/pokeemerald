@@ -961,7 +961,7 @@ struct SaveBlock1
     /*0x560*/ struct ItemSlot bagPocket_Items[BAG_ITEMS_COUNT];
     /*0x5D8*/ struct ItemSlot bagPocket_KeyItems[BAG_KEYITEMS_COUNT];
     /*0x650*/ struct ItemSlot bagPocket_PokeBalls[BAG_POKEBALLS_COUNT];
-    /*0x690*/ struct ItemSlot bagPocket_TMHM[BAG_TMHM_COUNT];
+    /*0x690*/ struct ItemSlot bagPocket_TMHM[BAG_TMHM_COUNT]; // 400 bytes
     /*0x790*/ struct ItemSlot bagPocket_Berries[BAG_BERRIES_COUNT];
     /*0x848*/ struct Pokeblock pokeblocks[POKEBLOCKS_COUNT];
     /*0x988*/ u8 seen1[NUM_DEX_FLAG_BYTES];
@@ -1019,7 +1019,7 @@ struct SaveBlock1
     #ifndef FREE_MYSTERY_EVENT_BUFFERS
     /*0x322C*/ struct MysteryGiftSave mysteryGift;   //876 bytes
     #endif
-    /*0x3598*/ u8 unused_3598[0x180];
+    /*0x3598*/ u8 unused_3598[0x110];
     /*0x3718*/ u32 trainerHillTimes[NUM_TRAINER_HILL_MODES];
     #ifndef FREE_MYSTERY_EVENT_BUFFERS
     /*0x3728*/ struct RamScript ramScript;

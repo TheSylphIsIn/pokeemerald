@@ -416,6 +416,7 @@ static bool8 TryGenerateWildMon(const struct WildPokemonInfo *wildMonInfo, u8 ar
 {
     u8 wildMonIndex = 0;
     u8 level;
+	u32 species = 0;
 
     switch (area)
     {
@@ -443,8 +444,18 @@ static bool8 TryGenerateWildMon(const struct WildPokemonInfo *wildMonInfo, u8 ar
         return FALSE;
     if (gMapHeader.mapLayoutId != LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_ROOM_WILD_MONS && flags & WILD_CHECK_KEEN_EYE && !IsAbilityAllowingEncounter(level))
         return FALSE;
+	
+	species = wildMonInfo->wildPokemon[wildMonIndex].species;
+	
+	// Wild members of the nidoran line will randomly pick between the sexes,
+	// Regardless of what's actually in the table.
+	if (species >= SPECIES_NIDORAN_F && species <= SPECIES_NIDOQUEEN)
+		species += ((Random() % 2) * 3);
+	else if (species >= SPECIES_NIDORAN_M && species <= SPECIES_NIDOKING)
+		species -= ((Random() % 2) * 3);
 
-    CreateWildMon(wildMonInfo->wildPokemon[wildMonIndex].species, level);
+
+    CreateWildMon(species, level);
     return TRUE;
 }
 

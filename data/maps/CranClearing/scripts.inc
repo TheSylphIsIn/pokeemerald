@@ -41,7 +41,7 @@ CranClearing_TriggerScript_Calvin1::
 	waitmovement 0
 	setobjectxy LOCALID_MORGAN, 12, 15
 	setobjectxy LOCALID_CALVIN, 30, 7
-	setobjectxyperm LOCALID_MORGAN, 12, 15 // add normal setobjectxys and a perm map script
+	setobjectxyperm LOCALID_MORGAN, 12, 15
 	setobjectxyperm LOCALID_CALVIN, 30, 7
 	setvar VAR_FONEI_COAST_STATE, 5
 	release
@@ -196,7 +196,130 @@ CranClearing_Movement_MorganWalkOffscreen:
 	step_end
 	
 // boy battle script
+CranClearing_EventScript_Calvin::
+	lock
+	faceplayer
+	call_if_set FLAG_FAVORED_MORGAN, CranClearing_EventScript_CalvinReactToMorganDefeat
+	msgbox CranClearing_Text_CalvinBattleIntro, MSGBOX_DEFAULT
+	applymovement LOCALID_CALVIN, CranClearing_Movement_CalvinWalkToArena
+	delay 10
+	applymovement OBJ_EVENT_ID_PLAYER, CranClearing_Movement_PlayerWalkToCArena
+	waitmovement LOCALID_CALVIN
+	msgbox CranClearing_Text_CalvinBattleIntro2, MSGBOX_DEFAULT
+	closemessage
+	switch VAR_STARTER_MON
+	case 0, CranClearing_EventScript_CalvinBattleGlasma
+	case 1, CranClearing_EventScript_CalvinBattleSandude
+	case 2, CranClearing_EventScript_CalvinBattleEladrift
+	end
+	
+CranClearing_EventScript_CalvinReactToMorganDefeat:
+	msgbox CranClearing_Text_CalvinMorganBeaten, MSGBOX_DEFAULT
+	closemessage
+	return
+	
+CranClearing_EventScript_CalvinBattleGlasma::
+	trainerbattle_no_intro TRAINER_CALVIN_FISHEYE_LAKE_GLASMA, CranClearing_Text_CalvinDefeated
+	goto CranClearing_EventScript_CalvinAfterBattle
+	end
 
+CranClearing_EventScript_CalvinBattleSandude::
+	trainerbattle_no_intro TRAINER_CALVIN_FISHEYE_LAKE_SANDUDE, CranClearing_Text_CalvinDefeated
+	goto CranClearing_EventScript_CalvinAfterBattle
+	end
+
+CranClearing_EventScript_CalvinBattleEladrift::
+	trainerbattle_no_intro TRAINER_CALVIN_FISHEYE_LAKE_ELADRIFT, CranClearing_Text_CalvinDefeated
+	goto CranClearing_EventScript_CalvinAfterBattle
+	end
+	
+CranClearing_Text_CalvinMorganBeaten:
+	.string "CALVIN: You fought MORGAN and came\n"
+	.string "back? You like this battle thing,\l"
+	.string "huh.$"
+	
+CranClearing_Text_CalvinBattleIntro:
+	.string "CALVIN: So, if we're trying to\n"
+	.string "toughen up, I guess we'd better\l"
+	.string "battle each other, right?\p"
+	.string "If you think you can keep up\n"
+	.string "with my pace… let's find out!$"
+	
+CranClearing_Text_CalvinBattleIntro2:
+	.string "Prepare yourself!$"
+	
+CranClearing_Text_CalvinDefeated:
+	.string "CALVIN: Huh, you're better\n"
+	.string "than I expected.$"
+	
+CranClearing_Movement_CalvinWalkToArena:
+	walk_up
+	walk_up
+	walk_up
+	walk_left
+	walk_left
+	walk_left
+	delay_16
+	face_right
+	step_end
+
+CranClearing_Movement_PlayerWalkToCArena:
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_left
+	step_end
+
+CranClearing_EventScript_CalvinAfterBattle:
+	special HealPlayerParty
+	msgbox CranClearing_Text_CalvinAfterBattle1, MSGBOX_DEFAULT
+	closemessage
+	applymovement LOCALID_CALVIN, CranClearing_Movement_CalvinGiveSwift
+	waitmovement 0
+	giveitem ITEM_TM10
+	msgbox CranClearing_Text_CalvinExplainSwift, MSGBOX_DEFAULT
+	closemessage
+	applymovement LOCALID_CALVIN, CranClearing_Movement_CalvinWalkOffscreen
+	waitmovement 0
+	removeobject LOCALID_CALVIN
+	setflag FLAG_FAVORED_CALVIN
+	end
+	
+CranClearing_Text_CalvinAfterBattle1:
+	.string "CALVIN: Dang, you're good.\n"
+	.string "How'd you get strong so quick?\p"
+	.string "Ah well, maybe you just know more\n"
+	.string " about POKéMON than me.\p"
+	.string "I'll get better than you, though,\n"
+	.string "mark my words.\p"
+	.string "I even used this, but it didn't\n"
+	.string "help. You can have it, I guess.$"
+
+CranClearing_Text_CalvinExplainSwift:
+	.string "It's a TM for SWIFT. Decent move.\n"
+	.string "It's reusable, too, so try it out.\p"
+	.string "I'm going on ahead. I guess the thief\n"
+	.string "is hiding out in that cave.\l"
+	.string "Don't be a slowpoke!$"
+	
+CranClearing_Movement_CalvinGiveSwift:
+	walk_right
+	delay_16
+	walk_in_place_slow_right
+	step_end
+	
+CranClearing_Movement_CalvinWalkOffscreen:
+	walk_up
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	step_end
+	
 // youngster
 
 // item 2
