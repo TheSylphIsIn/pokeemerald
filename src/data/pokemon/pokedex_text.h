@@ -2345,10 +2345,10 @@ const u8 gBitteragonPokedexText[] = _(
 	"Its fury can be calmed by choral singing.");
 	
 const u8 gCactumbraPokedexText[] = _(
-	"CACTUMBRA leaves its group when\n"
-	"it evolves. It is strong enough\n"
-	"to win one-on-one fights, but still\n"
-	"prefers prey that can't fight back.");
+	"CACTUMBRA leaves its pack when it\n"
+	"evolves. It fires needles from the end\n"
+	"of its arm, but they take a while to\n"
+	"regrow, so it uses them sparingly.");
 	
 const u8 gObsicargoPokedexText[] = _(
 	"Its magma body has thoroughly\n"

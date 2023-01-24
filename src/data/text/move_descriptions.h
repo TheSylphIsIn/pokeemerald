@@ -1696,6 +1696,106 @@ static const u8 sLimberUpDescription[] = _(
 static const u8 sAcidSprayDescription[] = _(
 	"Sprays acid that drops\n"
 	"the foe's SP. DEF harshly.");
+	
+static const u8 sShearWindDescription[] = _(
+	"Whips up a cutting gust\n"
+	"of wind. High critical.");
+	
+static const u8 sWashOffDescription[] = _(
+	"Cleanses the foe's stat\n"
+	"changes with running water.");
+	
+static const u8 sClearSmogDescription[] = _(
+	"Blows a strange fog that\n"
+	"removes foe's stat changes.");
+	
+static const u8 sWhitewaterDescription[] = _(
+	"Crushes the foe with\n"
+	"rushing water.");
+	
+static const u8 sBlackoutDescription[] = _(
+	"Traps foe in an illusion.\n"
+	"Attacks with SP. DEF.");
+	
+static const u8 sBladeStormDescription[] = _(
+	"Strikes with a whirl of\n"
+	"cutting power.");
+	
+static const u8 sHealOrderDescription[] = _(
+	"Uses the power of others\n"
+	"to restore HP.");
+	
+static const u8 sFumugateDescription[] = _(
+	"Overwhelms the foe with\n"
+	"noxious gas. May poison.");
+	
+static const u8 sFadeAwayDescription[] = _(
+	"Fades away ethereally to\n"
+	"escape from battle.");
+	
+static const u8 sBitterSlashDescription[] = _(
+	"Slashes the foe with a bone\n"
+	"chilling blade. Drops DEF.");
+	
+static const u8 sHorrifyDescription[] = _(
+	"Induces fear in the foe.\n"
+	"May cause flinching.");
+	
+static const u8 sMagicBurstDescription[] = _(
+	"Releases a lot of power\n"
+	"at once. Drops user SP.ATK.");
+	
+static const u8 sPreciseCutDescription[] = _(
+	"Stabs the target with a\n"
+	"pointy part. Can't miss.");
+	
+static const u8 sKowtowCleaveDescription[] = _(
+	"Mock bows to cut with the\n"
+	"user's head-mounted blade.");
+	
+static const u8 sRendDescription[] = _(
+	"Power up if foe has a \n"
+	"status problem."); 
+
+static const u8 sHexDescription[] = _(
+	"Power up if foe has a \n"
+	"status problem.");
+	
+static const u8 sTailwindDescription[] = _(
+	"Summons backing wind. Ups\n"
+	"party SPEED for 4 turns.");
+	
+static const u8 sArmorCrushDescription[] = _(
+	"Shatters the foe's defenses,"
+	"opening it to CRITICAL HITs.");
+	
+static const u8 sShoreUpDescription[] = _(
+	"Heals using sand. Heals\n"
+	"more in a SANDSTORM.");
+	
+static const u8 sFlameChargeDescription[] = _(
+	"A burning tackle that\n"
+	"ups the user's SPEED.");
+	
+static const u8 sTrailblazeDescription[] = _(
+	"A rushing ambush that\n"
+	"ups the user's SPEED.");
+	
+static const u8 sTantrumDescription[] = _(
+	"Spreads bad feelings.\n"
+	"Power up if suffering.");
+	
+static const u8 sStruggleBugDescription[] = _(
+	"A frantic attack that\n"
+	"drops the foe's SP. ATK.");
+	
+static const u8 sGemSparkDescription[] = _(
+	"A flash of crystal\n"
+	"energy that never misses.");
+	
+static const u8 sMockeryDescription[] = _(
+	"Demoralizes the foe with\n"
+	"insults to drop ATTACK.");
 
 // MOVE_NONE is ignored in this table. Make sure to always subtract 1 before getting the right pointer.
 const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
@@ -2124,4 +2224,29 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
 	[MOVE_CHILL_TOUCH - 1] = sChillTouchDescription,
 	[MOVE_LIMBER_UP - 1] = sLimberUpDescription,
 	[MOVE_ACID_SPRAY - 1] = sAcidSprayDescription,
+	[MOVE_SHEAR_WIND - 1] = sShearWindDescription,
+	[MOVE_WASH_OFF - 1] = sWashOffDescription,
+	[MOVE_CLEAR_SMOG - 1] = sClearSmogDescription,
+	[MOVE_WHITEWATER - 1] = sWhitewaterDescription,
+	[MOVE_BLACKOUT - 1] = sBlackoutDescription,
+	[MOVE_BLADE_STORM - 1] = sBladeStormDescription,
+	[MOVE_HEAL_ORDER - 1] = sHealOrderDescription,
+	[MOVE_FUMUGATE - 1] = sFumugateDescription,
+	[MOVE_FADE_AWAY - 1] = sFadeAwayDescription,
+	[MOVE_BITTER_SLASH - 1] = sBitterSlashDescription,
+	[MOVE_HORRIFY - 1] = sHorrifyDescription,
+	[MOVE_MAGIC_BURST - 1] = sMagicBurstDescription,
+	[MOVE_PRECISE_CUT - 1] = sPreciseCutDescription,
+	[MOVE_KOWTOW_CLEAVE - 1] = sKowtowCleaveDescription,
+	[MOVE_REND - 1] = sRendDescription,
+	[MOVE_HEX - 1] = sHexDescription,
+	[MOVE_TAILWIND - 1] = sTailwindDescription,
+	[MOVE_ARMOR_CRUSH - 1] = sArmorCrushDescription,
+	[MOVE_SHORE_UP - 1] = sShoreUpDescription,
+	[MOVE_FLAME_CHARGE - 1] = sFlameChargeDescription,
+	[MOVE_TRAILBLAZE - 1] = sTrailblazeDescription,
+	[MOVE_TANTRUM - 1] = sTantrumDescription,
+	[MOVE_STRUGGLE_BUG - 1] = sStruggleBugDescription,
+	[MOVE_GEM_SPARK - 1] = sGemSparkDescription,
+	[MOVE_MOCKERY - 1] = sMockeryDescription,
 };

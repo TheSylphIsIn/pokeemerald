@@ -441,6 +441,31 @@ gBattleAnims_Moves::
 	.4byte Move_CHILL_TOUCH
 	.4byte Move_LIMBER_UP
 	.4byte Move_ACID_SPRAY
+	.4byte Move_SHEAR_WIND
+	.4byte Move_WASH_OFF
+	.4byte Move_CLEAR_SMOG
+	.4byte Move_WHITEWATER
+	.4byte Move_BLACKOUT
+	.4byte Move_BLADE_STORM
+	.4byte Move_HEAL_ORDER
+	.4byte Move_FUMUGATE
+	.4byte Move_FADE_AWAY
+	.4byte Move_BITTER_SLASH
+	.4byte Move_HORRIFY
+	.4byte Move_MAGIC_BURST
+	.4byte Move_PRECISE_CUT
+	.4byte Move_KOWTOW_CLEAVE
+	.4byte Move_REND
+	.4byte Move_HEX
+	.4byte Move_TAILWIND
+	.4byte Move_ARMOR_CRUSH
+	.4byte Move_SHORE_UP
+	.4byte Move_FLAME_CHARGE
+	.4byte Move_TRAILBLAZE
+	.4byte Move_TANTRUM
+	.4byte Move_STRUGGLE_BUG
+	.4byte Move_GEM_SPARK
+	.4byte Move_MOCKERY
 	.4byte Move_COUNT @ cannot be reached, because last move is Psycho Boost
 
 	.align 2
@@ -10160,6 +10185,66 @@ Move_LIMBER_UP:
 
 
 Move_ACID_SPRAY:
+
+Move_SHEAR_WIND:
+Move_WASH_OFF:
+	loadspritegfx ANIM_TAG_SMALL_BUBBLES
+	loadspritegfx ANIM_TAG_WATER_IMPACT
+	monbg ANIM_DEF_PARTNER
+	splitbgprio ANIM_TARGET
+	setalpha 12, 8
+	createsprite gWaterGunProjectileSpriteTemplate, ANIM_ATTACKER, 2, 20, 0, 0, 0, 40, -25
+	playsewithpan SE_M_BUBBLE, SOUND_PAN_ATTACKER
+	delay 8
+	createsprite gWaterGunProjectileSpriteTemplate, ANIM_ATTACKER, 2, 20, 0, 0, 0, 40, -25
+	playsewithpan SE_M_BUBBLE, SOUND_PAN_ATTACKER
+	delay 8
+	createsprite gWaterGunProjectileSpriteTemplate, ANIM_ATTACKER, 2, 20, 0, 0, 0, 40, -25
+	playsewithpan SE_M_BUBBLE, SOUND_PAN_ATTACKER
+	delay 8
+	createsprite gWaterGunProjectileSpriteTemplate, ANIM_ATTACKER, 2, 20, 0, 0, 0, 40, -25
+	playsewithpan SE_M_BUBBLE, SOUND_PAN_ATTACKER
+	delay 8
+	waitforvisualfinish
+	createvisualtask AnimTask_ShakeMon2, 5, ANIM_TARGET, 1, 0, 8, 1
+	createsprite gWaterHitSplatSpriteTemplate, ANIM_ATTACKER, 4, 0, 0, ANIM_TARGET, 2
+	createsprite gWaterGunDropletSpriteTemplate, ANIM_ATTACKER, 2, 0, -15, 0, 15, 55
+	playsewithpan SE_M_CRABHAMMER, SOUND_PAN_TARGET
+	delay 10
+	createsprite gWaterGunDropletSpriteTemplate, ANIM_ATTACKER, 2, 15, -20, 0, 15, 50
+	playsewithpan SE_M_CRABHAMMER, SOUND_PAN_TARGET
+	delay 10
+	createsprite gWaterGunDropletSpriteTemplate, ANIM_ATTACKER, 2, -15, -10, 0, 10, 45
+	playsewithpan SE_M_CRABHAMMER, SOUND_PAN_TARGET
+	waitforvisualfinish
+	call WaterBubblesEffectLong
+	waitforvisualfinish
+	clearmonbg ANIM_DEF_PARTNER
+	blendoff
+	end
+Move_CLEAR_SMOG:
+Move_WHITEWATER:
+Move_BLACKOUT:
+Move_BLADE_STORM:
+Move_HEAL_ORDER:
+Move_FUMUGATE:
+Move_FADE_AWAY:
+Move_BITTER_SLASH:
+Move_HORRIFY:
+Move_MAGIC_BURST:
+Move_PRECISE_CUT:
+Move_KOWTOW_CLEAVE:
+Move_REND:
+Move_HEX:
+Move_TAILWIND:
+Move_ARMOR_CRUSH:
+Move_SHORE_UP:
+Move_FLAME_CHARGE:
+Move_TRAILBLAZE:
+Move_TANTRUM:
+Move_STRUGGLE_BUG:
+Move_GEM_SPARK:
+Move_MOCKERY:
 
 Move_KNOCK_OFF:
 	loadspritegfx ANIM_TAG_SLAM_HIT_2

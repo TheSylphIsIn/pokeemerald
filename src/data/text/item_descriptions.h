@@ -1731,6 +1731,96 @@ static const u8 sTM75Desc[] = _(
 	"Inflicts a random\n"
 	"status problem. 2nd\n"
 	"use: confuses.");
+	
+static const u8 sTM76Desc[] = _();
+	
+static const u8 sTM77Desc[] = _();
+	
+static const u8 sTM78Desc[] = _();
+	
+static const u8 sTM79Desc[] = _();
+	
+static const u8 sTM80Desc[] = _();
+	
+static const u8 sTM81Desc[] = _();
+	
+static const u8 sTM82Desc[] = _();
+	
+static const u8 sTM83Desc[] = _();
+	
+static const u8 sTM84Desc[] = _();
+	
+static const u8 sTM85Desc[] = _();
+	
+static const u8 sTM86Desc[] = _();
+	
+static const u8 sTM87Desc[] = _();
+	
+static const u8 sTM88Desc[] = _();
+	
+static const u8 sTM89Desc[] = _();
+	
+static const u8 sTM90Desc[] = _();
+	
+static const u8 sTM91Desc[] = _();
+	
+static const u8 sTM92Desc[] = _();
+	
+static const u8 sTM93Desc[] = _();
+	
+static const u8 sTM94Desc[] = _();
+	
+static const u8 sTM95Desc[] = _();
+	
+static const u8 sTM96Desc[] = _();
+	
+static const u8 sTM97Desc[] = _();
+	
+static const u8 sTM98Desc[] = _();
+	
+static const u8 sTM99Desc[] = _();
+	
+static const u8 sTM100Desc[] = _();
+	
+static const u8 sTM101Desc[] = _();
+	
+static const u8 sTM102Desc[] = _();
+	
+static const u8 sTM103Desc[] = _();
+	
+static const u8 sTM104Desc[] = _();
+	
+static const u8 sTM105Desc[] = _();
+	
+static const u8 sTM106Desc[] = _();
+	
+static const u8 sTM107Desc[] = _();
+	
+static const u8 sTM108Desc[] = _();
+	
+static const u8 sTM109Desc[] = _();
+	
+static const u8 sTM110Desc[] = _();
+	
+static const u8 sTM111Desc[] = _();
+	
+static const u8 sTM112Desc[] = _();
+	
+static const u8 sTM113Desc[] = _();
+	
+static const u8 sTM114Desc[] = _();
+	
+static const u8 sTM115Desc[] = _();
+	
+static const u8 sTM116Desc[] = _();
+	
+static const u8 sTM117Desc[] = _();
+	
+static const u8 sTM118Desc[] = _();
+	
+static const u8 sTM119Desc[] = _();
+	
+static const u8 sTM120Desc[] = _();
 
 static const u8 sHM01Desc[] = _(
     "Attacks the foe\n"

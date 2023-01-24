@@ -817,11 +817,11 @@ static const u16 sRarePickupItems[] =
     ITEM_FULL_RESTORE,
     ITEM_ETHER,
     ITEM_WHITE_HERB,
-    ITEM_TM44_REST,
+    ITEM_RARE_CANDY,
     ITEM_ELIXIR,
-    ITEM_TM01_FOCUS_PUNCH,
+    ITEM_DUSK_STONE,
     ITEM_LEFTOVERS,
-    ITEM_TM26_EARTHQUAKE,
+    ITEM_DAWN_STONE,
 };
 
 static const u8 sPickupProbabilities[] =
@@ -7459,8 +7459,11 @@ static void Cmd_normalisebuffs(void)
 {
     s32 i, j;
 
-    for (i = 0; i < gBattlersCount; i++)
+    for (i = 0; i < gBattlersCount; i++)	
     {
+		if (gBattleMoves[gCurrentMove].effect == EFFECT_CLEAR_STATS_HIT && i != gBattlerTarget)
+			continue;
+		
         for (j = 0; j < NUM_BATTLE_STATS; j++)
             gBattleMons[i].statStages[j] = DEFAULT_STAT_STAGE;
     }
@@ -9177,12 +9180,22 @@ static void Cmd_recoverbasedonsunlight(void)
 
     if (gBattleMons[gBattlerAttacker].hp != gBattleMons[gBattlerAttacker].maxHP)
     {
-        if (gBattleWeather == 0 || !WEATHER_HAS_EFFECT)
-            gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 2;
-        else if (gBattleWeather & B_WEATHER_SUN)
-            gBattleMoveDamage = 20 * gBattleMons[gBattlerAttacker].maxHP / 30;
-        else // not sunny weather
-            gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 4;
+		switch (gBattleMoves[gCurrentMove].effect)
+		{
+			case EFFECT_SHORE_UP:
+				if ((gBattleWeather & B_WEATHER_SANDSTORM) && WEATHER_HAS_EFFECT)
+					gBattleMoveDamage = 20 * gBattleMons[gBattlerAttacker].maxHP / 30;
+				else
+					gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 2;
+				break;
+			default:
+				if (gBattleWeather == 0 || !WEATHER_HAS_EFFECT)
+					gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 2;
+				else if (gBattleWeather & B_WEATHER_SUN)
+					gBattleMoveDamage = 20 * gBattleMons[gBattlerAttacker].maxHP / 30;
+				else // not sunny weather
+					gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 4;
+		}
 
         if (gBattleMoveDamage == 0)
             gBattleMoveDamage = 1;

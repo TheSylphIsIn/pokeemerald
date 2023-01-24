@@ -152,7 +152,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectHit                    @ EFFECT_UNUSED_83
 	.4byte BattleScript_EffectMorningSun             @ EFFECT_MORNING_SUN
 	.4byte BattleScript_EffectSynthesis              @ EFFECT_SYNTHESIS
-	.4byte BattleScript_EffectMoonlight              @ EFFECT_MOONLIGHT
+	.4byte BattleScript_EffectShoreUp             	 @ EFFECT_SHORE_UP
 	.4byte BattleScript_EffectHiddenPower            @ EFFECT_HIDDEN_POWER
 	.4byte BattleScript_EffectRainDance              @ EFFECT_RAIN_DANCE
 	.4byte BattleScript_EffectSunnyDay               @ EFFECT_SUNNY_DAY
@@ -253,6 +253,11 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectLimberUp				 @ EFFECT_LIMBER_UP
 	.4byte BattleScript_EffectSpecialDefenseDown2Hit @ EFFECT_SPECIAL_DEFENSE_DOWN_2_HIT
 	.4byte BattleScript_EffectPsychUpHit			 @ EFFECT_PSYCH_UP_HIT
+	.4byte BattleScript_EffectClearStatsHit			 @ EFFECT_CLEAR_STATS_HIT
+	.4byte BattleScript_EffectHex					 @ EFFECT_HEX
+	.4byte BattleScript_EffectTailwind				 @ EFFECT_TAILWIND
+	.4byte BattleScript_EffectArmorCrush 			 @ EFFECT_ARMOR_CRUSH
+	.4byte BattleScript_EffectSpeedUpHit			 @ EFFECT_SPEED_UP_HIT
 
 BattleScript_EffectHit::
 	jumpifnotmove MOVE_SURF, BattleScript_HitFromAtkCanceler
@@ -1759,7 +1764,7 @@ BattleScript_EffectSonicboom::
 
 BattleScript_EffectMorningSun::
 BattleScript_EffectSynthesis::
-BattleScript_EffectMoonlight::
+BattleScript_EffectShoreUp::
 	attackcanceler
 	attackstring
 	ppreduce
@@ -2280,7 +2285,7 @@ BattleScript_MementoTargetProtectEnd:
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectFacade::
-	jumpifstatus BS_ATTACKER, STATUS1_POISON | STATUS1_BURN | STATUS1_PARALYSIS | STATUS1_TOXIC_POISON, BattleScript_FacadeDoubleDmg
+	jumpifstatus BS_ATTACKER, STATUS1_POISON | STATUS1_BURN | STATUS1_PARALYSIS | STATUS1_TOXIC_POISON | STATUS1_FREEZE, BattleScript_FacadeDoubleDmg
 	goto BattleScript_EffectHit
 
 BattleScript_FacadeDoubleDmg::
@@ -3212,6 +3217,46 @@ BattleScript_PsychUpHitSkipMessage::
 	tryfaintmon BS_TARGET
 	goto BattleScript_MoveEnd
 
+BattleScript_EffectClearStatsHit::
+	attackcanceler
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	attackstring
+	ppreduce
+	critcalc
+	damagecalc
+	typecalc
+	adjustnormaldamage
+	attackanimation
+	waitanimation
+	effectivenesssound
+	hitanimation BS_TARGET
+	waitstate
+	healthbarupdate BS_TARGET
+	datahpupdate BS_TARGET
+	critmessage
+	waitmessage B_WAIT_TIME_LONG
+	resultmessage
+	waitmessage B_WAIT_TIME_LONG
+	seteffectwithchance
+	normalisebuffs
+	printstring STRINGID_STATCHANGESGONE
+	tryfaintmon BS_TARGET
+	moveendall
+	end
+
+BattleScript_EffectHex::
+	jumpifstatus BS_TARGET, STATUS1_ANY, BattleScript_FacadeDoubleDmg
+	goto BattleScript_EffectHit
+	
+BattleScript_EffectTailwind::
+	goto BattleScript_EffectHit
+	
+BattleScript_EffectArmorCrush::
+	goto BattleScript_EffectHit
+
+BattleScript_EffectSpeedUpHit::
+	setmoveeffect MOVE_EFFECT_SPD_PLUS_1 | MOVE_EFFECT_AFFECTS_USER
+	goto BattleScript_EffectHit
 
 BattleScript_FaintAttacker::
 	playfaintcry BS_ATTACKER

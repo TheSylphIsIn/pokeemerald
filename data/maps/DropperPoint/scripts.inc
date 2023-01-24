@@ -8,50 +8,7 @@ DropperPoint_MapScripts::
 DropperPoint_Sign::
 	msgbox DropperPoint_Text_Sign, MSGBOX_SIGN
 	end
-	
-Test_Alchemy::
-	chooseitem ITEMS_POCKET
-	goto_if_eq VAR_ITEM_ID, ITEM_NONE, Test_GaveUp
-	copyvar VAR_TEMP_E, VAR_ITEM_ID
-	removeitem VAR_TEMP_E, 1
-	chooseitem ITEMS_POCKET
-	goto_if_eq VAR_ITEM_ID, ITEM_NONE, Test_GaveUp2
-	copyvar VAR_TEMP_F, VAR_ITEM_ID
-	removeitem VAR_TEMP_F, 1
-	callnative TryCombineItems
-	goto_if_eq VAR_ITEM_ID, ITEM_NONE, Test_NoResult
-	bufferitemname STR_VAR_1, VAR_TEMP_E
-	bufferitemname STR_VAR_2, VAR_TEMP_F
-	msgbox Test_Text_Success, MSGBOX_SIGN
-	giveitem VAR_ITEM_ID
-	release
-	end
 
-Test_GaveUp:
-	msgbox Test_Text_DidntCraft, MSGBOX_SIGN
-	end
-	
-Test_GaveUp2:
-	additem VAR_TEMP_E
-	goto Test_GaveUp
-	
-Test_NoResult:
-	additem VAR_TEMP_E
-	additem VAR_TEMP_F
-	msgbox Test_Text_BadRecipe, MSGBOX_SIGN
-	end
-	
-
-Test_Text_DidntCraft:
-	.string "Gave up crafting.$"
-	
-Test_Text_BadRecipe:
-	.string "Invalid recipe.$"
-
-Test_Text_Success:
-	.string "Combined the {STR_VAR_1}\n"
-	.string "and the {STR_VAR_2}…$"
-	
 DropperPoint_EventScript_Morgan::
 	lock
 	goto_if_eq VAR_FONEI_COAST_STATE, 1, DropperPoint_EventScript_MorganPanic

@@ -277,7 +277,7 @@ CranClearing_EventScript_CalvinAfterBattle:
 	closemessage
 	applymovement LOCALID_CALVIN, CranClearing_Movement_CalvinGiveSwift
 	waitmovement 0
-	giveitem ITEM_TM10
+	giveitem ITEM_TM100
 	msgbox CranClearing_Text_CalvinExplainSwift, MSGBOX_DEFAULT
 	closemessage
 	applymovement LOCALID_CALVIN, CranClearing_Movement_CalvinWalkOffscreen

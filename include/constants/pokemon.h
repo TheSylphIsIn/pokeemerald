@@ -201,6 +201,28 @@
 #define MAX_TOTAL_EVS 510
 #define EV_ITEM_RAISE_LIMIT 100
 
+#define MOVE_CATEGORY_PHYSICAL 0
+#define MOVE_CATEGORY_SPECIAL 1
+#define MOVE_CATEGORY_STATUS 2
+#define MOVE_CATEGORY_DYNAMIC 3
+
+#define MOVE_ATTRIBUTE_NONE 0
+#define MOVE_ATTRIBUTE_SLASH 1 // boosted by Hyper Cutter.
+#define MOVE_ATTRIBUTE_PUNCH 2 // boosted by Iron Fist. evolves Tyrogue into Hitmonchan.
+#define MOVE_ATTRIBUTE_KICK 3 // boosted by Striker. evolves Tyrogue into Hitmonlee.
+#define MOVE_ATTRIBUTE_BITE 4 // boosted by Strong Jaw.
+#define MOVE_ATTRIBUTE_SOUND 5 // boosted by Cacophony.
+#define MOVE_ATTRIBUTE_RISKY 6 // boosted by Reckless.
+#define MOVE_ATTRIBUTE_LIGHT 7 // evolves Keesh into Hatchbling. 
+#define MOVE_ATTRIBUTE_ENERGY 8 // evolves Keesh into Keesight.
+#define MOVE_ATTRIBUTE_BOMB 9 // resisted by Bulletproof.
+#define MOVE_ATTRIBUTE_CRUSH 10
+#define MOVE_ATTRIBUTE_HEAL 11 // Heal Bell, Recover, etc.
+#define MOVE_ATTRIBUTE_BUFF 12 // Meditate, Iron Defense, etc
+#define MOVE_ATTRIBUTE_DEBUFF 13 // Sand-attack, Leer, etc
+#define MOVE_ATTRIBUTE_INFLICT_STATUS 14 // Thunder Wave, Confuse ray, etc.
+#define MOVE_ATTRIBUTE_FIELD_EFFECT 15 // Reflect, Sunny Day, etc.
+
 // Battle move flags
 #define FLAG_MAKES_CONTACT          (1 << 0)
 #define FLAG_PROTECT_AFFECTED       (1 << 1)
