@@ -6261,7 +6261,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 	[MOVE_WHITEWATER] = 
 	{
 		.effect = EFFECT_HIT,
-		.power = 110,
+		.power = 120,
 		.type = TYPE_WATER,
 		.accuracy = 85,
 		.pp = 5,

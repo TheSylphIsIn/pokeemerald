@@ -4412,17 +4412,17 @@ void ItemUseCB_AbilityScanner(u8 taskId, TaskFunc task)
         gPartyMenuUseExitCallback = TRUE;
         PlaySE(SE_PC_LOGIN);
 		value = GetMonData(mon, MON_DATA_SPECIES, NULL);
-		StringCopy(gStringVar2, gAbilityNames[gBaseStats[value].abilities[0]]);
-		if (gBaseStats[value].abilities[1]) // appends ",  <second ability name>" to the string if mon has two abilities
+		StringCopy(gStringVar2, gAbilityNames[gSpeciesInfo[value].abilities[0]]);
+		if (gSpeciesInfo[value].abilities[1]) // appends ",  <second ability name>" to the string if mon has two abilities
 		{
 			StringAppend(gStringVar2, gText_EmptySpace);
-			StringAppend(gStringVar2, gAbilityNames[gBaseStats[value].abilities[1]]);
+			StringAppend(gStringVar2, gAbilityNames[gSpeciesInfo[value].abilities[1]]);
 		}
-		StringCopy(gStringVar3, gAbilityNames[gBaseStats[value].abilities[2]]);
-		if (gBaseStats[value].abilities[2] != gBaseStats[value].abilities[3]) // doesn't display the same name twice
+		StringCopy(gStringVar3, gAbilityNames[gSpeciesInfo[value].abilities[2]]);
+		if (gSpeciesInfo[value].abilities[2] != gSpeciesInfo[value].abilities[3]) // doesn't display the same name twice
 		{
 			StringAppend(gStringVar3, gText_EmptySpace);
-			StringAppend(gStringVar3, gAbilityNames[gBaseStats[value].abilities[3]]);
+			StringAppend(gStringVar3, gAbilityNames[gSpeciesInfo[value].abilities[3]]);
 		}
 		StringExpandPlaceholders(gStringVar4, gText_ReadOutAbilities);
 		DisplayPartyMenuMessage(gStringVar4, TRUE);
@@ -4502,7 +4502,7 @@ void ItemUseCB_Medicine(u8 taskId, TaskFunc task)
 				SetMonData(mon, MON_DATA_ABILITY_NUM, &value);
 			}
 			GetMonNickname(mon, gStringVar1);
-			StringCopy(gStringVar2, gAbilityNames[gBaseStats[GetMonData(mon, MON_DATA_SPECIES, NULL)].abilities[value]]);
+			StringCopy(gStringVar2, gAbilityNames[gSpeciesInfo[GetMonData(mon, MON_DATA_SPECIES, NULL)].abilities[value]]);
 			StringExpandPlaceholders(gStringVar4, gText_PkmnAbilityChanged);
 			DisplayPartyMenuMessage(gStringVar4, FALSE);
 			ScheduleBgCopyTilemapToVram(2);
@@ -4511,7 +4511,7 @@ void ItemUseCB_Medicine(u8 taskId, TaskFunc task)
 		else if (item == ITEM_DREAM_PILL) // dream pills swap between normal/hidden without changing ability slots*.
 		{
 			value = GetMonData(mon, MON_DATA_ABILITY_NUM, NULL);
-			if (value == 3 && gBaseStats[GetMonData(mon, MON_DATA_SPECIES, NULL)].abilities[1] == 0)
+			if (value == 3 && gSpeciesInfo[GetMonData(mon, MON_DATA_SPECIES, NULL)].abilities[1] == 0)
 			/*
 			If a mon has one normal ability but two hidden abilities
 			(e.g. {ABILITY_OVERGROW, ABILITY_NONE, ABILITY_CHLOROPHYLL, ABILITY_THICK_FAT}),
@@ -4537,7 +4537,7 @@ void ItemUseCB_Medicine(u8 taskId, TaskFunc task)
 				SetMonData(mon, MON_DATA_ABILITY_NUM, &value);
 			}
 			GetMonNickname(mon, gStringVar1);
-			StringCopy(gStringVar2, gAbilityNames[gBaseStats[GetMonData(mon, MON_DATA_SPECIES, NULL)].abilities[value]]);
+			StringCopy(gStringVar2, gAbilityNames[gSpeciesInfo[GetMonData(mon, MON_DATA_SPECIES, NULL)].abilities[value]]);
 			StringExpandPlaceholders(gStringVar4, gText_PkmnAbilityChanged);
 			DisplayPartyMenuMessage(gStringVar4, FALSE);
 			ScheduleBgCopyTilemapToVram(2);
