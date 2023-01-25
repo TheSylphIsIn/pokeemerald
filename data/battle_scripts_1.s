@@ -5253,6 +5253,14 @@ BattleScript_ForewarnActivates::
 	printstring STRINGID_PKMNFOREWARNED
 	waitmessage B_WAIT_TIME_LONG
 	end3
+	
+BattleScript_PranksterMoveCancel::
+	attackstring
+	pause 0x20
+	ppreduce
+	printstring STRINGID_DARKBLOCKSPRANKSTER
+	waitmessage B_WAIT_TIME_LONG
+	end
 
 BattleScript_FormChangeFromMove::
 	printstring STRINGID_EMPTYSTRING3

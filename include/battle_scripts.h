@@ -250,4 +250,5 @@ extern const u8 BattleScript_FormChangeFromMove[];
 extern const u8 BattleScript_WardActivates[];
 extern const u8 BattleScript_TollCallActivates[];
 extern const u8 BattleScript_EntrapmentActivates[];
+extern const u8 BattleScript_PranksterMoveCancel[];
 #endif // GUARD_BATTLE_SCRIPTS_H

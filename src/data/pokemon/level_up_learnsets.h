@@ -5950,6 +5950,7 @@ static const u16 sMolduneLevelUpLearnset[] = {
 
 static const u16 sWattitudeLevelUpLearnset[] = {
 	LEVEL_UP_MOVE( 1, MOVE_THUNDER_SHOCK),
+	LEVEL_UP_MOVE( 1, MOVE_TAUNT),
 	LEVEL_UP_END
 };
 

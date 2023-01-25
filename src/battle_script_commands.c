@@ -979,12 +979,21 @@ static void Cmd_attackcanceler(void)
             return;
         }
     }
+	
 	if (AbilityBattleEffects(ABILITYEFFECT_ATTACKER, gBattlerAttacker, 0, 0, gCurrentMove))
 	{
 		gBattleScripting.battler = gBattlerAttacker;
 		return;		
 	}
 
+	if (gBattleMons[gBattlerAttacker].ability == ABILITY_PRANKSTER && gBattleMoves[gCurrentMove].category == MOVE_CATEGORY_STATUS
+		&& IS_BATTLER_OF_TYPE(gBattlerTarget, TYPE_DARK))
+	{
+		gMoveResultFlags |= MOVE_RESULT_DOESNT_AFFECT_FOE;
+        gBattlescriptCurrInstr = BattleScript_PranksterMoveCancel;
+		return;
+	}
+	
     if (gBattleOutcome != 0)
     {
         gCurrentActionFuncId = B_ACTION_FINISHED;
@@ -9425,7 +9434,7 @@ static void Cmd_callterrainattack(void)
 // Refresh
 static void Cmd_cureifburnedparalysedorpoisoned(void)
 {
-    if (gBattleMons[gBattlerAttacker].status1 & (STATUS1_POISON | STATUS1_BURN | STATUS1_PARALYSIS | STATUS1_TOXIC_POISON))
+    if (gBattleMons[gBattlerAttacker].status1 & (STATUS1_POISON | STATUS1_BURN | STATUS1_PARALYSIS | STATUS1_TOXIC_POISON | STATUS1_FREEZE))
     {
         gBattleMons[gBattlerAttacker].status1 = 0;
         gBattlescriptCurrInstr += 5;
@@ -9909,7 +9918,7 @@ static void Cmd_switchoutabilities(void)
         MarkBattlerForControllerExec(gActiveBattler);
         break;
 	case ABILITY_REGENERATOR:
-		gBattleMons[gActiveBattler].hp += ((gBattleMons[gActiveBattler].maxHP * 20) / 100);
+		gBattleMons[gActiveBattler].hp += ((gBattleMons[gActiveBattler].maxHP * 25) / 100);
 		if (gBattleMons[gActiveBattler].hp > gBattleMons[gActiveBattler].maxHP)
 			gBattleMons[gActiveBattler].hp = gBattleMons[gActiveBattler].maxHP;
 		BtlController_EmitSetMonData(BUFFER_A, REQUEST_HP_BATTLE, 
@@ -10348,9 +10357,9 @@ static void Cmd_handleballthrow(void)
             * (gBattleMons[gBattlerTarget].maxHP * 3 - gBattleMons[gBattlerTarget].hp * 2)
             / (3 * gBattleMons[gBattlerTarget].maxHP);
 
-        if (gBattleMons[gBattlerTarget].status1 & (STATUS1_SLEEP | STATUS1_FREEZE))
+        if (gBattleMons[gBattlerTarget].status1 & (STATUS1_SLEEP))
             odds *= 2;
-        if (gBattleMons[gBattlerTarget].status1 & (STATUS1_POISON | STATUS1_BURN | STATUS1_PARALYSIS | STATUS1_TOXIC_POISON))
+        if (gBattleMons[gBattlerTarget].status1 & (STATUS1_POISON | STATUS1_BURN | STATUS1_PARALYSIS | STATUS1_TOXIC_POISON | STATUS1_FREEZE))
             odds = (odds * 15) / 10;
 
         if (gLastUsedItem != ITEM_SAFARI_BALL)

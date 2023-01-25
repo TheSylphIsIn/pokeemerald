@@ -36,12 +36,12 @@
 #define ABILITY_SERENE_GRACE 32
 #define ABILITY_SWIFT_SWIM 33
 #define ABILITY_CHLOROPHYLL 34
-#define ABILITY_ILLUMINATE 35
+#define ABILITY_ILLUMINATE 35 // Compoundeyes clone.
 #define ABILITY_TRACE 36
 #define ABILITY_HUGE_POWER 37
 #define ABILITY_POISON_POINT 38
 #define ABILITY_INNER_FOCUS 39
-#define ABILITY_MAGMA_ARMOR 40
+#define ABILITY_MAGMA_ARMOR 40 // Makes user immune to Ice.
 #define ABILITY_WATER_VEIL 41
 #define ABILITY_MAGNET_PULL 42
 #define ABILITY_SOUNDPROOF 43
@@ -53,7 +53,7 @@
 #define ABILITY_FLAME_BODY 49
 #define ABILITY_RUN_AWAY 50
 #define ABILITY_KEEN_EYE 51
-#define ABILITY_HYPER_CUTTER 52
+#define ABILITY_HYPER_CUTTER 52 // Moves with the "slash" attribute do 50% more damage.
 #define ABILITY_PICKUP 53
 #define ABILITY_TRUANT 54
 #define ABILITY_HUSTLE 55
@@ -93,18 +93,18 @@
 #define ABILITY_PIXILATE 89
 #define ABILITY_AERIALATE 90
 #define ABILITY_GALVANIZE 91
-#define ABILITY_BURNINATE 92
+#define ABILITY_BURNINATE 92 // Fire
 #define ABILITY_FUR_COAT 93
-#define ABILITY_SHEER_FORCE 94
+#define ABILITY_SHEER_FORCE 94 // Applies to moves with a non-zero "secondary effect chance", which it sets to 0 on use.
 #define ABILITY_TINTED_LENS 95
-#define ABILITY_IRON_FIST 96
+#define ABILITY_IRON_FIST 96 // Moves with the "punch" attribute do 30% more damage and don't make contact
 #define ABILITY_ADAPTABILITY 97
 #define ABILITY_SUPER_TOUGH 98 // solid rock/filter
 #define ABILITY_RESOLVE 99 // special guts
 #define ABILITY_BRAIN_POWER 100 // special huge power
 #define ABILITY_UNAWARE 101
 #define ABILITY_SLIME_COAT 102 // special fur coat
-#define ABILITY_SPECIALIST 103 // double-single type
+#define ABILITY_SPECIALIST 103 // double-single type; 2.25x stab, 4x weaknesses, 1/4 resists
 #define ABILITY_EXPLOITATIVE 104 //SE moves do 3x damage; resisted moves do 1/3 damage
 #define ABILITY_MAGIC_GUARD 105
 #define ABILITY_NO_GUARD 106
@@ -117,46 +117,46 @@
 #define ABILITY_SKILL_LINK 113
 #define ABILITY_PRANKSTER 114
 #define ABILITY_MAGIC_BOUNCE 115
-#define ABILITY_QUICK_FEET 116
+#define ABILITY_QUICK_FEET 116 // Boosts speed by 1.5x while statused. While paralyzed, Speed remains unchanged (positive or negative) but the user won't get fully paralyzed.
 #define ABILITY_KLUTZ 117
 #define ABILITY_MOTOR_DRIVE 118
-#define ABILITY_LULL 119
+#define ABILITY_LULL 119 // Special Intimidate
 #define ABILITY_MOLD_BREAKER 120
 #define ABILITY_STORM_DRAIN 121
-#define ABILITY_WATER_COMPACTION 122
+#define ABILITY_WATER_COMPACTION 122 // Halves damage from Water and boosts Defense by 2 when taking a Water move.
 #define ABILITY_TERAVOLT 123
 #define ABILITY_TURBOBLAZE 124
 #define ABILITY_SCRAPPY 125
-#define ABILITY_TRUESIGHT 126
+#define ABILITY_TRUESIGHT 126 // Psychic->Dark Scrappy
 #define ABILITY_WEAK_ARMOR 127
 #define ABILITY_MOXIE 128
-#define ABILITY_REGENERATOR 129
+#define ABILITY_REGENERATOR 129 // Regenerates by 25% when switching out.
 #define ABILITY_SAP_SIPPER 130
 #define ABILITY_SIMPLE 131
 #define ABILITY_STAMINA 132
-#define ABILITY_CORROSION 133
+#define ABILITY_CORROSION 133 // still doesn't work btw
 #define ABILITY_FOREWARN 134
-#define ABILITY_STALL 135
-#define ABILITY_TIME_SLIP 136
+#define ABILITY_STALL 135 // Makes user move last, but they can't flinch.
+#define ABILITY_TIME_SLIP 136 // Ground Gale Wings
 #define ABILITY_GALE_WINGS 137
 #define ABILITY_DAZZLING 138
-#define ABILITY_SNIPER 139
+#define ABILITY_SNIPER 139 
 #define ABILITY_STEELWORKER 140
-#define ABILITY_FIRE_AFFINITY 141
-#define ABILITY_UMBRALAMP 142
-#define ABILITY_SPELL_SWAP 143
-#define ABILITY_SHIELDS_DOWN 144
-#define ABILITY_SHIELDS_UP 145
-#define ABILITY_PURITY 146
+#define ABILITY_FIRE_AFFINITY 141 // Fire Steelworker
+#define ABILITY_UMBRALAMP 142 // unsure
+#define ABILITY_SPELL_SWAP 143 // Runicast's ability
+#define ABILITY_SHIELDS_DOWN 144 // Minior-Meteor's ability
+#define ABILITY_SHIELDS_UP 145 // Minior-Core's ability
+#define ABILITY_PURITY 146 // Makes user immune to Poison.
 #define ABILITY_ANALYTIC 147
 #define ABILITY_DISGUISE 148
-#define ABILITY_SUPER_LUCK 149 // boost ratio by 2 instead of 1
-#define ABILITY_STRIKER 150
-#define ABILITY_STRONG_JAW 151
-#define ABILITY_RECKLESS 152
-#define ABILITY_WARD 153
-#define ABILITY_TOLL_CALL 154
-#define ABILITY_ENTRAPMENT 155
+#define ABILITY_SUPER_LUCK 149 // Boosts crit ratio by 2.
+#define ABILITY_STRIKER 150 // Powers up moves with the "kick" attribute by 20%.
+#define ABILITY_STRONG_JAW 151 // Powers up moves with the "bite" attribute by 50%.
+#define ABILITY_RECKLESS 152 // Powers up moves with the "risky" attribute by 20%.
+#define ABILITY_WARD 153 // On switch-in, sets Safeguard on the user's side.
+#define ABILITY_TOLL_CALL 154 // On switch-in, inflicts Perish Song on all foes that aren't holding a gold item or have Toll Call.
+#define ABILITY_ENTRAPMENT 155 // On switch-in, influcts Wrap on one foe for 3 turns.
 
 #define ABILITIES_COUNT 156
 #define ABILITIES_ATE_START ABILITY_REFRIGERATE

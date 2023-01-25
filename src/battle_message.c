@@ -520,6 +520,7 @@ static const u8 sText_PkmnHungOnWithX[] = _("{B_DEF_NAME_WITH_PREFIX} hung on\nu
 static const u8 sText_LastAbilityRaisedStat[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_LAST_ABILITY}\nraised its {B_BUFF1}!");
 static const u8 sText_PkmnForewarned[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} was FOREWARNED\nof {B_BUFF2}'s {B_BUFF1}!");
 static const u8 sText_PkmnTrappedFoe[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} wrapped\n{B_BUFF2} with ENTRAPMENT!");
+static const u8 sText_DarkBlocksPrankster[] = _("{B_DEF_NAME_WITH_PREFIX}'s DARK type\nblocks PRANKSTER moves!");
 const u8 gText_OvercastForm[] = _("OVERCAST");
 const u8 gText_SunnyForm[] = _("SUNNY");
 const u8 gText_RainyForm[] = _("RAINY");
@@ -946,6 +947,7 @@ const u8 * const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_S
 	[STRINGID_ACAPPED - BATTLESTRINGS_TABLE_START] = sText_ACapped,
 	[STRINGID_PKMNCALLEDFORSOULS - BATTLESTRINGS_TABLE_START] = sText_PkmnCalledForSouls,
 	[STRINGID_PKMNTRAPPEDFOE - BATTLESTRINGS_TABLE_START] = sText_PkmnTrappedFoe,
+	[STRINGID_DARKBLOCKSPRANKSTER - BATTLESTRINGS_TABLE_START] = sText_DarkBlocksPrankster,
 };
 
 const u16 gMissStringIds[] =
