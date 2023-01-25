@@ -2787,6 +2787,37 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 gBattleScripting.battler = battler;
                 effect++;
 				break;
+			case ABILITY_ENTRAPMENT:
+				for (i = 0; i < gBattlersCount; i++)
+				{
+					if (GET_BATTLER_SIDE(i) == GET_BATTLER_SIDE(battler))
+					{
+						continue;
+					}
+					else if (gBattleMons[i].status2 & STATUS2_WRAPPED)
+						continue;
+					else
+					{
+						gBattleMons[i].status2 |= STATUS2_WRAPPED_TURN(4); 
+
+						*(gBattleStruct->wrappedMove + i * 2 + 0) = MOVE_WRAP;
+						*(gBattleStruct->wrappedMove + i * 2 + 1) = MOVE_WRAP >> 8;
+						*(gBattleStruct->wrappedBy + i) = battler;
+
+						for (gBattleCommunication[MULTISTRING_CHOOSER] = 0; ; gBattleCommunication[MULTISTRING_CHOOSER]++)
+						{
+							if (gBattleCommunication[MULTISTRING_CHOOSER] >= NUM_TRAPPING_MOVES - 1)
+								break;
+							if (gTrappingMoves[gBattleCommunication[MULTISTRING_CHOOSER]] == MOVE_WRAP)
+								break;
+						}
+						BattleScriptPushCursorAndCallback(BattleScript_EntrapmentActivates);
+						gBattleScripting.battler = battler;
+						PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff2, i, gBattlerPartyIndexes[i])
+						effect++;
+					}
+				}
+				break;
             }
             break;
         case ABILITYEFFECT_ENDTURN: // 1

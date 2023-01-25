@@ -5092,6 +5092,12 @@ BattleScript_TollCallActivates::
 	waitmessage B_WAIT_TIME_LONG
 	end3
 	
+BattleScript_EntrapmentActivates::
+	pause 0x20
+	printstring STRINGID_PKMNTRAPPEDFOE
+	waitmessage B_WAIT_TIME_LONG
+	end3
+	
 BattleScript_SolarPowerDrain::
 	printstring STRINGID_PKMNSXDRAINEDHP
 	waitmessage B_WAIT_TIME_LONG
