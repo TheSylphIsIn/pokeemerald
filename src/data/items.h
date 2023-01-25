@@ -4471,10 +4471,10 @@ const struct Item gItems[] =
 		.fieldUseFunc = ItemUseOutOfBattle_TMHM,
 	},
 
-	[ITEM_TM63_POISON_JAB] = 
+	[ITEM_TM63_PIN_MISSILE] = 
 	{
 		.name = _("TM63"),
-		.itemId = ITEM_TM63_POISON_JAB,
+		.itemId = ITEM_TM63_PIN_MISSILE,
 		.price = 0,
 		.description = sTM63Desc,
 		.importance = 1,

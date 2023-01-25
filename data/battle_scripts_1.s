@@ -3240,6 +3240,7 @@ BattleScript_EffectClearStatsHit::
 	seteffectwithchance
 	normalisebuffs
 	printstring STRINGID_STATCHANGESGONE
+	waitmessage B_WAIT_TIME_SHORT
 	tryfaintmon BS_TARGET
 	moveendall
 	end
