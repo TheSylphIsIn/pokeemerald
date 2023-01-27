@@ -2458,13 +2458,12 @@ const u8 gBilliarachPokedexText[] = _(
 	"able to snipe targets with ricochets easily.");
 
 const u8 gSlugmaFoneiPokedexText[] = _(
-	"The FONEI form of SLUGMA.\n"
-	"Its lava body cooled and hardened into rock.\n"
-	"It doesn't seem bothered by that, though.\n"
-	"It is surprisingly mobile.");
+	"After it was pushed out of volcanic\n"
+	"habitats by LAV, its lava body cooled and\n"
+	"hardened into rock. It doesn't seem\n"
+	"bothered, though. It is surprisingly mobile.");
 
 const u8 gMagcargoFoneiPokedexText[] = _(
-	"The FONEI form of MAGCARGO.\n"
 	"Its brittle shell is magnetic, and its body\n"
 	"is light, so it moves quickly by flinging\n"
 	"pieces of its shell and sliding toward them.");
@@ -2476,19 +2475,19 @@ const u8 gSunforestPokedexText[] = _(
 	"predatory birds with FIRE attacks.");
 
 const u8 gHonedgeFoneiPokedexText[] = _(
-	"The FONEI form of HONEDGE.\n"
-	"When dormant, they are indistinguishable\n"
+	"It is a spirit inhabiting wood.\n"
+	"When dormant, it is indistinguishable\n"
 	"from normal sticks. The stream of energy\n"
 	"emerging from its top is not safe to touch.");
 	
 const u8 gDoubladeFoneiPokedexText[] = _(
-	"The FONEI form of DOUBLADE.\n"
 	"Though it appears to be two creatures,\n"
 	"It is actually one. They are held in\n"
-	"formation by a force similar to magnetism.");
+	"formation by a force similar to magnetism.\n"
+	"They temporarily unite when attacking.");
 	
 const u8 gAegislashFoneiAPokedexText[] = _(
-	"The FONEI form of AEGISLASH.\n"
+	"MAGINI permanently bond to become RUNICAST.\n"
 	"It must lower its runic shield before it can\n"
 	"attack. It keeps rigorous mental track of\n"
 	"how much PP it uses in each battle.");
@@ -2518,16 +2517,29 @@ const u8 gSerpentaurPokedexText[] = _(
 	"still avoid other living creatures.");
 
 const u8 gGeodudeFoneiPokedexText[] = _(
-	"The FONEI form of GEODUDE.\n"
 	"The harsh winds of the FONEI tundra\n"
 	"erode the rock from its body, replacing\n"
-	"it with ice and snow.");
+	"it with ice and snow.\n"
+	"GEODUDE doesn't seem to mind.");
 	
 const u8 gGravelerFoneiPokedexText[] = _(
-	"The FONEI form of GRAVELER.\n"
-	"");
-const u8 gGolemFoneiPokedexText[] = _("");
-const u8 gSudowoodoFoneiPokedexText[] = _("");
+	"It fortifies its body with wintry\n"
+	"materials, which merge seamlessly.\n"
+	"Something seems to be growing\n"
+	"inside its bulbous head.");
+	
+const u8 gGolemFoneiPokedexText[] = _(
+	"It rolls in slush and snow to\n"
+	"create a protective coating for\n"
+	"itself. This plus its speed make\n"
+	"it hard to land a solid hit on it.");
+	
+const u8 gSudowoodoFoneiPokedexText[] = _(
+	"The hot desert sun it basks in\n"
+	"may seem to be the source of its\n"
+	"hot skin, but it's actually the\n"
+	"fiery spirit concealed within.");
+	
 const u8 gGritwyrmPokedexText[] = _("");
 const u8 gMoldunePokedexText[] = _("");
 
@@ -2537,10 +2549,30 @@ const u8 gWattitudePokedexText[] = _(
 	"power lines, but never takes more than\n"
 	"its fair share, so it's not a pest.");
 	
-const u8 gRaltsFoneiPokedexText[] = _("");
-const u8 gKirliaFoneiPokedexText[] = _("");
-const u8 gGardevoirFoneiPokedexText[] = _("");
-const u8 gGalladeFoneiPokedexText[] = _("");
+const u8 gRaltsFoneiPokedexText[] = _(
+	"Living in isolation starved RALTS's\n"
+	"empathetic powers, driving it to find\n"
+	"other ways to survive.\n"
+	"They are antisocial as a rule.");
+	
+const u8 gKirliaFoneiPokedexText[] = _(
+	"KILOUETTE are reluctant to co\n"
+	"operate, even with others of its kind.\n"
+	"Even when tamed, they regard their\n"
+	"TRAINERS more as generals than friends.");
+
+const u8 gGardevoirFoneiPokedexText[] = _(
+	"TUERVOIR's fighting style is savage,\n"
+	"using its claws to tear at its foes.\n"
+	"It would regard its cousin GARDEVOIR's\n"
+	"emotional attachment as a weakness.");
+
+const u8 gGalladeFoneiPokedexText[] = _(
+	"It is said that CALLON's wings grew\n"
+	"as an expression of its desire to\n"
+	"be completely independent. It\n"
+	"attacks from above with its talons.");
+
 const u8 gWoobatPokedexText[] = _("");
 const u8 gSwoobatPokedexText[] = _("");
 const u8 gTruebatPokedexText[] = _("");
