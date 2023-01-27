@@ -2586,5 +2586,3 @@ const u8 gWeatherbanePokedexText[] = _("");
 const u8 gKetsubanPokedexText[] = _("");
 
 
-	
-// const u8 gSpcsPokedexText[] = _("");
