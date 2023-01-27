@@ -2504,6 +2504,7 @@ const u8 gVenearthPokedexText[] = _("");
 const u8 gMarsizzlePokedexText[] = _("");
 const u8 gJuplasmaPokedexText[] = _("");
 const u8 gMerlpoolPokedexText[] = _("");
+
 const u8 gOphicalfPokedexText[] = _(
 	"Legends say that eating the flesh of\n"
 	"an OPHICALF can make a human as strong\n"
