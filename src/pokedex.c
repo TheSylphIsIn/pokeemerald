@@ -1374,7 +1374,7 @@ static const struct SearchOptionText sDexSearchColorOptions[] =
     {},
 };
 
-static const struct SearchOptionText sDexSearchTypeOptions[NUMBER_OF_MON_TYPES + 1] = // + 2 for "None" and terminator, - 1 for Mystery
+static const struct SearchOptionText sDexSearchTypeOptions[NUMBER_OF_MON_TYPES + 2] = // + 2 for "None" and terminator, - 1 for Mystery
 {
     {gText_DexEmptyString, gText_DexSearchTypeNone},
     {gText_DexEmptyString, gTypeNames[TYPE_NORMAL]},
@@ -1384,8 +1384,9 @@ static const struct SearchOptionText sDexSearchTypeOptions[NUMBER_OF_MON_TYPES +
     {gText_DexEmptyString, gTypeNames[TYPE_GROUND]},
     {gText_DexEmptyString, gTypeNames[TYPE_ROCK]},
     {gText_DexEmptyString, gTypeNames[TYPE_BUG]},
-    {gText_DexEmptyString, gTypeNames[TYPE_GHOST]},
+    {gText_DexEmptyString, gTypeNames[TYPE_DARK]},
     {gText_DexEmptyString, gTypeNames[TYPE_STEEL]},
+	{gText_DexEmptyString, gTypeNames[TYPE_DISEASE]},
     {gText_DexEmptyString, gTypeNames[TYPE_FIRE]},
     {gText_DexEmptyString, gTypeNames[TYPE_WATER]},
     {gText_DexEmptyString, gTypeNames[TYPE_GRASS]},
@@ -1393,7 +1394,8 @@ static const struct SearchOptionText sDexSearchTypeOptions[NUMBER_OF_MON_TYPES +
     {gText_DexEmptyString, gTypeNames[TYPE_PSYCHIC]},
     {gText_DexEmptyString, gTypeNames[TYPE_ICE]},
     {gText_DexEmptyString, gTypeNames[TYPE_DRAGON]},
-    {gText_DexEmptyString, gTypeNames[TYPE_DARK]},
+    {gText_DexEmptyString, gTypeNames[TYPE_GHOST]},
+	{gText_DexEmptyString, gTypeNames[TYPE_MYSTERY]},
     {},
 };
 
@@ -1408,7 +1410,7 @@ static const u8 sOrderOptions[] =
     ORDER_SMALLEST,
 };
 
-static const u8 sDexSearchTypeIds[NUMBER_OF_MON_TYPES] =
+static const u8 sDexSearchTypeIds[NUMBER_OF_MON_TYPES + 1] =
 {
     TYPE_NONE,
     TYPE_NORMAL,
@@ -1418,8 +1420,9 @@ static const u8 sDexSearchTypeIds[NUMBER_OF_MON_TYPES] =
     TYPE_GROUND,
     TYPE_ROCK,
     TYPE_BUG,
-    TYPE_GHOST,
+    TYPE_DARK,
     TYPE_STEEL,
+	TYPE_DISEASE,
     TYPE_FIRE,
     TYPE_WATER,
     TYPE_GRASS,
@@ -1427,7 +1430,8 @@ static const u8 sDexSearchTypeIds[NUMBER_OF_MON_TYPES] =
     TYPE_PSYCHIC,
     TYPE_ICE,
     TYPE_DRAGON,
-    TYPE_DARK,
+    TYPE_GHOST,
+	TYPE_MYSTERY,
 };
 
 // Number pairs are the task data for tracking the cursor pos and scroll offset of each option list
