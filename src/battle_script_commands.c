@@ -75,6 +75,7 @@ static void DrawLevelUpWindow2(void);
 static void PutMonIconOnLvlUpBanner(void);
 static void DrawLevelUpBannerText(void);
 static void SpriteCB_MonIconOnLvlUpBanner(struct Sprite *sprite);
+static u8 CheckZombieAltType(u8 battler);
 
 static void Cmd_attackcanceler(void);
 static void Cmd_accuracycheck(void);
@@ -1366,7 +1367,7 @@ static void Cmd_typecalc(void)
     GET_MOVE_TYPE(gCurrentMove, moveType);
 
     // check stab
-    if (IS_BATTLER_OF_TYPE(gBattlerAttacker, moveType))
+    if (IS_BATTLER_OF_TYPE(gBattlerAttacker, moveType) || CheckZombieAltType(gBattlerAttacker) == moveType)
     {
         gBattleMoveDamage = gBattleMoveDamage * 15;
         gBattleMoveDamage = gBattleMoveDamage / 10;
@@ -10220,4 +10221,31 @@ static void Cmd_trainerslideout(void)
     MarkBattlerForControllerExec(gActiveBattler);
 
     gBattlescriptCurrInstr += 2;
+}
+
+static const u16 sZombieAltTypes[][2] = {
+	{SPECIES_BULBASAUR, TYPE_POISON},
+	{SPECIES_IVYSAUR, TYPE_POISON},
+	{SPECIES_VENUSAUR, TYPE_POISON},
+};
+
+// Gives STAB to the type a Zombie Pokemon used to have before gaining Disease type
+static u8 CheckZombieAltType(u8 battler)
+{
+	u32 i;
+	u8 type = TYPE_NONE;
+	
+	if (gBattleMons[battler].ability == ABILITY_UNDEAD_HEART)
+	{
+		for (i = 0; i < sizeof(sZombieAltTypes); i++)
+		{
+			if (sZombieAltTypes[i][0] == gBattleMons[battler].species)
+			{
+				type = sZombieAltTypes[i][1];
+				DebugPrintf("This Pokemon would get STAB on type %d", type);
+				break;
+			}
+		}
+	}
+	return type;
 }

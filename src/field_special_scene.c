@@ -200,7 +200,7 @@ static void Task_HandleTruckSequence(u8 taskId)
             tTimer = 0;
             tTaskId1 = CreateTask(Task_Truck1, 0xA);
             tState = 1;
-            PlaySE(SE_TRUCK_MOVE);
+            PlaySE(SE_M_EARTHQUAKE);
         }
         break;
     case 1:
@@ -210,6 +210,7 @@ static void Task_HandleTruckSequence(u8 taskId)
             FadeInFromBlack();
             tTimer = 0;
             tState = 2;
+            PlaySE(SE_M_EARTHQUAKE);
         }
         break;
     case 2:
@@ -220,7 +221,7 @@ static void Task_HandleTruckSequence(u8 taskId)
             DestroyTask(tTaskId1);
             tTaskId2 = CreateTask(Task_Truck2, 0xA);
             tState = 3;
-            PlaySE(SE_TRUCK_STOP);
+            //PlaySE(SE_M_EARTHQUAKE);
         }
         break;
     case 3:
@@ -236,20 +237,14 @@ static void Task_HandleTruckSequence(u8 taskId)
         tTimer++;
         if (tTimer == 90)
         {
-            PlaySE(SE_TRUCK_UNLOAD);
             tTimer = 0;
             tState = 5;
         }
         break;
     case 5:
         tTimer++;
-        if (tTimer == 120)
+        if (tTimer == 10)
         {
-            MapGridSetMetatileIdAt(4 + MAP_OFFSET, 1 + MAP_OFFSET, METATILE_InsideOfTruck_ExitLight_Top);
-            MapGridSetMetatileIdAt(4 + MAP_OFFSET, 2 + MAP_OFFSET, METATILE_InsideOfTruck_ExitLight_Mid);
-            MapGridSetMetatileIdAt(4 + MAP_OFFSET, 3 + MAP_OFFSET, METATILE_InsideOfTruck_ExitLight_Bottom);
-            DrawWholeMapView();
-            PlaySE(SE_TRUCK_DOOR);
             DestroyTask(taskId);
             UnlockPlayerFieldControls();
         }
@@ -259,10 +254,6 @@ static void Task_HandleTruckSequence(u8 taskId)
 
 void ExecuteTruckSequence(void)
 {
-    MapGridSetMetatileIdAt(4 + MAP_OFFSET, 1 + MAP_OFFSET, METATILE_InsideOfTruck_DoorClosedFloor_Top);
-    MapGridSetMetatileIdAt(4 + MAP_OFFSET, 2 + MAP_OFFSET, METATILE_InsideOfTruck_DoorClosedFloor_Mid);
-    MapGridSetMetatileIdAt(4 + MAP_OFFSET, 3 + MAP_OFFSET, METATILE_InsideOfTruck_DoorClosedFloor_Bottom);
-    DrawWholeMapView();
     LockPlayerFieldControls();
     CpuFastFill(0, gPlttBufferFaded, 0x400);
     CreateTask(Task_HandleTruckSequence, 0xA);
