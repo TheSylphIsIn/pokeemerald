@@ -119,7 +119,7 @@
       "flag": "FLAG_HIDE_LILYCOVE_CONTEST_HALL_REPORTER"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_BOY_1",
+      "graphics_id": "OBJ_EVENT_GFX_ZOMBIE_BOY",
       "x": 23,
       "y": 8,
       "elevation": 3,
@@ -223,7 +223,7 @@
       "flag": "FLAG_HIDE_LILYCOVE_CONTEST_HALL_BLEND_MASTER_REPLACEMENT"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_GIRL_1",
+      "graphics_id": "OBJ_EVENT_GFX_ZOMBIE_GIRL",
       "x": 24,
       "y": 9,
       "elevation": 3,

@@ -1209,7 +1209,7 @@ void IsGrassTypeInParty(void)
 
 void SpawnCameraObject(void)
 {
-    u8 obj = SpawnSpecialObjectEventParameterized(OBJ_EVENT_GFX_BOY_1,
+    u8 obj = SpawnSpecialObjectEventParameterized(OBJ_EVENT_GFX_ZOMBIE_BOY,
                                                   MOVEMENT_TYPE_FACE_DOWN,
                                                   OBJ_EVENT_ID_CAMERA,
                                                   gSaveBlock1Ptr->pos.x + MAP_OFFSET,

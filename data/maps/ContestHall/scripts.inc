@@ -175,11 +175,11 @@ ContestHall_EventScript_RandomAudienceTwin::
 	return
 
 ContestHall_EventScript_RandomAudienceBoy1::
-	setvar VAR_TEMP_1, OBJ_EVENT_GFX_BOY_1
+	setvar VAR_TEMP_1, OBJ_EVENT_GFX_ZOMBIE_BOY
 	return
 
 ContestHall_EventScript_RandomAudienceGirl1::
-	setvar VAR_TEMP_1, OBJ_EVENT_GFX_GIRL_1
+	setvar VAR_TEMP_1, OBJ_EVENT_GFX_ZOMBIE_GIRL
 	return
 
 ContestHall_EventScript_RandomAudienceGirl2::

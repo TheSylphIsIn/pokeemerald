@@ -41,7 +41,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_BOY_1",
+      "graphics_id": "OBJ_EVENT_GFX_ZOMBIE_BOY",
       "x": 9,
       "y": 2,
       "elevation": 0,
@@ -158,7 +158,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_GIRL_1",
+      "graphics_id": "OBJ_EVENT_GFX_ZOMBIE_GIRL",
       "x": 10,
       "y": 2,
       "elevation": 0,
