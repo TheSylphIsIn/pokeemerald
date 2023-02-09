@@ -98,3 +98,40 @@ Common_Movement_WalkUp2::
 	walk_up
 	walk_up
 	step_end
+
+StepAwayLeft::
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_StepLeft
+	waitmovement 0
+	end
+	
+Common_Movement_StepLeft::
+	walk_left
+	step_end
+
+StepAwayRight::
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_StepRight
+	waitmovement 0
+	end
+	
+Common_Movement_StepRight::
+	walk_right
+	step_end
+
+StepAwayUp::
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_StepUp
+	waitmovement 0
+	end
+	
+Common_Movement_StepUp::
+	walk_up
+	step_end
+
+StepAwayDown::
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_StepDown
+	waitmovement 0
+	end
+	
+Common_Movement_StepDown::
+	walk_down
+	step_end
+

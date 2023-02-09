@@ -611,5 +611,9 @@ extern const u8 EventScript_TradeCenter_Chair1[];
 extern const u8 EventScript_TradeCenter_Chair0[];
 extern const u8 EventScript_ConfirmLeaveCableClubRoom[];
 extern const u8 EventScript_TerminateLink[];
+extern const u8 StepAwayRight[];
+extern const u8 StepAwayLeft[];
+extern const u8 StepAwayUp[];
+extern const u8 StepAwayDown[];
 
 #endif // GUARD_EVENT_SCRIPTS_H

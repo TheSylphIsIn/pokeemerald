@@ -7,6 +7,7 @@
 #include "decoration.h"
 #include "diploma.h"
 #include "event_data.h"
+#include "event_scripts.h"
 #include "event_object_movement.h"
 #include "fieldmap.h"
 #include "field_camera.h"
@@ -4194,4 +4195,26 @@ void SetPlayerGotFirstFans(void)
 u8 Script_TryGainNewFanFromCounter(void)
 {
     return TryGainNewFanFromCounter(gSpecialVar_0x8004);
+}
+
+void MovePlayerBack(void) 
+{
+	u32 playerFacingDirection;
+
+	playerFacingDirection = GetPlayerFacingDirection();
+    switch (playerFacingDirection)
+    {
+    case DIR_WEST:
+        ScriptContext_SetupScript(StepAwayRight);
+        break;
+    case DIR_NORTH:
+        ScriptContext_SetupScript(StepAwayDown);
+        break;
+    case DIR_EAST:
+        ScriptContext_SetupScript(StepAwayLeft);
+        break;
+    case DIR_SOUTH:
+        ScriptContext_SetupScript(StepAwayUp);
+        break;
+    }
 }
