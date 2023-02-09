@@ -2885,11 +2885,14 @@ static void Cmd_seteffectwithchance(void)
 
     if (gBattleMons[gBattlerAttacker].ability == ABILITY_SERENE_GRACE)
         percentChance = gBattleMoves[gCurrentMove].secondaryEffectChance * 2;
+	else if (gBattleMons[gBattlerAttacker].ability == ABILITY_SHEER_FORCE)
+		percentChance = 0;
     else
         percentChance = gBattleMoves[gCurrentMove].secondaryEffectChance;
 
     if (gBattleCommunication[MOVE_EFFECT_BYTE] & MOVE_EFFECT_CERTAIN
-        && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
+        && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
+		&& !(gBattleMons[gBattlerAttacker].ability == ABILITY_SHEER_FORCE && gCurrentMove == MOVE_FAKE_OUT))
     {
         gBattleCommunication[MOVE_EFFECT_BYTE] &= ~MOVE_EFFECT_CERTAIN;
         SetMoveEffect(FALSE, MOVE_EFFECT_CERTAIN);
