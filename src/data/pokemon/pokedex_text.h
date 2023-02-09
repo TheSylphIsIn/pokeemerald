@@ -2319,3 +2319,58 @@ const u8 gDeoxysPokedexText[] = _(
     "extraterrestrial virus exposed to a laser\n"
     "beam. Its body is configured for superior\n"
     "agility and speed.");
+	
+const u8 gGorelaxPokedexText[] = _("");
+const u8 gShinigamiPokedexText[] = _("");
+const u8 gAntispiralPokedexText[] = _("");
+const u8 gDragonPokedexText[] = _("");
+const u8 gAmonsterPokedexText[] = _("");
+const u8 gFangasuPokedexText[] = _("");
+const u8 gNigeraPokedexText[] = _("");
+const u8 gKuriputoPokedexText[] = _("");
+const u8 gRoodansePokedexText[] = _("");
+const u8 gOoshePokedexText[] = _("");
+const u8 gGoosuboaPokedexText[] = _("");
+const u8 gRoclobsterPokedexText[] = _("");
+const u8 gX32763PokedexText[] = _("");
+const u8 gTelsonPokedexText[] = _("");
+const u8 gMagnezonePokedexText[] = _("");
+const u8 gVigourlanPokedexText[] = _("");
+const u8 gDiamandixPokedexText[] = _("");
+const u8 gGigawolfPokedexText[] = _("");
+const u8 gGalactimonPokedexText[] = _("");
+const u8 gQwilsharkPokedexText[] = _("");
+const u8 gDragoonePokedexText[] = _("");
+const u8 gCalfbyPokedexText[] = _("");
+const u8 gRamshakerPokedexText[] = _("");
+const u8 gSeviciousPokedexText[] = _("");
+const u8 gZangolPokedexText[] = _("");
+const u8 gPsypigPokedexText[] = _("");
+const u8 gMunchlaxPokedexText[] = _("");
+const u8 gSkylaxPokedexText[] = _("");
+const u8 gMysteryeggPokedexText[] = _("");
+const u8 gSecreteggPokedexText[] = _("");
+const u8 gHypereggPokedexText[] = _("");
+const u8 gHombonePokedexText[] = _("");
+const u8 gHombeastPokedexText[] = _("");
+const u8 gKenchiraPokedexText[] = _("");
+const u8 gKenchukoPokedexText[] = _("");
+const u8 gGlutePokedexText[] = _("");
+const u8 gButePokedexText[] = _("");
+const u8 gNutePokedexText[] = _("");
+const u8 gFuriXPokedexText[] = _("");
+const u8 gFuriZPokedexText[] = _("");
+const u8 gFuriQPokedexText[] = _("");
+const u8 gTurmurPokedexText[] = _("");
+const u8 gShaderuPokedexText[] = _("");
+const u8 gFaceleechPokedexText[] = _("");
+const u8 gLucaZamonPokedexText[] = _("");
+const u8 gTeaBarcanPokedexText[] = _("");
+const u8 gMinicePokedexText[] = _(
+	"The last living fragment of REGICE.\n"
+	"It exhausted its power while defending\n"
+	"itself from unholy forces. It tries\n"
+	"unsuccessfully to refreeze itself.");
+const u8 gMinirockPokedexText[] = _("");
+const u8 gMinisteelPokedexText[] = _("");
+const u8 gGeneroboPokedexText[] = _("");

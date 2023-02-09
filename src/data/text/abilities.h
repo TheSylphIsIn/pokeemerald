@@ -77,6 +77,8 @@ static const u8 sShellArmorDescription[] = _("Blocks critical hits.");
 static const u8 sCacophonyDescription[] = _("Avoids sound-based moves.");
 static const u8 sAirLockDescription[] = _("Negates weather effects.");
 static const u8 sUndeadHeartDescription[] = _("Spreads zombie plague.");
+static const u8 sSheerForceDescription[] = _("Trades effects for power.");
+static const u8 sGeneratorDescription[] = _("Powers up ELECTR allies.");
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
 {
@@ -159,6 +161,8 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_CACOPHONY] = _("CACOPHONY"),
     [ABILITY_AIR_LOCK] = _("AIR LOCK"),
 	[ABILITY_UNDEAD_HEART] = _("UNDEAD HEART"),
+	[ABILITY_SHEER_FORCE] = _("SHEER FORCE"),
+	[ABILITY_GENERATOR] = _("GENERATOR"),
 };
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
@@ -242,4 +246,6 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
     [ABILITY_CACOPHONY] = sCacophonyDescription,
     [ABILITY_AIR_LOCK] = sAirLockDescription,
 	[ABILITY_UNDEAD_HEART] = sUndeadHeartDescription,
+	[ABILITY_SHEER_FORCE] = sSheerForceDescription,
+	[ABILITY_GENERATOR] = sGeneratorDescription,
 };

@@ -5615,3 +5615,204 @@ static const u16 sChimechoLevelUpLearnset[] = {
     LEVEL_UP_MOVE(46, MOVE_PSYCHIC),
     LEVEL_UP_END
 };
+
+static const u16 sGorelaxLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sShinigamiLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sAntispiralLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sDragonLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sAmonsterLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sFangasuLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sNigeraLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sKuriputoLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sRoodanseLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sOosheLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sGoosuboaLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sRoclobsterLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sX32763LevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sTelsonLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sMagnezoneLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sVigourlanLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sDiamandixLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sGigawolfLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sGalactimonLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sQwilsharkLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sDragooneLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sCalfbyLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sRamshakerLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sSeviciousLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sZangolLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sPsypigLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sMunchlaxLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sSkylaxLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sMysteryeggLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sSecreteggLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sHypereggLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sHomboneLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sHombeastLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sKenchiraLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sKenchukoLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sGluteLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sButeLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sNuteLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sFuriXLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sFuriZLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sFuriQLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sTurmurLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sShaderuLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sFaceleechLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sLucaZamonLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sTeaBarcanLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sMiniceLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sMinirockLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sMinisteelLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sGeneroboLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+

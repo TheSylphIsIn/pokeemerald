@@ -4582,6 +4582,256 @@ static const union AnimCmd sAnim_Chimecho_1[] =
     ANIMCMD_END,
 };
 
+static const union AnimCmd sAnim_GORELAX_1[] =
+{
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_SHINIGAMI_1[] =
+{
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_ANTISPIRAL_1[] =
+{
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_DRAGON_1[] =
+{
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_AMONSTER_1[] =
+{
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_FANGASU_1[] =
+{
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_NIGERA_1[] =
+{
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_KURIPUTO_1[] =
+{
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_ROODANSE_1[] =
+{
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_OOSHE_1[] =
+{
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_GOOSUBOA_1[] =
+{
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_ROCLOBSTER_1[] =
+{
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_X32763_1[] =
+{
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_TELSON_1[] =
+{
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_MAGNEZONE_1[] =
+{
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_VIGOURLAN_1[] =
+{
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_DIAMANDIX_1[] =
+{
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_GIGAWOLF_1[] =
+{
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_GALACTIMON_1[] =
+{
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_QWILSHARK_1[] =
+{
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_DRAGOONE_1[] =
+{
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_CALFBY_1[] =
+{
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_RAMSHAKER_1[] =
+{
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_SEVICIOUS_1[] =
+{
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_ZANGOL_1[] =
+{
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_PSYPIG_1[] =
+{
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_MUNCHLAX_1[] =
+{
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_SKYLAX_1[] =
+{
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_MYSTERYEGG_1[] =
+{
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_SECRETEGG_1[] =
+{
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_HYPEREGG_1[] =
+{
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_HOMBONE_1[] =
+{
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_HOMBEAST_1[] =
+{
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_KENCHIRA_1[] =
+{
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_KENCHUKO_1[] =
+{
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_GLUTE_1[] =
+{
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_BUTE_1[] =
+{
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_NUTE_1[] =
+{
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_FURI_X_1[] =
+{
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_FURI_Z_1[] =
+{
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_FURI_Q_1[] =
+{
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_TURMUR_1[] =
+{
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_SHADERU_1[] =
+{
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_FACELEECH_1[] =
+{
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_LUCA_ZAMON_1[] =
+{
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_TEA_BARCAN_1[] =
+{
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_MINICE_1[] =
+{
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_MINIROCK_1[] =
+{
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_MINISTEEL_1[] =
+{
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_GENEROBO_1[] =
+{
+	ANIMCMD_END
+};
+
 static const union AnimCmd sAnim_Egg_1[] =
 {
     ANIMCMD_FRAME(0, 6),
@@ -5223,6 +5473,256 @@ DOUBLE_ANIMATION(Latios);
 DOUBLE_ANIMATION(Jirachi);
 DOUBLE_ANIMATION(Deoxys);
 SINGLE_ANIMATION(Chimecho);
+static const union AnimCmd *const sAnims_GORELAX[] ={
+	sAnim_GeneralFrame0,
+	sAnim_GORELAX_1,
+};
+
+static const union AnimCmd *const sAnims_SHINIGAMI[] ={
+	sAnim_GeneralFrame0,
+	sAnim_SHINIGAMI_1,
+};
+
+static const union AnimCmd *const sAnims_ANTISPIRAL[] ={
+	sAnim_GeneralFrame0,
+	sAnim_ANTISPIRAL_1,
+};
+
+static const union AnimCmd *const sAnims_DRAGON[] ={
+	sAnim_GeneralFrame0,
+	sAnim_DRAGON_1,
+};
+
+static const union AnimCmd *const sAnims_AMONSTER[] ={
+	sAnim_GeneralFrame0,
+	sAnim_AMONSTER_1,
+};
+
+static const union AnimCmd *const sAnims_FANGASU[] ={
+	sAnim_GeneralFrame0,
+	sAnim_FANGASU_1,
+};
+
+static const union AnimCmd *const sAnims_NIGERA[] ={
+	sAnim_GeneralFrame0,
+	sAnim_NIGERA_1,
+};
+
+static const union AnimCmd *const sAnims_KURIPUTO[] ={
+	sAnim_GeneralFrame0,
+	sAnim_KURIPUTO_1,
+};
+
+static const union AnimCmd *const sAnims_ROODANSE[] ={
+	sAnim_GeneralFrame0,
+	sAnim_ROODANSE_1,
+};
+
+static const union AnimCmd *const sAnims_OOSHE[] ={
+	sAnim_GeneralFrame0,
+	sAnim_OOSHE_1,
+};
+
+static const union AnimCmd *const sAnims_GOOSUBOA[] ={
+	sAnim_GeneralFrame0,
+	sAnim_GOOSUBOA_1,
+};
+
+static const union AnimCmd *const sAnims_ROCLOBSTER[] ={
+	sAnim_GeneralFrame0,
+	sAnim_ROCLOBSTER_1,
+};
+
+static const union AnimCmd *const sAnims_X32763[] ={
+	sAnim_GeneralFrame0,
+	sAnim_X32763_1,
+};
+
+static const union AnimCmd *const sAnims_TELSON[] ={
+	sAnim_GeneralFrame0,
+	sAnim_TELSON_1,
+};
+
+static const union AnimCmd *const sAnims_MAGNEZONE[] ={
+	sAnim_GeneralFrame0,
+	sAnim_MAGNEZONE_1,
+};
+
+static const union AnimCmd *const sAnims_VIGOURLAN[] ={
+	sAnim_GeneralFrame0,
+	sAnim_VIGOURLAN_1,
+};
+
+static const union AnimCmd *const sAnims_DIAMANDIX[] ={
+	sAnim_GeneralFrame0,
+	sAnim_DIAMANDIX_1,
+};
+
+static const union AnimCmd *const sAnims_GIGAWOLF[] ={
+	sAnim_GeneralFrame0,
+	sAnim_GIGAWOLF_1,
+};
+
+static const union AnimCmd *const sAnims_GALACTIMON[] ={
+	sAnim_GeneralFrame0,
+	sAnim_GALACTIMON_1,
+};
+
+static const union AnimCmd *const sAnims_QWILSHARK[] ={
+	sAnim_GeneralFrame0,
+	sAnim_QWILSHARK_1,
+};
+
+static const union AnimCmd *const sAnims_DRAGOONE[] ={
+	sAnim_GeneralFrame0,
+	sAnim_DRAGOONE_1,
+};
+
+static const union AnimCmd *const sAnims_CALFBY[] ={
+	sAnim_GeneralFrame0,
+	sAnim_CALFBY_1,
+};
+
+static const union AnimCmd *const sAnims_RAMSHAKER[] ={
+	sAnim_GeneralFrame0,
+	sAnim_RAMSHAKER_1,
+};
+
+static const union AnimCmd *const sAnims_SEVICIOUS[] ={
+	sAnim_GeneralFrame0,
+	sAnim_SEVICIOUS_1,
+};
+
+static const union AnimCmd *const sAnims_ZANGOL[] ={
+	sAnim_GeneralFrame0,
+	sAnim_ZANGOL_1,
+};
+
+static const union AnimCmd *const sAnims_PSYPIG[] ={
+	sAnim_GeneralFrame0,
+	sAnim_PSYPIG_1,
+};
+
+static const union AnimCmd *const sAnims_MUNCHLAX[] ={
+	sAnim_GeneralFrame0,
+	sAnim_MUNCHLAX_1,
+};
+
+static const union AnimCmd *const sAnims_SKYLAX[] ={
+	sAnim_GeneralFrame0,
+	sAnim_SKYLAX_1,
+};
+
+static const union AnimCmd *const sAnims_MYSTERYEGG[] ={
+	sAnim_GeneralFrame0,
+	sAnim_MYSTERYEGG_1,
+};
+
+static const union AnimCmd *const sAnims_SECRETEGG[] ={
+	sAnim_GeneralFrame0,
+	sAnim_SECRETEGG_1,
+};
+
+static const union AnimCmd *const sAnims_HYPEREGG[] ={
+	sAnim_GeneralFrame0,
+	sAnim_HYPEREGG_1,
+};
+
+static const union AnimCmd *const sAnims_HOMBONE[] ={
+	sAnim_GeneralFrame0,
+	sAnim_HOMBONE_1,
+};
+
+static const union AnimCmd *const sAnims_HOMBEAST[] ={
+	sAnim_GeneralFrame0,
+	sAnim_HOMBEAST_1,
+};
+
+static const union AnimCmd *const sAnims_KENCHIRA[] ={
+	sAnim_GeneralFrame0,
+	sAnim_KENCHIRA_1,
+};
+
+static const union AnimCmd *const sAnims_KENCHUKO[] ={
+	sAnim_GeneralFrame0,
+	sAnim_KENCHUKO_1,
+};
+
+static const union AnimCmd *const sAnims_GLUTE[] ={
+	sAnim_GeneralFrame0,
+	sAnim_GLUTE_1,
+};
+
+static const union AnimCmd *const sAnims_BUTE[] ={
+	sAnim_GeneralFrame0,
+	sAnim_BUTE_1,
+};
+
+static const union AnimCmd *const sAnims_NUTE[] ={
+	sAnim_GeneralFrame0,
+	sAnim_NUTE_1,
+};
+
+static const union AnimCmd *const sAnims_FURI_X[] ={
+	sAnim_GeneralFrame0,
+	sAnim_FURI_X_1,
+};
+
+static const union AnimCmd *const sAnims_FURI_Z[] ={
+	sAnim_GeneralFrame0,
+	sAnim_FURI_Z_1,
+};
+
+static const union AnimCmd *const sAnims_FURI_Q[] ={
+	sAnim_GeneralFrame0,
+	sAnim_FURI_Q_1,
+};
+
+static const union AnimCmd *const sAnims_TURMUR[] ={
+	sAnim_GeneralFrame0,
+	sAnim_TURMUR_1,
+};
+
+static const union AnimCmd *const sAnims_SHADERU[] ={
+	sAnim_GeneralFrame0,
+	sAnim_SHADERU_1,
+};
+
+static const union AnimCmd *const sAnims_FACELEECH[] ={
+	sAnim_GeneralFrame0,
+	sAnim_FACELEECH_1,
+};
+
+static const union AnimCmd *const sAnims_LUCA_ZAMON[] ={
+	sAnim_GeneralFrame0,
+	sAnim_LUCA_ZAMON_1,
+};
+
+static const union AnimCmd *const sAnims_TEA_BARCAN[] ={
+	sAnim_GeneralFrame0,
+	sAnim_TEA_BARCAN_1,
+};
+
+static const union AnimCmd *const sAnims_MINICE[] ={
+	sAnim_GeneralFrame0,
+	sAnim_MINICE_1,
+};
+
+static const union AnimCmd *const sAnims_MINIROCK[] ={
+	sAnim_GeneralFrame0,
+	sAnim_MINIROCK_1,
+};
+
+static const union AnimCmd *const sAnims_MINISTEEL[] ={
+	sAnim_GeneralFrame0,
+	sAnim_MINISTEEL_1,
+};
+
+static const union AnimCmd *const sAnims_GENEROBO[] ={
+	sAnim_GeneralFrame0,
+	sAnim_GENEROBO_1,
+};
+
 SINGLE_ANIMATION(Egg);
 SINGLE_ANIMATION(UnownB);
 SINGLE_ANIMATION(UnownC);
@@ -5666,6 +6166,56 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[] =
     [SPECIES_JIRACHI]     = sAnims_Jirachi,
     [SPECIES_DEOXYS]      = sAnims_Deoxys,
     [SPECIES_CHIMECHO]    = sAnims_Chimecho,
+		[SPECIES_GORELAX] = sAnims_GORELAX,
+	[SPECIES_SHINIGAMI] = sAnims_SHINIGAMI,
+	[SPECIES_ANTISPIRAL] = sAnims_ANTISPIRAL,
+	[SPECIES_DRAGON] = sAnims_DRAGON,
+	[SPECIES_AMONSTER] = sAnims_AMONSTER,
+	[SPECIES_FANGASU] = sAnims_FANGASU,
+	[SPECIES_NIGERA] = sAnims_NIGERA,
+	[SPECIES_KURIPUTO] = sAnims_KURIPUTO,
+	[SPECIES_ROODANSE] = sAnims_ROODANSE,
+	[SPECIES_OOSHE] = sAnims_OOSHE,
+	[SPECIES_GOOSUBOA] = sAnims_GOOSUBOA,
+	[SPECIES_ROCLOBSTER] = sAnims_ROCLOBSTER,
+	[SPECIES_X32763] = sAnims_X32763,
+	[SPECIES_TELSON] = sAnims_TELSON,
+	[SPECIES_MAGNEZONE] = sAnims_MAGNEZONE,
+	[SPECIES_VIGOURLAN] = sAnims_VIGOURLAN,
+	[SPECIES_DIAMANDIX] = sAnims_DIAMANDIX,
+	[SPECIES_GIGAWOLF] = sAnims_GIGAWOLF,
+	[SPECIES_GALACTIMON] = sAnims_GALACTIMON,
+	[SPECIES_QWILSHARK] = sAnims_QWILSHARK,
+	[SPECIES_DRAGOONE] = sAnims_DRAGOONE,
+	[SPECIES_CALFBY] = sAnims_CALFBY,
+	[SPECIES_RAMSHAKER] = sAnims_RAMSHAKER,
+	[SPECIES_SEVICIOUS] = sAnims_SEVICIOUS,
+	[SPECIES_ZANGOL] = sAnims_ZANGOL,
+	[SPECIES_PSYPIG] = sAnims_PSYPIG,
+	[SPECIES_MUNCHLAX] = sAnims_MUNCHLAX,
+	[SPECIES_SKYLAX] = sAnims_SKYLAX,
+	[SPECIES_MYSTERYEGG] = sAnims_MYSTERYEGG,
+	[SPECIES_SECRETEGG] = sAnims_SECRETEGG,
+	[SPECIES_HYPEREGG] = sAnims_HYPEREGG,
+	[SPECIES_HOMBONE] = sAnims_HOMBONE,
+	[SPECIES_HOMBEAST] = sAnims_HOMBEAST,
+	[SPECIES_KENCHIRA] = sAnims_KENCHIRA,
+	[SPECIES_KENCHUKO] = sAnims_KENCHUKO,
+	[SPECIES_GLUTE] = sAnims_GLUTE,
+	[SPECIES_BUTE] = sAnims_BUTE,
+	[SPECIES_NUTE] = sAnims_NUTE,
+	[SPECIES_FURI_X] = sAnims_FURI_X,
+	[SPECIES_FURI_Z] = sAnims_FURI_Z,
+	[SPECIES_FURI_Q] = sAnims_FURI_Q,
+	[SPECIES_TURMUR] = sAnims_TURMUR,
+	[SPECIES_SHADERU] = sAnims_SHADERU,
+	[SPECIES_FACELEECH] = sAnims_FACELEECH,
+	[SPECIES_LUCA_ZAMON] = sAnims_LUCA_ZAMON,
+	[SPECIES_TEA_BARCAN] = sAnims_TEA_BARCAN,
+	[SPECIES_MINICE] = sAnims_MINICE,
+	[SPECIES_MINIROCK] = sAnims_MINIROCK,
+	[SPECIES_MINISTEEL] = sAnims_MINISTEEL,
+	[SPECIES_GENEROBO] = sAnims_GENEROBO,
     [SPECIES_EGG]         = sAnims_Egg,
     [SPECIES_UNOWN_B]     = sAnims_UnownB,
     [SPECIES_UNOWN_C]     = sAnims_UnownC,

@@ -1937,6 +1937,206 @@ Cry_Deoxys::
 	.align 2
 Cry_Chimecho::
 	.incbin "sound/direct_sound_samples/cries/chimecho.bin"
+	
+	.align 2
+Cry_Gorelax::
+	.incbin "sound/direct_sound_samples/cries/snorlax.bin"
+
+	.align 2
+Cry_Shinigami::
+	.incbin "sound/direct_sound_samples/cries/gardevoir.bin"
+
+	.align 2
+Cry_Antispiral::
+	.incbin "sound/direct_sound_samples/cries/zangoose.bin"
+
+	.align 2
+Cry_Dragon::
+	.incbin "sound/direct_sound_samples/cries/charizard.bin"
+
+	.align 2
+Cry_Amonster::
+	.incbin "sound/direct_sound_samples/cries/kyogre.bin"
+
+	.align 2
+Cry_Fangasu::
+	.incbin "sound/direct_sound_samples/cries/unown.bin"
+
+	.align 2
+Cry_Nigera::
+	.incbin "sound/direct_sound_samples/cries/unown.bin"
+
+	.align 2
+Cry_Kuriputo::
+	.incbin "sound/direct_sound_samples/cries/unown.bin"
+
+	.align 2
+Cry_Roodanse::
+	.incbin "sound/direct_sound_samples/cries/unown.bin"
+
+	.align 2
+Cry_Ooshe::
+	.incbin "sound/direct_sound_samples/cries/unown.bin"
+
+	.align 2
+Cry_Goosuboa::
+	.incbin "sound/direct_sound_samples/cries/unown.bin"
+
+	.align 2
+Cry_Roclobster::
+	.incbin "sound/direct_sound_samples/cries/kingler.bin"
+
+	.align 2
+Cry_X32763::
+	.incbin "sound/direct_sound_samples/cries/magneton.bin"
+
+	.align 2
+Cry_Telson::
+	.incbin "sound/direct_sound_samples/cries/qwilfish.bin"
+
+	.align 2
+Cry_Magnezone::
+	.incbin "sound/direct_sound_samples/cries/magneton.bin"
+
+	.align 2
+Cry_Vigourlan::
+	.incbin "sound/direct_sound_samples/cries/vigoroth.bin"
+
+	.align 2
+Cry_Diamandix::
+	.incbin "sound/direct_sound_samples/cries/steelix.bin"
+
+	.align 2
+Cry_Gigawolf::
+	.incbin "sound/direct_sound_samples/cries/mightyena.bin"
+
+	.align 2
+Cry_Galactimon::
+	.incbin "sound/direct_sound_samples/cries/solrock.bin"
+
+	.align 2
+Cry_Qwilshark::
+	.incbin "sound/direct_sound_samples/cries/qwilfish.bin"
+
+	.align 2
+Cry_Dragoone::
+	.incbin "sound/direct_sound_samples/cries/linoone.bin"
+
+	.align 2
+Cry_Calfby::
+	.incbin "sound/direct_sound_samples/cries/tyrogue.bin"
+
+	.align 2
+Cry_Ramshaker::
+	.incbin "sound/direct_sound_samples/cries/kangaskhan.bin"
+
+	.align 2
+Cry_Sevicious::
+	.incbin "sound/direct_sound_samples/cries/seviper.bin"
+
+	.align 2
+Cry_Zangol::
+	.incbin "sound/direct_sound_samples/cries/zangoose.bin"
+
+	.align 2
+Cry_Psypig::
+	.incbin "sound/direct_sound_samples/cries/grumpig.bin"
+
+	.align 2
+Cry_Munchlax::
+	.incbin "sound/direct_sound_samples/cries/magby.bin"
+
+	.align 2
+Cry_Skylax::
+	.incbin "sound/direct_sound_samples/cries/snorlax.bin"
+
+	.align 2
+Cry_Mysteryegg::
+	.incbin "sound/direct_sound_samples/cries/unown.bin"
+
+	.align 2
+Cry_Secretegg::
+	.incbin "sound/direct_sound_samples/cries/unown.bin"
+
+	.align 2
+Cry_Hyperegg::
+	.incbin "sound/direct_sound_samples/cries/unown.bin"
+
+	.align 2
+Cry_Hombone::
+	.incbin "sound/direct_sound_samples/cries/rhyhorn.bin"
+
+	.align 2
+Cry_Hombeast::
+	.incbin "sound/direct_sound_samples/cries/charizard.bin"
+
+	.align 2
+Cry_Kenchira::
+	.incbin "sound/direct_sound_samples/cries/meditite.bin"
+
+	.align 2
+Cry_Kenchuko::
+	.incbin "sound/direct_sound_samples/cries/medicham.bin"
+
+	.align 2
+Cry_Glute::
+	.incbin "sound/direct_sound_samples/cries/weedle.bin"
+
+	.align 2
+Cry_Bute::
+	.incbin "sound/direct_sound_samples/cries/weedle.bin"
+
+	.align 2
+Cry_Nute::
+	.incbin "sound/direct_sound_samples/cries/weedle.bin"
+
+	.align 2
+Cry_FuriX::
+	.incbin "sound/direct_sound_samples/cries/unown.bin"
+
+	.align 2
+Cry_FuriZ::
+	.incbin "sound/direct_sound_samples/cries/unown.bin"
+
+	.align 2
+Cry_FuriQ::
+	.incbin "sound/direct_sound_samples/cries/unown.bin"
+
+	.align 2
+Cry_Turmur::
+	.incbin "sound/direct_sound_samples/cries/unown.bin"
+
+	.align 2
+Cry_Shaderu::
+	.incbin "sound/direct_sound_samples/cries/gengar.bin"
+
+	.align 2
+Cry_Faceleech::
+	.incbin "sound/direct_sound_samples/cries/deoxys.bin"
+
+	.align 2
+Cry_Luca_Zamon::
+	.incbin "sound/direct_sound_samples/cries/unown.bin"
+
+	.align 2
+Cry_Tea_Barcan::
+	.incbin "sound/direct_sound_samples/cries/unown.bin"
+
+	.align 2
+Cry_Minice::
+	.incbin "sound/direct_sound_samples/cries/regice.bin"
+
+	.align 2
+Cry_Minirock::
+	.incbin "sound/direct_sound_samples/cries/regirock.bin"
+
+	.align 2
+Cry_Ministeel::
+	.incbin "sound/direct_sound_samples/cries/registeel.bin"
+
+	.align 2
+Cry_Generobo::
+	.incbin "sound/direct_sound_samples/cries/magnemite.bin"
 
 	.align 2
 DirectSoundWaveData_register_noise::

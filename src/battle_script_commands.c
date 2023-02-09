@@ -10227,6 +10227,19 @@ static const u16 sZombieAltTypes[][2] = {
 	{SPECIES_BULBASAUR, TYPE_POISON},
 	{SPECIES_IVYSAUR, TYPE_POISON},
 	{SPECIES_VENUSAUR, TYPE_POISON},
+	{SPECIES_SHINIGAMI, TYPE_FIGHTING},
+	{SPECIES_ANTISPIRAL, TYPE_FIGHTING},
+	{SPECIES_CHARIZARD, TYPE_FLYING},
+	{SPECIES_POLIWRATH, TYPE_FIGHTING},
+	{SPECIES_SCYTHER, TYPE_FLYING},
+	{SPECIES_SCIZOR, TYPE_BUG},
+	{SPECIES_SMOOCHUM, TYPE_PSYCHIC},
+	{SPECIES_JYNX, TYPE_PSYCHIC},
+	{SPECIES_MURKROW, TYPE_DARK},
+	{SPECIES_HOUNDOUR, TYPE_FIRE},
+	{SPECIES_HOUNDOOM, TYPE_FIRE},
+	{SPECIES_LUGIA, TYPE_PSYCHIC},
+	{SPECIES_LATIOS, TYPE_PSYCHIC},
 };
 
 // Gives STAB to the type a Zombie Pokemon used to have before gaining Disease type
@@ -10242,7 +10255,6 @@ static u8 CheckZombieAltType(u8 battler)
 			if (sZombieAltTypes[i][0] == gBattleMons[battler].species)
 			{
 				type = sZombieAltTypes[i][1];
-				DebugPrintf("This Pokemon would get STAB on type %d", type);
 				break;
 			}
 		}

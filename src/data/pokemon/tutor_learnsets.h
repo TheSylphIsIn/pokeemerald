@@ -5746,6 +5746,106 @@ static const u32 sTutorLearnsets[] =
                                 | TUTOR(MOVE_SWAGGER)
                                 | TUTOR(MOVE_SLEEP_TALK)
                                 | TUTOR(MOVE_DEFENSE_CURL)),
+								
+		[SPECIES_GORELAX] = (0),
+
+	[SPECIES_SHINIGAMI] = (0),
+
+	[SPECIES_ANTISPIRAL] = (0),
+
+	[SPECIES_DRAGON] = (0),
+
+	[SPECIES_AMONSTER] = (0),
+
+	[SPECIES_FANGASU] = (0),
+
+	[SPECIES_NIGERA] = (0),
+
+	[SPECIES_KURIPUTO] = (0),
+
+	[SPECIES_ROODANSE] = (0),
+
+	[SPECIES_OOSHE] = (0),
+
+	[SPECIES_GOOSUBOA] = (0),
+
+	[SPECIES_ROCLOBSTER] = (0),
+
+	[SPECIES_X32763] = (0),
+
+	[SPECIES_TELSON] = (0),
+
+	[SPECIES_MAGNEZONE] = (0),
+
+	[SPECIES_VIGOURLAN] = (0),
+
+	[SPECIES_DIAMANDIX] = (0),
+
+	[SPECIES_GIGAWOLF] = (0),
+
+	[SPECIES_GALACTIMON] = (0),
+
+	[SPECIES_QWILSHARK] = (0),
+
+	[SPECIES_DRAGOONE] = (0),
+
+	[SPECIES_CALFBY] = (0),
+
+	[SPECIES_RAMSHAKER] = (0),
+
+	[SPECIES_SEVICIOUS] = (0),
+
+	[SPECIES_ZANGOL] = (0),
+
+	[SPECIES_PSYPIG] = (0),
+
+	[SPECIES_MUNCHLAX] = (0),
+
+	[SPECIES_SKYLAX] = (0),
+
+	[SPECIES_MYSTERYEGG] = (0),
+
+	[SPECIES_SECRETEGG] = (0),
+
+	[SPECIES_HYPEREGG] = (0),
+
+	[SPECIES_HOMBONE] = (0),
+
+	[SPECIES_HOMBEAST] = (0),
+
+	[SPECIES_KENCHIRA] = (0),
+
+	[SPECIES_KENCHUKO] = (0),
+
+	[SPECIES_GLUTE] = (0),
+
+	[SPECIES_BUTE] = (0),
+
+	[SPECIES_NUTE] = (0),
+
+	[SPECIES_FURI_X] = (0),
+
+	[SPECIES_FURI_Z] = (0),
+
+	[SPECIES_FURI_Q] = (0),
+
+	[SPECIES_TURMUR] = (0),
+
+	[SPECIES_SHADERU] = (0),
+
+	[SPECIES_FACELEECH] = (0),
+
+	[SPECIES_LUCA_ZAMON] = (0),
+
+	[SPECIES_TEA_BARCAN] = (0),
+
+	[SPECIES_MINICE] = (0),
+
+	[SPECIES_MINIROCK] = (0),
+
+	[SPECIES_MINISTEEL] = (0),
+
+	[SPECIES_GENEROBO] = (0),
 
 };
 

@@ -388,6 +388,56 @@ gCryTable::
 	cry Cry_Jirachi
 	cry Cry_Deoxys
 	cry Cry_Chimecho
+	cry Cry_Gorelax
+	cry Cry_Shinigami
+	cry Cry_Antispiral
+	cry Cry_Dragon
+	cry Cry_Amonster
+	cry Cry_Fangasu
+	cry Cry_Nigera
+	cry Cry_Kuriputo
+	cry Cry_Roodanse
+	cry Cry_Ooshe
+	cry Cry_Goosuboa
+	cry Cry_Roclobster
+	cry Cry_X32763
+	cry Cry_Telson
+	cry Cry_Magnezone
+	cry Cry_Vigourlan
+	cry Cry_Diamandix
+	cry Cry_Gigawolf
+	cry Cry_Galactimon
+	cry Cry_Qwilshark
+	cry Cry_Dragoone
+	cry Cry_Calfby
+	cry Cry_Ramshaker
+	cry Cry_Sevicious
+	cry Cry_Zangol
+	cry Cry_Psypig
+	cry Cry_Munchlax
+	cry Cry_Skylax
+	cry Cry_Mysteryegg
+	cry Cry_Secretegg
+	cry Cry_Hyperegg
+	cry Cry_Hombone
+	cry Cry_Hombeast
+	cry Cry_Kenchira
+	cry Cry_Kenchuko
+	cry Cry_Glute
+	cry Cry_Bute
+	cry Cry_Nute
+	cry Cry_FuriX
+	cry Cry_FuriZ
+	cry Cry_FuriQ
+	cry Cry_Turmur
+	cry Cry_Shaderu
+	cry Cry_Faceleech
+	cry Cry_Luca_Zamon
+	cry Cry_Tea_Barcan
+	cry Cry_Minice
+	cry Cry_Minirock
+	cry Cry_Ministeel
+	cry Cry_Generobo
 
 	.align 2
 gCryTable_Reverse::
@@ -779,3 +829,53 @@ gCryTable_Reverse::
 	cry_reverse Cry_Jirachi
 	cry_reverse Cry_Deoxys
 	cry_reverse Cry_Chimecho
+	cry_reverse Cry_Gorelax
+	cry_reverse Cry_Shinigami
+	cry_reverse Cry_Antispiral
+	cry_reverse Cry_Dragon
+	cry_reverse Cry_Amonster
+	cry_reverse Cry_Fangasu
+	cry_reverse Cry_Nigera
+	cry_reverse Cry_Kuriputo
+	cry_reverse Cry_Roodanse
+	cry_reverse Cry_Ooshe
+	cry_reverse Cry_Goosuboa
+	cry_reverse Cry_Roclobster
+	cry_reverse Cry_X32763
+	cry_reverse Cry_Telson
+	cry_reverse Cry_Magnezone
+	cry_reverse Cry_Vigourlan
+	cry_reverse Cry_Diamandix
+	cry_reverse Cry_Gigawolf
+	cry_reverse Cry_Galactimon
+	cry_reverse Cry_Qwilshark
+	cry_reverse Cry_Dragoone
+	cry_reverse Cry_Calfby
+	cry_reverse Cry_Ramshaker
+	cry_reverse Cry_Sevicious
+	cry_reverse Cry_Zangol
+	cry_reverse Cry_Psypig
+	cry_reverse Cry_Munchlax
+	cry_reverse Cry_Skylax
+	cry_reverse Cry_Mysteryegg
+	cry_reverse Cry_Secretegg
+	cry_reverse Cry_Hyperegg
+	cry_reverse Cry_Hombone
+	cry_reverse Cry_Hombeast
+	cry_reverse Cry_Kenchira
+	cry_reverse Cry_Kenchuko
+	cry_reverse Cry_Glute
+	cry_reverse Cry_Bute
+	cry_reverse Cry_Nute
+	cry_reverse Cry_FuriX
+	cry_reverse Cry_FuriZ
+	cry_reverse Cry_FuriQ
+	cry_reverse Cry_Turmur
+	cry_reverse Cry_Shaderu
+	cry_reverse Cry_Faceleech
+	cry_reverse Cry_Luca_Zamon
+	cry_reverse Cry_Tea_Barcan
+	cry_reverse Cry_Minice
+	cry_reverse Cry_Minirock
+	cry_reverse Cry_Ministeel
+	cry_reverse Cry_Generobo
