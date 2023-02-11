@@ -1101,11 +1101,11 @@
 	.4byte \text
 	.endm
 
-	@ Opens the Pokemart system, offering the specified products for sale.
-	@ Products should be a list of .2byte item values preceded by an .align 2
-	.macro pokemart products:req
+	@ Opens the Pokemart system, offering the specified products for sale. If tmshopid is 0, it won't be treated as a TM shop.
+	.macro pokemart products:req, tmshopid = 0
 	.byte 0x86
 	.4byte \products
+	.2byte \tmshopid
 	.endm
 
 	@ Opens the Pokemart system and treats the list of items as decorations.
