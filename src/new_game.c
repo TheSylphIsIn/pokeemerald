@@ -51,6 +51,7 @@ extern const u8 EventScript_ResetAllMapFlags[];
 static void ClearFrontierRecord(void);
 static void WarpToTruck(void);
 static void ResetMiniGamesRecords(void);
+static void SetShopInventories(void);
 
 EWRAM_DATA bool8 gDifferentSaveFile = FALSE;
 EWRAM_DATA bool8 gEnableContestDebugging = FALSE;
@@ -130,6 +131,26 @@ static void WarpToTruck(void)
     WarpIntoMap();
 }
 
+static const u8 sShopInventories[TMSHOP_COUNT][TMSHOP_ITEMS_COUNT] = 
+	{{255}, // placeholders
+	 {255},
+	 {255},
+	 {255},};
+
+static void SetShopInventories(void)
+{
+	u32 i, j;
+	for (i = 0; i < TMSHOP_COUNT; i++)
+	{
+		for (j = 0; j < TMSHOP_ITEMS_COUNT; j++)
+		{
+			if (sShopInventories[i][j] == 255)
+				break;
+			gSaveBlock2Ptr->shopInventories[i][j] = sShopInventories[i][j];
+		}
+	}
+}
+
 void Sav2_ClearSetDefault(void)
 {
     ClearSav2();
@@ -171,6 +192,7 @@ void NewGameInitData(void)
     ClearBerryTrees();
     SetMoney(&gSaveBlock1Ptr->money, 3000);
     SetCoins(0);
+	SetShopInventories();
     ResetLinkContestBoolean();
     ResetGameStats();
     ClearAllContestWinnerPics();

@@ -65,6 +65,8 @@
 #define GIFT_RIBBONS_COUNT 11
 #define SAVED_TRENDS_COUNT 5
 #define PYRAMID_BAG_ITEMS_COUNT 10
+#define TMSHOP_COUNT 4 // number of shops with limited inventories
+#define TMSHOP_ITEMS_COUNT 8  // max of distinct items in limited shops. each item can have up to 254 available.
 
 // Number of facilities for Ranking Hall.
 // 7 facilities for single mode + tower double mode + tower multi mode.

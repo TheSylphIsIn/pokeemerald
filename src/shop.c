@@ -596,23 +596,6 @@ static void BuyMenuPrintItemDescriptionAndShowItemIcon(s32 item, bool8 onInit, s
     BuyMenuPrint(WIN_ITEM_DESCRIPTION, description, 3, 1, 0, COLORID_NORMAL);
 }
 
-// TM Shop
-bool8 GetSetItemBought(u8 storeId, u16 itemPos, u8 caseId)
-{
-    u16 mask;
-
-    mask = 1 << itemPos;
-    switch (caseId)
-    {
-    case FLAG_GET_BOUGHT:
-        return (gSaveBlock2Ptr->tmShopFlags[storeId] & mask) != 0;
-    case FLAG_SET_BOUGHT:
-        gSaveBlock2Ptr->tmShopFlags[storeId] |= mask;
-        return TRUE;
-    }
-    
-    return FALSE;
-}
 
 static void BuyMenuPrintPriceInList(u8 windowId, s32 item, u8 y, u8 itemPos)
 {
@@ -631,7 +614,7 @@ static void BuyMenuPrintPriceInList(u8 windowId, s32 item, u8 y, u8 itemPos)
         }
         else if (gMartInfo.martType == MART_TYPE_TM)
         {
-            if (GetSetItemBought(gMartInfo.shopId, itemPos, FLAG_GET_BOUGHT))
+            if (gSaveBlock2Ptr->shopInventories[gMartInfo.shopId][itemPos] == 0)
             {
                 StringCopy(gStringVar1, gText_SoldOut);
                 StringExpandPlaceholders(gStringVar4, gText_StrVar1);
@@ -643,7 +626,12 @@ static void BuyMenuPrintPriceInList(u8 windowId, s32 item, u8 y, u8 itemPos)
                     ItemId_GetPrice(item) >> IsPokeNewsActive(POKENEWS_SLATEPORT),
                     STR_CONV_MODE_LEFT_ALIGN,
                     5);
-                StringExpandPlaceholders(gStringVar4, gText_PokedollarVar1);
+				ConvertIntToDecimalStringN(
+					gStringVar2,
+					gSaveBlock2Ptr->shopInventories[gMartInfo.shopId][itemPos],
+					STR_CONV_MODE_LEFT_ALIGN,
+					5);
+                StringExpandPlaceholders(gStringVar4, gText_PokedollarVar1QuantityVar2);
             }
         }
         else
@@ -1038,10 +1026,9 @@ static void Task_BuyMenu(u8 taskId)
 
                     StringExpandPlaceholders(gStringVar4, gText_YouWantedVar1ThatllBeVar2);
                     
-                    if (!GetSetItemBought(gMartInfo.shopId, gShopDataPtr->selectedRow + gShopDataPtr->scrollOffset, FLAG_GET_BOUGHT))
+                    if (gSaveBlock2Ptr->shopInventories[gMartInfo.shopId][gShopDataPtr->selectedRow + gShopDataPtr->scrollOffset] > 0)
                     {
-                        tItemCount = 1;
-                        BuyMenuDisplayMessage(taskId, gStringVar4, BuyMenuConfirmPurchase);
+                        BuyMenuDisplayMessage(taskId, gText_Var1CertainlyHowMany, Task_BuyHowManyDialogueInit);
                     }
                     else
                     {
@@ -1072,6 +1059,7 @@ static void Task_BuyHowManyDialogueInit(u8 taskId)
 
     u16 quantityInBag = CountTotalItemQuantityInBag(tItemId);
     u16 maxQuantity;
+	u8 shopQuantity;
 
     DrawStdFrameWithCustomTileAndPalette(WIN_QUANTITY_IN_BAG, FALSE, 1, 13);
     ConvertIntToDecimalStringN(gStringVar1, quantityInBag, STR_CONV_MODE_RIGHT_ALIGN, MAX_ITEM_DIGITS + 1);
@@ -1083,6 +1071,13 @@ static void Task_BuyHowManyDialogueInit(u8 taskId)
     ScheduleBgCopyTilemapToVram(0);
 
     maxQuantity = GetMoney(&gSaveBlock1Ptr->money) / gShopDataPtr->totalCost;
+	if (gMartInfo.martType == MART_TYPE_TM)
+	{
+		shopQuantity = gSaveBlock2Ptr->shopInventories[gMartInfo.shopId][gShopDataPtr->selectedRow + gShopDataPtr->scrollOffset];
+		// Max amount is how many the store has or how many the player can afford; whichever is lower.
+		if (shopQuantity < maxQuantity)
+			maxQuantity = shopQuantity;
+	}
 
     if (maxQuantity > MAX_BAG_ITEM_CAPACITY)
         gShopDataPtr->maxQuantity = MAX_BAG_ITEM_CAPACITY;
@@ -1136,6 +1131,7 @@ static void BuyMenuConfirmPurchase(u8 taskId)
 static void BuyMenuTryMakePurchase(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
+	u32 purchasedQuantity = tItemCount;
 
     PutWindowTilemap(WIN_ITEM_LIST);
 
@@ -1155,7 +1151,7 @@ static void BuyMenuTryMakePurchase(u8 taskId)
     {
         if (AddBagItem(tItemId, tItemCount) == TRUE)
         {
-            GetSetItemBought(gMartInfo.shopId, gShopDataPtr->selectedRow + gShopDataPtr->scrollOffset, FLAG_SET_BOUGHT);
+            gSaveBlock2Ptr->shopInventories[gMartInfo.shopId][gShopDataPtr->selectedRow + gShopDataPtr->scrollOffset] -= purchasedQuantity;
             BuyMenuDisplayMessage(taskId, gText_HereYouGoThankYou, BuyMenuSubtractMoney);
             RecordItemPurchase(taskId);
         }
@@ -1329,7 +1325,10 @@ void CreateTMShopMenu(const u16 *itemsForSale, u8 shopId)
 {
     CreateShopMenu(MART_TYPE_TM);
     SetTMShopItemsForSale(itemsForSale);
-    SetShopId(shopId);
+    // since 0 is treated as "not a TM shop", this -1 allows index 0 of the array to be used.
+	// Otherwise there would always be one wasted space.
+	// ID is not read if the shop type is not TM, so there is no conflict with the above default to 0.
+	SetShopId(shopId - 1); 
     ClearItemPurchases();
     SetShopMenuCallback(ScriptContext_Enable);
 }
