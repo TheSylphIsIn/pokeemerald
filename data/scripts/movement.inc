@@ -102,6 +102,7 @@ Common_Movement_WalkUp2::
 StepAwayLeft::
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_StepLeft
 	waitmovement 0
+	releaseall
 	end
 	
 Common_Movement_StepLeft::
@@ -111,6 +112,7 @@ Common_Movement_StepLeft::
 StepAwayRight::
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_StepRight
 	waitmovement 0
+	releaseall
 	end
 	
 Common_Movement_StepRight::
@@ -120,6 +122,7 @@ Common_Movement_StepRight::
 StepAwayUp::
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_StepUp
 	waitmovement 0
+	releaseall
 	end
 	
 Common_Movement_StepUp::
@@ -129,6 +132,7 @@ Common_Movement_StepUp::
 StepAwayDown::
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_StepDown
 	waitmovement 0
+	releaseall
 	end
 	
 Common_Movement_StepDown::

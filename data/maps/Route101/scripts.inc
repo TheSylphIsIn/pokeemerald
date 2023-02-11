@@ -24,8 +24,8 @@ Route101_EventScript_StartBirchRescue::
 	playbgm MUS_HELP, TRUE
 	msgbox Route101_Text_HelpMe, MSGBOX_DEFAULT
 	closemessage
-	setobjectxy LOCALID_BIRCH, 0, 15
-	setobjectxy LOCALID_ZIGZAGOON, 0, 16
+	setobjectxy LOCALID_BIRCH, 1, 16
+	setobjectxy LOCALID_ZIGZAGOON, 1, 17
 	applymovement OBJ_EVENT_ID_PLAYER, Route101_Movement_EnterScene
 	applymovement LOCALID_BIRCH, Route101_Movement_BirchRunAway1
 	applymovement LOCALID_ZIGZAGOON, Route101_Movement_ZigzagoonChase1
@@ -125,9 +125,6 @@ Route101_Movement_ZigzagoonChase1:
 	walk_fast_up
 	step_end
 
-@ Leftover data? This command is unused.
-	step_end
-
 Route101_Movement_ZigzagoonFaceBirch:
 	walk_in_place_fast_left
 	walk_in_place_fast_left
@@ -183,9 +180,6 @@ Route101_Movement_BirchRunAway1:
 	walk_fast_right
 	walk_fast_up
 	walk_fast_up
-	step_end
-
-@ Leftover data? This command is unused.
 	step_end
 
 Route101_Movement_BirchFaceZigzagoon:
