@@ -5789,6 +5789,7 @@ static const u16 sShaderuLevelUpLearnset[] = {
 };
 
 static const u16 sFaceleechLevelUpLearnset[] = {
+	LEVEL_UP_MOVE(1, MOVE_BITE),
 	LEVEL_UP_END
 };
 

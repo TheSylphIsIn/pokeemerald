@@ -23,9 +23,22 @@
 #include "tv.h"
 #include "constants/items.h"
 #include "constants/battle_frontier.h"
+#include "constants/region_map_sections.h"
 
 static void CB2_ReturnFromChooseHalfParty(void);
 static void CB2_ReturnFromChooseBattleFrontierParty(void);
+
+struct PresetMon {
+    /*0x00*/ u8 nickname[POKEMON_NAME_LENGTH + 1];
+    /*0x0C*/ u16 species;
+    /*0x0E*/ u8 ivs[NUM_STATS];
+    /*0x14*/ u8 abilityNum;
+    /*0x18*/ u32 otId;
+    /*0x24*/ u32 personality;
+    /*0x28*/ u16 heldItem;
+    /*0x2B*/ u8 otName[11];
+    /*0x36*/ u8 otGender;
+}; // 42 bytes
 
 void HealPlayerParty(void)
 {
@@ -58,19 +71,84 @@ void HealPlayerParty(void)
     }
 }
 
-u8 ScriptGiveMon(u16 species, u8 level, u16 item, u32 unused1, u32 unused2, u8 unused3)
+static const struct PresetMon sPresetMons[] = 
+{
+	{
+        .nickname = _("FACELEECH"),
+        .species = SPECIES_FACELEECH,
+        .ivs = {31, 20, 5, 20, 4, 4},
+        .abilityNum = 0,
+        .otId = 61616,
+        .personality = 0x3,
+        .heldItem = ITEM_FOCUS_BAND,
+        .otName = _("GLEIS"),
+        .otGender = MALE,
+    },
+};
+
+u8 ScriptGiveMon(u16 species, u8 level, u16 item, u32 presetMonId, u32 presetSpecies, u8 presetMode)
 {
     u16 nationalDexNum;
     int sentToPc;
     u8 heldItem[2];
-    struct Pokemon mon;
+    struct Pokemon *mon = &gEnemyParty[0];
+	struct Pokemon pokemon;
+	u32 i;
+	u8 metLocation = METLOC_FATEFUL_ENCOUNTER;
+	const struct PresetMon *presetMon = &sPresetMons[presetMonId];
+	
+	if (presetMode == 1) // give the mon specified by presetMonId
+	{
+		CreateMon(mon, presetMon->species, level, USE_RANDOM_IVS, TRUE, presetMon->personality, OT_ID_PRESET, presetMon->otId);
 
-    CreateMon(&mon, species, level, USE_RANDOM_IVS, FALSE, 0, OT_ID_PLAYER_ID, 0);
-    heldItem[0] = item;
-    heldItem[1] = item >> 8;
-    SetMonData(&mon, MON_DATA_HELD_ITEM, heldItem);
-    sentToPc = GiveMonToPlayer(&mon);
-    nationalDexNum = SpeciesToNationalPokedexNum(species);
+		SetMonData(mon, MON_DATA_HP_IV, &presetMon->ivs[0]);
+		SetMonData(mon, MON_DATA_ATK_IV, &presetMon->ivs[1]);
+		SetMonData(mon, MON_DATA_DEF_IV, &presetMon->ivs[2]);
+		SetMonData(mon, MON_DATA_SPEED_IV, &presetMon->ivs[3]);
+		SetMonData(mon, MON_DATA_SPATK_IV, &presetMon->ivs[4]);
+		SetMonData(mon, MON_DATA_SPDEF_IV, &presetMon->ivs[5]);
+		SetMonData(mon, MON_DATA_NICKNAME, presetMon->nickname);
+		SetMonData(mon, MON_DATA_OT_NAME, presetMon->otName);
+		SetMonData(mon, MON_DATA_OT_GENDER, &presetMon->otGender);
+		SetMonData(mon, MON_DATA_ABILITY_NUM, &presetMon->abilityNum);
+		SetMonData(mon, MON_DATA_MET_LOCATION, &metLocation);
+		
+		for (i = 0; i < PARTY_SIZE; i++)
+		{
+			if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL) == SPECIES_NONE)
+				break;
+		}
+
+		if (i >= PARTY_SIZE)
+		{
+			sentToPc = MON_CANT_GIVE;
+		}
+		else
+		{
+			CopyMon(&gPlayerParty[i], mon, sizeof(*mon));
+			gPlayerPartyCount = i + 1;
+			sentToPc = MON_GIVEN_TO_PARTY;
+			CalculateMonStats(&gPlayerParty[i]);
+		}
+	}
+	else if (presetMode == 2) // remove the mon specified by presetMonId
+	{
+		for (i = 0; i < PARTY_SIZE; i++)
+		{
+			if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL) == presetMon->species)
+				ZeroMonData(&gPlayerParty[i]);
+		}
+		sentToPc = MON_CANT_GIVE;
+	}
+	else // normal givemon
+	{
+		CreateMon(&pokemon, species, level, USE_RANDOM_IVS, FALSE, 0, OT_ID_PLAYER_ID, 0);
+		heldItem[0] = item;
+		heldItem[1] = item >> 8;
+		SetMonData(&pokemon, MON_DATA_HELD_ITEM, heldItem);
+		sentToPc = GiveMonToPlayer(&pokemon);
+		nationalDexNum = SpeciesToNationalPokedexNum(species);
+	}
 
     // Don't set Pokédex flag for MON_CANT_GIVE
     switch(sentToPc)

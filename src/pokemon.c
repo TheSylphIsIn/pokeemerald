@@ -1976,7 +1976,7 @@ static const u8 sMonFrontAnimIdsTable[NUM_SPECIES - 1] =
 	[SPECIES_FURI_Q- 1]	= ANIM_H_SHAKE,
 	[SPECIES_TURMUR- 1]	= ANIM_H_SHAKE,
 	[SPECIES_SHADERU- 1]	= ANIM_H_SHAKE,
-	[SPECIES_FACELEECH- 1]	= ANIM_H_SHAKE,
+	[SPECIES_FACELEECH- 1]	= ANIM_CIRCULAR_STRETCH_TWICE,
 	[SPECIES_LUCA_ZAMON- 1]	= ANIM_H_SHAKE,
 	[SPECIES_TEA_BARCAN- 1]	= ANIM_H_SHAKE,
 	[SPECIES_MINICE- 1]	= ANIM_H_SHAKE,
@@ -2444,9 +2444,9 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
     SetBoxMonData(boxMon, MON_DATA_NICKNAME, speciesName);
     SetBoxMonData(boxMon, MON_DATA_LANGUAGE, &gGameLanguage);
     SetBoxMonData(boxMon, MON_DATA_OT_NAME, gSaveBlock2Ptr->playerName);
-    SetBoxMonData(boxMon, MON_DATA_SPECIES, &species);
+    SetBoxMonData(boxMon, MON_DATA_SPECIES, &species);// mon becomes a bad egg during preset creation here, for some reason.
     SetBoxMonData(boxMon, MON_DATA_EXP, &gExperienceTables[gSpeciesInfo[species].growthRate][level]);
-    SetBoxMonData(boxMon, MON_DATA_FRIENDSHIP, &gSpeciesInfo[species].friendship);
+	SetBoxMonData(boxMon, MON_DATA_FRIENDSHIP, &gSpeciesInfo[species].friendship);
     value = GetCurrentRegionMapSectionId();
     SetBoxMonData(boxMon, MON_DATA_MET_LOCATION, &value);
     SetBoxMonData(boxMon, MON_DATA_MET_LEVEL, &level);
@@ -2491,8 +2491,8 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
         value = personality & 1;
         SetBoxMonData(boxMon, MON_DATA_ABILITY_NUM, &value);
     }
-
-    GiveBoxMonInitialMoveset(boxMon);
+	
+	GiveBoxMonInitialMoveset(boxMon);
 }
 
 void CreateMonWithNature(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 nature)

@@ -459,7 +459,7 @@ const struct MonCoords gMonBackPicCoords[] =
 	[SPECIES_FURI_Q] = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
 	[SPECIES_TURMUR] = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
 	[SPECIES_SHADERU] = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
-	[SPECIES_FACELEECH] = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
+	[SPECIES_FACELEECH] = { .size = MON_COORDS_SIZE(48, 20), .y_offset =  15 },
 	[SPECIES_LUCA_ZAMON] = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
 	[SPECIES_TEA_BARCAN] = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
 	[SPECIES_MINICE] = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },

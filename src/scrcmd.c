@@ -1780,11 +1780,11 @@ bool8 ScrCmd_givemon(struct ScriptContext *ctx)
     u16 species = VarGet(ScriptReadHalfword(ctx));
     u8 level = ScriptReadByte(ctx);
     u16 item = VarGet(ScriptReadHalfword(ctx));
-    u32 unkParam1 = ScriptReadWord(ctx);
-    u32 unkParam2 = ScriptReadWord(ctx);
-    u8 unkParam3 = ScriptReadByte(ctx);
+    u32 presetMonId = ScriptReadWord(ctx); // index into the array of preset mons
+    u32 presetSpecies = ScriptReadWord(ctx); // preset mon's species
+    u8 presetMode = ScriptReadByte(ctx); // whether to give or remove the preset mon. 0: not preset. 1: give. 2: remove.
 
-    gSpecialVar_Result = ScriptGiveMon(species, level, item, unkParam1, unkParam2, unkParam3);
+    gSpecialVar_Result = ScriptGiveMon(species, level, item, presetMonId, presetSpecies, presetMode);
     return FALSE;
 }
 

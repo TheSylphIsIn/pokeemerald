@@ -4799,6 +4799,9 @@ static const union AnimCmd sAnim_SHADERU_1[] =
 
 static const union AnimCmd sAnim_FACELEECH_1[] =
 {
+	ANIMCMD_FRAME(0, 15),
+	ANIMCMD_FRAME(1, 30),
+	ANIMCMD_FRAME(0, 30),
 	ANIMCMD_END
 };
 
