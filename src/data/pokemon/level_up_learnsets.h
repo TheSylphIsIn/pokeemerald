@@ -5813,7 +5813,16 @@ static const u16 sTeaBarcanLevelUpLearnset[] = {
 };
 
 static const u16 sMiniceLevelUpLearnset[] = {
-	LEVEL_UP_END
+    LEVEL_UP_MOVE( 1, MOVE_TACKLE),
+    LEVEL_UP_MOVE( 7, MOVE_POWDER_SNOW),
+    LEVEL_UP_MOVE(13, MOVE_CURSE),
+    LEVEL_UP_MOVE(19, MOVE_ICY_WIND),
+    LEVEL_UP_MOVE(25, MOVE_ANCIENT_POWER),
+    LEVEL_UP_MOVE(31, MOVE_AMNESIA),
+    LEVEL_UP_MOVE(37, MOVE_SUBMISSION),
+    LEVEL_UP_MOVE(43, MOVE_LOCK_ON),
+    LEVEL_UP_MOVE(49, MOVE_ZAP_CANNON),
+    LEVEL_UP_END
 };
 
 static const u16 sMinirockLevelUpLearnset[] = {

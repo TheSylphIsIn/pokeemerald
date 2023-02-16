@@ -9431,7 +9431,26 @@ const u32 gTMHMLearnsets[][2] =
 	[SPECIES_FACELEECH] = TMHM_LEARNSET(0),
 	[SPECIES_LUCA_ZAMON] = TMHM_LEARNSET(0),
 	[SPECIES_TEA_BARCAN] = TMHM_LEARNSET(0),
-	[SPECIES_MINICE] = TMHM_LEARNSET(0),
+	[SPECIES_MINICE] = TMHM_LEARNSET(TMHM(TM01_FOCUS_PUNCH)
+                                        | TMHM(TM06_TOXIC)
+                                        | TMHM(TM07_HAIL)
+                                        | TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM13_ICE_BEAM)
+                                        | TMHM(TM14_BLIZZARD)
+                                        | TMHM(TM17_PROTECT)
+                                        | TMHM(TM18_RAIN_DANCE)
+                                        | TMHM(TM20_SAFEGUARD)
+                                        | TMHM(TM21_FRUSTRATION)
+                                        | TMHM(TM24_THUNDERBOLT)
+                                        | TMHM(TM25_THUNDER)
+                                        | TMHM(TM27_RETURN)
+                                        | TMHM(TM31_BRICK_BREAK)
+                                        | TMHM(TM32_DOUBLE_TEAM)
+                                        | TMHM(TM34_SHOCK_WAVE)
+                                        | TMHM(TM42_FACADE)
+                                        | TMHM(TM43_SECRET_POWER)
+                                        | TMHM(TM44_REST)
+                                        | TMHM(HM06_ROCK_SMASH)),
 	[SPECIES_MINIROCK] = TMHM_LEARNSET(0),
 	[SPECIES_MINISTEEL] = TMHM_LEARNSET(0),
 	[SPECIES_GENEROBO] = TMHM_LEARNSET(0),

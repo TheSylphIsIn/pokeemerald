@@ -4820,7 +4820,12 @@ static const union AnimCmd sAnim_TEA_BARCAN_1[] =
 
 static const union AnimCmd sAnim_MINICE_1[] =
 {
-	ANIMCMD_END
+    ANIMCMD_FRAME(0, 20),
+    ANIMCMD_FRAME(1, 15),
+    ANIMCMD_FRAME(0, 10),
+    ANIMCMD_FRAME(1, 18),
+    ANIMCMD_FRAME(0, 10),
+    ANIMCMD_END,
 };
 
 static const union AnimCmd sAnim_MINIROCK_1[] =
