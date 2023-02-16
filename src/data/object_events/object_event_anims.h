@@ -607,6 +607,16 @@ static const union AnimCmd sAnim_NurseBow[] =
     ANIMCMD_END,
 };
 
+static const union AnimCmd sAnim_Crumble[] = 
+{
+	ANIMCMD_FRAME(0, 8),
+	ANIMCMD_FRAME(9, 16),
+	ANIMCMD_FRAME(10, 16),
+	ANIMCMD_FRAME(11, 16),
+	ANIMCMD_FRAME(12, 16),
+	ANIMCMD_END,
+};
+
 static const union AnimCmd sAnim_RockBreak[] =
 {
     ANIMCMD_FRAME(0, 8),
@@ -843,6 +853,7 @@ static const union AnimCmd *const sAnimTable_Standard[] = {
     [ANIM_STD_GO_FASTEST_NORTH] = sAnim_GoFastestNorth,
     [ANIM_STD_GO_FASTEST_WEST] = sAnim_GoFastestWest,
     [ANIM_STD_GO_FASTEST_EAST] = sAnim_GoFastestEast,
+	[ANIM_CRUMBLE] = sAnim_Crumble,
 };
 
 static const union AnimCmd *const sAnimTable_HoOh[] = {

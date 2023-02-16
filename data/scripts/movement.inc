@@ -134,6 +134,21 @@ StepAwayDown::
 	waitmovement 0
 	releaseall
 	end
+
+Common_ZombieCrumble::
+	message Common_Text_ZombieCrumbled
+	applymovement VAR_LAST_TALKED, Common_Movement_CrumbleToDust
+	waitmovement 0
+	removeobject VAR_LAST_TALKED
+	return
+	
+Common_Movement_CrumbleToDust::
+	crumble
+	delay_16
+	step_end
+	
+Common_Text_ZombieCrumbled::
+	.string "The zombie crumbled to dust.$"
 	
 Common_Movement_StepDown::
 	walk_down

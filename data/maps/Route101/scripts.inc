@@ -217,9 +217,7 @@ Route101_EventScript_BirchsBag::
 	faceplayer
 	special ChooseStarter
 	waitstate
-	msgbox Route101_Text_BoilbasaurCrumbled, MSGBOX_DEFAULT
-	closemessage
-	removeobject LOCALID_ZIGZAGOON
+	call Common_ZombieCrumble
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	applymovement LOCALID_BIRCH, Route101_Movement_BirchApproachPlayer
@@ -286,9 +284,4 @@ Route101_Text_WildPokemonInTallGrass:
 Route101_Text_RouteSign:
 	.string "ROUTE 101\n"
 	.string "{UP_ARROW} OLDALE TOWN$"
-	
-Route101_Text_BoilbasaurCrumbled:
-	.string "The monster crumbled to dust.$"
-
-
 
