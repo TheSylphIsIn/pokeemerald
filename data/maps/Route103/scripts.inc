@@ -6,8 +6,6 @@ Route103_MapScripts::
 	.byte 0
 
 Route103_OnTransition:
-	call Common_EventScript_SetupRivalGfxId
-	call ProfBirch_EventScript_UpdateLocation
 	end
 
 Route103_OnLoad:
@@ -20,16 +18,9 @@ Route103_EventScript_OpenAlteringCave::
 	return
 
 Route103_EventScript_Rival::
-	lockall
-	checkplayergender
-	goto_if_eq VAR_RESULT, MALE, Route103_EventScript_RivalMay
-	goto_if_eq VAR_RESULT, FEMALE, Route103_EventScript_RivalBrendan
-	end
-
-Route103_EventScript_RivalMay::
+	goto_if_set FLAG_ADVENTURE_STARTED, Route103_EventScript_BirchIdle
 	msgbox Route103_Text_MayRoute103Pokemon, MSGBOX_DEFAULT
 	closemessage
-	playbgm MUS_ENCOUNTER_MAY, TRUE
 	applymovement LOCALID_RIVAL, Common_Movement_FacePlayer
 	waitmovement 0
 	applymovement LOCALID_RIVAL, Common_Movement_ExclamationMark
@@ -37,114 +28,82 @@ Route103_EventScript_RivalMay::
 	applymovement LOCALID_RIVAL, Common_Movement_Delay48
 	waitmovement 0
 	msgbox Route103_Text_MayLetsBattle, MSGBOX_DEFAULT
-	switch VAR_STARTER_MON
-	case 0, Route103_EventScript_StartMayBattleTreecko
-	case 1, Route103_EventScript_StartMayBattleTorchic
-	case 2, Route103_EventScript_StartMayBattleMudkip
-	end
-
-Route103_EventScript_RivalBrendan::
-	msgbox Route103_Text_BrendanRoute103Pokemon, MSGBOX_DEFAULT
 	closemessage
-	playbgm MUS_ENCOUNTER_BRENDAN, TRUE
-	applymovement LOCALID_RIVAL, Common_Movement_FacePlayer
-	waitmovement 0
-	applymovement LOCALID_RIVAL, Common_Movement_ExclamationMark
-	waitmovement 0
-	applymovement LOCALID_RIVAL, Common_Movement_Delay48
-	waitmovement 0
-	msgbox Route103_Text_BrendanLetsBattle, MSGBOX_DEFAULT
-	switch VAR_STARTER_MON
-	case 0, Route103_EventScript_StartBrendanBattleTreecko
-	case 1, Route103_EventScript_StartBrendanBattleTorchic
-	case 2, Route103_EventScript_StartBrendanBattleMudkip
-	end
-
-Route103_EventScript_StartMayBattleTreecko::
-	trainerbattle_no_intro TRAINER_MAY_ROUTE_103_TREECKO, Route103_Text_MayDefeated
-	goto Route103_EventScript_AfterMayBattle
-	end
-
-Route103_EventScript_StartMayBattleTorchic::
-	trainerbattle_no_intro TRAINER_MAY_ROUTE_103_TORCHIC, Route103_Text_MayDefeated
-	goto Route103_EventScript_AfterMayBattle
-	end
-
-Route103_EventScript_StartMayBattleMudkip::
-	trainerbattle_no_intro TRAINER_MAY_ROUTE_103_MUDKIP, Route103_Text_MayDefeated
-	goto Route103_EventScript_AfterMayBattle
-	end
-
-Route103_EventScript_StartBrendanBattleTreecko::
-	trainerbattle_no_intro TRAINER_BRENDAN_ROUTE_103_TREECKO, Route103_Text_BrendanDefeated
-	goto Route103_EventScript_AfterBrendanBattle
-	end
-
-Route103_EventScript_StartBrendanBattleTorchic::
-	trainerbattle_no_intro TRAINER_BRENDAN_ROUTE_103_TORCHIC, Route103_Text_BrendanDefeated
-	goto Route103_EventScript_AfterBrendanBattle
-	end
-
-Route103_EventScript_StartBrendanBattleMudkip::
-	trainerbattle_no_intro TRAINER_BRENDAN_ROUTE_103_MUDKIP, Route103_Text_BrendanDefeated
-	goto Route103_EventScript_AfterBrendanBattle
-	end
-
-Route103_EventScript_AfterMayBattle::
-	msgbox Route103_Text_MayTimeToHeadBack, MSGBOX_DEFAULT
-	goto Route103_EventScript_RivalExit
-	end
-
-Route103_EventScript_AfterBrendanBattle::
-	msgbox Route103_Text_BrendanTimeToHeadBack, MSGBOX_DEFAULT
-	goto Route103_EventScript_RivalExit
-	end
-
-Route103_EventScript_RivalExit::
+	playfanfare MUS_OBTAIN_ITEM
+	message LavaridgeTown_Text_ReceivedTheEgg
+	waitfanfare
+	giveegg SPECIES_MYSTERYEGG
+	msgbox Route103_Text_BirchText2, MSGBOX_DEFAULT
 	closemessage
-	switch VAR_FACING
-	case DIR_SOUTH, Route103_EventScript_RivalExitFacingSouth
-	case DIR_NORTH, Route103_EventScript_RivalExitFacingNorth
-	case DIR_WEST, Route103_EventScript_RivalExitFacingEastOrWest
-	case DIR_EAST, Route103_EventScript_RivalExitFacingEastOrWest
-	end
-
-Route103_EventScript_RivalExitFacingNorth::
-	applymovement OBJ_EVENT_ID_PLAYER, Route103_Movement_WatchRivalExitFacingNorth
-	applymovement LOCALID_RIVAL, Route103_Movement_RivalExitFacingNorth1
-	waitmovement 0
-	playse SE_LEDGE
-	applymovement LOCALID_RIVAL, Route103_Movement_RivalExitFacingNorth2
-	waitmovement 0
+	setflag FLAG_SYS_POKENAV_GET
+	setflag FLAG_RECEIVED_POKENAV
+	playfanfare MUS_OBTAIN_ITEM
+	message Route103_Text_GotPokenav
+	waitfanfare
+	msgbox Route103_Text_BirchText3, MSGBOX_DEFAULT
+	closemessage
 	goto Route103_EventScript_RivalEnd
+	
+Route103_EventScript_BirchIdle:
+	msgbox Route103_Text_BirchIdle, MSGBOX_NPC
 	end
-
-Route103_EventScript_RivalExitFacingEastOrWest::
-	applymovement OBJ_EVENT_ID_PLAYER, Route103_Movement_WatchRivalExitFacingEastOrWest
-	applymovement LOCALID_RIVAL, Route103_Movement_RivalExit1
-	waitmovement 0
-	playse SE_LEDGE
-	applymovement LOCALID_RIVAL, Route103_Movement_RivalExit2
-	waitmovement 0
-	goto Route103_EventScript_RivalEnd
-	end
-
-Route103_EventScript_RivalExitFacingSouth::
-	applymovement LOCALID_RIVAL, Route103_Movement_RivalExit1
-	waitmovement 0
-	playse SE_LEDGE
-	applymovement LOCALID_RIVAL, Route103_Movement_RivalExit2
-	waitmovement 0
-	goto Route103_EventScript_RivalEnd
-	end
+	
+Route103_Text_BirchIdle:
+	.string "PROF. BIRCH: Don't worry about me.\n"
+	.string "HOENN is depending on you!\p"
+	.string "{PLAYER}: Gee, that's for taking the\n"
+	.string "pressure off, PROF.$"
+	
+Route103_Text_BirchText2:
+	.string "Anyway, did you need something?\p"
+	.string "{PLAYER}: Yeah. Can you tell me\n"
+	.string "about my brother?\p"
+	.string "BIRCH: Of course. LANDON was an\n"
+	.string "accomplished trainer. He beat the\l"
+	.string "POKéMON league a few years ago.\p"
+	.string "He was traveling the world with\n"
+	.string "my daughter, MAY, working on the\l"
+	.string "POKéDEX, when the zombies appeared.\p"
+	.string "He came back to protect LITTLEROOT for\n"
+	.string "a while, but a few weeks ago he and\l"
+	.string "MAY headed west to try to find the\l"
+	.string "source of the zombies and stop it.\p"
+	.string "BIRCH: … but we haven't heard from\n"
+	.string "them since then. We have no idea what\l"
+	.string "happened to them.\p"
+	.string "{PLAYER}: … Why don't I go look for\n"
+	.string "them? Retrace their steps, find out\l"
+	.string "what could have happened.\p"
+	.string "BIRCH: That would be… incredibly\n"
+	.string "dangerous. But, if you succeeded…\p"
+	.string "{PLAYER}: It's our best shot, right?\n"
+	.string "What can I really do sitting around\l"
+	.string "in OLDALE TOWN?\p"
+	.string "BIRCH: Alright. Then here, take this.$"
+	
+Route103_Text_GotPokenav:
+	.string "{PLAYER} got the POKéNAV.$"
+	
+Route103_Text_BirchText3:
+	.string "BIRCH: That POKéNAV has a phone in\n"
+	.string "it, so I can call you if anything\l"
+	.string "urgent comes up.\p"
+	.string "{PLAYER}: Can I call you to let you\n"
+	.string "know I'm not dead?\p"
+	.string "BIRCH: Um, no. The feature is still\n"
+	.string "experimental…\p"
+	.string "In any case. You should start by\n"
+	.string "heading west to PETALBURG.\p"
+	.string "We haven't had contact with outside,\n"
+	.string "so there could be survivors there.\p"
+	.string "And {PLAYER}, please… don't die!\p"
+	.string "{PLAYER}: … I'll do my best, PROF.$"
 
 Route103_EventScript_RivalEnd::
-	removeobject LOCALID_RIVAL
-	setvar VAR_BIRCH_LAB_STATE, 4
-	clearflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_RIVAL
 	setflag FLAG_DEFEATED_RIVAL_ROUTE103
-	setvar VAR_OLDALE_RIVAL_STATE, 1
 	clearflag FLAG_HIDE_OLDALE_TOWN_RIVAL
+	clearflag FLAG_KILLED_OLDALE_MART_ZOMBIE
+	setflag FLAG_ADVENTURE_STARTED
 	savebgm MUS_DUMMY
 	fadedefaultbgm
 	releaseall
@@ -289,17 +248,26 @@ Route103_EventScript_Isabelle::
 	end
 
 Route103_Text_MayRoute103Pokemon:
-	.string "MAY: Let's see… The POKéMON found\n"
-	.string "on ROUTE 103 include…$"
+	.string "PROF. BIRCH: Simply fascinating!\n"
+	.string "POKéMON breeding has never been\l"
+	.string "observed in the wild, and yet…!$"
 
 Route103_Text_MayLetsBattle:
-	.string "Oh, hi, {PLAYER}{KUN}!\p"
-	.string "…Oh, I see, my dad gave you\n"
-	.string "a POKéMON as a gift.\p"
-	.string "Since we're here, let's have a quick\n"
-	.string "battle!\p"
-	.string "I'll give you a taste of what being\n"
-	.string "a TRAINER is like.$"
+	.string "Oh, hello, {PLAYER}{KUN}.\n"
+	.string "Take a look at this!\p"
+	.string "{PLAYER}: Uh… what's with the egg?\p"
+	.string "BIRCH: Even when zombies besiege our\n"
+	.string "homes, and our families vanish\l"
+	.string "without a trace, there is always\l"
+	.string "time for science!\p"
+	.string "{PLAYER}: … … … … …\p"
+	.string "BIRCH: The presence of this EGG is\n"
+	.string "mystifying. You should take it.\p"
+	.string "EGGs only hatch in the presence\n"
+	.string "of POKéMON, and I don't have any.\l"
+	.string "They were all in my lab when…\p"
+	.string "Well, that's not important.\n"
+	.string "Take it!$"
 
 Route103_Text_MayDefeated:
 	.string "Wow! That's great!\n"

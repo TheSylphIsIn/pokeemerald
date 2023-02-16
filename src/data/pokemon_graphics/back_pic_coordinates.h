@@ -444,7 +444,7 @@ const struct MonCoords gMonBackPicCoords[] =
 	[SPECIES_PSYPIG] = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
 	[SPECIES_MUNCHLAX] = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
 	[SPECIES_SKYLAX] = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
-	[SPECIES_MYSTERYEGG] = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
+	[SPECIES_MYSTERYEGG] = { .size = MON_COORDS_SIZE(32, 20), .y_offset =  16 },
 	[SPECIES_SECRETEGG] = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
 	[SPECIES_HYPEREGG] = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
 	[SPECIES_HOMBONE] = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },

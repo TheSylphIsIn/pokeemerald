@@ -57,7 +57,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_MANIAC",
+      "graphics_id": "OBJ_EVENT_GFX_CAMPER",
       "x": 8,
       "y": 9,
       "elevation": 3,
@@ -70,17 +70,30 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_VAR_0",
-      "x": 11,
-      "y": 19,
+      "graphics_id": "OBJ_EVENT_GFX_MAGMA_MEMBER_F",
+      "x": 1,
+      "y": 7,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "OldaleTown_EventScript_Rival",
       "flag": "FLAG_HIDE_OLDALE_TOWN_RIVAL"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_PROF_BIRCH",
+      "x": 10,
+      "y": 12,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "NULL",
+      "flag": "FLAG_HIDE_OLDALE_TOWN_BIRCH"
     }
   ],
   "warp_events": [
@@ -116,39 +129,21 @@
   "coord_events": [
     {
       "type": "trigger",
-      "x": 0,
+      "x": 1,
       "y": 10,
       "elevation": 3,
-      "var": "VAR_OLDALE_TOWN_STATE",
-      "var_value": "0",
+      "var": "VAR_ROUTE101_STATE",
+      "var_value": "4",
       "script": "OldaleTown_EventScript_BlockedPath"
     },
     {
       "type": "trigger",
-      "x": 8,
-      "y": 19,
+      "x": 1,
+      "y": 11,
       "elevation": 3,
-      "var": "VAR_OLDALE_RIVAL_STATE",
-      "var_value": "1",
-      "script": "OldaleTown_EventScript_RivalTrigger1"
-    },
-    {
-      "type": "trigger",
-      "x": 9,
-      "y": 19,
-      "elevation": 3,
-      "var": "VAR_OLDALE_RIVAL_STATE",
-      "var_value": "1",
-      "script": "OldaleTown_EventScript_RivalTrigger2"
-    },
-    {
-      "type": "trigger",
-      "x": 10,
-      "y": 19,
-      "elevation": 3,
-      "var": "VAR_OLDALE_RIVAL_STATE",
-      "var_value": "1",
-      "script": "OldaleTown_EventScript_RivalTrigger3"
+      "var": "VAR_ROUTE101_STATE",
+      "var_value": "4",
+      "script": "OldaleTown_EventScript_BlockedPath"
     }
   ],
   "bg_events": [

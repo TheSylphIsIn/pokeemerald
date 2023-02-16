@@ -53,7 +53,7 @@ OldaleTown_Mart_EventScript_PokeBallsInStock::
 	end
 
 OldaleTown_Mart_EventScript_Boy::
-	msgbox OldaleTown_Mart_Text_RestoreHPWithPotion, MSGBOX_NPC
+	msgbox OldaleTown_Mart_Text_RestoreHPWithPotion, MSGBOX_SIGN
 	end
 
 OldaleTown_Mart_Text_PokeBallsAreSoldOut:
@@ -61,12 +61,10 @@ OldaleTown_Mart_Text_PokeBallsAreSoldOut:
 	.string "I can't buy any POKé BALLS.$"
 
 OldaleTown_Mart_Text_ImGoingToBuyPokeBalls:
-	.string "I'm going to buy a bunch of POKé BALLS\n"
-	.string "and catch a bunch of POKéMON!$"
+	.string "I feel like I'm being watched…$"
 
 OldaleTown_Mart_Text_RestoreHPWithPotion:
-	.string "If a POKéMON gets hurt and loses its HP\n"
-	.string "and faints, it won't be able to battle.\p"
-	.string "To prevent your POKéMON from fainting,\n"
-	.string "restore its HP with a POTION.$"
+	.string "ZOMBIE: … … … … …\p"
+	.string "The zombie is lying motionless on\n"
+	.string "the floor.$"
 

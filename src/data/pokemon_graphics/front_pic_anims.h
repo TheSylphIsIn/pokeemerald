@@ -4724,6 +4724,9 @@ static const union AnimCmd sAnim_SKYLAX_1[] =
 
 static const union AnimCmd sAnim_MYSTERYEGG_1[] =
 {
+	ANIMCMD_FRAME(0, 10),
+	ANIMCMD_FRAME(1, 10),
+	ANIMCMD_FRAME(0, 10),
 	ANIMCMD_END
 };
 

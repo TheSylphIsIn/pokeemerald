@@ -1,26 +1,75 @@
 .set LOCALID_MART_EMPLOYEE, 2
 .set LOCALID_FOOTPRINTS_MAN, 3
 .set LOCALID_RIVAL, 4
+.set LOCALID_BIRCH, 5
 
 OldaleTown_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, OldaleTown_OnTransition
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, OldaleTown_OnFrame
 	.byte 0
 
 OldaleTown_OnTransition:
-	call Common_EventScript_SetupRivalGfxId
 	setflag FLAG_VISITED_OLDALE_TOWN
 	call_if_unset FLAG_ADVENTURE_STARTED, OldaleTown_EventScript_BlockWestEntrance
 	call_if_unset FLAG_RECEIVED_POTION_OLDALE, OldaleTown_EventScript_MoveMartEmployee
-	call_if_set FLAG_ADVENTURE_STARTED, OldaleTown_EventScript_SetOldaleState
 	end
 
-@ This script seems pointless because nothing uses VAR_OLDALE_TOWN_STATE
-OldaleTown_EventScript_SetOldaleState::
-	setvar VAR_OLDALE_TOWN_STATE, 1
-	return
+OldaleTown_OnFrame:
+	map_script_2 VAR_ROUTE101_STATE, 3, OldaleTown_OnFrameScript
+	.2byte 0
+
+OldaleTown_OnFrameScript::
+	lockall
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp
+	msgbox OldaleTown_BirchEventText1, MSGBOX_DEFAULT
+	closemessage
+	delay 60
+	msgbox OldaleTown_BirchEventText2, MSGBOX_DEFAULT
+	closemessage
+	applymovement LOCALID_BIRCH, OldaleTown_Movement_BirchWalkOffscreen
+	waitmovement 0
+	removeobject LOCALID_BIRCH
+	setvar VAR_ROUTE101_STATE, 4
+	releaseall
+	end
+	
+OldaleTown_Movement_BirchWalkOffscreen:
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	step_end
+
+OldaleTown_BirchEventText1:
+	.string "PROF. BIRCH: So, {PLAYER}. You really\n"
+	.string "don't remember your older brother?\p"
+	.string "{PLAYER}: Nope.\n"
+	.string "PROF. BIRCH: My daughter MAY?\l"
+	.string "{PLAYER}: Nuh-uh.\p"
+	.string "PROF. BIRCH: The zombie plague that\n"
+	.string "drove our home and society to ruin?\p"
+	.string "{PLAYER}: You'd think I'd remember\n"
+	.string "something like that, but no.\p"
+	.string "I have AMNESIA, dumbass! I don't\n"
+	.string "remember ANYTHING!\p"
+	.string "PROF. BIRCH: Okay, okay, you don't\n"
+	.string "have to shout.$"
+	
+OldaleTown_BirchEventText2:
+	.string "{PLAYER}: Actually… I do recognize\n"
+	.string "you. And I recall a zombie POKéMON.\p"
+	.string "PROF. BIRCH: Really? Then I daresay\n"
+	.string "you'll remember more over time.\p"
+	.string "In any case, go ahead and settle in\n"
+	.string "here. OLDALE TOWN has guards posted,\l"
+	.string "so we're safe from the zombies here.\p"
+	.string "I'll be on ROUTE 103 if you need me.$"
+	
 
 OldaleTown_EventScript_BlockWestEntrance::
-	setobjectxyperm LOCALID_FOOTPRINTS_MAN, 1, 11
+	setobjectxyperm LOCALID_FOOTPRINTS_MAN, 2, 11
 	setobjectmovementtype LOCALID_FOOTPRINTS_MAN, MOVEMENT_TYPE_FACE_LEFT
 	return
 
@@ -204,10 +253,13 @@ OldaleTown_EventScript_FootprintsMan::
 
 OldaleTown_EventScript_BlockedPath::
 	lockall
+	goto_if_set FLAG_ADVENTURE_STARTED, OldaleTown_EventScript_AliciaBattle
 	applymovement OBJ_EVENT_ID_PLAYER, OldaleTown_Movement_PlayerStepBack
 	applymovement LOCALID_FOOTPRINTS_MAN, OldaleTown_Movement_BackUp
 	waitmovement 0
 	msgbox OldaleTown_Text_WaitDontComeInHere, MSGBOX_DEFAULT
+	closemessage
+	msgbox OldaleTown_Text_DiscoveredFootprints, MSGBOX_DEFAULT
 	closemessage
 	applymovement LOCALID_FOOTPRINTS_MAN, OldaleTown_Movement_ReturnToOriginalPosition
 	waitmovement 0
@@ -220,110 +272,80 @@ OldaleTown_EventScript_NotBlockingPath::
 	end
 
 OldaleTown_EventScript_Rival::
-	lockall
-	applymovement LOCALID_RIVAL, Common_Movement_FacePlayer
-	waitmovement 0
-	setvar VAR_0x8009, 0
-	goto OldaleTown_EventScript_ShowRivalMessage
+	msgbox OldaleTown_Text_AliciaTalksToSelf, MSGBOX_NPC
 	end
 
-OldaleTown_EventScript_RivalTrigger1::
-	lockall
-	applymovement LOCALID_RIVAL, OldaleTown_Movement_RivalApproachPlayer1
-	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight
-	waitmovement 0
-	setvar VAR_0x8009, 1
-	goto OldaleTown_EventScript_ShowRivalMessage
-	end
-
-OldaleTown_EventScript_RivalTrigger2::
-	lockall
-	applymovement LOCALID_RIVAL, OldaleTown_Movement_RivalApproachPlayer2
-	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight
-	waitmovement 0
-	setvar VAR_0x8009, 1
-	goto OldaleTown_EventScript_ShowRivalMessage
-	end
-
-OldaleTown_EventScript_RivalTrigger3::
-	lockall
-	applymovement LOCALID_RIVAL, OldaleTown_Movement_RivalApproachPlayer3
-	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight
-	waitmovement 0
-	setvar VAR_0x8009, 1
-	goto OldaleTown_EventScript_ShowRivalMessage
-	end
-
-OldaleTown_EventScript_ShowRivalMessage::
-	checkplayergender
-	goto_if_eq VAR_RESULT, MALE, OldaleTown_EventScript_ShowMayMessage
-	goto_if_eq VAR_RESULT, FEMALE, OldaleTown_EventScript_ShowBrendanMessage
-	end
-
-OldaleTown_EventScript_ShowMayMessage::
-	msgbox OldaleTown_Text_MayLetsGoBack, MSGBOX_DEFAULT
-	goto OldaleTown_EventScript_RivalFinish
-	end
-
-OldaleTown_EventScript_ShowBrendanMessage::
-	msgbox OldaleTown_Text_BrendanLetsGoBack, MSGBOX_DEFAULT
-	goto OldaleTown_EventScript_RivalFinish
-	end
-
-OldaleTown_EventScript_RivalFinish::
+OldaleTown_Text_AliciaTalksToSelf:
+	.string "Fufufu… this quaint little town has\n"
+	.string "escaped my grasp long enough…\p"
+	.string "I'd love to stick around to see it\n"
+	.string "torn to shreds, but alas, I have\l"
+	.string "other business to attend.\p"
+	.string "… what? Leave me alone, fool.$"
+	
+OldaleTown_EventScript_AliciaBattle::
+	lock
+	applymovement LOCALID_RIVAL, OldaleTown_Movement_AliciaStepDown
+	msgbox OldaleTown_Text_AliciaNoticePlayer, MSGBOX_DEFAULT
 	closemessage
-	call_if_eq VAR_0x8009, 0, OldaleTown_EventScript_DoExitMovement1
-	call_if_eq VAR_0x8009, 1, OldaleTown_EventScript_DoExitMovement2
-	applymovement LOCALID_RIVAL, OldaleTown_Movement_RivalExit
-	waitmovement 0
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp
+	msgbox OldaleTown_Text_PreAliciaBattle, MSGBOX_DEFAULT
+	trainerbattle_no_intro TRAINER_MAY_ROUTE_103_TREECKO, OldaleTown_Text_AliciaDefeat
+	msgbox OldaleTown_Text_PostAliciaBattle MSGBOX_DEFAULT
+	closemessage
+	fadescreen FADE_TO_BLACK
 	removeobject LOCALID_RIVAL
-	setvar VAR_OLDALE_RIVAL_STATE, 2
-	setflag FLAG_HIDE_OLDALE_TOWN_RIVAL
-	releaseall
+	setvar VAR_ROUTE101_STATE, 5
+	fadescreen FADE_FROM_BLACK
+	msgbox OldaleTown_Text_AliciaEventEnd, MSGBOX_DEFAULT
+	closemessage
+	release
 	end
-
-OldaleTown_EventScript_DoExitMovement1::
-	goto_if_ne VAR_FACING, DIR_SOUTH, OldaleTown_EventScript_DoExitMovement2
-	applymovement LOCALID_RIVAL, OldaleTown_Movement_RivalExit
-	waitmovement 0
-	return
-
-OldaleTown_EventScript_DoExitMovement2::
-	applymovement OBJ_EVENT_ID_PLAYER, OldaleTown_Movement_WatchRivalExit
-	applymovement LOCALID_RIVAL, OldaleTown_Movement_RivalExit
-	waitmovement 0
-	return
-
-OldaleTown_Movement_RivalApproachPlayer1:
-	walk_left
-	walk_left
+	
+OldaleTown_Movement_AliciaStepDown:
+	walk_fast_down
 	step_end
 
-OldaleTown_Movement_RivalApproachPlayer2:
-	walk_left
-	step_end
-
-OldaleTown_Movement_RivalApproachPlayer3:
-	face_left
-	step_end
-
-OldaleTown_Movement_RivalExit:
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	step_end
-
-OldaleTown_Movement_WatchRivalExit:
-	delay_8
-	delay_4
-	walk_in_place_faster_down
-	step_end
+OldaleTown_Text_AliciaNoticePlayer:
+	.string "What!? YOU! You're alive?$"
+	
+OldaleTown_Text_PreAliciaBattle:
+	.string "{PLAYER}: Duh. Why does everyone keep\n"
+	.string "asking that? If I wasn't, then…\p"
+	.string "Well, I guess I could be standing here\n"
+	.string "while dead if I was a zombie, so all\l"
+	.string "things considered, it's a reasonable…\p"
+	.string "???: Quit your babbling! I won't\n"
+	.string "stand here while you mock me!\p"
+	.string "{PLAYER}: Lady, who do you think\n"
+	.string "you are? I lost my memory, so if\l"
+	.string "you know me, then sorry, but I\l"
+	.string "don't know you.\p"
+	.string "???: What? Truly…?\n"
+	.string "Hmmm…\p"
+	.string "Well, then, listen well! I am ALICIA!\n"
+	.string "And for the sake of my mission…\p"
+	.string "ALICIA: You must be eliminated!$"
+	
+OldaleTown_Text_AliciaDefeat:
+	.string "Hmph. So you still have some power…$"
+	
+OldaleTown_Text_PostAliciaBattle:
+	.string "ALICIA: Bah! You just got lucky.\n"
+	.string "But tremble in fear!\p"
+	.string "This world no longer belongs to\n"
+	.string "the living! Me and my s…\l"
+	.string "er, MASTERS will make sure of it!$"
+	
+OldaleTown_Text_AliciaEventEnd:
+	.string "{PLAYER}: Oh yeah, I'm trembling\n"
+	.string "at your level FIVE SNEASEL.\p"
+	.string "What a weirdo. But I guess I\n"
+	.string "need to be careful. After all…\p"
+	.string "Without my memories, my enemies\n"
+	.string "will know me before I know them.\p"
+	.string "Just 'cause they're alive doesn't\n"
+	.string "mean they're my friend.$"
 
 OldaleTown_Movement_PlayerStepBack:
 	delay_8
@@ -344,8 +366,11 @@ OldaleTown_Movement_ReturnToOriginalPosition:
 	step_end
 
 OldaleTown_Text_SavingMyProgress:
-	.string "I want to take a rest, so I'm saving my\n"
-	.string "progress.$"
+	.string "When the zombies first appeared, we\n"
+	.string "hired a trainer from DEVON CORP to\l"
+	.string "protect the border of the town.\p"
+	.string "That's why OLDALE wasn't destroyed.\n"
+	.string "But LITTLEROOT wasn't so lucky…$"
 
 OldaleTown_Text_IWorkAtPokemonMart:
 	.string "Hi!\n"
@@ -357,43 +382,33 @@ OldaleTown_Text_ThisIsAPokemonMart:
 	.string "Just look for our blue roof.\p"
 	.string "We sell a variety of goods including\n"
 	.string "POKé BALLS for catching POKéMON.\p"
-	.string "Here, I'd like you to have this as\n"
-	.string "a promotional item.$"
+	.string "Even though our supply chain was\n"
+	.string "destroyed by demons, we have enough\l"
+	.string "stocked to keep you supplied.\p"
+	.string "Unlike LOOTER MERCHANTS you'll find\n"
+	.string "outside, we won't run out of stock.\p"
+	.string "Here's a free sample!$"
 
 OldaleTown_Text_PotionExplanation:
-	.string "A POTION can be used anytime, so it's\n"
-	.string "even more useful than a POKéMON CENTER\l"
-	.string "in certain situations.$"
+	.string "A POTION can be used anytime, so it\n"
+	.string "could save your life if your POKéMON\l"
+	.string "are getting tired out.$"
 
 OldaleTown_Text_WaitDontComeInHere:
-	.string "Aaaaah! Wait!\n"
-	.string "Please don't come in here.\p"
-	.string "I just discovered the footprints of\n"
-	.string "a rare POKéMON!\p"
-	.string "Wait until I finish sketching\n"
-	.string "them, okay?$"
+	.string "Hey! Didn't you hear me?\n"
+	.string "It's not safe out there!$"
 
 OldaleTown_Text_DiscoveredFootprints:
-	.string "I just discovered the footprints of\n"
-	.string "a rare POKéMON!\p"
-	.string "Wait until I finish sketching\n"
-	.string "them, okay?$"
+	.string "The road to PETALBURG is crawling\n"
+	.string "with zombies. They'll eat you.\p"
+	.string "No one goes this way without a\n"
+	.string "good reason to.$"
 
 OldaleTown_Text_FinishedSketchingFootprints:
-	.string "I finished sketching the footprints of\n"
-	.string "a rare POKéMON.\p"
-	.string "But it turns out they were only my\n"
-	.string "own footprints…$"
-
-OldaleTown_Text_MayLetsGoBack:
-	.string "MAY: {PLAYER}{KUN}!\n"
-	.string "Over here!\l"
-	.string "Let's hurry home!$"
-
-OldaleTown_Text_BrendanLetsGoBack:
-	.string "BRENDAN: I'm heading back to my dad's\n"
-	.string "LAB now.\l"
-	.string "{PLAYER}, you should hustle back, too.$"
+	.string "I heard about your mission from\n"
+	.string "PROFESSOR BIRCH.\p"
+	.string "Stay safe out there. You're our\n"
+	.string "only hope for saving HOENN.$"
 
 OldaleTown_Text_TownSign:
 	.string "OLDALE TOWN\n"

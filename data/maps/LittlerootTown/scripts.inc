@@ -164,14 +164,5 @@ LittlerootTown_Text_PlayersHouse:
 LittlerootTown_Text_ProfBirchsHouse:
 	.string "PROF. BIRCH'S HOUSE$"
 
-LittlerootTown_Text_BirchSomethingToShowYouAtLab:
-	.string "PROF. BIRCH: Well, well, {PLAYER}{KUN}!\n"
-	.string "That was good work out there!\p"
-	.string "I knew there was something special\n"
-	.string "about you when I first saw you,\l"
-	.string "but I never expected this.\p"
-	.string "Oh, yes. Do you still have the POKéDEX\n"
-	.string "I gave you?\p"
-	.string "I have something to show you.\n"
-	.string "Let's go to my LAB.$"
+
 

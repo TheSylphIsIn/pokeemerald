@@ -6387,10 +6387,10 @@ const struct Trainer gTrainers[] = {
 
     [TRAINER_MAY_ROUTE_103_TREECKO] =
     {
-        .trainerClass = TRAINER_CLASS_RIVAL,
+        .trainerClass = TRAINER_CLASS_DEATHCALLER,
         .encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE,
-        .trainerPic = TRAINER_PIC_MAY,
-        .trainerName = _("MAY"),
+        .trainerPic = TRAINER_PIC_ALICIA,
+        .trainerName = _("ALICIA"),
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE | AI_SCRIPT_TRY_TO_FAINT | AI_SCRIPT_CHECK_VIABILITY,

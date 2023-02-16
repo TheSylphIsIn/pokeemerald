@@ -909,17 +909,11 @@ u8 GetSpecialBattleTransition(s32 id)
 
 void ChooseStarter(void)
 {
-    SetMainCallback2(CB2_ChooseStarter);
-    gMain.savedCallback = CB2_GiveStarter;
+    SetMainCallback2(CB2_GiveStarter);
 }
 
 static void CB2_GiveStarter(void)
 {
-    u16 starterMon;
-
-    *GetVarPointer(VAR_STARTER_MON) = gSpecialVar_Result;
-    starterMon = GetStarterPokemon(gSpecialVar_Result);
-    ScriptGiveMon(starterMon, 5, ITEM_NONE, 0, 0, 0);
     ResetTasks();
     PlayBattleBGM();
     SetMainCallback2(CB2_StartFirstBattle);
