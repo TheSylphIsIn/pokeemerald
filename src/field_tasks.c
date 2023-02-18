@@ -121,7 +121,7 @@ static const u16 sSootopolisGymIceRowVars[] =
     0,
     VAR_TEMP_8,
     VAR_TEMP_9,
-    VAR_TEMP_A,
+    VAR_TEMP_B,
     0,
     0,
     0,

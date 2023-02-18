@@ -142,6 +142,12 @@ Common_ZombieCrumble::
 	removeobject VAR_LAST_TALKED
 	return
 	
+Common_LootCorpse::
+	message Common_Text_PlayerLooted
+	waitbuttonpress
+	finditem VAR_TEMP_LOOT_ITEM
+	return
+	
 Common_Movement_CrumbleToDust::
 	crumble
 	delay_16
@@ -149,6 +155,9 @@ Common_Movement_CrumbleToDust::
 	
 Common_Text_ZombieCrumbled::
 	.string "The zombie crumbled to dust.$"
+	
+Common_Text_PlayerLooted:
+	.string "{PLAYER} looted the body…$"
 	
 Common_Movement_StepDown::
 	walk_down

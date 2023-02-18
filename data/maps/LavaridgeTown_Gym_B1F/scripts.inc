@@ -17,7 +17,7 @@ LavaridgeTown_Gym_B1F_EventScript_SetTrainerTempVars::
 	setvar VAR_TEMP_7, 0
 	setvar VAR_TEMP_8, 0
 	setvar VAR_TEMP_9, 0
-	setvar VAR_TEMP_A, 0
+	setvar VAR_TEMP_B, 0
 	goto_if_defeated TRAINER_KEEGAN, LavaridgeTown_Gym_B1F_EventScript_SetJaceTempVar
 	setvar VAR_TEMP_7, 1
 LavaridgeTown_Gym_B1F_EventScript_SetJaceTempVar::
@@ -28,7 +28,7 @@ LavaridgeTown_Gym_B1F_EventScript_SetJeffTempVar::
 	setvar VAR_TEMP_9, 1
 LavaridgeTown_Gym_B1F_EventScript_SetEliTempVar::
 	goto_if_defeated TRAINER_ELI, LavaridgeTown_Gym_B1F_EventScript_EndSetTrainerTempVars
-	setvar VAR_TEMP_A, 1
+	setvar VAR_TEMP_B, 1
 LavaridgeTown_Gym_B1F_EventScript_EndSetTrainerTempVars::
 	return
 

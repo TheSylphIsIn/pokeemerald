@@ -32,7 +32,7 @@ LilycoveCity_Harbor_EventScript_FerryAttendant::
 
 @ First goto_if_eq is unnecessary; identical scripts
 LilycoveCity_Harbor_EventScript_NoFirstTimeEventTickets::
-	goto_if_eq VAR_TEMP_A, 0, LilycoveCity_Harbor_EventScript_NoEventTickets
+	goto_if_eq VAR_TEMP_8, 0, LilycoveCity_Harbor_EventScript_NoEventTickets
 	msgbox LilycoveCity_Harbor_Text_MayISeeYourTicket, MSGBOX_DEFAULT
 	message LilycoveCity_Harbor_Text_FlashTicketWhereTo
 	waitmessage
@@ -167,7 +167,7 @@ LilycoveCity_Harbor_EventScript_SetFirstTimeShowingMysticTicket::
 	return
 
 LilycoveCity_Harbor_EventScript_GetHasTicketsState::
-	setvar VAR_TEMP_A, 0
+	setvar VAR_TEMP_8, 0
 	call_if_eq VAR_TEMP_E, 1, LilycoveCity_Harbor_EventScript_SetHasEonTicket
 	call_if_eq VAR_TEMP_D, 1, LilycoveCity_Harbor_EventScript_SetHasAuroraTicket
 	call_if_eq VAR_TEMP_C, 1, LilycoveCity_Harbor_EventScript_SetHasOldSeaMap
@@ -175,19 +175,19 @@ LilycoveCity_Harbor_EventScript_GetHasTicketsState::
 	return
 
 LilycoveCity_Harbor_EventScript_SetHasEonTicket::
-	addvar VAR_TEMP_A, 1
+	addvar VAR_TEMP_8, 1
 	return
 
 LilycoveCity_Harbor_EventScript_SetHasAuroraTicket::
-	addvar VAR_TEMP_A, 2
+	addvar VAR_TEMP_8, 2
 	return
 
 LilycoveCity_Harbor_EventScript_SetHasOldSeaMap::
-	addvar VAR_TEMP_A, 4
+	addvar VAR_TEMP_8, 4
 	return
 
 LilycoveCity_Harbor_EventScript_SetHasMysticTicket::
-	addvar VAR_TEMP_A, 8
+	addvar VAR_TEMP_8, 8
 	return
 
 LilycoveCity_Harbor_EventScript_EonTicketFirstTime::

@@ -16,7 +16,7 @@
 #define VAR_TEMP_7                 (TEMP_VARS_START + 0x7)
 #define VAR_TEMP_8                 (TEMP_VARS_START + 0x8)
 #define VAR_TEMP_9                 (TEMP_VARS_START + 0x9)
-#define VAR_TEMP_A                 (TEMP_VARS_START + 0xA)
+#define VAR_TEMP_LOOT_ITEM         (TEMP_VARS_START + 0xA) // read to determine what item to get when killing a zombie
 #define VAR_TEMP_B                 (TEMP_VARS_START + 0xB)
 #define VAR_TEMP_C                 (TEMP_VARS_START + 0xC)
 #define VAR_TEMP_D                 (TEMP_VARS_START + 0xD)
