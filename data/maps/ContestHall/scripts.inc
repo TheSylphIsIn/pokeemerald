@@ -179,11 +179,11 @@ ContestHall_EventScript_RandomAudienceBoy1::
 	return
 
 ContestHall_EventScript_RandomAudienceGirl1::
-	setvar VAR_TEMP_1, OBJ_EVENT_GFX_ZOMBIE_GIRL
+	setvar VAR_TEMP_1, OBJ_EVENT_GFX_GIRL_1
 	return
 
 ContestHall_EventScript_RandomAudienceGirl2::
-	setvar VAR_TEMP_1, OBJ_EVENT_GFX_GIRL_2
+	setvar VAR_TEMP_1, OBJ_EVENT_GFX_ZOMBIE_GIRL
 	return
 
 ContestHall_EventScript_RandomAudienceLittleBoy::

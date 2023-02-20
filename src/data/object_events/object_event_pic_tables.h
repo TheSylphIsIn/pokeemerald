@@ -140,6 +140,10 @@ static const struct SpriteFrameImage sPicTable_Boy1[] = {
     overworld_frame(gObjectEventPic_Boy1, 2, 4, 6),
     overworld_frame(gObjectEventPic_Boy1, 2, 4, 7),
     overworld_frame(gObjectEventPic_Boy1, 2, 4, 8),
+    overworld_frame(gObjectEventPic_Boy1, 2, 4, 9),
+    overworld_frame(gObjectEventPic_Boy1, 2, 4, 10),
+    overworld_frame(gObjectEventPic_Boy1, 2, 4, 11),
+    overworld_frame(gObjectEventPic_Boy1, 2, 4, 12),
 };
 
 static const struct SpriteFrameImage sPicTable_Girl1[] = {
@@ -176,6 +180,10 @@ static const struct SpriteFrameImage sPicTable_Girl2[] = {
     overworld_frame(gObjectEventPic_Girl2, 2, 4, 6),
     overworld_frame(gObjectEventPic_Girl2, 2, 4, 7),
     overworld_frame(gObjectEventPic_Girl2, 2, 4, 8),
+    overworld_frame(gObjectEventPic_Girl2, 2, 4, 9),
+    overworld_frame(gObjectEventPic_Girl2, 2, 4, 10),
+    overworld_frame(gObjectEventPic_Girl2, 2, 4, 11),
+    overworld_frame(gObjectEventPic_Girl2, 2, 4, 12),
 };
 
 static const struct SpriteFrameImage sPicTable_LittleBoy[] = {

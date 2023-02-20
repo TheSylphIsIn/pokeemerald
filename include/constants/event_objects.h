@@ -9,9 +9,9 @@
 #define OBJ_EVENT_GFX_NINJA_BOY                    5
 #define OBJ_EVENT_GFX_TWIN                         6
 #define OBJ_EVENT_GFX_ZOMBIE_BOY                        7
-#define OBJ_EVENT_GFX_ZOMBIE_GIRL                       8
+#define OBJ_EVENT_GFX_GIRL_1                       8
 #define OBJ_EVENT_GFX_BOY_2                        9
-#define OBJ_EVENT_GFX_GIRL_2                      10
+#define OBJ_EVENT_GFX_ZOMBIE_GIRL                      10
 #define OBJ_EVENT_GFX_LITTLE_BOY                  11
 #define OBJ_EVENT_GFX_LITTLE_GIRL                 12
 #define OBJ_EVENT_GFX_BOY_3                       13

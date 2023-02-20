@@ -280,6 +280,12 @@ const u32 gTrainerPalette_RubySapphireMay[] = INCBIN_U32("graphics/trainers/pale
 const u32 gTrainerFrontPic_Alicia[] = INCBIN_U32("graphics/trainers/front_pics/alicia.4bpp.lz");
 const u32 gTrainerPalette_Alicia[] = INCBIN_U32("graphics/trainers/front_pics/alicia.gbapal.lz");
 
+const u32 gTrainerFrontPic_ZombieKid[] = INCBIN_U32("graphics/trainers/front_pics/zombie_kid.4bpp.lz");
+const u32 gTrainerPalette_ZombieKid[] = INCBIN_U32("graphics/trainers/front_pics/zombie_kid.gbapal.lz");
+
+const u32 gTrainerFrontPic_GhostGirl[] = INCBIN_U32("graphics/trainers/front_pics/ghost_girl.4bpp.lz");
+const u32 gTrainerPalette_GhostGirl[] = INCBIN_U32("graphics/trainers/front_pics/ghost_girl.gbapal.lz");
+
 const u8 gTrainerBackPic_Brendan[] = INCBIN_U8("graphics/trainers/back_pics/brendan.4bpp");
 const u8 gTrainerBackPic_May[] = INCBIN_U8("graphics/trainers/back_pics/may.4bpp");
 const u8 gTrainerBackPic_Red[] = INCBIN_U8("graphics/trainers/back_pics/red.4bpp");

@@ -239,6 +239,15 @@ OldaleTown_Movement_Unknown2:
 	walk_up
 	walk_up
 	step_end
+	
+OldaleTown_EventScript_Youngster::
+	msgbox OldaleTown_Text_Youngster, MSGBOX_NPC
+	end
+
+OldaleTown_Text_Youngster:
+	.string "Hey, thanks again for saving me!\p"
+	.string "It was worth the trip. OLDALE TOWN\n"
+	.string "is much calmer than RUSTBORO.$"
 
 OldaleTown_EventScript_FootprintsMan::
 	lock
