@@ -356,8 +356,21 @@
 #define MOVE_WATER_PULSE 352
 #define MOVE_DOOM_DESIRE 353
 #define MOVE_PSYCHO_BOOST 354
+#define MOVE_ROTTEN_CLAW 355 // disease moves
+#define MOVE_VIRAL_BITE 356
+#define MOVE_DISEASE_RAY 357
+#define MOVE_DEATH_CHOMP 358
+#define MOVE_BLOODY_SLASH 359
+#define MOVE_UNHOLY_HOWL 360
+#define MOVE_VIRAL_COUGH 361
+#define MOVE_ICE_VOODOO 362
+#define MOVE_AFRO_BEAM 363 // ??? moves
+#define MOVE_MADIO_RADIO 364
+#define MOVE_WEIRD_THING 365
+#define MOVE_SPIN_AROUND 366
+#define MOVE_NIGHT_SLASH 367
 
-#define MOVES_COUNT 355
+#define MOVES_COUNT 368
 
 // Used for checks for moves affected by Disable, Mimic, etc.
 #define MOVE_UNAVAILABLE 0xFFFF

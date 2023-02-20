@@ -2872,6 +2872,10 @@ void SetMoveEffect(bool8 primary, u8 certain)
                 BattleScriptPush(gBattlescriptCurrInstr + 1);
                 gBattlescriptCurrInstr = BattleScript_SAtkDown2;
                 break;
+			case MOVE_EFFECT_RANDOM:
+				gBattleCommunication[MOVE_EFFECT_BYTE] = (Random() % NUM_MOVE_EFFECTS);
+				SetMoveEffect(primary, certain);
+				break;
             }
         }
     }

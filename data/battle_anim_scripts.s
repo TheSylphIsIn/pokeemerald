@@ -371,6 +371,19 @@ gBattleAnims_Moves::
 	.4byte Move_WATER_PULSE
 	.4byte Move_DOOM_DESIRE
 	.4byte Move_PSYCHO_BOOST
+	.4byte Move_ROTTEN_CLAW
+	.4byte Move_VIRAL_BITE
+	.4byte Move_DISEASE_RAY
+	.4byte Move_DEATH_CHOMP
+	.4byte Move_BLOODY_SLASH
+	.4byte Move_UNHOLY_HOWL
+	.4byte Move_VIRAL_COUGH
+	.4byte Move_ICE_VOODOO
+	.4byte Move_AFRO_BEAM
+	.4byte Move_MADIO_RADIO
+	.4byte Move_WEIRD_THING
+	.4byte Move_SPIN_AROUND
+	.4byte Move_NIGHT_SLASH
 	.4byte Move_COUNT @ cannot be reached, because last move is Psycho Boost
 
 	.align 2
@@ -9549,6 +9562,33 @@ Move_PSYCHO_BOOST:
 	blendoff
 	call UnsetPsychicBackground
 	end
+	
+
+Move_ROTTEN_CLAW:
+Move_VIRAL_BITE:
+Move_DISEASE_RAY:
+Move_DEATH_CHOMP:
+Move_BLOODY_SLASH:
+Move_UNHOLY_HOWL:
+Move_VIRAL_COUGH:
+Move_ICE_VOODOO:
+Move_AFRO_BEAM:
+Move_MADIO_RADIO:
+	loadspritegfx ANIM_TAG_IMPACT
+	monbg ANIM_TARGET
+	setalpha 12, 8
+	createsprite gHorizontalLungeSpriteTemplate, ANIM_ATTACKER, 2, 4, 4
+	delay 6
+	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, ANIM_TARGET, 2
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 6, 1
+	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
+	waitforvisualfinish
+	clearmonbg ANIM_TARGET
+	blendoff
+	end
+Move_WEIRD_THING:
+Move_SPIN_AROUND:
+Move_NIGHT_SLASH:
 
 Move_KNOCK_OFF:
 	loadspritegfx ANIM_TAG_SLAM_HIT_2

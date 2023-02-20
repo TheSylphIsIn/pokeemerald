@@ -1416,6 +1416,59 @@ static const u8 sDoomDesireDescription[] = _(
 static const u8 sPsychoBoostDescription[] = _(
     "Allows a full-power attack,\n"
     "but sharply lowers SP. ATK.");
+	
+
+static const u8 sRottenClawDescription[] = _(
+	"Slashes with a zombified\n"
+	"claw that may poison.");
+	
+static const u8 sViralBiteDescription[] = _(
+	"Bites with infected\n"
+	"fangs that may poison.");
+	
+static const u8 sDiseaseRayDescription[] = _(
+	"A sickly ray of zombie\n"
+	"magic that may poison.");
+	
+static const u8 sDeathChompDescription[] = _(
+	"A vicious throat bite\n"
+	"that may badly poison.");
+	
+static const u8 sBloodySlashDescription[] = _(
+	"A slash with an unclean\n"
+	"claw that may poison.");
+	
+static const u8 sUnholyHowlDescription[] = _(
+	"An unholy sound that\n"
+	"weakens foe's PHYS stats.");
+	
+static const u8 sViralCoughDescription[] = _(
+	"A weak expulsion of\n"
+	"infected material.");
+	
+static const u8 sIceVoodooDescription[] = _(
+	"Attacks with a magic\n"
+	"ice doll. May poison.");
+	
+static const u8 sAfroBeamDescription[] = _(
+	"A powerful beam move\n"
+	"of the WAY OF THE AFRO.");
+
+static const u8 sMadioRadioDescription[] = _(
+	"Summons random energy\n"
+	"from the MADIO dimension.");
+	
+static const u8 sWeirdThingDescription[] = _(
+	"Does something to hit\n"
+	"with variable power.");
+	
+static const u8 sSpinAroundDescription[] = _(
+	"Makes something spin\n"
+	"to tire the foe out.");
+	
+static const u8 sNightSlashDescription[] = _(
+	"A savage sneaky slash\n"
+	"with a high crit rate.");
 
 // MOVE_NONE is ignored in this table. Make sure to always subtract 1 before getting the right pointer.
 const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
@@ -1774,4 +1827,18 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
     [MOVE_WATER_PULSE - 1] = sWaterPulseDescription,
     [MOVE_DOOM_DESIRE - 1] = sDoomDesireDescription,
     [MOVE_PSYCHO_BOOST - 1] = sPsychoBoostDescription,
+	[MOVE_ROTTEN_CLAW - 1] = sRottenClawDescription,
+	[MOVE_VIRAL_BITE - 1] = sViralBiteDescription,
+	[MOVE_DISEASE_RAY - 1] = sDiseaseRayDescription,
+	[MOVE_DEATH_CHOMP - 1] = sDeathChompDescription,
+	[MOVE_BLOODY_SLASH - 1] = sBloodySlashDescription,
+	[MOVE_UNHOLY_HOWL - 1] = sUnholyHowlDescription,
+	[MOVE_VIRAL_COUGH - 1] = sViralCoughDescription,
+	[MOVE_ICE_VOODOO - 1] = sIceVoodooDescription,
+	[MOVE_AFRO_BEAM - 1] = sAfroBeamDescription,
+	[MOVE_MADIO_RADIO - 1] = sMadioRadioDescription,
+	[MOVE_WEIRD_THING - 1] = sWeirdThingDescription,
+	[MOVE_SPIN_AROUND - 1] = sSpinAroundDescription,
+	[MOVE_NIGHT_SLASH - 1] = sNightSlashDescription,
 };
+
