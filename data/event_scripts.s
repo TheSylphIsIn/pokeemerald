@@ -1138,3 +1138,5 @@ Common_EventScript_LegendaryFlewAway::
 	.include "data/maps/GlitchCity/scripts.inc"
 
 	.include "data/maps/HotHeartPath/scripts.inc"
+
+	.include "data/maps/ClearingCave/scripts.inc"

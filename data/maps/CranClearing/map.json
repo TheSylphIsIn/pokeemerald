@@ -150,7 +150,7 @@
       "x": 3,
       "y": 6,
       "elevation": 0,
-      "dest_map": "MAP_CRAN_CLEARING",
+      "dest_map": "MAP_CLEARING_CAVE",
       "dest_warp_id": "0"
     },
     {

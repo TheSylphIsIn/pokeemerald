@@ -28,6 +28,7 @@
 #define MAP_CLIFF_EDGE_CLIMB_OUTSIDE (1 | (2 << 8))
 #define MAP_CLIFF_FACE_CLIMB2F       (2 | (2 << 8))
 #define MAP_CLIFF_FACE_CLIMB3F       (3 | (2 << 8))
+#define MAP_CLEARING_CAVE            (4 | (2 << 8))
 
 // gMapGroup_FoneiDungeons
 

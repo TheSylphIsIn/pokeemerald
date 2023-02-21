@@ -4733,6 +4733,8 @@ static const union AnimCmd sAnim_SANDUEL_1[] =
 
 static const union AnimCmd sAnim_ELADRIFT_1[] =
 {
+	ANIMCMD_FRAME(1, 10),
+	ANIMCMD_FRAME(0, 10),
 	ANIMCMD_END
 };
 

@@ -1,5 +1,4 @@
 {
-  "layouts_table_label": "gMapLayouts",
   "group_order": [
     "gMapGroup_FoneiOverworld",
     "gMapGroup_Burrows",
@@ -63,7 +62,8 @@
     "CliffFaceClimb",
     "CliffEdgeClimbOutside",
     "CliffFaceClimb2F",
-    "CliffFaceClimb3F"
+    "CliffFaceClimb3F",
+    "ClearingCave"
   ],
   "gMapGroup_FoneiDungeons": [
 
