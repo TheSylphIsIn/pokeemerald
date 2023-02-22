@@ -631,7 +631,7 @@ static void Task_MainMenuCheckSaveFile(u8 taskId)
         SetGpuReg(REG_OFFSET_WIN0V, 0);
         SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG0 | WININ_WIN0_OBJ);
         SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG0 | WINOUT_WIN01_OBJ | WINOUT_WIN01_CLR);
-        SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_DARKEN | BLDCNT_TGT1_BG0);
+        SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_DARKEN | BLDCNT_TGT1_BG0 | BLDCNT_TGT1_OBJ);
         SetGpuReg(REG_OFFSET_BLDALPHA, 0);
         SetGpuReg(REG_OFFSET_BLDY, 7);
 
@@ -709,7 +709,7 @@ static void Task_MainMenuCheckBattery(u8 taskId)
         SetGpuReg(REG_OFFSET_WIN0V, 0);
         SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG0 | WININ_WIN0_OBJ);
         SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG0 | WINOUT_WIN01_OBJ | WINOUT_WIN01_CLR);
-        SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_DARKEN | BLDCNT_TGT1_BG0);
+        SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_DARKEN | BLDCNT_TGT1_BG0 | BLDCNT_TGT1_OBJ);
         SetGpuReg(REG_OFFSET_BLDALPHA, 0);
         SetGpuReg(REG_OFFSET_BLDY, 7);
 
@@ -747,7 +747,7 @@ static void Task_DisplayMainMenu(u8 taskId)
         SetGpuReg(REG_OFFSET_WIN0V, 0);
         SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG0 | WININ_WIN0_OBJ);
         SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG0 | WINOUT_WIN01_OBJ | WINOUT_WIN01_CLR);
-        SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_DARKEN | BLDCNT_TGT1_BG0);
+        SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_DARKEN | BLDCNT_TGT1_BG0 | BLDCNT_TGT1_OBJ);
         SetGpuReg(REG_OFFSET_BLDALPHA, 0);
         SetGpuReg(REG_OFFSET_BLDY, 7);
 
@@ -2312,13 +2312,29 @@ static void MainMenu_DrawMonIcons(void)
 	u32 i;
 	u8 spriteId;
 	LoadMonIconPalettes();
+	SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_OBJWIN_ON);
+    SetGpuRegBits(REG_OFFSET_WINOUT, WINOUT_WINOBJ_OBJ);
+    SetGpuRegBits(REG_OFFSET_WININ, WININ_WIN0_OBJ);
+	
 	{
 		for (i = 0; i < PARTY_SIZE; i++) 
 		{
 			if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != SPECIES_NONE)
 			{ // the X and Y coordinates here place the icons below the text, each with a 2 px gap between them.
 				spriteId = CreateMonIcon(GetMonData(&gPlayerParty[i], MON_DATA_SPECIES), SpriteCB_MonIcon, (35 + (34 * i)), 71, 4, GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY), TRUE);
-				gSprites[spriteId].oam.priority = 0; // moves the icons over the window instead of behind it.
+				gSprites[spriteId].oam.priority = 0; // moves the icons over the window instead of behind it
+				gSprites[spriteId].invisible = 0;
+			}
+		}
+		
+		for (i = 0; i < PARTY_SIZE; i++) 
+		{
+			if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != SPECIES_NONE)
+			{ // the X and Y coordinates here place the icons below the text, each with a 2 px gap between them.
+				spriteId = CreateMonIcon(GetMonData(&gPlayerParty[i], MON_DATA_SPECIES), SpriteCB_MonIcon, (35 + (34 * i)), 71, 4, GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY), TRUE);
+				gSprites[spriteId].oam.priority = 0; // moves the icons over the window instead of behind it
+				gSprites[spriteId].invisible = 0;
+				gSprites[spriteId].oam.objMode = ST_OAM_OBJ_WINDOW;
 			}
 		}
 	}
