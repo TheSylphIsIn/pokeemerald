@@ -111,9 +111,6 @@ LittlerootTown_Movement_PlayerWalkBack:
 
 LittlerootTown_EventScript_TownSign::
 	msgbox LittlerootTown_Text_TownSign, MSGBOX_SIGN
-	giveitem ITEM_POTION
-	giveitem ITEM_SHOAL_SHELL
-	giveitem ITEM_POKE_BALL
 	end
 
 LittlerootTown_EventScript_BirchsLabSign::

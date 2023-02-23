@@ -537,3 +537,4 @@ gSpecials::
 	def_special TrySetBattleTowerLinkType
 	def_special MovePlayerBack
 	def_special ChooseItemFromBag
+	def_special TryCombineItems

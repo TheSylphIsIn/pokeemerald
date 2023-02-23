@@ -4230,8 +4230,39 @@ void ChooseItemFromBag(void)
     case TMHM_POCKET:
     case BERRIES_POCKET:
     case KEYITEMS_POCKET:
+	case MEDICINE_POCKET:
+	case MATERIALS_POCKET:
         GoToBagMenu(ITEMMENULOCATION_CHOOSE_ITEM, VarGet(VAR_TEMP_1), CB2_ReturnToFieldContinueScript);
     default:
         break;
     }
+}
+
+static const u16 sRecipes[][3] = {
+	{ITEM_POTION, ITEM_POTION, ITEM_SUPER_POTION},
+	{ITEM_POTION, ITEM_NONE, ITEM_ANTIDOTE},
+};
+
+void TryCombineItems(void)
+{
+	u32 item1;
+	u32 item2;
+	u32 i;
+	u16 result = ITEM_NONE;
+	
+	item1 = VarGet(VAR_TEMP_E);
+	item2 = VarGet(VAR_TEMP_F);
+	
+	for (i = 0; i < ARRAY_COUNT(sRecipes); i++)
+	{
+		if ((sRecipes[i][0] == item1 && sRecipes[i][1] == item2) || (sRecipes[i][0] == item2 && sRecipes[i][1] == item1))
+		{
+			result = sRecipes[i][2];
+			break;
+		}
+	}
+	
+	gSpecialVar_ItemId = result;
+	
+	
 }
