@@ -2,6 +2,7 @@
 #include "malloc.h"
 #include "battle.h"
 #include "battle_tower.h"
+#include "berry.h"
 #include "cable_club.h"
 #include "data.h"
 #include "decoration.h"
@@ -132,6 +133,8 @@ static u8 DidPlayerGetFirstFans(void);
 static void SetInitialFansOfPlayer(void);
 static u16 PlayerGainRandomTrainerFan(void);
 static void BufferFanClubTrainerName_(struct LinkBattleRecords *, u8, u8);
+static bool32 HandleBerryRecipes(u32 item1, u32 item2);
+static bool32 HandleSpecialRecipes(u32 item1, u32 item2);
 
 void Special_ShowDiploma(void)
 {
@@ -4239,30 +4242,189 @@ void ChooseItemFromBag(void)
 }
 
 static const u16 sRecipes[][3] = {
-	{ITEM_POTION, ITEM_POTION, ITEM_SUPER_POTION},
-	{ITEM_POTION, ITEM_NONE, ITEM_ANTIDOTE},
-};
+	{ITEM_POTION, ITEM_APRICORN, ITEM_SUPER_POTION},
+	{ITEM_SUPER_POTION, ITEM_SUPERCORN, ITEM_HYPER_POTION},
+	{ITEM_HYPER_POTION, ITEM_HYPERCORN, ITEM_MAX_POTION},
+	{ITEM_APRICORN, ITEM_NONE, ITEM_POKE_BALL},
+	{ITEM_SUPERCORN, ITEM_NONE, ITEM_GREAT_BALL},
+	{ITEM_HYPERCORN, ITEM_NONE, ITEM_ULTRA_BALL},
+	{ITEM_APRICORN, ITEM_APRICORN, ITEM_REPEAT_BALL},
+	{ITEM_ZOMBIE_HAND, ITEM_SHOAL_SALT, ITEM_CHOICE_BAND},
+	{ITEM_ZOMBIE_LIVER, ITEM_NONE, ITEM_FRESH_WATER},
+	{ITEM_ZOMBIE_LIVER, ITEM_SHOAL_SALT, ITEM_FULL_RESTORE},
+	{ITEM_ZOMBIE_SLOP, ITEM_SHOAL_SALT, ITEM_LEFTOVERS},
+	{ITEM_LEMONADE, ITEM_SODA_POP, ITEM_ARNOLD_PALMER},
+}; // special handling: potion shakes and blends, bitter medicine, empty TMs
 
 void TryCombineItems(void)
 {
 	u32 item1;
 	u32 item2;
 	u32 i;
-	u16 result = ITEM_NONE;
 	
 	item1 = VarGet(VAR_TEMP_E);
 	item2 = VarGet(VAR_TEMP_F);
+	gSpecialVar_ItemId = ITEM_NONE;
 	
-	for (i = 0; i < ARRAY_COUNT(sRecipes); i++)
+	if (!HandleBerryRecipes(item1, item2) && !HandleSpecialRecipes(item1, item2))
 	{
-		if ((sRecipes[i][0] == item1 && sRecipes[i][1] == item2) || (sRecipes[i][0] == item2 && sRecipes[i][1] == item1))
+		for (i = 0; i < ARRAY_COUNT(sRecipes); i++)
 		{
-			result = sRecipes[i][2];
-			break;
+			if ((sRecipes[i][0] == item1 && sRecipes[i][1] == item2) || (sRecipes[i][0] == item2 && sRecipes[i][1] == item1))
+			{
+				gSpecialVar_ItemId = sRecipes[i][2];
+				break;
+			}
 		}
+	}		
+}
+
+static bool32 HandleBerryRecipes(u32 item1, u32 item2)
+{
+	u32 item;
+	u32 berry;
+	
+	if (item1 < LAST_BERRY_INDEX && item1 > FIRST_BERRY_INDEX)
+	{
+		berry = item1 - FIRST_BERRY_INDEX;
+		item = item2;
+	}
+	else if (item2 < LAST_BERRY_INDEX && item2 > FIRST_BERRY_INDEX)
+	{
+		berry = item2 - FIRST_BERRY_INDEX;
+		item = item1;
+	}
+	else
+		return FALSE;
+	
+	switch (item)
+	{
+		case ITEM_DRIED_ROOT:
+			if (gBerries[berry].bitter > 20)
+				gSpecialVar_ItemId = ITEM_ENERGY_ROOT;
+			else if (gBerries[berry].bitter > 0)
+				gSpecialVar_ItemId = ITEM_ENERGY_POWDER;
+			else
+				return FALSE;
+			return TRUE;
+		case ITEM_DRIED_HERB:
+			if (gBerries[berry].bitter > 20)
+				gSpecialVar_ItemId = ITEM_REVIVAL_HERB;
+			else if (gBerries[berry].bitter > 0)
+				gSpecialVar_ItemId = ITEM_HEAL_POWDER;
+			else
+				return FALSE;
+			return TRUE;
+		case ITEM_FRESH_WATER:
+			if (berry + FIRST_BERRY_INDEX == ITEM_NOMEL_BERRY)
+				gSpecialVar_ItemId = ITEM_LEMONADE;
+			else if (gBerries[berry].sweet > 0)
+				gSpecialVar_ItemId = ITEM_SODA_POP;
+			else 
+				gSpecialVar_ItemId = ITEM_BERRY_JUICE;
+			return TRUE;
+		default:
+			return FALSE;
+	}
+}
+
+static bool32 HandleSpecialRecipes(u32 item1, u32 item2)
+{
+	switch (item1)
+	{
+		case ITEM_POTION:
+			if (item2 >= ITEM_ANTIDOTE && item2 <= ITEM_PARALYZE_HEAL)
+			{
+				gSpecialVar_ItemId = (ITEM_ANTIDOTE_SHAKE + (2 * (item2 - ITEM_ANTIDOTE)));
+				return TRUE;
+			}
+			break;
+		case ITEM_SUPER_POTION:
+			if (item2 >= ITEM_ANTIDOTE && item2 <= ITEM_PARALYZE_HEAL)
+			{
+				gSpecialVar_ItemId = (ITEM_ANTIDOTE_BLEND + (2 * (item2 - ITEM_ANTIDOTE)));
+				return TRUE;
+			}
+			break;
+		case ITEM_EMPTY_TM:
+			if (item2 == ITEM_MAGIC_POWDER)
+			{
+				gSpecialVar_ItemId = (ITEM_TM01 + (Random() % 50));
+				return TRUE;
+			}
+			break;
+		default:
+			break;
 	}
 	
-	gSpecialVar_ItemId = result;
+	switch (item2)
+	{
+		case ITEM_POTION:
+			if (item1 >= ITEM_ANTIDOTE && item1 <= ITEM_PARALYZE_HEAL)
+			{
+				gSpecialVar_ItemId = (ITEM_ANTIDOTE_SHAKE + (2 * (item1 - ITEM_ANTIDOTE)));
+				return TRUE;
+			}
+			break;
+		case ITEM_SUPER_POTION:
+			if (item1 >= ITEM_ANTIDOTE && item1 <= ITEM_PARALYZE_HEAL)
+			{
+				gSpecialVar_ItemId = (ITEM_ANTIDOTE_BLEND + (2 * (item1 - ITEM_ANTIDOTE)));
+				return TRUE;
+			}
+			break;
+		case ITEM_EMPTY_TM:
+			if (item1 == ITEM_MAGIC_POWDER)
+			{
+				gSpecialVar_ItemId = (ITEM_TM01 + (Random() % 50));
+				return TRUE;
+			}
+			break;
+		default:
+			break;
+	}
 	
+	return FALSE;
+}
+
+static const u8 sFlavorText0[] = _("There's an assortment of weird\nforeign sweets.");
+static const u8 sFlavorText1[] = _("Hey, sweet! A bag of SKITTLES!\nWait, no, it's a weird flavor.");
+static const u8 sFlavorText2[] = _("A chocolate bar. But it's the\nworst brand.");
+static const u8 sFlavorText3[] = _("Hand sanitizer. Jackpot!");
+static const u8 sFlavorText4[] = _("Silly bandz? They still make these?");
+static const u8 sFlavorText5[] = _("Earbuds. But the POKéNAV doesn't\nhave a jack for them.");
+static const u8 sFlavorText6[] = _("A single individually-wrapped\ngummy bear...");
+static const u8 sFlavorText7[] = _("A romantic comedy about zombies.\nI hope this wasn't made recently.");
+static const u8 sFlavorText8[] = _("An indie film about zombie hunters.\nWith no CGI!");
+static const u8 sFlavorText9[] = _("Shavers. I don't think I need these.");
+static const u8 sFlavorText10[] = _("A memory matching game.\nReal funny…");
+static const u8 sFlavorText11[] = _("A pack of gum! Score!");
+static const u8 sFlavorText12[] = _("An empty bottle. Might make a good\nthrown weapon, but I don't need one.");
+static const u8 sFlavorText13[] = _("A baseball bat? Nothing compared\nto a good POKéMON.");
+static const u8 sFlavorText14[] = _("Coding for dummies? Seems useless.");
+
+static const u8 * const sShelfFlavorTextStrings[] = 
+{
+	sFlavorText0,
+	sFlavorText1,
+	sFlavorText2,
+	sFlavorText3,
+	sFlavorText4,
+	sFlavorText5,
+	sFlavorText6,
+	sFlavorText7,
+	sFlavorText8,
+	sFlavorText9,
+	sFlavorText10,
+	sFlavorText11,
+	sFlavorText12,
+	sFlavorText13,
+	sFlavorText14,
+};
+
+void BufferShelfFlavorText(void)
+{
+	u32 textId = Random() % ARRAY_COUNT(sShelfFlavorTextStrings);
 	
+	StringCopy(gStringVar1, sShelfFlavorTextStrings[textId]);
 }

@@ -538,3 +538,4 @@ gSpecials::
 	def_special MovePlayerBack
 	def_special ChooseItemFromBag
 	def_special TryCombineItems
+	def_special BufferShelfFlavorText

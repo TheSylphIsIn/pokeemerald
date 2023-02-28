@@ -736,3 +736,25 @@ const u32 gItemIconPalette_MagmaEmblem[] = INCBIN_U32("graphics/items/icon_palet
 
 const u32 gItemIcon_OldSeaMap[] = INCBIN_U32("graphics/items/icons/old_sea_map.4bpp.lz");
 const u32 gItemIconPalette_OldSeaMap[] = INCBIN_U32("graphics/items/icon_palettes/old_sea_map.gbapal.lz");
+
+const u32 gItemIcon_PotionShake[] = INCBIN_U32("graphics/items/icons/potion_shake.4bpp.lz");
+const u32 gItemIcon_PotionBlend[] = INCBIN_U32("graphics/items/icons/potion_blend.4bpp.lz");
+const u32 gItemIconPalette_AntidoteShake[] = INCBIN_U32("graphics/items/icon_palettes/antidote_shake.gbapal.lz");
+const u32 gItemIconPalette_ParlyzHealShake[] = INCBIN_U32("graphics/items/icon_palettes/parlyz_heal_Shake.gbapal.lz");
+const u32 gItemIconPalette_BurnHealShake[] = INCBIN_U32("graphics/items/icon_palettes/burn_heal_shake.gbapal.lz");
+const u32 gItemIconPalette_AwakeningShake[] = INCBIN_U32("graphics/items/icon_palettes/awakening_shake.gbapal.lz");
+const u32 gItemIconPalette_IceHealShake[] = INCBIN_U32("graphics/items/icon_palettes/ice_heal_shake.gbapal.lz");
+const u32 gItemIcon_Apricorn[] = INCBIN_U32("graphics/items/icons/apricorn.4bpp.lz");
+const u32 gItemIconPalette_Apricorn[] = INCBIN_U32("graphics/items/icon_palettes/apricorn.gbapal.lz");
+const u32 gItemIconPalette_Supercorn[] = INCBIN_U32("graphics/items/icon_palettes/supercorn.gbapal.lz");
+const u32 gItemIconPalette_Hypercorn[] = INCBIN_U32("graphics/items/icon_palettes/hypercorn.gbapal.lz");
+const u32 gItemIconPalette_EmptyTM[] = INCBIN_U32("graphics/items/icon_palettes/empty_tm.gbapal.lz");
+const u32 gItemIconPalette_MagicDust[] = INCBIN_U32("graphics/items/icon_palettes/magic_dust.gbapal.lz");
+const u32 gItemIcon_DriedRoot[] = INCBIN_U32("graphics/items/icons/dried_root.4bpp.lz");
+const u32 gItemIcon_DriedHerb[] = INCBIN_U32("graphics/items/icons/dried_herb.4bpp.lz");
+//const u32 gItemIcon_ArnoldPalmer[] = INCBIN_U32("graphics/items/icons/.4bpp.lz");
+//const u32 gItemIconPalette_ArnoldPalmer[] = INCBIN_U32("graphics/items/icon_palettes/.gbapal.lz");
+const u32 gItemIcon_ZombieLiver[] = INCBIN_U32("graphics/items/icons/zombie_liver.4bpp.lz");
+const u32 gItemIconPalette_ZombieLiver[] = INCBIN_U32("graphics/items/icon_palettes/zombie_liver.gbapal.lz");
+//const u32 gItemIcon_ZombieHand[] = INCBIN_U32("graphics/items/icons/.4bpp.lz"); // h
+//const u32 gItemIconPalette_ZombieHand[] = INCBIN_U32("graphics/items/icon_palettes/.gbapal.lz");

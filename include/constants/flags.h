@@ -1322,7 +1322,7 @@
 #define FLAG_DEFEATED_METEOR_FALLS_STEVEN                           0x4F8
 
 #define FLAG_HIDE_OLDALE_102_YOUNGSTER                              0x4F9 // Unused Flag
-#define FLAG_UNUSED_0x4FA                                           0x4FA // Unused Flag
+#define FLAG_PETALBURG_WOMAN_CORPSE_LOOTED                                           0x4FA // Unused Flag
 
 #define FLAG_DEFEATED_ELITE_4_SIDNEY                                0x4FB
 #define FLAG_DEFEATED_ELITE_4_PHOEBE                                0x4FC

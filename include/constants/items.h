@@ -63,17 +63,17 @@
 #define ITEM_BLUE_SHARD 49
 #define ITEM_YELLOW_SHARD 50
 #define ITEM_GREEN_SHARD 51
-#define ITEM_034 52
-#define ITEM_035 53
-#define ITEM_036 54
-#define ITEM_037 55
-#define ITEM_038 56
-#define ITEM_039 57
-#define ITEM_03A 58
-#define ITEM_03B 59
-#define ITEM_03C 60
-#define ITEM_03D 61
-#define ITEM_03E 62
+#define ITEM_ANTIDOTE_SHAKE 52 // same order as the plain status cures, for silly math reasons.
+#define ITEM_ANTIDOTE_BLEND 53
+#define ITEM_BURN_HEAL_SHAKE 54
+#define ITEM_BURN_HEAL_BLEND 55
+#define ITEM_ICE_HEAL_SHAKE 56
+#define ITEM_ICE_HEAL_BLEND 57
+#define ITEM_AWAKENING_SHAKE 58
+#define ITEM_AWAKENING_BLEND 59
+#define ITEM_PARALYZE_HEAL_SHAKE 60
+#define ITEM_PARALYZE_HEAL_BLEND 61
+#define ITEM_ARNOLD_PALMER 62
 #define ITEM_HP_UP 63
 #define ITEM_PROTEIN 64
 #define ITEM_IRON 65
@@ -203,7 +203,7 @@
 #define ITEM_UNUSED_BERRY_2 177
 #define ITEM_UNUSED_BERRY_3 178
 
-#define MAX_BERRY_INDEX ITEM_UNUSED_BERRY_3
+#define MAX_BERRY_INDEX ITEM_UNUSED_BERRY_3 // 33 usable item slots free
 
 // Battle Held items
 #define ITEM_BRIGHT_POWDER 179
@@ -253,16 +253,16 @@
 #define ITEM_METAL_POWDER 223
 #define ITEM_THICK_CLUB 224
 #define ITEM_STICK 225
-#define ITEM_0E2 226
-#define ITEM_0E3 227
-#define ITEM_0E4 228
-#define ITEM_0E5 229
-#define ITEM_0E6 230
-#define ITEM_0E7 231
-#define ITEM_0E8 232
-#define ITEM_0E9 233
-#define ITEM_0EA 234
-#define ITEM_0EB 235
+#define ITEM_ZOMBIE_LIVER 226
+#define ITEM_APRICORN 227
+#define ITEM_SUPERCORN 228
+#define ITEM_HYPERCORN 229
+#define ITEM_ZOMBIE_SLOP 230
+#define ITEM_ZOMBIE_HAND 231
+#define ITEM_EMPTY_TM 232
+#define ITEM_DRIED_ROOT 233
+#define ITEM_DRIED_HERB 234
+#define ITEM_MAGIC_POWDER 235
 #define ITEM_0EC 236
 #define ITEM_0ED 237
 #define ITEM_0EE 238

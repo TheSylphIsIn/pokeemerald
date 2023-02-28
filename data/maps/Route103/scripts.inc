@@ -309,8 +309,15 @@ Route103_Text_BrendanTimeToHeadBack:
 	.string "We should head back to the LAB.$"
 
 Route103_Text_ShouldHaveBroughtPotion:
-	.string "My POKéMON is staggeringly tired…\n"
-	.string "I should have brought a POTION…$"
+	.string "Zombies can't cross running water,\n"
+	.string "so this river is a natural barrier\l"
+	.string "that protects OLDALE from the west.\p"
+	.string "{PLAYER}: Can't cross running water?\n"
+	.string "Aren't you thinking of vampires?\p"
+	.string "BOY: Oh, sure, the dude with amnesia\n"
+	.string "knows more about zombies than me.\p"
+	.string "{PLAYER}: I only forgot important\n"
+	.string "things, okay? Cut me some slack!$"
 
 Route103_Text_ShortcutToOldale:
 	.string "If you cross the sea from here,\n"

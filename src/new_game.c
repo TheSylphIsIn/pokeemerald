@@ -132,7 +132,7 @@ static void WarpToTruck(void)
 }
 
 static const u8 sShopInventories[TMSHOP_COUNT][TMSHOP_ITEMS_COUNT] = 
-	{{255}, // placeholders
+	{{2, 10, 5, 5, 3, 3, 1, 255}, // petalburg woods larry: superpotion, pokeball, antidote, prlzheal, brnheal, repel, escape rope
 	 {255},
 	 {255},
 	 {255},};

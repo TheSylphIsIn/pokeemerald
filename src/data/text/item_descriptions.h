@@ -125,17 +125,17 @@ static const u8 sMaxReviveDesc[] = _(
 static const u8 sFreshWaterDesc[] = _(
     "A mineral water\n"
     "that restores HP\n"
-    "by 50 points.");
+    "by 30 points.");
 
 static const u8 sSodaPopDesc[] = _(
     "A fizzy soda drink\n"
     "that restores HP\n"
-    "by 60 points.");
+    "by 50 points.");
 
 static const u8 sLemonadeDesc[] = _(
     "A very sweet drink\n"
     "that restores HP\n"
-    "by 80 points.");
+    "by 70 points.");
 
 static const u8 sMoomooMilkDesc[] = _(
     "A nutritious milk\n"
@@ -222,9 +222,9 @@ static const u8 sSacredAshDesc[] = _(
 
 // Collectibles
 static const u8 sShoalSaltDesc[] = _(
-    "Salt obtained from\n"
-    "deep inside the\n"
-    "SHOAL CAVE.");
+    "Salt that repels\n"
+    "evil and purifies\n"
+    "ZOMBIE flesh.");
 
 static const u8 sShoalShellDesc[] = _(
     "A seashell found\n"
@@ -1549,3 +1549,103 @@ static const u8 sOldSeaMapDesc[] = _(
     "A faded sea chart\n"
     "that shows the way\n"
     "to a certain island.");
+	
+static const u8 sZombieLiverDesc[] = _(
+	"Body part from a\n"
+	"ZOMBIE. Mostly\n"
+	"non toxic.$");
+	
+static const u8 sApricornDesc[] = _(
+	"Inedible fruit.\n"
+	"POKé BALLs are made\n"
+	"from these.");
+	
+static const u8 sSupercornDesc[] = _(
+	"A better APRICORN.\n"
+	"Makes the same\n"
+	"items, but better.");
+	
+static const u8 sHypercornDesc[] = _(
+	"The ultimate\n"
+	"in APRICORNs.\n"
+	"Pretty rare, too.");
+	
+static const u8 sZombieSlopDesc[] = _(
+	"A lump of flesh.\n"
+	"Would be delicious\n"
+	"to a ZOMBIE.");
+	
+static const u8 sZombieHandDesc[] = _(
+	"This impure hand\n"
+	"hungers for glory\n"
+	"in battle.");
+	
+static const u8 sEmptyTMDesc[] = _(
+	"Could be burned\n"
+	"into a TM if you\n"
+	"had some power.");
+
+static const u8 sDriedRootDesc[] = _(
+	"Can be blended\n"
+	"into bitter\n"
+	"medicine.");
+	
+static const u8 sMagicPowderDesc[] = _(
+	"Magic essence that\n"
+	"can empower some\n"
+	"objects.");
+
+static const u8 sCureShakeDesc[] = _(
+	"Mixed medicine\n"
+	"that heals 20 HP\n"
+	"and cures poison.");
+
+static const u8 sCureBlendDesc[] = _(
+	"Mixed medicine\n"
+	"that heals 40 HP\n"
+	"and cures poison.");
+
+static const u8 sVigorShakeDesc[] = _(
+	"Mixed medicine\n"
+	"that heals 20 HP\n"
+	"and cures paralysis.");
+
+static const u8 sVigorBlendDesc[] = _(
+	"Mixed medicine\n"
+	"that heals 40 HP\n"
+	"and cures paralysis.");
+
+static const u8 sColdShakeDesc[] = _(
+	"Mixed medicine\n"
+	"that heals 20 HP\n"
+	"and cures burn.");
+
+static const u8 sColdBlendDesc[] = _(
+	"Mixed medicine\n"
+	"that heals 40 HP\n"
+	"and cures burn.");
+
+static const u8 sLatteDesc[] = _(
+	"Mixed medicine\n"
+	"that heals 20 HP\n"
+	"and cures sleep.");
+
+static const u8 sEspressoDesc[] = _(
+	"Mixed medicine\n"
+	"that heals 40 HP\n"
+	"and cures sleep.");
+
+static const u8 sHotShakeDesc[] = _(
+	"Mixed medicine\n"
+	"that heals 20 HP\n"
+	"and cures freeze.");
+
+static const u8 sHotBlendDesc[] = _(
+	"Mixed medicine\n"
+	"that heals 40 HP\n"
+	"and cures freeze.");
+
+static const u8 sArnoldPalmerDesc[] = _(
+	"A refreshing\n"
+	"blended drink.\n"
+	"Heals 100 HP.");

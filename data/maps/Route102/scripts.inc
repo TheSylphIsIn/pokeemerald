@@ -72,8 +72,8 @@ Route102_Text_LootingTutorial:
 	.string "{PLAYER}: But that's disgusting.\p"
 	.string "It's the apocalypse, weenie. You\n"
 	.string "gotta do what you can to survive.\l"
-	.string "besides, it's mostly dust anyway."
-	.string "{PLAYER}: Ugh, fine. Here goes...$"
+	.string "besides, it's mostly dust anyway.\p"
+	.string "{PLAYER}: Ugh, fine. Here goes…$"
 
 Route102_EventScript_Rick::
 	trainerbattle_single TRAINER_RICK, Route102_Text_RickIntro, Route102_Text_RickDefeated, Route102_EventScript_ZombieDefeated_Rick

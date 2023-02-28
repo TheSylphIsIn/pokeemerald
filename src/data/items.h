@@ -615,9 +615,9 @@ const struct Item gItems[] =
 
     [ITEM_SHOAL_SALT] =
     {
-        .name = _("SHOAL SALT"),
+        .name = _("PURE SALT"),
         .itemId = ITEM_SHOAL_SALT,
-        .price = 20,
+        .price = 0,
         .description = sShoalSaltDesc,
         .pocket = POCKET_MATERIALS,
         .type = ITEM_USE_BAG_MENU,
@@ -679,125 +679,147 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_034] =
+    [ITEM_ANTIDOTE_SHAKE] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
-        .price = 0,
-        .description = sDummyDesc,
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .name = _("CURE SHAKE"),
+        .itemId = ITEM_ANTIDOTE_SHAKE,
+        .price = 1000,
+        .description = sCureShakeDesc,
+        .pocket = POCKET_MEDICINE,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Medicine,
+        .battleUsage = ITEM_B_USE_MEDICINE,
+        .battleUseFunc = ItemUseInBattle_Medicine,
     },
 
-    [ITEM_035] =
+    [ITEM_ANTIDOTE_BLEND] =
     {
-        .name = _("????????"),
+        .name = _("CURE BLEND"),
         .itemId = ITEM_NONE,
-        .price = 0,
-        .description = sDummyDesc,
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .price = 2000,
+        .description = sCureBlendDesc,
+        .pocket = POCKET_MEDICINE,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Medicine,
+        .battleUsage = ITEM_B_USE_MEDICINE,
+        .battleUseFunc = ItemUseInBattle_Medicine,
     },
 
-    [ITEM_036] =
+    [ITEM_PARALYZE_HEAL_SHAKE] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
-        .price = 0,
-        .description = sDummyDesc,
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .name = _("VIGOR SHAKE"),
+        .itemId = ITEM_PARALYZE_HEAL_SHAKE,
+        .price = 1000,
+        .description = sVigorShakeDesc,
+        .pocket = POCKET_MEDICINE,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Medicine,
+        .battleUsage = ITEM_B_USE_MEDICINE,
+        .battleUseFunc = ItemUseInBattle_Medicine,
     },
 
-    [ITEM_037] =
+    [ITEM_PARALYZE_HEAL_BLEND] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
-        .price = 0,
-        .description = sDummyDesc,
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .name = _("VIGOR BLEND"),
+        .itemId = ITEM_PARALYZE_HEAL_BLEND,
+        .price = 2000,
+        .description = sVigorBlendDesc,
+        .pocket = POCKET_MEDICINE,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Medicine,
+        .battleUsage = ITEM_B_USE_MEDICINE,
+        .battleUseFunc = ItemUseInBattle_Medicine,
     },
 
-    [ITEM_038] =
+    [ITEM_BURN_HEAL_SHAKE] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
-        .price = 0,
-        .description = sDummyDesc,
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .name = _("COLD SHAKE"),
+        .itemId = ITEM_BURN_HEAL_SHAKE,
+        .price = 1000,
+        .description = sColdShakeDesc,
+        .pocket = POCKET_MEDICINE,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Medicine,
+        .battleUsage = ITEM_B_USE_MEDICINE,
+        .battleUseFunc = ItemUseInBattle_Medicine,
     },
 
-    [ITEM_039] =
+    [ITEM_BURN_HEAL_BLEND] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
-        .price = 0,
-        .description = sDummyDesc,
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .name = _("COLD BLEND"),
+        .itemId = ITEM_BURN_HEAL_BLEND,
+        .price = 2000,
+        .description = sColdBlendDesc,
+        .pocket = POCKET_MEDICINE,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Medicine,
+        .battleUsage = ITEM_B_USE_MEDICINE,
+        .battleUseFunc = ItemUseInBattle_Medicine,
     },
 
-    [ITEM_03A] =
+    [ITEM_AWAKENING_SHAKE] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
-        .price = 0,
-        .description = sDummyDesc,
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .name = _("LATTE"),
+        .itemId = ITEM_AWAKENING_SHAKE,
+        .price = 1000,
+        .description = sLatteDesc,
+        .pocket = POCKET_MEDICINE,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Medicine,
+        .battleUsage = ITEM_B_USE_MEDICINE,
+        .battleUseFunc = ItemUseInBattle_Medicine,
     },
 
-    [ITEM_03B] =
+    [ITEM_AWAKENING_BLEND] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
-        .price = 0,
-        .description = sDummyDesc,
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .name = _("ESPRESSO"),
+        .itemId = ITEM_AWAKENING_BLEND,
+        .price = 2000,
+        .description = sEspressoDesc,
+        .pocket = POCKET_MEDICINE,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Medicine,
+        .battleUsage = ITEM_B_USE_MEDICINE,
+        .battleUseFunc = ItemUseInBattle_Medicine,
     },
 
-    [ITEM_03C] =
+    [ITEM_ICE_HEAL_SHAKE] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
-        .price = 0,
-        .description = sDummyDesc,
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .name = _("HOT SHAKE"),
+        .itemId = ITEM_ICE_HEAL_SHAKE,
+        .price = 1000,
+        .description = sHotShakeDesc,
+        .pocket = POCKET_MEDICINE,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Medicine,
+        .battleUsage = ITEM_B_USE_MEDICINE,
+        .battleUseFunc = ItemUseInBattle_Medicine,
     },
 
-    [ITEM_03D] =
+    [ITEM_ICE_HEAL_BLEND] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
-        .price = 0,
-        .description = sDummyDesc,
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .name = _("HOT BLEND"),
+        .itemId = ITEM_ICE_HEAL_BLEND,
+        .price = 2000,
+        .description = sHotBlendDesc,
+        .pocket = POCKET_MEDICINE,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Medicine,
+        .battleUsage = ITEM_B_USE_MEDICINE,
+        .battleUseFunc = ItemUseInBattle_Medicine,
     },
 
-    [ITEM_03E] =
+    [ITEM_ARNOLD_PALMER] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
-        .price = 0,
-        .description = sDummyDesc,
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .name = _("ARNOLDPALMER"),
+        .itemId = ITEM_ARNOLD_PALMER,
+        .price = 1600,
+        .description = sArnoldPalmerDesc,
+        .pocket = POCKET_MEDICINE,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Medicine,
+        .battleUsage = ITEM_B_USE_MEDICINE,
+        .battleUseFunc = ItemUseInBattle_Medicine,
     },
 
 // Vitamins
@@ -2774,112 +2796,112 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_0E2] =
+    [ITEM_ZOMBIE_LIVER] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
-        .price = 0,
-        .description = sDummyDesc,
-        .pocket = POCKET_ITEMS,
+        .name = _("ZOMBIE LIVER"),
+        .itemId = ITEM_ZOMBIE_LIVER,
+        .price = 100,
+        .description = sZombieLiverDesc,
+        .pocket = POCKET_MATERIALS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_0E3] =
+    [ITEM_APRICORN] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
-        .price = 0,
-        .description = sDummyDesc,
-        .pocket = POCKET_ITEMS,
+        .name = _("APRICORN"),
+        .itemId = ITEM_APRICORN,
+        .price = 100,
+        .description = sApricornDesc,
+        .pocket = POCKET_MATERIALS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_0E4] =
+    [ITEM_SUPERCORN] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
-        .price = 0,
-        .description = sDummyDesc,
-        .pocket = POCKET_ITEMS,
+        .name = _("SUPERCORN"),
+        .itemId = ITEM_SUPERCORN,
+        .price = 500,
+        .description = sSupercornDesc,
+        .pocket = POCKET_MATERIALS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_0E5] =
+    [ITEM_HYPERCORN] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
-        .price = 0,
-        .description = sDummyDesc,
-        .pocket = POCKET_ITEMS,
+        .name = _("HYPERCORN"),
+        .itemId = ITEM_HYPERCORN,
+        .price = 1000,
+        .description = sHypercornDesc,
+        .pocket = POCKET_MATERIALS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_0E6] =
+    [ITEM_ZOMBIE_SLOP] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
+        .name = _("ZOMBIE SLOP"),
+        .itemId = ITEM_ZOMBIE_SLOP,
         .price = 0,
-        .description = sDummyDesc,
-        .pocket = POCKET_ITEMS,
+        .description = sZombieSlopDesc,
+        .pocket = POCKET_MATERIALS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_0E7] =
+    [ITEM_ZOMBIE_HAND] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
+        .name = _("ZOMBIE HAND"),
+        .itemId = ITEM_ZOMBIE_HAND,
         .price = 0,
-        .description = sDummyDesc,
-        .pocket = POCKET_ITEMS,
+        .description = sZombieHandDesc,
+        .pocket = POCKET_MATERIALS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_0E8] =
+    [ITEM_EMPTY_TM] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
-        .price = 0,
-        .description = sDummyDesc,
-        .pocket = POCKET_ITEMS,
+        .name = _("EMPTY TM"),
+        .itemId = ITEM_EMPTY_TM,
+        .price = 2000,
+        .description = sEmptyTMDesc,
+        .pocket = POCKET_MATERIALS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_0E9] =
+    [ITEM_DRIED_ROOT] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
-        .price = 0,
-        .description = sDummyDesc,
-        .pocket = POCKET_ITEMS,
+        .name = _("DRIED ROOT"),
+        .itemId = ITEM_DRIED_ROOT,
+        .price = 500,
+        .description = sDriedRootDesc,
+        .pocket = POCKET_MATERIALS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_0EA] =
+    [ITEM_DRIED_HERB] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
-        .price = 0,
-        .description = sDummyDesc,
-        .pocket = POCKET_ITEMS,
+        .name = _("DRIED HERB"),
+        .itemId = ITEM_DRIED_HERB,
+        .price = 1000,
+        .description = sDriedRootDesc,
+        .pocket = POCKET_MATERIALS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_0EB] =
+    [ITEM_MAGIC_POWDER] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
-        .price = 0,
-        .description = sDummyDesc,
-        .pocket = POCKET_ITEMS,
+        .name = _("MAGIC POWDER"),
+        .itemId = ITEM_MAGIC_POWDER,
+        .price = 2000,
+        .description = sMagicPowderDesc,
+        .pocket = POCKET_MATERIALS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },

@@ -60,20 +60,21 @@ const u8 gItemEffect_MaxRevive[7] = {
 
 const u8 gItemEffect_FreshWater[7] = {
     [4] = ITEM4_HEAL_HP,
-    [6] = 50, // Amount of HP to recover
+    [6] = 30, // Amount of HP to recover
 };
 
 const u8 gItemEffect_SodaPop[7] = {
     [4] = ITEM4_HEAL_HP,
-    [6] = 60, // Amount of HP to recover
+    [6] = 50, // Amount of HP to recover
 };
 
 const u8 gItemEffect_Lemonade[7] = {
     [4] = ITEM4_HEAL_HP,
-    [6] = 80, // Amount of HP to recover
+    [6] = 70, // Amount of HP to recover
 };
 
 const u8 gItemEffect_MoomooMilk[7] = {
+	[3] = ITEM3_STATUS_ALL,
     [4] = ITEM4_HEAL_HP,
     [6] = 100, // Amount of HP to recover
 };
@@ -158,6 +159,71 @@ const u8 gItemEffect_SacredAsh[7] = {
     [0] = ITEM0_SACRED_ASH,
     [4] = ITEM4_REVIVE | ITEM4_HEAL_HP,
     [6] = ITEM6_HEAL_HP_FULL,
+};
+
+const u8 gItemEffect_CureShake[7] = {
+	[3] = ITEM3_POISON,
+	[4] = ITEM4_HEAL_HP,
+	[6] = 20,
+};
+
+const u8 gItemEffect_VigorShake[7] = {
+	[3] = ITEM3_PARALYSIS,
+	[4] = ITEM4_HEAL_HP,
+	[6] = 20,
+};
+
+const u8 gItemEffect_ColdShake[7] = {
+	[3] = ITEM3_BURN,
+	[4] = ITEM4_HEAL_HP,
+	[6] = 20,
+};
+
+const u8 gItemEffect_Latte[7] = {
+	[3] = ITEM3_SLEEP,
+	[4] = ITEM4_HEAL_HP,
+	[6] = 20,
+};
+
+const u8 gItemEffect_HotShake[7] = {
+	[3] = ITEM3_FREEZE,
+	[4] = ITEM4_HEAL_HP,
+	[6] = 20,
+};
+
+const u8 gItemEffect_CureBlend[7] = {
+	[3] = ITEM3_POISON,
+	[4] = ITEM4_HEAL_HP,
+	[6] = 40,
+};
+
+const u8 gItemEffect_VigorBlend[7] = {
+	[3] = ITEM3_PARALYSIS,
+	[4] = ITEM4_HEAL_HP,
+	[6] = 40,
+};
+
+const u8 gItemEffect_ColdBlend[7] = {
+	[3] = ITEM3_BURN,
+	[4] = ITEM4_HEAL_HP,
+	[6] = 40,
+};
+
+const u8 gItemEffect_Espresso[7] = {
+	[3] = ITEM3_SLEEP,
+	[4] = ITEM4_HEAL_HP,
+	[6] = 40,
+};
+
+const u8 gItemEffect_HotBlend[7] = {
+	[3] = ITEM3_FREEZE,
+	[4] = ITEM4_HEAL_HP,
+	[6] = 40,
+};
+
+const u8 gItemEffect_ArnoldPalmer[7] = {
+	[4] = ITEM4_HEAL_HP,
+	[6] = 100,
 };
 
 #define VITAMIN_FRIENDSHIP_CHANGE(i)             \
@@ -415,6 +481,17 @@ const u8 *const gItemEffectTable[] =
     [ITEM_RED_FLUTE - ITEM_POTION]     = gItemEffect_RedFlute,
     [ITEM_BERRY_JUICE - ITEM_POTION]   = gItemEffect_BerryJuice,
     [ITEM_SACRED_ASH - ITEM_POTION]    = gItemEffect_SacredAsh,
+	[ITEM_ANTIDOTE_SHAKE - ITEM_POTION] = gItemEffect_CureShake,
+	[ITEM_ANTIDOTE_BLEND - ITEM_POTION] = gItemEffect_CureBlend,
+	[ITEM_PARALYZE_HEAL_SHAKE - ITEM_POTION] = gItemEffect_VigorShake,
+	[ITEM_PARALYZE_HEAL_BLEND - ITEM_POTION] = gItemEffect_VigorBlend,
+	[ITEM_BURN_HEAL_SHAKE - ITEM_POTION] = gItemEffect_ColdShake,
+	[ITEM_BURN_HEAL_BLEND - ITEM_POTION] = gItemEffect_ColdBlend,
+	[ITEM_AWAKENING_SHAKE - ITEM_POTION] = gItemEffect_Latte,
+	[ITEM_AWAKENING_BLEND - ITEM_POTION] = gItemEffect_Espresso,
+	[ITEM_ICE_HEAL_SHAKE - ITEM_POTION] = gItemEffect_HotShake,
+	[ITEM_ICE_HEAL_BLEND - ITEM_POTION] = gItemEffect_HotBlend,
+	[ITEM_ARNOLD_PALMER - ITEM_POTION] = gItemEffect_ArnoldPalmer,
     [ITEM_HP_UP - ITEM_POTION]         = gItemEffect_HPUp,
     [ITEM_PROTEIN - ITEM_POTION]       = gItemEffect_Protein,
     [ITEM_IRON - ITEM_POTION]          = gItemEffect_Iron,

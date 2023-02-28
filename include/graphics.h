@@ -4207,6 +4207,28 @@ extern const u32 gItemIconPalette_MagmaEmblem[];
 extern const u32 gItemIcon_OldSeaMap[];
 extern const u32 gItemIconPalette_OldSeaMap[];
 
+extern const u32 gItemIcon_PotionShake[];
+extern const u32 gItemIcon_PotionBlend[];
+extern const u32 gItemIconPalette_AntidoteShake[];
+extern const u32 gItemIconPalette_ParlyzHealShake[];
+extern const u32 gItemIconPalette_BurnHealShake[];
+extern const u32 gItemIconPalette_AwakeningShake[];
+extern const u32 gItemIconPalette_IceHealShake[];
+extern const u32 gItemIcon_Apricorn[];
+extern const u32 gItemIconPalette_Apricorn[];
+extern const u32 gItemIconPalette_Supercorn[];
+extern const u32 gItemIconPalette_Hypercorn[];
+extern const u32 gItemIconPalette_EmptyTM[];
+extern const u32 gItemIconPalette_MagicDust[];
+extern const u32 gItemIcon_DriedRoot[];
+extern const u32 gItemIcon_DriedHerb[];
+//extern const u32 gItemIcon_ArnoldPalmer[];
+//extern const u32 gItemIconPalette_ArnoldPalmer[];
+extern const u32 gItemIcon_ZombieLiver[];
+extern const u32 gItemIconPalette_ZombieLiver[];
+//extern const u32 gItemIcon_ZombieHand[]; // h
+//extern const u32 gItemIconPalette_ZombieHand[];
+
 extern const u32 gItemIcon_ReturnToFieldArrow[];
 extern const u32 gItemIconPalette_ReturnToFieldArrow[];
 

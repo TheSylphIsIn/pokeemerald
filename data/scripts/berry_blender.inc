@@ -715,14 +715,14 @@ Blender_EventScript_CheckBlender::
 	goto_if_eq VAR_RESULT, NO, Blender_EventScript_GaveUpBeforeCrafting
 	message Blender_Text_WhichPocket
 	waitmessage
-	dynmultichoice 0, 0, TRUE, 3, 0, DYN_MULTICHOICE_CB_NONE, gText_ItemsPocket, gText_MedicinePocket, gText_MaterialsPocket
-	goto_if_eq VAR_RESULT, 0, Blender_EventScript_ChooseItemsPocketFirstItem
+	dynmultichoice 0, 0, TRUE, 3, 0, DYN_MULTICHOICE_CB_NONE, gText_MaterialsPocket, gText_MedicinePocket, gText_BerriesPocket
+	goto_if_eq VAR_RESULT, 0, Blender_EventScript_ChooseMaterialsPocketFirstItem
 	goto_if_eq VAR_RESULT, 1, Blender_EventScript_ChooseMedicinePocketFirstItem
-	goto_if_eq VAR_RESULT, 2, Blender_EventScript_ChooseMaterialsPocketFirstItem
+	goto_if_eq VAR_RESULT, 2, Blender_EventScript_ChooseBerriesPocketFirstItem
 	goto Blender_EventScript_GaveUpBeforeCrafting
 
-Blender_EventScript_ChooseItemsPocketFirstItem::
-	chooseitem ITEMS_POCKET
+Blender_EventScript_ChooseBerriesPocketFirstItem::
+	chooseitem BERRIES_POCKET
 	goto Blender_EventScript_ManageFirstItem
 	
 Blender_EventScript_ChooseMedicinePocketFirstItem::
@@ -749,14 +749,14 @@ Blender_EventScript_ChooseSecondItemPocket::
 	goto_if_eq VAR_RESULT, NO, Blender_EventScript_CraftWithOneItem
 	message Blender_Text_WhichPocket
 	waitmessage
-	dynmultichoice 0, 0, TRUE, 3, 0, DYN_MULTICHOICE_CB_NONE, gText_ItemsPocket, gText_MedicinePocket, gText_MaterialsPocket
-	goto_if_eq VAR_RESULT, 0, Blender_EventScript_ChooseItemsPocketSecondItem
+	dynmultichoice 0, 0, TRUE, 3, 0, DYN_MULTICHOICE_CB_NONE, gText_MaterialsPocket, gText_MedicinePocket, gText_BerriesPocket
+	goto_if_eq VAR_RESULT, 0, Blender_EventScript_ChooseMaterialsPocketSecondItem
 	goto_if_eq VAR_RESULT, 1, Blender_EventScript_ChooseMedicinePocketSecondItem
-	goto_if_eq VAR_RESULT, 2, Blender_EventScript_ChooseMaterialsPocketSecondItem
+	goto_if_eq VAR_RESULT, 2, Blender_EventScript_ChooseBerriesPocketSecondItem
 	goto Blender_EventScript_CraftWithOneItem
 
-Blender_EventScript_ChooseItemsPocketSecondItem::
-	chooseitem ITEMS_POCKET
+Blender_EventScript_ChooseBerriesPocketSecondItem::
+	chooseitem BERRIES_POCKET
 	goto Blender_EventScript_ManageSecondItem
 	
 Blender_EventScript_ChooseMedicinePocketSecondItem::
@@ -778,7 +778,7 @@ Blender_EventScript_CraftWithOneItem::
 	setvar VAR_TEMP_F, ITEM_NONE
 	msgbox Blender_Text_ConfirmOneItemCraft, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, Blender_EventScript_GaveUpAfterOneItemChoice
-	goto Blender_EventScript_CraftResult
+	goto Blender_EventScript_CraftResultOneItem
 	
 Blender_EventScript_CraftWithTwoItems::
 	bufferitemname STR_VAR_1, VAR_TEMP_E
@@ -795,6 +795,23 @@ Blender_EventScript_CraftResult:
 	playse SE_TRUCK_DOOR
 	waitse
 	delay 30
+	playse SE_TRUCK_DOOR
+	waitse
+	delay 30
+	playse SE_BERRY_BLENDER
+	delay 90
+	playfanfare MUS_LEVEL_UP
+	msgbox Blender_Text_Success, MSGBOX_DEFAULT
+	giveitem VAR_ITEM_ID
+	call_if_eq VAR_RESULT, FALSE, Blender_NoRoomGiveComponentsBack
+	release
+	end
+
+Blender_EventScript_CraftResultOneItem:
+	special TryCombineItems
+	goto_if_eq VAR_ITEM_ID, ITEM_NONE, Blender_EventScript_BadRecipe
+	message Blender_Text_WaitingForBlend
+	waitmessage
 	playse SE_TRUCK_DOOR
 	waitse
 	delay 30
