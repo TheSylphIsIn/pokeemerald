@@ -92,14 +92,20 @@ PetalburgCity_EventScript_Medkit::
 	lock
 	msgbox PetalburgCity_Text_AskForUseMedkit, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, PetalburgCity_EventScript_DontUseMedkit
+	closemessage
 	fadescreen FADE_TO_BLACK
 	special HealPlayerParty
 	playse SE_USE_ITEM
 	waitse
 	removeobject VAR_LAST_TALKED
 	fadescreen FADE_FROM_BLACK
+	msgbox PetalburgCity_Text_PartyHealed, MSGBOX_DEFAULT
 	release
 	end
+	
+PetalburgCity_Text_PartyHealed:
+	.string "{PLAYER}'s POKéMON were completely\n"
+	.string "healed.$"
 	
 PetalburgCity_EventScript_DontUseMedkit:
 	release
@@ -112,6 +118,7 @@ PetalburgCity_Text_AskForUseMedkit:
 PetalburgCity_EventScript_EndlessPlainsTrigger::
 	lock
 	opendoor 7, 8
+	delay 16
 	addobject 6
 	msgbox PetalburgCity_Text_EndlessPlainsCallout, MSGBOX_DEFAULT
 	closemessage
@@ -123,6 +130,7 @@ PetalburgCity_EventScript_EndlessPlainsTrigger::
 	msgbox PetalburgCity_Text_EndlessPlainsCallout2, MSGBOX_DEFAULT
 	closemessage
 	removeobject 6
+	delay 16
 	closedoor 7, 8
 	delay 32
 	setvar VAR_SCOTT_PETALBURG_ENCOUNTER, 1

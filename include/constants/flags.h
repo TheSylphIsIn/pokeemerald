@@ -1220,7 +1220,7 @@
 #define FLAG_HIDE_BALTOY_BALL                                           0x493 // Unused Flag
 #define FLAG_HIDE_KOFFING_BALL                                       0x494 // Unused Flag
 #define FLAG_HIDE_PARAS_BALL                                           0x495 // Unused Flag
-#define FLAG_UNUSED_0x496                                           0x496 // Unused Flag
+#define FLAG_HIDE_ENDLESS_PLAIN_TUTORIAL_BOY                                       0x496 // Unused Flag
 #define FLAG_UNUSED_0x497                                           0x497 // Unused Flag
 #define FLAG_UNUSED_0x498                                           0x498 // Unused Flag
 #define FLAG_UNUSED_0x499                                           0x499 // Unused Flag

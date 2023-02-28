@@ -29,6 +29,8 @@ Route102_EventScript_LootingTutorial:
 	setvar VAR_TEMP_LOOT_ITEM, ITEM_POTION
 	call Common_LootCorpse
 	msgbox Route102_Text_LootingTutorialDone, MSGBOX_DEFAULT
+	giveitem ITEM_POKE_BALL, 5
+	msgbox Route102_Text_LootingTutorialBye, MSGBOX_DEFAULT
 	closemessage
 	applymovement OBJ_EVENT_ID_PLAYER, Route102_Movement_LetYoungsterOut
 	applymovement 2, Route102_Movement_YoungsterWalkToOldale
@@ -59,7 +61,10 @@ Route102_Text_LootingTutorialDone:
 	.string "See? Easy money. Now don't forget\n"
 	.string "to do that to every zombie.\p"
 	.string "And thanks again for saving my life.\n"
-	.string "See you in OLDALE!$"
+	.string "Here, you can have these as thanks.$"
+	
+Route102_Text_LootingTutorialBye:
+	.string "See you in OLDALE TOWN!$"
 	
 Route102_Text_LootingTutorial:
 	.string "Thanks! You saved my life. I can\n"

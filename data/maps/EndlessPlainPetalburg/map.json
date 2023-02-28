@@ -14,21 +14,33 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": 0,
   "object_events": [
-
+    {
+      "graphics_id": "OBJ_EVENT_GFX_BOY_2",
+      "x": 4,
+      "y": 4,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "NULL",
+      "flag": "FLAG_HIDE_ENDLESS_PLAIN_TUTORIAL_BOY"
+    }
   ],
   "warp_events": [
     {
       "x": 4,
       "y": 5,
       "elevation": 0,
-      "dest_map": "MAP_ENDLESS_PLAIN_PETALBURG",
+      "dest_map": "MAP_PETALBURG_CITY",
       "dest_warp_id": "0"
     },
     {
       "x": 5,
       "y": 5,
       "elevation": 0,
-      "dest_map": "MAP_ENDLESS_PLAIN_PETALBURG",
+      "dest_map": "MAP_PETALBURG_CITY",
       "dest_warp_id": "0"
     }
   ],
@@ -76,7 +88,7 @@
       "elevation": 0,
       "var": "VAR_TEMP_0",
       "var_value": "0",
-      "script": "NULL"
+      "script": "EndlessPlainPetalburg_EventScript_BarrierTrigger"
     },
     {
       "type": "trigger",
