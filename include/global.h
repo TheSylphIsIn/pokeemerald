@@ -494,8 +494,10 @@ struct RankingHall2P
 
 struct SaveBlock2
 {
-			 u16 saveVersion;
-			 u16 versionPadding;
+			 u8 versionSentinel; // used to detect if the save is non-vanilla
+			 u8 versionPadding;
+			 u16 saveVersion:15;
+			 u16 fandango:1; // sanity bit so the save converter won't try to load data from other hacks. probably pointless, but harmless.
     /*0x00*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
     /*0x08*/ u8 playerGender; // MALE, FEMALE
     /*0x09*/ u8 specialSaveWarpFlags;
