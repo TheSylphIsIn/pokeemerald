@@ -26,8 +26,11 @@
 #define LANGUAGE_SPANISH  7
 #define NUM_LANGUAGES     7
 
+#define SAVE_VERSION_DEMO 1 // future-proofing for demo/full version compatibility, hopefully
+
 #define GAME_VERSION (VERSION_EMERALD)
 #define GAME_LANGUAGE (LANGUAGE_ENGLISH)
+#define CURRENT_VERSION (SAVE_VERSION_DEMO)
 
 // party sizes
 #define PARTY_SIZE 6

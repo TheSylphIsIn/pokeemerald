@@ -179,6 +179,7 @@ void NewGameInitData(void)
     InitSeedotSizeRecord();
     InitLotadSizeRecord();
     gPlayerPartyCount = 0;
+	gSaveBlock2Ptr->saveVersion = CURRENT_VERSION;
     ZeroPlayerPartyMons();
     ResetPokemonStorageSystem();
     ClearRoamerData();
