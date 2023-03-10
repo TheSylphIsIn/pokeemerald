@@ -601,18 +601,18 @@ static const struct WindowTemplate sPageInfoTemplate[] =
         .tilemapLeft = 11,
         .tilemapTop = 9,
         .width = 18,
-        .height = 4,
+        .height = 6,
         .paletteNum = 6,
         .baseBlock = 485,
     },
     [PSS_DATA_WINDOW_INFO_MEMO] = {
         .bg = 0,
         .tilemapLeft = 11,
-        .tilemapTop = 14,
+        .tilemapTop = 16,
         .width = 18,
         .height = 6,
         .paletteNum = 6,
-        .baseBlock = 557,
+        .baseBlock = 593,
     },
 };
 static const struct WindowTemplate sPageSkillsTemplate[] =
