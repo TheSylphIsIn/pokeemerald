@@ -4379,9 +4379,12 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
             case HOLD_EFFECT_FLINCH:
                 if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
                     && TARGET_TURN_DAMAGED
-                    && (Random() % 100) < atkHoldEffectParam
-                    && gBattleMoves[gCurrentMove].flags & FLAG_KINGS_ROCK_AFFECTED
-                    && gBattleMons[gBattlerTarget].hp)
+                    && (((Random() % 100) < atkHoldEffectParam
+						&& gBattleMoves[gCurrentMove].flags & FLAG_KINGS_ROCK_AFFECTED)
+						|| 
+						((Random() % 100) < 10
+						&& gBattleMons[gBattlerAttacker].ability == ABILITY_STENCH))
+					&& gBattleMons[gBattlerTarget].hp)
                 {
                     gBattleCommunication[MOVE_EFFECT_BYTE] = MOVE_EFFECT_FLINCH;
                     BattleScriptPushCursor();
