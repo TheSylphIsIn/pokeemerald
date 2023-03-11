@@ -250,17 +250,14 @@ Route104_Text_IvanPostBattle:
 	.string "I forgot I had to raise my POKéMON…$"
 
 Route104_Text_BillyIntro:
-	.string "Leaving footprints in the sand is\n"
-	.string "so fun!$"
+	.string "No, go away! I stole these items\n"
+	.string "fair and square!$"
 
 Route104_Text_BillyDefeat:
-	.string "Waah! I got sand in my runners!\n"
-	.string "They're all gritty!$"
+	.string "Not even my items could protect me…$"
 
 Route104_Text_BillyPostBattle:
-	.string "I want to leave my footprints in\n"
-	.string "the sand everywhere, but they\l"
-	.string "disappear quickly…$"
+	.string "What a twisted world this is.$"
 
 Route104_Text_HaleyIntro:
 	.string "Should I…\n"
@@ -337,15 +334,17 @@ Route104_Text_WinstonPostRematch:
 	.string "It's so deep, the world of POKéMON…$"
 
 Route104_Text_CindyIntro:
-	.string "We must have been fated to meet.\n"
-	.string "May I ask you for a battle?$"
+	.string "I will defend my right to loot and\n"
+	.string "steal to the death!$"
 
 Route104_Text_CindyDefeat:
-	.string "Oh, my!$"
+	.string "Or maybe just to the defeat!$"
 
 Route104_Text_CindyPostBattle:
-	.string "“Hello” is the beginning of “good-bye.”\n"
-	.string "I hope we meet again.$"
+	.string "Buzz off! You're not getting any of\n"
+	.string "my items!\p"
+	.string "{PLAYER}: Damn. Guess I can't loot\n"
+	.string "opponents' corpses if they're alive.$"
 
 Route104_Text_CindyRegister1:
 	.string "Hello, we meet again.\p"

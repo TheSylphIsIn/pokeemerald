@@ -291,12 +291,29 @@ Route104_EventScript_ReceivedWhiteHerb::
 	end
 
 Route104_EventScript_Girl1::
-	msgbox Route104_Text_BrineyLivesInSeasideCottage, MSGBOX_NPC
+	msgbox Route104_Text_BrineyLivesInSeasideCottage, MSGBOX_SIGN
 	end
 
 Route104_EventScript_BugCatcher::
-	msgbox Route104_Text_WhatsItLikeAtBottomOfSea, MSGBOX_SIGN
+	lock
+	msgbox Route104_Text_WhatsItLikeAtBottomOfSea, MSGBOX_DEFAULT
+	goto_if_set FLAG_DAILY_OCEAN_SALT, Route104_End
+	faceplayer
+	giveitem ITEM_SHOAL_SALT
+	msgbox Route104_Text_ExplainSalt, MSGBOX_DEFAULT
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
+	setflag FLAG_DAILY_OCEAN_SALT
+	release
 	end
+	
+Route104_End:
+	release
+	end
+	
+Route104_Text_ExplainSalt:
+	.string "Your POKéMON are strong. Maybe you'd\n"
+	.string "rather use that salt to make some\l"
+	.string "good MAGIC BLENDER items.$"
 
 Route104_EventScript_BrineysCottageSign::
 	msgbox Route104_Text_MrBrineysCottage, MSGBOX_SIGN
@@ -319,7 +336,7 @@ Route104_EventScript_TrainerTipsDoubleBattles::
 	end
 
 Route104_EventScript_Boy1::
-	msgbox Route104_Text_ThrowBallAtWeakenedPokemon, MSGBOX_NPC
+	msgbox Route104_Text_ThrowBallAtWeakenedPokemon, MSGBOX_SIGN
 	end
 
 Route104_EventScript_Woman::
@@ -939,44 +956,9 @@ Route104_EventScript_RematchWinston::
 	end
 
 Route104_EventScript_Cindy::
-	trainerbattle_single TRAINER_CINDY_1, Route104_Text_CindyIntro, Route104_Text_CindyDefeat, Route104_EventScript_TryRegisterCindyAfterBattle
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route104_EventScript_RematchCindy
-	setvar VAR_0x8004, TRAINER_CINDY_1
-	specialvar VAR_RESULT, IsTrainerRegistered
-	goto_if_eq VAR_RESULT, FALSE, Route104_EventScript_TryRegisterCindy
-	msgbox Route104_Text_CindyPostBattle, MSGBOX_DEFAULT
-	release
+	trainerbattle_single TRAINER_CINDY_1, Route104_Text_CindyIntro, Route104_Text_CindyDefeat
+	msgbox Route104_Text_DarianPostBattle, MSGBOX_AUTOCLOSE
 	end
-
-Route104_EventScript_TryRegisterCindyAfterBattle::
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	goto_if_set FLAG_HAS_MATCH_CALL, Route104_EventScript_RegisterCindyAfterBattle
-	release
-	end
-
-Route104_EventScript_RegisterCindyAfterBattle::
-	msgbox Route104_Text_CindyRegister2, MSGBOX_DEFAULT
-	register_matchcall TRAINER_CINDY_1
-	release
-	end
-
-Route104_EventScript_TryRegisterCindy::
-	goto_if_set FLAG_HAS_MATCH_CALL, Route104_EventScript_RegisterCindy
-	msgbox Route104_Text_CindyPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route104_EventScript_RegisterCindy::
-	msgbox Route104_Text_CindyRegister1, MSGBOX_DEFAULT
-	register_matchcall TRAINER_CINDY_1
-	release
-	end
-
-Route104_EventScript_RematchCindy::
-	trainerbattle_rematch TRAINER_CINDY_1, Route104_Text_CindyRematchIntro, Route104_Text_CindyRematchDefeat
-	msgbox Route104_Text_CindyPostRematch, MSGBOX_AUTOCLOSE
 	end
 
 Route104_EventScript_Gina::
@@ -997,23 +979,41 @@ Route104_EventScript_Darian::
 	trainerbattle_single TRAINER_DARIAN, Route104_Text_DarianIntro, Route104_Text_DarianDefeat
 	msgbox Route104_Text_DarianPostBattle, MSGBOX_AUTOCLOSE
 	end
+	
+Route104_EventScript_Briney::
+	msgbox Route104_Text_Briney, MSGBOX_NPC
+	end
+	
+Route104_Text_Briney:
+	.string "Arrr! I be a pirate. Me name be\n"
+	.string "CAPTAIN BRINEYBEARD!\p"
+	.string "{PLAYER}: Why do you talk like that?\n"
+	.string "It's really annoying.\p"
+	.string "BRINEY: Aye, it be a curse.\p"
+	.string "{PLAYER}: Then just stop?\p"
+	.string "BRINEY: No, it be a literal curse.\n"
+	.string "A witch cast it on all we sea dogs.\p"
+	.string "We be too annoying to bunk with, so\n"
+	.string "landlubbers avoid us instead o\l"
+	.string "sailing to safer shores.\p"
+	.string "{PLAYER}: Well, it's working. Bye.$"
 
 Route104_Text_BrineyLivesInSeasideCottage:
-	.string "That seaside cottage is where\n"
-	.string "MR. BRINEY lives.\p"
-	.string "He was once a mighty sailor who never\n"
-	.string "feared the sea, however stormy.$"
+	.string "This zombie has been impaled through\n"
+	.string "the chest with a cutlass.\p"
+	.string "It's nailed to the dock.$"
 
 Route104_Text_WhatsItLikeAtBottomOfSea:
-	.string "The sea, huh?\p"
-	.string "I wonder what it's like at the bottom\n"
-	.string "of the sea?$"
+	.string "I'm extracting salt from the ocean.\p"
+	.string "Folk legend says putting salt in\n"
+	.string "a zombie's mouth immobilizes it.$"
 
 Route104_Text_ThrowBallAtWeakenedPokemon:
-	.string "If you're going to throw a POKé BALL,\n"
-	.string "weaken the wild POKéMON first.\p"
-	.string "It will be easier to catch if it's been\n"
-	.string "poisoned, burned, or lulled to sleep.$"
+	.string "ZOMBIE: Guuuuuh… … … … …\p"
+	.string "This zombie appears woozy and\n"
+	.string "disinclined to attack.\p"
+	.string "Maybe it's the salty ocean air\n"
+	.string "making it weak.$"
 
 Route104_Text_OnlyThrowBallAtWildPokemon:
 	.string "You're a thief if you try to steal\n"
@@ -1022,11 +1022,11 @@ Route104_Text_OnlyThrowBallAtWildPokemon:
 	.string "wild POKéMON.$"
 
 Route104_Text_ImNotATrainer:
-	.string "Oh, no, I'm not a TRAINER.\p"
-	.string "But that's right, if TRAINERS lock eyes,\n"
-	.string "it's a challenge to battle.\p"
-	.string "If you don't want to battle, stay out\n"
-	.string "of their sight.$"
+	.string "I've lost everything…\p"
+	.string "Zombies destroyed my home and family,\n"
+	.string "and what little I had left was\l"
+	.string "stolen by looters…\p"
+	.string "Sob…$"
 
 Route104_Text_LikeFillingMouthWithSeedsTakeThis:
 	.string "I like filling my mouth with seeds,\n"

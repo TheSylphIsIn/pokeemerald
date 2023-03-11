@@ -70,6 +70,8 @@
 #define TMSHOP_COUNT 4 // number of shops with limited inventories
 #define TMSHOP_ITEMS_COUNT 8  // max of distinct items in limited shops. each item can have up to 254 available.
 
+#define SAVE_VERSION_DEMO 1 // for save compatibility/conversion if continued past the demo.
+
 // Number of facilities for Ranking Hall.
 // 7 facilities for single mode + tower double mode + tower multi mode.
 // Excludes link modes. See RANKING_HALL_* in include/constants/battle_frontier.h

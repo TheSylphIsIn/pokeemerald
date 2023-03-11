@@ -182,6 +182,8 @@ void NewGameInitData(void)
     ClearAllMail();
     gSaveBlock2Ptr->specialSaveWarpFlags = 0;
     gSaveBlock2Ptr->gcnLinkFlags = 0;
+	gSaveBlock2Ptr->saveVersion = SAVE_VERSION_DEMO;
+	gSaveBlock2Ptr->versionSentinel = 0xFF;
     InitPlayerTrainerId();
     PlayTimeCounter_Reset();
     ClearPokedexFlags();
