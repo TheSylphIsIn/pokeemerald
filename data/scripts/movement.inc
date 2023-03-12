@@ -148,6 +148,13 @@ Common_LootCorpse::
 	finditem VAR_TEMP_LOOT_ITEM
 	return
 	
+Common_DemonCrumble::
+	message Common_Text_DemonCrumbled
+	applymovement VAR_LAST_TALKED, Common_Movement_CrumbleToDust
+	waitmovement 0
+	removeobject VAR_LAST_TALKED
+	return
+	
 Common_Movement_CrumbleToDust::
 	crumble
 	delay_16
@@ -155,6 +162,11 @@ Common_Movement_CrumbleToDust::
 	
 Common_Text_ZombieCrumbled::
 	.string "The zombie crumbled to dust.$"
+	
+Common_Text_DemonCrumbled::
+	.string "The corpse crumbled to dust.\p"
+	.string "The demon flitted back to the\n"
+	.string "netherworld!$"
 	
 Common_Text_PlayerLooted:
 	.string "{PLAYER} looted the body…$"

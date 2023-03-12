@@ -357,6 +357,8 @@
 #define TRAINER_CLASS_DEATHCALLER	 0x42
 #define TRAINER_CLASS_ZOMBIE_KID	 0x43
 #define TRAINER_CLASS_GHOST_GIRL	 0x44
+#define TRAINER_CLASS_SURVIVOR		 0x45
+#define TRAINER_CLASS_DEMON_CORPSE	 0x46
 
 #define TRAINER_ENCOUNTER_MUSIC_MALE         0 // standard male encounter music
 #define TRAINER_ENCOUNTER_MUSIC_FEMALE       1 // standard female encounter music

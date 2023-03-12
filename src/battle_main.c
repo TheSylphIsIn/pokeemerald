@@ -533,6 +533,8 @@ const struct TrainerMoney gTrainerMoneyTable[] =
 	{TRAINER_CLASS_DEATHCALLER, 20},
 	{TRAINER_CLASS_ZOMBIE_KID, 5},
 	{TRAINER_CLASS_GHOST_GIRL, 5},
+	{TRAINER_CLASS_SURVIVOR, 10},
+	{TRAINER_CLASS_DEMON_CORPSE, 8},
     {0xFF, 5}, // Any trainer class not listed above uses this
 };
 

@@ -424,6 +424,10 @@ static const struct SpriteFrameImage sPicTable_OldWoman[] = {
     overworld_frame(gObjectEventPic_OldWoman, 2, 4, 6),
     overworld_frame(gObjectEventPic_OldWoman, 2, 4, 7),
     overworld_frame(gObjectEventPic_OldWoman, 2, 4, 8),
+    overworld_frame(gObjectEventPic_OldWoman, 2, 4, 9),
+    overworld_frame(gObjectEventPic_OldWoman, 2, 4, 10),
+    overworld_frame(gObjectEventPic_OldWoman, 2, 4, 11),
+    overworld_frame(gObjectEventPic_OldWoman, 2, 4, 12),
 };
 
 static const struct SpriteFrameImage sPicTable_Camper[] = {

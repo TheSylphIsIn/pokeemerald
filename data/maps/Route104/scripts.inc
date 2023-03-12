@@ -957,8 +957,7 @@ Route104_EventScript_RematchWinston::
 
 Route104_EventScript_Cindy::
 	trainerbattle_single TRAINER_CINDY_1, Route104_Text_CindyIntro, Route104_Text_CindyDefeat
-	msgbox Route104_Text_DarianPostBattle, MSGBOX_AUTOCLOSE
-	end
+	msgbox Route104_Text_CindyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route104_EventScript_Gina::
