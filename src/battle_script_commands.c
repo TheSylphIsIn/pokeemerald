@@ -3544,6 +3544,11 @@ static void Cmd_getexp(void)
 
             calculatedExp = gSpeciesInfo[gBattleMons[gBattlerFainted].species].expYield * gBattleMons[gBattlerFainted].level / 7;
 			
+			// this calculation is done early so that gExpShareExp will be correct
+			// when it is used to display a battle message at the end of the function.
+			if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+				calculatedExp += (calculatedExp >> 1);
+			
             if (gSaveBlock2Ptr->optionsExpShare) // exp share is turned on
             {
                 *exp = calculatedExp / 2 + calculatedExp % 2; // preserves hanging experience point if exp yield is odd
@@ -3774,7 +3779,10 @@ static void Cmd_getexp(void)
 				}
 				// only display Exp share message if mons actually got exp from it
 				if (gSaveBlock2Ptr->optionsExpShare && viaSentIn < CalculatePlayerPartyCount())
+				{
+					PREPARE_WORD_NUMBER_BUFFER(gBattleTextBuff1, 5, gExpShareExp);
 					PrepareStringBattle(STRINGID_EXPSHAREMESSAGE, 0);
+				}
 			}
 				
         }
