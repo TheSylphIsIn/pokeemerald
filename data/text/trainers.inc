@@ -201,53 +201,46 @@ Route103_Text_MarcosPostBattle:
 	.string "Heh, maybe I should turn pro.$"
 
 Route104_Text_GinaIntro:
-	.string "GINA: Okay, let's battle with our\n"
-	.string "POKéMON!$"
+	.string "ZOMBIE: Grrrah!\p"
+	.string "The zombie and his twin are blocking\n"
+	.string "the way. Time to fight!$"
 
 Route104_Text_GinaDefeat:
-	.string "GINA: Losing upsets me!$"
-
-Route104_Text_GinaPostBattle:
-	.string "GINA: You are strong!\n"
-	.string "We have to train lots more!$"
+	.string "Uuuoh!$"
 
 Route104_Text_GinaNotEnoughMons:
-	.string "GINA: Oh? Only one POKéMON?\n"
-	.string "Then, we don't battle with you.\p"
-	.string "If there's only one POKéMON, it will\n"
-	.string "be lonesome. That's not nice.$"
+	.string "These zombies look especially\n"
+	.string "fearsome.\p"
+	.string "I'd better not fight them with\n"
+	.string "only one POKéMON.$"
 
 Route104_Text_MiaIntro:
-	.string "MIA: We are twins, so we battle\n"
-	.string "POKéMON together.$"
+	.string "ZOMBIE: Shiieeh!\p"
+	.string "The zombie and her twin are blocking\n"
+	.string "the way. Time to fight!$"
 
 Route104_Text_MiaDefeat:
-	.string "MIA: We battled together, but we\n"
-	.string "both lost…$"
-
-Route104_Text_MiaPostBattle:
-	.string "MIA: We will train our POKéMON more\n"
-	.string "and be strong like you.$"
+	.string "Gueeee!$"
 
 Route104_Text_MiaNotEnoughMons:
-	.string "MIA: You want to battle with us?\p"
-	.string "It's a big no-no if you don't have two\n"
-	.string "POKéMON with you.\l"
-	.string "We're too strong for you!$"
+	.string "These zombies look especially\n"
+	.string "fearsome.\p"
+	.string "I'd better not fight them with\n"
+	.string "only one POKéMON.$"
 
 Route104_Text_IvanIntro:
-	.string "Why keep it a secret?\n"
-	.string "I'm the WATER POKéMON expert!\p"
-	.string "Huh?\n"
-	.string "You don't know me?$"
+	.string "Ha! Zombies can't cross running\n"
+	.string "water, so I'm safe on this bridge!\p"
+	.string "{PLAYER}: Seriously…that's vampires.\p"
+	.string "IVAN: Ha! You're funny, kid. Let's\n"
+	.string "have a nice, safe battle!$"
 
 Route104_Text_IvanDefeat:
-	.string "I thought I wasn't too bad, if I may\n"
-	.string "say so, but I guess not… Bleah…$"
+	.string "Ha! You're good!$"
 
 Route104_Text_IvanPostBattle:
-	.string "I got too into fishing.\n"
-	.string "I forgot I had to raise my POKéMON…$"
+	.string "Ha!\n"
+	.string "{PLAYER}: Stop saying ha.$"
 
 Route104_Text_BillyIntro:
 	.string "No, go away! I stole these items\n"
@@ -260,12 +253,11 @@ Route104_Text_BillyPostBattle:
 	.string "What a twisted world this is.$"
 
 Route104_Text_HaleyIntro:
-	.string "Should I…\n"
-	.string "Or shouldn't I?\p"
-	.string "Okay, sure, I will battle!$"
+	.string "Raaaagh!\p"
+	.string "{PLAYER}: Whoa! A floating head!$"
 
 Route104_Text_HaleyDefeat:
-	.string "I shouldn't have battled…$"
+	.string "Grrraaaagh…$"
 
 Route104_Text_HaleyPostBattle:
 	.string "If you're faced with a decision and\n"
@@ -286,11 +278,11 @@ Route104_Text_HaleyRegister2:
 	.string "Okay, sure, I will register you!$"
 
 Route104_Text_HaleyRematchIntro:
-	.string "Come on, battle with me!$"
+	.string "Raaaagh!\p"
+	.string "{PLAYER}: Whoa! A floating head!$"
 
 Route104_Text_HaleyRematchDefeat:
-	.string "Ohh…\n"
-	.string "I thought I could win…$"
+	.string "Grrraaaagh…$"
 
 Route104_Text_HaleyPostRematch:
 	.string "I made the decision to battle, so\n"
@@ -298,15 +290,16 @@ Route104_Text_HaleyPostRematch:
 	.string "I am still upset about losing!$"
 
 Route104_Text_WinstonIntro:
-	.string "Oh, sure, I'll accept your challenge.\n"
-	.string "I have a lot of money.$"
+	.string "Aieeh! Zombie!$"
 
 Route104_Text_WinstonDefeat:
-	.string "Why couldn't I win?$"
+	.string "Oh, you're not a zombie…$"
 
 Route104_Text_WinstonPostBattle:
-	.string "There are some things money can't buy.\n"
-	.string "That's POKéMON…$"
+	.string "I'm lost, tired, and now my POKéMON\n"
+	.string "is fainted…\p"
+	.string "Maybe I can make it to OLDANE in\n"
+	.string "one piece if I run my heart out.$"
 
 Route104_Text_WinstonRegister1:
 	.string "Hm?\n"

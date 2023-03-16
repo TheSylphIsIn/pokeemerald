@@ -116,6 +116,10 @@ static const struct SpriteFrameImage sPicTable_NinjaBoy[] = {
     overworld_frame(gObjectEventPic_NinjaBoy, 2, 2, 6),
     overworld_frame(gObjectEventPic_NinjaBoy, 2, 2, 7),
     overworld_frame(gObjectEventPic_NinjaBoy, 2, 2, 8),
+    overworld_frame(gObjectEventPic_NinjaBoy, 2, 2, 9),
+    overworld_frame(gObjectEventPic_NinjaBoy, 2, 2, 10),
+    overworld_frame(gObjectEventPic_NinjaBoy, 2, 2, 11),
+    overworld_frame(gObjectEventPic_NinjaBoy, 2, 2, 12),
 };
 
 static const struct SpriteFrameImage sPicTable_Twin[] = {

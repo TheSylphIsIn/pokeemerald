@@ -1635,11 +1635,11 @@ const struct Trainer gTrainers[] = {
 
     [TRAINER_WINSTON_1] =
     {
-        .trainerClass = TRAINER_CLASS_RICH_BOY,
+        .trainerClass = TRAINER_CLASS_SURVIVOR,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_RICH,
         .trainerPic = TRAINER_PIC_RICH_BOY,
         .trainerName = _("WINSTON"),
-        .items = {ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE},
+        .items = {ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
         .party = ITEM_DEFAULT_MOVES(sParty_Winston1),
@@ -5800,12 +5800,12 @@ const struct Trainer gTrainers[] = {
     [TRAINER_GINA_AND_MIA_1] =
     {
         .trainerClass = TRAINER_CLASS_TWINS,
-        .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_TWINS,
+        .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_INTENSE,
         .trainerPic = TRAINER_PIC_TWINS,
-        .trainerName = _("GINA & MIA"),
+        .trainerName = _("JIM & MIA"),
         .items = {},
         .doubleBattle = TRUE,
-        .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
+        .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE | AI_SCRIPT_TRY_TO_FAINT,
         .party = NO_ITEM_DEFAULT_MOVES(sParty_GinaAndMia1),
     },
 
@@ -7251,13 +7251,13 @@ const struct Trainer gTrainers[] = {
 
     [TRAINER_HALEY_1] =
     {
-        .trainerClass = TRAINER_CLASS_LASS,
-        .encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE,
-        .trainerPic = TRAINER_PIC_LASS,
-        .trainerName = _("HALEY"),
+        .trainerClass = TRAINER_CLASS_NINJA_BOY,
+        .encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE,
+        .trainerPic = TRAINER_PIC_NINJA_BOY,
+        .trainerName = _("JERRY"),
         .items = {},
         .doubleBattle = FALSE,
-        .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
+        .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE | AI_SCRIPT_TRY_TO_FAINT,
         .party = NO_ITEM_DEFAULT_MOVES(sParty_Haley1),
     },
 

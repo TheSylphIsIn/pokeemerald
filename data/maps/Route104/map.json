@@ -57,17 +57,17 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_LASS",
-      "x": 31,
-      "y": 24,
+      "graphics_id": "OBJ_EVENT_GFX_NINJA_BOY",
+      "x": 21,
+      "y": 6,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
-      "movement_range_x": 0,
+      "movement_type": "MOVEMENT_TYPE_WALK_LEFT_AND_RIGHT",
+      "movement_range_x": 4,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NORMAL",
-      "trainer_sight_or_berry_tree_id": "7",
+      "trainer_sight_or_berry_tree_id": "5",
       "script": "Route104_EventScript_Haley",
-      "flag": "0"
+      "flag": "TRAINER_HALEY_1+TRAINER_FLAGS_START"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ZOMBIE_BOY",
@@ -84,16 +84,16 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_WOMAN_2",
-      "x": 30,
-      "y": 50,
+      "x": 29,
+      "y": 54,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Route104_EventScript_Woman",
-      "flag": "0"
+      "flag": "FLAG_POTION_GIRL"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_GIRL_3",
@@ -136,8 +136,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_FISHERMAN",
-      "x": 29,
-      "y": 8,
+      "x": 27,
+      "y": 16,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
@@ -227,15 +227,15 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_EXPERT_F",
-      "x": 37,
-      "y": 8,
+      "x": 32,
+      "y": 23,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route104_EventScript_ExpertF",
+      "script": "Route104_EventScript_Boy2",
       "flag": "0"
     },
     {
@@ -317,9 +317,9 @@
       "flag": "FLAG_HIDE_ROUTE_104_WHITE_HERB_FLORIST"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_TWIN",
-      "x": 27,
-      "y": 15,
+      "graphics_id": "OBJ_EVENT_GFX_ZOMBIE_BOY",
+      "x": 24,
+      "y": 8,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
@@ -327,12 +327,12 @@
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "1",
       "script": "Route104_EventScript_Gina",
-      "flag": "0"
+      "flag": "TRAINER_GINA_AND_MIA_1+TRAINER_FLAGS_START"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_TWIN",
-      "x": 28,
-      "y": 15,
+      "graphics_id": "OBJ_EVENT_GFX_ZOMBIE_GIRL",
+      "x": 25,
+      "y": 8,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
@@ -340,7 +340,7 @@
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "1",
       "script": "Route104_EventScript_Mia",
-      "flag": "0"
+      "flag": "TRAINER_GINA_AND_MIA_1+TRAINER_FLAGS_START"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_RICH_BOY",
@@ -370,8 +370,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
-      "x": 29,
-      "y": 53,
+      "x": 30,
+      "y": 50,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
@@ -434,16 +434,16 @@
       "flag": "FLAG_ITEM_ROUTE_104_POTION"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_BOY_2",
+      "graphics_id": "OBJ_EVENT_GFX_PIKACHU",
       "x": 5,
       "y": 26,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route104_EventScript_Boy2",
+      "script": "Route104_EventScript_ExpertF",
       "flag": "0"
     },
     {

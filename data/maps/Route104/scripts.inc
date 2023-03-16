@@ -1,6 +1,8 @@
 @ NOTE: Route 104's sail to Dewford script references local IDs from Dewford's map.
 @  These are labeled in DewfordTown/scripts.inc
 .set LOCALID_RIVAL, 34
+.set LOCALID_ZOMBIE_TWIN_BOY, 23
+.set LOCALID_ZOMBIE_TWIN_GIRL, 24
 
 Route104_MapScripts::
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route104_OnFrame
@@ -259,20 +261,35 @@ Route104_Movement_RivalExitBrineysCottage:
 
 Route104_EventScript_ExpertF::
 	lock
-	faceplayer
-	goto_if_set FLAG_RECEIVED_CHESTO_BERRY_ROUTE_104, Route104_EventScript_ReceivedBerry
-	msgbox Route104_Text_PlantBerriesInSoilTakeThis, MSGBOX_DEFAULT
-	giveitem ITEM_CHESTO_BERRY
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	msgbox Route104_Text_PikachuHead, MSGBOX_DEFAULT
+	goto_if_set FLAG_RECEIVED_CHESTO_BERRY_ROUTE_104, Route104_EventScript_End
+	msgbox Route104_Text_LootPrompt, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, Route104_EventScript_DidntLoot
+	giveitem ITEM_SUPER_POTION
 	setflag FLAG_RECEIVED_CHESTO_BERRY_ROUTE_104
-	msgbox Route104_Text_TrainersOftenMakeMonHoldBerries, MSGBOX_DEFAULT
 	release
 	end
+	
+Route104_EventScript_DidntLoot:
+	msgbox Route104_Text_DidntLoot, MSGBOX_DEFAULT
+	release
+	end
+	
+Route104_EventScript_End:
+	release
+	end
+	
+Route104_Text_PikachuHead:
+	.string "The severed head of a PIKACHU has\n"
+	.string "been mounted on a stake.$"
 
-Route104_EventScript_ReceivedBerry::
-	msgbox Route104_Text_TrainersOftenMakeMonHoldBerries, MSGBOX_DEFAULT
-	release
-	end
+Route104_Text_LootPrompt:
+	.string "Stick your hand in its mouth?$"
+
+Route104_Text_DidntLoot:
+	.string "Probably a good idea. After all,\n"
+	.string "it's sticky and oozing.\l"
+	.string "And that fungus looks toxic.$"
 
 Route104_EventScript_WhiteHerbFlorist::
 	lock
@@ -340,15 +357,74 @@ Route104_EventScript_Boy1::
 	end
 
 Route104_EventScript_Woman::
-	msgbox Route104_Text_OnlyThrowBallAtWildPokemon, MSGBOX_NPC
+	lock
+	faceplayer
+	msgbox Route104_Text_NeedPotion, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, Route104_EventScript_RefusedGivePotion
+	checkitem ITEM_POTION
+	goto_if_eq VAR_RESULT, FALSE, Route104_EventScript_DontHavePotions
+	msgbox Route104_Text_ThanksForPotion, MSGBOX_DEFAULT
+	giveitem ITEM_SHARP_BEAK
+	msgbox Route104_Text_PotionGirlFarewell, MSGBOX_DEFAULT
+	closemessage
+	applymovement VAR_LAST_TALKED, Route104_Movement_PotionGirlLeave
+	playse SE_BIKE_HOP
+	waitmovement 0
+	removeobject VAR_LAST_TALKED
+	release
 	end
+	
+Route104_Text_NeedPotion:
+	.string "Gasp…gasp…\n"
+	.string "I've been running from the zombies\l"
+	.string "for days now, but…\p"
+	.string "They're everywhere, and my POKéMON\n"
+	.string "can barely carry on…\p"
+	.string "Could you please spare a POTION?$"
+	
+Route104_Text_ThanksForPotion:
+	.string "Thank you so much. You've literally\n"
+	.string "saved my life.\p"
+	.string "Here, take this small gift.$"
+	
+Route104_Text_PotionGirlFarewell:
+	.string "Please, stay safe.$"
+	
+Route104_Movement_PotionGirlLeave:
+	jump_2_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	step_end	
+	
+Route104_EventScript_RefusedGivePotion:
+	msgbox Route104_Text_GoingToDie, MSGBOX_DEFAULT
+	release
+	end
+	
+Route104_EventScript_DontHavePotions:
+	msgbox Route104_Text_ThatsSweetBut, MSGBOX_DEFAULT
+	release
+	end
+
+Route104_Text_GoingToDie:
+	.string "W-what? Please…\n"
+	.string "I need it to survive…$"
+	
+Route104_Text_ThatsSweetBut:
+	.string "… … … … …\n"
+	.string "That's sweet, but you don't even\l"
+	.string "have any POTIONs…$"
+
 
 Route104_EventScript_Boy2::
 	lock
 	faceplayer
 	goto_if_set FLAG_RECEIVED_TM09, Route104_EventScript_ReceivedBulletSeed
 	msgbox Route104_Text_LikeFillingMouthWithSeedsTakeThis, MSGBOX_DEFAULT
-	giveitem ITEM_TM09
+	giveitem ITEM_EMPTY_TM, 3
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM09
 	release
@@ -875,20 +951,12 @@ Route104_EventScript_Billy::
 
 Route104_EventScript_Haley::
 	trainerbattle_single TRAINER_HALEY_1, Route104_Text_HaleyIntro, Route104_Text_HaleyDefeat, Route104_EventScript_TryRegisterHaleyAfterBattle
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route104_EventScript_RematchHaley
-	setvar VAR_0x8004, TRAINER_HALEY_1
-	specialvar VAR_RESULT, IsTrainerRegistered
-	goto_if_eq VAR_RESULT, FALSE, Route104_EventScript_TryRegisterHaley
-	msgbox Route104_Text_HaleyPostBattle, MSGBOX_DEFAULT
-	release
 	end
 
 Route104_EventScript_TryRegisterHaleyAfterBattle::
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	goto_if_set FLAG_HAS_MATCH_CALL, Route104_EventScript_RegisterHaleyAfterBattle
-	release
+	call Common_ZombieCrumble
+	setvar VAR_TEMP_LOOT_ITEM, ITEM_APRICORN
+	call Common_LootCorpse
 	end
 
 Route104_EventScript_RegisterHaleyAfterBattle::
@@ -961,17 +1029,22 @@ Route104_EventScript_Cindy::
 	end
 
 Route104_EventScript_Gina::
-	trainerbattle_double TRAINER_GINA_AND_MIA_1, Route104_Text_GinaIntro, Route104_Text_GinaDefeat, Route104_Text_GinaNotEnoughMons
-	special GetPlayerBigGuyGirlString
-	msgbox Route104_Text_GinaPostBattle, MSGBOX_DEFAULT
-	release
+	trainerbattle_double TRAINER_GINA_AND_MIA_1, Route104_Text_GinaIntro, Route104_Text_GinaDefeat, Route104_Text_GinaNotEnoughMons, Route104_TwinZombiesDefeated
 	end
 
 Route104_EventScript_Mia::
-	trainerbattle_double TRAINER_GINA_AND_MIA_1, Route104_Text_MiaIntro, Route104_Text_MiaDefeat, Route104_Text_MiaNotEnoughMons
-	special GetPlayerBigGuyGirlString
-	msgbox Route104_Text_MiaPostBattle, MSGBOX_DEFAULT
-	release
+	trainerbattle_double TRAINER_GINA_AND_MIA_1, Route104_Text_MiaIntro, Route104_Text_MiaDefeat, Route104_Text_MiaNotEnoughMons, Route104_TwinZombiesDefeated
+	end
+
+Route104_TwinZombiesDefeated:
+	message Common_Text_ZombieCrumbled
+	applymovement LOCALID_ZOMBIE_TWIN_BOY, Common_Movement_CrumbleToDust
+	applymovement LOCALID_ZOMBIE_TWIN_GIRL, Common_Movement_CrumbleToDust
+	waitmovement LOCALID_ZOMBIE_TWIN_GIRL
+	removeobject LOCALID_ZOMBIE_TWIN_BOY
+	removeobject LOCALID_ZOMBIE_TWIN_GIRL
+	setvar VAR_TEMP_LOOT_ITEM, ITEM_DRIED_HERB
+	call Common_LootCorpse
 	end
 
 Route104_EventScript_Darian::
@@ -1028,18 +1101,20 @@ Route104_Text_ImNotATrainer:
 	.string "Sob…$"
 
 Route104_Text_LikeFillingMouthWithSeedsTakeThis:
-	.string "I like filling my mouth with seeds,\n"
-	.string "then spitting them out fast!\p"
-	.string "You can have this, so you try it out!\p"
-	.string "Use it on a POKéMON, and it will learn\n"
-	.string "a move for firing seeds rapidly.$"
+	.string "You there. Are you a trainer?\p"
+	.string "{PLAYER}: I am.\p"
+	.string "LADY: Please, go to RUSTBORO and rid\n"
+	.string "us of the demons.\p"
+	.string "If it will help, take these.$"
 
 Route104_Text_TMsAreOneTimeUse:
-	.string "A word of advice!\p"
-	.string "A TM, TECHNICAL MACHINE, is good only\n"
-	.string "for one-time use.\p"
-	.string "Once you use it, it's gone.\n"
-	.string "Think twice before using it!$"
+	.string "LADY: There's a MAGIC BLENDER in the\n"
+	.string "city somewhere.\p"
+	.string "If you can loot some MAGIC POWDER\n"
+	.string "from a demon and combine it with\l"
+	.string "that TM, it will become usable.\p"
+	.string "Please use it to power up your\n"
+	.string "POKéMON and save us all!$"
 
 Route104_Text_DontNeedThisTakeIt:
 	.string "This FLOWER SHOP started selling\n"
