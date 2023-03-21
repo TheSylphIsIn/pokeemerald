@@ -24,8 +24,6 @@
 #include "constants/songs.h"
 #include "constants/rgb.h"
 
-#define STARTER_MON_COUNT   3
-
 // Position of the sprite of the selected starter Pokemon
 #define STARTER_PKMN_POS_X (DISPLAY_WIDTH / 2)
 #define STARTER_PKMN_POS_Y 64
@@ -110,39 +108,13 @@ static const u8 sStarterLabelCoords[STARTER_MON_COUNT][2] =
     {8, 4},
 };
 
-static const u16 sStarterMon0[STARTER_MON_COUNT] =
+static const u16 sStarterMons[STARTER_SET_COUNT][STARTER_MON_COUNT] =
 {
-    SPECIES_SLOSHMOSH,
-    SPECIES_MINIOR_METEOR,
-    SPECIES_SPOOKUM,
-};
-
-static const u16 sStarterMon1[STARTER_MON_COUNT] =
-{
-    SPECIES_GLASMA,
-    SPECIES_SANDUDE,
-    SPECIES_ELADRIFT,
-};
-
-static const u16 sStarterMon2[STARTER_MON_COUNT] =
-{
-    SPECIES_CHIKORITA,
-    SPECIES_CYNDAQUIL,
-    SPECIES_TOTODILE,
-};
-
-static const u16 sStarterMon3[STARTER_MON_COUNT] =
-{
-    SPECIES_BULBASAUR,
-    SPECIES_CHARMANDER,
-    SPECIES_SQUIRTLE,
-};
-
-static const u16 sStarterMon4[STARTER_MON_COUNT] =
-{
-    SPECIES_DUBSNAKE,
-    SPECIES_WYCERN,
-    SPECIES_ABRA,
+    [STARTER_SET_FONEI] = {SPECIES_GLASMA, SPECIES_SANDUDE, SPECIES_ELADRIFT},
+	[STARTER_SET_HOENN] = {SPECIES_TREECKO, SPECIES_TORCHIC, SPECIES_MUDKIP},
+	[STARTER_SET_JOHTO] = {SPECIES_CHIKORITA, SPECIES_CYNDAQUIL, SPECIES_TOTODILE},
+	[STARTER_SET_KANTO] = {SPECIES_BULBASAUR, SPECIES_CHARMANDER, SPECIES_SQUIRTLE},
+	[STARTER_SET_WACKY] = {SPECIES_SHROOMISH, SPECIES_NATU, SPECIES_RHYHORN}
 };
 
 static const struct BgTemplate sBgTemplates[3] =
@@ -380,21 +352,8 @@ u16 GetStarterPokemon(u16 chosenStarterId)
 {
     if (chosenStarterId > STARTER_MON_COUNT)
         chosenStarterId = 0;
-	
-	if (VarGet(VAR_STARTER_SET) == 1)
-		return sStarterMon1[chosenStarterId];
-	
-	else if (VarGet(VAR_STARTER_SET) == 2)
-		return sStarterMon2[chosenStarterId];
-	
-	else if (VarGet(VAR_STARTER_SET) == 3)
-		return sStarterMon3[chosenStarterId];
-	
-	else if (VarGet(VAR_STARTER_SET) == 4)
-		return sStarterMon4[chosenStarterId];
-	
-	else 
-		return sStarterMon0[chosenStarterId];
+
+	return sStarterMons[VarGet(VAR_STARTER_SET)][chosenStarterId];
 }
 
 static void VblankCB_StarterChoose(void)

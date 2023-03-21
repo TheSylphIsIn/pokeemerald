@@ -222,7 +222,6 @@ DropperPoint_EventScript_Bag::
 	removeobject LOCALID_SLOSHMOSH
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
-	setvar VAR_STARTER_SET, 1
 	special ChooseStarter
 	waitstate
 	bufferleadmonspeciesname STR_VAR_1

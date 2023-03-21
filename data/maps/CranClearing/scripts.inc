@@ -77,37 +77,32 @@ CranClearing_EventScript_Morgan::
 	faceplayer
 	call_if_set FLAG_FAVORED_CALVIN, CranClearing_EventScript_MorganReactToCalvinDefeat
 	msgbox CranClearing_Text_MorganBattleIntro, MSGBOX_DEFAULT
+	closemessage
 	applymovement LOCALID_MORGAN, CranClearing_Movement_MorganWalkToArena
 	delay 10
 	applymovement OBJ_EVENT_ID_PLAYER, CranClearing_Movement_PlayerWalkToMArena
 	waitmovement LOCALID_MORGAN
 	msgbox CranClearing_Text_MorganBattleIntro2, MSGBOX_DEFAULT
 	closemessage
-	switch VAR_STARTER_MON
-	case 0, CranClearing_EventScript_MorganBattleGlasma
-	case 1, CranClearing_EventScript_MorganBattleSandude
-	case 2, CranClearing_EventScript_MorganBattleEladrift
+	trainerbattle_no_intro TRAINER_MORGAN_FISHEYE_LAKE, CranClearing_Text_MorganDefeated
+	special HealPlayerParty
+	msgbox CranClearing_Text_MorganAfterBattle1, MSGBOX_DEFAULT
+	closemessage
+	applymovement LOCALID_MORGAN, CranClearing_Movement_MorganGiveFlash
+	waitmovement 0
+	giveitem ITEM_HM05
+	msgbox CranClearing_Text_MorganExplainFlash, MSGBOX_DEFAULT
+	closemessage
+	applymovement LOCALID_MORGAN, CranClearing_Movement_MorganWalkOffscreen
+	waitmovement 0
+	removeobject LOCALID_MORGAN
+	setflag FLAG_FAVORED_MORGAN
 	end
 	
 CranClearing_EventScript_MorganReactToCalvinDefeat:
 	msgbox CranClearing_Text_MorganCalvinBeaten, MSGBOX_DEFAULT
 	closemessage
 	return
-	
-CranClearing_EventScript_MorganBattleGlasma::
-	trainerbattle_no_intro TRAINER_MORGAN_FISHEYE_LAKE_GLASMA, CranClearing_Text_MorganDefeated
-	goto CranClearing_EventScript_MorganAfterBattle
-	end
-
-CranClearing_EventScript_MorganBattleSandude::
-	trainerbattle_no_intro TRAINER_MORGAN_FISHEYE_LAKE_SANDUDE, CranClearing_Text_MorganDefeated
-	goto CranClearing_EventScript_MorganAfterBattle
-	end
-
-CranClearing_EventScript_MorganBattleEladrift::
-	trainerbattle_no_intro TRAINER_MORGAN_FISHEYE_LAKE_ELADRIFT, CranClearing_Text_MorganDefeated
-	goto CranClearing_EventScript_MorganAfterBattle
-	end
 	
 CranClearing_Text_MorganCalvinBeaten:
 	.string "MORGAN: Huh…? Did you already go\n"
@@ -143,21 +138,6 @@ CranClearing_Movement_PlayerWalkToMArena:
 	walk_left
 	walk_left
 	step_end
-
-CranClearing_EventScript_MorganAfterBattle:
-	special HealPlayerParty
-	msgbox CranClearing_Text_MorganAfterBattle1, MSGBOX_DEFAULT
-	closemessage
-	applymovement LOCALID_MORGAN, CranClearing_Movement_MorganGiveFlash
-	waitmovement 0
-	giveitem ITEM_HM05
-	msgbox CranClearing_Text_MorganExplainFlash, MSGBOX_DEFAULT
-	closemessage
-	applymovement LOCALID_MORGAN, CranClearing_Movement_MorganWalkOffscreen
-	waitmovement 0
-	removeobject LOCALID_MORGAN
-	setflag FLAG_FAVORED_MORGAN
-	end
 	
 CranClearing_Text_MorganAfterBattle1:
 	.string "MORGAN: That was exhilarating…!\n"
@@ -201,37 +181,33 @@ CranClearing_EventScript_Calvin::
 	faceplayer
 	call_if_set FLAG_FAVORED_MORGAN, CranClearing_EventScript_CalvinReactToMorganDefeat
 	msgbox CranClearing_Text_CalvinBattleIntro, MSGBOX_DEFAULT
+	closemessage
 	applymovement LOCALID_CALVIN, CranClearing_Movement_CalvinWalkToArena
 	delay 10
 	applymovement OBJ_EVENT_ID_PLAYER, CranClearing_Movement_PlayerWalkToCArena
 	waitmovement LOCALID_CALVIN
 	msgbox CranClearing_Text_CalvinBattleIntro2, MSGBOX_DEFAULT
 	closemessage
-	switch VAR_STARTER_MON
-	case 0, CranClearing_EventScript_CalvinBattleGlasma
-	case 1, CranClearing_EventScript_CalvinBattleSandude
-	case 2, CranClearing_EventScript_CalvinBattleEladrift
+	trainerbattle_no_intro TRAINER_CALVIN_FISHEYE_LAKE, CranClearing_Text_CalvinDefeated
+	special HealPlayerParty
+	msgbox CranClearing_Text_CalvinAfterBattle1, MSGBOX_DEFAULT
+	closemessage
+	applymovement LOCALID_CALVIN, CranClearing_Movement_CalvinGiveSwift
+	waitmovement 0
+	giveitem ITEM_TM100
+	msgbox CranClearing_Text_CalvinExplainSwift, MSGBOX_DEFAULT
+	closemessage
+	applymovement LOCALID_CALVIN, CranClearing_Movement_CalvinWalkOffscreen
+	waitmovement 0
+	removeobject LOCALID_CALVIN
+	setflag FLAG_FAVORED_CALVIN
 	end
 	
 CranClearing_EventScript_CalvinReactToMorganDefeat:
 	msgbox CranClearing_Text_CalvinMorganBeaten, MSGBOX_DEFAULT
 	closemessage
 	return
-	
-CranClearing_EventScript_CalvinBattleGlasma::
-	trainerbattle_no_intro TRAINER_CALVIN_FISHEYE_LAKE_GLASMA, CranClearing_Text_CalvinDefeated
-	goto CranClearing_EventScript_CalvinAfterBattle
-	end
 
-CranClearing_EventScript_CalvinBattleSandude::
-	trainerbattle_no_intro TRAINER_CALVIN_FISHEYE_LAKE_SANDUDE, CranClearing_Text_CalvinDefeated
-	goto CranClearing_EventScript_CalvinAfterBattle
-	end
-
-CranClearing_EventScript_CalvinBattleEladrift::
-	trainerbattle_no_intro TRAINER_CALVIN_FISHEYE_LAKE_ELADRIFT, CranClearing_Text_CalvinDefeated
-	goto CranClearing_EventScript_CalvinAfterBattle
-	end
 	
 CranClearing_Text_CalvinMorganBeaten:
 	.string "CALVIN: You fought MORGAN and came\n"
@@ -270,21 +246,6 @@ CranClearing_Movement_PlayerWalkToCArena:
 	walk_up
 	walk_left
 	step_end
-
-CranClearing_EventScript_CalvinAfterBattle:
-	special HealPlayerParty
-	msgbox CranClearing_Text_CalvinAfterBattle1, MSGBOX_DEFAULT
-	closemessage
-	applymovement LOCALID_CALVIN, CranClearing_Movement_CalvinGiveSwift
-	waitmovement 0
-	giveitem ITEM_TM100
-	msgbox CranClearing_Text_CalvinExplainSwift, MSGBOX_DEFAULT
-	closemessage
-	applymovement LOCALID_CALVIN, CranClearing_Movement_CalvinWalkOffscreen
-	waitmovement 0
-	removeobject LOCALID_CALVIN
-	setflag FLAG_FAVORED_CALVIN
-	end
 	
 CranClearing_Text_CalvinAfterBattle1:
 	.string "CALVIN: Dang, you're good.\n"

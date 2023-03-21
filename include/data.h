@@ -73,6 +73,8 @@ struct TrainerMonItemCustomMoves
 #define ITEM_DEFAULT_MOVES_NO_HARD(party) { .ItemDefaultMoves = sParty_##party }, .partySize = ARRAY_COUNT(sParty_##party), .partyFlags = F_TRAINER_PARTY_HELD_ITEM, .hardParty = { .ItemDefaultMoves = sParty_##party }, .hardPartySize = ARRAY_COUNT(sParty_##party), .unfairParty = { .ItemDefaultMoves = sParty_##party }
 #define ITEM_CUSTOM_MOVES_NO_HARD(party) { .ItemCustomMoves = sParty_##party }, .partySize = ARRAY_COUNT(sParty_##party), .partyFlags = F_TRAINER_PARTY_CUSTOM_MOVESET | F_TRAINER_PARTY_HELD_ITEM, .hardParty = { .ItemCustomMoves = sParty_##party }, .hardPartySize = ARRAY_COUNT(sParty_##party), .unfairParty = { .ItemCustomMoves = sParty_##party }
 
+#define ITEM_CUSTOM_MOVES_STARTER_DEPENDENT(party) { .ItemCustomMoves = sParty_##party }, .partySize = ARRAY_COUNT(sParty_##party), .partyFlags = F_TRAINER_PARTY_CUSTOM_MOVESET | F_TRAINER_PARTY_HELD_ITEM | F_TRAINER_STARTER_DEPENDENT, .hardParty = { .ItemCustomMoves = sParty_##party }, .hardPartySize = ARRAY_COUNT(sParty_##party), .unfairParty = { .ItemCustomMoves = sParty_##party }
+
 
 union TrainerMonPtr
 {

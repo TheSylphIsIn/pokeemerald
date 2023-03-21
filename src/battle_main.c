@@ -59,6 +59,7 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 #include "constants/trainers.h"
+#include "constants/opponents.h"
 #include "cable_club.h"
 
 extern const struct BgTemplate gBattleBgTemplates[];
@@ -1987,6 +1988,8 @@ static void SpriteCB_UnusedBattleInit_Main(struct Sprite *sprite)
     }
 }
 
+#include "data/starter_dependent_parties.h"
+
 static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 firstTrainer)
 {
 	/*
@@ -2033,7 +2036,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
             for (j = 0; gTrainers[trainerNum].trainerName[j] != EOS; j++)
                 nameHash += gTrainers[trainerNum].trainerName[j];
 
-            switch (gTrainers[trainerNum].partyFlags)
+            switch (gTrainers[trainerNum].partyFlags & (F_TRAINER_PARTY_CUSTOM_MOVESET | F_TRAINER_PARTY_HELD_ITEM))
             {
             case 0:
             {
@@ -2141,8 +2144,17 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
 					partyData = gTrainers[trainerNum].unfairParty.ItemCustomMoves;
 				else
 					partyData = gTrainers[trainerNum].party.ItemCustomMoves;
-
-                for (j = 0; gSpeciesNames[partyData[i].species][j] != EOS; j++)
+				
+				if (gTrainers[trainerNum].partyFlags & F_TRAINER_STARTER_DEPENDENT)
+				{
+					if (gSaveBlock2Ptr->optionsBattleStyle == OPTIONS_DIFFICULTY_HARD)
+						partyData = sHardStarterDependentParties[VarGet(VAR_STARTER_MON)][VarGet(VAR_STARTER_SET)][trainerNum - FIRST_STARTER_DEPENDENT_INDEX];
+					else if (gSaveBlock2Ptr->optionsBattleStyle == OPTIONS_DIFFICULTY_UNFAIR)
+						partyData = sUnfairStarterDependentParties[VarGet(VAR_STARTER_MON)][VarGet(VAR_STARTER_SET)][trainerNum - FIRST_STARTER_DEPENDENT_INDEX];
+					else 
+						partyData = sStarterDependentParties[VarGet(VAR_STARTER_MON)][VarGet(VAR_STARTER_SET)][trainerNum - FIRST_STARTER_DEPENDENT_INDEX];
+                }
+				for (j = 0; gSpeciesNames[partyData[i].species][j] != EOS; j++)
                     nameHash += gSpeciesNames[partyData[i].species][j];
 
 				level = partyData[i].lvl;

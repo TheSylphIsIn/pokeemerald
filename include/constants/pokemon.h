@@ -291,6 +291,21 @@
 #define BATTLE_ALIVE_ATK_SIDE       1
 #define BATTLE_ALIVE_DEF_SIDE       2
 
+// Miscellaneous constants for Rival mon handling.
+#define STARTER_MON_0 0
+#define STARTER_MON_1 1
+#define STARTER_MON_2 2
+// 0 is weak to 1, 1 is weak to 2, 2 is weak to 0.
+
+#define STARTER_SET_FONEI 0
+#define STARTER_SET_HOENN 1
+#define STARTER_SET_JOHTO 2
+#define STARTER_SET_KANTO 3
+#define STARTER_SET_WACKY 4
+
+#define STARTER_MON_COUNT   3
+#define STARTER_SET_COUNT	5
+
 #define SKIP_FRONT_ANIM (1 << 7)
 
 #endif // GUARD_CONSTANTS_POKEMON_H

@@ -376,5 +376,8 @@
 // Pokémon.
 #define F_TRAINER_PARTY_CUSTOM_MOVESET (1 << 0)
 #define F_TRAINER_PARTY_HELD_ITEM      (1 << 1)
+// Some trainers vary their party depending on which starter the player has. This flags them as such.
+// Parties are in src/data/starter_dependent_parties.h
+#define F_TRAINER_STARTER_DEPENDENT	   (1 << 2)
 
 #endif  // GUARD_TRAINERS_H
