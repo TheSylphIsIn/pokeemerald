@@ -140,26 +140,26 @@ EndlessPlainPetalburg_EventScript_ApriGachaStart::
 	giveitem ITEM_APRICORN
 	goto EndlessPlainPetalburg_EventScript_ApriGachaStart
 	
-EndlessPlainPetalburg_EventScript_GetSupercorn:
+EndlessPlainPetalburg_EventScript_GetSupercorn::
 	giveitem ITEM_SUPERCORN
 	goto EndlessPlainPetalburg_EventScript_ApriGachaStart
 
-EndlessPlainPetalburg_EventScript_DidntPlay:
+EndlessPlainPetalburg_EventScript_DidntPlay::
 	msgbox EndlessPlainPetalburg_Text_NoMore, MSGBOX_DEFAULT
 	release
 	end
 	
-EndlessPlainPetalburg_EventScript_NoMoney:
+EndlessPlainPetalburg_EventScript_NoMoney::
 	msgbox EndlessPlainPetalburg_Text_NoMoney, MSGBOX_DEFAULT
 	release
 	end
 	
-EndlessPlainPetalburg_EventScript_NoRoom:
+EndlessPlainPetalburg_EventScript_NoRoom::
 	msgbox EndlessPlainPetalburg_Text_NoRoom, MSGBOX_DEFAULT
 	release
 	end
 	
-EndlessPlainPetalburg_Text_ExplainAprigacha:
+EndlessPlainPetalburg_Text_ExplainAprigacha::
 	.string "This is an APRIGACHA machine.\n"
 	.string "It costs ¥100 to play.\p"
 	.string "Put the money in, turn the crank,\n"
@@ -168,22 +168,22 @@ EndlessPlainPetalburg_Text_ExplainAprigacha:
 	.string "RATES:\n"
 	.string "APRICORN: 90%, SUPERCORN: 10%.$"
 	
-EndlessPlainPetalburg_Text_PromptAprigacha:
+EndlessPlainPetalburg_Text_PromptAprigacha::
 	.string "Play the APRIGACHA?$"
 	
-EndlessPlainPetalburg_Text_GachaActivate:
+EndlessPlainPetalburg_Text_GachaActivate::
 	.string "Turned the crank…\n"
 	.string "K-chunk! Something fell out!$"
 	
-EndlessPlainPetalburg_Text_NoMore:
+EndlessPlainPetalburg_Text_NoMore::
 	.string "I don't want to develop a\n"
 	.string "gambling addiction.$"
 	
-EndlessPlainPetalburg_Text_NoMoney:
+EndlessPlainPetalburg_Text_NoMoney::
 	.string "You can't play because you're\n"
 	.string "broke.$"
 	
-EndlessPlainPetalburg_Text_NoRoom:
+EndlessPlainPetalburg_Text_NoRoom::
 	.string "You can't play because your bag\n"
 	.string "might not have room for the result.$"
 

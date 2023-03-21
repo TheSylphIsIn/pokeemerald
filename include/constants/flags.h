@@ -738,7 +738,7 @@
 #define FLAG_UNUSED_0x2B8  0x2B8 // Unused Flag
 #define FLAG_UNUSED_0x2B9  0x2B9 // Unused Flag
 #define FLAG_UNUSED_0x2BA  0x2BA // Unused Flag
-#define FLAG_UNUSED_0x2BB  0x2BB // Unused Flag
+#define FLAG_RUSTBORO_HIKER_CORPSE  0x2BB // Unused Flag
 
 // Event Flags
 #define FLAG_HIDE_OLDALE_TOWN_BIRCH                      0x2BC
@@ -774,8 +774,8 @@
 #define FLAG_UNUSED_0x2D9                                           0x2D9 // Unused Flag
 
 #define FLAG_HIDE_LILYCOVE_FAN_CLUB_INTERVIEWER                     0x2DA
-#define FLAG_HIDE_RUSTBORO_CITY_AQUA_GRUNT                          0x2DB
-#define FLAG_HIDE_RUSTBORO_CITY_DEVON_EMPLOYEE_1                    0x2DC
+#define FLAG_SAW_GLEIS_EVENT_1                          0x2DB
+#define FLAG_STARTED_ZOMBIE_PIT_EVENT                   0x2DC
 #define FLAG_HIDE_SEAFLOOR_CAVERN_ROOM_9_KYOGRE_ASLEEP              0x2DD
 #define FLAG_HIDE_PLAYERS_HOUSE_DAD                                 0x2DE
 #define FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_SIBLING      0x2DF
@@ -857,7 +857,7 @@
 #define FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_POKEBALL_CYNDAQUIL     0x32B
 #define FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_POKEBALL_TOTODILE      0x32C
 #define FLAG_HIDE_ROUTE_116_DROPPED_GLASSES_MAN                     0x32D
-#define FLAG_HIDE_RUSTBORO_CITY_RIVAL                               0x32E
+#define FLAG_FINISHED_ZOMBIE_PIT_EVENT                               0x32E
 #define FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F_SWABLU_DOLL     0x32F
 #define FLAG_HIDE_SOOTOPOLIS_CITY_WALLACE                           0x330
 #define FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F_POKE_BALL       0x331
@@ -887,7 +887,7 @@
 #define FLAG_HIDE_SLATEPORT_CITY_HARBOR_CAPTAIN_STERN               0x349
 #define FLAG_HIDE_BATTLE_FRONTIER_SUDOWOODO                         0x34A
 #define FLAG_HIDE_ROUTE_111_ROCK_SMASH_TIP_GUY                      0x34B
-#define FLAG_HIDE_RUSTBORO_CITY_SCIENTIST                           0x34C
+#define FLAG_HIDE_GLEIS_RUSTBORO                           0x34C
 #define FLAG_HIDE_SLATEPORT_CITY_HARBOR_AQUA_GRUNT                  0x34D
 #define FLAG_HIDE_SLATEPORT_CITY_HARBOR_ARCHIE                      0x34E
 #define FLAG_HIDE_JAGGED_PASS_MAGMA_GUARD                           0x34F

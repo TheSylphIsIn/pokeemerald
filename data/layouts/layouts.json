@@ -4430,6 +4430,16 @@
       "secondary_tileset": "gTileset_Lavaridge",
       "border_filepath": "data/layouts/ActualHell/border.bin",
       "blockdata_filepath": "data/layouts/ActualHell/map.bin"
+    },
+    {
+      "id": "LAYOUT_ENDLESS_PLAIN_RUSTBORO",
+      "name": "EndlessPlainRustboro_Layout",
+      "width": 14,
+      "height": 7,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_Shop",
+      "border_filepath": "data/layouts/EndlessPlainRustboro/border.bin",
+      "blockdata_filepath": "data/layouts/EndlessPlainRustboro/map.bin"
     }
   ]
 }

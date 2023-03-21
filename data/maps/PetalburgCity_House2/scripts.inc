@@ -23,7 +23,7 @@ PetalburgCity_House2_EventScript_End:
 
 PetalburgCity_House2_EventScript_SchoolKid::
 	lock
-	goto_if_eq VAR_POTION_CRATE_PETALBURG_TAKEN, 5, PetalburgCity_House2_EventScript_CrateEmpty
+	goto_if_ge VAR_POTION_CRATE_PETALBURG_TAKEN, 5, PetalburgCity_House2_EventScript_CrateEmpty
 	msgbox PetalburgCity_House2_Text_BattledNormanOnce, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, PetalburgCity_House2_EventScript_DidntTake
 	giveitem ITEM_POTION
@@ -31,12 +31,12 @@ PetalburgCity_House2_EventScript_SchoolKid::
 	release
 	end
 	
-PetalburgCity_House2_EventScript_DidntTake:
+PetalburgCity_House2_EventScript_DidntTake::
 	msgbox PetalburgCity_House2_Text_LeftCrateAlone, MSGBOX_DEFAULT
 	release
 	end
 
-PetalburgCity_House2_EventScript_CrateEmpty:
+PetalburgCity_House2_EventScript_CrateEmpty::
 	msgbox PetalburgCity_House2_Text_CrateEmpty, MSGBOX_DEFAULT
 	release
 	end
@@ -54,15 +54,15 @@ PetalburgCity_House2_Text_DidntLoot:
 	.string "Yeah, that would just be horrible,\n"
 	.string "wouldn't it?$"
 
-PetalburgCity_House2_Text_BattledNormanOnce:
+PetalburgCity_House2_Text_BattledNormanOnce::
 	.string "There's a SUPPLY CRATE here.\n"
 	.string "It contains POTIONs. Take one?$"
 	
-PetalburgCity_House2_Text_LeftCrateAlone:
+PetalburgCity_House2_Text_LeftCrateAlone::
 	.string "You've heard the one about the\n"
 	.string "crate labeled POTIONS full of guts.$"
 	
-PetalburgCity_House2_Text_CrateEmpty:
+PetalburgCity_House2_Text_CrateEmpty::
 	.string "The crate is completely empty.\n"
 	.string "You greedy dirtbag.$"
 

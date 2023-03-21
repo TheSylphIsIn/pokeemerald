@@ -1059,3 +1059,5 @@ Common_EventScript_LegendaryFlewAway::
 	.include "data/maps/EndlessPlainPetalburg/scripts.inc"
 
 	.include "data/maps/ActualHell/scripts.inc"
+
+	.include "data/maps/EndlessPlainRustboro/scripts.inc"

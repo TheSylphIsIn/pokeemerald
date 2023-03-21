@@ -96,6 +96,7 @@ PetalburgCity_EventScript_Medkit::
 	fadescreen FADE_TO_BLACK
 	special HealPlayerParty
 	playse SE_USE_ITEM
+	setrespawn HEAL_LOCATION_PETALBURG_CITY
 	waitse
 	removeobject VAR_LAST_TALKED
 	fadescreen FADE_FROM_BLACK

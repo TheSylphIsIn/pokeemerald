@@ -1,0 +1,329 @@
+{
+  "id": "MAP_ENDLESS_PLAIN_RUSTBORO",
+  "name": "EndlessPlainRustboro",
+  "layout": "LAYOUT_ENDLESS_PLAIN_RUSTBORO",
+  "music": "MUS_FORTREE",
+  "region_map_section": "MAPSEC_SOUTHERN_ISLAND",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": false,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": 0,
+  "object_events": [
+    {
+      "graphics_id": "OBJ_EVENT_GFX_RICH_BOY",
+      "x": 10,
+      "y": 4,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_WANDER_DOWN_AND_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EndlessPlainRustboro_EventScript_RichBoy",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_SCHOOL_KID_M",
+      "x": 6,
+      "y": 1,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EndlessPlainRustboro_EventScript_Larry",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_GIRL_3",
+      "x": 2,
+      "y": 5,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT",
+      "movement_range_x": 1,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EndlessPlainRustboro_EventScript_Girl",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_PIKACHU",
+      "x": 8,
+      "y": 1,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EndlessPlainRustboro_EventScript_Healmadio",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 6,
+      "y": 6,
+      "elevation": 0,
+      "dest_map": "MAP_RUSTBORO_CITY",
+      "dest_warp_id": "6"
+    },
+    {
+      "x": 7,
+      "y": 6,
+      "elevation": 0,
+      "dest_map": "MAP_RUSTBORO_CITY",
+      "dest_warp_id": "6"
+    }
+  ],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 2,
+      "y": 1,
+      "elevation": 0,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "EndlessPlainPetalburg_EventScript_BarrierTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 0,
+      "y": 2,
+      "elevation": 0,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "EndlessPlainPetalburg_EventScript_BarrierTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 0,
+      "y": 3,
+      "elevation": 0,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "EndlessPlainPetalburg_EventScript_BarrierTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 0,
+      "y": 4,
+      "elevation": 0,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "EndlessPlainPetalburg_EventScript_BarrierTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 0,
+      "y": 5,
+      "elevation": 0,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "EndlessPlainPetalburg_EventScript_BarrierTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 1,
+      "y": 6,
+      "elevation": 0,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "EndlessPlainPetalburg_EventScript_BarrierTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 2,
+      "y": 6,
+      "elevation": 0,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "EndlessPlainPetalburg_EventScript_BarrierTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 3,
+      "y": 6,
+      "elevation": 0,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "EndlessPlainPetalburg_EventScript_BarrierTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 4,
+      "y": 6,
+      "elevation": 0,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "EndlessPlainPetalburg_EventScript_BarrierTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 5,
+      "y": 6,
+      "elevation": 0,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "EndlessPlainPetalburg_EventScript_BarrierTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 8,
+      "y": 6,
+      "elevation": 0,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "EndlessPlainPetalburg_EventScript_BarrierTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 9,
+      "y": 6,
+      "elevation": 0,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "EndlessPlainPetalburg_EventScript_BarrierTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 6,
+      "elevation": 0,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "EndlessPlainPetalburg_EventScript_BarrierTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 11,
+      "y": 6,
+      "elevation": 0,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "EndlessPlainPetalburg_EventScript_BarrierTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 12,
+      "y": 6,
+      "elevation": 0,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "EndlessPlainPetalburg_EventScript_BarrierTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 5,
+      "elevation": 0,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "EndlessPlainPetalburg_EventScript_BarrierTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 4,
+      "elevation": 0,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "EndlessPlainPetalburg_EventScript_BarrierTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 3,
+      "elevation": 0,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "EndlessPlainPetalburg_EventScript_BarrierTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 2,
+      "elevation": 0,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "EndlessPlainPetalburg_EventScript_BarrierTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 11,
+      "y": 0,
+      "elevation": 0,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "EndlessPlainPetalburg_EventScript_BarrierTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 9,
+      "y": 0,
+      "elevation": 0,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "EndlessPlainPetalburg_EventScript_BarrierTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 7,
+      "y": 0,
+      "elevation": 0,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "EndlessPlainPetalburg_EventScript_BarrierTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 5,
+      "y": 0,
+      "elevation": 0,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "EndlessPlainPetalburg_EventScript_BarrierTrigger"
+    }
+  ],
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 3,
+      "y": 1,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "EndlessPlainPetalburg_EventScript_GoodiesShelf"
+    },
+    {
+      "type": "sign",
+      "x": 4,
+      "y": 1,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "EndlessPlainPetalburg_EventScript_GoodiesShelf"
+    },
+    {
+      "type": "sign",
+      "x": 10,
+      "y": 1,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Blender_EventScript_CheckBlender"
+    },
+    {
+      "type": "sign",
+      "x": 12,
+      "y": 1,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "EndlessPlainRustboro_EventScript_ApriGacha"
+    }
+  ]
+}

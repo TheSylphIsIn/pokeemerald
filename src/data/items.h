@@ -3439,7 +3439,7 @@ const struct Item gItems[] =
 
     [ITEM_ROOM_1_KEY] =
     {
-        .name = _("RM. 1 KEY"),
+        .name = _("APT. KEY"),
         .itemId = ITEM_ROOM_1_KEY,
         .price = 0,
         .description = sRoom1KeyDesc,

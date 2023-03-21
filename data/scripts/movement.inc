@@ -140,6 +140,7 @@ Common_ZombieCrumble::
 	applymovement VAR_LAST_TALKED, Common_Movement_CrumbleToDust
 	waitmovement 0
 	removeobject VAR_LAST_TALKED
+	waitbuttonpress
 	return
 	
 Common_LootCorpse::
@@ -153,6 +154,8 @@ Common_DemonCrumble::
 	applymovement VAR_LAST_TALKED, Common_Movement_CrumbleToDust
 	waitmovement 0
 	removeobject VAR_LAST_TALKED
+	waitmessage
+	waitbuttonpress
 	return
 	
 Common_Movement_CrumbleToDust::
