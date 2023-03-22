@@ -6010,4 +6010,26 @@ static const u16 sKetsubanLevelUpLearnset[] = {
 	LEVEL_UP_END
 };
 
+static const u16 sDisabyLevelUpLearnset[] = {
+	LEVEL_UP_MOVE( 1, MOVE_DAZZLE),
+	LEVEL_UP_END
+};
+
+static const u16 sDisaspriteLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sDismasterLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sPuridianLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sManipuloLevelUpLearnset[] = {
+	LEVEL_UP_MOVE( 1, MOVE_HYPNOSIS),
+	LEVEL_UP_END
+};
+
 

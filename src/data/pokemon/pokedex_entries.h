@@ -5400,6 +5400,67 @@ const struct PokedexEntry gPokedexEntries[] =
 		.trainerOffset = 0,
 	},
 	
+	[NATIONAL_DEX_DISABY] =
+	{
+		.categoryName = _("FAIRY"),
+		.height = 1,
+		.weight = 1,
+		.description = gDisabyPokedexText,
+		.pokemonScale = 256,
+		.pokemonOffset = 0,
+		.trainerScale = 256,
+		.trainerOffset = 0,
+	},
+
+	[NATIONAL_DEX_DISASPRITE] =
+	{
+		.categoryName = _(""),
+		.height = 1,
+		.weight = 1,
+		.description = gDisaspritePokedexText,
+		.pokemonScale = 256,
+		.pokemonOffset = 0,
+		.trainerScale = 256,
+		.trainerOffset = 0,
+	},
+
+	[NATIONAL_DEX_DISMASTER] =
+	{
+		.categoryName = _(""),
+		.height = 1,
+		.weight = 1,
+		.description = gDismasterPokedexText,
+		.pokemonScale = 256,
+		.pokemonOffset = 0,
+		.trainerScale = 256,
+		.trainerOffset = 0,
+	},
+
+	[NATIONAL_DEX_PURIDIAN] =
+	{
+		.categoryName = _(""),
+		.height = 1,
+		.weight = 1,
+		.description = gPuridianPokedexText,
+		.pokemonScale = 256,
+		.pokemonOffset = 0,
+		.trainerScale = 256,
+		.trainerOffset = 0,
+	},
+
+	[NATIONAL_DEX_MANIPULO] =
+	{
+		.categoryName = _("HYPNOSIS"),
+		.height = 1,
+		.weight = 1,
+		.description = gManipuloPokedexText,
+		.pokemonScale = 256,
+		.pokemonOffset = 0,
+		.trainerScale = 256,
+		.trainerOffset = 0,
+	},
+
+	
 	/*
 	[NATIONAL_DEX_SPCS] = 
 	{

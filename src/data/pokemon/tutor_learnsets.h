@@ -5877,6 +5877,16 @@ static const u32 sTutorLearnsets[] =
 
 	[SPECIES_KETSUBAN] = (0),
 	
+	[SPECIES_DISABY] = (0),
+
+	[SPECIES_DISASPRITE] = (0),
+
+	[SPECIES_DISMASTER] = (0),
+
+	[SPECIES_PURIDIAN] = (0),
+
+	[SPECIES_MANIPULO] = (0),
+	
 	// [SPECIES_SPCS] = (0),
 	
 	[SPECIES_CASTFORM_SUNNY] = (0),

@@ -451,6 +451,11 @@ gCryTable::
 	cry Cry_Krakodemon
 	cry Cry_Weatherbane
 	cry Cry_Ketsuban
+	cry Cry_Disaby
+	cry Cry_Disasprite
+	cry Cry_Dismaster
+	cry Cry_Puridian
+	cry Cry_Manipulo
 
 	// cry Cry_Spcs
 	.align 2
@@ -906,5 +911,10 @@ gCryTable_Reverse::
 	cry_reverse Cry_Krakodemon
 	cry_reverse Cry_Weatherbane
 	cry_reverse Cry_Ketsuban
+	cry_reverse Cry_Disaby
+	cry_reverse Cry_Disasprite
+	cry_reverse Cry_Dismaster
+	cry_reverse Cry_Puridian
+	cry_reverse Cry_Manipulo
 
 	// cry_reverse Cry_Spcs

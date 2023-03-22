@@ -2189,6 +2189,26 @@ Cry_Weatherbane::
 	.align 2
 Cry_Ketsuban::
 	.incbin "sound/direct_sound_samples/cries/unown.bin"
+
+	.align 2
+Cry_Disaby::
+	.incbin "sound/direct_sound_samples/cries/unown.bin"
+
+	.align 2
+Cry_Disasprite::
+	.incbin "sound/direct_sound_samples/cries/unown.bin"
+
+	.align 2
+Cry_Dismaster::
+	.incbin "sound/direct_sound_samples/cries/unown.bin"
+
+	.align 2
+Cry_Puridian::
+	.incbin "sound/direct_sound_samples/cries/unown.bin"
+
+	.align 2
+Cry_Manipulo::
+	.incbin "sound/direct_sound_samples/cries/hypno.bin"
 	
 // Cry_Spcs::
 // 	.incbin "sound/direct_sound_samples/cries/abra.bin"

@@ -460,6 +460,11 @@ const u32 gMonFrontPic_Krissy[] = INCBIN_U32("graphics/pokemon/krissy/anim_front
 const u32 gMonFrontPic_Krakodemon[] = INCBIN_U32("graphics/pokemon/krakodemon/anim_front.4bpp.lz");
 const u32 gMonFrontPic_Weatherbane[] = INCBIN_U32("graphics/pokemon/weatherbane/anim_front.4bpp.lz");
 const u32 gMonFrontPic_Ketsuban[] = INCBIN_U32("graphics/pokemon/0xb-ketsu/anim_front.4bpp.lz");
+const u32 gMonFrontPic_Disaby[] = INCBIN_U32("graphics/pokemon/disaby/anim_front.4bpp.lz");
+const u32 gMonFrontPic_Disasprite[] = INCBIN_U32("graphics/pokemon/disasprite/anim_front.4bpp.lz");
+const u32 gMonFrontPic_Dismaster[] = INCBIN_U32("graphics/pokemon/dismaster/anim_front.4bpp.lz");
+const u32 gMonFrontPic_Puridian[] = INCBIN_U32("graphics/pokemon/puridian/anim_front.4bpp.lz");
+const u32 gMonFrontPic_Manipulo[] = INCBIN_U32("graphics/pokemon/manipulo/anim_front.4bpp.lz");
 
 // const u32 gMonFrontPic_Spcs[] = INCBIN_U32("graphics/pokemon/spcs/anim_front.4bpp.lz");
 

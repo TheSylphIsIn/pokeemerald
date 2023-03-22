@@ -2585,4 +2585,9 @@ const u8 gKrakodemonPokedexText[] = _("");
 const u8 gWeatherbanePokedexText[] = _("");
 const u8 gKetsubanPokedexText[] = _("");
 
+const u8 gDisabyPokedexText[] = _("");
+const u8 gDisaspritePokedexText[] = _("");
+const u8 gDismasterPokedexText[] = _("");
+const u8 gPuridianPokedexText[] = _("");
+const u8 gManipuloPokedexText[] = _("");
 

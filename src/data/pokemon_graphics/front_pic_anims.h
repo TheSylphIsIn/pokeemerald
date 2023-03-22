@@ -4992,6 +4992,41 @@ static const union AnimCmd sAnim_KETSUBAN_1[] =
 	ANIMCMD_END
 };
 
+static const union AnimCmd sAnim_DISABY_1[] =
+{
+	ANIMCMD_FRAME(0, 10),
+	ANIMCMD_FRAME(1, 60),
+	ANIMCMD_FRAME(0, 30),
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_DISASPRITE_1[] =
+{
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_DISMASTER_1[] =
+{
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_PURIDIAN_1[] =
+{
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_MANIPULO_1[] =
+{
+	ANIMCMD_FRAME(0, 15),
+    ANIMCMD_FRAME(1, 15),
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_FRAME(1, 15),
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_FRAME(1, 15),
+    ANIMCMD_FRAME(0, 15),
+	ANIMCMD_END
+};
+
 // static const union AnimCmd sAnim_SPCS_1[] = 
 // {
 	// ANIMCMD_END
@@ -7547,6 +7582,31 @@ static const union AnimCmd *const sAnims_KETSUBAN[] ={
 	sAnim_KETSUBAN_1,
 };
 
+static const union AnimCmd *const sAnims_DISABY[] ={
+	sAnim_GeneralFrame0,
+	sAnim_DISABY_1,
+};
+
+static const union AnimCmd *const sAnims_DISASPRITE[] ={
+	sAnim_GeneralFrame0,
+	sAnim_DISASPRITE_1,
+};
+
+static const union AnimCmd *const sAnims_DISMASTER[] ={
+	sAnim_GeneralFrame0,
+	sAnim_DISMASTER_1,
+};
+
+static const union AnimCmd *const sAnims_PURIDIAN[] ={
+	sAnim_GeneralFrame0,
+	sAnim_PURIDIAN_1,
+};
+
+static const union AnimCmd *const sAnims_MANIPULO[] ={
+	sAnim_GeneralFrame0,
+	sAnim_MANIPULO_1,
+};
+
 // static const union AnimCmd *const sAnims_SPCS[] ={
 	// sAnim_GeneralFrame0,
 	// sAnim_SPCS_1,
@@ -8174,6 +8234,11 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[] =
 	ANIM_CMD(KRAKODEMON),
 	ANIM_CMD(WEATHERBANE),
 	ANIM_CMD(KETSUBAN),
+	ANIM_CMD(DISABY),
+	ANIM_CMD(DISASPRITE),
+	ANIM_CMD(DISMASTER),
+	ANIM_CMD(PURIDIAN),
+	ANIM_CMD(MANIPULO),
 
 	// ANIM_CMD(SPCS),
 	[SPECIES_CASTFORM_SUNNY] = sAnims_CASTFORM,
