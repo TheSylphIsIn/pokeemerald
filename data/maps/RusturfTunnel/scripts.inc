@@ -1,27 +1,11 @@
 .equ LOCALID_WANDAS_BF, 1
 .set LOCALID_BRINEY, 5
-.set LOCALID_GRUNT, 6
-.set LOCALID_PEEKO, 7
+.set LOCALID_GLEIS, 5
+.set LOCALID_ELISE, 6
 .equ LOCALID_WANDA, 10
 
 RusturfTunnel_MapScripts::
-	map_script MAP_SCRIPT_ON_TRANSITION, RusturfTunnel_OnTransition
-	map_script MAP_SCRIPT_ON_FRAME_TABLE, RusturfTunnel_OnFrame
 	.byte 0
-
-RusturfTunnel_OnFrame:
-	map_script_2 VAR_RUSTURF_TUNNEL_STATE, 4, RusturfTunnel_EventScript_ClearTunnelScene
-	map_script_2 VAR_RUSTURF_TUNNEL_STATE, 5, RusturfTunnel_EventScript_ClearTunnelScene
-	.2byte 0
-
-RusturfTunnel_OnTransition:
-	call_if_eq VAR_RUSTURF_TUNNEL_STATE, 2, RusturfTunnel_EventScript_SetAquaGruntAndPeekoPos
-	end
-
-RusturfTunnel_EventScript_SetAquaGruntAndPeekoPos::
-	setobjectxyperm LOCALID_PEEKO, 13, 4
-	setobjectxyperm LOCALID_GRUNT, 13, 5
-	return
 
 RusturfTunnel_EventScript_Wanda::
 	lock
@@ -32,6 +16,276 @@ RusturfTunnel_EventScript_Wanda::
 	waitmovement 0
 	release
 	end
+
+RusturfTunnel_Trigger_Gleis::
+	lockall
+	playse SE_PIN
+	applymovement LOCALID_GLEIS, Common_Movement_FaceLeft
+	waitmovement 0
+	applymovement LOCALID_GLEIS, Common_Movement_ExclamationMark
+	waitmovement 0
+	applymovement LOCALID_GLEIS, Common_Movement_Delay48
+	waitmovement 0
+	msgbox RusturfTunnel_Text_GleisCallOut, MSGBOX_AUTOCLOSE
+	applymovement OBJ_EVENT_ID_PLAYER, RusturfTunnel_Movement_PlayerApproachGleis
+	waitmovement 0
+	msgbox RusturfTunnel_Text_TriggerExposition, MSGBOX_DEFAULT
+	closemessage
+	applymovement LOCALID_GLEIS, Common_Movement_FaceUp
+	waitmovement 0
+	setvar VAR_RUSTURF_TUNNEL_STATE, 1
+	releaseall
+	end
+
+RusturfTunnel_Text_GleisCallOut:
+	.string "{COLOR RED}{SHADOW LIGHT_RED}GLEIS: {PLAYER}. You made it.\n"
+	.string "Come closer.$"
+
+RusturfTunnel_Text_TriggerExposition:
+	.string "{PLAYER}: Who's this girl?\p"
+	.string "{COLOR RED}{SHADOW LIGHT_RED}GLEIS: She is the portal. Demonic\n"
+	.string "energy is being channeled through\l"
+	.string "her body to connect the world of the\l"
+	.string "living to the netherworld.\p"
+	.string "Normally, my powers of the TAO would\n"
+	.string "allow me to seal it from here, but…\p"
+	.string "GLEIS: Some strange power is forcing\n"
+	.string "the portal to stay open. I believe\l"
+	.string "there must be some powerful artefact\l"
+	.string "in the netherworld causing this.\p"
+	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}{PLAYER}: Some kind of soul portal\n"
+	.string "artefect? So what do we do?\p"
+	.string "{COLOR RED}{SHADOW LIGHT_RED}GLEIS: I have a plan involving you.\p"
+	.string "I will use the portal to send you in\n"
+	.string "to the netherworld so that you may\l"
+	.string "destroy the artefact.\p"
+	.string "Once its power is broken, I will\n"
+	.string "extract you and close the portal.\p"
+	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}{PLAYER}: …you're gonna send me to hell?\p"
+	.string "That sounds extremely dangerous.\p"
+	.string "{COLOR RED}{SHADOW LIGHT_RED}GLEIS: Well, it's our best shot. I\n"
+	.string "can't send DANTALION. My control\l"
+	.string "would be broken if he returned there.\p"
+	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}{PLAYER}: I guess I'll give it a shot.\p"
+	.string "{COLOR RED}{SHADOW LIGHT_RED}GLEIS: If you have any more questions,\n"
+	.string "I will answer them best I can.\p"
+	.string "Note well that you will not be able\n"
+	.string "to access your PC while there.\l"
+	.string "Do not go in unprepared.\p"
+	.string "When you're ready, stand before the\n"
+	.string "conduit and place your hand upon her.$"
+
+RusturfTunnel_Movement_PlayerApproachGleis:
+	walk_right
+	walk_right
+	walk_right
+	step_end
+
+RusturfTunnel_EventScript_Gleis::
+	lock
+	faceplayer
+	message RusturfTunnel_Text_GleisQuestionPrompt
+	waitmessage
+	dynmultichoice 0, 0, TRUE, 4, 0, DYN_MULTICHOICE_CB_NONE, RusturfTunnel_Text_AskDemons, RusturfTunnel_Text_AskTao, RusturfTunnel_Text_AskFaceleech, RusturfTunnel_Text_AskLandon
+	goto_if_eq VAR_RESULT, 0, RusturfTunnel_EventScript_DemonsScript
+	goto_if_eq VAR_RESULT, 1, RusturfTunnel_EventScript_TaoScript
+	goto_if_eq VAR_RESULT, 2, RusturfTunnel_EventScript_FaceleechScript
+	goto_if_eq VAR_RESULT, 3, RusturfTunnel_EventScript_LandonScript
+	goto RusturfTunnel_EventScript_NoQuestions
+
+RusturfTunnel_EventScript_NoQuestions:
+	msgbox RusturfTunnel_Text_NoQuestions, MSGBOX_DEFAULT
+	release
+	applymovement LOCALID_GLEIS, Common_Movement_FaceOriginalDirection
+	end
+
+RusturfTunnel_EventScript_DemonsScript:
+	msgbox RusturfTunnel_Text_AskedDemons, MSGBOX_DEFAULT
+	release
+	applymovement LOCALID_GLEIS, Common_Movement_FaceOriginalDirection
+	end
+
+RusturfTunnel_EventScript_TaoScript:
+	msgbox RusturfTunnel_Text_AskedTao, MSGBOX_DEFAULT
+	release
+	applymovement LOCALID_GLEIS, Common_Movement_FaceOriginalDirection
+	end
+
+RusturfTunnel_EventScript_FaceleechScript:
+	msgbox RusturfTunnel_Text_AskedFaceleech, MSGBOX_DEFAULT
+	goto_if_set FLAG_BORROWED_FACELEECH, RusturfTunnel_EventScript_End
+	getpartysize
+	goto_if_eq VAR_RESULT, PARTY_SIZE, RusturfTunnel_EventScript_End
+	msgbox RusturfTunnel_Text_BorrowFaceleech, MSGBOX_DEFAULT
+	playfanfare MUS_OBTAIN_ITEM
+	message RusturfTunnel_Text_BorrowedFaceleech
+	waitfanfare
+	waitbuttonpress
+	givemon SPECIES_FACELEECH, 20, 0, 0, SPECIES_FACELEECH, 1
+	msgbox RusturfTunnel_Text_FaceleechEnd, MSGBOX_DEFAULT
+	closemessage
+	setflag FLAG_BORROWED_FACELEECH
+	release
+	applymovement LOCALID_GLEIS, Common_Movement_FaceOriginalDirection
+	end
+
+RusturfTunnel_EventScript_End:
+	release
+	applymovement LOCALID_GLEIS, Common_Movement_FaceOriginalDirection
+	end
+
+RusturfTunnel_EventScript_LandonScript:
+	msgbox RusturfTunnel_Text_AskedLandon, MSGBOX_DEFAULT
+	release
+	applymovement LOCALID_GLEIS, Common_Movement_FaceOriginalDirection
+	end
+
+RusturfTunnel_Text_GleisQuestionPrompt:
+	.string "{COLOR RED}{SHADOW LIGHT_RED}GLEIS: Do you have something to ask\n"
+	.string "me about?$"
+
+RusturfTunnel_Text_AskDemons:
+	.string "DEMONS$"
+
+RusturfTunnel_Text_AskTao:
+	.string "TAOISM$"
+
+RusturfTunnel_Text_AskFaceleech:
+	.string "FACELEECH$"
+
+RusturfTunnel_Text_AskLandon:
+	.string "LANDON$"
+
+RusturfTunnel_Text_AskNone:
+	.string "Nope.$"
+
+RusturfTunnel_Text_NoQuestions:
+	.string "{COLOR RED}{SHADOW LIGHT_RED}GLEIS: Then stop wasting time. We\n"
+	.string "can't linger here any longer than\l"
+	.string "absolutely necessary.$"
+
+RusturfTunnel_Text_AskedDemons:
+	.string "{PLAYER}: How am I supposed to\n"
+	.string "survive against the demons? Won't\l"
+	.string "they try to kill me?\p"
+	.string "{COLOR RED}{SHADOW LIGHT_RED}GLEIS: Well, you see…you'll be fine,\n"
+	.string "for the same reason there are still\l"
+	.string "living people in this region.\p"
+	.string "POKéMON are more powerful than the\n"
+	.string "monsters. That's why they must use\l"
+	.string "zombified POKéMON to fight.\p"
+	.string "As long as you can win in a POKéMON\n"
+	.string "battle, no harm will come to you.\p"
+	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}{PLAYER}: But what about the fire\n"
+	.string "and stuff? It is hell, after all…\p"
+	.string "{COLOR RED}{SHADOW LIGHT_RED}GLEIS: I will use some of my power\n"
+	.string "to shield you from here. Understood?\p"
+	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}{PLAYER}: Okay, fine.$"
+
+RusturfTunnel_Text_AskedTao:
+	.string "{PLAYER}: You're a TAOIST, right? What\n"
+	.string "does that really mean?\p"
+	.string "{COLOR RED}{SHADOW LIGHT_RED}GLEIS: Well, I have some power over\n"
+	.string "things which are mystical in nature.\p"
+	.string "I can dominate the feeble minds of\n"
+	.string "the undead, and I know other spells\l"
+	.string "as well. Invisibility, portals…\p"
+	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}{PLAYER}: Okay, but Taoism is a real\n"
+	.string "thing, isn't it? A philosophy, or…\p"
+	.string "I dunno exactly, but why does the Tao\n"
+	.string "give you magic powers?\p"
+	.string "{COLOR RED}{SHADOW LIGHT_RED}GLEIS: It…{PAUSE 60}\n"
+	.string "well, I…\p"
+	.string "GLEIS: Look, it's not important. We\n"
+	.string "must focus on sealing this portal.$"
+
+RusturfTunnel_Text_AskedFaceleech:
+	.string "{PLAYER}: What's that…thing you used\n"
+	.string "when you battled me?\l"
+	.string "I've never seen a POKéMON like that.\p"
+	.string "{COLOR RED}{SHADOW LIGHT_RED}GLEIS: I'm sure you haven't.\p"
+	.string "FACELEECH is a creature made from my\n"
+	.string "own power. You see…\p"
+	.string "I chanced across a strange POKéMON\n"
+	.string "one day. It was gravely damaged.\p"
+	.string "I revitalized it with my powers, and\n"
+	.string "it morphed into the form of FACELEECH.$"
+
+RusturfTunnel_Text_BorrowFaceleech:
+	.string "{PLAYER}: Well…since I'm going to be\n"
+	.string "doing all the fighting while you\l"
+	.string "hang around up here…\p"
+	.string "Could I borrow FACELEECH?\p"
+	.string "{COLOR RED}{SHADOW LIGHT_RED}GLEIS: What?{PAUSE 20}\n"
+	.string "You're…{PAUSE 10}audacious. Why should I?\l"
+	.string "FACELEECH is my creation.\p"
+	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}{PLAYER}: Well, I'm still a noob.\n"
+	.string "And I saw what that thing can do to\l"
+	.string "these monsters. Just look outside.\p"
+	.string "It's our best shot at success, isn't\n"
+	.string "it?\p"
+	.string "{COLOR RED}{SHADOW LIGHT_RED}GLEIS: … … … … …\n"
+	.string "I suppose you're right. Fine, here.$"
+
+RusturfTunnel_Text_BorrowedFaceleech:
+	.string "{PLAYER} borrowed the FACELEECH\n"
+	.string "from GLEIS!$"
+
+RusturfTunnel_Text_FaceleechEnd:
+	.string "{COLOR RED}{SHADOW LIGHT_RED}GLEIS: I'll be taking that back if…{PAUSE 45}\n"
+	.string "that is, WHEN you return.\l"
+	.string "Don't get too attached.$"
+
+RusturfTunnel_Text_AskedLandon:
+	.string "{PLAYER}: I'm looking for someone.\n"
+	.string "Have you seen him around recently?\l"
+	.string "His name's LANDON.\p"
+	.string "{COLOR RED}{SHADOW LIGHT_RED}GLEIS: What does he look like?\p"
+	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}{PLAYER}: … {PAUSE 10}… {PAUSE 10}… {PAUSE 10}… {PAUSE 10}…\n"
+	.string "I have no damned idea.\p"
+	.string "But he's the CHAMPION of HOENN.\n"
+	.string "He's famous. Surely you know?\p"
+	.string "{COLOR RED}{SHADOW LIGHT_RED}GLEIS: Hmm…I don't make a habit of\n"
+	.string "following celebrity gossip.\p"
+	.string "I may recall something about the\n"
+	.string "CHAMPION, but we need to focus on\l"
+	.string "the task at hand. Ask me afterward.$"
+
+RusturfTunnel_EventScript_Elise::
+	lock
+	msgbox RusturfTunnel_Text_ReadyToGo, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, RusturfTunnel_EventScript_NoQuestions
+	msgbox RusturfTunnel_Text_PreFlashback, MSGBOX_DEFAULT
+	fadescreen FADE_TO_WHITE
+	delay 10
+	fadescreen FADE_FROM_WHITE
+	msgbox RusturfTunnel_Text_PostFlashback, MSGBOX_DEFAULT
+	closemessage
+	playse SE_WARP_IN
+	waitse
+	warp MAP_ACTUAL_HELL_LANDING, 4, 4
+	release
+	end
+
+RusturfTunnel_Text_ReadyToGo:
+	.string "{COLOR RED}{SHADOW LIGHT_RED}GLEIS: You'll be stuck in there\n"
+	.string "until the job is done. Ready?$"
+
+RusturfTunnel_Text_PreFlashback:
+	.string "{PLAYER}: Yes. Let's do this…\n"
+	.string "Ngh…?\p"
+	.string "Aaaargh!$"
+
+RusturfTunnel_Text_PostFlashback:
+	.string "{COLOR RED}{SHADOW LIGHT_RED}GLEIS: {PLAYER}! Are you quite alright?\p"
+	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}{PLAYER}: Yeah. I just had a flashback.\n"
+	.string "They're painful, but I remember who\l"
+	.string "this girl is now.\p"
+	.string "She's the CUT MAN's daughter. She\n"
+	.string "was friends with MAY.\p"
+	.string "{COLOR RED}{SHADOW LIGHT_RED}GLEIS: Well, that's quite nice. Now\n"
+	.string "are you ready to close this portal?\p"
+	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}{PLAYER}: Yeah, yeah. Send me in.$"
 
 RusturfTunnel_EventScript_WandasBoyfriend::
 	lock

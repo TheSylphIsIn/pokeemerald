@@ -2275,15 +2275,11 @@ Route116_Text_DevanPostBattle:
 	.string "types, that's what I ought to do.$"
 
 Route116_Text_JohnsonIntro:
-	.string "It's a dead end up here.\n"
-	.string "I'm bored, so can we battle?$"
+	.string "ZOMBIE: Geeeeeeeh!\p"
+	.string "This zombie looks terrified!$"
 
 Route116_Text_JohnsonDefeat:
-	.string "That was fun even though I lost.$"
-
-Route116_Text_JohnsonPostBattle:
-	.string "Want to stay here and keep\n"
-	.string "me company?$"
+	.string "Ngaaaaoooh!$"
 
 Route117_Text_IsaacIntro:
 	.string "Listen, could I get you to battle\n"

@@ -4424,7 +4424,7 @@
     {
       "id": "LAYOUT_ACTUAL_HELL",
       "name": "ActualHell_Layout",
-      "width": 20,
+      "width": 18,
       "height": 20,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Lavaridge",
@@ -4440,6 +4440,16 @@
       "secondary_tileset": "gTileset_Shop",
       "border_filepath": "data/layouts/EndlessPlainRustboro/border.bin",
       "blockdata_filepath": "data/layouts/EndlessPlainRustboro/map.bin"
+    },
+    {
+      "id": "LAYOUT_ACTUAL_HELL_LANDING",
+      "name": "ActualHellLanding_Layout",
+      "width": 18,
+      "height": 20,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Lavaridge",
+      "border_filepath": "data/layouts/ActualHellLanding/border.bin",
+      "blockdata_filepath": "data/layouts/ActualHellLanding/map.bin"
     }
   ]
 }

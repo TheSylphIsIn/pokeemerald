@@ -1,5 +1,5 @@
-.set LOCALID_BRINEY, 11
-.set LOCALID_WANDAS_BF_OUTSIDE, 21
+.set LOCALID_BRINEY, 9
+.set LOCALID_WANDAS_BF_OUTSIDE, 13
 
 Route116_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, Route116_OnTransition
@@ -15,7 +15,7 @@ Route116_OnTransition:
 	end
 
 Route116_EventScript_SetWandasBoyfriendPos::
-	setobjectxyperm LOCALID_WANDAS_BF_OUTSIDE, 38, 10
+	setobjectxyperm LOCALID_WANDAS_BF_OUTSIDE, 33, 11
 	return
 
 Route116_OnLoad:
@@ -46,74 +46,6 @@ Route116_EventScript_BoyfriendGruntInTunnel::
 	release
 	end
 
-Route116_EventScript_DevonEmployee::
-	lock
-	faceplayer
-	goto_if_set FLAG_MET_DEVON_EMPLOYEE, Route116_EventScript_TryGiveRepeatBallAgain
-	msgbox Route116_Text_ThankYouTokenOfAppreciation, MSGBOX_DEFAULT
-	goto Route116_EventScript_GiveRepeatBall
-	end
-
-Route116_EventScript_GiveRepeatBall::
-	setflag FLAG_MET_DEVON_EMPLOYEE
-	giveitem ITEM_REPEAT_BALL
-	goto_if_eq VAR_RESULT, FALSE, Route116_EventScript_NoRoomForRepeatBall
-	msgbox Route116_Text_NewBallAvailableAtMart, MSGBOX_DEFAULT
-	closemessage
-	call_if_eq VAR_FACING, DIR_NORTH, Route116_EventScript_DevonEmployeeExit
-	call_if_eq VAR_FACING, DIR_SOUTH, Route116_EventScript_DevonEmployeeExit
-	call_if_eq VAR_FACING, DIR_WEST, Route116_EventScript_DevonEmployeeExit
-	call_if_eq VAR_FACING, DIR_EAST, Route116_EventScript_DevonEmployeeExitEast
-	removeobject VAR_LAST_TALKED
-	clearflag FLAG_HIDE_RUSTBORO_CITY_DEVON_CORP_3F_EMPLOYEE
-	setflag FLAG_RECEIVED_REPEAT_BALL
-	release
-	end
-
-Route116_EventScript_DevonEmployeeExit::
-	applymovement VAR_LAST_TALKED, Route116_Movement_DevonEmployeeExit
-	waitmovement 0
-	return
-
-Route116_EventScript_DevonEmployeeExitEast::
-	applymovement VAR_LAST_TALKED, Route116_Movement_DevonEmployeeExitEast
-	waitmovement 0
-	return
-
-Route116_EventScript_TryGiveRepeatBallAgain::
-	msgbox Route116_Text_TokenOfAppreciation, MSGBOX_DEFAULT
-	goto Route116_EventScript_GiveRepeatBall
-	end
-
-Route116_EventScript_NoRoomForRepeatBall::
-	msgbox Route116_Text_BagIsJamPacked, MSGBOX_DEFAULT
-	release
-	end
-
-Route116_Movement_DevonEmployeeExit:
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	step_end
-
-Route116_Movement_DevonEmployeeExitEast:
-	walk_down
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	step_end
-
 Route116_EventScript_RouteSignRustboro::
 	msgbox Route116_Text_RouteSignRustboro, MSGBOX_SIGN
 	end
@@ -138,7 +70,7 @@ Route116_EventScript_Briney::
 	lock
 	faceplayer
 	msgbox Route116_Text_ScoundrelMadeOffWithPeeko, MSGBOX_DEFAULT
-	setvar VAR_ROUTE116_STATE, 2
+	setvar VAR_ROUTE116_STATE, 1
 	release
 	end
 
@@ -148,7 +80,7 @@ Route116_EventScript_BrineyTrigger::
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	msgbox Route116_Text_ScoundrelMadeOffWithPeeko, MSGBOX_DEFAULT
-	setvar VAR_ROUTE116_STATE, 2
+	setvar VAR_ROUTE116_STATE, 1
 	releaseall
 	end
 
@@ -230,138 +162,88 @@ Route116_Movement_GlassesManExitEast:
 	step_end
 
 Route116_EventScript_Joey::
-	trainerbattle_single TRAINER_JOEY, Route116_Text_JoeyIntro, Route116_Text_JoeyDefeat
-	msgbox Route116_Text_JoeyPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route116_Text_JoeyZombie, MSGBOX_SIGN
 	end
+
+Route116_Text_JoeyZombie:
+	.string "This used to be a zombie, but either\n"
+	.string "GLEIS or DANTALION amputated its\l"
+	.string "arm and shoved it through its mouth.\p"
+	.string "It's nailed to the ground.$"
 
 Route116_EventScript_Jose::
-	trainerbattle_single TRAINER_JOSE, Route116_Text_JoseIntro, Route116_Text_JoseDefeat
-	msgbox Route116_Text_JosePostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route116_Text_JoseZombie, MSGBOX_SIGN
 	end
-
-Route116_EventScript_Jerry::
-	trainerbattle_single TRAINER_JERRY_1, Route116_Text_JerryIntro, Route116_Text_JerryDefeat, Route116_EventScript_TryRegisterJerryAfterBattle
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route116_EventScript_RematchJerry
-	setvar VAR_0x8004, TRAINER_JERRY_1
-	specialvar VAR_RESULT, IsTrainerRegistered
-	goto_if_eq VAR_RESULT, FALSE, Route116_EventScript_TryRegisterJerry
-	msgbox Route116_Text_JerryPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route116_EventScript_TryRegisterJerryAfterBattle::
-	goto_if_set FLAG_HAS_MATCH_CALL, Route116_EventScript_RegisterJerryAfterBattle
-	release
-	end
-
-Route116_EventScript_RegisterJerryAfterBattle::
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox Route116_Text_JerryRegister2, MSGBOX_DEFAULT
-	register_matchcall TRAINER_JERRY_1
-	release
-	end
-
-Route116_EventScript_TryRegisterJerry::
-	goto_if_set FLAG_HAS_MATCH_CALL, Route116_EventScript_RegisterJerry
-	msgbox Route116_Text_JerryPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route116_EventScript_RegisterJerry::
-	msgbox Route116_Text_JerryRegister1, MSGBOX_DEFAULT
-	register_matchcall TRAINER_JERRY_1
-	release
-	end
-
-Route116_EventScript_RematchJerry::
-	trainerbattle_rematch TRAINER_JERRY_1, Route116_Text_JerryRematchIntro, Route116_Text_JerryRematchDefeat
-	msgbox Route116_Text_JerryPostRematch, MSGBOX_AUTOCLOSE
-	end
+	
+Route116_Text_JoseZombie:
+	.string "This used to be a zombie, but either\n"
+	.string "GLEIS or DANTALION carefully extracted\l"
+	.string "all its bones through its nose, so\l"
+	.string "it can't move any more.$"
 
 Route116_EventScript_Clark::
-	trainerbattle_single TRAINER_CLARK, Route116_Text_ClarkIntro, Route116_Text_ClarkDefeat
-	msgbox Route116_Text_ClarkPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route116_Text_ClarkZombie, MSGBOX_SIGN
 	end
 
-Route116_EventScript_Janice::
-	trainerbattle_single TRAINER_JANICE, Route116_Text_JaniceIntro, Route116_Text_JaniceDefeat
-	msgbox Route116_Text_JanicePostBattle, MSGBOX_AUTOCLOSE
-	end
+Route116_Text_ClarkZombie:
+	.string "This was once a zombie, but GLEIS\n"
+	.string "has melted its chest cavity and\l"
+	.string "lashed its intestines around a tree.\p"
+	.string "You know it was GLEIS because it was\n"
+	.string "melted using FACELEECH acid.$"
 
 Route116_EventScript_Karen::
-	trainerbattle_single TRAINER_KAREN_1, Route116_Text_KarenIntro, Route116_Text_KarenDefeat, Route116_EventScript_TryRegisterKarenAfterBattle
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route116_EventScript_RematchKaren
-	setvar VAR_0x8004, TRAINER_KAREN_1
-	specialvar VAR_RESULT, IsTrainerRegistered
-	goto_if_eq VAR_RESULT, FALSE, Route116_EventScript_TryRegisterKaren
-	msgbox Route116_Text_KarenPostBattle, MSGBOX_DEFAULT
-	release
+	msgbox Route116_Text_KarenZombie, MSGBOX_NPC
 	end
 
-Route116_EventScript_TryRegisterKarenAfterBattle::
-	goto_if_set FLAG_HAS_MATCH_CALL, Route116_EventScript_RegisterKarenAfterBattle
-	release
-	end
-
-Route116_EventScript_RegisterKarenAfterBattle::
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox Route116_Text_KarenRegister2, MSGBOX_DEFAULT
-	register_matchcall TRAINER_KAREN_1
-	release
-	end
-
-Route116_EventScript_TryRegisterKaren::
-	goto_if_set FLAG_HAS_MATCH_CALL, Route116_EventScript_RegisterKaren
-	msgbox Route116_Text_KarenPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route116_EventScript_RegisterKaren::
-	msgbox Route116_Text_KarenRegister1, MSGBOX_DEFAULT
-	register_matchcall TRAINER_KAREN_1
-	release
-	end
-
-Route116_EventScript_RematchKaren::
-	trainerbattle_rematch TRAINER_KAREN_1, Route116_Text_KarenRematchIntro, Route116_Text_KarenRematchDefeat
-	msgbox Route116_Text_KarenPostRematch, MSGBOX_AUTOCLOSE
-	end
-
-Route116_EventScript_Sarah::
-	trainerbattle_single TRAINER_SARAH, Route116_Text_SarahIntro, Route116_Text_SarahDefeat
-	msgbox Route116_Text_SarahPostBattle, MSGBOX_AUTOCLOSE
-	end
-
-Route116_EventScript_Dawson::
-	trainerbattle_single TRAINER_DAWSON, Route116_Text_DawsonIntro, Route116_Text_DawsonDefeat
-	msgbox Route116_Text_DawsonPostBattle, MSGBOX_AUTOCLOSE
-	end
+Route116_Text_KarenZombie:
+	.string "This used to be a zombie, but either\n"
+	.string "GLEIS or DANTALION has removed its\l"
+	.string "hands and jaw, and buried its feet\l"
+	.string "in the earth. It is harmless now.\p"
+	.string "It wobbles back and forth in a comical\n"
+	.string "manner while trying to attack you.$"
 
 Route116_EventScript_Devan::
-	trainerbattle_single TRAINER_DEVAN, Route116_Text_DevanIntro, Route116_Text_DevanDefeat
-	msgbox Route116_Text_DevanPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route116_Text_DevanZombie, MSGBOX_SIGN
 	end
 
+Route116_Text_DevanZombie:
+	.string "This used to be a zombie, but\n"
+	.string "DANTALION slammed it against a\l"
+	.string "sharp rock repeatedly to split it\l"
+	.string "into 6 separate pieces.\p"
+	.string "You think it was DANTALION because\n"
+	.string "You saw blood splattered on him.$"
+
 Route116_EventScript_Johnson::
-	trainerbattle_single TRAINER_JOHNSON, Route116_Text_JohnsonIntro, Route116_Text_JohnsonDefeat
-	msgbox Route116_Text_JohnsonPostBattle, MSGBOX_AUTOCLOSE
+	trainerbattle_single TRAINER_JOHNSON, Route116_Text_JohnsonIntro, Route116_Text_JohnsonDefeat, Route116_EventScript_JohnsonZombieDie
+	end
+
+Route116_EventScript_JohnsonZombieDie:
+	call Common_ZombieCrumble
+	setvar VAR_TEMP_LOOT_ITEM, ITEM_EVERSTONE
+	call Common_LootCorpse
+	release
 	end
 
 Route116_Text_ScoundrelMadeOffWithPeeko:
-	.string "Ohhh, what am I to do?\p"
-	.string "We were on our walk, PEEKO and I, when\n"
-	.string "we were jumped by an odd thug…\p"
-	.string "The scoundrel made off with my\n"
-	.string "darling PEEKO!\p"
-	.string "Wrrrooooooaaaar! PEEKO!$"
+	.string "DANTALION: You must be {PLAYER}.\n"
+	.string "MASTER GLEIS told me about you.\p"
+	.string "{PLAYER}: … … … … …\p"
+	.string "DANTALION: You're unnerved by my\n"
+	.string "demonic nature, aren't you?\p"
+	.string "Worry not. MASTER GLEIS has…{PAUSE 30}\n"
+	.string "persuaded me to fight for the living.\p"
+	.string "{PLAYER}: Uhh, okay. Is GLEIS inside?\p"
+	.string "DANTALION: Yes. Please hurry in.\n"
+	.string "We mustn't give the demons any rest.$"
 
 Route116_Text_WantToDigTunnel:
-	.string "Nnn… Roar!\p"
-	.string "I want to dig that tunnel!$"
+	.string "This is some kind of demonic snail\n"
+	.string "creature using a corpse as a shell.\p"
+	.string "It will probably move out of the way,\n"
+	.string "but very very slowly.$"
 
 Route116_Text_DiggingTunnelWhenGoonOrderedMeOut:
 	.string "Nnn… Roar!\n"
@@ -378,44 +260,7 @@ Route116_Text_DiggingTunnelWhenGoonOrderedMeOut:
 	.string "POKéMON into an uproar.$"
 
 Route116_Text_GoonHightailedItOutOfTunnel:
-	.string "Nnn… Roar!\p"
-	.string "That goofy goon hightailed it out of\n"
-	.string "the tunnel! I can go back to digging!$"
-
-Route116_Text_ThankYouTokenOfAppreciation:
-	.string "Oh! It's you!\p"
-	.string "You're that person who not only helped\n"
-	.string "me in PETALBURG WOODS, but also got\l"
-	.string "back my stolen package and then even\l"
-	.string "graciously delivered it to SLATEPORT!\p"
-	.string "CAPT. STERN informed us that the\n"
-	.string "package arrived, too!\p"
-	.string "I thank you very, very much!\p"
-	.string "Why, if I were a rain cloud, I would\n"
-	.string "shower you with gratitude and hail\l"
-	.string "you as a hero!\p"
-	.string "For you, the most wonderful TRAINER,\n"
-	.string "I bear good news!\p"
-	.string "Recently, our company developed\n"
-	.string "a new kind of POKé BALL.\p"
-	.string "As a token of our appreciation, this\n"
-	.string "is our gift to our wonderful TRAINER!$"
-
-Route116_Text_NewBallAvailableAtMart:
-	.string "Our new POKé BALL will be available\n"
-	.string "at the POKéMON MART in RUSTBORO.\p"
-	.string "Please do try it out!\n"
-	.string "Thank you and bye-bye!$"
-
-Route116_Text_BagIsJamPacked:
-	.string "Your BAG is jam-packed.\n"
-	.string "I can't give you this REPEAT BALL.$"
-
-Route116_Text_TokenOfAppreciation:
-	.string "As a token of our appreciation for\n"
-	.string "your delivering our package, I have\l"
-	.string "a gift of a new kind of POKé BALL\l"
-	.string "for our most wonderful TRAINER!$"
+	.string "Gone.$"
 
 Route116_Text_CanYouHelpMeFindGlasses:
 	.string "I dropped my glasses…\n"

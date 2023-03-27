@@ -67,43 +67,30 @@
       "flag": "FLAG_ITEM_RUSTURF_TUNNEL_MAX_ETHER"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_EXPERT_M",
-      "x": 5,
-      "y": 4,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "0x0",
-      "flag": "FLAG_HIDE_RUSTURF_TUNNEL_BRINEY"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_AQUA_MEMBER_M",
+      "graphics_id": "OBJ_EVENT_GFX_PSYCHIC_M",
       "x": 14,
       "y": 5,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "RusturfTunnel_EventScript_Grunt",
-      "flag": "FLAG_HIDE_RUSTURF_TUNNEL_AQUA_GRUNT"
+      "script": "RusturfTunnel_EventScript_Gleis",
+      "flag": "FLAG_FINISHED_HELL_RUN"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_WINGULL",
+      "graphics_id": "OBJ_EVENT_GFX_LASS",
       "x": 14,
       "y": 4,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "RusturfTunnel_EventScript_Peeko",
-      "flag": "FLAG_HIDE_RUSTURF_TUNNEL_PEEKO"
+      "script": "RusturfTunnel_EventScript_Elise",
+      "flag": "0"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BREAKABLE_ROCK",
@@ -184,8 +171,8 @@
       "y": 4,
       "elevation": 3,
       "var": "VAR_RUSTURF_TUNNEL_STATE",
-      "var_value": "2",
-      "script": "RusturfTunnel_EventScript_AquaGruntBackUp"
+      "var_value": "0",
+      "script": "RusturfTunnel_Trigger_Gleis"
     },
     {
       "type": "trigger",
@@ -193,8 +180,8 @@
       "y": 5,
       "elevation": 3,
       "var": "VAR_RUSTURF_TUNNEL_STATE",
-      "var_value": "2",
-      "script": "RusturfTunnel_EventScript_AquaGruntBackUp"
+      "var_value": "0",
+      "script": "RusturfTunnel_Trigger_Gleis"
     },
     {
       "type": "trigger",

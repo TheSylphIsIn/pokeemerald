@@ -140,14 +140,14 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Route116_EventScript_Briney",
-      "flag": "FLAG_HIDE_ROUTE_116_MR_BRINEY"
+      "flag": "0"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ZOMBIE_BOY",
       "x": 36,
       "y": 17,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_UP_AND_LEFT",
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
@@ -156,24 +156,11 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
-      "x": 80,
-      "y": 8,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route116_EventScript_ItemHPUp",
-      "flag": "FLAG_ITEM_ROUTE_116_HP_UP"
-    },
-    {
       "graphics_id": "OBJ_EVENT_GFX_ZOMBIE_GIRL",
       "x": 22,
       "y": 16,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_DOWN_AND_UP",
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
@@ -205,7 +192,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Route116_EventScript_WandasBoyfriend",
-      "flag": "FLAG_HIDE_ROUTE_116_WANDAS_BOYFRIEND"
+      "flag": "0"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_MANIAC",
@@ -241,10 +228,10 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN_AND_RIGHT",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "5",
       "script": "Route116_EventScript_Johnson",
-      "flag": "0"
+      "flag": "TRAINER_JOHNSON+TRAINER_FLAGS_START"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ZOMBIE_GIRL",

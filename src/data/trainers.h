@@ -9049,11 +9049,11 @@ const struct Trainer gTrainers[] = {
         .party = NO_ITEM_DEFAULT_MOVES(sParty_Devan),
     },
 
-    [TRAINER_JOHNSON] =
+    [TRAINER_JOHNSON] = // used
     {
-        .trainerClass = TRAINER_CLASS_YOUNGSTER,
+        .trainerClass = TRAINER_CLASS_ZOMBIE_KID,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
-        .trainerPic = TRAINER_PIC_YOUNGSTER,
+        .trainerPic = TRAINER_PIC_ZOMBIE_KID,
         .trainerName = _("JOHNSON"),
         .items = {},
         .doubleBattle = FALSE,
