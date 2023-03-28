@@ -246,6 +246,8 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_UnusedMauvi
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_UnusedMauvilleOldMan2;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CoilBoy;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_HikerShirtless;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Demon;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_ArchDemon;
 
 
 const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM_OBJ_EVENT_GFX] = {
@@ -490,6 +492,8 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_HOOH] =                     &gObjectEventGraphicsInfo_HoOh,
 	[OBJ_EVENT_GFX_COIL_BOY] =				   &gObjectEventGraphicsInfo_CoilBoy,
 	[OBJ_EVENT_GFX_HIKER_SHIRTLESS] =		   &gObjectEventGraphicsInfo_HikerShirtless,
+	[OBJ_EVENT_GFX_DEMON] =					   &gObjectEventGraphicsInfo_Demon,
+	[OBJ_EVENT_GFX_ARCHDEMON] =				   &gObjectEventGraphicsInfo_ArchDemon,
 };
 
 const struct ObjectEventGraphicsInfo *const gMauvilleOldManGraphicsInfoPointers[] = {

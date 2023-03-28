@@ -112,6 +112,8 @@
 #define TRAINER_PIC_ALICIA				  93
 #define TRAINER_PIC_ZOMBIE_KID			  94
 #define TRAINER_PIC_GHOST_GIRL			  95
+#define TRAINER_PIC_DEMON				  96
+#define TRAINER_PIC_ARCHDEMON			  97
 
 // The player back pics are assumed to alternate according to the gender values (MALE/FEMALE)
 #define TRAINER_BACK_PIC_BRENDAN                0
@@ -359,6 +361,8 @@
 #define TRAINER_CLASS_GHOST_GIRL	 0x44
 #define TRAINER_CLASS_SURVIVOR		 0x45
 #define TRAINER_CLASS_DEMON_CORPSE	 0x46
+#define TRAINER_CLASS_DEMON			 0x47
+#define TRAINER_CLASS_ARCHDEMON		 0x48
 
 #define TRAINER_ENCOUNTER_MUSIC_MALE         0 // standard male encounter music
 #define TRAINER_ENCOUNTER_MUSIC_FEMALE       1 // standard female encounter music

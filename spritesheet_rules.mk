@@ -409,6 +409,12 @@ $(OBJEVENTGFXDIR)/people/coil_boy.4bpp: %.4bpp: %.png
 $(OBJEVENTGFXDIR)/people/hiker_shirtless.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 4
 	
+$(OBJEVENTGFXDIR)/people/demon.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+	
+$(OBJEVENTGFXDIR)/people/arch_demon.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+	
 
 
 

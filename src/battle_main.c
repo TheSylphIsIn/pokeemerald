@@ -535,6 +535,8 @@ const struct TrainerMoney gTrainerMoneyTable[] =
 	{TRAINER_CLASS_GHOST_GIRL, 5},
 	{TRAINER_CLASS_SURVIVOR, 10},
 	{TRAINER_CLASS_DEMON_CORPSE, 8},
+	{TRAINER_CLASS_DEMON, 6},
+	{TRAINER_CLASS_ARCHDEMON, 10},
     {0xFF, 5}, // Any trainer class not listed above uses this
 };
 
