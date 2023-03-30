@@ -4659,7 +4659,14 @@ static const union AnimCmd sAnim_MAGNEZONE_1[] =
 
 static const union AnimCmd sAnim_VIGOURLAN_1[] =
 {
-	ANIMCMD_END
+    ANIMCMD_FRAME(0, 13),
+    ANIMCMD_FRAME(1, 7),
+    ANIMCMD_FRAME(0, 13),
+    ANIMCMD_FRAME(1, 7),
+    ANIMCMD_FRAME(0, 13),
+    ANIMCMD_FRAME(1, 7),
+    ANIMCMD_FRAME(0, 11),
+    ANIMCMD_END,
 };
 
 static const union AnimCmd sAnim_DIAMANDIX_1[] =
@@ -4669,7 +4676,12 @@ static const union AnimCmd sAnim_DIAMANDIX_1[] =
 
 static const union AnimCmd sAnim_GIGAWOLF_1[] =
 {
-	ANIMCMD_END
+    ANIMCMD_FRAME(0, 27),
+    ANIMCMD_FRAME(1, 6),
+    ANIMCMD_FRAME(0, 6),
+    ANIMCMD_FRAME(1, 6),
+    ANIMCMD_FRAME(0, 6),
+    ANIMCMD_END,
 };
 
 static const union AnimCmd sAnim_GALACTIMON_1[] =
@@ -4684,7 +4696,12 @@ static const union AnimCmd sAnim_QWILSHARK_1[] =
 
 static const union AnimCmd sAnim_DRAGOONE_1[] =
 {
-	ANIMCMD_END
+    ANIMCMD_FRAME(0, 14),
+    ANIMCMD_FRAME(1, 14),
+    ANIMCMD_FRAME(0, 14),
+    ANIMCMD_FRAME(1, 14),
+    ANIMCMD_FRAME(0, 14),
+    ANIMCMD_END,
 };
 
 static const union AnimCmd sAnim_CALFBY_1[] =
@@ -4725,28 +4742,40 @@ static const union AnimCmd sAnim_SKYLAX_1[] =
 static const union AnimCmd sAnim_MYSTERYEGG_1[] =
 {
 	ANIMCMD_FRAME(0, 10),
-	ANIMCMD_FRAME(1, 10),
+	ANIMCMD_FRAME(1, 40),
 	ANIMCMD_FRAME(0, 10),
 	ANIMCMD_END
 };
 
 static const union AnimCmd sAnim_SECRETEGG_1[] =
 {
+	ANIMCMD_FRAME(0, 10),
+	ANIMCMD_FRAME(1, 40),
+	ANIMCMD_FRAME(0, 10),
 	ANIMCMD_END
 };
 
 static const union AnimCmd sAnim_HYPEREGG_1[] =
 {
+	ANIMCMD_FRAME(0, 10),
+	ANIMCMD_FRAME(1, 40),
+	ANIMCMD_FRAME(0, 10),
 	ANIMCMD_END
 };
 
 static const union AnimCmd sAnim_HOMBONE_1[] =
 {
+	ANIMCMD_FRAME(0, 10),
+	ANIMCMD_FRAME(1, 45),
+	ANIMCMD_FRAME(0, 5),
 	ANIMCMD_END
 };
 
 static const union AnimCmd sAnim_HOMBEAST_1[] =
 {
+	ANIMCMD_FRAME(0, 10),
+	ANIMCMD_FRAME(1, 45),
+	ANIMCMD_FRAME(0, 5),
 	ANIMCMD_END
 };
 
