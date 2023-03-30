@@ -3919,7 +3919,7 @@ u8 IsMonDisobedient(void)
         if (FlagGet(FLAG_BADGE08_GET))
             return 0;
 
-        obedienceLevel = 10;
+        obedienceLevel = 21; // arbitrary number for hell/faceleech borrow. faceleech will obey, but will stop obeying if you use it too much.
 
         if (FlagGet(FLAG_BADGE02_GET))
             obedienceLevel = 30;

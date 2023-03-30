@@ -1595,6 +1595,11 @@ static const u8 sMagicPowderDesc[] = _(
 	"can empower some\n"
 	"objects.");
 
+static const u8 sStonePowderDesc[] = _(
+	"Powder containing\n"
+	"evolution power.\n"
+	"Must be unleashed.");
+
 static const u8 sCureShakeDesc[] = _(
 	"Mixed medicine\n"
 	"that heals 20 HP\n"

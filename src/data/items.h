@@ -2409,7 +2409,7 @@ const struct Item gItems[] =
         .price = 200,
         .holdEffect = HOLD_EFFECT_PREVENT_EVOLVE,
         .description = sEverstoneDesc,
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_MATERIALS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
@@ -2906,46 +2906,46 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_0EC] =
+    [ITEM_FIRE_DUST] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
-        .price = 0,
-        .description = sDummyDesc,
-        .pocket = POCKET_ITEMS,
+        .name = _("FIRE DUST"),
+        .itemId = ITEM_FIRE_DUST,
+        .price = 2000,
+        .description = sStonePowderDesc,
+        .pocket = POCKET_MATERIALS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_0ED] =
+    [ITEM_WATER_DUST] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
-        .price = 0,
-        .description = sDummyDesc,
-        .pocket = POCKET_ITEMS,
+        .name = _("WATER DUST"),
+        .itemId = ITEM_WATER_DUST,
+        .price = 2000,
+        .description = sStonePowderDesc,
+        .pocket = POCKET_MATERIALS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_0EE] =
+    [ITEM_ELEC_DUST] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
-        .price = 0,
-        .description = sDummyDesc,
-        .pocket = POCKET_ITEMS,
+        .name = _("ELEC DUST"),
+        .itemId = ITEM_ELEC_DUST,
+        .price = 2000,
+        .description = sStonePowderDesc,
+        .pocket = POCKET_MATERIALS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_0EF] =
+    [ITEM_LEAF_DUST] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
-        .price = 0,
-        .description = sDummyDesc,
-        .pocket = POCKET_ITEMS,
+        .name = _("LEAF DUST"),
+        .itemId = ITEM_LEAF_DUST,
+        .price = 2000,
+        .description = sStonePowderDesc,
+        .pocket = POCKET_MATERIALS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
