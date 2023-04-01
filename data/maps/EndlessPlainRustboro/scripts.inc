@@ -102,6 +102,18 @@ EndlessPlainRustboro_LarryShop:
 	.2byte ITEM_NONE
 	release
 	end
+
+EndlessPlainRustboro_EventScript_Barry::
+	msgbox EndlessPlainRustboro_Text_Barry, MSGBOX_NPC
+	end
+	
+EndlessPlainRustboro_Text_Barry:
+	.string "I'm not LARRY the LOOTER.\n"
+	.string "I'm his little brother, BARRY.\p"
+	.string "He stepped outside for some fresh\n"
+	.string "air.\p"
+	.string "If you wanna buy his items, go look\n"
+	.string "for a gap in the fence on the left.$"
 	
 EndlessPlainRustboro_EventScript_Girl::
 	msgbox EndlessPlainRustboro_Text_Girl, MSGBOX_NPC

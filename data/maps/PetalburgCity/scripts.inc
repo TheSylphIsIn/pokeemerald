@@ -156,3 +156,13 @@ PetalburgCity_Text_CitySign:
 
 PetalburgCity_Text_WallyHouseSign:
 	.string "WALLY'S HOUSE$"
+
+PetalburgCity_EventScript_GymDoor::
+	msgbox PetalburgCity_Text_BlockedDoor, MSGBOX_SIGN
+	end
+	
+PetalburgCity_Text_BlockedDoor:
+	.string "There's a mess of skulls and stuff\n"
+	.string "wedged behind the door.\p"
+	.string "Even if you could force your way\n"
+	.string "in, you'd rather not.$"

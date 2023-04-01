@@ -1764,7 +1764,7 @@ static const u16 sElectabuzzLevelUpLearnset[] = {
 
 static const u16 sMagmarLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_EMBER),
-    LEVEL_UP_MOVE( 6, MOVE_SUNNY_DAY),
+    LEVEL_UP_MOVE( 6, MOVE_LEER),
     LEVEL_UP_MOVE(12, MOVE_VIRAL_COUGH),
     LEVEL_UP_MOVE(18, MOVE_FIRE_PUNCH),
     LEVEL_UP_MOVE(24, MOVE_CONFUSE_RAY),

@@ -298,7 +298,7 @@ Route104_Text_WinstonDefeat:
 Route104_Text_WinstonPostBattle:
 	.string "I'm lost, tired, and now my POKéMON\n"
 	.string "is fainted…\p"
-	.string "Maybe I can make it to OLDANE in\n"
+	.string "Maybe I can make it to OLDALE in\n"
 	.string "one piece if I run my heart out.$"
 
 Route104_Text_WinstonRegister1:

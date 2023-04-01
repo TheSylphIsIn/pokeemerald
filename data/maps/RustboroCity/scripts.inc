@@ -555,12 +555,6 @@ RustboroCity_Movement_GleisBattleWalkAway:
 RustboroCity_EventScript_ZombiePitFirstTry::
 	lockall
 	msgbox RustboroCity_Text_PitDemonIdle, MSGBOX_DEFAULT
-	goto_if_set FLAG_STARTED_ZOMBIE_PIT_EVENT, RustboroCity_EventScript_ZombiePitSecondTry
-	trainerbattle_single TRAINER_JOEY, RustboroCity_Text_PitDemonFirstTryIntro, RustboroCity_Text_PitDemonDefeat, RustboroCity_EventScript_ZombiePitMain
-	end
-
-RustboroCity_EventScript_ZombiePitSecondTry::
-	setflag FLAG_TEMP_1
 	addobject LOCALID_GAUNTLET_4
 	addobject LOCALID_GAUNTLET_5
 	setobjectxy LOCALID_GAUNTLET_1, 8, 31
@@ -568,6 +562,12 @@ RustboroCity_EventScript_ZombiePitSecondTry::
 	setobjectxy LOCALID_GAUNTLET_3, 9, 31
 	setobjectxy LOCALID_GAUNTLET_4, 7, 32
 	setobjectxy LOCALID_GAUNTLET_5, 9, 32
+	goto_if_set FLAG_STARTED_ZOMBIE_PIT_EVENT, RustboroCity_EventScript_ZombiePitSecondTry
+	trainerbattle_single TRAINER_JOEY, RustboroCity_Text_PitDemonFirstTryIntro, RustboroCity_Text_PitDemonDefeat, RustboroCity_EventScript_ZombiePitMain
+	end
+
+RustboroCity_EventScript_ZombiePitSecondTry::
+	setflag FLAG_TEMP_1
 	trainerbattle_single TRAINER_JOEY, RustboroCity_Text_PitDemonSecondTryIntro, RustboroCity_Text_PitDemonDefeat, RustboroCity_EventScript_ZombiePitMain
 	end
 
@@ -642,14 +642,15 @@ RustboroCity_EventScript_ZombiePitMain::
 	addobject LOCALID_HIKER
 	setobjectxy LOCALID_ROXANNE, 8, 32
 	setobjectxy LOCALID_HIKER, 9, 32
-	applymovement LOCALID_ROXANNE, Common_Movement_FaceUp
-	applymovement LOCALID_HIKER, Common_Movement_FaceUp
 	trainerbattle_no_intro TRAINER_JERRY_5, RustboroCity_Text_PitZombieDefeat
-	lockall
 	call Common_ZombieCrumble
 	setvar VAR_TEMP_LOOT_ITEM, ITEM_DURIN_BERRY
 	call_if_unset FLAG_TEMP_1, Common_LootCorpse
 	closemessage
+	applymovement LOCALID_ROXANNE, Common_Movement_FaceUp
+	applymovement LOCALID_HIKER, Common_Movement_FaceUp
+	waitmovement 0
+	lockall
 	delay 60
 	msgbox RustboroCity_Text_LastZombieBeaten, MSGBOX_DEFAULT
 	closemessage

@@ -29,6 +29,7 @@ OldaleTown_OnFrameScript::
 	applymovement LOCALID_BIRCH, OldaleTown_Movement_BirchWalkOffscreen
 	waitmovement 0
 	removeobject LOCALID_BIRCH
+	setrespawn HEAL_LOCATION_OLDALE_TOWN
 	setvar VAR_ROUTE101_STATE, 4
 	releaseall
 	end

@@ -77,7 +77,7 @@ Route102_Text_LootingTutorial:
 	.string "{PLAYER}: But that's disgusting.\p"
 	.string "It's the apocalypse, weenie. You\n"
 	.string "gotta do what you can to survive.\l"
-	.string "besides, it's mostly dust anyway.\p"
+	.string "Besides, it's mostly dust anyway.\p"
 	.string "{PLAYER}: Ugh, fine. Here goes…$"
 
 Route102_EventScript_Rick::

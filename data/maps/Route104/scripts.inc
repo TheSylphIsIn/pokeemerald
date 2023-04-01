@@ -840,7 +840,14 @@ Route104_EventScript_Darian::
 Route104_EventScript_Briney::
 	msgbox Route104_Text_Briney, MSGBOX_NPC
 	end
-	
+
+Route104_EventScript_Fisherman::
+	msgbox Route104_Text_Fisherman, MSGBOX_SIGN
+	end
+
+Route104_Text_Fisherman:
+	.string "He's sound asleep at his rod.\p"
+	.string "Let's leave him alone.$"
 Route104_Text_Briney:
 	.string "Arrr! I be a pirate. Me name be\n"
 	.string "CAPTAIN BRINEYBEARD!\p"

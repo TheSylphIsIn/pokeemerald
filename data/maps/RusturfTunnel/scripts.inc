@@ -27,6 +27,7 @@ RusturfTunnel_OnFrameScript::
 	msgbox RusturfTunnel_Text_DemoOver, MSGBOX_DEFAULT
 	closemessage
 	setvar VAR_RUSTURF_TUNNEL_STATE, 3
+	setrespawn HEAL_LOCATION_RUSTBORO_CITY
 	release
 	end
 
@@ -221,10 +222,18 @@ RusturfTunnel_EventScript_TaoScript:
 
 RusturfTunnel_EventScript_FaceleechScript:
 	msgbox RusturfTunnel_Text_AskedFaceleech, MSGBOX_DEFAULT
-	goto_if_set FLAG_BORROWED_FACELEECH, RusturfTunnel_EventScript_End
+	goto_if_set FLAG_TEMP_2, RusturfTunnel_EventScript_End
 	getpartysize
 	goto_if_eq VAR_RESULT, PARTY_SIZE, RusturfTunnel_EventScript_End
 	msgbox RusturfTunnel_Text_BorrowFaceleech, MSGBOX_DEFAULT
+	closemessage
+	setflag FLAG_BORROWED_FACELEECH
+	setflag FLAG_TEMP_2
+	release
+	applymovement LOCALID_GLEIS, Common_Movement_FaceOriginalDirection
+	end
+
+RusturfTunnel_EventScript_GiveFaceleech:
 	playfanfare MUS_OBTAIN_ITEM
 	message RusturfTunnel_Text_BorrowedFaceleech
 	waitfanfare
@@ -232,10 +241,7 @@ RusturfTunnel_EventScript_FaceleechScript:
 	givemon SPECIES_FACELEECH, 20, 0, 0, SPECIES_FACELEECH, 1
 	msgbox RusturfTunnel_Text_FaceleechEnd, MSGBOX_DEFAULT
 	closemessage
-	setflag FLAG_BORROWED_FACELEECH
-	release
-	applymovement LOCALID_GLEIS, Common_Movement_FaceOriginalDirection
-	end
+	return
 
 RusturfTunnel_EventScript_End:
 	release
@@ -333,7 +339,9 @@ RusturfTunnel_Text_BorrowFaceleech:
 	.string "It's our best shot at success, isn't\n"
 	.string "it?\p"
 	.string "{COLOR RED}{SHADOW LIGHT_RED}GLEIS: … … … … …\n"
-	.string "I suppose you're right. Fine, here.$"
+	.string "I suppose you're right. Fine.\p"
+	.string "When I send you through the portal,\n"
+	.string "I'll send FACELEECH with you.$"
 
 RusturfTunnel_Text_BorrowedFaceleech:
 	.string "{PLAYER} borrowed the FACELEECH\n"
@@ -370,7 +378,9 @@ RusturfTunnel_EventScript_Elise::
 	msgbox RusturfTunnel_Text_PostFlashback, MSGBOX_DEFAULT
 	closemessage
 	setrespawn HEAL_LOCATION_ACTUAL_HELL_LANDING
+	call_if_set FLAG_TEMP_2, RusturfTunnel_EventScript_GiveFaceleech
 	playse SE_WARP_IN
+	waitse
 	warp MAP_ACTUAL_HELL_LANDING, 4, 4
 	waitstate
 	release
@@ -390,8 +400,8 @@ RusturfTunnel_Text_PostFlashback:
 	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}{PLAYER}: Yeah. I just had a flashback.\n"
 	.string "They're painful, but I remember who\l"
 	.string "this girl is now.\p"
-	.string "She's the CUT MAN's daughter. She\n"
-	.string "was friends with MAY.\p"
+	.string "She's the CUT MAN's daughter, ELISE.\n"
+	.string "She was friends with MAY.\p"
 	.string "{COLOR RED}{SHADOW LIGHT_RED}GLEIS: Well, that's quite nice. Now\n"
 	.string "are you ready to close this portal?\p"
 	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}{PLAYER}: Yeah, yeah. Send me in.$"

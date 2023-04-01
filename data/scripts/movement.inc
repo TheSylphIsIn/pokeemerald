@@ -145,6 +145,7 @@ Common_ZombieCrumble::
 	
 Common_LootCorpse::
 	message Common_Text_PlayerLooted
+	waitmessage
 	waitbuttonpress
 	finditem VAR_TEMP_LOOT_ITEM
 	return
