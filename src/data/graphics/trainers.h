@@ -292,6 +292,9 @@ const u32 gTrainerPalette_Demon[] = INCBIN_U32("graphics/trainers/front_pics/dem
 const u32 gTrainerFrontPic_ArchDemon[] = INCBIN_U32("graphics/trainers/front_pics/arch_demon.4bpp.lz");
 const u32 gTrainerPalette_ArchDemon[] = INCBIN_U32("graphics/trainers/front_pics/arch_demon.gbapal.lz");
 
+const u32 gTrainerFrontPic_DemonDuo[] = INCBIN_U32("graphics/trainers/front_pics/demon_duo.4bpp.lz");
+
+
 const u8 gTrainerBackPic_Brendan[] = INCBIN_U8("graphics/trainers/back_pics/brendan.4bpp");
 const u8 gTrainerBackPic_May[] = INCBIN_U8("graphics/trainers/back_pics/may.4bpp");
 const u8 gTrainerBackPic_Red[] = INCBIN_U8("graphics/trainers/back_pics/red.4bpp");

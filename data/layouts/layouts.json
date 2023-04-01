@@ -4424,7 +4424,7 @@
     {
       "id": "LAYOUT_ACTUAL_HELL",
       "name": "ActualHell_Layout",
-      "width": 24,
+      "width": 36,
       "height": 30,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Lavaridge",

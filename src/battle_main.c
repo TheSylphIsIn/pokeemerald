@@ -4987,6 +4987,7 @@ static void HandleEndTurn_BattleWon(void)
             PlayBGM(MUS_VICTORY_AQUA_MAGMA);
             break;
         case TRAINER_CLASS_LEADER:
+		case TRAINER_CLASS_ARCHDEMON:
             PlayBGM(MUS_VICTORY_GYM_LEADER);
             break;
         default:

@@ -5,7 +5,115 @@
 .equ LOCALID_WANDA, 10
 
 RusturfTunnel_MapScripts::
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, RusturfTunnel_OnFrame
 	.byte 0
+
+RusturfTunnel_OnFrame:
+	map_script_2 VAR_RUSTURF_TUNNEL_STATE, 2, RusturfTunnel_OnFrameScript
+	.2byte 0
+
+RusturfTunnel_OnFrameScript::
+	lock
+	applymovement LOCALID_GLEIS, RusturfTunnel_Movement_GleisWalkOver
+	waitmovement 0
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceRight
+	msgbox RusturfTunnel_Text_PostHell, MSGBOX_DEFAULT
+	call_if_set FLAG_BORROWED_FACELEECH, RusturfTunnel_EventScript_TakeBackFaceleech
+	closemessage
+	applymovement LOCALID_GLEIS, RusturfTunnel_Movement_GleisLeave
+	waitmovement 0
+	removeobject LOCALID_GLEIS
+	delay 120
+	msgbox RusturfTunnel_Text_DemoOver, MSGBOX_DEFAULT
+	closemessage
+	setvar VAR_RUSTURF_TUNNEL_STATE, 3
+	release
+	end
+
+RusturfTunnel_EventScript_TakeBackFaceleech:
+	msgbox RusturfTunnel_Text_TakeFaceleech, MSGBOX_DEFAULT
+	givemon SPECIES_FACELEECH, 20, 0, 0, 0, 2
+	return
+
+RusturfTunnel_Text_PostHell:
+	.string "{COLOR RED}{SHADOW LIGHT_RED}GLEIS: Good job, {PLAYER}.\n"
+	.string "We've closed the portal. Demons can\l"
+	.string "no longer reach RUSTBORO from here.\p"
+	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}{PLAYER}: Dammit! I was so close!\p"
+	.string "{COLOR RED}{SHADOW LIGHT_RED}GLEIS: What's wrong?\p"
+	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}{PLAYER}: The head demon…he said he\n"
+	.string "knew about my past.\p"
+	.string "But you pulled me out before I could\n"
+	.string "get any answers out of him.\p"
+	.string "{COLOR RED}{SHADOW LIGHT_RED}GLEIS: {PAUSE 30}Well…{PAUSE 30}\n"
+	.string "demons are untrustworthy, {PLAYER}.\p"
+	.string "It's unlikely he had any real knowledge.\n"
+	.string "He was just trying to sow discord.\l"
+	.string "Don't think about it any more.\p"
+	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}{PLAYER}: Ugh…do YOU know anything?\n"
+	.string "About my past? Or my brother?\p"
+	.string "{COLOR RED}{SHADOW LIGHT_RED}GLEIS: Hmm…I seem to recall he was\n"
+	.string "in this area recently. I believe\l"
+	.string "he headed east to VERDANTURF.\l"
+	.string "You should follow him.\p"
+	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}{PLAYER}: …Okay. Fine. I'll start there.\n"
+	.string "Thanks, GLEIS.\p"
+	.string "{COLOR RED}{SHADOW LIGHT_RED}GLEIS: Oh, it's my pleasure.\p"
+	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}{PLAYER}: Hey, what happened to ELISE?\p"
+	.string "{COLOR RED}{SHADOW LIGHT_RED}GLEIS: I beg your pardon?\p"
+	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}{PLAYER}: The girl they were using\n"
+	.string "for the portal. She's gone.\p"
+	.string "{COLOR RED}{SHADOW LIGHT_RED}GLEIS: Closing the portal released a\n"
+	.string "discharge of energy. I channeled it\l"
+	.string "back into her to contain it.\l"
+	.string "It destroyed her.\p"
+	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}{PLAYER}: Y-you killed her!?\p"
+	.string "{COLOR RED}{SHADOW LIGHT_RED}GLEIS: The alternative was to let\n"
+	.string "it run free and kill us both.\l"
+	.string "It was a necessary sacrifice.\p"
+	.string "Well, now that my business here is done,\n"
+	.string "I must go. I'll try to discover more\l"
+	.string "about LANDON in case we cross paths\l"
+	.string "again. Until then…$"
+
+RusturfTunnel_Text_TakeFaceleech:
+	.string "{COLOR RED}{SHADOW LIGHT_RED}GLEIS: Oh, and I'll need my\n"
+	.string "FACELEECH back.$"
+
+RusturfTunnel_Text_DemoOver:
+	.string "{COLOR GREEN}{SHADOW LIGHT_GREEN}Thank you for playing\n"
+	.string "SNAKEWOOD RESURRECTED!\p"
+	.string "This is the end of the demo. No\n"
+	.string "further progress can be made.\p"
+	.string "I undertook this project in honor of\n"
+	.string "April Fools Day. It's unlikely that I\l"
+	.string "will ever develop a full version.\p"
+	.string "This is the end. I hope you enjoyed,\n"
+	.string "ironically or sincerely.\p"
+	.string "If you liked my additions, keep an\n"
+	.string "eye out for my main project,\l"
+	.string "POKéMON FANDANGO VERSION. I'll\l"
+	.string "release a similarly featured demo\l"
+	.string "for that game whenever I can.\p"
+	.string "Until then, see ya around!\n"
+	.string "    - The Sylph of Mind$"
+
+RusturfTunnel_Movement_GleisWalkOver:
+	walk_left
+	step_end
+
+RusturfTunnel_Movement_GleisLeave:
+	walk_up
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	step_end
 
 RusturfTunnel_EventScript_Wanda::
 	lock
@@ -261,9 +369,10 @@ RusturfTunnel_EventScript_Elise::
 	fadescreen FADE_FROM_WHITE
 	msgbox RusturfTunnel_Text_PostFlashback, MSGBOX_DEFAULT
 	closemessage
+	setrespawn HEAL_LOCATION_ACTUAL_HELL_LANDING
 	playse SE_WARP_IN
-	waitse
 	warp MAP_ACTUAL_HELL_LANDING, 4, 4
+	waitstate
 	release
 	end
 

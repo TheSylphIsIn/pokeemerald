@@ -10,9 +10,12 @@ RustboroCity_Flat1_1F_EventScript_Woman::
 	end
 
 RustboroCity_Flat1_1F_Text_EveryPokemonHasAbility:
-	.string "Every POKéMON has a special ability\n"
-	.string "that it can use.$"
+	.string "Whew…I think I don't want to ever\n"
+	.string "walk again, for the rest of my life.$"
 
 RustboroCity_Flat1_1F_Text_PokemonStrange:
-	.string "POKéMON are such strange creatures.$"
+	.string "ROXANNE: Thank you again for saving\n"
+	.string "our lives, {PLAYER}.\p"
+	.string "I would offer to spar with you for\n"
+	.string "training, but I have no POKéMON.$"
 

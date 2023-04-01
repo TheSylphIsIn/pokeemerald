@@ -96,6 +96,9 @@ const struct MonCoords gTrainerFrontPicCoords[] =
 	[TRAINER_PIC_ALICIA] = {.size = 8, .y_offset = 0},
     [TRAINER_PIC_ZOMBIE_KID] = {.size = 8, .y_offset = 1},
     [TRAINER_PIC_GHOST_GIRL] = {.size = 8, .y_offset = 1},
+    [TRAINER_PIC_DEMON] = {.size = 8, .y_offset = 0},
+    [TRAINER_PIC_ARCHDEMON] = {.size = 8, .y_offset = 0},
+    [TRAINER_PIC_DEMON_DUO] = {.size = 8, .y_offset = 0},
 };
 
 #define TRAINER_SPRITE(trainerPic, sprite, size) [TRAINER_PIC_##trainerPic] = {sprite, size, TRAINER_PIC_##trainerPic}
@@ -200,6 +203,7 @@ const struct CompressedSpriteSheet gTrainerFrontPicTable[] =
 	TRAINER_SPRITE(GHOST_GIRL, gTrainerFrontPic_GhostGirl, 0x800),
 	TRAINER_SPRITE(DEMON, gTrainerFrontPic_Demon, 0x800),
 	TRAINER_SPRITE(ARCHDEMON, gTrainerFrontPic_ArchDemon, 0x800),
+	TRAINER_SPRITE(DEMON_DUO, gTrainerFrontPic_DemonDuo, 0x800),
 };
 
 #define TRAINER_PAL(trainerPic, pal) [TRAINER_PIC_##trainerPic] = {pal, TRAINER_PIC_##trainerPic}
@@ -304,4 +308,5 @@ const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[] =
 	TRAINER_PAL(GHOST_GIRL, gTrainerPalette_GhostGirl),
 	TRAINER_PAL(DEMON, gTrainerPalette_Demon),
 	TRAINER_PAL(ARCHDEMON, gTrainerPalette_ArchDemon),
+	TRAINER_PAL(DEMON_DUO, gTrainerPalette_Demon),
 };

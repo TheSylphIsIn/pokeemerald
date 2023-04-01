@@ -114,6 +114,7 @@
 #define TRAINER_PIC_GHOST_GIRL			  95
 #define TRAINER_PIC_DEMON				  96
 #define TRAINER_PIC_ARCHDEMON			  97
+#define TRAINER_PIC_DEMON_DUO			  98
 
 // The player back pics are assumed to alternate according to the gender values (MALE/FEMALE)
 #define TRAINER_BACK_PIC_BRENDAN                0

@@ -3317,6 +3317,7 @@ extern const u32 gTrainerFrontPic_ZombieKid[];
 extern const u32 gTrainerFrontPic_GhostGirl[];
 extern const u32 gTrainerFrontPic_Demon[];
 extern const u32 gTrainerFrontPic_ArchDemon[];
+extern const u32 gTrainerFrontPic_DemonDuo[];
 
 extern const u32 gTrainerPalette_Hiker[];
 extern const u32 gTrainerPalette_AquaGruntM[];

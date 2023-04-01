@@ -16,13 +16,13 @@ RustboroCity_MapScripts::
 
 RustboroCity_OnTransition:
 	setflag FLAG_VISITED_RUSTBORO_CITY
-	goto_if_eq VAR_RUSTBORO_CITY_STATE, 2, RustboroCity_EventScript_PositionScientistForExit
+	call_if_eq VAR_RUSTBORO_CITY_STATE, 2, RustboroCity_EventScript_PositionScientistForExit
 	call_if_set FLAG_STARTED_ZOMBIE_PIT_EVENT, RustboroCity_MapScript_HandleZombiePit
 	end
 
 RustboroCity_EventScript_PositionScientistForExit::
 	setobjectxyperm LOCALID_GLEIS, 35, 10
-	end
+	return
 	
 RustboroCity_MapScript_HandleZombiePit::
 	goto_if_set FLAG_FINISHED_ZOMBIE_PIT_EVENT, RustboroCity_Script_End
@@ -32,7 +32,7 @@ RustboroCity_MapScript_HandleZombiePit::
 	cleartrainerflag TRAINER_JERRY_3// pit trainer
 	cleartrainerflag TRAINER_JERRY_4// pit trainer
 	cleartrainerflag TRAINER_JERRY_5// pit trainer
-	end
+	return
 	
 RustboroCity_Script_End:
 	release
