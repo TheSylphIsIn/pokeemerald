@@ -1,4 +1,12 @@
-# Pokémon Emerald
+# Pokemon Snakewood: Resurrected
+
+This is the repository for Snakewood: Resurrected, a Pokemon Snakewood reboot made using the pokeemerald decomp.
+
+The game is playable up to Rusturf Tunnel (roughly one gym of content). This is a "demo" I made for April Fools Day 2023.
+
+It is unlikely I will do any further development with this. Do with it what you wish.
+
+# Pret Info
 
 This is a decompilation of Pokémon Emerald.
 
