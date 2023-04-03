@@ -93,10 +93,14 @@ DropperPoint_TriggerScript_Bag::
 	// both rivals awake
 	msgbox DropperPoint_Text_BagText1, MSGBOX_DEFAULT
 	closemessage
+	setmetatile 17, 11, 0x36C, FALSE // dumb thing to fix visual error
+	special DrawWholeMapView
 	applymovement LOCALID_CALVIN, DropperPoint_Movement_CalvinGoToBag
 	playse SE_BIKE_HOP
 	waitse
 	waitmovement 0
+	setmetatile 17, 11, 0x2E1, FALSE // dumb thing to fix visual error
+	special DrawWholeMapView
 	applymovement LOCALID_MORGAN, DropperPoint_Movement_MorganGoToBag
 	waitmovement 0
 	applymovement LOCALID_CALVIN, Common_Movement_FaceLeft
