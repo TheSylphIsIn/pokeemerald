@@ -629,7 +629,7 @@ static void PlayerNotOnBikeMoving(u8 direction, u16 heldKeys)
 
     if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING)
     { // auto run is set -> holding B makes you walk, not holding it makes you run.
-		if (((heldKeys & B_BUTTON) && !FlagGet(FLAG_AUTO_RUN)) || (!(heldKeys & B_BUTTON) && FlagGet(FLAG_AUTO_RUN))) // surf dashing
+		if (((heldKeys & B_BUTTON) && !gSaveBlock2Ptr->optionsAutoRun) || (!(heldKeys & B_BUTTON) && gSaveBlock2Ptr->optionsAutoRun)) // surf dashing
 			PlayerWalkFaster(direction); 
 		else // same speed as running
 			PlayerWalkFast(direction);
@@ -638,7 +638,7 @@ static void PlayerNotOnBikeMoving(u8 direction, u16 heldKeys)
 	
 	if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_UNDERWATER)
 	{
-		if (((heldKeys & B_BUTTON) && !FlagGet(FLAG_AUTO_RUN)) || (!(heldKeys & B_BUTTON) && FlagGet(FLAG_AUTO_RUN))) // dive dashing
+		if (((heldKeys & B_BUTTON) && !gSaveBlock2Ptr->optionsAutoRun) || (!(heldKeys & B_BUTTON) && gSaveBlock2Ptr->optionsAutoRun)) // dive dashing
 			PlayerWalkFast(direction);
 		else // same speed as walking
 			PlayerWalkNormal(direction);
@@ -646,7 +646,7 @@ static void PlayerNotOnBikeMoving(u8 direction, u16 heldKeys)
 	}
 	// running 
     if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_UNDERWATER) && 
-	(((heldKeys & B_BUTTON) && !FlagGet(FLAG_AUTO_RUN)) || (!(heldKeys & B_BUTTON) && FlagGet(FLAG_AUTO_RUN)))
+	(((heldKeys & B_BUTTON) && !gSaveBlock2Ptr->optionsAutoRun) || (!(heldKeys & B_BUTTON) && gSaveBlock2Ptr->optionsAutoRun))
      && IsRunningDisallowed(gObjectEvents[gPlayerAvatar.objectEventId].currentMetatileBehavior) == 0)
     {
         PlayerRun(direction);

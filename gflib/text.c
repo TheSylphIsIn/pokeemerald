@@ -74,9 +74,10 @@ static const u8 sUnusedFRLGBlankedDownArrow[] = INCBIN_U8("graphics/fonts/unused
 static const u8 sUnusedFRLGDownArrow[] = INCBIN_U8("graphics/fonts/unused_frlg_down_arrow.4bpp");
 static const u8 sDownArrowYCoords[] = { 0, 1, 2, 1 };
 static const u8 sWindowVerticalScrollSpeeds[] = {
-    [OPTIONS_TEXT_SPEED_SLOW] = 1,
-    [OPTIONS_TEXT_SPEED_MID] = 2,
+    [OPTIONS_TEXT_SPEED_SLOW] = 4,
+    [OPTIONS_TEXT_SPEED_MID] = 4,
     [OPTIONS_TEXT_SPEED_FAST] = 4,
+	[TEXT_SPEED_FORCED_SLOW] = 2
 };
 
 static const struct GlyphWidthFunc sGlyphWidthFuncs[] =
@@ -327,10 +328,10 @@ void RunTextPrinters(void)
             if (sTextPrinters[i].active)
             {
                 u16 renderCmd = RenderFont(&sTextPrinters[i]);
+                    CopyWindowToVram(sTextPrinters[i].printerTemplate.windowId, COPYWIN_GFX);
                 switch (renderCmd)
                 {
                 case RENDER_PRINT:
-                    CopyWindowToVram(sTextPrinters[i].printerTemplate.windowId, COPYWIN_GFX);
                 case RENDER_UPDATE:
                     if (sTextPrinters[i].callback != NULL)
                         sTextPrinters[i].callback(&sTextPrinters[i].printerTemplate, renderCmd);
@@ -938,6 +939,7 @@ static u16 RenderText(struct TextPrinter *textPrinter)
     u16 currChar;
     s32 width;
     s32 widthHelper;
+	u8 repeats;
 
     switch (textPrinter->state)
     {
@@ -960,7 +962,12 @@ static u16 RenderText(struct TextPrinter *textPrinter)
             textPrinter->delayCounter = 3;
         else
             textPrinter->delayCounter = textPrinter->textSpeed;
-
+		
+		repeats = GetPlayerTextSpeed() * 2;
+		if (repeats == 0 || repeats > 4)
+			repeats = 1;
+		
+		do {
         currChar = *textPrinter->printerTemplate.currentChar;
         textPrinter->printerTemplate.currentChar++;
 
@@ -1164,6 +1171,10 @@ static u16 RenderText(struct TextPrinter *textPrinter)
             else
                 textPrinter->printerTemplate.currentX += gCurGlyph.width;
         }
+		
+		repeats--;
+		} while (repeats > 0);
+		
         return RENDER_PRINT;
     case RENDER_STATE_WAIT:
         if (TextPrinterWait(textPrinter))
