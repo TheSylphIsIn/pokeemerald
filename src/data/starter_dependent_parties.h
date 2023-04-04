@@ -12,7 +12,7 @@ static const struct TrainerMonItemCustomMoves sParty_MorganFisheyeSandude[] = {
     {
     .iv = 10,
     .lvl = 6,
-    .species = SPECIES_GLASMA,
+    .species = SPECIES_MAGIKARP,
 	.ability = 0,
     .moves = {MOVE_TACKLE, MOVE_LEER, MOVE_THUNDER_SHOCK, MOVE_NONE}
     },

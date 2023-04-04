@@ -746,7 +746,7 @@ static u8 GetSumOfEnemyPartyLevel(u16 opponentId, u8 numMons)
 
     sum = 0;
 
-    switch (gTrainers[opponentId].partyFlags)
+    switch (gTrainers[opponentId].partyFlags & (F_TRAINER_PARTY_CUSTOM_MOVESET | F_TRAINER_PARTY_HELD_ITEM))
     {
     case 0:
         {
