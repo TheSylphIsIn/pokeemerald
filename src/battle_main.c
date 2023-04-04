@@ -2015,7 +2015,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
         if (firstTrainer == TRUE)
             ZeroEnemyPartyMons();
 		
-		if (gSaveBlock2Ptr->optionsBattleStyle >= OPTIONS_DIFFICULTY_HARD)
+		if (gSaveBlock2Ptr->optionsDifficulty >= OPTIONS_DIFFICULTY_HARD)
 			monsCount = gTrainers[trainerNum].hardPartySize;
 		else
 			monsCount = gTrainers[trainerNum].partySize;
@@ -2041,9 +2041,9 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
             case 0:
             {
                 const struct TrainerMonNoItemDefaultMoves *partyData;
-				if (gSaveBlock2Ptr->optionsBattleStyle == OPTIONS_DIFFICULTY_HARD)
+				if (gSaveBlock2Ptr->optionsDifficulty == OPTIONS_DIFFICULTY_HARD)
 					partyData = gTrainers[trainerNum].hardParty.NoItemDefaultMoves;
-				else if (gSaveBlock2Ptr->optionsBattleStyle == OPTIONS_DIFFICULTY_UNFAIR)
+				else if (gSaveBlock2Ptr->optionsDifficulty == OPTIONS_DIFFICULTY_UNFAIR)
 					partyData = gTrainers[trainerNum].unfairParty.NoItemDefaultMoves;
 				else
 					partyData = gTrainers[trainerNum].party.NoItemDefaultMoves;
@@ -2070,9 +2070,9 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
             case F_TRAINER_PARTY_CUSTOM_MOVESET:
             {
                 const struct TrainerMonNoItemCustomMoves *partyData;
-				if (gSaveBlock2Ptr->optionsBattleStyle == OPTIONS_DIFFICULTY_HARD)
+				if (gSaveBlock2Ptr->optionsDifficulty == OPTIONS_DIFFICULTY_HARD)
 					partyData = gTrainers[trainerNum].hardParty.NoItemCustomMoves;
-				else if (gSaveBlock2Ptr->optionsBattleStyle == OPTIONS_DIFFICULTY_UNFAIR)
+				else if (gSaveBlock2Ptr->optionsDifficulty == OPTIONS_DIFFICULTY_UNFAIR)
 					partyData = gTrainers[trainerNum].unfairParty.NoItemCustomMoves;
 				else
 					partyData = gTrainers[trainerNum].party.NoItemCustomMoves;
@@ -2106,9 +2106,9 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
             case F_TRAINER_PARTY_HELD_ITEM:
             {
                 const struct TrainerMonItemDefaultMoves *partyData;
-				if (gSaveBlock2Ptr->optionsBattleStyle == OPTIONS_DIFFICULTY_HARD)
+				if (gSaveBlock2Ptr->optionsDifficulty == OPTIONS_DIFFICULTY_HARD)
 					partyData = gTrainers[trainerNum].hardParty.ItemDefaultMoves;
-				else if (gSaveBlock2Ptr->optionsBattleStyle == OPTIONS_DIFFICULTY_UNFAIR)
+				else if (gSaveBlock2Ptr->optionsDifficulty == OPTIONS_DIFFICULTY_UNFAIR)
 					partyData = gTrainers[trainerNum].unfairParty.ItemDefaultMoves;
 				else
 					partyData = gTrainers[trainerNum].party.ItemDefaultMoves;
@@ -2138,18 +2138,18 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
             case F_TRAINER_PARTY_CUSTOM_MOVESET | F_TRAINER_PARTY_HELD_ITEM:
             {
                 const struct TrainerMonItemCustomMoves *partyData;
-				if (gSaveBlock2Ptr->optionsBattleStyle == OPTIONS_DIFFICULTY_HARD)
+				if (gSaveBlock2Ptr->optionsDifficulty == OPTIONS_DIFFICULTY_HARD)
 					partyData = gTrainers[trainerNum].hardParty.ItemCustomMoves;
-				else if (gSaveBlock2Ptr->optionsBattleStyle == OPTIONS_DIFFICULTY_UNFAIR)
+				else if (gSaveBlock2Ptr->optionsDifficulty == OPTIONS_DIFFICULTY_UNFAIR)
 					partyData = gTrainers[trainerNum].unfairParty.ItemCustomMoves;
 				else
 					partyData = gTrainers[trainerNum].party.ItemCustomMoves;
 				
 				if (gTrainers[trainerNum].partyFlags & F_TRAINER_STARTER_DEPENDENT)
 				{
-					if (gSaveBlock2Ptr->optionsBattleStyle == OPTIONS_DIFFICULTY_HARD)
+					if (gSaveBlock2Ptr->optionsDifficulty == OPTIONS_DIFFICULTY_HARD)
 						partyData = sHardStarterDependentParties[VarGet(VAR_STARTER_MON)][VarGet(VAR_STARTER_SET)][trainerNum - FIRST_STARTER_DEPENDENT_INDEX];
-					else if (gSaveBlock2Ptr->optionsBattleStyle == OPTIONS_DIFFICULTY_UNFAIR)
+					else if (gSaveBlock2Ptr->optionsDifficulty == OPTIONS_DIFFICULTY_UNFAIR)
 						partyData = sUnfairStarterDependentParties[VarGet(VAR_STARTER_MON)][VarGet(VAR_STARTER_SET)][trainerNum - FIRST_STARTER_DEPENDENT_INDEX];
 					else 
 						partyData = sStarterDependentParties[VarGet(VAR_STARTER_MON)][VarGet(VAR_STARTER_SET)][trainerNum - FIRST_STARTER_DEPENDENT_INDEX];
@@ -2211,7 +2211,7 @@ static u8 AdjustTrainerLevelDynamic(u8 playerMaxLvl, u8 enemyMaxLvl, u8 enemyLvl
 		adjustedLevel++; // Bosses are stronger than the player.
 	
 	adjustedLevel = adjustedLevel + (enemyLvl - enemyMaxLvl); // pokemon maintain their level difference from the "ace".
-	adjustedLevel += (gSaveBlock2Ptr->optionsBattleStyle - 1); // pokemon are base 1 level lower on easy or 1-2 higher on hard/unfair
+	adjustedLevel += (gSaveBlock2Ptr->optionsDifficulty); // pokemon are 1-2 levels higher on hard/unfair
 	if (adjustedLevel > MAX_LEVEL)
 		adjustedLevel = MAX_LEVEL;
 	

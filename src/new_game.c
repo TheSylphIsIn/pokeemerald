@@ -96,6 +96,11 @@ static void SetDefaultOptions(void)
     gSaveBlock2Ptr->optionsExpShare = 1;
     gSaveBlock2Ptr->optionsBattleStyle = OPTIONS_BATTLE_STYLE_SET;
     gSaveBlock2Ptr->optionsBattleSceneOff = FALSE;
+    gSaveBlock2Ptr->optionsSound = OPTIONS_SOUND_MONO;
+    gSaveBlock2Ptr->optionsAutoRun = FALSE;
+    gSaveBlock2Ptr->optionsDifficulty = OPTIONS_DIFFICULTY_NORMAL;
+    gSaveBlock2Ptr->optionsButtonMode = OPTIONS_BUTTON_MODE_NORMAL;
+	
     gSaveBlock2Ptr->regionMapZoom = FALSE;
 }
 
