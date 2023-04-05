@@ -476,6 +476,7 @@ static bool8 SetUpFieldMove_Surf(void);
 static bool8 SetUpFieldMove_Fly(void);
 static bool8 SetUpFieldMove_Waterfall(void);
 static bool8 SetUpFieldMove_Dive(void);
+static void CreateSwapLabels(void);
 
 // static const data
 #include "data/pokemon/tutor_learnsets.h"
@@ -653,6 +654,8 @@ static bool8 ShowPartyMenu(void)
         gMain.state++;
         break;
     case 19:
+		if (gPartyMenu.menuType == PARTY_MENU_TYPE_FIELD)
+			CreateSwapLabels();
         gMain.state++;
         break;
     case 20:
@@ -2122,7 +2125,7 @@ static void InitPartyMenuWindows(u8 layout)
     DeactivateAllTextPrinters();
     for (i = 0; i < PARTY_SIZE; i++)
         FillWindowPixelBuffer(i, PIXEL_FILL(0));
-    LoadUserWindowBorderGfx(0, 0x4F, BG_PLTT_ID(13));
+    LoadUserWindowBorderGfx(0, 0x50, BG_PLTT_ID(13));
     LoadPalette(GetOverworldTextboxPalettePtr(), BG_PLTT_ID(14), PLTT_SIZE_4BPP);
     LoadPalette(gStandardMenuPalette, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
 }
@@ -2524,7 +2527,7 @@ void DisplayPartyMenuStdMessage(u32 stringId)
             else if (!ShouldUseChooseMonText())
                 stringId = PARTY_MSG_CHOOSE_MON_OR_CANCEL;
         }
-        DrawStdFrameWithCustomTileAndPalette(*windowPtr, FALSE, 0x4F, 13);
+        DrawStdFrameWithCustomTileAndPalette(*windowPtr, FALSE, 0x50, 13);
         StringExpandPlaceholders(gStringVar4, sActionStringTable[stringId]);
         AddTextPrinterParameterized(*windowPtr, FONT_NORMAL, gStringVar4, 0, 1, 0, 0);
         ScheduleBgCopyTilemapToVram(2);
@@ -2574,7 +2577,7 @@ static u8 DisplaySelectionWindow(u8 windowType)
     }
 
     sPartyMenuInternal->windowId[0] = AddWindow(&window);
-    DrawStdFrameWithCustomTileAndPalette(sPartyMenuInternal->windowId[0], FALSE, 0x4F, 13);
+    DrawStdFrameWithCustomTileAndPalette(sPartyMenuInternal->windowId[0], FALSE, 0x50, 13);
     if (windowType == SELECTWINDOW_MOVES)
         return sPartyMenuInternal->windowId[0];
     cursorDimension = GetMenuCursorDimensionByFont(FONT_NORMAL, 0);
@@ -2594,20 +2597,20 @@ static u8 DisplaySelectionWindow(u8 windowType)
 
 static void PartyMenuPrintText(const u8 *text)
 {
-    DrawStdFrameWithCustomTileAndPalette(6, FALSE, 0x4F, 13);
+    DrawStdFrameWithCustomTileAndPalette(6, FALSE, 0x50, 13);
     gTextFlags.canABSpeedUpPrint = TRUE;
     AddTextPrinterParameterized2(6, FONT_NORMAL, text, GetPlayerTextSpeedDelay(), 0, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
 }
 
 static void PartyMenuDisplayYesNoMenu(void)
 {
-    CreateYesNoMenu(&sPartyMenuYesNoWindowTemplate, 0x4F, 13, 0);
+    CreateYesNoMenu(&sPartyMenuYesNoWindowTemplate, 0x50, 13, 0);
 }
 
 static u8 CreateLevelUpStatsWindow(void)
 {
     sPartyMenuInternal->windowId[0] = AddWindow(&sLevelUpStatsWindowTemplate);
-    DrawStdFrameWithCustomTileAndPalette(sPartyMenuInternal->windowId[0], FALSE, 0x4F, 13);
+    DrawStdFrameWithCustomTileAndPalette(sPartyMenuInternal->windowId[0], FALSE, 0x50, 13);
     return sPartyMenuInternal->windowId[0];
 }
 
@@ -6553,4 +6556,11 @@ void IsLastMonThatKnowsSurf(void)
         if (AnyStorageMonWithMove(move) != TRUE)
             gSpecialVar_Result = TRUE;
     }
+}
+
+static void CreateSwapLabels(void)
+{
+	CopyToBgTilemapBufferRect_ChangePalette(0, sSelectSwitchLabel_Tilemap, 12, 0, 8, 1, 14);
+	CopyToBgTilemapBufferRect_ChangePalette(0, sStartSwitchLabel_Tilemap, 21, 0, 8, 1, 14);
+    ScheduleBgCopyTilemapToVram(0);
 }

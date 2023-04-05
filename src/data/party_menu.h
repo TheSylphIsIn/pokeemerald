@@ -108,6 +108,8 @@ static const u8 sPartyMenuSpriteCoords[PARTY_LAYOUT_COUNT][PARTY_SIZE][4 * 2] =
 // Used only when both Cancel and Confirm are present
 static const u32 sConfirmButton_Tilemap[] = INCBIN_U32("graphics/party_menu/confirm_button.bin");
 static const u32 sCancelButton_Tilemap[] = INCBIN_U32("graphics/party_menu/cancel_button.bin");
+static const u32 sSelectSwitchLabel_Tilemap[] = INCBIN_U32("graphics/party_menu/select_indicator.bin");
+static const u32 sStartSwitchLabel_Tilemap[] = INCBIN_U32("graphics/party_menu/start_indicator.bin");
 
 // Text colors for BG, FG, and Shadow in that order
 static const u8 sFontColorTable[][3] =
