@@ -46,7 +46,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE | AI_SCRIPT_TRY_TO_FAINT | AI_SCRIPT_CHECK_VIABILITY,
-        .party = ITEM_CUSTOM_MOVES_STARTER_DEPENDENT(DummyParty),
+        .party = ITEM_CUSTOM_MOVES_STARTER_DEPENDENT(DummyParty_Rival1),
     },
 	
 	[TRAINER_CALVIN_FISHEYE_LAKE] =
@@ -58,6 +58,6 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE | AI_SCRIPT_TRY_TO_FAINT | AI_SCRIPT_CHECK_VIABILITY,
-        .party = ITEM_CUSTOM_MOVES_STARTER_DEPENDENT(DummyParty),
+        .party = ITEM_CUSTOM_MOVES_STARTER_DEPENDENT(DummyParty_Rival1),
     },
 };

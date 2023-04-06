@@ -42,10 +42,10 @@ static const struct TrainerMonNoItemCustomMoves sParty_[] = {
 };
 */
 
-static const struct TrainerMonItemCustomMoves sParty_DummyParty[] = {
+static const struct TrainerMonItemCustomMoves sParty_DummyParty_Rival1[] = {
     {
     .iv = 31,
-    .lvl = 10,
+    .lvl = 6,
     .species = SPECIES_DUBSNAKE,
 	.ability = 0,
     .moves = {MOVE_ACID, MOVE_ICE_SHARD, MOVE_BLOCK, MOVE_PERISH_SONG}
