@@ -510,13 +510,13 @@ struct SaveBlock2
     /*0x14*/ u16 optionsTextSpeed:2; // OPTIONS_TEXT_SPEED_[SLOW/MID/FAST]
              u16 optionsWindowFrameType:5; // Specifies one of the 20 decorative borders for text boxes
              u16 optionsExpShare:1; // if TRUE, exp will be distributed to non-battlers.
-             u16 optionsDifficulty:2; // OPTIONS_DIFFICULTY_[EASY/NORMAL/HARD/UNFAIR]
+             u16 optionsDifficulty:2; // OPTIONS_DIFFICULTY_[NORMAL/HARD/UNFAIR]
              u16 optionsBattleSceneOff:1; // whether battle animations are disabled
              u16 regionMapZoom:1; // whether the map is zoomed in
-             u16 optionsAutoRun:1;
-			 u16 optionsSound:1;
-			 u16 optionsBattleStyle:1;
-			 u16 optionsSpareBit:1;
+             u16 optionsAutoRun:1; // whether holding B will make the player run or walk
+			 u16 optionsSound:1; // stereo or mono
+			 u16 optionsBattleStyle:1; // shift or set
+			 u16 optionsSpareBit:1; // unused for now
              //u16 padding2;
     /*0x18*/ struct Pokedex pokedex;
     /*0x90*/ u8 filler_90[0x8];

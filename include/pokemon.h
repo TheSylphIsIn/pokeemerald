@@ -81,10 +81,7 @@ enum {
     MON_DATA_LAND_RIBBON,
     MON_DATA_SKY_RIBBON,
     MON_DATA_COUNTRY_RIBBON,
-    MON_DATA_NATIONAL_RIBBON,
-    MON_DATA_EARTH_RIBBON,
-    MON_DATA_WORLD_RIBBON,
-    MON_DATA_UNUSED_RIBBONS,
+	MON_DATA_NATURE,
     MON_DATA_EVENT_LEGAL,
     MON_DATA_KNOWN_MOVES,
     MON_DATA_RIBBON_COUNT,
@@ -160,10 +157,7 @@ struct PokemonSubstruct3
  /* 0x0A */ u32 landRibbon:1; // never distributed
  /* 0x0A */ u32 skyRibbon:1; // never distributed
  /* 0x0A */ u32 countryRibbon:1; // distributed during Pokémon Festa '04 and '05 to tournament winners
- /* 0x0B */ u32 nationalRibbon:1;
- /* 0x0B */ u32 earthRibbon:1;
- /* 0x0B */ u32 worldRibbon:1; // distributed during Pokémon Festa '04 and '05 to tournament winners
- /* 0x0B */ u32 unusedRibbons:2; // discarded in Gen 4
+			u32 nature:5;
  /* 0x0B */ u32 abilityNum:2; 
  /* 0x0B */ u32 eventLegal:1; // controls Mew & Deoxys obedience; if set, Pokémon is a fateful encounter in Gen 4+; set for in-game event island legendaries, some distributed events, and Pokémon from XD: Gale of Darkness.
 };
