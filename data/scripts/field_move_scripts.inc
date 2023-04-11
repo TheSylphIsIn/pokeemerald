@@ -309,6 +309,7 @@ EventScript_DoCheatSequenceResult::
 	switch VAR_RESULT
 	case 0, EventScript_RareCandyCode
 	case 1, EventScript_KonamiCode
+	case 2, EventScript_HealCode
 	goto EventScript_FailSweetScent
 	
 EventScript_KonamiCode:
@@ -324,8 +325,30 @@ EventScript_RareCandyCode:
 	waitbuttonpress
 	release
 	end
+
+EventScript_HealCode:
+	goto_if_set FLAG_PORTABLE_HEAL_USED, EventScript_HealCodeUsed
+	playse SE_USE_ITEM
+	message Text_HealCode
+	special HealPlayerParty
+	setflag FLAG_PORTABLE_HEAL_USED
+	waitbuttonpress
+	release
+	end
+
+EventScript_HealCodeUsed:
+	message Text_HealCodeUsed
+	waitbuttonpress
+	release
+	end
 	
 Text_GetItems:
 	.string "The cheat code gave you items!$"
 
+Text_HealCode:
+	.string "The cheat code healed your party!$"
+
+Text_HealCodeUsed:
+	.string "This code can't be used again until\n"
+	.string "you use a healing spot.$"
 

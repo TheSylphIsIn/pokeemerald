@@ -1503,7 +1503,7 @@
 
 #define FLAG_HELD_ITEMS_STORED                           (SYSTEM_FLAGS + 0x85) // Used to remember that held items were saved, so they don't get overwritten if they weren't
 #define FLAG_EGG_MOVE_TUTOR                           (SYSTEM_FLAGS + 0x86) // If set, the move reminder will remind Egg moves instead of level moves.
-#define FLAG_UNUSED_0x8E7                           (SYSTEM_FLAGS + 0x87) // Unused Flag
+#define FLAG_PORTABLE_HEAL_USED                           (SYSTEM_FLAGS + 0x87) // The cheat code heal can only be used once until the next time a regular heal is used.
 #define FLAG_UNUSED_0x8E8                           (SYSTEM_FLAGS + 0x88) // Unused Flag
 #define FLAG_UNUSED_0x8E9                           (SYSTEM_FLAGS + 0x89) // Unused Flag
 #define FLAG_UNUSED_0x8EA                           (SYSTEM_FLAGS + 0x8A) // Unused Flag
