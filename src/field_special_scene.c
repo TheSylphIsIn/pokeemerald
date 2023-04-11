@@ -86,7 +86,7 @@ static s16 GetTruckBoxYMovement(int time)
 
 #define tTimer data[0]
 
-static void Task_Truck1(u8 taskId)
+static void Task_Truck1(u8 taskId) // sprites slide in from the top of the screen
 {
     s16 *data = gTasks[taskId].data;
     s16 cameraXpan = 0, cameraYpan = 0;
@@ -113,7 +113,7 @@ static void Task_Truck1(u8 taskId)
 #define tMoveStep        data[1]
 #define tTimerVertical   data[2]
 
-static void Task_Truck2(u8 taskId)
+static void Task_Truck2(u8 taskId) // sprites bob up and down for a little while
 {
     s16 *data = gTasks[taskId].data;
     s16 cameraYpan, cameraXpan;
@@ -149,7 +149,7 @@ static void Task_Truck2(u8 taskId)
     }
 }
 
-static void Task_Truck3(u8 taskId)
+static void Task_Truck3(u8 taskId) // sprites slide down into place
 {
    s16 *data = gTasks[taskId].data;
    s16 cameraXpan, cameraYpan;

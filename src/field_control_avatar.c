@@ -1047,9 +1047,8 @@ static bool32 TryProcessCheatCode(void)
     return FALSE;
 }
 
-static const u16 sRareCandySequence[4] = {B_BUTTON, A_BUTTON, B_BUTTON, DPAD_RIGHT};
-static const u16 sKonamiCode[10] = {DPAD_UP, DPAD_UP, DPAD_DOWN, DPAD_DOWN, DPAD_LEFT, DPAD_RIGHT, 
-									DPAD_LEFT, DPAD_RIGHT, B_BUTTON, A_BUTTON};
+#include "data/cheat_codes.h"
+
 // This is essentially a task. It tries to detect if the player is inputting
 // a valid button sequence cheat code.
 /*

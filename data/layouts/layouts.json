@@ -4830,6 +4830,16 @@
       "secondary_tileset": "gTileset_Cave",
       "border_filepath": "data/layouts/ClearingCave/border.bin",
       "blockdata_filepath": "data/layouts/ClearingCave/map.bin"
+    },
+    {
+      "id": "LAYOUT_WANDERERS_ROAD",
+      "name": "WanderersRoad_Layout",
+      "width": 76,
+      "height": 32,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Rustboro",
+      "border_filepath": "data/layouts/WanderersRoad/border.bin",
+      "blockdata_filepath": "data/layouts/WanderersRoad/map.bin"
     }
   ]
 }

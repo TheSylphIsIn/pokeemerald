@@ -22,6 +22,16 @@
       "map": "MAP_LUMEN_LAKE",
       "offset": -16,
       "direction": "left"
+    },
+    {
+      "map": "MAP_WANDERERS_ROAD",
+      "offset": 6,
+      "direction": "right"
+    },
+    {
+      "map": "MAP_HOT_HEART_PATH",
+      "offset": 0,
+      "direction": "up"
     }
   ],
   "object_events": [

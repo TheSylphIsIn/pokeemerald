@@ -16,6 +16,7 @@
 #define MAP_PENZEL_CITY     (7 | (0 << 8))
 #define MAP_LUMEN_LAKE      (8 | (0 << 8))
 #define MAP_HOT_HEART_PATH  (9 | (0 << 8))
+#define MAP_WANDERERS_ROAD  (10 | (0 << 8))
 
 // gMapGroup_Burrows
 #define MAP_NEW_MAP1           (0 | (1 << 8))
