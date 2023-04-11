@@ -1802,6 +1802,9 @@ u8 AI_TypeCalc(u16 move, u16 targetSpecies, u8 targetAbility)
 	
 	if (AbilityIsAte(gBattleMons[gBattlerAttacker].ability) && moveType == TYPE_NORMAL)
 		moveType = SetAteMoveType(gBattleMons[gBattlerAttacker].ability);
+	
+	if (move == MOVE_HIDDEN_POWER)
+		moveType = GetHiddenPowerType(gBattleMons[gActiveBattler].hpIV, gBattleMons[gActiveBattler].attackIV, gBattleMons[gActiveBattler].defenseIV, gBattleMons[gActiveBattler].speedIV, gBattleMons[gActiveBattler].spAttackIV, gBattleMons[gActiveBattler].spDefenseIV);
 
     if (targetAbility == ABILITY_LEVITATE && moveType == TYPE_GROUND && AbilityIsActive())
     {

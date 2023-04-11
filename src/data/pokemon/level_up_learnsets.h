@@ -5773,6 +5773,7 @@ static const u16 sStormageLevelUpLearnset[] = {
 static const u16 sSandudeLevelUpLearnset[] = {
 	LEVEL_UP_MOVE( 1, MOVE_TACKLE),
 	LEVEL_UP_MOVE( 1, MOVE_HARDEN),
+	LEVEL_UP_MOVE( 6, MOVE_HIDDEN_POWER),
 	LEVEL_UP_MOVE( 6, MOVE_MUD_SLAP),
 	LEVEL_UP_MOVE( 8, MOVE_SAND_TOMB),
 	LEVEL_UP_MOVE(13, MOVE_MUD_SHOT),
