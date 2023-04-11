@@ -2841,6 +2841,10 @@ void CreateMonWithEVSpreadNatureOTID(struct Pokemon *mon, u16 species, u8 level,
     i = Random32();
 
     CreateMon(mon, species, level, fixedIV, TRUE, i, OT_ID_PRESET, otId);
+	
+	if (nature != GetNatureFromPersonality(i))
+		SetMonData(mon, MON_DATA_NATURE, &nature);
+	
     evsBits = evSpread;
     for (i = 0; i < NUM_STATS; i++)
     {
@@ -2857,9 +2861,6 @@ void CreateMonWithEVSpreadNatureOTID(struct Pokemon *mon, u16 species, u8 level,
             SetMonData(mon, MON_DATA_HP_EV + i, &evAmount);
         evsBits <<= 1;
     }
-	
-	if (nature != GetNatureFromPersonality(personality))
-		SetMonData(mon, MON_DATA_NATURE, &nature);
 
     CalculateMonStats(mon);
 }
@@ -4268,9 +4269,6 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
             retVal += substruct3->landRibbon;
             retVal += substruct3->skyRibbon;
             retVal += substruct3->countryRibbon;
-            retVal += substruct3->nationalRibbon;
-            retVal += substruct3->earthRibbon;
-            retVal += substruct3->worldRibbon;
         }
         break;
     case MON_DATA_RIBBONS:
@@ -4290,10 +4288,7 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
                 | (substruct3->marineRibbon << 20)
                 | (substruct3->landRibbon << 21)
                 | (substruct3->skyRibbon << 22)
-                | (substruct3->countryRibbon << 23)
-                | (substruct3->nationalRibbon << 24)
-                | (substruct3->earthRibbon << 25)
-                | (substruct3->worldRibbon << 26);
+                | (substruct3->countryRibbon << 23);
         }
         break;
     default:

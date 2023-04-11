@@ -1348,6 +1348,16 @@ void GiveLeadMonEffortRibbon(void)
         TryPutSpotTheCutiesOnAir(leadMon, MON_DATA_EFFORT_RIBBON);
 }
 
+void SetNatureAtPartyIndex(void)
+{
+	u8 nature = VarGet(VAR_0x800B);
+	u8 partyIndex = VarGet(VAR_0x800C); // this doesn't account for eggs or empty slots.
+	struct Pokemon *mon;
+    mon = &gPlayerParty[partyIndex];
+	SetMonData(mon, MON_DATA_NATURE, &nature);
+	CalculateMonStats(mon);
+}
+
 bool8 Special_AreLeadMonEVsMaxedOut(void)
 {
     if (GetMonEVCount(&gPlayerParty[GetLeadMonIndex()]) >= MAX_TOTAL_EVS)
