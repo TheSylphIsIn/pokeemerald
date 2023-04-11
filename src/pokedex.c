@@ -4329,7 +4329,7 @@ u16 GetNationalPokedexCount(u8 caseID)
             break;
         }
     }
-	DebugPrintf("Seen count: %d", count);
+	
     return count;
 }
 

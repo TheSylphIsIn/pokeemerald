@@ -581,17 +581,13 @@ static bool8 HandleStartMenuInput(void)
 
     if (JOY_NEW(A_BUTTON))
     {
-		DebugPrintf("Selected Menu Option %d", sStartMenuCursorPos);
         PlaySE(SE_SELECT);
         if (sStartMenuItems[sCurrentStartMenuActions[sStartMenuCursorPos]].func.u8_void == StartMenuPokedexCallback)
         {
-			
-			DebugPrintf("Selected Pokedex", 0);
             if (GetNationalPokedexCount(FLAG_GET_SEEN) == 0)
                 return FALSE;
         }
 
-		DebugPrintf("Set callback", 0);
         gMenuCallback = sStartMenuItems[sCurrentStartMenuActions[sStartMenuCursorPos]].func.u8_void;
 
         if (gMenuCallback != StartMenuSaveCallback
@@ -624,7 +620,6 @@ static bool8 StartMenuPokedexCallback(void)
         RemoveExtraStartMenuWindows();
         CleanupOverworldWindowsAndTilemaps();
         SetMainCallback2(CB2_OpenPokedex);
-		DebugPrintf("Opened Pokedex", 0);
 
         return TRUE;
     }

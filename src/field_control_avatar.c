@@ -1055,6 +1055,7 @@ static bool32 TryProcessCheatCode(void)
 */
 static bool32 TryCheatSequence(void)
 {
+	u32 i;
 	if (JOY_HELD_RAW(R_BUTTON))
 	{
 		cTimer = 30; // if R is released for more than 30 frames, resets code progress.
@@ -1064,51 +1065,40 @@ static bool32 TryCheatSequence(void)
 			switch (cState)
 			{
 				case 0: // try to detect if a valid code is being input
-					if (cNextInput & sRareCandySequence[cInputIndex] || cNextInput & sKonamiCode[cInputIndex])
+					for (i = 0; i < sizeof(sCheatCodes); i++)
 					{
-						cInputIndex++;
-						cState++;
+						if (cNextInput & sCheatCodes[i][cInputIndex])
+						{
+							cInputIndex++;
+							cState++;
+							break;
+						}
 					}
 					return FALSE;
 				case 1: // try to match the sequence to a code
-					if (cNextInput & sKonamiCode[cInputIndex])
+					for (i = 0; i < sizeof(sCheatCodes); i++)
 					{
-						cCodeIndex = 1;
-						cState++;
-						cInputIndex++;
+						if (cNextInput & sCheatCodes[i][cInputIndex])
+						{
+							cInputIndex++;
+							cState++;
+							cCodeIndex = i;
+							break;
+						}
 					}
-					else if (cNextInput & sRareCandySequence[cInputIndex])
-					{
-						cCodeIndex = 2;
-						cState++;
-						cInputIndex++;
-					}
-					else
+					if (i >= sizeof(sCheatCodes))
 						ResetCheatSequenceProgress();
 					return FALSE;
 				case 2: // try to make sure the code sequence is completed
-					switch (cCodeIndex)
+					if (cNextInput & sCheatCodes[cCodeIndex][cInputIndex])
 					{
-						case 1: 
-							if (cNextInput & sKonamiCode[cInputIndex])
-								cInputIndex++;
-							else 
-								ResetCheatSequenceProgress();
-							if (cInputIndex > 9)
-								cState++;
-							break;
-						case 2:
-							if (cNextInput & sRareCandySequence[cInputIndex])
-								cInputIndex++;
-							else 
-								ResetCheatSequenceProgress();
-							if (cInputIndex > 3)
-								cState++;
-							break;
-						default:
-							ResetCheatSequenceProgress();
-							break;
+						cInputIndex++;
+						if (sCheatCodes[cCodeIndex][cInputIndex] == 0x3000)
+							cState++;
 					}
+					else 
+						ResetCheatSequenceProgress();
+					
 					return FALSE;
 				case 3: // code completed successfully.
 					gSpecialVar_Result = cCodeIndex; // this is used to select the script from a switch in field_move_scripts

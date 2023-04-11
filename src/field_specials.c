@@ -4228,15 +4228,12 @@ void TryCombineItems(void)
 	item1 = VarGet(VAR_TEMP_E);
 	item2 = VarGet(VAR_TEMP_F);
 	
-	DebugPrintf("Combining itemID %d and itemID %d", item1, item2);
-	
 	for (i = 0; i < ARRAY_COUNT(sRecipes); i++)
 	{
 		if ((sRecipes[i][0] == item1 && sRecipes[i][1] == item2) || (sRecipes[i][0] == item2 && sRecipes[i][1] == item1))
 		{
 			result = sRecipes[i][2];
 			break;
-			DebugPrintf("Made an itemID %d", result);
 		}
 	}
 	

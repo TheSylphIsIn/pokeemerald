@@ -216,7 +216,6 @@ static u32 LoopedTask_BuildMatchCallList(s32 taskState)
         // Load special trainers (e.g. Rival, gym leaders)
         for (i = 0, j = state->headerId; i < 30; i++, j++)
         {
-			DebugPrintf("Loading member: %d", j);
             if (MatchCall_GetEnabled(j) || AchievementGetUnlocked(j))
             {
                 state->matchCallEntries[state->numRegistered].headerId = j;

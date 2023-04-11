@@ -307,8 +307,8 @@ Text_AchievementGet:
 EventScript_DoCheatSequenceResult::
 	lock
 	switch VAR_RESULT
+	case 0, EventScript_RareCandyCode
 	case 1, EventScript_KonamiCode
-	case 2, EventScript_RareCandyCode
 	goto EventScript_FailSweetScent
 	
 EventScript_KonamiCode:
