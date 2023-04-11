@@ -1482,6 +1482,7 @@ const u8 gText_AutoRun[] = _("AUTO RUN");
 const u8 gText_TextSpeed[] = _("TEXT SPEED");
 const u8 gText_BattleScene[] = _("BATTLE SCENE");
 const u8 gText_BattleStyle[] = _("BATTLE STYLE");
+const u8 gText_BattleHelpers[] = _("BATTLE HELP");
 const u8 gText_Sound[] = _("SOUND");
 const u8 gText_Frame[] = _("FRAME");
 const u8 gText_OptionMenuCancel[] = _("PRESS B BUTTON TO SAVE & EXIT");

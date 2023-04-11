@@ -23,12 +23,15 @@
 #define tTextSpeed data[4]
 #define tButtonMode data[5]
 #define tBattleSceneOff data[6]
-#define tSound data[7]
-#define tWindowFrameType data[8]
-#define tMenuSelection data[9]
-#define tAbsolutePos data[10]
-#define tScrollOffset data[11]
-#define tHeldKeysTimer data[12]
+#define tBattleHelpers data[7]
+#define tSound data[8]
+#define tWindowFrameType data[9]
+
+
+#define tMenuSelection data[12]
+#define tAbsolutePos data[13]
+#define tScrollOffset data[14]
+#define tHeldKeysTimer data[15]
 
 enum
 {
@@ -39,6 +42,7 @@ enum
 	MENUITEM_TEXTSPEED,
     MENUITEM_BUTTONMODE,
     MENUITEM_BATTLESCENE,
+	MENUITEM_BATTLEHELPERS,
     MENUITEM_SOUND,
     MENUITEM_FRAMETYPE,
     MENUITEM_COUNT,
@@ -78,6 +82,8 @@ static u8 Difficulty_ProcessInput(u8 selection);
 static void Difficulty_DrawChoices(u8 selection, u8 order);
 static u8 AutoRun_ProcessInput(u8 selection);
 static void AutoRun_DrawChoices(u8 selection, u8 order);
+static u8 BattleHelpers_ProcessInput(u8 selection);
+static void BattleHelpers_DrawChoices(u8 selection, u8 order);
 static void DrawHeaderText(void);
 static void DrawFooterText(void);
 static void DrawOptionMenuTexts(void);
@@ -111,6 +117,7 @@ static const u8 *const sOptionMenuItemsNames[MENUITEM_COUNT] =
 	[MENUITEM_TEXTSPEED] = gText_TextSpeed,
     [MENUITEM_BUTTONMODE] = gText_ButtonMode,
     [MENUITEM_BATTLESCENE] = gText_BattleScene,
+	[MENUITEM_BATTLEHELPERS] = gText_BattleHelpers,
     [MENUITEM_SOUND] = gText_Sound,
     [MENUITEM_FRAMETYPE] = gText_Frame,
 };
@@ -288,6 +295,7 @@ void CB2_InitOptionMenu(void)
         gTasks[taskId].tWindowFrameType = gSaveBlock2Ptr->optionsWindowFrameType;
 		gTasks[taskId].tDifficulty = gSaveBlock2Ptr->optionsDifficulty;
 		gTasks[taskId].tAutoRun = gSaveBlock2Ptr->optionsAutoRun;
+		gTasks[taskId].tBattleHelpers = gSaveBlock2Ptr->optionsBattleHelpers;
 		gTasks[taskId].tAbsolutePos = 0;
 		gTasks[taskId].tScrollOffset = 0;
 		gTasks[taskId].tHeldKeysTimer = 10;
@@ -400,6 +408,13 @@ static void Task_OptionMenuProcessInput(u8 taskId)
             if (previousOption != gTasks[taskId].tBattleStyle)
                 BattleStyle_DrawChoices(gTasks[taskId].tBattleStyle, MENUITEM_BATTLESTYLE - gTasks[taskId].tScrollOffset);
             break;
+        case MENUITEM_BATTLEHELPERS:
+            previousOption = gTasks[taskId].tBattleHelpers;
+            gTasks[taskId].tBattleHelpers = BattleHelpers_ProcessInput(gTasks[taskId].tBattleHelpers);
+
+            if (previousOption != gTasks[taskId].tBattleHelpers)
+                BattleHelpers_DrawChoices(gTasks[taskId].tBattleHelpers, MENUITEM_BATTLEHELPERS - gTasks[taskId].tScrollOffset);
+            break;
         case MENUITEM_SOUND:
             previousOption = gTasks[taskId].tSound;
             gTasks[taskId].tSound = Sound_ProcessInput(gTasks[taskId].tSound);
@@ -441,6 +456,7 @@ static void Task_OptionMenuSave(u8 taskId)
     gSaveBlock2Ptr->optionsTextSpeed = gTasks[taskId].tTextSpeed;
     gSaveBlock2Ptr->optionsBattleSceneOff = gTasks[taskId].tBattleSceneOff;
     gSaveBlock2Ptr->optionsBattleStyle = gTasks[taskId].tBattleStyle;
+	gSaveBlock2Ptr->optionsBattleHelpers = gTasks[taskId].tBattleHelpers;
     gSaveBlock2Ptr->optionsSound = gTasks[taskId].tSound;
     gSaveBlock2Ptr->optionsButtonMode = gTasks[taskId].tButtonMode;
     gSaveBlock2Ptr->optionsWindowFrameType = gTasks[taskId].tWindowFrameType;
@@ -677,6 +693,29 @@ static void BattleScene_DrawChoices(u8 selection, u8 order)
 
     DrawOptionMenuChoice(gText_BattleSceneOn, 104, YPOS_WITH_MENU_POS, styles[0]);
     DrawOptionMenuChoice(gText_BattleSceneOff, GetStringRightAlignXOffset(FONT_NORMAL, gText_BattleSceneOff, 198), YPOS_WITH_MENU_POS, styles[1]);
+}
+
+static u8 BattleHelpers_ProcessInput(u8 selection)
+{
+    if (JOY_NEW(DPAD_LEFT | DPAD_RIGHT))
+    {
+        selection ^= 1;
+        sArrowPressed = TRUE;
+    }
+
+    return selection;
+}
+
+static void BattleHelpers_DrawChoices(u8 selection, u8 order)
+{
+    u8 styles[2];
+
+    styles[0] = 0;
+    styles[1] = 0;
+    styles[selection] = 1;
+
+    DrawOptionMenuChoice(gText_BattleSceneOff, 104, YPOS_WITH_MENU_POS, styles[0]);
+    DrawOptionMenuChoice(gText_BattleSceneOn, GetStringRightAlignXOffset(FONT_NORMAL, gText_BattleSceneOff, 198), YPOS_WITH_MENU_POS, styles[1]);
 }
 
 static u8 Sound_ProcessInput(u8 selection)
@@ -939,6 +978,9 @@ static void RedrawChoices(u8 taskId, u8 position)
 			break;
 		case MENUITEM_BATTLESCENE:
 			BattleScene_DrawChoices(gTasks[taskId].data[nextOption], position);
+			break;
+		case MENUITEM_BATTLEHELPERS:
+			BattleHelpers_DrawChoices(gTasks[taskId].data[nextOption], position);
 			break;
 		case MENUITEM_SOUND:
 			Sound_DrawChoices(gTasks[taskId].data[nextOption], position);

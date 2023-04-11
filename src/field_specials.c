@@ -1350,8 +1350,8 @@ void GiveLeadMonEffortRibbon(void)
 
 void SetNatureAtPartyIndex(void)
 {
-	u8 nature = VarGet(VAR_0x800B);
-	u8 partyIndex = VarGet(VAR_0x800C); // this doesn't account for eggs or empty slots.
+	u8 nature = VarGet(VAR_0x800A);
+	u8 partyIndex = VarGet(VAR_0x800B); // this doesn't account for eggs or empty slots.
 	struct Pokemon *mon;
     mon = &gPlayerParty[partyIndex];
 	SetMonData(mon, MON_DATA_NATURE, &nature);

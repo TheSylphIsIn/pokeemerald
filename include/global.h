@@ -516,7 +516,7 @@ struct SaveBlock2
              u16 optionsAutoRun:1; // whether holding B will make the player run or walk
 			 u16 optionsSound:1; // stereo or mono
 			 u16 optionsBattleStyle:1; // shift or set
-			 u16 optionsSpareBit:1; // unused for now
+			 u16 optionsBattleHelpers:1; // true or false. Provides information that the player should have memorized, such as type matchups or nature stat mods
              //u16 padding2;
     /*0x18*/ struct Pokedex pokedex;
     /*0x90*/ u8 filler_90[0x8];
