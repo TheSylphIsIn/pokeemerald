@@ -187,6 +187,8 @@ extern const u8 gText_Gold[];
 extern const u8 gText_Var1AteTheVar2[];
 extern const u8 gText_Var1HappilyAteVar2[];
 extern const u8 gText_Var1DisdainfullyAteVar2[];
+extern const u8 gText_NatureChanged[];
+extern const u8 gText_ExclamationPoint[];
 
 extern const u8 gText_RedPokeblock[];
 extern const u8 gText_BluePokeblock[];

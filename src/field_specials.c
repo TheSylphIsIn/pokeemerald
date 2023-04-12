@@ -4252,3 +4252,79 @@ void TryCombineItems(void)
 	
 }
 
+static const struct Pokeblock sDebugWeakBlock = 
+{
+	.color = PBLOCK_CLR_RED,
+    .spicy = 10,
+    .dry = 2,
+    .sweet = 2,
+    .bitter = 0,
+    .sour = 2,
+    .feel = 10
+};
+
+static const struct Pokeblock sDebugSpicyBlock = 
+{
+	.color = PBLOCK_CLR_PURPLE,
+    .spicy = 50,
+    .dry = 0,
+    .sweet = 0,
+    .bitter = 0,
+    .sour = 0,
+    .feel = 10
+};
+
+static const struct Pokeblock sDebugDryBlock = 
+{
+	.color = PBLOCK_CLR_INDIGO,
+    .spicy = 0,
+    .dry = 50,
+    .sweet = 0,
+    .bitter = 0,
+    .sour = 0,
+    .feel = 10
+};
+
+static const struct Pokeblock sDebugSweetBlock = 
+{
+	.color = PBLOCK_CLR_BROWN,
+    .spicy = 0,
+    .dry = 0,
+    .sweet = 50,
+    .bitter = 0,
+    .sour = 0,
+    .feel = 10
+};
+
+static const struct Pokeblock sDebugBitterBlock = 
+{
+	.color = PBLOCK_CLR_LITE_BLUE,
+    .spicy = 0,
+    .dry = 0,
+    .sweet = 0,
+    .bitter = 50,
+    .sour = 0,
+    .feel = 10
+};
+
+static const struct Pokeblock sDebugSourBlock = 
+{
+	.color = PBLOCK_CLR_OLIVE,
+    .spicy = 0,
+    .dry = 0,
+    .sweet = 0,
+    .bitter = 0,
+    .sour = 50,
+    .feel = 10
+};
+
+void GivePokeblock(void)
+{
+	AddPokeblock(&sDebugWeakBlock);
+	AddPokeblock(&sDebugSpicyBlock);
+	AddPokeblock(&sDebugDryBlock);
+	AddPokeblock(&sDebugSweetBlock);
+	AddPokeblock(&sDebugBitterBlock);
+	AddPokeblock(&sDebugSourBlock);
+}
+

@@ -22,6 +22,7 @@
 #include "menu.h"
 #include "gpu_regs.h"
 #include "graphics.h"
+#include "random.h"
 #include "pokemon_summary_screen.h"
 #include "item_menu.h"
 
@@ -69,7 +70,7 @@ struct UsePokeblockSession
     u8 curSelection;
     bool8 (*loadNewSelection)(void);
     u8 helperState;
-    u8 unused3;
+    u8 changedNature;
     u8 natureText[34];
 };
 
@@ -151,6 +152,8 @@ static void LoadMonInfo(s16, u8);
 static bool8 LoadNewSelection_CancelToMon(void);
 static bool8 LoadNewSelection_MonToCancel(void);
 static bool8 LoadNewSelection_MonToMon(void);
+static u8 TryUpdateNature(struct Pokemon *mon);
+static bool8 TryPrintNatureChangedText(void);
 static void SpriteCB_SelectionIconPokeball(struct Sprite *);
 static void SpriteCB_SelectionIconCancel(struct Sprite *);
 static void SpriteCB_MonPic(struct Sprite *);
@@ -808,7 +811,7 @@ static void ShowPokeblockResults(void)
         }
         break;
     case 5:
-        if (JOY_NEW(A_BUTTON | B_BUTTON) && !TryPrintNextEnhancement())
+        if (JOY_NEW(A_BUTTON | B_BUTTON) && !TryPrintNextEnhancement() && !TryPrintNatureChangedText())
         {
             TryClearPokeblock((u8)gSpecialVar_ItemId);
             SetUsePokeblockCallback(CloseUsePokeblockMenu);
@@ -945,6 +948,24 @@ static bool8 TryPrintNextEnhancement(void)
     return TRUE;
 }
 
+static bool8 TryPrintNatureChangedText(void)
+{
+    if (!sInfo->changedNature)
+		return FALSE;
+	
+	FillWindowPixelBuffer(WIN_TEXT, 17);
+
+    StringCopy(gStringVar4, gText_NatureChanged);
+	StringAppend(gStringVar4, gNatureNamePointers[sInfo->changedNature]);
+	StringAppend(gStringVar4, gText_ExclamationPoint);
+    PrintMenuWindowText(gStringVar4);
+    CopyWindowToVram(WIN_TEXT, COPYWIN_GFX);
+	
+	sInfo->changedNature = FALSE;
+	
+	return TRUE;
+}
+
 static void PrintWontEatAnymore(void)
 {
     FillWindowPixelBuffer(WIN_TEXT, 17);
@@ -1034,6 +1055,8 @@ static void CalculateConditionEnhancements(void)
     GetMonConditions(mon, sInfo->conditionsAfterBlock);
     for (i = 0; i < CONDITION_COUNT; i++)
         sInfo->enhancements[i] = sInfo->conditionsAfterBlock[i] - sInfo->conditionsBeforeBlock[i];
+	
+	sInfo->changedNature = TryUpdateNature(mon);
 }
 
 static void CalculatePokeblockEffectiveness(struct Pokeblock *pokeblock, struct Pokemon *mon)
@@ -1664,4 +1687,55 @@ static void SpriteCB_Condition(struct Sprite *sprite)
         sprite->x = sprite->data[1];
         sprite->callback = SpriteCallbackDummy;
     }
+}
+
+static const u8 sConditionToStat[CONDITION_COUNT] =
+{
+    [CONDITION_COOL]   = STAT_ATK,
+    [CONDITION_TOUGH]  = STAT_DEF,
+    [CONDITION_SMART]  = STAT_SPDEF,
+    [CONDITION_CUTE]   = STAT_SPEED,
+    [CONDITION_BEAUTY] = STAT_SPATK
+};
+
+static u8 TryUpdateNature(struct Pokemon *mon)
+{
+	u32 statToBoost = 0;
+	u32 highestCondition = 0;
+	u32 statToLower = 0;
+	u32 lowestCondition = 255;
+	u8 value;
+	u32 i;
+	
+	for (i = 0; i < CONDITION_COUNT; i++) // assign boost and lower stats according to conditions
+	{
+		value = GetMonData(mon, sConditionToMonData[i]);
+		if (value > highestCondition || (value == highestCondition && Random() % 2)) // if there's a tie, one will randomly be favored.
+		{
+			highestCondition = value;
+			statToBoost = sConditionToStat[i];
+		}
+		if (value < lowestCondition || (value == lowestCondition && Random() % 2)) // emergent property: if you keep feeding the same color, it will cycle through the natures of that stat.
+		{
+			lowestCondition = value;
+			statToLower = sConditionToStat[i];
+		}
+	}
+	
+	if (statToBoost == statToLower || highestCondition < 30) // don't change nature if best condition is below 30 or it would be a neutral nature
+		return FALSE;
+	
+	for (value = 0; value < NUM_NATURES; value++)
+	{
+		if (gNatureStatTable[value][statToBoost - 1] == 1 && gNatureStatTable[value][statToLower - 1] == -1
+			&& GetMonData(mon, MON_DATA_NATURE, 0) != value)
+		{
+			SetMonData(mon, MON_DATA_NATURE, &value);
+			CalculateMonStats(mon);
+			return value;
+		}
+	}
+	
+	return FALSE;
+	
 }
