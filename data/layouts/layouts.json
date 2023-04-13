@@ -2417,7 +2417,7 @@
       "width": 58,
       "height": 26,
       "primary_tileset": "gTileset_General",
-      "secondary_tileset": "0",
+      "secondary_tileset": "gTileset_Petalburg",
       "border_filepath": "data/layouts/UnusedOutdoorArea/border.bin",
       "blockdata_filepath": "data/layouts/UnusedOutdoorArea/map.bin"
     },
@@ -4674,7 +4674,7 @@
     {
       "id": "LAYOUT_STONEFACE_WAY",
       "name": "StonefaceWay_Layout",
-      "width": 32,
+      "width": 79,
       "height": 36,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_SeaRoute",
@@ -4840,6 +4840,16 @@
       "secondary_tileset": "gTileset_Rustboro",
       "border_filepath": "data/layouts/WanderersRoad/border.bin",
       "blockdata_filepath": "data/layouts/WanderersRoad/map.bin"
+    },
+    {
+      "id": "LAYOUT_SEABOUND_PATH",
+      "name": "SeaboundPath_Layout",
+      "width": 40,
+      "height": 60,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Slateport",
+      "border_filepath": "data/layouts/SeaboundPath/border.bin",
+      "blockdata_filepath": "data/layouts/SeaboundPath/map.bin"
     }
   ]
 }

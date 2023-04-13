@@ -541,7 +541,7 @@ extern const u8 EventScript_UseWaterfall[];
 extern const u8 EventScript_CannotUseWaterfall[];
 extern const u8 EventScript_UseDive[];
 extern const u8 EventScript_UseDiveUnderwater[];
-extern const u8 EventScript_WarpToOptionsRoom[];
+extern const u8 EventScript_EnableStarterSets[];
 extern const u8 EventScript_AwardAchievement[];
 extern const u8 EventScript_DoCheatSequenceResult[];
 extern const u8 EventScript_FallDownHole[];

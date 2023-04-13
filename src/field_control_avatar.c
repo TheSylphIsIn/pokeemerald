@@ -1021,7 +1021,7 @@ int SetCableClubWarp(void)
     return 0;
 }
 
-#define OPTIONS_ROOM_BUTTON_COMBO (L_BUTTON | R_BUTTON | B_BUTTON)
+#define STARTER_SET_BUTTON_COMBO (L_BUTTON | R_BUTTON | B_BUTTON)
 #define cState sCheatCodeData[0]
 #define cTimer sCheatCodeData[1]
 #define cInputIndex sCheatCodeData[2]
@@ -1035,9 +1035,9 @@ static bool32 TryProcessCheatCode(void)
 {
     if (FlagGet(FLAG_ACCEPT_CHEAT_CODES))
     {
-		if (JOY_HELD(OPTIONS_ROOM_BUTTON_COMBO) == OPTIONS_ROOM_BUTTON_COMBO && !FlagGet(FLAG_SYS_POKEMON_GET))
+		if (JOY_HELD(STARTER_SET_BUTTON_COMBO) == STARTER_SET_BUTTON_COMBO && !FlagGet(FLAG_SYS_POKEMON_GET))
 		{
-			ScriptContext_SetupScript(EventScript_WarpToOptionsRoom);
+			ScriptContext_SetupScript(EventScript_EnableStarterSets);
 			return TRUE;
 		}
 		

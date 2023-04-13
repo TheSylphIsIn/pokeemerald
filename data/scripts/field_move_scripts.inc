@@ -286,12 +286,17 @@ EventScript_FailSweetScent::
 Text_FailSweetScent:
 	.string "Looks like there's nothing here…$"
 	
-EventScript_WarpToOptionsRoom::
+EventScript_EnableStarterSets::
 	lock
-	warp MAP_OPTIONS_ROOM, 6, 7
-	waitstate
+	setflag FLAG_SYS_ENABLE_STARTER_SETS 
+	msgbox Text_EnabledStarterSets, MSGBOX_DEFAULT
+	closemessage
 	release
 	end
+
+Text_EnabledStarterSets:
+	.string "Enabled starter sets!\n"
+	.string "Press {UP_ARROW} or {DOWN_ARROW} when selecting to swap.$"
 
 EventScript_AwardAchievement::
 	lock

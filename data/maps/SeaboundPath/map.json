@@ -1,9 +1,9 @@
 {
-  "id": "MAP_STONEFACE_WAY",
-  "name": "StonefaceWay",
-  "layout": "LAYOUT_STONEFACE_WAY",
+  "id": "MAP_SEABOUND_PATH",
+  "name": "SeaboundPath",
+  "layout": "LAYOUT_SEABOUND_PATH",
   "music": "MUS_ROUTE104",
-  "region_map_section": "MAPSEC_ROUTE_107",
+  "region_map_section": "MAPSEC_ROUTE_105",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
   "map_type": "MAP_TYPE_ROUTE",
@@ -14,28 +14,28 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "map": "MAP_CRAN_TOWN",
-      "offset": 2,
-      "direction": "left"
-    },
-    {
-      "map": "MAP_CLIFF_EDGE_CLIMB_OUTSIDE",
-      "offset": 7,
+      "map": "MAP_WANDERERS_ROAD",
+      "offset": -25,
       "direction": "up"
     },
     {
-      "map": "MAP_SEABOUND_PATH",
-      "offset": -44,
-      "direction": "right"
+      "map": "MAP_CLIFF_EDGE_CLIMB_OUTSIDE",
+      "offset": 20,
+      "direction": "left"
+    },
+    {
+      "map": "MAP_STONEFACE_WAY",
+      "offset": 44,
+      "direction": "left"
     }
   ],
   "object_events": [
     {
-      "graphics_id": "OBJ_EVENT_GFX_STAR_PIECE",
-      "x": 20,
-      "y": 2,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_SPIN_CLOCKWISE_DELAY",
+      "graphics_id": "OBJ_EVENT_GFX_RIVAL_CALVIN",
+      "x": 23,
+      "y": 42,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
@@ -44,24 +44,11 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_SWIMMER_M",
-      "x": 10,
-      "y": 27,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_WALK_RIGHT_AND_LEFT",
-      "movement_range_x": 11,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
-      "flag": "0"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_SAILOR",
-      "x": 16,
+      "graphics_id": "OBJ_EVENT_GFX_RIVAL_MORGAN",
+      "x": 26,
       "y": 21,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
@@ -70,10 +57,36 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
-      "x": 13,
-      "y": 9,
-      "elevation": 3,
+      "graphics_id": "OBJ_EVENT_GFX_TUBER_F",
+      "x": 19,
+      "y": 27,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "NULL",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_POKEFAN_M",
+      "x": 23,
+      "y": 7,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "NULL",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_RICH_BOY",
+      "x": 26,
+      "y": 32,
+      "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
       "movement_range_y": 0,
@@ -84,19 +97,22 @@
     }
   ],
   "warp_events": [
-    {
-      "x": 17,
-      "y": 5,
-      "elevation": 0,
-      "dest_map": "MAP_CLIFF_FACE_CLIMB",
-      "dest_warp_id": "1"
-    }
+
   ],
   "coord_events": [
     {
       "type": "trigger",
-      "x": 22,
-      "y": 5,
+      "x": 26,
+      "y": 15,
+      "elevation": 0,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "NULL"
+    },
+    {
+      "type": "trigger",
+      "x": 27,
+      "y": 14,
       "elevation": 0,
       "var": "VAR_TEMP_0",
       "var_value": "0",

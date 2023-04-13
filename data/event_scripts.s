@@ -1142,3 +1142,5 @@ Common_EventScript_LegendaryFlewAway::
 	.include "data/maps/ClearingCave/scripts.inc"
 
 	.include "data/maps/WanderersRoad/scripts.inc"
+
+	.include "data/maps/SeaboundPath/scripts.inc"
