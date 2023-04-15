@@ -1781,7 +1781,7 @@
 	.2byte \item
 	.2byte \quantity
 	.endm
-	
+
 	@ sets the specified achievement to unlocked/true
 	.macro giveachievement achievement:req
 	.byte 0xe3
@@ -1824,6 +1824,13 @@
 
 	.macro dynmultistack left:req, top:req, ignoreBPress:req, maxBeforeScroll:req, shouldSort:req, initialSelected:req, callbacks:req
 	_dynmultichoice \left, \top, \ignoreBPress, \maxBeforeScroll, \shouldSort, \initialSelected, \callbacks, NULL
+	.endm
+
+
+	@ Sets the text of the name box in the next-shown message box.
+	.macro speakername text:req
+	.byte 0xe7
+	.4byte \text
 	.endm
 
 

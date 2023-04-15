@@ -185,9 +185,9 @@
 #define FLAG_NURSE_UNION_ROOM_REMINDER              (SYSTEM_FLAGS + 0x20)
 
 #define FLAG_SYS_NO_LEVEL_CAPS                           (SYSTEM_FLAGS + 0x21) // if set, level caps won't modify Exp
-#define FLAG_SYS_ENABLE_STARTER_SETS                           (SYSTEM_FLAGS + 0x22) // Unused Flag
-#define FLAG_SPAWN_INVISIBLE                           (SYSTEM_FLAGS + 0x23) // Unused Flag
-#define FLAG_UNUSED_0x884                           (SYSTEM_FLAGS + 0x24) // Unused Flag
+#define FLAG_SYS_ENABLE_STARTER_SETS                           (SYSTEM_FLAGS + 0x22) // If set, the player can scroll through different starter sets on the selection menu with Up/Down
+#define FLAG_SPAWN_INVISIBLE                           (SYSTEM_FLAGS + 0x23) // If set, the player will be invisible after warping (useful for cutscenes)
+#define FLAG_SUPPRESS_SPEAKER_NAME                           (SYSTEM_FLAGS + 0x24) // If set, Dialogue tags won't appear on message boxes even if set
 #define FLAG_UNUSED_0x885                           (SYSTEM_FLAGS + 0x25) // Unused Flag
 #define FLAG_UNUSED_0x886                           (SYSTEM_FLAGS + 0x26) // Unused Flag
 #define FLAG_UNUSED_0x887                           (SYSTEM_FLAGS + 0x27) // Unused Flag
