@@ -4764,7 +4764,7 @@
     {
       "id": "LAYOUT_PENZEL_CITY",
       "name": "PenzelCity_Layout",
-      "width": 40,
+      "width": 64,
       "height": 38,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Rustboro",
@@ -4844,7 +4844,7 @@
     {
       "id": "LAYOUT_SEABOUND_PATH",
       "name": "SeaboundPath_Layout",
-      "width": 40,
+      "width": 42,
       "height": 60,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Slateport",
