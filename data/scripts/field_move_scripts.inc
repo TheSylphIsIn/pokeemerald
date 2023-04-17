@@ -2,8 +2,10 @@
 EventScript_CutTree::
 	lockall
 	goto_if_unset FLAG_BADGE01_GET, EventScript_CheckTreeCantCut
+	goto_if_set FLAG_FREE_HMS, EventScript_CutTreeDown // Skips party check; mon being able to learn the move is not required
 	checkpartymove ITEM_HM01
 	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CheckTreeCantCut
+	goto_if_set FLAG_FAST_HMS, EventScript_CutTreeDown // Skips animation
 	setfieldeffectargument 0, VAR_RESULT
 	bufferpartymonnick STR_VAR_1, VAR_RESULT
 	buffermovename STR_VAR_2, MOVE_CUT
@@ -59,8 +61,10 @@ Text_CantCut:
 EventScript_RockSmash::
 	lockall
 	goto_if_unset FLAG_BADGE03_GET, EventScript_CantSmashRock
+	goto_if_set FLAG_FREE_HMS, EventScript_SmashRock
 	checkpartymove ITEM_HM06
 	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CantSmashRock
+	goto_if_set FLAG_FAST_HMS, EventScript_SmashRock
 	setfieldeffectargument 0, VAR_RESULT
 	bufferpartymonnick STR_VAR_1, VAR_RESULT
 	buffermovename STR_VAR_2, MOVE_ROCK_SMASH
@@ -123,8 +127,10 @@ EventScript_StrengthBoulder::
 	lockall
 	goto_if_unset FLAG_BADGE04_GET, EventScript_CantStrength
 	goto_if_set FLAG_SYS_USE_STRENGTH, EventScript_CheckActivatedBoulder
+	goto_if_set FLAG_FREE_HMS, EventScript_ActivateStrength
 	checkpartymove ITEM_HM04
 	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CantStrength
+	goto_if_set FLAG_FAST_HMS, EventScript_ActivateStrength
 	setfieldeffectargument 0, VAR_RESULT
 	msgbox Text_WantToStrength, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, EventScript_CancelStrength

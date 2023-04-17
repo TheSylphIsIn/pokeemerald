@@ -1504,10 +1504,10 @@
 #define FLAG_HELD_ITEMS_STORED                           (SYSTEM_FLAGS + 0x85) // Used to remember that held items were saved, so they don't get overwritten if they weren't
 #define FLAG_EGG_MOVE_TUTOR                           (SYSTEM_FLAGS + 0x86) // If set, the move reminder will remind Egg moves instead of level moves.
 #define FLAG_PORTABLE_HEAL_USED                           (SYSTEM_FLAGS + 0x87) // The cheat code heal can only be used once until the next time a regular heal is used.
-#define FLAG_UNUSED_0x8E8                           (SYSTEM_FLAGS + 0x88) // Unused Flag
-#define FLAG_UNUSED_0x8E9                           (SYSTEM_FLAGS + 0x89) // Unused Flag
-#define FLAG_UNUSED_0x8EA                           (SYSTEM_FLAGS + 0x8A) // Unused Flag
-#define FLAG_UNUSED_0x8EB                           (SYSTEM_FLAGS + 0x8B) // Unused Flag
+#define FLAG_DISABLE_ENCOUNTERS                           (SYSTEM_FLAGS + 0x88) // Set by a cheat code. Disables random wild encounters.
+#define FLAG_DISABLE_TRAINER_SIGHT                           (SYSTEM_FLAGS + 0x89) // Set by a cheat code. Disables trainers seeing you. They can still be fought by interacting.
+#define FLAG_FREE_HMS                           (SYSTEM_FLAGS + 0x8A) // Skips the "mon in party can learn HM" check
+#define FLAG_FAST_HMS                           (SYSTEM_FLAGS + 0x8B) // Skips the field effect animation 
 #define FLAG_UNUSED_0x8EC                           (SYSTEM_FLAGS + 0x8C) // Unused Flag
 #define FLAG_UNUSED_0x8ED                           (SYSTEM_FLAGS + 0x8D) // Unused Flag
 #define FLAG_UNUSED_0x8EE                           (SYSTEM_FLAGS + 0x8E) // Unused Flag

@@ -1,6 +1,7 @@
 #include "global.h"
 #include "decompress.h"
 #include "event_object_movement.h"
+#include "event_data.h"
 #include "field_camera.h"
 #include "field_control_avatar.h"
 #include "field_effect.h"
@@ -1847,6 +1848,9 @@ static bool8 WaterfallFieldEffect_Init(struct Task *task, struct ObjectEvent *ob
     LockPlayerFieldControls();
     gPlayerAvatar.preventStep = TRUE;
     task->tState++;
+	
+	if (FlagGet(FLAG_FAST_HMS))
+		task->tState += 2;
     return FALSE;
 }
 
@@ -1921,6 +1925,9 @@ static bool8 DiveFieldEffect_Init(struct Task *task)
 {
     gPlayerAvatar.preventStep = TRUE;
     task->data[0]++;
+	
+	if (FlagGet(FLAG_FAST_HMS))
+		task->data[0]++;
     return FALSE;
 }
 
@@ -3044,6 +3051,8 @@ static void SurfFieldEffect_Init(struct Task *task)
     PlayerGetDestCoords(&task->tDestX, &task->tDestY);
     MoveCoords(gObjectEvents[gPlayerAvatar.objectEventId].movementDirection, &task->tDestX, &task->tDestY);
     task->tState++;
+	if (FlagGet(FLAG_FAST_HMS))
+		task->tState += 2;
 }
 
 static void SurfFieldEffect_FieldMovePose(struct Task *task)
