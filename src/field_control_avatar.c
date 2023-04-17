@@ -39,7 +39,7 @@
 
 static EWRAM_DATA u8 sWildEncounterImmunitySteps = 0;
 static EWRAM_DATA u16 sPrevMetatileBehavior = 0;
-static EWRAM_DATA u16 sCheatCodeData[5] = {0};
+static EWRAM_DATA u16 sCheatCodeData[7] = {0};
 
 u8 gSelectedObjectEvent;
 
@@ -73,6 +73,7 @@ static void UpdateFriendshipStepCounter(void);
 static bool8 UpdatePoisonStepCounter(void);
 static bool32 TryProcessCheatCode(void);
 static bool32 TryCheatSequence(void);
+static bool8 TryMatchCheatSequenceBeginning(void);
 static void ResetCheatSequenceProgress(void);
 static bool32 TryUnlockAchievement(void);
 
@@ -1027,6 +1028,8 @@ int SetCableClubWarp(void)
 #define cInputIndex sCheatCodeData[2]
 #define cNextInput sCheatCodeData[3]
 #define cCodeIndex sCheatCodeData[4]
+#define cFirstInput sCheatCodeData[5]
+#define cSecondInput sCheatCodeData[6]
 // Checks if the player is inputting a button combination for a cheat code. If so, activates
 // the code's effect via a script.
 // Will only trigger the script if FLAG_ACCEPT_CHEAT_CODES is set.
@@ -1069,6 +1072,7 @@ static bool32 TryCheatSequence(void)
 					{
 						if (cNextInput & sCheatCodes[i][cInputIndex])
 						{
+							cFirstInput = sCheatCodes[i][cInputIndex];
 							cInputIndex++;
 							cState++;
 							break;
@@ -1080,13 +1084,11 @@ static bool32 TryCheatSequence(void)
 					{
 						if (cNextInput & sCheatCodes[i][cInputIndex])
 						{
-							cInputIndex++;
-							cState++;
-							cCodeIndex = i;
+							cSecondInput = sCheatCodes[i][cInputIndex];
 							break;
 						}
 					}
-					if (i >= NUM_CHEAT_CODES)
+					if (i >= NUM_CHEAT_CODES || !TryMatchCheatSequenceBeginning())
 						ResetCheatSequenceProgress();
 					return FALSE;
 				case 2: // try to make sure the code sequence is completed
@@ -1123,14 +1125,39 @@ static void ResetCheatSequenceProgress(void)
 	cState = 0;
 	cInputIndex = 0;
 	cCodeIndex = 0;
+	cFirstInput = 0;
+	cSecondInput = 0;
 }
 
-#undef OPTIONS_ROOM_BUTTON_COMBO
+// Sanity check to make sure the first and second inputs were actually from the same code.
+static bool8 TryMatchCheatSequenceBeginning(void)
+{
+	u32 i, firstCheck, secondCheck;
+	
+	for (i = 0; i < NUM_CHEAT_CODES; i++)
+	{
+		firstCheck = sCheatCodes[i][0];
+		secondCheck = sCheatCodes[i][1];
+		if (firstCheck == cFirstInput && secondCheck == cSecondInput)
+		{
+			cInputIndex++;
+			cState++;
+			cCodeIndex = i;
+			return TRUE;
+		}
+	}
+
+	return FALSE;
+}
+
+#undef STARTER_SET_BUTTON_COMBO
 #undef cState
 #undef cTimer
 #undef cInputIndex
 #undef cNextInput
 #undef cCodeIndex
+#undef cFirstInput
+#undef cSecondInput
 
 static const u8 * const sAchievementNames[] = 
 {
