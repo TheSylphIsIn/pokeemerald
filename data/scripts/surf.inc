@@ -1,4 +1,6 @@
 EventScript_UseSurf::
+	bufferstring STR_VAR_1, Text_DefaultBuffer
+	goto_if_set FLAG_FREE_HMS, EventScript_SurfSkipPrompt
 	checkpartymove ITEM_HM03
 	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_EndUseSurf
 	bufferpartymonnick STR_VAR_1, VAR_RESULT
@@ -6,6 +8,7 @@ EventScript_UseSurf::
 	lockall
 	msgbox gText_WantToUseSurf, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, EventScript_ReleaseUseSurf
+EventScript_SurfSkipPrompt::
 	msgbox gText_PlayerUsedSurf, MSGBOX_DEFAULT
 	dofieldeffect FLDEFF_USE_SURF
 EventScript_ReleaseUseSurf::

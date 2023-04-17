@@ -2,10 +2,10 @@
 EventScript_CutTree::
 	lockall
 	goto_if_unset FLAG_BADGE01_GET, EventScript_CheckTreeCantCut
-	goto_if_set FLAG_FREE_HMS, EventScript_CutTreeDown // Skips party check; mon being able to learn the move is not required
+	goto_if_set FLAG_FREE_HMS, EventScript_CutTreeDown @ Skips party check; mon being able to learn the move is not required
 	checkpartymove ITEM_HM01
 	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CheckTreeCantCut
-	goto_if_set FLAG_FAST_HMS, EventScript_CutTreeDown // Skips animation
+	goto_if_set FLAG_FAST_HMS, EventScript_CutTreeDown @ Skips animation
 	setfieldeffectargument 0, VAR_RESULT
 	bufferpartymonnick STR_VAR_1, VAR_RESULT
 	buffermovename STR_VAR_2, MOVE_CUT
@@ -125,6 +125,7 @@ Text_CantSmash:
 
 EventScript_StrengthBoulder::
 	lockall
+	bufferstring STR_VAR_1, Text_DefaultBuffer
 	goto_if_unset FLAG_BADGE04_GET, EventScript_CantStrength
 	goto_if_set FLAG_SYS_USE_STRENGTH, EventScript_CheckActivatedBoulder
 	goto_if_set FLAG_FREE_HMS, EventScript_ActivateStrength
@@ -188,12 +189,15 @@ Text_StrengthActivated:
 
 EventScript_UseWaterfall::
 	lockall
+	bufferstring STR_VAR_1, Text_DefaultBuffer
+	goto_if_set FLAG_FREE_HMS, EventScript_WaterfallSkipPrompt
 	checkpartymove ITEM_HM07
 	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CantWaterfall
 	bufferpartymonnick STR_VAR_1, VAR_RESULT
 	setfieldeffectargument 0, VAR_RESULT
 	msgbox Text_WantToWaterfall, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, EventScript_EndWaterfall
+EventScript_WaterfallSkipPrompt::
 	msgbox Text_MonUsedWaterfall, MSGBOX_DEFAULT
 	dofieldeffect FLDEFF_USE_WATERFALL
 	goto EventScript_EndWaterfall
@@ -221,6 +225,8 @@ Text_MonUsedWaterfall:
 
 EventScript_UseDive::
 	lockall
+	bufferstring STR_VAR_1, Text_DefaultBuffer
+	goto_if_set FLAG_FREE_HMS, EventScript_DiveSkipPrompt
 	checkpartymove ITEM_HM08
 	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CantDive
 	bufferpartymonnick STR_VAR_1, VAR_RESULT
@@ -228,6 +234,7 @@ EventScript_UseDive::
 	setfieldeffectargument 1, 1
 	msgbox Text_WantToDive, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, EventScript_EndDive
+EventScript_DiveSkipPrompt::
 	msgbox Text_MonUsedDive, MSGBOX_DEFAULT
 	dofieldeffect FLDEFF_USE_DIVE
 	goto EventScript_EndDive
@@ -244,6 +251,8 @@ EventScript_EndDive::
 
 EventScript_UseDiveUnderwater::
 	lockall
+	bufferstring STR_VAR_1, Text_DefaultBuffer
+	goto_if_set FLAG_FREE_HMS, EventScript_DiveSurfaceSkipPrompt
 	checkpartymove ITEM_HM08
 	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CantSurface
 	bufferpartymonnick STR_VAR_1, VAR_RESULT
@@ -251,6 +260,7 @@ EventScript_UseDiveUnderwater::
 	setfieldeffectargument 1, 1
 	msgbox Text_WantToSurface, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, EventScript_EndSurface
+EventScript_DiveSurfaceSkipPrompt::
 	msgbox Text_MonUsedDive, MSGBOX_DEFAULT
 	dofieldeffect FLDEFF_USE_DIVE
 	goto EventScript_EndSurface
@@ -321,6 +331,9 @@ EventScript_DoCheatSequenceResult::
 	case 0, EventScript_RareCandyCode
 	case 1, EventScript_KonamiCode
 	case 2, EventScript_HealCode
+	case 3, EventScript_FreeHMsCode
+	case 4, EventScript_NoEncountersCode
+	case 5, EventScript_NoTrainerSeeCode
 	goto EventScript_FailSweetScent
 	
 EventScript_KonamiCode:
@@ -352,7 +365,86 @@ EventScript_HealCodeUsed:
 	waitbuttonpress
 	release
 	end
+
+EventScript_FreeHMsCode:
+	goto_if_unset FLAG_FREE_HMS, EventScript_SetFreeHMs
+	goto_if_set FLAG_FREE_HMS, EventScript_ClearFreeHMs
+	release
+	end
 	
+EventScript_SetFreeHMs:
+	message Text_HMsFree
+	setflag FLAG_FREE_HMS
+	waitbuttonpress
+	release
+	end
+
+EventScript_ClearFreeHMs:
+	message Text_HMsNotFree
+	clearflag FLAG_FREE_HMS
+	waitbuttonpress
+	release
+	end
+
+Text_DefaultBuffer:: @ String for "<NAME> used <MOVE>!" HMs vis a vis free HMs.
+	.string "NOBODY$"
+	
+EventScript_NoEncountersCode:
+	goto_if_unset FLAG_DISABLE_ENCOUNTERS, EventScript_DisableEncounters
+	goto_if_set FLAG_DISABLE_ENCOUNTERS, EventScript_EnableEncounters
+	release
+	end
+	
+EventScript_DisableEncounters:
+	message Text_EncountersOn
+	setflag FLAG_DISABLE_ENCOUNTERS
+	waitbuttonpress
+	release
+	end
+
+EventScript_EnableEncounters:
+	message Text_EncountersOff
+	clearflag FLAG_DISABLE_ENCOUNTERS
+	waitbuttonpress
+	release
+	end
+
+Text_EncountersOn:
+	.string "Random encounters are disabled!\n"
+	.string "It's like an unlimited repel!$"
+
+Text_EncountersOff:
+	.string "Random encounters enabled.\n"
+	.string "Repel's effect wore off!$"
+
+EventScript_NoTrainerSeeCode:
+	goto_if_unset FLAG_DISABLE_TRAINER_SIGHT, EventScript_DisableTrainerSee
+	goto_if_set FLAG_DISABLE_TRAINER_SIGHT, EventScript_EnableTrainerSee
+	release
+	end
+	
+EventScript_DisableTrainerSee:
+	message Text_TrainersCantSee
+	setflag FLAG_DISABLE_TRAINER_SIGHT
+	waitbuttonpress
+	release
+	end
+
+EventScript_EnableTrainerSee:
+	message Text_TrainersCanSee
+	clearflag FLAG_DISABLE_TRAINER_SIGHT
+	waitbuttonpress
+	release
+	end
+	
+Text_TrainersCantSee:
+	.string "Trainer sight disabled!\n"
+	.string "Interact with them to battle.$"
+
+Text_TrainersCanSee:
+	.string "Trainer sight enabled!\n"
+	.string "Watch your step!$"
+
 Text_GetItems:
 	.string "The cheat code gave you items!$"
 
@@ -362,4 +454,12 @@ Text_HealCode:
 Text_HealCodeUsed:
 	.string "This code can't be used again until\n"
 	.string "you use a healing spot.$"
+
+Text_HMsFree:
+	.string "HMs can now be used without needing\n"
+	.string "a party mon to use them!$"
+
+Text_HMsNotFree:
+	.string "Free HMs are now disabled! A party\n"
+	.string "member must be able to learn them.$"
 

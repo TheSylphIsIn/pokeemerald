@@ -1,6 +1,7 @@
 #include "global.h"
 #include "option_menu.h"
 #include "bg.h"
+#include "event_data.h"
 #include "gpu_regs.h"
 #include "international_string_util.h"
 #include "main.h"
@@ -45,6 +46,7 @@ enum
 	MENUITEM_BATTLEHELPERS,
     MENUITEM_SOUND,
     MENUITEM_FRAMETYPE,
+	MENUITEM_FASTHMS,
     MENUITEM_COUNT,
 };
 
@@ -84,6 +86,8 @@ static u8 AutoRun_ProcessInput(u8 selection);
 static void AutoRun_DrawChoices(u8 selection, u8 order);
 static u8 BattleHelpers_ProcessInput(u8 selection);
 static void BattleHelpers_DrawChoices(u8 selection, u8 order);
+static u8 FastHMs_ProcessInput(u8 selection);
+static void FastHMs_DrawChoices(u8 selection, u8 order);
 static void DrawHeaderText(void);
 static void DrawFooterText(void);
 static void DrawOptionMenuTexts(void);
@@ -120,6 +124,7 @@ static const u8 *const sOptionMenuItemsNames[MENUITEM_COUNT] =
 	[MENUITEM_BATTLEHELPERS] = gText_BattleHelpers,
     [MENUITEM_SOUND] = gText_Sound,
     [MENUITEM_FRAMETYPE] = gText_Frame,
+	[MENUITEM_FASTHMS] = gText_FastHMs,
 };
 
 static const struct ScrollArrowsTemplate sScrollArrowsTemplate_OptionMenu = {2, 120, 36, 3, 120, 126, 0, MENUITEM_COUNT - ONSCREEN_MENU_ITEMS, 1, 1, 0};
@@ -436,6 +441,12 @@ static void Task_OptionMenuProcessInput(u8 taskId)
             if (previousOption != gTasks[taskId].tWindowFrameType)
                 FrameType_DrawChoices(gTasks[taskId].tWindowFrameType, MENUITEM_FRAMETYPE - gTasks[taskId].tScrollOffset);
             break;
+        case MENUITEM_FASTHMS:
+            previousOption = FlagGet(FLAG_FAST_HMS);
+
+            if (FastHMs_ProcessInput(previousOption))
+                FastHMs_DrawChoices(FlagGet(FLAG_FAST_HMS), MENUITEM_FASTHMS - gTasks[taskId].tScrollOffset);
+            break;
         default:
             return;
         }
@@ -718,6 +729,33 @@ static void BattleHelpers_DrawChoices(u8 selection, u8 order)
     DrawOptionMenuChoice(gText_BattleSceneOn, GetStringRightAlignXOffset(FONT_NORMAL, gText_BattleSceneOff, 198), YPOS_WITH_MENU_POS, styles[1]);
 }
 
+static u8 FastHMs_ProcessInput(u8 selection)
+{
+    if (JOY_NEW(DPAD_LEFT | DPAD_RIGHT))
+    {
+        if (selection)
+			FlagClear(FLAG_FAST_HMS);
+		else
+			FlagSet(FLAG_FAST_HMS);
+        sArrowPressed = TRUE;
+		return TRUE;
+    }
+
+    return FALSE;
+}
+
+static void FastHMs_DrawChoices(u8 selection, u8 order)
+{
+    u8 styles[2];
+
+    styles[0] = 0;
+    styles[1] = 0;
+    styles[selection] = 1;
+
+    DrawOptionMenuChoice(gText_BattleSceneOff, 104, YPOS_WITH_MENU_POS, styles[0]);
+    DrawOptionMenuChoice(gText_BattleSceneOn, GetStringRightAlignXOffset(FONT_NORMAL, gText_BattleSceneOff, 198), YPOS_WITH_MENU_POS, styles[1]);
+}
+
 static u8 Sound_ProcessInput(u8 selection)
 {
     if (JOY_NEW(DPAD_LEFT | DPAD_RIGHT))
@@ -987,6 +1025,9 @@ static void RedrawChoices(u8 taskId, u8 position)
 			break;
 		case MENUITEM_FRAMETYPE:
 			FrameType_DrawChoices(gTasks[taskId].data[nextOption], position);
+			break;
+		case MENUITEM_FASTHMS:
+			FastHMs_DrawChoices(FlagGet(FLAG_FAST_HMS), position);
 			break;
 	}
 }

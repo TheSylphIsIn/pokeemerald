@@ -1065,7 +1065,7 @@ static bool32 TryCheatSequence(void)
 			switch (cState)
 			{
 				case 0: // try to detect if a valid code is being input
-					for (i = 0; i < sizeof(sCheatCodes); i++)
+					for (i = 0; i < NUM_CHEAT_CODES; i++)
 					{
 						if (cNextInput & sCheatCodes[i][cInputIndex])
 						{
@@ -1076,7 +1076,7 @@ static bool32 TryCheatSequence(void)
 					}
 					return FALSE;
 				case 1: // try to match the sequence to a code
-					for (i = 0; i < sizeof(sCheatCodes); i++)
+					for (i = 0; i < NUM_CHEAT_CODES; i++)
 					{
 						if (cNextInput & sCheatCodes[i][cInputIndex])
 						{
@@ -1086,7 +1086,7 @@ static bool32 TryCheatSequence(void)
 							break;
 						}
 					}
-					if (i >= sizeof(sCheatCodes))
+					if (i >= NUM_CHEAT_CODES)
 						ResetCheatSequenceProgress();
 					return FALSE;
 				case 2: // try to make sure the code sequence is completed

@@ -1849,7 +1849,7 @@ static bool8 WaterfallFieldEffect_Init(struct Task *task, struct ObjectEvent *ob
     gPlayerAvatar.preventStep = TRUE;
     task->tState++;
 	
-	if (FlagGet(FLAG_FAST_HMS))
+	if (FlagGet(FLAG_FAST_HMS) || FlagGet(FLAG_FREE_HMS))
 		task->tState += 2;
     return FALSE;
 }
@@ -1926,7 +1926,7 @@ static bool8 DiveFieldEffect_Init(struct Task *task)
     gPlayerAvatar.preventStep = TRUE;
     task->data[0]++;
 	
-	if (FlagGet(FLAG_FAST_HMS))
+	if (FlagGet(FLAG_FAST_HMS) || FlagGet(FLAG_FREE_HMS))
 		task->data[0]++;
     return FALSE;
 }
@@ -3051,7 +3051,7 @@ static void SurfFieldEffect_Init(struct Task *task)
     PlayerGetDestCoords(&task->tDestX, &task->tDestY);
     MoveCoords(gObjectEvents[gPlayerAvatar.objectEventId].movementDirection, &task->tDestX, &task->tDestY);
     task->tState++;
-	if (FlagGet(FLAG_FAST_HMS))
+	if (FlagGet(FLAG_FAST_HMS) || FlagGet(FLAG_FREE_HMS))
 		task->tState += 2;
 }
 
