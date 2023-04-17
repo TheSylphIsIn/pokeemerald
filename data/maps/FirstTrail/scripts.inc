@@ -45,7 +45,7 @@ FirstTrail_TriggerScript_ProfessorMeeting::
 	msgbox FirstTrail_Text_Prof1, MSGBOX_DEFAULT
 	closemessage
 	addobject LOCALID_MANGROVE
-	setobjectxy LOCALID_MANGROVE, 20, 15
+	setobjectxy LOCALID_MANGROVE, 34, 16
 	applymovement LOCALID_MANGROVE, FirstTrail_Movement_ProfJumpFromTree
 	playse SE_BIKE_HOP
 	waitse

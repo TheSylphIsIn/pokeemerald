@@ -93,13 +93,13 @@ DropperPoint_TriggerScript_Bag::
 	// both rivals awake
 	msgbox DropperPoint_Text_BagText1, MSGBOX_DEFAULT
 	closemessage
-	setmetatile 17, 11, 0x36C, FALSE // dumb thing to fix visual error
+	setmetatile 12, 11, 0x36C, FALSE // dumb thing to fix visual error
 	special DrawWholeMapView
 	applymovement LOCALID_CALVIN, DropperPoint_Movement_CalvinGoToBag
 	playse SE_BIKE_HOP
 	waitse
 	waitmovement 0
-	setmetatile 17, 11, 0x2E1, FALSE // dumb thing to fix visual error
+	setmetatile 12, 11, 0x2E1, FALSE // dumb thing to fix visual error
 	special DrawWholeMapView
 	applymovement LOCALID_MORGAN, DropperPoint_Movement_MorganGoToBag
 	waitmovement 0
@@ -140,7 +140,7 @@ DropperPoint_Text_MorganQuickIntro:
 
 DropperPoint_TriggerScript_BagContinue::
 	addobject LOCALID_SLOSHMOSH
-	setobjectxy LOCALID_SLOSHMOSH, 18, 14
+	setobjectxy LOCALID_SLOSHMOSH, 13, 14
 	applymovement LOCALID_SLOSHMOSH, Common_Movement_WalkUp
 	playse SE_BALLOON_BLUE
 	waitse

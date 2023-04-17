@@ -13,7 +13,7 @@ CranTown_OnFrame:
 CranTown_MapScript_WipedBeforeMeetingProf:
 	lock
 	addobject LOCALID_CALVIN
-	setobjectxy LOCALID_CALVIN, 9, 24
+	setobjectxy LOCALID_CALVIN, 9, 21
 	applymovement LOCALID_CALVIN, CranTown_Movement_CalvinCheckOnWipedPlayer
 	waitmovement 0
 	msgbox CranTown_Text_CalvinCheckOnWipedPlayer, MSGBOX_DEFAULT

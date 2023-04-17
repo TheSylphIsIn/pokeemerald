@@ -18,6 +18,7 @@
 #define MAP_HOT_HEART_PATH  (9 | (0 << 8))
 #define MAP_WANDERERS_ROAD  (10 | (0 << 8))
 #define MAP_SEABOUND_PATH   (11 | (0 << 8))
+#define MAP_SANDBAR_COAST   (12 | (0 << 8))
 
 // gMapGroup_Burrows
 #define MAP_NEW_MAP1           (0 | (1 << 8))

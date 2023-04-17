@@ -15,18 +15,23 @@
   "connections": [
     {
       "map": "MAP_CRAN_TOWN",
-      "offset": 2,
+      "offset": 0,
       "direction": "left"
     },
     {
       "map": "MAP_CLIFF_EDGE_CLIMB_OUTSIDE",
-      "offset": 7,
+      "offset": 0,
       "direction": "up"
     },
     {
       "map": "MAP_SEABOUND_PATH",
-      "offset": -44,
+      "offset": -48,
       "direction": "right"
+    },
+    {
+      "map": "MAP_SANDBAR_COAST",
+      "offset": 24,
+      "direction": "left"
     }
   ],
   "object_events": [
