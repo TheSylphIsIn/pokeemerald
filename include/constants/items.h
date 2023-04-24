@@ -16,6 +16,12 @@
 #define ITEM_TIMER_BALL 10
 #define ITEM_LUXURY_BALL 11
 #define ITEM_PREMIER_BALL 12
+// 7 apricorn balls  - with custom effects
+// quick ball
+// dusk ball
+// hidden ball - gives mon hidden abilities
+// incense ball - changes a mon's nature to one that boosts its best base stat.
+// lock ball - effective against mons in dimension warps.
 
 // Note: If moving ball IDs around, updating FIRST_BALL/LAST_BALL is not sufficient
 //       Several places expect the ball IDs to be first and contiguous (e.g. gBattlescriptsForBallThrow and MON_DATA_POKEBALL)
@@ -57,12 +63,12 @@
 #define ITEM_WHITE_FLUTE 43
 #define ITEM_BERRY_JUICE 44
 #define ITEM_SACRED_ASH 45
-#define ITEM_SHOAL_SALT 46
-#define ITEM_SHOAL_SHELL 47
-#define ITEM_RED_SHARD 48
-#define ITEM_BLUE_SHARD 49
-#define ITEM_YELLOW_SHARD 50
-#define ITEM_GREEN_SHARD 51
+#define ITEM_SHOAL_SALT 46 // doesn't need to be in usable range
+#define ITEM_SHOAL_SHELL 47 // doesn't need to be in usable range
+#define ITEM_RED_SHARD 48  // doesn't need to be in usable range
+#define ITEM_BLUE_SHARD 49 // doesn't need to be in usable range
+#define ITEM_YELLOW_SHARD 50 // doesn't need to be in usable range
+#define ITEM_GREEN_SHARD 51 // doesn't need to be in usable range
 #define ITEM_ABILITY_PILL 52
 #define ITEM_CANDIED_BERRY 53
 #define ITEM_DREAM_PILL 54
@@ -94,10 +100,10 @@
 #define ITEM_POKE_DOLL 80
 #define ITEM_FLUFFY_TAIL 81
 #define ITEM_052 82
-#define ITEM_SUPER_REPEL 83
-#define ITEM_MAX_REPEL 84
-#define ITEM_ESCAPE_ROPE 85
-#define ITEM_REPEL 86
+#define ITEM_SUPER_REPEL 83 // doesn't need to be in usable range
+#define ITEM_MAX_REPEL 84 // doesn't need to be in usable range
+#define ITEM_ESCAPE_ROPE 85 // doesn't need to be in usable range
+#define ITEM_REPEL 86 // doesn't need to be in usable range
 #define ITEM_057 87
 #define ITEM_058 88
 #define ITEM_059 89
@@ -116,15 +122,15 @@
 #define ITEM_ICE_STONE 102
 
 // Unusable
-#define ITEM_TINY_MUSHROOM 103
-#define ITEM_BIG_MUSHROOM 104
+#define ITEM_TINY_MUSHROOM 103 // doesn't need to be in usable range
+#define ITEM_BIG_MUSHROOM 104 // doesn't need to be in usable range
 #define ITEM_069 105
-#define ITEM_PEARL 106
-#define ITEM_BIG_PEARL 107
-#define ITEM_STARDUST 108
-#define ITEM_STAR_PIECE 109
-#define ITEM_NUGGET 110
-#define ITEM_HEART_SCALE 111
+#define ITEM_PEARL 106 // doesn't need to be in usable range
+#define ITEM_BIG_PEARL 107 // doesn't need to be in usable range
+#define ITEM_STARDUST 108 // doesn't need to be in usable range
+#define ITEM_STAR_PIECE 109 // doesn't need to be in usable range
+#define ITEM_NUGGET 110 // doesn't need to be in usable range
+#define ITEM_HEART_SCALE 111 // doesn't need to be in usable range
 #define ITEM_070 112
 #define ITEM_071 113
 #define ITEM_072 114
@@ -136,18 +142,18 @@
 #define ITEM_078 120
 
 // Mails
-#define ITEM_ORANGE_MAIL 121
-#define ITEM_HARBOR_MAIL 122
-#define ITEM_GLITTER_MAIL 123
-#define ITEM_MECH_MAIL 124
-#define ITEM_WOOD_MAIL 125
-#define ITEM_WAVE_MAIL 126
-#define ITEM_BEAD_MAIL 127
-#define ITEM_SHADOW_MAIL 128
-#define ITEM_TROPIC_MAIL 129
-#define ITEM_DREAM_MAIL 130
-#define ITEM_FAB_MAIL 131
-#define ITEM_RETRO_MAIL 132
+#define ITEM_ORANGE_MAIL 121 // doesn't need to be in usable range
+#define ITEM_HARBOR_MAIL 122 // doesn't need to be in usable range
+#define ITEM_GLITTER_MAIL 123 // doesn't need to be in usable range
+#define ITEM_MECH_MAIL 124 // doesn't need to be in usable range
+#define ITEM_WOOD_MAIL 125 // doesn't need to be in usable range
+#define ITEM_WAVE_MAIL 126 // doesn't need to be in usable range
+#define ITEM_BEAD_MAIL 127 // doesn't need to be in usable range
+#define ITEM_SHADOW_MAIL 128 // doesn't need to be in usable range
+#define ITEM_TROPIC_MAIL 129 // doesn't need to be in usable range
+#define ITEM_DREAM_MAIL 130 // doesn't need to be in usable range
+#define ITEM_FAB_MAIL 131 // doesn't need to be in usable range
+#define ITEM_RETRO_MAIL 132 // doesn't need to be in usable range
 
 #define FIRST_MAIL_INDEX ITEM_ORANGE_MAIL
 
@@ -195,6 +201,10 @@
 #define ITEM_LANSAT_BERRY 173
 #define ITEM_STARF_BERRY 174
 #define ITEM_ENIGMA_BERRY 175
+// 18 type resist berries 
+// custap berry
+// kee berry
+// maranga berry
 
 #define FIRST_BERRY_INDEX ITEM_CHERI_BERRY
 #define LAST_BERRY_INDEX  ITEM_ENIGMA_BERRY
