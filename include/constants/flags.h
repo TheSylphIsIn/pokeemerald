@@ -1221,8 +1221,8 @@
 #define FLAG_FAVORED_CALVIN 0x494 // For example, battling them in the clearing sets their flag, which affects which one you battle on the cliffs.
 #define FLAG_HIDE_MORGAN_FISHEYE                                           0x495 // Unused Flag
 #define FLAG_HIDE_CALVIN_FISHEYE                               0x496 // Unused Flag
-#define FLAG_UNUSED_0x497                                           0x497 // Unused Flag
-#define FLAG_UNUSED_0x498                                           0x498 // Unused Flag
+#define FLAG_HIDE_MORGAN_INTRO                                           0x497 // Unused Flag
+#define FLAG_HIDE_CALVIN_INTRO                                           0x498 // Unused Flag
 #define FLAG_UNUSED_0x499                                           0x499 // Unused Flag
 #define FLAG_UNUSED_0x49A                                           0x49A // Unused Flag
 #define FLAG_UNUSED_0x49B                                           0x49B // Unused Flag
@@ -1397,7 +1397,7 @@
 #define FLAG_SYS_SAFARI_MODE                        (SYSTEM_FLAGS + 0x2C)
 #define FLAG_SYS_CRUISE_MODE                        (SYSTEM_FLAGS + 0x2D)
 
-#define FLAG_UNUSED_0x88E                           (SYSTEM_FLAGS + 0x2E) // Unused Flag
+#define FLAG_DEFAULT_HIDDEN                         (SYSTEM_FLAGS + 0x2E) // For objects that only appear during cutscenes
 #define FLAG_UNUSED_0x88F                           (SYSTEM_FLAGS + 0x2F) // Unused Flag
 
 #define FLAG_SYS_TV_HOME                            (SYSTEM_FLAGS + 0x30)

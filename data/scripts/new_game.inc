@@ -113,6 +113,10 @@ EventScript_ResetAllBerries::
 	return
 
 EventScript_ResetAllMapFlags::
+	setflag FLAG_HIDE_MORGAN_INTRO
+	setflag FLAG_HIDE_CALVIN_INTRO
+	setflag FLAG_DEFAULT_HIDDEN
+	setflag FLAG_SPAWN_INVISIBLE
 	setflag FLAG_ACCEPT_CHEAT_CODES
 	setflag FLAG_SYS_B_DASH
 	setflag FLAG_HIDE_CONTEST_POKE_BALL

@@ -1426,6 +1426,30 @@ static const struct SpriteFrameImage sPicTable_Calvin[] = {
     overworld_frame(gObjectEventPic_Calvin, 2, 4, 8),
 };
 
+static const struct SpriteFrameImage sPicTable_MorganAsleep[] = {
+    overworld_frame(gObjectEventPic_MorganAsleep, 2, 4, 0),
+    overworld_frame(gObjectEventPic_MorganAsleep, 2, 4, 1),
+    overworld_frame(gObjectEventPic_MorganAsleep, 2, 4, 2),
+    overworld_frame(gObjectEventPic_MorganAsleep, 2, 4, 0),
+    overworld_frame(gObjectEventPic_MorganAsleep, 2, 4, 0),
+    overworld_frame(gObjectEventPic_MorganAsleep, 2, 4, 1),
+    overworld_frame(gObjectEventPic_MorganAsleep, 2, 4, 1),
+    overworld_frame(gObjectEventPic_MorganAsleep, 2, 4, 2),
+    overworld_frame(gObjectEventPic_MorganAsleep, 2, 4, 2),
+};
+
+static const struct SpriteFrameImage sPicTable_CalvinAsleep[] = {
+    overworld_frame(gObjectEventPic_CalvinAsleep, 2, 4, 0),
+    overworld_frame(gObjectEventPic_CalvinAsleep, 2, 4, 1),
+    overworld_frame(gObjectEventPic_CalvinAsleep, 2, 4, 2),
+    overworld_frame(gObjectEventPic_CalvinAsleep, 2, 4, 0),
+    overworld_frame(gObjectEventPic_CalvinAsleep, 2, 4, 0),
+    overworld_frame(gObjectEventPic_CalvinAsleep, 2, 4, 1),
+    overworld_frame(gObjectEventPic_CalvinAsleep, 2, 4, 1),
+    overworld_frame(gObjectEventPic_CalvinAsleep, 2, 4, 2),
+    overworld_frame(gObjectEventPic_CalvinAsleep, 2, 4, 2),
+};
+
 static const struct SpriteFrameImage sPicTable_RubySapphireLittleBoy[] = {
     overworld_frame(gObjectEventPic_RubySapphireLittleBoy, 2, 2, 0),
     overworld_frame(gObjectEventPic_RubySapphireLittleBoy, 2, 2, 1),

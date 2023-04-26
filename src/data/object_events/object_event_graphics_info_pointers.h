@@ -243,6 +243,8 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_AltaMemberF
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_StarPiece;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Morgan;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Calvin;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MorganAsleep;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CalvinAsleep;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Bard;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Hipster;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Trader;
@@ -498,6 +500,8 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
 	[OBJ_EVENT_GFX_ALTA_GRUNT_F] = 			   &gObjectEventGraphicsInfo_AltaMemberF,
 	[OBJ_EVENT_GFX_RIVAL_MORGAN] = 			   &gObjectEventGraphicsInfo_Morgan,
 	[OBJ_EVENT_GFX_RIVAL_CALVIN] = 			   &gObjectEventGraphicsInfo_Calvin,
+	[OBJ_EVENT_GFX_RIVAL_MORGAN_ASLEEP] =	   &gObjectEventGraphicsInfo_MorganAsleep,
+	[OBJ_EVENT_GFX_RIVAL_CALVIN_ASLEEP] = 	   &gObjectEventGraphicsInfo_CalvinAsleep,
 };
 
 const struct ObjectEventGraphicsInfo *const gMauvilleOldManGraphicsInfoPointers[] = {

@@ -246,6 +246,8 @@
 #define OBJ_EVENT_GFX_RIVAL_MORGAN				 242
 #define OBJ_EVENT_GFX_RIVAL_CALVIN				 243
 #define OBJ_EVENT_GFX_CUTTABLE_FENCE			 244
+#define OBJ_EVENT_GFX_RIVAL_MORGAN_ASLEEP		 245
+#define OBJ_EVENT_GFX_RIVAL_CALVIN_ASLEEP		 246
 
 // NOTE: By default, the max value for NUM_OBJ_EVENT_GFX is 239.
 //
@@ -256,7 +258,7 @@
 // object graphics that can be removed. If more graphics are needed, anything that
 // stores graphics ids will need to be increased in size. See wiki entry below:
 // https://github.com/pret/pokeemerald/wiki/Feature-Branches#overworld-expansion
-#define NUM_OBJ_EVENT_GFX                        245
+#define NUM_OBJ_EVENT_GFX                        247
 
 
 // These are dynamic object gfx ids.
@@ -311,9 +313,9 @@
 #define LOCALID_UNION_ROOM_PLAYER_2 8
 #define LOCALID_UNION_ROOM_PLAYER_1 9
 #define LOCALID_BATTLE_TOWER_LOBBY_REPORTER 5
-#define LOCALID_TRUCK_BOX_TOP 1
-#define LOCALID_TRUCK_BOX_BOTTOM_L 2
-#define LOCALID_TRUCK_BOX_BOTTOM_R 3
+#define LOCALID_SLEEPING_MORGAN 6
+#define LOCALID_SLEEPING_PLAYER 7
+#define LOCALID_SLEEPING_CALVIN 8
 #define LOCALID_OLDALE_MART_CLERK 1
 #define LOCALID_LAVARIDGE_MART_CLERK 1
 #define LOCALID_FALLARBOR_MART_CLERK 1
