@@ -52,7 +52,7 @@ static const struct TrainerMonItemCustomMoves sParty_DummyParty_Rival1[] = {
     },
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Billy[] = {
+static const struct TrainerMonNoItemDefaultMoves sParty_Kyle[] = {
 	{
 	.iv = 0,
 	.lvl = 5,

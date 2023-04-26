@@ -53,7 +53,8 @@
     "HotHeartPath",
     "WanderersRoad",
     "SeaboundPath",
-    "SandbarCoast"
+    "SandbarCoast",
+    "PortWander"
   ],
   "gMapGroup_Burrows": [
     "NewMap1",

@@ -1146,3 +1146,5 @@ Common_EventScript_LegendaryFlewAway::
 	.include "data/maps/SeaboundPath/scripts.inc"
 
 	.include "data/maps/SandbarCoast/scripts.inc"
+
+	.include "data/maps/PortWander/scripts.inc"

@@ -4860,6 +4860,16 @@
       "secondary_tileset": "gTileset_Petalburg",
       "border_filepath": "data/layouts/SandbarCoast/border.bin",
       "blockdata_filepath": "data/layouts/SandbarCoast/map.bin"
+    },
+    {
+      "id": "LAYOUT_PORT_WANDER",
+      "name": "PortWander_Layout",
+      "width": 72,
+      "height": 24,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Slateport",
+      "border_filepath": "data/layouts/PortWander/border.bin",
+      "blockdata_filepath": "data/layouts/PortWander/map.bin"
     }
   ]
 }

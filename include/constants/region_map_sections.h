@@ -1,6 +1,7 @@
 #ifndef GUARD_REGIONMAPSEC_H
 #define GUARD_REGIONMAPSEC_H
 
+// old mapsecs
 #define MAPSEC_LITTLEROOT_TOWN              0x00 // cran town
 #define MAPSEC_OLDALE_TOWN                  0x01
 #define MAPSEC_DEWFORD_TOWN                 0x02 // RESERVED FOR VANILLA MAP
