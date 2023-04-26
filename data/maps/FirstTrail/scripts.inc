@@ -79,7 +79,7 @@ FirstTrail_TriggerScript_ProfessorMeeting::
 	closemessage
 	applymovement LOCALID_CALVIN, FirstTrail_Movement_ProfWalkAway
 	waitmovement 0
-	setvar VAR_FONEI_COAST_STATE, 2
+	setvar VAR_FONEI_COAST_STATE, 3
 	setflag FLAG_MET_PROFESSOR
 	removeobject LOCALID_CALVIN
 	removeobject LOCALID_MORGAN

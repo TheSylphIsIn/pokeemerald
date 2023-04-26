@@ -2,6 +2,7 @@
 #include "event_data.h"
 #include "event_object_movement.h"
 #include "field_camera.h"
+#include "field_effect.h"
 #include "field_screen_effect.h"
 #include "field_specials.h"
 #include "fieldmap.h"
@@ -18,6 +19,7 @@
 #include "constants/field_specials.h"
 #include "constants/songs.h"
 #include "constants/metatile_labels.h"
+#include "constants/field_effects.h"
 
 #define MORGAN_STARTING_Y -60
 #define PLAYER_STARTING_Y -90
@@ -45,8 +47,6 @@ static const u8 sSSTidalSailWestMovementScript[] =
     MOVEMENT_ACTION_WALK_FAST_LEFT,
     MOVEMENT_ACTION_STEP_END
 };
-
-static void Task_Truck3(u8);
 
 static s16 GetTruckCameraBobbingY(int time)
 {
@@ -85,7 +85,9 @@ static s16 GetTruckBoxYMovement(int time)
 #define tPlayerY data[2]
 #define tCalvinY data[3]
 
-static void Task_Truck1(u8 taskId) // sprites slide in from the top of the screen
+// Sprites slide in from the top of the screen. Calvin appears after the player, and Morgan after him.
+// They hover in place after reaching 36px. Once all 3 are there, proceeds to task 2.
+static void Task_HoverProtagSprites(u8 taskId) 
 {
     s16 *data = gTasks[taskId].data;
 	u32 i;
@@ -112,54 +114,66 @@ static void Task_Truck1(u8 taskId) // sprites slide in from the top of the scree
 
 #undef tTimer
 
-#define tTimerHorizontal data[0]
-#define tMoveStep        data[1]
-#define tTimerVertical   data[2]
+#define tTimer   data[2]
 
-static void Task_Truck2(u8 taskId) // sprites bob up and down for a little while
+static void Task_MoveProtagSpritesDown(u8 taskId) 
 {
     s16 *data = gTasks[taskId].data;
     s16 yMorgan, yPlayer, yCalvin;
+	u8 objEventId;
 
-    tTimerVertical++;
+    tTimer++;
+	
+	// Each character descends at their own rate. When they reach their home tile,
+	// Their shadow disappears and they play a dust landing effect.
+	// Cutscene ends when all 3 are in their home tile.
 
-	yMorgan = (tTimerVertical + 36) + MORGAN_STARTING_Y;
+	yMorgan = (tTimer + 36) + MORGAN_STARTING_Y;
 	if (yMorgan <= 0)
 		SetObjectEventSpritePosByLocalIdAndMap(LOCALID_SLEEPING_MORGAN, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, 0, yMorgan);
-	yPlayer = (tTimerVertical) + 36 + PLAYER_STARTING_Y;
+	if (yMorgan == 0)
+	{
+		TryGetObjectEventIdByLocalIdAndMap(LOCALID_SLEEPING_MORGAN, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objEventId);
+		gObjectEvents[objEventId].hasShadow = FALSE;
+		gFieldEffectArguments[0] = gObjectEvents[objEventId].currentCoords.x;
+		gFieldEffectArguments[1] = gObjectEvents[objEventId].currentCoords.y;
+		gFieldEffectArguments[2] = gObjectEvents[objEventId].previousElevation;
+		FieldEffectStart(FLDEFF_DUST);
+        PlaySE(SE_TRUCK_DOOR);
+	}	
+	
+	yPlayer = (tTimer) + 36 + PLAYER_STARTING_Y;
 	if (yPlayer <= 0)
 	SetObjectEventSpritePosByLocalIdAndMap(LOCALID_SLEEPING_PLAYER, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, 0, yPlayer);
-	yCalvin = ((tTimerVertical) * 4) + 36 + CALVIN_STARTING_Y;
+	if (yPlayer == 0)
+	{
+		TryGetObjectEventIdByLocalIdAndMap(LOCALID_SLEEPING_PLAYER, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objEventId);
+		gObjectEvents[objEventId].hasShadow = FALSE;
+		gFieldEffectArguments[0] = gObjectEvents[objEventId].currentCoords.x;
+		gFieldEffectArguments[1] = gObjectEvents[objEventId].currentCoords.y;
+		gFieldEffectArguments[2] = gObjectEvents[objEventId].previousElevation;
+		FieldEffectStart(FLDEFF_DUST);
+	}	
+	
+	yCalvin = ((tTimer) * 4) + 36 + CALVIN_STARTING_Y;
 	if (yCalvin <= 0)
 		SetObjectEventSpritePosByLocalIdAndMap(LOCALID_SLEEPING_CALVIN, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, 0, yCalvin);
-	if (yMorgan == 0 && yPlayer == 0 && yCalvin == 0)
+	if (yCalvin == 0)
+	{
+		TryGetObjectEventIdByLocalIdAndMap(LOCALID_SLEEPING_CALVIN, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objEventId);
+		gObjectEvents[objEventId].hasShadow = FALSE;
+		gFieldEffectArguments[0] = gObjectEvents[objEventId].currentCoords.x;
+		gFieldEffectArguments[1] = gObjectEvents[objEventId].currentCoords.y;
+		gFieldEffectArguments[2] = gObjectEvents[objEventId].previousElevation;
+		FieldEffectStart(FLDEFF_DUST);
+        PlaySE(SE_TRUCK_DOOR);
+	}	
+	
+	if (yMorgan > 0 && yPlayer > 0 && yCalvin > 0)
        DestroyTask(taskId);
 }
 
-static void Task_Truck3(u8 taskId) // sprites slide down into place
-{
-   s16 *data = gTasks[taskId].data;
-
-   tTimerHorizontal++;
-
-   
-   if (tTimerHorizontal > 36)
-   {
-       DestroyTask(taskId);
-   }
-   else
-   {
-		if (tTimerHorizontal < 18)
-			SetObjectEventSpritePosByLocalIdAndMap(LOCALID_SLEEPING_MORGAN, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, 0, MORGAN_STARTING_Y + tTimerHorizontal + 36);
-		if (tTimerHorizontal < 18)
-			SetObjectEventSpritePosByLocalIdAndMap(LOCALID_SLEEPING_PLAYER, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, 0, PLAYER_STARTING_Y + (tTimerHorizontal * 3) + 36);
-		SetObjectEventSpritePosByLocalIdAndMap(LOCALID_SLEEPING_CALVIN, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, 0, CALVIN_STARTING_Y + (tTimerHorizontal * 2) + 36);
-   }
-}
-
-#undef tTimerHorizontal
-#undef tMoveStep
-#undef tTimerVertical
+#undef tTimer
 
 #define tState   data[0]
 #define tTimer   data[1]
@@ -169,10 +183,11 @@ static void Task_Truck3(u8 taskId) // sprites slide down into place
 static void Task_HandleTruckSequence(u8 taskId)
 {
    s16 *data = gTasks[taskId].data;
+   u8 i;
 
     switch (tState)
     {
-    case 0:
+    case 0: // Prof intro finished. Delay beginning for 1 second.
         tTimer++;
         if (tTimer == 60)
         {
@@ -180,51 +195,62 @@ static void Task_HandleTruckSequence(u8 taskId)
             tTimer = 0;
             tState = 1;
             PlaySE(SE_WARP_IN);
+			TryGetObjectEventIdByLocalIdAndMap(LOCALID_SLEEPING_MORGAN, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &i);
+			gObjectEvents[i].hasShadow = TRUE;
+			TryGetObjectEventIdByLocalIdAndMap(LOCALID_SLEEPING_PLAYER, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &i);
+			gObjectEvents[i].hasShadow = TRUE;
+			TryGetObjectEventIdByLocalIdAndMap(LOCALID_SLEEPING_CALVIN, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &i);
+			gObjectEvents[i].hasShadow = TRUE;
+			gFieldEffectArguments[0] = LOCALID_SLEEPING_MORGAN;
+			gFieldEffectArguments[1] = gSaveBlock1Ptr->location.mapNum;
+			gFieldEffectArguments[2] = gSaveBlock1Ptr->location.mapGroup;
+			FieldEffectStart(FLDEFF_SHADOW);
+			gFieldEffectArguments[0] = LOCALID_SLEEPING_PLAYER;
+			FieldEffectStart(FLDEFF_SHADOW);
+			gFieldEffectArguments[0] = LOCALID_SLEEPING_CALVIN;
+			FieldEffectStart(FLDEFF_SHADOW);
         }
         break;
-    case 1:
+    case 1: // fade in after warp sound. Slide sprites on screen.
         tTimer++;
         if (tTimer == 30)
         {
             FadeInFromBlack();
             tTimer = 0;
             tState = 2;
-            tTaskId1 = CreateTask(Task_Truck1, 0xA);
+            tTaskId1 = CreateTask(Task_HoverProtagSprites, 0xA);
         }
         break;
-    case 2:
+    case 2: // Once all sprites are hovering in place, play "warp out" sound.
         tTimer++;
         if (!gPaletteFade.active && gTasks[tTaskId1].data[0] > 90)
         {
             PlaySE(SE_WARP_OUT);
             tTimer = 0;
             DestroyTask(tTaskId1);
-            tTaskId2 = CreateTask(Task_Truck2, 0xA);
-            tState = 3;
-        }
-        break;
-    case 3:
-        if (!gTasks[tTaskId2].isActive)
-        {
-            // Task_Truck2 / Task_Truck3 has finished
-            InstallCameraPanAheadCallback();
-            tTimer = 0;
+			tState = 3;
+		}
+		break;
+	case 3: // Once "warp out" sound is finished, move sprites into place.
+		tTimer++;
+		if (tTimer > 30)
+		{
+            tTaskId2 = CreateTask(Task_MoveProtagSpritesDown, 0xA);
             tState = 4;
         }
         break;
-    case 4:
-        tTimer++;
-        if (tTimer == 1)
+    case 4: // Sprites are in place. Wait a bit.
+        if (!gTasks[tTaskId2].isActive)
         {
+            InstallCameraPanAheadCallback();
             tTimer = 0;
             tState = 5;
         }
         break;
-    case 5:
+    case 5: // End cutscene.
         tTimer++;
-        if (tTimer == 60)
+        if (tTimer == 10)
         {
-            DrawWholeMapView();
             PlaySE(SE_TRUCK_DOOR);
             DestroyTask(taskId);
             UnlockPlayerFieldControls();

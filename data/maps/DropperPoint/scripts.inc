@@ -1,44 +1,99 @@
 .set LOCALID_MORGAN, 3
 .set LOCALID_CALVIN, 2
 .set LOCALID_SLOSHMOSH, 5
+.set LOCALID_ASLEEP_MORGAN, 6
+.set LOCALID_ASLEEP_PLAYER, 7
+.set LOCALID_ASLEEP_CALVIN, 8
 
 DropperPoint_MapScripts::
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, DropperPoint_OnFrame
 	.byte 0
+	
+DropperPoint_OnFrame::
+	map_script_2 VAR_FONEI_COAST_STATE, 0, DropperPoint_EventScript_PlayerWakeUp
+	.2byte 0
+
+DropperPoint_EventScript_PlayerWakeUp::
+	lockall
+	delay 60
+	applymovement LOCALID_ASLEEP_PLAYER, DropperPoint_Movement_WakeUp
+	waitmovement 0
+	playse SE_PIN
+	applymovement LOCALID_ASLEEP_PLAYER, Common_Movement_ExclamationMark
+	waitmovement 0
+	applymovement LOCALID_ASLEEP_PLAYER, Common_Movement_Delay48
+	waitmovement 0
+	playse SE_BIKE_HOP
+	removeobject LOCALID_ASLEEP_PLAYER
+	applymovement OBJ_EVENT_ID_PLAYER, DropperPoint_Movement_ShowPlayer
+	waitmovement 0
+	setvar VAR_FONEI_COAST_STATE, 1
+	releaseall
+	end
+
+DropperPoint_Movement_ShowPlayer:
+	set_visible
+	jump_in_place_down
+	delay_16
+	delay_16
+	step_end
+	
+DropperPoint_Movement_WakeJump:
+	jump_in_place_down
+	delay_16
+	delay_16
+	step_end
 
 DropperPoint_Sign::
 	msgbox DropperPoint_Text_Sign, MSGBOX_SIGN
 	end
+	
+DropperPoint_EventScript_WakeRival::
+	applymovement VAR_LAST_TALKED, DropperPoint_Movement_WakeUp
+	waitmovement 0
+	playse SE_PIN
+	applymovement VAR_LAST_TALKED, Common_Movement_ExclamationMark
+	waitmovement 0
+	applymovement VAR_LAST_TALKED, Common_Movement_Delay48
+	waitmovement 0
+	playse SE_BIKE_HOP
+	removeobject VAR_LAST_TALKED
+	return	
 
 DropperPoint_EventScript_Morgan::
 	lock
-	goto_if_eq VAR_FONEI_COAST_STATE, 1, DropperPoint_EventScript_MorganPanic
-	goto_if_set FLAG_FAVORED_MORGAN, DropperPoint_EventScript_MorganAwake
 	msgbox DropperPoint_Text_MorganWake, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_MORGAN, DropperPoint_Movement_WakeUp
+	call DropperPoint_EventScript_WakeRival
+	addobject LOCALID_MORGAN
+	clearflag FLAG_HIDE_MORGAN_INTRO
+	applymovement LOCALID_MORGAN, DropperPoint_Movement_WakeJump
 	waitmovement 0
-	faceplayer
+	applymovement LOCALID_MORGAN, Common_Movement_FacePlayer
+	waitmovement 0
 	msgbox DropperPoint_Text_MorganIntro, MSGBOX_DEFAULT
 	setflag FLAG_FAVORED_MORGAN
-	setobjectmovementtype LOCALID_MORGAN, MOVEMENT_TYPE_LOOK_AROUND
 	release
 	end
 	
 DropperPoint_EventScript_Calvin::
 	lock
-	goto_if_set FLAG_FAVORED_CALVIN, DropperPoint_EventScript_CalvinAwake
 	msgbox DropperPoint_Text_CalvinWake, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_CALVIN, DropperPoint_Movement_WakeUp
+	call DropperPoint_EventScript_WakeRival
+	addobject LOCALID_CALVIN
+	clearflag FLAG_HIDE_CALVIN_INTRO
+	applymovement LOCALID_CALVIN, DropperPoint_Movement_WakeJump
 	waitmovement 0
-	faceplayer
+	applymovement LOCALID_CALVIN, Common_Movement_FacePlayer
+	waitmovement 0
 	msgbox DropperPoint_Text_CalvinIntro, MSGBOX_DEFAULT
 	setflag FLAG_FAVORED_CALVIN
-	setobjectmovementtype LOCALID_CALVIN, MOVEMENT_TYPE_LOOK_AROUND
 	release
 	end
 	
 DropperPoint_EventScript_MorganAwake::
+	goto_if_eq VAR_FONEI_COAST_STATE, 2, DropperPoint_EventScript_MorganPanic
 	msgbox DropperPoint_Text_Morgan2, MSGBOX_NPC
 	end
 	
@@ -95,9 +150,12 @@ DropperPoint_TriggerScript_Bag::
 	closemessage
 	setmetatile 12, 11, 0x36C, FALSE // dumb thing to fix visual error
 	special DrawWholeMapView
-	applymovement LOCALID_CALVIN, DropperPoint_Movement_CalvinGoToBag
+	applymovement LOCALID_CALVIN, DropperPoint_Movement_CalvinJumpOne
 	playse SE_BIKE_HOP
 	waitse
+	waitmovement 0
+	applymovement LOCALID_CALVIN, DropperPoint_Movement_CalvinJump2
+	playse SE_BIKE_HOP
 	waitmovement 0
 	setmetatile 12, 11, 0x2E1, FALSE // dumb thing to fix visual error
 	special DrawWholeMapView
@@ -111,17 +169,41 @@ DropperPoint_TriggerScript_Bag::
 	goto DropperPoint_TriggerScript_BagContinue
 	
 DropperPoint_TriggerScript_CalvinSleep:
-	applymovement LOCALID_CALVIN, DropperPoint_Movement_WakeUp
+	applymovement LOCALID_ASLEEP_CALVIN, DropperPoint_Movement_WakeUp
 	waitmovement 0
-	applymovement LOCALID_CALVIN, Common_Movement_FacePlayer
+	playse SE_PIN
+	applymovement LOCALID_ASLEEP_CALVIN, Common_Movement_ExclamationMark
+	waitmovement 0
+	applymovement LOCALID_ASLEEP_CALVIN, Common_Movement_Delay48
+	waitmovement 0
+	playse SE_BIKE_HOP
+	removeobject LOCALID_ASLEEP_CALVIN
+	addobject LOCALID_CALVIN
+	clearflag FLAG_HIDE_CALVIN_INTRO
+	applymovement LOCALID_CALVIN, DropperPoint_Movement_WakeJump
+	waitmovement 0
+	applymovement LOCALID_CALVIN, Common_Movement_FaceUp
+	waitmovement 0
 	msgbox DropperPoint_Text_CalvinQuickIntro, MSGBOX_DEFAULT
 	closemessage
 	return
 
 DropperPoint_TriggerScript_MorganSleep:
-	applymovement LOCALID_MORGAN, DropperPoint_Movement_WakeUp
+	applymovement LOCALID_ASLEEP_MORGAN, DropperPoint_Movement_WakeUp
 	waitmovement 0
-	applymovement LOCALID_MORGAN, Common_Movement_FacePlayer
+	playse SE_PIN
+	applymovement LOCALID_ASLEEP_MORGAN, Common_Movement_ExclamationMark
+	waitmovement 0
+	applymovement LOCALID_ASLEEP_MORGAN, Common_Movement_Delay48
+	waitmovement 0
+	playse SE_BIKE_HOP
+	removeobject LOCALID_ASLEEP_MORGAN
+	addobject LOCALID_MORGAN
+	clearflag FLAG_HIDE_MORGAN_INTRO
+	applymovement LOCALID_MORGAN, DropperPoint_Movement_WakeJump
+	waitmovement 0
+	applymovement LOCALID_MORGAN, Common_Movement_FaceRight
+	waitmovement 0
 	msgbox DropperPoint_Text_MorganQuickIntro, MSGBOX_DEFAULT
 	closemessage
 	return
@@ -181,7 +263,7 @@ DropperPoint_TriggerScript_BagContinue::
 	closemessage
 	msgbox DropperPoint_Text_SlimeApproaching2, MSGBOX_DEFAULT
 	closemessage
-	setvar VAR_FONEI_COAST_STATE, 1
+	setvar VAR_FONEI_COAST_STATE, 2
 	setrespawn HEAL_LOCATION_CRAN_TOWN
 	setflag FLAG_HIDE_FONEI_COAST_NPCS
 	release
@@ -297,7 +379,7 @@ DropperPoint_Text_BagText2:
 	
 DropperPoint_Text_SlimeApproaching1:
 	.string "MORGAN: W-what was that noise?\p"
-	.string "CALVIN: Relax. It was just a wave…$"
+	.string "CALVIN: Relax. It was just a wave, or…$"
 	
 DropperPoint_Text_SlimeApproaching2:
 	.string "MORGAN: AAAAH! What is that thing!?\n"
@@ -331,23 +413,25 @@ DropperPoint_Text_NicknamePrompt:
 	.string "Give a nickname to your {STR_VAR_1}?$"
 	
 DropperPoint_Movement_WakeUp:
-	face_left
-	delay_8
-	face_right
-	delay_8
-	face_left
-	delay_8
-	face_right
-	delay_8
-	emote_exclamation_mark
+	face_up
 	delay_16
-	jump_in_place_down
+	face_down
+	delay_8
+	face_up
 	delay_16
+	face_down
+	delay_8
+	face_up
+	delay_16
+	face_left
 	step_end
 	
-DropperPoint_Movement_CalvinGoToBag:
+DropperPoint_Movement_CalvinJumpOne:
 	jump_2_up
 	walk_up
+	step_end
+	
+DropperPoint_Movement_CalvinJump2:
 	jump_2_up
 	face_right
 	step_end

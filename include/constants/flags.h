@@ -1223,8 +1223,8 @@
 #define FLAG_HIDE_CALVIN_FISHEYE                               0x496 // Unused Flag
 #define FLAG_HIDE_MORGAN_INTRO                                           0x497 // Unused Flag
 #define FLAG_HIDE_CALVIN_INTRO                                           0x498 // Unused Flag
-#define FLAG_UNUSED_0x499                                           0x499 // Unused Flag
-#define FLAG_UNUSED_0x49A                                           0x49A // Unused Flag
+#define FLAG_HIDE_SLEEPING_MORGAN_INTRO                                          0x499 // Unused Flag
+#define FLAG_HIDE_SLEEPING_CALVIN_INTRO                                           0x49A // Unused Flag
 #define FLAG_UNUSED_0x49B                                           0x49B // Unused Flag
 #define FLAG_UNUSED_0x49C                                           0x49C // Unused Flag
 #define FLAG_UNUSED_0x49D                                           0x49D // Unused Flag

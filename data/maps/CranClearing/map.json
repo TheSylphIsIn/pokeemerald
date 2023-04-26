@@ -182,7 +182,7 @@
       "y": 24,
       "elevation": 0,
       "var": "VAR_FONEI_COAST_STATE",
-      "var_value": "4",
+      "var_value": "5",
       "script": "CranClearing_TriggerScript_Morgan1"
     },
     {
@@ -191,7 +191,7 @@
       "y": 24,
       "elevation": 0,
       "var": "VAR_FONEI_COAST_STATE",
-      "var_value": "4",
+      "var_value": "5",
       "script": "CranClearing_TriggerScript_Calvin1"
     },
     {
@@ -200,7 +200,7 @@
       "y": 24,
       "elevation": 0,
       "var": "VAR_FONEI_COAST_STATE",
-      "var_value": "4",
+      "var_value": "5",
       "script": "CranClearing_TriggerScript_Morgan1"
     },
     {
@@ -209,7 +209,7 @@
       "y": 25,
       "elevation": 0,
       "var": "VAR_FONEI_COAST_STATE",
-      "var_value": "4",
+      "var_value": "5",
       "script": "CranClearing_TriggerScript_Calvin1"
     }
   ],

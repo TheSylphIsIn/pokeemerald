@@ -8,7 +8,7 @@ LittlerootTown_ProfessorBirchsLab_MapScripts::
 	.byte 0
 
 LittlerootTown_ProfessorBirchsLab_OnFrame:
-	map_script_2 VAR_FONEI_COAST_STATE, 2, CranTown_Lab_GetPokedexScript
+	map_script_2 VAR_FONEI_COAST_STATE, 3, CranTown_Lab_GetPokedexScript
 	.2byte 0
 
 CranTown_Lab_GetPokedexScript::
@@ -51,7 +51,7 @@ CranTown_Lab_GetPokedexScript::
 	msgbox CranTown_Lab_Text_GetItBack
 	closemessage
 	releaseall
-	setvar VAR_FONEI_COAST_STATE, 3
+	setvar VAR_FONEI_COAST_STATE, 4
 	clearflag FLAG_HIDE_FONEI_COAST_NPCS
 	end
 	
@@ -190,7 +190,7 @@ CranTown_Lab_Text_GetItBack:
 LittlerootTown_ProfessorBirchsLab_EventScript_Birch::
 	lock
 	faceplayer
-	goto_if_le VAR_FONEI_COAST_STATE, 4, CranTown_Lab_EventScript_ProfScannerStolen
+	goto_if_le VAR_FONEI_COAST_STATE, 6, CranTown_Lab_EventScript_ProfScannerStolen
 	goto LittlerootTown_ProfessorBirchsLab_EventScript_TryRatePokedexOrRegister
 	end
 

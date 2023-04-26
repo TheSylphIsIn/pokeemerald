@@ -198,7 +198,7 @@
       "y": 19,
       "elevation": 0,
       "var": "VAR_FONEI_COAST_STATE",
-      "var_value": "1",
+      "var_value": "2",
       "script": "FirstTrail_TriggerScript_ProfessorMeeting"
     }
   ],

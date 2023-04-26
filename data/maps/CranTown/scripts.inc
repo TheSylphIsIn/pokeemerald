@@ -6,8 +6,8 @@ CranTown_MapScripts::
 	.byte 0
 
 CranTown_OnFrame:
-	map_script_2 VAR_FONEI_COAST_STATE, 1, CranTown_MapScript_WipedBeforeMeetingProf
-	map_script_2 VAR_FONEI_COAST_STATE, 3, CranTown_MapScript_LeavingLab
+	map_script_2 VAR_FONEI_COAST_STATE, 2, CranTown_MapScript_WipedBeforeMeetingProf
+	map_script_2 VAR_FONEI_COAST_STATE, 4, CranTown_MapScript_LeavingLab
 	.2byte 0
 
 CranTown_MapScript_WipedBeforeMeetingProf:
@@ -21,7 +21,7 @@ CranTown_MapScript_WipedBeforeMeetingProf:
 	applymovement LOCALID_CALVIN, CranTown_Movement_CalvinWalkOffscreen
 	waitmovement 0
 	removeobject LOCALID_CALVIN
-	setvar VAR_FONEI_COAST_STATE, 2
+	setvar VAR_FONEI_COAST_STATE, 3
 	setflag FLAG_MET_PROFESSOR
 	release
 	end
@@ -114,7 +114,7 @@ CranTown_MapScript_LeavingLab::
 	waitmovement LOCALID_MORGAN
 	removeobject LOCALID_CALVIN
 	removeobject LOCALID_MORGAN
-	setvar VAR_FONEI_COAST_STATE, 4
+	setvar VAR_FONEI_COAST_STATE, 5
 	release
 	end
 

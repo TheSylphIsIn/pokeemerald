@@ -6,7 +6,7 @@ CranClearing_MapScripts::
 	.byte 0
 
 CranClearing_MapScript_OnTransition:
-	call_if_eq VAR_FONEI_COAST_STATE, 5, CranClearing_MapScript_SetRivalPositions
+	call_if_eq VAR_FONEI_COAST_STATE, 6, CranClearing_MapScript_SetRivalPositions
 	end
 	
 CranClearing_MapScript_SetRivalPositions:
@@ -28,7 +28,7 @@ CranClearing_TriggerScript_Morgan1::
 	setobjectxy LOCALID_CALVIN, 30, 7
 	setobjectxyperm LOCALID_MORGAN, 12, 15
 	setobjectxyperm LOCALID_CALVIN, 30, 7
-	setvar VAR_FONEI_COAST_STATE, 5
+	setvar VAR_FONEI_COAST_STATE, 6
 	release
 	end
 	
@@ -43,7 +43,7 @@ CranClearing_TriggerScript_Calvin1::
 	setobjectxy LOCALID_CALVIN, 30, 7
 	setobjectxyperm LOCALID_MORGAN, 12, 15
 	setobjectxyperm LOCALID_CALVIN, 30, 7
-	setvar VAR_FONEI_COAST_STATE, 5
+	setvar VAR_FONEI_COAST_STATE, 6
 	release
 	end
 	

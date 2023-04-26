@@ -248,6 +248,8 @@
 #define OBJ_EVENT_GFX_CUTTABLE_FENCE			 244
 #define OBJ_EVENT_GFX_RIVAL_MORGAN_ASLEEP		 245
 #define OBJ_EVENT_GFX_RIVAL_CALVIN_ASLEEP		 246
+#define OBJ_EVENT_GFX_PLAYER_ASLEEP_M			 247
+#define OBJ_EVENT_GFX_PLAYER_ASLEEP_F			 248
 
 // NOTE: By default, the max value for NUM_OBJ_EVENT_GFX is 239.
 //
@@ -258,7 +260,7 @@
 // object graphics that can be removed. If more graphics are needed, anything that
 // stores graphics ids will need to be increased in size. See wiki entry below:
 // https://github.com/pret/pokeemerald/wiki/Feature-Branches#overworld-expansion
-#define NUM_OBJ_EVENT_GFX                        247
+#define NUM_OBJ_EVENT_GFX                        249
 
 
 // These are dynamic object gfx ids.
