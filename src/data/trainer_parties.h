@@ -56,7 +56,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Kyle[] = {
 	{
 	.iv = 0,
 	.lvl = 5,
-	.species = SPECIES_POOCHYENA
+	.species = SPECIES_NIDORAN_M
 	},
 };
 

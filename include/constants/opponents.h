@@ -865,6 +865,7 @@
 #define TRAINER_JESSE							4
 #define TRAINER_DOBSON							5
 #define TRAINER_KELLY							6
+#define TRAINER_COOPER							7
 // starter dependent party trainers. index into starter-dependent party array is ID - 500
 #define TRAINER_MORGAN_FISHEYE_LAKE 			500
 #define TRAINER_CALVIN_FISHEYE_LAKE				501

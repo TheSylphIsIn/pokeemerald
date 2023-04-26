@@ -191,4 +191,74 @@ FirstTrail_Movement_MorganWalkAway:
 	walk_fast_right
 	step_end
 
-// old lady script (she isn't there on first visit)
+// NPC scripts
+FirstTrail_EventScript_OldWoman::
+	msgbox FirstTrail_Text_OldWoman, MSGBOX_NPC
+	end
+
+FirstTrail_EventScript_LittleBoy::
+	msgbox FirstTrail_Text_LittleBoy, MSGBOX_NPC
+	end
+
+FirstTrail_EventScript_FatMan::
+	msgbox FirstTrail_Text_FatMan, MSGBOX_NPC
+	end
+
+FirstTrail_Text_OldWoman::
+	.string "Ohoho…I remember the first march\n"
+	.string "up this trail.\p"
+	.string "I was just a toddler when we first\n"
+	.string "settlers arrived.\p"
+	.string "We surely weren't the first people\n"
+	.string "to ever live here, but whoever was,\l"
+	.string "they were long gone when we arrived.\p"
+	.string "I wonder where they went…\n"
+	.string "Ohohoho… … …$"
+
+FirstTrail_Text_LittleBoy::
+	.string "I bet there's secret treasure buried\n"
+	.string "around here somewhere!$"
+
+FirstTrail_Text_FatMan::
+	.string "What kind of crappy sign is this?\p"
+	.string "It doesn't list the year the settlers\n"
+	.string "arrived or anything.\p"
+	.string "Come on, not everyone knows it was…\n"
+	.string "Was, uh… … …\l"
+	.string "Darn! I forgot!$"
+
+FirstTrail_EventScript_TrainerKyle::
+	trainerbattle_single TRAINER_KYLE, FirstTrail_Text_KyleIntro, FirstTrail_Text_KyleDefeated
+	msgbox FirstTrail_Text_KylePostBattle, MSGBOX_AUTOCLOSE
+	end
+
+FirstTrail_Text_KyleIntro:
+	.string "Hey! Got any cool POKéMON?\n"
+	.string "Show me, show me!$"
+
+FirstTrail_Text_KyleDefeated:
+	.string "Aw, it's cooler than mine!$"
+	
+FirstTrail_Text_KylePostBattle:
+	.string "I wanna catch a cool WATER type, but\n"
+	.string "they always swim away too fast.$"
+
+// welcome to fonei sign script
+FirstTrail_EventScript_WelcomeSignLeft::
+	msgbox FirstTrail_Text_SignLeft, MSGBOX_SIGN
+	end
+	
+FirstTrail_EventScript_WelcomeSignRight::
+	msgbox FirstTrail_Text_SignRight, MSGBOX_SIGN
+	end
+
+FirstTrail_Text_SignLeft:
+	.string "Welcome to the FONEI region!\p"
+	.string "Free real estate to the north.\n"
+	.string "Inquire in PENZELCASE CITY.$"
+
+FirstTrail_Text_SignRight:
+	.string "HISTORY OF FONEI:\n"
+	.string "This is the trail that the first\n"
+	.string "modern day FONEI settlers followed\l"
+	.string "Upon making landfall in the region.$"
