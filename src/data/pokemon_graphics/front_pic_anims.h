@@ -4787,6 +4787,13 @@ static const union AnimCmd sAnim_HUMMBLING_1[] =
 
 static const union AnimCmd sAnim_KEESIGHT_1[] =
 {
+	ANIMCMD_FRAME(0, 10),
+	ANIMCMD_FRAME(1, 20),
+	ANIMCMD_FRAME(0, 20),
+	ANIMCMD_FRAME(1, 20),
+	ANIMCMD_FRAME(0, 20),
+	ANIMCMD_FRAME(1, 20),
+	ANIMCMD_FRAME(0, 20),
 	ANIMCMD_END
 };
 

@@ -32,7 +32,7 @@
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_MART_EMPLOYEE",
-      "x": 10,
+      "x": 9,
       "y": 6,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
@@ -53,7 +53,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route102_EventScript_Calvin",
+      "script": "CranTown_EventScript_OldMan",
       "flag": "FLAG_HIDE_FONEI_COAST_NPCS"
     },
     {
@@ -71,7 +71,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_LITTLE_BOY_3",
-      "x": 20,
+      "x": 21,
       "y": 16,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_WALK_IN_PLACE_UP",
@@ -93,7 +93,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
-      "flag": "FLAG_SYS_POKEMON_GET"
+      "flag": "FLAG_DEFAULT_HIDDEN"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_RIVAL_CALVIN",
@@ -106,7 +106,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
-      "flag": "FLAG_SYS_POKEMON_GET"
+      "flag": "FLAG_DEFAULT_HIDDEN"
     }
   ],
   "warp_events": [
@@ -167,7 +167,7 @@
       "y": 3,
       "elevation": 0,
       "var": "VAR_FONEI_COAST_STATE",
-      "var_value": "2",
+      "var_value": "3",
       "script": "CranTown_TriggerScript_NorthBlock"
     },
     {
@@ -176,7 +176,7 @@
       "y": 3,
       "elevation": 0,
       "var": "VAR_FONEI_COAST_STATE",
-      "var_value": "2",
+      "var_value": "3",
       "script": "CranTown_TriggerScript_NorthBlock"
     },
     {
@@ -185,7 +185,7 @@
       "y": 3,
       "elevation": 0,
       "var": "VAR_FONEI_COAST_STATE",
-      "var_value": "2",
+      "var_value": "3",
       "script": "CranTown_TriggerScript_NorthBlock"
     },
     {
@@ -194,7 +194,7 @@
       "y": 8,
       "elevation": 0,
       "var": "VAR_FONEI_COAST_STATE",
-      "var_value": "2",
+      "var_value": "3",
       "script": "CranTown_TriggerScript_MeetProf"
     },
     {
@@ -203,7 +203,7 @@
       "y": 9,
       "elevation": 0,
       "var": "VAR_FONEI_COAST_STATE",
-      "var_value": "2",
+      "var_value": "3",
       "script": "CranTown_TriggerScript_MeetProf"
     },
     {
@@ -212,7 +212,7 @@
       "y": 8,
       "elevation": 0,
       "var": "VAR_FONEI_COAST_STATE",
-      "var_value": "3",
+      "var_value": "5",
       "script": "CranTown_TriggerScript_Scanner"
     },
     {
@@ -221,7 +221,25 @@
       "y": 9,
       "elevation": 0,
       "var": "VAR_FONEI_COAST_STATE",
-      "var_value": "3",
+      "var_value": "5",
+      "script": "CranTown_TriggerScript_Scanner"
+    },
+    {
+      "type": "trigger",
+      "x": 23,
+      "y": 8,
+      "elevation": 0,
+      "var": "VAR_FONEI_COAST_STATE",
+      "var_value": "6",
+      "script": "CranTown_TriggerScript_Scanner"
+    },
+    {
+      "type": "trigger",
+      "x": 23,
+      "y": 9,
+      "elevation": 0,
+      "var": "VAR_FONEI_COAST_STATE",
+      "var_value": "6",
       "script": "CranTown_TriggerScript_Scanner"
     }
   ],
@@ -264,7 +282,7 @@
       "y": 8,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "NULL"
+      "script": "CranTown_Sign_FamilySign"
     }
   ]
 }

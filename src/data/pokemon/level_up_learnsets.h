@@ -5851,6 +5851,9 @@ static const u16 sHummblingLevelUpLearnset[] = {
 };
 
 static const u16 sKeesightLevelUpLearnset[] = {
+	LEVEL_UP_MOVE( 1, MOVE_SCRATCH),
+	LEVEL_UP_MOVE( 4, MOVE_DEFENSE_CURL),
+	LEVEL_UP_MOVE( 7, MOVE_CONFUSION),
 	LEVEL_UP_END
 };
 

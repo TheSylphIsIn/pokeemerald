@@ -205,13 +205,14 @@ FirstTrail_EventScript_FatMan::
 	end
 
 FirstTrail_Text_OldWoman::
-	.string "Ohoho…I remember the first march\n"
-	.string "up this trail.\p"
-	.string "I was just a toddler when we first\n"
-	.string "settlers arrived.\p"
+	.string "Ohoho…my family has been in this\n"
+	.string "region since its founding, you know.\p"
+	.string "My ancestors marched up this trail\n"
+	.string "when they first made landfall.\p"
 	.string "We surely weren't the first people\n"
-	.string "to ever live here, but whoever was,\l"
-	.string "they were long gone when we arrived.\p"
+	.string "to ever live here, but whoever was\l"
+	.string "here before us must have been long\l"
+	.string "gone by the time we arrived.\p"
 	.string "I wonder where they went…\n"
 	.string "Ohohoho… … …$"
 
@@ -258,7 +259,7 @@ FirstTrail_Text_SignLeft:
 	.string "Inquire in PENZELCASE CITY.$"
 
 FirstTrail_Text_SignRight:
-	.string "HISTORY OF FONEI:\n"
+	.string "HISTORY OF FONEI:\p"
 	.string "This is the trail that the first\n"
-	.string "modern day FONEI settlers followed\l"
+	.string "ancestral FONEI settlers followed\l"
 	.string "Upon making landfall in the region.$"

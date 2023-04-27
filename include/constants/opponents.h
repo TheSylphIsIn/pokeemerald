@@ -860,8 +860,8 @@
 // They're referenced by scripts and some code.
 
 #define TRAINER_KYLE 							1
-#define TRAINER_KEY_LACKEY_FISHEYE_LAKE			2
-#define TRAINER_BILLY							3
+#define TRAINER_BILLY							2
+#define TRAINER_KEY_LACKEY_FISHEYE_LAKE			3
 #define TRAINER_JESSE							4
 #define TRAINER_DOBSON							5
 #define TRAINER_KELLY							6

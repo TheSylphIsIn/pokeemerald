@@ -5,8 +5,17 @@
 
 LittlerootTown_ProfessorBirchsLab_MapScripts::
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, LittlerootTown_ProfessorBirchsLab_OnFrame
+	map_script MAP_SCRIPT_ON_LOAD, CranTown_Lab_OnLoad
 	.byte 0
 
+CranTown_Lab_OnLoad:
+	call_if_ge VAR_FONEI_COAST_STATE, 4, CranTown_Lab_RemoveAbilScanner
+	end
+	
+CranTown_Lab_RemoveAbilScanner:
+	setmetatile 6, 1, 0x20B, TRUE
+	return
+	
 LittlerootTown_ProfessorBirchsLab_OnFrame:
 	map_script_2 VAR_FONEI_COAST_STATE, 3, CranTown_Lab_GetPokedexScript
 	.2byte 0
@@ -34,7 +43,7 @@ CranTown_Lab_GetPokedexScript::
 	applymovement LOCALID_GRUNT, Common_Movement_ExclamationMark
 	msgbox CranTown_Lab_Text_GruntText, MSGBOX_DEFAULT
 	closemessage
-	setmetatile 6, 1, 0x20B, FALSE
+	setmetatile 6, 1, 0x20B, TRUE
 	special DrawWholeMapView
 	applymovement LOCALID_GRUNT, CranTown_Lab_Movement_GruntRunAway1
 	waitmovement 0
@@ -85,13 +94,6 @@ CranTown_Lab_Text_ProfPokeBalls:
 	.string "that is. Take these, too.$"
 	
 CranTown_Lab_Movement_ProfGiveDexesToRivals:
-	walk_left
-	face_down
-	delay_16
-	walk_in_place_down
-	delay_16
-	delay_16
-	walk_right
 	walk_right
 	face_down
 	delay_16
@@ -99,6 +101,13 @@ CranTown_Lab_Movement_ProfGiveDexesToRivals:
 	delay_16
 	delay_16
 	walk_left
+	walk_left
+	face_down
+	delay_16
+	walk_in_place_down
+	delay_16
+	delay_16
+	walk_right
 	walk_up
 	face_down
 	step_end

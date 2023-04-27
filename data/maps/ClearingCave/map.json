@@ -2,7 +2,7 @@
   "id": "MAP_CLEARING_CAVE",
   "name": "ClearingCave",
   "layout": "LAYOUT_CLEARING_CAVE",
-  "music": "MUS_MT_PYRE",
+  "music": "MUS_PETALBURG_WOODS",
   "region_map_section": "MAPSEC_PETALBURG_WOODS",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -16,7 +16,7 @@
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_ALTA_GRUNT_M",
-      "x": 23,
+      "x": 24,
       "y": 2,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
@@ -25,7 +25,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
-      "flag": "0"
+      "flag": "FLAG_RECOVERED_ABILITY_SCANNER"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
@@ -36,9 +36,9 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
-      "flag": "0"
+      "trainer_sight_or_berry_tree_id": "ITEM_X_DEFEND",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ITEM_FROZEN_FISH_CAVE_X_DEFENSE"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_RIVAL_CALVIN",
@@ -51,7 +51,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "ClearingCave_EventScript_Calvin",
-      "flag": "0"
+      "flag": "FLAG_RECOVERED_ABILITY_SCANNER"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
@@ -62,9 +62,9 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
-      "flag": "0"
+      "trainer_sight_or_berry_tree_id": "ITEM_X_ATTACK",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ITEM_FROZEN_FISH_CAVE_X_ATTACK"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_RIVAL_MORGAN",
@@ -77,7 +77,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "ClearingCave_EventScript_Morgan",
-      "flag": "0"
+      "flag": "FLAG_RECOVERED_ABILITY_SCANNER"
     }
   ],
   "warp_events": [
@@ -95,9 +95,9 @@
       "x": 20,
       "y": 5,
       "elevation": 0,
-      "var": "VAR_TEMP_0",
+      "var": "VAR_TEAM_KEY_STATE",
       "var_value": "0",
-      "script": "NULL"
+      "script": "ClearingCave_TriggerScript_LackeyFight"
     }
   ],
   "bg_events": [
@@ -120,14 +120,6 @@
     {
       "type": "sign",
       "x": 22,
-      "y": 1,
-      "elevation": 0,
-      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "ClearingCave_Sign_LockedDoor"
-    },
-    {
-      "type": "sign",
-      "x": 23,
       "y": 1,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",

@@ -267,7 +267,7 @@
 #define VAR_MORGAN_STATE                               0x40F7 // Tracks misc triggers related to Rival Morgan
 #define VAR_CALVIN_STATE                                0x40F8 // Tracks misc triggers related to Rival Calvin
 #define VAR_STAR_PIECE_COUNT                                0x40F9 // Tracks how many star pieces the player has.
-#define VAR_UNUSED_0x40FA                                0x40FA // Unused Var
+#define VAR_TEAM_KEY_STATE                                0x40FA // Unused Var
 #define VAR_UNUSED_0x40FB                                0x40FB // Unused Var
 #define VAR_UNUSED_0x40FC                                0x40FC // Unused Var
 #define VAR_UNUSED_0x40FD                                0x40FD // Unused Var

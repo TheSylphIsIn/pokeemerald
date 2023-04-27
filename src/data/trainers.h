@@ -25,6 +25,18 @@ const struct Trainer gTrainers[] = {
         .party = NO_ITEM_DEFAULT_MOVES_NO_HARD(Kyle),
     },
 	
+	[TRAINER_BILLY] =
+	{
+        .trainerClass = TRAINER_CLASS_YOUNGSTER,
+        .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
+        .trainerPic = TRAINER_PIC_YOUNGSTER,
+        .trainerName = _("BILLY"),
+        .items = {},
+        .doubleBattle = FALSE,
+        .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
+        .party = NO_ITEM_DEFAULT_MOVES_NO_HARD(Billy),
+    },
+	
 	[TRAINER_KEY_LACKEY_FISHEYE_LAKE] =
 	{
         .trainerClass = TRAINER_CLASS_TEAM_MAGMA,

@@ -409,8 +409,11 @@ static bool8 MonListHasSpecies(const struct WildPokemonInfo *info, u16 species, 
     {
         for (i = 0; i < size; i++)
         {
-            if (info->wildPokemon[i].species == species)
+            if (info->wildPokemon[i].species == species
+			|| (species >= SPECIES_NIDORAN_F && species <= SPECIES_NIDOQUEEN && info->wildPokemon[i].species == species + 3)
+			|| (species >= SPECIES_NIDORAN_M && species <= SPECIES_NIDOKING && info->wildPokemon[i].species == species - 3))
                 return TRUE;
+			
         }
     }
     return FALSE;

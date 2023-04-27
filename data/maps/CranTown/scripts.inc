@@ -182,6 +182,19 @@ CranTown_Text_Girl:
 	.string "But I'm a big girl! I know\n"
 	.string "treasure hunts aren't real!$"
 
+CranTown_EventScript_OldMan::
+	msgbox CranTown_Text_OldMan, MSGBOX_NPC
+	end
+	
+CranTown_Text_OldMan:
+	.string "Can you see land on the horizon?\p"
+	.string "FONEI's ocean is home to many islands\n"
+	.string "both big and small.\p"
+	.string "As a matter of fact, I was born out\n"
+	.string "there in the GLUE VALLEY PIT.\p"
+	.string "…I promise it's more pleasant than\n"
+	.string "it sounds. Keheheh…$"
+
 // Mart script
 CranTown_EventScript_Shop::
 	lock
@@ -231,11 +244,11 @@ CranTown_Text_FamilySign:
 	
 CranTown_Text_TrainerTips:
 	.string "TRAINER TIPS\p"
-	.string "The base chance of a CRITICAL HIT\n"
-	.string "occuring is zero.\p"
-	.string "This means CRITICAL HITS won't\n"
-	.string "occur if CRIT RATIO is not raised.\p"
-	.string "On the flip side, CRITICAL HITS are\n"
+	.string "The base chance of a critical hit\n"
+	.string "landing in battle is zero.\p"
+	.string "This means critical hits won't\n"
+	.string "occur if crit ratio is not raised.\p"
+	.string "On the flip side, critical hits are\n"
 	.string "certain with a ratio above four.\p"
 	.string "For reference, FOCUS ENERGY boosts\n"
 	.string "the ratio by two.\p"

@@ -1051,8 +1051,8 @@
 #define FLAG_ITEM_FISHEYE_LAKE_GREAT_BALL                                 0x3EB
 #define FLAG_ITEM_FISHEYE_LAKE_SUPER_POTION                                 0x3EC
 #define FLAG_FISHEYE_LAKE_STAR_PIECE                                   0x3ED
-#define FLAG_ITEM_ROUTE_109_RARE_CANDY                              0x3EE
-#define FLAG_ITEM_ROUTE_110_DIRE_HIT                                0x3EF
+#define FLAG_ITEM_FROZEN_FISH_CAVE_X_DEFENSE                              0x3EE
+#define FLAG_ITEM_FROZEN_FISH_CAVE_X_ATTACK                                0x3EF
 #define FLAG_ITEM_ROUTE_111_TM37                                    0x3F0
 #define FLAG_ITEM_ROUTE_111_STARDUST                                0x3F1
 #define FLAG_ITEM_ROUTE_111_HP_UP                                   0x3F2
@@ -1225,7 +1225,7 @@
 #define FLAG_HIDE_CALVIN_INTRO                                           0x498 // Unused Flag
 #define FLAG_HIDE_SLEEPING_MORGAN_INTRO                                          0x499 // Unused Flag
 #define FLAG_HIDE_SLEEPING_CALVIN_INTRO                                           0x49A // Unused Flag
-#define FLAG_UNUSED_0x49B                                           0x49B // Unused Flag
+#define FLAG_RECOVERED_ABILITY_SCANNER                                           0x49B // Unused Flag
 #define FLAG_UNUSED_0x49C                                           0x49C // Unused Flag
 #define FLAG_UNUSED_0x49D                                           0x49D // Unused Flag
 #define FLAG_UNUSED_0x49E                                           0x49E // Unused Flag

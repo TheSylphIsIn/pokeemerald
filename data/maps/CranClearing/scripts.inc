@@ -78,10 +78,9 @@ CranClearing_EventScript_Morgan::
 	call_if_set FLAG_FAVORED_CALVIN, CranClearing_EventScript_MorganReactToCalvinDefeat
 	msgbox CranClearing_Text_MorganBattleIntro, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_MORGAN, CranClearing_Movement_MorganWalkToArena
-	delay 10
-	applymovement OBJ_EVENT_ID_PLAYER, CranClearing_Movement_PlayerWalkToMArena
-	waitmovement LOCALID_MORGAN
+	specialvar VAR_RESULT, GetPlayerFacingDirection
+	call_if_eq VAR_RESULT, DIR_WEST, CranClearing_EventScript_MorganBattleFromStart
+	call_if_ne VAR_RESULT, DIR_WEST, CranClearing_EventScript_MorganBattleFromEnd
 	msgbox CranClearing_Text_MorganBattleIntro2, MSGBOX_DEFAULT
 	closemessage
 	trainerbattle_no_intro TRAINER_MORGAN_FISHEYE_LAKE, CranClearing_Text_MorganDefeated
@@ -103,6 +102,47 @@ CranClearing_EventScript_MorganReactToCalvinDefeat:
 	msgbox CranClearing_Text_MorganCalvinBeaten, MSGBOX_DEFAULT
 	closemessage
 	return
+	
+CranClearing_EventScript_MorganBattleFromStart:
+	applymovement LOCALID_MORGAN, CranClearing_Movement_MorganWalkToArena
+	delay 10
+	applymovement OBJ_EVENT_ID_PLAYER, CranClearing_Movement_PlayerWalkToMArena
+	waitmovement LOCALID_MORGAN
+	return
+	
+CranClearing_EventScript_MorganBattleFromEnd:
+	call_if_eq VAR_RESULT, DIR_SOUTH, CranClearing_EventScript_MorganBattlePlayerTop
+	call_if_ne VAR_RESULT, DIR_SOUTH, CranClearing_EventScript_MorganBattlePlayerLeft
+	applymovement LOCALID_MORGAN, CranClearing_Movement_MorganWalkToArena
+	waitmovement LOCALID_MORGAN
+	return
+
+CranClearing_EventScript_MorganBattlePlayerTop:
+	applymovement OBJ_EVENT_ID_PLAYER, CranClearing_Movement_PlayerWalkToMArenaFromTop
+	return
+
+CranClearing_EventScript_MorganBattlePlayerLeft:
+	applymovement OBJ_EVENT_ID_PLAYER, CranClearing_Movement_PlayerWalkToMArenaFromLeft
+	delay 16
+	return
+
+CranClearing_Movement_PlayerWalkToMArenaFromTop:
+	walk_left
+	delay_16
+	walk_down
+	walk_left
+	walk_left
+	step_end
+
+CranClearing_Movement_PlayerWalkToMArenaFromLeft:
+	walk_up
+	face_down
+	delay_16
+	delay_16
+	walk_down
+	walk_left
+	walk_left
+	step_end
 	
 CranClearing_Text_MorganCalvinBeaten:
 	.string "MORGAN: Huh…? Did you already go\n"
@@ -182,10 +222,9 @@ CranClearing_EventScript_Calvin::
 	call_if_set FLAG_FAVORED_MORGAN, CranClearing_EventScript_CalvinReactToMorganDefeat
 	msgbox CranClearing_Text_CalvinBattleIntro, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_CALVIN, CranClearing_Movement_CalvinWalkToArena
-	delay 10
-	applymovement OBJ_EVENT_ID_PLAYER, CranClearing_Movement_PlayerWalkToCArena
-	waitmovement LOCALID_CALVIN
+	specialvar VAR_RESULT, GetPlayerFacingDirection
+	call_if_eq VAR_RESULT, DIR_NORTH, CranClearing_EventScript_CalvinBattleFromStart
+	call_if_ne VAR_RESULT, DIR_NORTH, CranClearing_EventScript_CalvinBattleFromEnd
 	msgbox CranClearing_Text_CalvinBattleIntro2, MSGBOX_DEFAULT
 	closemessage
 	trainerbattle_no_intro TRAINER_CALVIN_FISHEYE_LAKE, CranClearing_Text_CalvinDefeated
@@ -207,6 +246,51 @@ CranClearing_EventScript_CalvinReactToMorganDefeat:
 	msgbox CranClearing_Text_CalvinMorganBeaten, MSGBOX_DEFAULT
 	closemessage
 	return
+	
+CranClearing_EventScript_CalvinBattleFromStart:
+	applymovement LOCALID_CALVIN, CranClearing_Movement_CalvinWalkToArena
+	delay 10
+	applymovement OBJ_EVENT_ID_PLAYER, CranClearing_Movement_PlayerWalkToCArena
+	waitmovement LOCALID_CALVIN
+	return
+	
+CranClearing_EventScript_CalvinBattleFromEnd:
+	call_if_eq VAR_RESULT, DIR_SOUTH, CranClearing_EventScript_CalvinBattlePlayerTop
+	call_if_ne VAR_RESULT, DIR_SOUTH, CranClearing_EventScript_CalvinBattlePlayerLeft
+	applymovement LOCALID_CALVIN, CranClearing_Movement_CalvinWalkToArena
+	waitmovement LOCALID_CALVIN
+	return
+
+CranClearing_EventScript_CalvinBattlePlayerTop:
+	applymovement OBJ_EVENT_ID_PLAYER, CranClearing_Movement_PlayerWalkToCArenaFromTop
+	delay 16
+	return
+
+CranClearing_EventScript_CalvinBattlePlayerLeft:
+	applymovement OBJ_EVENT_ID_PLAYER, CranClearing_Movement_PlayerWalkToCArenaFromLeft
+	return
+
+CranClearing_Movement_PlayerWalkToCArenaFromTop:
+	walk_left
+	face_right
+	delay_16
+	delay_16
+	walk_up
+	delay_16
+	walk_up
+	face_left
+	step_end
+
+CranClearing_Movement_PlayerWalkToCArenaFromLeft:
+	walk_up
+	delay_16
+	delay_16
+	walk_up
+	delay_16
+	delay_8
+	walk_up
+	face_left
+	step_end
 
 	
 CranClearing_Text_CalvinMorganBeaten:
@@ -282,8 +366,22 @@ CranClearing_Movement_CalvinWalkOffscreen:
 	step_end
 	
 // youngster
+CranClearing_EventScript_TrainerBilly::
+	trainerbattle_single TRAINER_BILLY, CranClearing_Text_BillyIntro, CranClearing_Text_BillyDefeated
+	msgbox CranClearing_Text_BillyPostBattle, MSGBOX_AUTOCLOSE
+	end
 
-// item 2
+CranClearing_Text_BillyIntro:
+	.string "You wanna know why it's called\p"
+	.string "FISHEYE POND? I'll tell if you win!$"
+
+CranClearing_Text_BillyDefeated:
+	.string "Glub!$"
+	
+CranClearing_Text_BillyPostBattle:
+	.string "It's called FISHEYE POND because\n"
+	.string "it's shaped like a fish POKéMON!\p"
+	.string "I think its name is GUPPAGE.$"
 
 // trainer tip sign
 CranClearing_EventScript_TrainerTipsSign::

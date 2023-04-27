@@ -7,7 +7,6 @@ OldaleTown_PokemonCenter_1F_MapScripts::
 
 OldaleTown_PokemonCenter_1F_OnTransition:
 	setrespawn HEAL_LOCATION_CRAN_TOWN
-	call Common_EventScript_UpdateBrineyLocation
 	end
 
 OldaleTown_PokemonCenter_1F_EventScript_Nurse::
@@ -40,10 +39,12 @@ OldaleTown_PokemonCenter_1F_EventScript_WirelessClubAvailable::
 	end
 
 OldaleTown_PokemonCenter_1F_Text_TrainersCanUsePC:
-	.string "That PC in the corner there is\n"
-	.string "for any POKéMON TRAINER to use.\p"
-	.string "Naturally, that means you're welcome\n"
-	.string "to use it, too.$"
+	.string "That PC in the corner there can be\n"
+	.string "used to store items and POKéMON.\p"
+	.string "But nowadays, BAGs are much bigger\n"
+	.string "than they used to be.\p"
+	.string "You probably won't need to store items\n"
+	.string "unless you're something of a hoarder.$"
 
 OldaleTown_PokemonCenter_1F_Text_PokemonCentersAreGreat:
 	.string "POKéMON CENTERS are great!\p"
