@@ -563,6 +563,7 @@ static void Task_HandleConfirmStarterInput(u8 taskId)
         // Return the starter choice and exit.
         gSpecialVar_Result = gTasks[taskId].tStarterSelection;
 		VarSet(VAR_STARTER_SET, gTasks[taskId].tStarterSet);
+		GetSetPokedexFlag(SpeciesToNationalPokedexNum(GetStarterPokemon(gTasks[taskId].tStarterSelection, gTasks[taskId].tStarterSet)), FLAG_SET_STUDIED);
         ResetAllPicSprites();
         SetMainCallback2(gMain.savedCallback);
         break;

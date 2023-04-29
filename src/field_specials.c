@@ -28,6 +28,7 @@
 #include "overworld.h"
 #include "party_menu.h"
 #include "pokeblock.h"
+#include "pokedex.h"
 #include "pokemon.h"
 #include "pokemon_storage_system.h"
 #include "random.h"
@@ -4326,5 +4327,12 @@ void GivePokeblock(void)
 	AddPokeblock(&sDebugSweetBlock);
 	AddPokeblock(&sDebugBitterBlock);
 	AddPokeblock(&sDebugSourBlock);
+}
+
+void SetSpeciesStudied(void)
+{
+	u16 species = VarGet(VAR_0x800B);
+	
+	GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_SET_STUDIED);        
 }
 

@@ -222,6 +222,7 @@
 #define MOVE_ATTRIBUTE_DEBUFF 13 // Sand-attack, Leer, etc
 #define MOVE_ATTRIBUTE_INFLICT_STATUS 14 // Thunder Wave, Confuse ray, etc.
 #define MOVE_ATTRIBUTE_FIELD_EFFECT 15 // Reflect, Sunny Day, etc.
+#define MOVE_ATTRIBUTE_COUNT 16
 
 // Battle move flags
 #define FLAG_MAKES_CONTACT          (1 << 0)
