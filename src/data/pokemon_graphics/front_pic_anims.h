@@ -4819,11 +4819,21 @@ static const union AnimCmd sAnim_BILLIARACH_1[] =
 
 static const union AnimCmd sAnim_SLUGMA_FONEI_1[] =
 {
-	ANIMCMD_END
+    ANIMCMD_FRAME(0, 10),
+    ANIMCMD_FRAME(1, 10),
+    ANIMCMD_FRAME(0, 10),
+    ANIMCMD_FRAME(1, 10),
+    ANIMCMD_FRAME(0, 10),
+    ANIMCMD_END,
 };
 
 static const union AnimCmd sAnim_MAGCARGO_FONEI_1[] =
 {
+    ANIMCMD_FRAME(0, 10),
+    ANIMCMD_FRAME(1, 10),
+    ANIMCMD_FRAME(0, 10),
+    ANIMCMD_FRAME(1, 10),
+    ANIMCMD_FRAME(0, 10),
 	ANIMCMD_END
 };
 

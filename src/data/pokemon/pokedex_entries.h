@@ -4982,26 +4982,26 @@ const struct PokedexEntry gPokedexEntries[] =
 
 	[NATIONAL_DEX_SLUGMA_FONEI] =
 	{
-		.categoryName = _(""),
-		.height = 1,
-		.weight = 1,
-		.description = gSlugmaFoneiPokedexText,
-		.pokemonScale = 256,
-		.pokemonOffset = 0,
-		.trainerScale = 256,
-		.trainerOffset = 0,
+		.categoryName = _("MARBLE"),
+		.height = 7,
+        .weight = 220,
+        .description = gSlugmaFoneiPokedexText,
+        .pokemonScale = 329,
+        .pokemonOffset = 15,
+        .trainerScale = 256,
+        .trainerOffset = 0,
 	},
 
 	[NATIONAL_DEX_MAGCARGO_FONEI] =
 	{
-		.categoryName = _(""),
-		.height = 1,
-		.weight = 1,
-		.description = gMagcargoFoneiPokedexText,
-		.pokemonScale = 256,
-		.pokemonOffset = 0,
-		.trainerScale = 256,
-		.trainerOffset = 0,
+		.categoryName = _("LODESTONE"),
+        .height = 8,
+        .weight = 250,
+        .description = gMagcargoFoneiPokedexText,
+        .pokemonScale = 332,
+        .pokemonOffset = 15,
+        .trainerScale = 256,
+        .trainerOffset = 0,
 	},
 
 	[NATIONAL_DEX_SUNFOREST] =

@@ -2321,8 +2321,8 @@ const u8 gDeoxysPokedexText[] = _(
     "agility and speed.");
 	
 const u8 gDubsnakePokedexText[] = _(
-	"Sometimes its two heads disagree on where\n"
-	"to go, leaving it stuck in place. However,\n"
+	"The crystal on its back creates liquid\n"
+	"which leaks out of the gems on its heads.\n"
 	"it's not easy prey because it can defend\n"
 	"itself from both ends.");
 	
@@ -2449,7 +2449,11 @@ const u8 gLarvoolPokedexText[] = _(
 	"but deceptively hard to avoid. Any contact\n"
 	"is enough to get ensnared.");
 	
-const u8 gSpoolerPokedexText[] = _("");
+const u8 gSpoolerPokedexText[] = _(
+	"It conceals its multi-colored cocoon by\n"
+	"attaching stripped bark to the sides.\n"
+	"Though immobile, it can defend itself by\n"
+	"adeptly firing sticky globs from its mouth.");
 
 const u8 gBilliarachPokedexText[] = _(
 	"BILLIARACH forgoes web-building. Instead,\n"
@@ -2464,9 +2468,10 @@ const u8 gSlugmaFoneiPokedexText[] = _(
 	"bothered, though. It is surprisingly mobile.");
 
 const u8 gMagcargoFoneiPokedexText[] = _(
-	"Its brittle shell is magnetic, and its body\n"
-	"is light, so it moves quickly by flinging\n"
-	"pieces of its shell and sliding toward them.");
+	"Its shell is strongly magnetic, and its\n"
+	"body is porous and light. It moves quickly\n"
+	"by flinging its shell, then magnetizing\n"
+	"itself and sliding toward the shell.");
 
 const u8 gSunforestPokedexText[] = _(
 	"Each SUNFLORA community has one SUNFOREST.\n"
