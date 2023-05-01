@@ -2399,10 +2399,10 @@ static void Cmd_printfromtable(void)
     {
         const u16 *ptr = (const u16 *) T1_READ_PTR(gBattlescriptCurrInstr + 1);
         ptr += gBattleCommunication[MULTISTRING_CHOOSER];
+        gBattlescriptCurrInstr += 5;
 
         PrepareStringBattle(*ptr, gBattlerAttacker);
 
-        gBattlescriptCurrInstr += 5;
         gBattleCommunication[MSG_DISPLAY] = 1;
     }
 }
@@ -6820,8 +6820,9 @@ static void Cmd_various(void)
         {
             gBattleMons[gBattlerAttacker].statStages[STAT_ATK]++;
             SET_STATCHANGER(STAT_ATK, 1, FALSE);
-            PREPARE_STAT_BUFFER(gBattleTextBuff1, STAT_ATK);
+            PREPARE_STAT_BUFFER(gBattleTextBuff3, STAT_ATK);
             BattleScriptPush(gBattlescriptCurrInstr + 3);
+			gBattleScripting.battler = gActiveBattler;
             gLastUsedAbility = ABILITY_MOXIE;
             gBattlescriptCurrInstr = BattleScript_StatChangeOnFaint;
             return;

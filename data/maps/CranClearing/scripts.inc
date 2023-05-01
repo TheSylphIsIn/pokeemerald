@@ -372,7 +372,7 @@ CranClearing_EventScript_TrainerBilly::
 	end
 
 CranClearing_Text_BillyIntro:
-	.string "You wanna know why it's called\p"
+	.string "You wanna know why it's called\n"
 	.string "FISHEYE POND? I'll tell if you win!$"
 
 CranClearing_Text_BillyDefeated:

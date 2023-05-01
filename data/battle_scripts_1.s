@@ -34,7 +34,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectSpecialAttackUp        @ EFFECT_SPECIAL_ATTACK_UP
 	.4byte BattleScript_EffectHit                    @ EFFECT_SPECIAL_DEFENSE_UP
 	.4byte BattleScript_EffectHit                    @ EFFECT_ACCURACY_UP
-	.4byte BattleScript_EffectEvasionUp              @ EFFECT_EVASION_UP
+	.4byte BattleScript_EffectEvasionUp              @ EFFECT_EVASION_UP 
 	.4byte BattleScript_EffectHit                    @ EFFECT_ALWAYS_HIT
 	.4byte BattleScript_EffectAttackDown             @ EFFECT_ATTACK_DOWN
 	.4byte BattleScript_EffectDefenseDown            @ EFFECT_DEFENSE_DOWN
@@ -5265,5 +5265,14 @@ BattleScript_PranksterMoveCancel::
 BattleScript_FormChangeFromMove::
 	printstring STRINGID_EMPTYSTRING3
 	call BattleScript_DoCastformChange
+	return
+
+BattleScript_AbilityRaisesDefenderStatSharply::
+	pause B_WAIT_TIME_SHORT
+	statbuffchange 0, NULL
+	setgraphicalstatchangevalues
+	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	printstring STRINGID_LASTABILITYRAISEDSTATSHARPLY
+	waitmessage B_WAIT_TIME_LONG
 	return
 

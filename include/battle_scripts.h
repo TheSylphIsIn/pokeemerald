@@ -251,4 +251,5 @@ extern const u8 BattleScript_WardActivates[];
 extern const u8 BattleScript_TollCallActivates[];
 extern const u8 BattleScript_EntrapmentActivates[];
 extern const u8 BattleScript_PranksterMoveCancel[];
+extern const u8 BattleScript_AbilityRaisesDefenderStatSharply[];
 #endif // GUARD_BATTLE_SCRIPTS_H

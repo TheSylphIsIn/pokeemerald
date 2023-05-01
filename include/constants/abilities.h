@@ -157,8 +157,10 @@
 #define ABILITY_WARD 153 // On switch-in, sets Safeguard on the user's side.
 #define ABILITY_TOLL_CALL 154 // On switch-in, inflicts Perish Song on all foes that aren't holding a gold item or have Toll Call.
 #define ABILITY_ENTRAPMENT 155 // On switch-in, influcts Wrap on one foe for 3 turns.
+#define ABILITY_DEFIANT 156
+#define ABILITY_COMPETITIVE 157
 
-#define ABILITIES_COUNT 156
+#define ABILITIES_COUNT 158
 #define ABILITIES_ATE_START ABILITY_REFRIGERATE
 #define ABILITIES_ATE_END ABILITY_BURNINATE + 1
 #define ABILITIES_NUM_ATES ABILITIES_ATE_END - ABILITIES_ATE_START

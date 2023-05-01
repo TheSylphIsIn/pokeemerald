@@ -517,7 +517,8 @@ static const u8 sText_PkmnsItemRestoredHPALittle[] = _("{B_SCR_ACTIVE_NAME_WITH_
 static const u8 sText_PkmnsItemDrainedHPALittle[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\ndrained its HP a little!");
 static const u8 sText_ItemAllowsOnlyYMove[] = _("{B_LAST_ITEM} allows the\nuse of only {B_CURRENT_MOVE}!\p");
 static const u8 sText_PkmnHungOnWithX[] = _("{B_DEF_NAME_WITH_PREFIX} hung on\nusing its {B_LAST_ITEM}!");
-static const u8 sText_LastAbilityRaisedStat[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_LAST_ABILITY}\nraised its {B_BUFF1}!");
+static const u8 sText_LastAbilityRaisedStat[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ABILITY}\nraised its {B_BUFF3}!");
+static const u8 sText_LastAbilityRaisedStatSharply[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ABILITY}\nsharply raised its {B_BUFF3}!");
 static const u8 sText_PkmnForewarned[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} was FOREWARNED\nof {B_BUFF2}'s {B_BUFF1}!");
 static const u8 sText_PkmnTrappedFoe[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} wrapped\n{B_BUFF2} with ENTRAPMENT!");
 static const u8 sText_DarkBlocksPrankster[] = _("{B_DEF_NAME_WITH_PREFIX}'s DARK type\nblocks PRANKSTER moves!");
@@ -948,6 +949,7 @@ const u8 * const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_S
 	[STRINGID_PKMNCALLEDFORSOULS - BATTLESTRINGS_TABLE_START] = sText_PkmnCalledForSouls,
 	[STRINGID_PKMNTRAPPEDFOE - BATTLESTRINGS_TABLE_START] = sText_PkmnTrappedFoe,
 	[STRINGID_DARKBLOCKSPRANKSTER - BATTLESTRINGS_TABLE_START] = sText_DarkBlocksPrankster,
+	[STRINGID_LASTABILITYRAISEDSTATSHARPLY - BATTLESTRINGS_TABLE_START] = sText_LastAbilityRaisedStatSharply,
 };
 
 const u16 gMissStringIds[] =

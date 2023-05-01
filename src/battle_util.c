@@ -897,6 +897,22 @@ bool8 WasUnableToUseMove(u8 battler)
 
 void PrepareStringBattle(u16 stringId, u8 battler)
 {
+	u32 targetAbility = gBattleMons[gBattlerTarget].ability;
+	
+	if ((stringId == STRINGID_DEFENDERSSTATFELL || stringId == STRINGID_PKMNCUTSATTACKWITH)
+        && ((targetAbility == ABILITY_DEFIANT && gBattleMons[gBattlerTarget].statStages[STAT_ATK] < MAX_STAT_STAGE)
+        || (targetAbility == ABILITY_COMPETITIVE && gBattleMons[gBattlerTarget].statStages[STAT_SPATK] < MAX_STAT_STAGE))
+              && GET_BATTLER_SIDE(gBattlerAttacker) != GET_BATTLER_SIDE(gBattlerTarget))
+    {
+		gSpecialStatuses[gBattlerTarget].statLowered = TRUE;
+		gBattleScripting.battler = gBattlerTarget;
+		gLastUsedAbility = gBattleMons[gBattlerTarget].ability;
+		BattleScriptPushCursor();
+		gBattlescriptCurrInstr = BattleScript_AbilityRaisesDefenderStatSharply;
+		SET_STATCHANGER(STAT_ATK + (targetAbility == ABILITY_COMPETITIVE) * 3, 2, FALSE);
+		PREPARE_STAT_BUFFER(gBattleTextBuff3, STAT_ATK + (targetAbility == ABILITY_COMPETITIVE) * 3);
+	}
+	
     gActiveBattler = battler;
     BtlController_EmitPrintString(BUFFER_A, stringId);
     MarkBattlerForControllerExec(gActiveBattler);

@@ -152,6 +152,8 @@ static const u8 sRecklessDescription[] = _("Boosts power of recoil\nmoves by 20%
 static const u8 sWardDescription[] = _("Sets SAFEGUARD when\nuser is sent out.");
 static const u8 sTollCallDescription[] = _("Sets all foes' PERISH\ncounts when sent in.");
 static const u8 sEntrapmentDescription[] = _("Wraps foe when sent in.");
+static const u8 sDefiantDescription[] = _("Sharply boosts ATTACK if\nuser's stats drop.");
+static const u8 sCompetitiveDescription[] = _("Sharply boosts SP.ATK if\nuser's stats drop.");
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
 {
@@ -310,6 +312,8 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
 	[ABILITY_WARD] = _("WARD"),
 	[ABILITY_TOLL_CALL] = _("TOLL CALL"),
 	[ABILITY_ENTRAPMENT] = _("ENTRAPMENT"),
+	[ABILITY_DEFIANT] = _("DEFIANT"),
+	[ABILITY_COMPETITIVE] = _("COMPETITIVE"),
 };
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
@@ -469,4 +473,6 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 	[ABILITY_WARD] = sWardDescription,
 	[ABILITY_TOLL_CALL] = sTollCallDescription,
 	[ABILITY_ENTRAPMENT] = sEntrapmentDescription,
+	[ABILITY_DEFIANT] = sDefiantDescription,
+	[ABILITY_COMPETITIVE] = sCompetitiveDescription,
 };
