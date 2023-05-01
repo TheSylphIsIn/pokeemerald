@@ -5276,3 +5276,11 @@ BattleScript_AbilityRaisesDefenderStatSharply::
 	waitmessage B_WAIT_TIME_LONG
 	return
 
+BattleScript_AngerPoint::
+	playstatchangeanimation BS_SCRIPTING, BIT_ATK, 0
+	setstatchanger STAT_ATK, 2, FALSE
+	statbuffchange STAT_CHANGE_ALLOW_PTR, BattleScript_AngerPointEnd
+	printstring STRINGID_ANGERPOINTACTIVATES
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_AngerPointEnd::
+	return

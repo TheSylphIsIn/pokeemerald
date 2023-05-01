@@ -2196,12 +2196,22 @@ static void Cmd_critmessage(void)
 {
     if (gBattleControllerExecFlags == 0)
     {
+        gBattlescriptCurrInstr++;
         if (gCritMultiplier >= 2 && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
         {
             PrepareStringBattle(STRINGID_CRITICALHIT, gBattlerAttacker);
             gBattleCommunication[MSG_DISPLAY] = 1;
+			
+			if (gBattleMons[gBattlerTarget].ability == ABILITY_ANGER_POINT
+				&& gBattleMons[gBattlerTarget].statStages[STAT_ATK] < MAX_STAT_STAGE)
+			{
+				gBattleScripting.battler = gBattlerTarget;
+				gLastUsedAbility = gBattleMons[gBattlerTarget].ability;
+				BattleScriptPushCursor();
+				gBattlescriptCurrInstr = BattleScript_AngerPoint;
+				gBattleMons[gBattlerTarget].statStages[STAT_ATK] = (MAX_STAT_STAGE - 2);		
+			}
         }
-        gBattlescriptCurrInstr++;
     }
 }
 

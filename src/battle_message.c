@@ -288,6 +288,7 @@ static const u8 sText_PkmnsXBlocksY2[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B
 static const u8 sText_PkmnsXRestoredHPALittle2[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_ATK_ABILITY}\nrestored its HP a little!");
 static const u8 sText_PkmnsXDrainedHP[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_ATK_ABILITY}\nmade it exhausted!");
 static const u8 sText_PkmnWentBerserk[] = _("{B_ATK_NAME_WITH_PREFIX} went berserk!\nATTACK maximized!");
+static const u8 sText_AngerPointActivate[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ABILITY}\nmaximized its ATTACK!");
 static const u8 sText_WithSturdy[] = _("{B_DEF_NAME_WITH_PREFIX} ENDURED\nthe hit with STURDY!");
 static const u8 sText_MoveWashedOut[] = _("{B_ATK_NAME_WITH_PREFIX}'s FIRE move\nwas doused!");
 static const u8 sText_MoveEvaporated[] = _("{B_ATK_NAME_WITH_PREFIX}'s WATER move\nevaporated!");
@@ -950,6 +951,7 @@ const u8 * const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_S
 	[STRINGID_PKMNTRAPPEDFOE - BATTLESTRINGS_TABLE_START] = sText_PkmnTrappedFoe,
 	[STRINGID_DARKBLOCKSPRANKSTER - BATTLESTRINGS_TABLE_START] = sText_DarkBlocksPrankster,
 	[STRINGID_LASTABILITYRAISEDSTATSHARPLY - BATTLESTRINGS_TABLE_START] = sText_LastAbilityRaisedStatSharply,
+	[STRINGID_ANGERPOINTACTIVATES - BATTLESTRINGS_TABLE_START] = sText_AngerPointActivate,
 };
 
 const u16 gMissStringIds[] =

@@ -154,6 +154,7 @@ static const u8 sTollCallDescription[] = _("Sets all foes' PERISH\ncounts when s
 static const u8 sEntrapmentDescription[] = _("Wraps foe when sent in.");
 static const u8 sDefiantDescription[] = _("Sharply boosts ATTACK if\nuser's stats drop.");
 static const u8 sCompetitiveDescription[] = _("Sharply boosts SP.ATK if\nuser's stats drop.");
+static const u8 sAngerPointDescription[] = _("Maximizes ATTACK stat\nwhen critically hit.");
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
 {
@@ -314,6 +315,7 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
 	[ABILITY_ENTRAPMENT] = _("ENTRAPMENT"),
 	[ABILITY_DEFIANT] = _("DEFIANT"),
 	[ABILITY_COMPETITIVE] = _("COMPETITIVE"),
+	[ABILITY_ANGER_POINT] = _("ANGER POINT"),
 };
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
@@ -475,4 +477,5 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 	[ABILITY_ENTRAPMENT] = sEntrapmentDescription,
 	[ABILITY_DEFIANT] = sDefiantDescription,
 	[ABILITY_COMPETITIVE] = sCompetitiveDescription,
+	[ABILITY_ANGER_POINT] = sAngerPointDescription,
 };
