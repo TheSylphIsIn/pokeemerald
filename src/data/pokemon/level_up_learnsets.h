@@ -5880,7 +5880,7 @@ static const u16 sSlugmaFoneiLevelUpLearnset[] = {
     LEVEL_UP_MOVE(12, MOVE_SAND_ATTACK),
     LEVEL_UP_MOVE(17, MOVE_HARDEN),
 	LEVEL_UP_MOVE(23, MOVE_TAKE_DOWN),
-	LEVEL_UP_MOVE(25, MOVE_ANCIENT_POWER)
+	LEVEL_UP_MOVE(25, MOVE_ANCIENT_POWER),
     LEVEL_UP_MOVE(28, MOVE_AMNESIA),
     LEVEL_UP_MOVE(33, MOVE_ROCK_SLIDE),
     LEVEL_UP_MOVE(39, MOVE_BODY_SLAM),
@@ -6061,4 +6061,202 @@ static const u16 sManipuloLevelUpLearnset[] = {
 	LEVEL_UP_END
 };
 
+static const u16 sCoilspillLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
 
+static const u16 sBoowhoLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sBooxerLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sBoozerkerLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sDeepdarkLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sBurmiteLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sSedimetalLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sSolosisFoneiLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sDuosionFoneiLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sReuniclusFoneiLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sVinosLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sVinoceiverLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sAnnoyidgeLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sPesquitoLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sMankeyFoneiLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sPrimeapeFoneiLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sCryogonalFoneiLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sAmpiboisonLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sLagnetLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sLannetLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sCyburnLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sSapnoseLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sBurrootLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sBurrushLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sLavLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sLavalyLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sLavsamuchLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sGuppageLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sSeageLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sBasstionLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sPantomLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sHappaningLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sPanzergastLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sScairyLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sDanklimmerLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sGolichemLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sSpindaFoneiLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sEmunitionLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sEmortarLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sOpebbliskLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sStonumentLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sMemoirbleLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sNokommonLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sTanghoulLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sQwilyuLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sCoriliaLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sNidorookLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sSkalvengerLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sSkulkrexLevelUpLearnset[] = {
+	LEVEL_UP_END
+};
+
+static const u16 sSkeltyrantLevelUpLearnset[] = {
+	LEVEL_UP_END
+};

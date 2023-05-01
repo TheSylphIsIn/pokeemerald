@@ -456,6 +456,56 @@ gCryTable::
 	cry Cry_Dismaster
 	cry Cry_Puridian
 	cry Cry_Manipulo
+	cry Cry_Coilspill
+	cry Cry_Boowho
+	cry Cry_Booxer
+	cry Cry_Boozerker
+	cry Cry_Deepdark
+	cry Cry_Burmite
+	cry Cry_Sedimetal
+	cry Cry_SolosisFonei
+	cry Cry_DuosionFonei
+	cry Cry_ReuniclusFonei
+	cry Cry_Vinos
+	cry Cry_Vinoceiver
+	cry Cry_Annoyidge
+	cry Cry_Pesquito
+	cry Cry_MankeyFonei
+	cry Cry_PrimeapeFonei
+	cry Cry_CryogonalFonei
+	cry Cry_Ampiboison
+	cry Cry_Lagnet
+	cry Cry_Lannet
+	cry Cry_Cyburn
+	cry Cry_Sapnose
+	cry Cry_Burroot
+	cry Cry_Burrush
+	cry Cry_Lav
+	cry Cry_Lavaly
+	cry Cry_Lavsamuch
+	cry Cry_Guppage
+	cry Cry_Seage
+	cry Cry_Basstion
+	cry Cry_Pantom
+	cry Cry_Happaning
+	cry Cry_Panzergast
+	cry Cry_Scairy
+	cry Cry_Danklimmer
+	cry Cry_Golichem
+	cry Cry_SpindaFonei
+	cry Cry_Emunition
+	cry Cry_Emortar
+	cry Cry_Opebblisk
+	cry Cry_Stonument
+	cry Cry_Memoirble
+	cry Cry_Nokommon
+	cry Cry_Tanghoul
+	cry Cry_Qwilyu
+	cry Cry_Corilia
+	cry Cry_Nidorook
+	cry Cry_Skalvenger
+	cry Cry_Skulkrex
+	cry Cry_Skeltyrant
 
 	// cry Cry_Spcs
 	.align 2
@@ -916,5 +966,55 @@ gCryTable_Reverse::
 	cry_reverse Cry_Dismaster
 	cry_reverse Cry_Puridian
 	cry_reverse Cry_Manipulo
+	cry_reverse Cry_Coilspill
+	cry_reverse Cry_Boowho
+	cry_reverse Cry_Booxer
+	cry_reverse Cry_Boozerker
+	cry_reverse Cry_Deepdark
+	cry_reverse Cry_Burmite
+	cry_reverse Cry_Sedimetal
+	cry_reverse Cry_SolosisFonei
+	cry_reverse Cry_DuosionFonei
+	cry_reverse Cry_ReuniclusFonei
+	cry_reverse Cry_Vinos
+	cry_reverse Cry_Vinoceiver
+	cry_reverse Cry_Annoyidge
+	cry_reverse Cry_Pesquito
+	cry_reverse Cry_MankeyFonei
+	cry_reverse Cry_PrimeapeFonei
+	cry_reverse Cry_CryogonalFonei
+	cry_reverse Cry_Ampiboison
+	cry_reverse Cry_Lagnet
+	cry_reverse Cry_Lannet
+	cry_reverse Cry_Cyburn
+	cry_reverse Cry_Sapnose
+	cry_reverse Cry_Burroot
+	cry_reverse Cry_Burrush
+	cry_reverse Cry_Lav
+	cry_reverse Cry_Lavaly
+	cry_reverse Cry_Lavsamuch
+	cry_reverse Cry_Guppage
+	cry_reverse Cry_Seage
+	cry_reverse Cry_Basstion
+	cry_reverse Cry_Pantom
+	cry_reverse Cry_Happaning
+	cry_reverse Cry_Panzergast
+	cry_reverse Cry_Scairy
+	cry_reverse Cry_Danklimmer
+	cry_reverse Cry_Golichem
+	cry_reverse Cry_SpindaFonei
+	cry_reverse Cry_Emunition
+	cry_reverse Cry_Emortar
+	cry_reverse Cry_Opebblisk
+	cry_reverse Cry_Stonument
+	cry_reverse Cry_Memoirble
+	cry_reverse Cry_Nokommon
+	cry_reverse Cry_Tanghoul
+	cry_reverse Cry_Qwilyu
+	cry_reverse Cry_Corilia
+	cry_reverse Cry_Nidorook
+	cry_reverse Cry_Skalvenger
+	cry_reverse Cry_Skulkrex
+	cry_reverse Cry_Skeltyrant
 
 	// cry_reverse Cry_Spcs
