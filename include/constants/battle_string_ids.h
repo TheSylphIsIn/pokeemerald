@@ -408,8 +408,9 @@
 #define STRINGID_DARKBLOCKSPRANKSTER		408
 #define STRINGID_LASTABILITYRAISEDSTATSHARPLY 409
 #define STRINGID_ANGERPOINTACTIVATES		410
+#define STRINGID_ABILITYBLOCKSDAMAGE		411
 
-#define BATTLESTRINGS_COUNT                 411
+#define BATTLESTRINGS_COUNT                 412
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,

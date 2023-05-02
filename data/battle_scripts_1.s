@@ -5284,3 +5284,8 @@ BattleScript_AngerPoint::
 	waitmessage B_WAIT_TIME_LONG
 BattleScript_AngerPointEnd::
 	return
+
+BattleScript_AbilityBlocksSomeDamage::
+	printstring STRINGID_ABILITYBLOCKSDAMAGE
+	waitmessage B_WAIT_TIME_SHORT
+	return

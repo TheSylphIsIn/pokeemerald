@@ -253,4 +253,5 @@ extern const u8 BattleScript_EntrapmentActivates[];
 extern const u8 BattleScript_PranksterMoveCancel[];
 extern const u8 BattleScript_AbilityRaisesDefenderStatSharply[];
 extern const u8 BattleScript_AngerPoint[];
+extern const u8 BattleScript_AbilityBlocksSomeDamage[];
 #endif // GUARD_BATTLE_SCRIPTS_H

@@ -5866,6 +5866,16 @@ static void Cmd_hitanimation(void)
         BtlController_EmitHitAnimation(BUFFER_A);
         MarkBattlerForControllerExec(gActiveBattler);
         gBattlescriptCurrInstr += 2;
+		
+		if (gBattleMons[gBattlerTarget].ability == ABILITY_STRATIFIED && AbilityIsActive()
+			&& gBattleMoveDamage > gBattleMons[gBattlerTarget].maxHP / 2)
+		{
+			gBattleScripting.battler = gBattlerTarget;
+			gBattleMoveDamage = gBattleMons[gBattlerTarget].maxHP / 2;
+			gLastUsedAbility = gBattleMons[gBattlerTarget].ability;
+			BattleScriptPushCursor();
+			gBattlescriptCurrInstr = BattleScript_AbilityBlocksSomeDamage;
+		}
     }
     else
     {

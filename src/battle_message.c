@@ -131,6 +131,7 @@ static const u8 sText_PkmnCoveredByVeil[] = _("{B_ATK_PREFIX2}'s party is covere
 static const u8 sText_PkmnUsedSafeguard[] = _("{B_DEF_NAME_WITH_PREFIX}'s party is protected\nby SAFEGUARD!");
 static const u8 sText_PkmnUsedSafeguardBattleScriptBattler[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s party is protected\nby SAFEGUARD!");
 static const u8 sText_PkmnCalledForSouls[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} called for\nits opponent's soul!");
+static const u8 sText_AbilityBlocksDamage[] = _("{B_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ABILITY}\nblocked some of the damage!");
 static const u8 sText_PkmnSafeguardExpired[] = _("{B_ATK_PREFIX3}'s party is no longer\nprotected by SAFEGUARD!");
 static const u8 sText_PkmnWentToSleep[] = _("{B_ATK_NAME_WITH_PREFIX} went\nto sleep!");
 static const u8 sText_PkmnSleptHealthy[] = _("{B_ATK_NAME_WITH_PREFIX} slept and\nbecame healthy!");
@@ -952,6 +953,7 @@ const u8 * const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_S
 	[STRINGID_DARKBLOCKSPRANKSTER - BATTLESTRINGS_TABLE_START] = sText_DarkBlocksPrankster,
 	[STRINGID_LASTABILITYRAISEDSTATSHARPLY - BATTLESTRINGS_TABLE_START] = sText_LastAbilityRaisedStatSharply,
 	[STRINGID_ANGERPOINTACTIVATES - BATTLESTRINGS_TABLE_START] = sText_AngerPointActivate,
+	[STRINGID_ABILITYBLOCKSDAMAGE - BATTLESTRINGS_TABLE_START] = sText_AbilityBlocksDamage,
 };
 
 const u16 gMissStringIds[] =
