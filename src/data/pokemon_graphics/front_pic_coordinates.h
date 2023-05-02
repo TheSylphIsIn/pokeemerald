@@ -496,7 +496,7 @@ const struct MonCoords gMonFrontPicCoords[] =
 	[SPECIES_DEEPDARK] = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
 	[SPECIES_BURMITE] = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
 	[SPECIES_SEDIMETAL] = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
-	[SPECIES_SOLOSIS_FONEI] = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
+	[SPECIES_SOLOSIS_FONEI] = { .size = MON_COORDS_SIZE(40, 40), .y_offset =  16 },
 	[SPECIES_DUOSION_FONEI] = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
 	[SPECIES_REUNICLUS_FONEI] = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
 	[SPECIES_VINOS] = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },

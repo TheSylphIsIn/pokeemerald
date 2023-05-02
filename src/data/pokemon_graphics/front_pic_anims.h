@@ -5088,6 +5088,10 @@ static const union AnimCmd sAnim_SEDIMETAL_1[] =
 
 static const union AnimCmd sAnim_SOLOSIS_FONEI_1[] =
 {
+	ANIMCMD_FRAME(0, 20),
+	ANIMCMD_FRAME(1, 20),
+	ANIMCMD_FRAME(0, 20),
+	ANIMCMD_FRAME(1, 20),
 	ANIMCMD_FRAME(0, 10),
 	ANIMCMD_END
 };
