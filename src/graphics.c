@@ -1248,6 +1248,7 @@ const u32 gPokedexStartMenuSearchResults_Tilemap[] = INCBIN_U32("graphics/pokede
 const u32 gPokedexList_Tilemap[] = INCBIN_U32("graphics/pokedex/list.bin.lz");
 const u32 gPokedexListUnderlay_Tilemap[] = INCBIN_U32("graphics/pokedex/list_underlay.bin.lz");
 const u32 gPokedexSizeScreen_Tilemap[] = INCBIN_U32("graphics/pokedex/size_screen.bin.lz");
+const u32 gPokedexDataScreenPage2_Tilemap[] = INCBIN_U32("graphics/pokedex/data_screen_page_2.bin.lz");
 const u32 gPokedexDataScreen_Tilemap[] = INCBIN_U32("graphics/pokedex/data_screen.bin.lz");
 const u32 gPokedexScreenSelectBarMain_Tilemap[] = INCBIN_U32("graphics/pokedex/screen_select_bar_main.bin.lz");
 const u32 gPokedexScreenSelectBarSubmenu_Tilemap[] = INCBIN_U32("graphics/pokedex/screen_select_bar_submenu.bin.lz");

@@ -147,6 +147,27 @@ const u8 gText_EeveeEvoText[] = _("Use an evolution stone");
 const u8 gText_TyrogueEvoText[] = _("Teach it many PUNCHING and/or\nKICKING moves.");
 const u8 gText_ElemptyEvoText[] = _("Use an elemental stone");
 const u8 gText_Period[] = _(".");
+const u8 gText_Breed[] = _("BREED");
+const u8 gText_Ability[] = _("ABILITY");
+const u8 gText_HiddenAbility[] = _("HIDDEN");
+const u8 gText_LevelUpMoves[] = _("LVL-UP MOVES");
+
+const u8 gText_EggGroupMonster[] = _("MONSTER");
+const u8 gText_EggGroupWater1[] = _("WATER 1");
+const u8 gText_EggGroupBug[] = _("BUG");
+const u8 gText_EggGroupFlying[] = _("FLYING");
+const u8 gText_EggGroupField[] = _("FIELD");
+const u8 gText_EggGroupFairy[] = _("FAIRY");
+const u8 gText_EggGroupGrass[] = _("PLANT");
+const u8 gText_EggGroupHumanLike[] = _("BIPED");
+const u8 gText_EggGroupWater3[] = _("WATER 3");
+const u8 gText_EggGroupMineral[] = _("MINERAL");
+const u8 gText_EggGroupAmorphous[] = _("AMORPH");
+const u8 gText_EggGroupWater2[] = _("WATER 2");
+const u8 gText_EggGroupDitto[] = _("ALL");
+const u8 gText_EggGroupDragon[] = _("DRAGON");
+const u8 gText_EggGroupUndiscovered[] = _("CANNOT");
+
 const u8 gText_SearchingPleaseWait[] = _("Searching…\nPlease wait.");
 const u8 gText_SearchCompleted[] = _("Search completed.");
 const u8 gText_NoMatchingPkmnWereFound[] = _("No matching POKéMON were found.");

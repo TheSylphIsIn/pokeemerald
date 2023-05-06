@@ -581,6 +581,26 @@ extern const u8 gText_Moves[];
 extern const u8 gText_EeveeEvoText[];
 extern const u8 gText_TyrogueEvoText[];
 extern const u8 gText_ElemptyEvoText[];
+extern const u8 gText_Breed[];
+extern const u8 gText_Ability[];
+extern const u8 gText_HiddenAbility[];
+extern const u8 gText_LevelUpMoves[];
+
+extern const u8 gText_EggGroupMonster[];
+extern const u8 gText_EggGroupWater1[];
+extern const u8 gText_EggGroupBug[];
+extern const u8 gText_EggGroupFlying[];
+extern const u8 gText_EggGroupField[];
+extern const u8 gText_EggGroupFairy[];
+extern const u8 gText_EggGroupGrass[];
+extern const u8 gText_EggGroupHumanLike[];
+extern const u8 gText_EggGroupWater3[];
+extern const u8 gText_EggGroupMineral[];
+extern const u8 gText_EggGroupAmorphous[];
+extern const u8 gText_EggGroupWater2[];
+extern const u8 gText_EggGroupDitto[];
+extern const u8 gText_EggGroupDragon[];
+extern const u8 gText_EggGroupUndiscovered[];
 
 // birch dex rating text
 extern const u8 gBirchDexRatingText_LessThan10[];

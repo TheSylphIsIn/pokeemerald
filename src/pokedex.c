@@ -28,6 +28,7 @@
 #include "trainer_pokemon_sprites.h"
 #include "trig.h"
 #include "window.h"
+#include "list_menu.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
 #include "constants/pokemon.h"
@@ -275,6 +276,12 @@ static void DataScreenHandleSpecialEvoText(u16 species);
 static void DataScreenPrintMonEvoMethods(u16 species, u32 numEvos);
 static void DataScreenPrintNumEvos(u16 species);
 static void DataScreenPrintEVYield(u16 species);
+static void DataScreenPrintPage2Labels(void);
+static void DataScreenPrintPage2Data(u16 species);
+static void DataScreenPrintAbilities(u16 species);
+static void DataScreenPrintHiddenAbilities(u16 species);
+static void DataScreenPrintEggGroups(u16 species);
+static void DataScreenPrintLevelUpMoves(u16 species, u32 scrollOffset, u32 movesetSize);
 static void LoadScreenSelectBarMain(u16);
 static void LoadScreenSelectBarSubmenu(u16);
 static void HighlightScreenSelectBarItem(u8, u16);
@@ -2462,7 +2469,6 @@ static void CreateMonDexNum(u16 entryNum, u8 left, u8 top, u16 unused)
 
 static void CreateCaughtBall(bool16 owned, u8 x, u8 y, u16 studied)
 {
-	DebugPrintf("caught: %d, studied: %d", owned, studied);
 	if (studied)
 		BlitBitmapToWindow(0, sStudiedStar_Gfx, x * 8, y * 8, 8, 16);
     else if (owned)
@@ -3914,6 +3920,11 @@ static void Task_SwitchScreensFromSizeScreen(u8 taskId)
     }
 }
 
+#define tDataPageTurned data[6]
+#define tDataMovesetScroll data[7]
+#define tScrollArrowId data[8]
+#define tMonMovesetSize data[9]
+
 static void Task_LoadDataScreen(u8 taskId)
 {
     switch (gMain.state)
@@ -3945,15 +3956,10 @@ static void Task_LoadDataScreen(u8 taskId)
         break;
     case 3:
         {
-			// print data
-			
-			// i think each function needs to know the state of the others so it can know whether to print ?s.
-			// maybe this should just be one function.
-            // u8 string[64];
-
-            // StringCopy(string, gText_SizeComparedTo);
-            // StringAppend(string, gSaveBlock2Ptr->playerName);
-            // PrintInfoScreenText(string, GetStringCenterAlignXOffset(FONT_NORMAL, string, 0xF0), 0x79);
+			u32 i;
+			// put the size of the moveset in movesetSize
+			for (i = 0; gLevelUpLearnsets[NationalPokedexNumToSpecies(sPokedexListItem->dexNum)][i] != LEVEL_UP_END; i++) {}
+			gTasks[taskId].tMonMovesetSize = i;
 			DataScreenPrintLabels();
 			DataScreenPrintData(NationalPokedexNumToSpecies(sPokedexListItem->dexNum));
             gMain.state++;
@@ -3996,11 +4002,59 @@ static void Task_LoadDataScreen(u8 taskId)
         {
             sPokedexView->screenSwitchState = 0;
             gMain.state = 0;
+			gTasks[taskId].tDataPageTurned = FALSE;
+			gTasks[taskId].tDataMovesetScroll = 0;
             gTasks[taskId].func = Task_HandleDataScreenInput;
         }
         break;
     }
 }
+
+static const struct ScrollArrowsTemplate sScrollArrowsTemplate_PokedexDataScreen = {2, 184, 44, 3, 184, 128, 0, 6, 1, 1, 0};
+
+#define DATA_SCREEN_TOP_LABELS_Y 	25
+#define DATA_SCREEN_BOTTOM_LABELS_Y 89
+#define DATA_SCREEN_STATS_LABEL_X 	104
+#define DATA_SCREEN_EVS_LABEL_X 	184
+#define DATA_SCREEN_EVOS_LABEL_X 	104
+
+#define DATA_SCREEN_LEFT_STATS_X 100
+#define DATA_SCREEN_RIGHT_STATS_X 148
+#define DATA_SCREEN_TOP_STATS_Y 39
+#define DATA_SCREEN_MID_STATS_Y DATA_SCREEN_TOP_STATS_Y + 13
+#define DATA_SCREEN_BOT_STATS_Y DATA_SCREEN_MID_STATS_Y + 13
+#define DATA_SCREEN_EVS_DATA_X 195
+
+#define DATA_SCREEN_EVO_TEXT_X 20
+#define DATA_SCREEN_EVO_TEXT_FIRST_LINE_Y 104
+#define DATA_SCREEN_EVO_TEXT_Y_DIFF 16 // if you do 10, you can fit 3 lines. don't really need 3 lines though.
+
+// page 2
+#define DATA_SCREEN_LVL_MOVE_LABEL_X 155
+#define DATA_SCREEN_LVL_MOVE_LABEL_Y 25
+#define DATA_SCREEN_EGG_LABEL_X 104
+#define DATA_SCREEN_EGG_LABEL_Y 49
+#define DATA_SCREEN_ABILITY_LABEL_X 32
+#define DATA_SCREEN_HIDDEN_LABEL_X 97
+#define DATA_SCREEN_ABILS_LABEL_Y 89
+
+#define DATA_SCREEN_MOVES_X 164
+#define DATA_SCREEN_MOVES_STARTING_Y 47
+#define DATA_SCREEN_MOVES_Y_DIFF 13
+#define DATA_SCREEN_MOVES_LEVEL_X 148
+
+#define DATA_SCREEN_EGG_X 100
+#define DATA_SCREEN_EGG_Y 62
+#define DATA_SCREEN_EGG_Y_DIFF 12
+
+#define DATA_SCREEN_ABILITY_X 20
+#define DATA_SCREEN_HIDDEN_X 84
+#define DATA_SCREEN_ABIL_Y 104
+#define DATA_SCREEN_ABIL_Y_DIFF 16
+
+#define DATA_SCREEN_FOOTER_Y 145
+
+#define NUM_MOVES_DISPLAY 6
 
 static void Task_HandleDataScreenInput(u8 taskId)
 {
@@ -4011,13 +4065,59 @@ static void Task_HandleDataScreenInput(u8 taskId)
         gTasks[taskId].func = Task_SwitchScreensFromDataScreen;
         PlaySE(SE_PC_OFF);
     }
-    else if (JOY_NEW(DPAD_LEFT)
-     || (JOY_NEW(L_BUTTON)))
+    else if (JOY_NEW(DPAD_LEFT))
     {
         BeginNormalPaletteFade(PALETTES_ALL & ~(0x14), 0, 0, 0x10, RGB_BLACK);
         sPokedexView->screenSwitchState = 2;
         gTasks[taskId].func = Task_SwitchScreensFromDataScreen;
         PlaySE(SE_DEX_PAGE);
+	}
+	else if ((JOY_NEW(R_BUTTON)) || (JOY_NEW(L_BUTTON)))
+	{
+		if (gTasks[taskId].tDataPageTurned)
+		{
+			CopyToBgTilemapBuffer(3, gPokedexDataScreen_Tilemap, 0, 0);
+			FillWindowPixelBuffer(WIN_INFO, PIXEL_FILL(0));
+			PutWindowTilemap(WIN_INFO);
+			DataScreenPrintLabels();
+			DataScreenPrintData(NationalPokedexNumToSpecies(sPokedexListItem->dexNum));
+			CopyWindowToVram(WIN_INFO, COPYWIN_FULL);
+			CopyBgTilemapBufferToVram(3);
+			PlaySE(SE_DEX_PAGE);	
+			gTasks[taskId].tDataPageTurned = FALSE;
+			gTasks[taskId].tDataMovesetScroll = 0;
+			RemoveScrollIndicatorArrowPair(gTasks[taskId].tScrollArrowId);
+		}
+		else
+		{
+			CopyToBgTilemapBuffer(3, gPokedexDataScreenPage2_Tilemap, 0, 0);
+			FillWindowPixelBuffer(WIN_INFO, PIXEL_FILL(0));
+			PutWindowTilemap(WIN_INFO);
+			DataScreenPrintPage2Labels();
+			DataScreenPrintPage2Data(NationalPokedexNumToSpecies(sPokedexListItem->dexNum));
+			DataScreenPrintLevelUpMoves(NationalPokedexNumToSpecies(sPokedexListItem->dexNum), gTasks[taskId].tDataMovesetScroll, gTasks[taskId].tMonMovesetSize);
+			CopyWindowToVram(WIN_INFO, COPYWIN_FULL);
+			CopyBgTilemapBufferToVram(3);
+			PlaySE(SE_DEX_PAGE);
+			gTasks[taskId].tDataPageTurned = TRUE;
+			gTempScrollArrowTemplate = sScrollArrowsTemplate_PokedexDataScreen; 
+			gTempScrollArrowTemplate.fullyDownThreshold = (gTasks[taskId].tMonMovesetSize - NUM_MOVES_DISPLAY) * (gTasks[taskId].tMonMovesetSize - NUM_MOVES_DISPLAY > 0);
+			gTasks[taskId].tScrollArrowId = AddScrollIndicatorArrowPair(&gTempScrollArrowTemplate, &gTasks[taskId].tDataMovesetScroll);
+		}
+	}
+	else if ((JOY_NEW(DPAD_DOWN)) && gTasks[taskId].tDataPageTurned && (gTasks[taskId].tMonMovesetSize - NUM_MOVES_DISPLAY > gTasks[taskId].tDataMovesetScroll))
+	{
+		gTasks[taskId].tDataMovesetScroll++;
+		FillWindowPixelRect(WIN_INFO, PIXEL_FILL(0), 144, 48, 80, 80);
+		DataScreenPrintLevelUpMoves(NationalPokedexNumToSpecies(sPokedexListItem->dexNum), gTasks[taskId].tDataMovesetScroll, gTasks[taskId].tMonMovesetSize);
+		CopyWindowToVram(WIN_INFO, COPYWIN_FULL);
+	}
+	else if ((JOY_NEW(DPAD_UP)) && gTasks[taskId].tDataPageTurned && (0 < gTasks[taskId].tDataMovesetScroll))
+	{
+		gTasks[taskId].tDataMovesetScroll--;
+		FillWindowPixelRect(WIN_INFO, PIXEL_FILL(0), 144, 48, 80, 80);
+		DataScreenPrintLevelUpMoves(NationalPokedexNumToSpecies(sPokedexListItem->dexNum), gTasks[taskId].tDataMovesetScroll, gTasks[taskId].tMonMovesetSize);
+		CopyWindowToVram(WIN_INFO, COPYWIN_FULL);
 	}
 }
 
@@ -4039,25 +4139,6 @@ static void Task_SwitchScreensFromDataScreen(u8 taskId)
     }
 }
 
-#define DATA_SCREEN_TOP_LABELS_Y 	25
-#define DATA_SCREEN_BOTTOM_LABELS_Y 89
-#define DATA_SCREEN_STATS_LABEL_X 	104
-#define DATA_SCREEN_EVS_LABEL_X 	184
-#define DATA_SCREEN_EVOS_LABEL_X 	104
-
-#define DATA_SCREEN_LEFT_STATS_X 100
-#define DATA_SCREEN_RIGHT_STATS_X 148
-#define DATA_SCREEN_TOP_STATS_Y 39
-#define DATA_SCREEN_MID_STATS_Y DATA_SCREEN_TOP_STATS_Y + 13
-#define DATA_SCREEN_BOT_STATS_Y DATA_SCREEN_MID_STATS_Y + 13
-#define DATA_SCREEN_EVS_DATA_X 195
-
-#define DATA_SCREEN_EVO_TEXT_X 20
-#define DATA_SCREEN_EVO_TEXT_FIRST_LINE_Y 102
-#define DATA_SCREEN_EVO_TEXT_Y_DIFF 16 // if you do 10, you can fit 3 lines. don't really need 3 lines though.
-
-#define DATA_SCREEN_FOOTER_Y 145
-
 static void DataScreenPrintLabels(void)
 {	
 	PrintInfoScreenTextSmall(gText_BaseStats, DATA_SCREEN_STATS_LABEL_X, DATA_SCREEN_TOP_LABELS_Y);
@@ -4074,7 +4155,6 @@ static void DataScreenPrintLabels(void)
 
 static void DataScreenPrintData(u16 species)
 {
-	u32 i;
 	u8 stringBuffer[32];
 	bool32 printedCompletionText = FALSE;
 	
@@ -4335,10 +4415,10 @@ static const u8 * const sEVStatNames[NUM_STATS] =
 
 static void DataScreenPrintEVYield(u16 species)
 {
-	u8 bestEV = STAT_HP;
-	u8 bestVal = gSpeciesInfo[species].evYield_HP;
-	u8 secondBestEV = STAT_HP;
-	u8 secondBestVal = gSpeciesInfo[species].evYield_HP;
+	u32 bestEV = STAT_HP;
+	u32 bestVal = gSpeciesInfo[species].evYield_HP;
+	u32 secondBestEV = STAT_HP;
+	u32 secondBestVal = gSpeciesInfo[species].evYield_HP;
 	u8 stringBuffer[8];
 	
 	// Find highest EV yield stat.
@@ -4444,12 +4524,149 @@ static void DataScreenPrintEVYield(u16 species)
 	}
 }
 
+static void DataScreenPrintPage2Labels(void)
+{
+	PrintInfoScreenTextSmall(gText_Breed,			DATA_SCREEN_EGG_LABEL_X,		DATA_SCREEN_EGG_LABEL_Y);
+	PrintInfoScreenTextSmall(gText_Ability,			DATA_SCREEN_ABILITY_LABEL_X,	DATA_SCREEN_ABILS_LABEL_Y);
+	PrintInfoScreenTextSmall(gText_HiddenAbility,	DATA_SCREEN_HIDDEN_LABEL_X,		DATA_SCREEN_ABILS_LABEL_Y);
+	PrintInfoScreenTextSmall(gText_LevelUpMoves,	DATA_SCREEN_LVL_MOVE_LABEL_X,	DATA_SCREEN_LVL_MOVE_LABEL_Y);
+}
+
+static void DataScreenPrintPage2Data(u16 species)
+{
+	bool32 printedCompletionText = FALSE;
+	
+	if (GetSetPokedexFlag(sPokedexListItem->dexNum, FLAG_GET_STUDIED))
+	{
+		DataScreenPrintHiddenAbilities(species);
+		DataScreenPrintEggGroups(species);
+		PrintInfoScreenTextSmall(gText_DataComplete, GetStringCenterAlignXOffset(FONT_SMALL, gText_DataComplete, 239), DATA_SCREEN_FOOTER_Y);
+		printedCompletionText = TRUE;
+	}
+	else
+	{
+		PrintInfoScreenTextSmall(gText_Unknown, DATA_SCREEN_HIDDEN_X, DATA_SCREEN_ABIL_Y);
+		PrintInfoScreenTextSmall(gText_ThreeMarks, DATA_SCREEN_EGG_X, DATA_SCREEN_EGG_Y);
+	}
+
+	if (sPokedexListItem->owned)
+	{
+		DataScreenPrintAbilities(species);
+		if (!printedCompletionText)
+		{
+			PrintInfoScreenTextSmall(gText_DataIncompleteCaught, GetStringCenterAlignXOffset(FONT_SMALL, gText_DataComplete, 239), DATA_SCREEN_FOOTER_Y);
+			printedCompletionText = TRUE;
+		}
+	}
+	else
+		PrintInfoScreenTextSmall(gText_Unknown, DATA_SCREEN_ABILITY_X, DATA_SCREEN_ABIL_Y);
+	
+	// Level up move printing is handled outside this function, in Task_DataScreenHandleInput
+	
+	if (!printedCompletionText)
+	{
+		PrintInfoScreenTextSmall(gText_DataIncompleteSeen, GetStringCenterAlignXOffset(FONT_SMALL, gText_DataComplete, 239), DATA_SCREEN_FOOTER_Y);
+		printedCompletionText = TRUE;
+	}
+}
+
+static void DataScreenPrintAbilities(u16 species)
+{
+	u32 firstAbility = gSpeciesInfo[species].abilities[0];
+	u32 secondAbility = gSpeciesInfo[species].abilities[1];
+	
+	PrintInfoScreenTextSmall(gAbilityNames[firstAbility], DATA_SCREEN_ABILITY_X, DATA_SCREEN_ABIL_Y);
+	if (secondAbility)
+		PrintInfoScreenTextSmall(gAbilityNames[secondAbility], DATA_SCREEN_ABILITY_X, DATA_SCREEN_ABIL_Y + DATA_SCREEN_ABIL_Y_DIFF);
+}
+
+static void DataScreenPrintHiddenAbilities(u16 species)
+{
+	u32 firstAbility = gSpeciesInfo[species].abilities[2];
+	u32 secondAbility = gSpeciesInfo[species].abilities[3];
+	
+	PrintInfoScreenTextSmall(gAbilityNames[firstAbility], DATA_SCREEN_HIDDEN_X, DATA_SCREEN_ABIL_Y);
+	if (secondAbility != firstAbility)
+		PrintInfoScreenTextSmall(gAbilityNames[secondAbility], DATA_SCREEN_HIDDEN_X, DATA_SCREEN_ABIL_Y + DATA_SCREEN_ABIL_Y_DIFF);
+
+}
+
+static const u8 * const sEggGroupNames[EGG_GROUP_UNDISCOVERED + 1] =
+{
+    [EGG_GROUP_MONSTER]      	= gText_EggGroupMonster,
+	[EGG_GROUP_WATER_1]			= gText_EggGroupWater1,
+	[EGG_GROUP_BUG]				= gText_EggGroupBug,
+	[EGG_GROUP_FLYING]			= gText_EggGroupFlying,
+	[EGG_GROUP_FIELD]			= gText_EggGroupField,
+	[EGG_GROUP_FAIRY]			= gText_EggGroupFairy,
+	[EGG_GROUP_GRASS]			= gText_EggGroupGrass,
+	[EGG_GROUP_HUMAN_LIKE]		= gText_EggGroupHumanLike,
+	[EGG_GROUP_WATER_3]			= gText_EggGroupWater3,
+	[EGG_GROUP_MINERAL]			= gText_EggGroupMineral,
+	[EGG_GROUP_AMORPHOUS]		= gText_EggGroupAmorphous,
+	[EGG_GROUP_WATER_2]			= gText_EggGroupWater2,
+	[EGG_GROUP_DITTO]			= gText_EggGroupDitto,
+	[EGG_GROUP_DRAGON]			= gText_EggGroupDragon,
+	[EGG_GROUP_UNDISCOVERED] 	= gText_EggGroupUndiscovered,
+};
+
+static void DataScreenPrintEggGroups(u16 species)
+{
+	u32 firstEggGroup = gSpeciesInfo[species].eggGroups[0];
+	u32 secondEggGroup = gSpeciesInfo[species].eggGroups[1];
+	
+	PrintInfoScreenTextSmall(sEggGroupNames[firstEggGroup], DATA_SCREEN_EGG_X, DATA_SCREEN_EGG_Y);
+	if (secondEggGroup != firstEggGroup)
+		PrintInfoScreenTextSmall(sEggGroupNames[secondEggGroup], DATA_SCREEN_EGG_X, DATA_SCREEN_EGG_Y + DATA_SCREEN_EGG_Y_DIFF);
+
+}
+
+static void DataScreenPrintLevelUpMoves(u16 species, u32 scrollOffset, u32 movesetSize)
+{
+	u32 level;
+	u32 i;
+	u8 levelBuff[8];
+
+	// print full moveset if caught.
+	if (sPokedexListItem->owned)
+	{
+		for (i = 0; i < NUM_MOVES_DISPLAY && (i + scrollOffset) < movesetSize; i++)
+		{
+			level = (gLevelUpLearnsets[species][i + scrollOffset] & LEVEL_UP_MOVE_LV) >> 9;
+			if (level)
+				ConvertIntToDecimalStringN(&levelBuff[0], level, STR_CONV_MODE_RIGHT_ALIGN, 2);
+			else
+				StringCopy(&levelBuff[0], gText_UpArrow);
+			PrintInfoScreenTextSmall(gMoveNames[(gLevelUpLearnsets[species][i + scrollOffset] & LEVEL_UP_MOVE_ID)], DATA_SCREEN_MOVES_X, DATA_SCREEN_MOVES_STARTING_Y + (DATA_SCREEN_MOVES_Y_DIFF * i));
+			PrintInfoScreenTextSmall(levelBuff, DATA_SCREEN_MOVES_LEVEL_X, DATA_SCREEN_MOVES_STARTING_Y + (DATA_SCREEN_MOVES_Y_DIFF * i));
+		}
+	} // print half moveset if only seen.
+	else
+	{
+		for (i = 0; i < NUM_MOVES_DISPLAY && (i + scrollOffset) < movesetSize / 2; i++)
+		{
+			PrintInfoScreenTextSmall(gMoveNames[(gLevelUpLearnsets[species][i + scrollOffset] & LEVEL_UP_MOVE_ID)], DATA_SCREEN_MOVES_X, DATA_SCREEN_MOVES_STARTING_Y + (DATA_SCREEN_MOVES_Y_DIFF * i));
+			PrintInfoScreenTextSmall(gText_TwoMarks, DATA_SCREEN_MOVES_LEVEL_X, DATA_SCREEN_MOVES_STARTING_Y + (DATA_SCREEN_MOVES_Y_DIFF * i));
+		}
+		
+		for (; i < NUM_MOVES_DISPLAY && (i + scrollOffset) < movesetSize; i++)
+		{
+			PrintInfoScreenTextSmall(gText_ThreeMarks, DATA_SCREEN_MOVES_X, DATA_SCREEN_MOVES_STARTING_Y + (DATA_SCREEN_MOVES_Y_DIFF * i));
+			PrintInfoScreenTextSmall(gText_TwoMarks, DATA_SCREEN_MOVES_LEVEL_X, DATA_SCREEN_MOVES_STARTING_Y + (DATA_SCREEN_MOVES_Y_DIFF * i));
+		}
+	}
+}
+
 #undef tScrolling
 #undef tMonSpriteDone
 #undef tBgLoaded
 #undef tSkipCry
 #undef tMonSpriteId
 #undef tTrainerSpriteId
+#undef tDataPageTurned
+#undef tDataMovesetScroll
+#undef tScrollArrowId
+#undef tMonMovesetSize
 
 static void LoadScreenSelectBarMain(u16 unused)
 {
