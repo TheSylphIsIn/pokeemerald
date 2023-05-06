@@ -4331,8 +4331,20 @@ void GivePokeblock(void)
 
 void SetSpeciesStudied(void)
 {
-	u16 species = VarGet(VAR_0x800B);
+	u32 species = VarGet(VAR_0x800B);
 	
 	GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_SET_STUDIED);        
+}
+
+void DebugCompletePokedex(void)
+{
+	u32 i;
+	
+	for (i = 0; i <= NATIONAL_DEX_COUNT; i++)
+	{
+		GetSetPokedexFlag(i, FLAG_SET_SEEN);        
+		GetSetPokedexFlag(i, FLAG_SET_CAUGHT);        
+		GetSetPokedexFlag(i, FLAG_SET_STUDIED);        
+	}
 }
 

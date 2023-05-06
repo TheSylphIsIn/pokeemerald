@@ -1940,11 +1940,11 @@ Cry_Chimecho::
 	
 	.align 2
 Cry_Dubsnake::
-	.incbin "sound/direct_sound_samples/cries/ekans.bin"
+	.incbin "sound/direct_sound_samples/cries/dubsnake.bin"
 	
 	.align 2
 Cry_Hydroil::
-	.incbin "sound/direct_sound_samples/cries/arbok.bin"
+	.incbin "sound/direct_sound_samples/cries/hydroil.bin"
 	
 	.align 2
 Cry_Wycern::

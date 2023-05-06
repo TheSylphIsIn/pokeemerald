@@ -1011,7 +1011,7 @@ struct SaveBlock1
     /*0x9BC*/ u16 berryBlenderRecords[3];
     /*0x9C2*/ u8 unused_9C2[6];
     /*0x9C8*/ u16 trainerRematchStepCounter;
-    /*0x9CA*/ u8 achievementFlags[16];
+    /*0x9CA*/ u8 achievementFlags[NUM_ACHIEVEMENTS / 4];
 			  u8 filler[84];
     /*0xA30*/ struct ObjectEvent objectEvents[OBJECT_EVENTS_COUNT];
     /*0xC70*/ struct ObjectEventTemplate objectEventTemplates[OBJECT_EVENT_TEMPLATES_COUNT];

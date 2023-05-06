@@ -4341,6 +4341,7 @@ static void DataScreenPrintEVYield(u16 species)
 	u8 secondBestVal = gSpeciesInfo[species].evYield_HP;
 	u8 stringBuffer[8];
 	
+	// Find highest EV yield stat.
 	// This is inefficient. I don't know how to optimize it.
 	// If there was a way to loop across struct members, then...?
 	if (gSpeciesInfo[species].evYield_Attack > bestVal)
@@ -4349,22 +4350,10 @@ static void DataScreenPrintEVYield(u16 species)
 		bestEV = STAT_ATK;
 	}
 	
-	if (gSpeciesInfo[species].evYield_Attack > secondBestVal && bestEV != STAT_ATK)
-	{
-		secondBestVal = gSpeciesInfo[species].evYield_Attack;
-		secondBestEV = STAT_ATK;
-	}
-	
 	if (gSpeciesInfo[species].evYield_Defense > bestVal)
 	{
 		bestVal = gSpeciesInfo[species].evYield_Defense;
 		bestEV = STAT_DEF;
-	}
-	
-	if (gSpeciesInfo[species].evYield_Defense > secondBestVal && bestEV != STAT_DEF)
-	{
-		secondBestVal = gSpeciesInfo[species].evYield_Defense;
-		secondBestEV = STAT_DEF;
 	}
 	
 	if (gSpeciesInfo[species].evYield_SpAttack > bestVal)
@@ -4373,22 +4362,10 @@ static void DataScreenPrintEVYield(u16 species)
 		bestEV = STAT_SPATK;
 	}
 	
-	if (gSpeciesInfo[species].evYield_SpAttack > secondBestVal && bestEV != STAT_SPATK)
-	{
-		secondBestVal = gSpeciesInfo[species].evYield_SpAttack;
-		secondBestEV = STAT_SPATK;
-	}
-	
 	if (gSpeciesInfo[species].evYield_SpDefense > bestVal)
 	{
 		bestVal = gSpeciesInfo[species].evYield_SpDefense;
 		bestEV = STAT_SPDEF;
-	}
-	
-	if (gSpeciesInfo[species].evYield_SpDefense > secondBestVal && bestEV != STAT_SPDEF)
-	{
-		secondBestVal = gSpeciesInfo[species].evYield_SpDefense;
-		secondBestEV = STAT_SPDEF;
 	}
 	
 	if (gSpeciesInfo[species].evYield_Speed > bestVal)
@@ -4397,13 +4374,43 @@ static void DataScreenPrintEVYield(u16 species)
 		bestEV = STAT_SPEED;
 	}
 	
-	if (gSpeciesInfo[species].evYield_Speed > secondBestVal && bestEV != STAT_SPEED)
+	// Resets secondBestVal if it's the same as bestVal.
+	secondBestVal *= (bestEV != secondBestEV);
+	
+	// Find second-best EV yield. Will not find anything if only giving one stat.
+	// this probably doesn't work if one mon gave 1 in 3 different stats, but i probably won't do that
+	if (gSpeciesInfo[species].evYield_Attack >= secondBestVal && bestEV != STAT_ATK)
+	{
+		secondBestVal = gSpeciesInfo[species].evYield_Attack;
+		secondBestEV = STAT_ATK;
+	}
+	
+	if (gSpeciesInfo[species].evYield_Defense >= secondBestVal && bestEV != STAT_DEF)
+	{
+		secondBestVal = gSpeciesInfo[species].evYield_Defense;
+		secondBestEV = STAT_DEF;
+	}
+	
+	if (gSpeciesInfo[species].evYield_SpAttack >= secondBestVal && bestEV != STAT_SPATK)
+	{
+		secondBestVal = gSpeciesInfo[species].evYield_SpAttack;
+		secondBestEV = STAT_SPATK;
+	}
+	
+	if (gSpeciesInfo[species].evYield_SpDefense >= secondBestVal && bestEV != STAT_SPDEF)
+	{
+		secondBestVal = gSpeciesInfo[species].evYield_SpDefense;
+		secondBestEV = STAT_SPDEF;
+	}
+	
+	if (gSpeciesInfo[species].evYield_Speed >= secondBestVal && bestEV != STAT_SPEED)
 	{
 		secondBestVal = gSpeciesInfo[species].evYield_Speed;
 		secondBestEV = STAT_SPEED;
 	}
 	
-	if (secondBestVal > 0 && bestEV != secondBestEV)
+	// Print best and second-best EV yields.
+	if (secondBestVal > 0)
 	{
 		StringCopy(stringBuffer, sEVStatNames[secondBestEV]);
 

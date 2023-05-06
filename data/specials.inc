@@ -539,3 +539,4 @@ gSpecials::
 	def_special SetNatureAtPartyIndex
 	def_special GivePokeblock
 	def_special SetSpeciesStudied
+	def_special DebugCompletePokedex

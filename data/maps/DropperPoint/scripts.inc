@@ -46,6 +46,7 @@ DropperPoint_Movement_WakeJump:
 
 DropperPoint_Sign::
 	msgbox DropperPoint_Text_Sign, MSGBOX_SIGN
+	special DebugCompletePokedex
 	end
 	
 DropperPoint_EventScript_WakeRival::
