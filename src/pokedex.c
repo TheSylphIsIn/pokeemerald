@@ -4332,12 +4332,12 @@ static void DataScreenPrintMonEvoMethods(u16 species, u32 numEvos)
 			case EVO_LEVEL_ATK_EQ_DEF:		// Pokémon reaches the specified level with attack = defense
 				StringCopy(gStringVar1, gText_EvoMethodStatDependent);
 				ConvertIntToDecimalStringN(gStringVar2, gEvolutionTable[species][i].param, STR_CONV_MODE_RIGHT_ALIGN, 2);
-				StringCopy(gStringVar3, gText_EvoMethodStatDef);
+				StringCopy(gStringVar3, gText_EvoMethodStatEqual);
 				break;
 			case EVO_LEVEL_ATK_LT_DEF:		// Pokémon reaches the specified level with attack < defense
 				StringCopy(gStringVar1, gText_EvoMethodStatDependent);
 				ConvertIntToDecimalStringN(gStringVar2, gEvolutionTable[species][i].param, STR_CONV_MODE_RIGHT_ALIGN, 2);
-				StringCopy(gStringVar3, gText_EvoMethodStatEqual);
+				StringCopy(gStringVar3, gText_EvoMethodStatDef);
 				break;
 			case EVO_LEVEL_SILCOON:			// Pokémon reaches the specified level with a Silcoon personality value
 			case EVO_LEVEL_CASCOON:			// Pokémon reaches the specified level with a Cascoon personality value
