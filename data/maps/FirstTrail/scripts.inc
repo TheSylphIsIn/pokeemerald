@@ -118,7 +118,7 @@ FirstTrail_Text_Prof4:
 	.string "MANGROVE: … … … … …\p"
 	.string "I think we need to talk more.\n"
 	.string "Come visit my lab, if you please.\l"
-	.string "It's just past here, in CRAN TOWN.$"
+	.string "It's just past here, in {EMPHASIS_BLUE}CRAN TOWN{EMPHASIS_OFF}.$"
 	
 FirstTrail_Text_MorganTrigger:
 	.string "MORGAN: W-wait! We're not thieves!\n"
@@ -256,10 +256,10 @@ FirstTrail_EventScript_WelcomeSignRight::
 FirstTrail_Text_SignLeft:
 	.string "Welcome to the FONEI region!\p"
 	.string "Free real estate to the north.\n"
-	.string "Inquire in PENZELCASE CITY.$"
+	.string "Inquire in {EMPHASIS_BLUE}PENZELCASE CITY{EMPHASIS_OFF}.$"
 
 FirstTrail_Text_SignRight:
-	.string "HISTORY OF FONEI:\p"
+	.string "{EMPHASIS_RED}HISTORY OF FONEI{EMPHASIS_OFF}\p"
 	.string "This is the trail that the first\n"
-	.string "ancestral FONEI settlers followed\l"
-	.string "Upon making landfall in the region.$"
+	.string "humans to explore FONEI followed\l"
+	.string "upon starting their expedition.$"

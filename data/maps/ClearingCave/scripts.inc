@@ -34,9 +34,9 @@ ClearingCave_Text_Keypad:
 	.string "You don't know the code.$"
 
 ClearingCave_Text_Lab:
-	.string "KEY RESEARCH FACILITY\n"
+	.string "{EMPHASIS_GREEN}KEY RESEARCH FACILITY\n"
 	.string "UNDERGROUND LAB No. 1\p"
-	.string "Authorized personnel only.$"
+	.string "{EMPHASIS_OFF}Authorized personnel only.$"
 
 ClearingCave_Text_LockedDoor:
 	.string "The door is firmly sealed by an\n"
@@ -192,7 +192,7 @@ ClearingCave_Text_Finish:
 	.string "CALVIN: Who cares? We got the thing\n"
 	.string "back, right? Let's just get going.\p"
 	.string "MORGAN: Oh, alright. {PLAYER}, do you\n"
-	.string "mind giving that back to the professor?\p"
+	.string "mind {EMPHASIS_RED}giving that back to the professor?{EMPHASIS_OFF}\p"
 	.string "We'll go on ahead, if that's okay.$"
 
 ClearingCave_Movement_PlayerApproachGrunt:

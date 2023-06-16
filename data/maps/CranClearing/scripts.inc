@@ -343,7 +343,7 @@ CranClearing_Text_CalvinAfterBattle1:
 
 CranClearing_Text_CalvinExplainSwift:
 	.string "It's a TM for SWIFT. Decent move.\n"
-	.string "It's reusable, too, so try it out.\p"
+	.string "It's {EMPHASIS_RED}reusable{EMPHASIS_OFF}, too, so try it out.\p"
 	.string "I'm going on ahead. I guess the thief\n"
 	.string "is hiding out in that cave.\l"
 	.string "Don't be a slowpoke!$"
@@ -394,7 +394,7 @@ CranClearing_Text_TrainerTips:
 	.string "Even if you're a POKéMON\n"
 	.string "expert, it will still tell you\l"
 	.string "about this game's unique features!\p"
-	.string "For example, ICE resists GRASS,\n"
+	.string "For example, {EMPHASIS_RED}ICE resists GRASS,\n"
 	.string "GROUND, and FLYING.$"
 
 // surf hiker

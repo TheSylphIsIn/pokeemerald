@@ -179,8 +179,8 @@ CranTown_EventScript_Girl::
 CranTown_Text_Girl:
 	.string "Mommy says the statues on\n"
 	.string "STONEFACE WAY are hiding treasure.\p"
-	.string "But I'm a big girl! I know\n"
-	.string "treasure hunts aren't real!$"
+	.string "But I'm a big girl! I know treasure\n"
+	.string "isn't real!$"
 
 CranTown_EventScript_OldMan::
 	msgbox CranTown_Text_OldMan, MSGBOX_NPC
@@ -191,7 +191,7 @@ CranTown_Text_OldMan:
 	.string "FONEI's ocean is home to many islands\n"
 	.string "both big and small.\p"
 	.string "As a matter of fact, I was born out\n"
-	.string "there in the GLUE VALLEY PIT.\p"
+	.string "there in the {EMPHASIS_BLUE}GLUE VALLEY PIT{EMPHASIS_OFF}.\p"
 	.string "…I promise it's more pleasant than\n"
 	.string "it sounds. Keheheh…$"
 
@@ -220,6 +220,7 @@ CranTown_Mart:
 	.2byte ITEM_NONE
 	release
 	end
+
 // Old man script
 
 CranTown_Sign_TownSign::
@@ -235,21 +236,21 @@ CranTown_Sign_FamilySign::
 	end
 	
 CranTown_Text_TownSign:
-	.string "CRAN TOWN\n"
+	.string "{EMPHASIS_BLUE}CRAN TOWN{EMPHASIS_OFF}\n"
 	.string "“A town of humble beginnings.”$"
 	
 CranTown_Text_FamilySign:
-	.string "MOVE MACHINE FAMILY\n"
+	.string "{EMPHASIS_RED}MOVE MACHINE FAMILY{EMPHASIS_OFF}\n"
 	.string "Home-made TMs and HMs!$"
 	
 CranTown_Text_TrainerTips:
-	.string "TRAINER TIPS\p"
+	.string "{EMPHASIS_GREEN}TRAINER TIPS{EMPHASIS_OFF}\p"
 	.string "The base chance of a critical hit\n"
 	.string "landing in battle is zero.\p"
-	.string "This means critical hits won't\n"
-	.string "occur if crit ratio is not raised.\p"
+	.string "This means {EMPHASIS_RED}critical hits won't\n"
+	.string "occur if crit ratio is not raised.{EMPHASIS_OFF}\p"
 	.string "On the flip side, critical hits are\n"
-	.string "certain with a ratio above four.\p"
+	.string "certain with a ratio {EMPHASIS_RED}above four.{EMPHASIS_OFF}\p"
 	.string "For reference, FOCUS ENERGY boosts\n"
 	.string "the ratio by two.\p"
 	.string "High critical rate moves only\n"

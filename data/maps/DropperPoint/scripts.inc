@@ -103,7 +103,7 @@ DropperPoint_EventScript_CalvinAwake::
 	end
 
 DropperPoint_Text_Sign:
-	.string "DROPPER POINT\n"
+	.string "{EMPHASIS_BLUE}DROPPER POINT{EMPHASIS_OFF}\n"
 	.string "“The launching point of the world.”$"
 
 DropperPoint_Text_MorganWake:
