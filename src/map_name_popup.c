@@ -205,6 +205,12 @@ static bool8 StartMenu_ShowMapNamePopup(void)
     return TRUE;
 }
 
+#define tState data[0]
+#define tHideTimer data[1]
+#define tYoffset data[2]
+
+#define tShowTimer data[4]
+
 void ShowMapNamePopup(void)
 {
     if (FlagGet(FLAG_HIDE_MAP_NAME_POPUP) != TRUE)
@@ -213,13 +219,13 @@ void ShowMapNamePopup(void)
         {
             sPopupTaskId = CreateTask(Task_MapNamePopUpWindow, 90);
             SetGpuReg(REG_OFFSET_BG0VOFS, 40);
-            gTasks[sPopupTaskId].data[0] = 6;
-            gTasks[sPopupTaskId].data[2] = 40;
+            gTasks[sPopupTaskId].tState = 6;
+            gTasks[sPopupTaskId].tYoffset = 40;
         }
         else
         {
-            if (gTasks[sPopupTaskId].data[0] != 2)
-                gTasks[sPopupTaskId].data[0] = 2;
+            if (gTasks[sPopupTaskId].tState != 2)
+                gTasks[sPopupTaskId].tState = 2;
             gTasks[sPopupTaskId].data[3] = 1;
         }
     }
@@ -229,61 +235,61 @@ static void Task_MapNamePopUpWindow(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
-    switch (task->data[0])
+    switch (task->tState)
     {
     case 6:
-        task->data[4]++;
-        if (task->data[4] > 30)
+        task->tShowTimer++;
+        if (task->tShowTimer > 30)
         {
-            task->data[0] = 0;
-            task->data[4] = 0;
+            task->tState = 0;
+            task->tShowTimer = 0;
             ShowMapNamePopUpWindow();
         }
         break;
     case 0:
-        task->data[2] -= 2;
-        if (task->data[2] <= 0 )
+        task->tYoffset -= 2;
+        if (task->tYoffset <= 0 )
         {
-            task->data[2] = 0;
-            task->data[0] = 1;
-            gTasks[sPopupTaskId].data[1] = 0;
+            task->tYoffset = 0;
+            task->tState = 1;
+            gTasks[sPopupTaskId].tHideTimer = 0;
         }
         break;
     case 1:
-        task->data[1]++;
-        if (task->data[1] > 120 )
+        task->tHideTimer++;
+        if (task->tHideTimer > 120 )
         {
-            task->data[1] = 0;
-            task->data[0] = 2;
+            task->tHideTimer = 0;
+            task->tState = 2;
         }
         break;
     case 2:
-        task->data[2] += 2;
-        if (task->data[2] > 39)
+        task->tYoffset += 2;
+        if (task->tYoffset > 39)
         {
-            task->data[2] = 40;
+            task->tYoffset = 40;
             if (task->data[3])
             {
-                task->data[0] = 6;
-                task->data[4] = 0;
+                task->tState = 6;
+                task->tShowTimer = 0;
                 task->data[3] = 0;
             }
             else
             {
-                task->data[0] = 4;
+                task->tState = 4;
                 return;
             }
         }
         break;
     case 4:
         ClearStdWindowAndFrame(GetMapNamePopUpWindowId(), TRUE);
-        task->data[0] = 5;
+        task->tState = 5;
         break;
     case 5:
         HideMapNamePopUpWindow();
         return;
     }
-    SetGpuReg(REG_OFFSET_BG0VOFS, task->data[2]);
+    SetGpuReg(REG_OFFSET_BG0VOFS, task->tYoffset);
 }
 
 void HideMapNamePopUpWindow(void)
