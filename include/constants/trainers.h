@@ -380,4 +380,8 @@
 // Parties are in src/data/starter_dependent_parties.h
 #define F_TRAINER_STARTER_DEPENDENT	   (1 << 2)
 
+// Speed of the "intro slide" animation at the start of a battle, in pixels per frame.
+// BG and enemy move to right, player moves to left.
+#define INTRO_SLIDE_SPEED 4
+
 #endif  // GUARD_TRAINERS_H
