@@ -1478,7 +1478,9 @@ static void ModulateDmgByType(u8 multiplier)
 static void Cmd_typecalc(void)
 {
     s32 i = 0;
-    u8 moveType;
+    u32 moveType;
+	u32 defenderTypes[2];
+	u32 multiplier;
 
     if (gCurrentMove == MOVE_STRUGGLE)
     {
@@ -1519,59 +1521,36 @@ static void Cmd_typecalc(void)
     }
     else
     {
-        while (TYPE_EFFECT_ATK_TYPE(i) != TYPE_ENDTABLE)
-        {
-            if (TYPE_EFFECT_ATK_TYPE(i) == TYPE_FORESIGHT)
-            {
-                if (gBattleMons[gBattlerTarget].status2 & STATUS2_FORESIGHT 
-					|| gBattleMons[gBattlerAttacker].ability == ABILITY_SCRAPPY)
-                    break;
-                i += 3;
-                continue;
-            }
-            else if (TYPE_EFFECT_ATK_TYPE(i) == moveType)
-            {
-                // check type1
-                if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[gBattlerTarget].type1)
-				{
-					if (moveType == TYPE_PSYCHIC && TYPE_EFFECT_DEF_TYPE(i) == TYPE_DARK
-						&& gBattleMons[gBattlerAttacker].ability == ABILITY_TRUESIGHT)
-						continue;
-					else if ((gBattleMoves[gCurrentMove].effect == EFFECT_FREEZE_DRY && 
-					gBattleMons[gBattlerTarget].type1 == TYPE_WATER) ||
-					(gBattleMoves[gCurrentMove].effect == EFFECT_LIGHTNING && 
-					gBattleMons[gBattlerTarget].type1 == TYPE_GRASS))
-						ModulateDmgByType(20);
-					else 
-						ModulateDmgByType(TYPE_EFFECT_MULTIPLIER(i));
-				}
-                // check type2
-                if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[gBattlerTarget].type2 &&
-                    (gBattleMons[gBattlerTarget].type1 != gBattleMons[gBattlerTarget].type2
-					|| (gBattleMons[gBattlerTarget].ability == ABILITY_SPECIALIST && AbilityIsActive())))
-                {
-					if (moveType == TYPE_PSYCHIC && TYPE_EFFECT_DEF_TYPE(i) == TYPE_DARK
-						&& gBattleMons[gBattlerAttacker].ability == ABILITY_TRUESIGHT)
-						continue;
-					else if ((gBattleMoves[gCurrentMove].effect == EFFECT_FREEZE_DRY && 
-					gBattleMons[gBattlerTarget].type2 == TYPE_WATER) || 
-					(gBattleMoves[gCurrentMove].effect == EFFECT_LIGHTNING && 
-					gBattleMons[gBattlerTarget].type2 == TYPE_GRASS))
-						ModulateDmgByType(20);
-					else 
-						ModulateDmgByType(TYPE_EFFECT_MULTIPLIER(i));
-				}
-            }
-            i += 3;
-        }
-		if ((gBattleMoves[gCurrentMove].effect == EFFECT_SCALE_PIERCE && 
-			(gBattleMons[gBattlerTarget].type1 == TYPE_DRAGON || 
-			 gBattleMons[gBattlerTarget].type2 == TYPE_DRAGON)) ||
-			(gBattleMoves[gCurrentMove].effect == EFFECT_HARPOON_LASH && 
-			(gBattleMons[gBattlerTarget].type1 == TYPE_FLYING || 
-			 gBattleMons[gBattlerTarget].type2 == TYPE_FLYING)))
-			 ModulateDmgByType(20);
-			 
+		defenderTypes[0] = gBattleMons[gBattlerTarget].type1;
+		defenderTypes[1] = gBattleMons[gBattlerTarget].type2;
+		
+		for (i = 0; i < 2; i++)
+		{
+			if (i && defenderTypes[0] == defenderTypes[1])
+				continue;
+			
+			if (defenderTypes[i] == TYPE_GHOST 
+				&& (moveType == TYPE_NORMAL || moveType == TYPE_FIGHTING)
+				&& (gBattleMons[gBattlerTarget].status2 & STATUS2_FORESIGHT 
+				|| gBattleMons[gBattlerAttacker].ability == ABILITY_SCRAPPY))
+				continue;
+			
+			if (defenderTypes[i] == TYPE_DARK
+				&& moveType == TYPE_PSYCHIC
+				&& gBattleMons[gBattlerAttacker].ability == ABILITY_TRUESIGHT)
+				continue;
+			
+			multiplier = gTypeEffectiveness[moveType][defenderTypes[i]];
+			
+			if ((defenderTypes[i] == TYPE_WATER && gBattleMoves[gCurrentMove].effect == EFFECT_FREEZE_DRY) ||
+				(defenderTypes[i] == TYPE_DRAGON && gBattleMoves[gCurrentMove].effect == EFFECT_SCALE_PIERCE) ||
+				(defenderTypes[i] == TYPE_FLYING && gBattleMoves[gCurrentMove].effect == EFFECT_HARPOON_LASH) ||
+				(defenderTypes[i] == TYPE_GRASS && gBattleMoves[gCurrentMove].effect == EFFECT_LIGHTNING))
+				multiplier = TYPE_MUL_SUPER_EFFECTIVE;
+			
+			ModulateDmgByType(multiplier);
+		}
+        
 		if (gMoveResultFlags & MOVE_RESULT_NOT_VERY_EFFECTIVE && !(gMoveResultFlags & MOVE_RESULT_SUPER_EFFECTIVE)
 			&& gBattleMons[gBattlerAttacker].ability == ABILITY_TINTED_LENS)
 			gBattleMoveDamage *= 2;
@@ -1602,6 +1581,8 @@ static void CheckWonderGuardAndLevitate(void)
     u8 flags = 0;
     s32 i = 0;
     u8 moveType;
+	u32 defenderTypes[2];
+	u32 multiplier;
 
     if (gCurrentMove == MOVE_STRUGGLE || !gBattleMoves[gCurrentMove].power)
         return;
@@ -1619,49 +1600,42 @@ static void CheckWonderGuardAndLevitate(void)
         return;
     }
 
-    while (TYPE_EFFECT_ATK_TYPE(i) != TYPE_ENDTABLE)
-    {
-        if (TYPE_EFFECT_ATK_TYPE(i) == TYPE_FORESIGHT)
-        {
-            if (gBattleMons[gBattlerTarget].status2 & STATUS2_FORESIGHT)
-                break;
-            i += 3;
-            continue;
-        }
-        if (TYPE_EFFECT_ATK_TYPE(i) == moveType)
-        {
-            // check no effect
-            if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[gBattlerTarget].type1
-                && TYPE_EFFECT_MULTIPLIER(i) == TYPE_MUL_NO_EFFECT)
-            {
-                gMoveResultFlags |= MOVE_RESULT_DOESNT_AFFECT_FOE;
-                gProtectStructs[gBattlerAttacker].targetNotAffected = 1;
-            }
-            if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[gBattlerTarget].type2 &&
-                gBattleMons[gBattlerTarget].type1 != gBattleMons[gBattlerTarget].type2 &&
-                TYPE_EFFECT_MULTIPLIER(i) == TYPE_MUL_NO_EFFECT)
-            {
-                gMoveResultFlags |= MOVE_RESULT_DOESNT_AFFECT_FOE;
-                gProtectStructs[gBattlerAttacker].targetNotAffected = 1;
-            }
+	defenderTypes[0] = gBattleMons[gBattlerTarget].type1;
+	defenderTypes[1] = gBattleMons[gBattlerTarget].type2;
+	
+	for (i = 0; i < 2; i++)
+	{
+		if (i && defenderTypes[0] == defenderTypes[1])
+			continue;
+		
+		if (defenderTypes[i] == TYPE_GHOST 
+			&& (moveType == TYPE_NORMAL || moveType == TYPE_FIGHTING)
+			&& (gBattleMons[gBattlerTarget].status2 & STATUS2_FORESIGHT 
+			|| gBattleMons[gBattlerAttacker].ability == ABILITY_SCRAPPY))
+			continue;
+		
+		if (defenderTypes[i] == TYPE_DARK
+			&& moveType == TYPE_PSYCHIC
+			&& gBattleMons[gBattlerAttacker].ability == ABILITY_TRUESIGHT)
+			continue;
+		
+		multiplier = gTypeEffectiveness[moveType][defenderTypes[i]];
+		
+		if ((defenderTypes[i] == TYPE_WATER && gBattleMoves[gCurrentMove].effect == EFFECT_FREEZE_DRY) ||
+			(defenderTypes[i] == TYPE_DRAGON && gBattleMoves[gCurrentMove].effect == EFFECT_SCALE_PIERCE) ||
+			(defenderTypes[i] == TYPE_FLYING && gBattleMoves[gCurrentMove].effect == EFFECT_HARPOON_LASH) ||
+			(defenderTypes[i] == TYPE_GRASS && gBattleMoves[gCurrentMove].effect == EFFECT_LIGHTNING))
+			multiplier = TYPE_MUL_SUPER_EFFECTIVE;
 
-            // check super effective
-            if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[gBattlerTarget].type1 && TYPE_EFFECT_MULTIPLIER(i) == 20)
-                flags |= 1;
-            if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[gBattlerTarget].type2
-             && gBattleMons[gBattlerTarget].type1 != gBattleMons[gBattlerTarget].type2
-             && TYPE_EFFECT_MULTIPLIER(i) == TYPE_MUL_SUPER_EFFECTIVE)
-                flags |= 1;
-
-            // check not very effective
-            if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[gBattlerTarget].type1 && TYPE_EFFECT_MULTIPLIER(i) == 5)
-                flags |= 2;
-            if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[gBattlerTarget].type2
-             && gBattleMons[gBattlerTarget].type1 != gBattleMons[gBattlerTarget].type2
-             && TYPE_EFFECT_MULTIPLIER(i) == TYPE_MUL_NOT_EFFECTIVE)
-                flags |= 2;
-        }
-        i += 3;
+		if (multiplier == TYPE_MUL_NO_EFFECT)
+		{
+			gMoveResultFlags |= MOVE_RESULT_DOESNT_AFFECT_FOE;
+            gProtectStructs[gBattlerAttacker].targetNotAffected = 1;
+		}
+		if (multiplier == TYPE_MUL_NOT_EFFECTIVE)
+			flags |= 2;
+		if (multiplier == TYPE_MUL_SUPER_EFFECTIVE)
+			flags |= 1;
     }
 
     if (gBattleMons[gBattlerTarget].ability == ABILITY_WONDER_GUARD && AttacksThisTurn(gBattlerAttacker, gCurrentMove) == 2)
@@ -1711,6 +1685,8 @@ static void ModulateDmgByType2(u8 multiplier, u16 move, u8 *flags)
                 *flags |= MOVE_RESULT_SUPER_EFFECTIVE;
         }
         break;
+	default:
+		break;
     }
 }
 
@@ -1718,20 +1694,22 @@ u8 TypeCalc(u16 move, u8 attacker, u8 defender)
 {
     s32 i = 0;
     u8 flags = 0;
-    u8 moveType;
+    u32 moveType;
+	u32 defenderTypes[2];
+	u32 multiplier;
 
     if (move == MOVE_STRUGGLE)
         return 0;
 
     moveType = gBattleMoves[move].type;
 	
-	if (AbilityIsAte(gBattleMons[gBattlerAttacker].ability) && moveType == TYPE_NORMAL)
-		moveType = SetAteMoveType(gBattleMons[gBattlerAttacker].ability);
+	if (AbilityIsAte(gBattleMons[attacker].ability) && moveType == TYPE_NORMAL)
+		moveType = SetAteMoveType(gBattleMons[attacker].ability);
 
     // check stab
-    if (IS_BATTLER_OF_TYPE(gBattlerAttacker, moveType))
+    if (IS_BATTLER_OF_TYPE(attacker, moveType))
     {
-		if (gBattleMons[gBattlerAttacker].ability == ABILITY_ADAPTABILITY)
+		if (gBattleMons[attacker].ability == ABILITY_ADAPTABILITY)
 			gBattleMoveDamage = gBattleMoveDamage * 20;
 		else
 			gBattleMoveDamage = gBattleMoveDamage * 15;
@@ -1739,6 +1717,10 @@ u8 TypeCalc(u16 move, u8 attacker, u8 defender)
 			gBattleMoveDamage = (gBattleMoveDamage * 15) / 10;
         gBattleMoveDamage = gBattleMoveDamage / 10;
     }
+	
+	if ((gBattleMons[attacker].ability == ABILITY_STEELWORKER && moveType == TYPE_STEEL) ||
+		(gBattleMons[attacker].ability == ABILITY_FIRE_AFFINITY	&& moveType == TYPE_FIRE))
+		gBattleMoveDamage == (gBattleMoveDamage * 15) / 10;
 
     if (gBattleMons[defender].ability == ABILITY_LEVITATE && moveType == TYPE_GROUND && AbilityIsActive())
     {
@@ -1746,35 +1728,41 @@ u8 TypeCalc(u16 move, u8 attacker, u8 defender)
     }
     else
     {
-        while (TYPE_EFFECT_ATK_TYPE(i) != TYPE_ENDTABLE)
-        {
-            if (TYPE_EFFECT_ATK_TYPE(i) == TYPE_FORESIGHT)
-            {
-                if (gBattleMons[defender].status2 & STATUS2_FORESIGHT
-					|| gBattleMons[attacker].ability == ABILITY_SCRAPPY)
-                    break;
-                i += 3;
-                continue;
-            }
+		defenderTypes[0] = gBattleMons[defender].type1;
+		defenderTypes[1] = gBattleMons[defender].type2;
+		
+		for (i = 0; i < 2; i++)
+		{
+			if (i && defenderTypes[0] == defenderTypes[1])
+				continue;
+			
+			if (defenderTypes[i] == TYPE_GHOST 
+				&& (moveType == TYPE_NORMAL || moveType == TYPE_FIGHTING)
+				&& (gBattleMons[defender].status2 & STATUS2_FORESIGHT 
+				|| gBattleMons[attacker].ability == ABILITY_SCRAPPY))
+				continue;
+			
+			if (defenderTypes[i] == TYPE_DARK
+				&& moveType == TYPE_PSYCHIC
+				&& gBattleMons[attacker].ability == ABILITY_TRUESIGHT)
+				continue;
+			
+			multiplier = gTypeEffectiveness[moveType][defenderTypes[i]];
+			
+			if ((defenderTypes[i] == TYPE_WATER && gBattleMoves[move].effect == EFFECT_FREEZE_DRY) ||
+				(defenderTypes[i] == TYPE_DRAGON && gBattleMoves[move].effect == EFFECT_SCALE_PIERCE) ||
+				(defenderTypes[i] == TYPE_FLYING && gBattleMoves[move].effect == EFFECT_HARPOON_LASH) ||
+				(defenderTypes[i] == TYPE_GRASS && gBattleMoves[move].effect == EFFECT_LIGHTNING))
+				multiplier = TYPE_MUL_SUPER_EFFECTIVE;
 
-            else if (TYPE_EFFECT_ATK_TYPE(i) == moveType)
-            {
-                // check type1
-                if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[defender].type1)
-                    ModulateDmgByType2(TYPE_EFFECT_MULTIPLIER(i), move, &flags);
-                // check type2
-                if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[defender].type2 &&
-                    (gBattleMons[defender].type1 != gBattleMons[defender].type2
-					|| (gBattleMons[defender].ability == ABILITY_SPECIALIST && AbilityIsActive())))
-                    ModulateDmgByType2(TYPE_EFFECT_MULTIPLIER(i), move, &flags);
-            }
-            i += 3;
-        }
+			ModulateDmgByType2(gTypeEffectiveness[moveType][defenderTypes[i]], move, &flags);
+		}
+		
 		if (flags & MOVE_RESULT_NOT_VERY_EFFECTIVE && !(flags & MOVE_RESULT_SUPER_EFFECTIVE)
-			&& gBattleMons[gBattlerAttacker].ability == ABILITY_TINTED_LENS)
+			&& gBattleMons[attacker].ability == ABILITY_TINTED_LENS)
 			gBattleMoveDamage *= 2;
 		if (flags & MOVE_RESULT_SUPER_EFFECTIVE && !(flags & MOVE_RESULT_NOT_VERY_EFFECTIVE)
-			&& gBattleMons[gBattlerTarget].ability == ABILITY_SUPER_TOUGH && AbilityIsActive())
+			&& gBattleMons[defender].ability == ABILITY_SUPER_TOUGH && AbilityIsActive())
 			gBattleMoveDamage = (gBattleMoveDamage * 75) / 100;
     }
 
@@ -1792,16 +1780,17 @@ u8 AI_TypeCalc(u16 move, u16 targetSpecies, u8 targetAbility)
 {
     s32 i = 0;
     u8 flags = 0;
-    u8 type1 = gSpeciesInfo[targetSpecies].types[0], type2 = gSpeciesInfo[targetSpecies].types[1];
+    u8 types[2] = {*gSpeciesInfo[targetSpecies].types};
     u8 moveType;
+	u32 multiplier;
 
     if (move == MOVE_STRUGGLE)
         return 0;
 
     moveType = gBattleMoves[move].type;
 	
-	if (AbilityIsAte(gBattleMons[gBattlerAttacker].ability) && moveType == TYPE_NORMAL)
-		moveType = SetAteMoveType(gBattleMons[gBattlerAttacker].ability);
+	if (AbilityIsAte(gBattleMons[gActiveBattler].ability) && moveType == TYPE_NORMAL)
+		moveType = SetAteMoveType(gBattleMons[gActiveBattler].ability);
 	
 	if (move == MOVE_HIDDEN_POWER)
 		moveType = GetHiddenPowerType(gBattleMons[gActiveBattler].hpIV, gBattleMons[gActiveBattler].attackIV, gBattleMons[gActiveBattler].defenseIV, gBattleMons[gActiveBattler].speedIV, gBattleMons[gActiveBattler].spAttackIV, gBattleMons[gActiveBattler].spDefenseIV);
@@ -1812,23 +1801,30 @@ u8 AI_TypeCalc(u16 move, u16 targetSpecies, u8 targetAbility)
     }
     else
     {
-        while (TYPE_EFFECT_ATK_TYPE(i) != TYPE_ENDTABLE)
-        {
-            if (TYPE_EFFECT_ATK_TYPE(i) == TYPE_FORESIGHT)
-            {
-                i += 3;
-                continue;
-            }
-            if (TYPE_EFFECT_ATK_TYPE(i) == moveType)
-            {
-                // check type1
-                if (TYPE_EFFECT_DEF_TYPE(i) == type1)
-                    ModulateDmgByType2(TYPE_EFFECT_MULTIPLIER(i), move, &flags);
-                // check type2
-                if (TYPE_EFFECT_DEF_TYPE(i) == type2 && type1 != type2)
-                    ModulateDmgByType2(TYPE_EFFECT_MULTIPLIER(i), move, &flags);
-            }
-            i += 3;
+		for (i = 0; i < 2; i++)
+		{
+			if (i && types[0] == types[1])
+				continue;
+			
+			if (types[i] == TYPE_GHOST 
+				&& (moveType == TYPE_NORMAL || moveType == TYPE_FIGHTING)
+				&& (gBattleMons[gActiveBattler].ability == ABILITY_SCRAPPY))
+				continue;
+			
+			if (types[i] == TYPE_DARK
+				&& moveType == TYPE_PSYCHIC
+				&& gBattleMons[gActiveBattler].ability == ABILITY_TRUESIGHT)
+				continue;
+			
+			multiplier = gTypeEffectiveness[moveType][types[i]];
+			
+			if ((types[i] == TYPE_WATER && gBattleMoves[move].effect == EFFECT_FREEZE_DRY) ||
+				(types[i] == TYPE_DRAGON && gBattleMoves[move].effect == EFFECT_SCALE_PIERCE) ||
+				(types[i] == TYPE_FLYING && gBattleMoves[move].effect == EFFECT_HARPOON_LASH) ||
+				(types[i] == TYPE_GRASS && gBattleMoves[move].effect == EFFECT_LIGHTNING))
+				multiplier = TYPE_MUL_SUPER_EFFECTIVE;
+				
+			ModulateDmgByType2(multiplier, move, &flags);
         }
     }
     if (targetAbility == ABILITY_WONDER_GUARD
@@ -4788,11 +4784,14 @@ static void Cmd_moveend(void)
         gBattlescriptCurrInstr += 3;
 }
 
+// only checks type relationships, not damage.
 static void Cmd_typecalc2(void)
 {
     u8 flags = 0;
     s32 i = 0;
     u8 moveType = gBattleMoves[gCurrentMove].type;
+	u32 defenderTypes[2];
+	u32 multiplier;
 	
 	if (AbilityIsAte(gBattleMons[gBattlerAttacker].ability) && moveType == TYPE_NORMAL)
 		moveType = SetAteMoveType(gBattleMons[gBattlerAttacker].ability);
@@ -4807,68 +4806,40 @@ static void Cmd_typecalc2(void)
     }
     else
     {
-        while (TYPE_EFFECT_ATK_TYPE(i) != TYPE_ENDTABLE)
-        {
-            if (TYPE_EFFECT_ATK_TYPE(i) == TYPE_FORESIGHT)
-            {
-                if (gBattleMons[gBattlerTarget].status2 & STATUS2_FORESIGHT
-					|| gBattleMons[gBattlerAttacker].ability == ABILITY_SCRAPPY)
-                {
-                    break;
-                }
-                else
-                {
-                    i += 3;
-                    continue;
-                }
-            }
-
-            if (TYPE_EFFECT_ATK_TYPE(i) == moveType)
-            {
-                // check type1
-                if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[gBattlerTarget].type1)
-                {
-                    if (TYPE_EFFECT_MULTIPLIER(i) == TYPE_MUL_NO_EFFECT)
-                    {
-						if (TYPE_EFFECT_DEF_TYPE(i) == TYPE_DARK && gBattleMons[gBattlerAttacker].ability == ABILITY_TRUESIGHT)
-							continue;
-                        gMoveResultFlags |= MOVE_RESULT_DOESNT_AFFECT_FOE;
-                        break;
-                    }
-                    if (TYPE_EFFECT_MULTIPLIER(i) == TYPE_MUL_NOT_EFFECTIVE)
-                    {
-                        flags |= MOVE_RESULT_NOT_VERY_EFFECTIVE;
-                    }
-                    if (TYPE_EFFECT_MULTIPLIER(i) == TYPE_MUL_SUPER_EFFECTIVE)
-                    {
-                        flags |= MOVE_RESULT_SUPER_EFFECTIVE;
-                    }
-                }
-                // check type2
-                if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[gBattlerTarget].type2)
-                {
-                    if (gBattleMons[gBattlerTarget].type1 != gBattleMons[gBattlerTarget].type2
-                        && TYPE_EFFECT_MULTIPLIER(i) == TYPE_MUL_NO_EFFECT)
-                    {
-                        gMoveResultFlags |= MOVE_RESULT_DOESNT_AFFECT_FOE;
-                        break;
-                    }
-                    if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[gBattlerTarget].type2
-                        && gBattleMons[gBattlerTarget].type1 != gBattleMons[gBattlerTarget].type2
-                        && TYPE_EFFECT_MULTIPLIER(i) == TYPE_MUL_NOT_EFFECTIVE)
-                    {
-                        flags |= MOVE_RESULT_NOT_VERY_EFFECTIVE;
-                    }
-                    if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[gBattlerTarget].type2
-                        && gBattleMons[gBattlerTarget].type1 != gBattleMons[gBattlerTarget].type2
-                        && TYPE_EFFECT_MULTIPLIER(i) == TYPE_MUL_SUPER_EFFECTIVE)
-                    {
-                        flags |= MOVE_RESULT_SUPER_EFFECTIVE;
-                    }
-                }
-            }
-            i += 3;
-        }
+		defenderTypes[0] = gBattleMons[gBattlerTarget].type1;
+		defenderTypes[1] = gBattleMons[gBattlerTarget].type2;
+		
+		for (i = 0; i < 2; i++)
+		{
+			if (i && defenderTypes[0] == defenderTypes[1])
+				continue;
+			
+			if (defenderTypes[i] == TYPE_GHOST 
+				&& (moveType == TYPE_NORMAL || moveType == TYPE_FIGHTING)
+				&& (gBattleMons[gBattlerTarget].status2 & STATUS2_FORESIGHT 
+				|| gBattleMons[gBattlerAttacker].ability == ABILITY_SCRAPPY))
+				continue;
+			
+			if (defenderTypes[i] == TYPE_DARK
+				&& moveType == TYPE_PSYCHIC
+				&& gBattleMons[gBattlerAttacker].ability == ABILITY_TRUESIGHT)
+				continue;
+			
+			multiplier = gTypeEffectiveness[moveType][defenderTypes[i]];
+			
+			if ((defenderTypes[i] == TYPE_WATER && gBattleMoves[gCurrentMove].effect == EFFECT_FREEZE_DRY) ||
+				(defenderTypes[i] == TYPE_DRAGON && gBattleMoves[gCurrentMove].effect == EFFECT_SCALE_PIERCE) ||
+				(defenderTypes[i] == TYPE_FLYING && gBattleMoves[gCurrentMove].effect == EFFECT_HARPOON_LASH) ||
+				(defenderTypes[i] == TYPE_GRASS && gBattleMoves[gCurrentMove].effect == EFFECT_LIGHTNING))
+				multiplier = TYPE_MUL_SUPER_EFFECTIVE;
+				
+			if (multiplier == TYPE_MUL_NO_EFFECT)
+                gMoveResultFlags |= MOVE_RESULT_DOESNT_AFFECT_FOE;
+			if (multiplier == TYPE_MUL_NOT_EFFECTIVE)
+				flags |= MOVE_RESULT_NOT_VERY_EFFECTIVE;
+			if (multiplier == TYPE_MUL_SUPER_EFFECTIVE)
+				flags |= MOVE_RESULT_SUPER_EFFECTIVE;
+		}
     }
 
     if (gBattleMons[gBattlerTarget].ability == ABILITY_WONDER_GUARD
@@ -8441,43 +8412,18 @@ static void Cmd_settypetorandomresistance(void)
 
         for (rands = 0; rands < 1000; rands++)
         {
-            while (((i = Random() % 128) > sizeof(gTypeEffectiveness) / 3));
-
-            i *= 3;
-
-            if (TYPE_EFFECT_ATK_TYPE(i) == gLastHitByType[gBattlerAttacker]
-                && TYPE_EFFECT_MULTIPLIER(i) <= TYPE_MUL_NOT_EFFECTIVE
-                && !IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_EFFECT_DEF_TYPE(i)))
-            {
-                SET_BATTLER_TYPE(gBattlerAttacker, TYPE_EFFECT_DEF_TYPE(i));
-                PREPARE_TYPE_BUFFER(gBattleTextBuff1, TYPE_EFFECT_DEF_TYPE(i));
+			i = Random() % NUMBER_OF_MON_TYPES;
+			
+			if (gTypeEffectiveness[gLastHitByType[gBattlerAttacker]][i] <= TYPE_MUL_NOT_EFFECTIVE
+				&& !IS_BATTLER_OF_TYPE(gBattlerAttacker, i))
+			{
+                SET_BATTLER_TYPE(gBattlerAttacker, i);
+                PREPARE_TYPE_BUFFER(gBattleTextBuff1, i);
 
                 gBattlescriptCurrInstr += 5;
                 return;
             }
-        }
-
-        for (j = 0, rands = 0; rands < sizeof(gTypeEffectiveness); j += 3, rands += 3)
-        {
-            switch (TYPE_EFFECT_ATK_TYPE(j))
-            {
-            case TYPE_ENDTABLE:
-            case TYPE_FORESIGHT:
-                break;
-            default:
-                if (TYPE_EFFECT_ATK_TYPE(j) == gLastHitByType[gBattlerAttacker]
-                 && TYPE_EFFECT_MULTIPLIER(j) <= 5
-                 && !IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_EFFECT_DEF_TYPE(i)))
-                {
-                    SET_BATTLER_TYPE(gBattlerAttacker, TYPE_EFFECT_DEF_TYPE(rands));
-                    PREPARE_TYPE_BUFFER(gBattleTextBuff1, TYPE_EFFECT_DEF_TYPE(rands))
-
-                    gBattlescriptCurrInstr += 5;
-                    return;
-                }
-                break;
-            }
-        }
+		}
 
         gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
     }

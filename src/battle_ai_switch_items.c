@@ -603,26 +603,10 @@ void AI_TrySwitchOrUseItem(void)
 
 static void ModulateByTypeEffectiveness(u8 atkType, u8 defType1, u8 defType2, u8 *var)
 {
-    s32 i = 0;
-
-    while (TYPE_EFFECT_ATK_TYPE(i) != TYPE_ENDTABLE)
-    {
-        if (TYPE_EFFECT_ATK_TYPE(i) == TYPE_FORESIGHT)
-        {
-            i += 3;
-            continue;
-        }
-        else if (TYPE_EFFECT_ATK_TYPE(i) == atkType)
-        {
-            // Check type1.
-            if (TYPE_EFFECT_DEF_TYPE(i) == defType1)
-                *var = (*var * TYPE_EFFECT_MULTIPLIER(i)) / 10;
-            // Check type2.
-            if (TYPE_EFFECT_DEF_TYPE(i) == defType2 && defType1 != defType2)
-                *var = (*var * TYPE_EFFECT_MULTIPLIER(i)) / 10;
-        }
-        i += 3;
-    }
+    *var = (*var * gTypeEffectiveness[atkType][defType1]) / 10;
+	
+	if (defType2 != defType1)
+		*var = (*var * gTypeEffectiveness[atkType][defType2]) / 10;
 }
 
 u8 GetMostSuitableMonToSwitchInto(void)
