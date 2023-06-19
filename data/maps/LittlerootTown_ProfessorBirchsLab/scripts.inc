@@ -72,12 +72,12 @@ CranTown_Lab_Text_PokedexPreamble:
 	.string "MANGROVE: So, I've heard the story\n"
 	.string "from your friends, here.\p"
 	.string "You say you were transported here\n"
-	.string "from another world… one where\l"
+	.string "from another world…one where\l"
 	.string "POKéMON and TRAINERS don't exist.\p"
 	.string "MANGROVE: Well, frankly…\n"
 	.string "I believe it!\p"
 	.string "MORGAN: What? R-really?\p"
-	.string "CALVIN: Wow… I didn't even believe\n"
+	.string "CALVIN: Wow…I didn't even believe\n"
 	.string "her, and I know POKéMON aren't real!\p"
 	.string "MANGROVE: Well, I have my reasons…\n"
 	.string "But before I get into that, take this.$"
@@ -139,6 +139,11 @@ CranTown_Lab_Text_EndingText:
 	.string "They say FONEI is where the walls\n"
 	.string "of our world are weakest, or where\l"
 	.string "the keys to break free reside…\p"
+	.string "Whether it's true or not is another\n"
+	.string "matter, but when three strangers\l"
+	.string "appear on the beach saying they came\l"
+	.string "from another world, I can't help\l"
+	.string "but humor them at the very least…\p"
 	.string "Regardless, if you want to get back\n"
 	.string "to your home world, you'll need\l"
 	.string "powerful POKéMON to help you explore.\p"
@@ -182,7 +187,7 @@ CranTown_Lab_Movement_GruntRunAway2:
 	
 CranTown_Lab_Text_GruntText:
 	.string "MANGROVE: Hey! Get your hands off\n"
-	.string "my ABILITY SCANNER!\p"
+	.string "my {EMPHASIS_GREEN}ABILITY SCANNER{EMPHASIS_OFF}!\p"
 	.string "???: Uh-oh! I've been spotted!$"
 	
 CranTown_Lab_Text_MorganScream:
@@ -200,15 +205,11 @@ LittlerootTown_ProfessorBirchsLab_EventScript_Birch::
 	lock
 	faceplayer
 	goto_if_le VAR_FONEI_COAST_STATE, 6, CranTown_Lab_EventScript_ProfScannerStolen
-	goto LittlerootTown_ProfessorBirchsLab_EventScript_TryRatePokedexOrRegister
-	end
-
-LittlerootTown_ProfessorBirchsLab_EventScript_TryRatePokedexOrRegister::
-	goto_if_unset FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_UNKNOWN_0x380, ProfBirch_EventScript_RatePokedexOrRegister
-	release
+	goto ProfBirch_EventScript_RatePokedexOrRegister
 	end
 	
 CranTown_Lab_EventScript_ProfScannerStolen:
+	goto_if_set FLAG_RECOVERED_ABILITY_SCANNER, CranTown_Lab_EventScript_ReturnScanner
 	msgbox CranTown_Lab_Text_Prof1, MSGBOX_NPC
 	end
 	
@@ -217,6 +218,60 @@ CranTown_Lab_Text_Prof1:
 	.string "clearing north of town.\p"
 	.string "When you get my ABILITY SCANNER\n"
 	.string "back, we can finish our talk.$"
+
+CranTown_Lab_EventScript_ReturnScanner:
+	msgbox CranTown_Lab_Text_ReturnScanner1, MSGBOX_DEFAULT
+	removeitem ITEM_ABILITY_SCANNER
+	msgbox CranTown_Lab_Text_ReturnScanner2, MSGBOX_DEFAULT
+	//giveitem ITEM_RESEARCH_BAG
+	msgbox CranTown_Lab_Text_ReturnScannerEnd, MSGBOX_DEFAULT
+	setvar VAR_FONEI_COAST_STATE, 10
+	release
+	end
+	
+
+CranTown_Lab_Text_ReturnScanner1:
+	.string "MANGROVE: {PLAYER}, good to see you.\n"
+	.string "Did you get the scanner back?\p"
+	.string "{PLAYER} returned the ABILITY SCANNER\n"
+	.string "to PROFESSOR MANGROVE.$"
+	
+CranTown_Lab_Text_ReturnScanner2:
+	.string "Wonderful!\p"
+	.string "Oh, MORGAN and CALVIN aren't with\n"
+	.string "you? Ah well, their loss.\p"
+	.string "Well, as I was saying…I have\n"
+	.string "obligations as a POKéMON PROFESSOR.\p"
+	.string "There's no formal research data on\n"
+	.string "the wildlife of FONEI.\l"
+	.string "It's my job to fix that.\p"
+	.string "But the three of you will be exploring\n"
+	.string "the region already, won't you?\p"
+	.string "It's your choice whether to focus on\n"
+	.string "that, but the POKéDEX automatically\l"
+	.string "records data as you fight, so please\l"
+	.string "keep it with you.\p"
+	.string "The POKéDEX can record data about\n"
+	.string "how a species battles, such as {EMPHASIS_RED}stats,\l"
+	.string "abilities, or what moves it learns.{EMPHASIS_OFF}\p"
+	.string "You'll discover more detailed info\n"
+	.string "with further study, so {EMPHASIS_RED}filling out the\l"
+	.string "POKéDEX is useful even if you only\l"
+	.string "care about battling.{EMPHASIS_OFF}\p"
+	.string "You can see this info on the species'\n"
+	.string "POKéDEX page under DATA.\p"
+	.string "Anyway, as for your next move…\p"
+	.string "Those POKéMON you took belonged to\n"
+	.string "my associate, DOCTOR SPADE.\l"
+	.string "He lives in {EMPHASIS_BLUE}PENZELCASE CITY{EMPHASIS_OFF}.\p"
+	.string "He'll allow you to keep the POKéMON,\n"
+	.string "but you should take responsibility\l"
+	.string "for returning his bag and notes.$"
+
+CranTown_Lab_Text_ReturnScannerEnd:
+	.string "You can reach the city by going\n"
+	.string "east to {EMPHASIS_BLUE}CLIFF FACE CLIMB CAVE{EMPHASIS_OFF}.\p"
+	.string "Good luck out there!$"
 
 LittlerootTown_ProfessorBirchsLab_EventScript_ReceivePokedex::
 	playfanfare MUS_OBTAIN_ITEM
