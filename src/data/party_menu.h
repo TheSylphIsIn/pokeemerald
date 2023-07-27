@@ -124,7 +124,7 @@ static const u8 sFontColorTable[][3] =
 
 static const struct WindowTemplate sSinglePartyMenuWindowTemplate[] =
 {
-    {
+    { // Party mon 1
         .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 3,
@@ -133,7 +133,7 @@ static const struct WindowTemplate sSinglePartyMenuWindowTemplate[] =
         .paletteNum = 3,
         .baseBlock = 0x63,
     },
-    {
+    { // Party mon 2
         .bg = 0,
         .tilemapLeft = 12,
         .tilemapTop = 1,
@@ -142,7 +142,7 @@ static const struct WindowTemplate sSinglePartyMenuWindowTemplate[] =
         .paletteNum = 4,
         .baseBlock = 0xA9,
     },
-    {
+    { // Party mon 3
         .bg = 0,
         .tilemapLeft = 12,
         .tilemapTop = 4,
@@ -151,7 +151,7 @@ static const struct WindowTemplate sSinglePartyMenuWindowTemplate[] =
         .paletteNum = 5,
         .baseBlock = 0xDF,
     },
-    {
+    { // Party mon 4
         .bg = 0,
         .tilemapLeft = 12,
         .tilemapTop = 7,
@@ -160,7 +160,7 @@ static const struct WindowTemplate sSinglePartyMenuWindowTemplate[] =
         .paletteNum = 6,
         .baseBlock = 0x115,
     },
-    {
+    { // Party mon 5
         .bg = 0,
         .tilemapLeft = 12,
         .tilemapTop = 10,
@@ -169,7 +169,7 @@ static const struct WindowTemplate sSinglePartyMenuWindowTemplate[] =
         .paletteNum = 7,
         .baseBlock = 0x14B,
     },
-    {
+    { // Party mon 6
         .bg = 0,
         .tilemapLeft = 12,
         .tilemapTop = 13,
@@ -178,7 +178,7 @@ static const struct WindowTemplate sSinglePartyMenuWindowTemplate[] =
         .paletteNum = 8,
         .baseBlock = 0x181,
     },
-    {
+    [WIN_MSG] = {
         .bg = 2,
         .tilemapLeft = 1,
         .tilemapTop = 15,
@@ -192,7 +192,7 @@ static const struct WindowTemplate sSinglePartyMenuWindowTemplate[] =
 
 static const struct WindowTemplate sDoublePartyMenuWindowTemplate[] =
 {
-    {
+    { // Party mon 1
         .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 1,
@@ -201,7 +201,7 @@ static const struct WindowTemplate sDoublePartyMenuWindowTemplate[] =
         .paletteNum = 3,
         .baseBlock = 0x63,
     },
-    {
+    { // Party mon 2
         .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 8,
@@ -210,7 +210,7 @@ static const struct WindowTemplate sDoublePartyMenuWindowTemplate[] =
         .paletteNum = 4,
         .baseBlock = 0xA9,
     },
-    {
+    { // Party mon 3
         .bg = 0,
         .tilemapLeft = 12,
         .tilemapTop = 1,
@@ -219,7 +219,7 @@ static const struct WindowTemplate sDoublePartyMenuWindowTemplate[] =
         .paletteNum = 5,
         .baseBlock = 0xEF,
     },
-    {
+    { // Party mon 4
         .bg = 0,
         .tilemapLeft = 12,
         .tilemapTop = 5,
@@ -228,7 +228,7 @@ static const struct WindowTemplate sDoublePartyMenuWindowTemplate[] =
         .paletteNum = 6,
         .baseBlock = 0x125,
     },
-    {
+    { // Party mon 5
         .bg = 0,
         .tilemapLeft = 12,
         .tilemapTop = 9,
@@ -237,7 +237,7 @@ static const struct WindowTemplate sDoublePartyMenuWindowTemplate[] =
         .paletteNum = 7,
         .baseBlock = 0x15B,
     },
-    {
+    { // Party mon 6
         .bg = 0,
         .tilemapLeft = 12,
         .tilemapTop = 13,
@@ -246,7 +246,7 @@ static const struct WindowTemplate sDoublePartyMenuWindowTemplate[] =
         .paletteNum = 8,
         .baseBlock = 0x191,
     },
-    {
+    [WIN_MSG] = {
         .bg = 2,
         .tilemapLeft = 1,
         .tilemapTop = 15,
@@ -260,7 +260,7 @@ static const struct WindowTemplate sDoublePartyMenuWindowTemplate[] =
 
 static const struct WindowTemplate sMultiPartyMenuWindowTemplate[] =
 {
-    {
+    { // Party mon 1
         .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 1,
@@ -269,7 +269,7 @@ static const struct WindowTemplate sMultiPartyMenuWindowTemplate[] =
         .paletteNum = 3,
         .baseBlock = 0x63,
     },
-    {
+    { // Party mon 2
         .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 8,
@@ -278,7 +278,7 @@ static const struct WindowTemplate sMultiPartyMenuWindowTemplate[] =
         .paletteNum = 4,
         .baseBlock = 0xA9,
     },
-    {
+    { // Party mon 3
         .bg = 0,
         .tilemapLeft = 12,
         .tilemapTop = 2,
@@ -287,7 +287,7 @@ static const struct WindowTemplate sMultiPartyMenuWindowTemplate[] =
         .paletteNum = 5,
         .baseBlock = 0xEF,
     },
-    {
+    { // Party mon 4
         .bg = 0,
         .tilemapLeft = 12,
         .tilemapTop = 5,
@@ -296,7 +296,7 @@ static const struct WindowTemplate sMultiPartyMenuWindowTemplate[] =
         .paletteNum = 6,
         .baseBlock = 0x125,
     },
-    {
+    { // Party mon 5
         .bg = 0,
         .tilemapLeft = 12,
         .tilemapTop = 9,
@@ -305,7 +305,7 @@ static const struct WindowTemplate sMultiPartyMenuWindowTemplate[] =
         .paletteNum = 7,
         .baseBlock = 0x15B,
     },
-    {
+    { // Party mon 6
         .bg = 0,
         .tilemapLeft = 12,
         .tilemapTop = 12,
@@ -314,7 +314,7 @@ static const struct WindowTemplate sMultiPartyMenuWindowTemplate[] =
         .paletteNum = 8,
         .baseBlock = 0x191,
     },
-    {
+    [WIN_MSG] = {
         .bg = 2,
         .tilemapLeft = 1,
         .tilemapTop = 15,
@@ -328,7 +328,7 @@ static const struct WindowTemplate sMultiPartyMenuWindowTemplate[] =
 
 static const struct WindowTemplate sShowcaseMultiPartyMenuWindowTemplate[] =
 {
-    {
+    { // Party mon 1
         .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 2,
@@ -337,7 +337,7 @@ static const struct WindowTemplate sShowcaseMultiPartyMenuWindowTemplate[] =
         .paletteNum = 3,
         .baseBlock = 0x63,
     },
-    {
+    { // Party mon 2
         .bg = 0,
         .tilemapLeft = 12,
         .tilemapTop = 3,
@@ -346,7 +346,7 @@ static const struct WindowTemplate sShowcaseMultiPartyMenuWindowTemplate[] =
         .paletteNum = 5,
         .baseBlock = 0xA9,
     },
-    {
+    { // Party mon 3
         .bg = 0,
         .tilemapLeft = 12,
         .tilemapTop = 6,
@@ -355,7 +355,7 @@ static const struct WindowTemplate sShowcaseMultiPartyMenuWindowTemplate[] =
         .paletteNum = 6,
         .baseBlock = 0xDF,
     },
-    {
+    { // Party mon 4
         .bg = 2,
         .tilemapLeft = 1,
         .tilemapTop = 11,
@@ -364,7 +364,7 @@ static const struct WindowTemplate sShowcaseMultiPartyMenuWindowTemplate[] =
         .paletteNum = 4,
         .baseBlock = 0x115,
     },
-    {
+    { // Party mon 5
         .bg = 2,
         .tilemapLeft = 12,
         .tilemapTop = 12,
@@ -373,7 +373,7 @@ static const struct WindowTemplate sShowcaseMultiPartyMenuWindowTemplate[] =
         .paletteNum = 7,
         .baseBlock = 0x16B,
     },
-    {
+    { // Party mon 6
         .bg = 2,
         .tilemapLeft = 12,
         .tilemapTop = 15,

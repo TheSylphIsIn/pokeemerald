@@ -267,7 +267,7 @@ void ExecuteTruckSequence(void)
 {
     DrawWholeMapView();
     LockPlayerFieldControls();
-    CpuFastFill(0, gPlttBufferFaded, 0x400);
+    CpuFastFill(0, gPlttBufferFaded, PLTT_SIZE);
     CreateTask(Task_HandleTruckSequence, 0xA);
 }
 
