@@ -540,3 +540,4 @@ gSpecials::
 	def_special GivePokeblock
 	def_special SetSpeciesStudied
 	def_special DebugCompletePokedex
+	def_special TeleportCamera
