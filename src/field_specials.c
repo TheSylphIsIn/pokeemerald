@@ -4270,3 +4270,14 @@ u8 Script_TryGainNewFanFromCounter(void)
 {
     return TryGainNewFanFromCounter(gSpecialVar_0x8004);
 }
+
+void TeleportCamera(void)
+{
+    s16 x = gSpecialVar_0x8000;
+    s16 y = gSpecialVar_0x8001;
+
+    s16 deltaX = x - gSaveBlock1Ptr->pos.x;
+    s16 deltaY = y - gSaveBlock1Ptr->pos.y;
+    MoveCameraAndRedrawMap(deltaX,deltaY);
+}
+
