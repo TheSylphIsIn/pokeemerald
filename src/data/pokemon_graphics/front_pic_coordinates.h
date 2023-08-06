@@ -428,7 +428,7 @@ const struct MonCoords gMonFrontPicCoords[] =
 	[SPECIES_CASTFORM_SUNNY] = { .size = MON_COORDS_SIZE(24, 32), .y_offset = 17 },
 	[SPECIES_CASTFORM_RAINY] = { .size = MON_COORDS_SIZE(24, 32), .y_offset = 17 },
 	[SPECIES_CASTFORM_SNOWY] = { .size = MON_COORDS_SIZE(24, 32), .y_offset = 17 },
-	[SPECIES_SPOOKUM] 	  = { .size = MON_COORDS_SIZE(40, 48), .y_offset = 14 },
+	[SPECIES_SPOOKUM] 	  = { .size = MON_COORDS_SIZE(64, 64), .y_offset = 1 },
 	[SPECIES_SPOOKUM_BUSTED] = { .size = MON_COORDS_SIZE(64, 56), .y_offset = 14 },
 	[SPECIES_GLASMA] 	  = { .size = MON_COORDS_SIZE(40, 40), .y_offset = 12 },
 	[SPECIES_PLASMOLYTE]  = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
