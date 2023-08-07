@@ -108,7 +108,7 @@
       "x": 33,
       "y": 19,
       "elevation": 0,
-      "dest_map": "MAP_CLIFF_EDGE_CLIMB_OUTSIDE",
+      "dest_map": "MAP_CLIFF_FACE_CLIMB2F",
       "dest_warp_id": "0"
     },
     {

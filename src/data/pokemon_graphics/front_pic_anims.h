@@ -4864,6 +4864,7 @@ static const union AnimCmd sAnim_AEGISLASH_FONEI_E_1[] =
 
 static const union AnimCmd sAnim_ELEMPTY_1[] =
 {
+	ANIMCMD_FRAME(0, 20),
 	ANIMCMD_END
 };
 
@@ -4941,6 +4942,7 @@ static const union AnimCmd sAnim_WATTITUDE_1[] =
 
 static const union AnimCmd sAnim_RALTS_FONEI_1[] =
 {
+	ANIMCMD_FRAME(0, 20),
 	ANIMCMD_END
 };
 
@@ -4961,6 +4963,7 @@ static const union AnimCmd sAnim_GALLADE_FONEI_1[] =
 
 static const union AnimCmd sAnim_WOOBAT_1[] =
 {
+	ANIMCMD_FRAME(0, 20),
 	ANIMCMD_END
 };
 
