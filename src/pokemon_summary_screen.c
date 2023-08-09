@@ -4300,9 +4300,6 @@ static u8 GetNatureStatChange(u8 stat)
 	const s8 *natureMod = gNatureStatTable[sMonSummaryScreen->summary.nature];
 	u32 modifier = natureMod[stat];
 	
-	if (!gSaveBlock2Ptr->optionsBattleHelpers)
-		return 1;
-	
 	switch (modifier) 
 	{
 		case 1:
