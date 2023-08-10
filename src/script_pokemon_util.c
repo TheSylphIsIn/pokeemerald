@@ -27,6 +27,50 @@
 static void CB2_ReturnFromChooseHalfParty(void);
 static void CB2_ReturnFromChooseBattleFrontierParty(void);
 
+struct PresetMon {
+	u8 nickname[POKEMON_NAME_LENGTH + 1];
+    u8 abilityNum;
+    u16 species;
+    u8 ivs[NUM_STATS];
+	u8 nature;
+	u16 moves[MAX_MON_MOVES];
+};
+
+static const struct PresetMon sInitialParty[] = {
+	{
+		.species = SPECIES_TYPHLOSION,
+		.nickname = _("SALEZERKER"),
+		.abilityNum = 0, // rock head
+		.ivs = {25, 30, 10, 10, 30, 20},
+		.nature = NATURE_ADAMANT,
+		.moves = {MOVE_FLARE_BLITZ, MOVE_IRON_TAIL, MOVE_FLAMETHROWER, MOVE_TAKE_DOWN},
+	},
+	{
+		.species = SPECIES_PORYGON2,
+		.nickname = _("IMPFECTION"),
+		.abilityNum = 0, // serene grace
+		.ivs = {30, 20, 10, 30, 30, 10},
+		.nature = NATURE_TIMID,
+		.moves = {MOVE_SLUDGE_BOMB, MOVE_AGILITY, MOVE_BATON_PASS, MOVE_WISH},
+	},
+	{
+		.species = SPECIES_SKARMORY,
+		.nickname = _("WETHERBANE"),
+		.abilityNum = 0, // Lightningrod
+		.ivs = {10, 10, 30, 0, 30, 0},
+		.nature = NATURE_BOLD,
+		.moves = {MOVE_THUNDER, MOVE_PROTECT, MOVE_CLOUD_BREAKER, MOVE_CUT},
+	},
+	{
+		.species = SPECIES_OCTILLERY,
+		.nickname = _("ONSENPURA"),
+		.abilityNum = 0, // rain dish
+		.ivs = {15, 30, 30, 30, 10, 30},
+		.nature = NATURE_CALM,
+		.moves = {MOVE_RAIN_DANCE, MOVE_HYDRO_PUMP, MOVE_ANCIENT_POWER, MOVE_WRAP},
+	},
+};
+
 void HealPlayerParty(void)
 {
     u8 i, j;
@@ -58,18 +102,30 @@ void HealPlayerParty(void)
     }
 }
 
-u8 ScriptGiveMon(u16 species, u8 level, u16 item, u32 unused1, u32 unused2, u8 unused3)
+u8 ScriptGiveMon(u16 species, u8 level, u16 item, u32 presetId, u32 unused2, u8 unused3)
 {
     u16 nationalDexNum;
     int sentToPc;
     u8 heldItem[2];
-    struct Pokemon mon;
+    struct Pokemon *mon = &gEnemyParty[0];
+	const struct PresetMon *presetMon = &sInitialParty[presetId];
+	u32 i;
 
-    CreateMon(&mon, species, level, USE_RANDOM_IVS, FALSE, 0, OT_ID_PLAYER_ID, 0);
+    CreateMonWithNature(mon, species, level, USE_RANDOM_IVS, presetMon->nature);
     heldItem[0] = item;
     heldItem[1] = item >> 8;
-    SetMonData(&mon, MON_DATA_HELD_ITEM, heldItem);
-    sentToPc = GiveMonToPlayer(&mon);
+    SetMonData(mon, MON_DATA_HP_IV, &presetMon->ivs[0]);
+    SetMonData(mon, MON_DATA_ATK_IV, &presetMon->ivs[1]);
+    SetMonData(mon, MON_DATA_DEF_IV, &presetMon->ivs[2]);
+    SetMonData(mon, MON_DATA_SPEED_IV, &presetMon->ivs[3]);
+    SetMonData(mon, MON_DATA_SPATK_IV, &presetMon->ivs[4]);
+    SetMonData(mon, MON_DATA_SPDEF_IV, &presetMon->ivs[5]);
+    SetMonData(mon, MON_DATA_NICKNAME, &presetMon->nickname);
+	DeleteFirstMoveAndGiveMoveToMon(mon, presetMon->moves[0]);
+	DeleteFirstMoveAndGiveMoveToMon(mon, presetMon->moves[1]);
+	DeleteFirstMoveAndGiveMoveToMon(mon, presetMon->moves[2]);
+	DeleteFirstMoveAndGiveMoveToMon(mon, presetMon->moves[3]);
+    sentToPc = GiveMonToPlayer(mon);
     nationalDexNum = SpeciesToNationalPokedexNum(species);
 
     // Don't set Pokédex flag for MON_CANT_GIVE

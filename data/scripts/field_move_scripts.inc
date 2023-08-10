@@ -1,7 +1,6 @@
 @ Interact with cuttable tree
 EventScript_CutTree::
 	lockall
-	goto_if_unset FLAG_BADGE01_GET, EventScript_CheckTreeCantCut
 	checkpartymove MOVE_CUT
 	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CheckTreeCantCut
 	setfieldeffectargument 0, VAR_RESULT

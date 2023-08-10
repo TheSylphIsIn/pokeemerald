@@ -458,26 +458,7 @@ static const struct MenuAction sMenuActions_Gender[] = {
 };
 
 static const u8 *const sMalePresetNames[] = {
-    gText_DefaultNameStu,
-    gText_DefaultNameMilton,
-    gText_DefaultNameTom,
-    gText_DefaultNameKenny,
-    gText_DefaultNameReid,
-    gText_DefaultNameJude,
-    gText_DefaultNameJaxson,
-    gText_DefaultNameEaston,
-    gText_DefaultNameWalker,
-    gText_DefaultNameTeru,
-    gText_DefaultNameJohnny,
-    gText_DefaultNameBrett,
-    gText_DefaultNameSeth,
-    gText_DefaultNameTerry,
-    gText_DefaultNameCasey,
-    gText_DefaultNameDarren,
-    gText_DefaultNameLandon,
-    gText_DefaultNameCollin,
-    gText_DefaultNameStanley,
-    gText_DefaultNameQuincy
+    gText_DefaultNameStu
 };
 
 static const u8 *const sFemalePresetNames[] = {
@@ -1058,7 +1039,8 @@ static void Task_HandleMainMenuAPressed(u8 taskId)
             default:
                 gPlttBufferUnfaded[0] = RGB_BLACK;
                 gPlttBufferFaded[0] = RGB_BLACK;
-                gTasks[taskId].func = Task_NewGameBirchSpeech_Init;
+				NewGameBirchSpeech_SetDefaultPlayerName(Random() % NUM_PRESET_NAMES);
+				SetMainCallback2(CB2_NewGame);
                 break;
             case ACTION_CONTINUE:
                 gPlttBufferUnfaded[0] = RGB_BLACK;

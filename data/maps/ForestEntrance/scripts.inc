@@ -8,13 +8,17 @@ ForestEntrance_OnFrame:
 
 ForestEntrance_IntroScript:
 	lockall
+	givemon SPECIES_TYPHLOSION, 44, 0, 0
+	givemon SPECIES_PORYGON2, 65, 0, 1
 	delay 60
 	applymovement OBJ_EVENT_ID_PLAYER, ForestEntrance_Movement_ExitBedroll
 	waitmovement 0
+	givemon SPECIES_SKARMORY, 42, 0, 2
 	msgbox ForestEntrance_Text_ReviewOrders, MSGBOX_DEFAULT
 	closemessage
 	applymovement OBJ_EVENT_ID_PLAYER, ForestEntrance_Movement_GoToEntrance
 	waitmovement 0
+	givemon SPECIES_OCTILLERY, 42, 0, 3
 	special SpawnCameraObject
 	applymovement OBJ_EVENT_ID_CAMERA, ForestEntrance_Movement_PanToForest
 	waitmovement 0
@@ -23,6 +27,11 @@ ForestEntrance_IntroScript:
 	setvar VAR_FOREST_STATE 1
 	setflag FLAG_SYS_B_DASH
 	setflag FLAG_SYS_POKEMON_GET
+	additem ITEM_HYPER_POTION, 5
+	additem ITEM_MAX_POTION, 3
+	additem ITEM_FULL_HEAL, 3
+	additem ITEM_REVIVE, 3
+	additem ITEM_MAX_REVIVE, 1
 	releaseall
 	end
 
@@ -117,4 +126,12 @@ ForestEntrance_BedrollScript::
 ForestEntrance_Text_LetsRest:
 	.string "You and your team could use some\n"
 	.string "rest…$"
+
+ForestEntrance_Sign::
+	msgbox Forestentrance_Text_Sign, MSGBOX_SIGN
+	end
+
+Forestentrance_Text_Sign:
+	.string "ENTRANCE OF THE FOREST\n"
+	.string "Do not wander off the path.$"
 
