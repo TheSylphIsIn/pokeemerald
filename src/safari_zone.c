@@ -9,6 +9,7 @@
 #include "script.h"
 #include "string_util.h"
 #include "tv.h"
+#include "text.h"
 #include "constants/game_stat.h"
 #include "field_screen_effect.h"
 
@@ -24,6 +25,9 @@ struct PokeblockFeeder
 #define NUM_POKEBLOCK_FEEDERS 10
 
 extern const u8 SafariZone_EventScript_TimesUp[];
+extern const u8 TheForest_EventScript_StepCounter1[];
+extern const u8 TheForest_EventScript_StepCounter2[];
+extern const u8 TheForest_EventScript_StepCounter3[];
 extern const u8 SafariZone_EventScript_RetirePrompt[];
 extern const u8 SafariZone_EventScript_OutOfBallsMidBattle[];
 extern const u8 SafariZone_EventScript_OutOfBalls[];
@@ -39,7 +43,7 @@ static void DecrementFeederStepCounters(void);
 
 bool32 GetSafariZoneFlag(void)
 {
-    return FlagGet(FLAG_SYS_SAFARI_MODE);
+    return FALSE;
 }
 
 void SetSafariZoneFlag(void)
@@ -54,13 +58,8 @@ void ResetSafariZoneFlag(void)
 
 void EnterSafariMode(void)
 {
-    IncrementGameStat(GAME_STAT_ENTERED_SAFARI_ZONE);
     SetSafariZoneFlag();
-    ClearAllPokeblockFeeders();
-    gNumSafariBalls = 30;
     sSafariZoneStepCounter = 500;
-    sSafariZoneCaughtMons = 0;
-    sSafariZonePkblkUses = 0;
 }
 
 void ExitSafariMode(void)
@@ -74,16 +73,26 @@ void ExitSafariMode(void)
 
 bool8 SafariZoneTakeStep(void)
 {
-    if (GetSafariZoneFlag() == FALSE)
+    if (FlagGet(FLAG_SYS_SAFARI_MODE) == FALSE)
     {
         return FALSE;
     }
 
-    DecrementFeederStepCounters();
     sSafariZoneStepCounter--;
-    if (sSafariZoneStepCounter == 0)
+    if (sSafariZoneStepCounter == 400)
     {
-        ScriptContext_SetupScript(SafariZone_EventScript_TimesUp);
+        ScriptContext_SetupScript(TheForest_EventScript_StepCounter1);
+        return TRUE;
+    }
+    else if (sSafariZoneStepCounter == 200)
+    {
+        ScriptContext_SetupScript(TheForest_EventScript_StepCounter2);
+        return TRUE;
+    }
+    else if (sSafariZoneStepCounter == 0)
+    {
+		gTextFlags.forceMidTextSpeed = TRUE;
+        ScriptContext_SetupScript(TheForest_EventScript_StepCounter3);
         return TRUE;
     }
     return FALSE;

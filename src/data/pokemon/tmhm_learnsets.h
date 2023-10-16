@@ -5582,6 +5582,7 @@ const u32 gTMHMLearnsets[][2] =
                                         | TMHM(TM43_SECRET_POWER)
                                         | TMHM(TM44_REST)
                                         | TMHM(TM46_THIEF)
+										| TMHM(HM01_CUT)
                                         | TMHM(HM05_FLASH)),
 
     [SPECIES_STANTLER]    = TMHM_LEARNSET(TMHM(TM04_CALM_MIND)

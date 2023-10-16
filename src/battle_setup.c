@@ -535,7 +535,9 @@ void BattleSetup_StartLegendaryBattle(void)
         break;
     case SPECIES_LUGIA:
     case SPECIES_HO_OH:
-        CreateBattleStartTask(B_TRANSITION_BLUR, MUS_RG_VS_LEGEND);
+	case SPECIES_ABSOL:
+		gBattleTypeFlags |= BATTLE_TYPE_LEGENDARY;
+        CreateBattleStartTask(B_TRANSITION_BLUR, MUS_NONE);
         break;
     case SPECIES_MEW:
         CreateBattleStartTask(B_TRANSITION_GRID_SQUARES, MUS_VS_MEW);
@@ -642,7 +644,7 @@ u8 BattleSetup_GetTerrainId(void)
 
     if (MetatileBehavior_IsTallGrass(tileBehavior))
         return BATTLE_TERRAIN_GRASS;
-    if (MetatileBehavior_IsLongGrass(tileBehavior))
+    if (MetatileBehavior_IsLongGrass(tileBehavior) || gBattleTypeFlags & BATTLE_TYPE_LEGENDARY)
         return BATTLE_TERRAIN_LONG_GRASS;
     if (MetatileBehavior_IsSandOrDeepSand(tileBehavior))
         return BATTLE_TERRAIN_SAND;

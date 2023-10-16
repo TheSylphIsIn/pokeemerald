@@ -4420,6 +4420,36 @@
       "secondary_tileset": "gTileset_Rustboro",
       "border_filepath": "data/layouts/ForestEntrance/border.bin",
       "blockdata_filepath": "data/layouts/ForestEntrance/map.bin"
+    },
+    {
+      "id": "LAYOUT_FOREST_KALPA1",
+      "name": "ForestKalpa1_Layout",
+      "width": 40,
+      "height": 48,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_TheForest",
+      "border_filepath": "data/layouts/ForestKalpa1/border.bin",
+      "blockdata_filepath": "data/layouts/ForestKalpa1/map.bin"
+    },
+    {
+      "id": "LAYOUT_FOREST_KALPA2",
+      "name": "ForestKalpa2_Layout",
+      "width": 48,
+      "height": 32,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_TheForest",
+      "border_filepath": "data/layouts/ForestKalpa2/border.bin",
+      "blockdata_filepath": "data/layouts/ForestKalpa2/map.bin"
+    },
+    {
+      "id": "LAYOUT_FOREST_KALPA3",
+      "name": "ForestKalpa3_Layout",
+      "width": 48,
+      "height": 48,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_TheForest",
+      "border_filepath": "data/layouts/ForestKalpa3/border.bin",
+      "blockdata_filepath": "data/layouts/ForestKalpa3/map.bin"
     }
   ]
 }

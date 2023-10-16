@@ -3072,6 +3072,10 @@ BattleScript_PrintCantRunFromTrainer::
 	printstring STRINGID_NORUNNINGFROMTRAINERS
 	end2
 
+BattleScript_PrintCantRunFromForest::
+	printstring STRINGID_ROOTEDTOGROUND
+	end2
+
 BattleScript_PrintFailedToRunString::
 	printfromtable gNoEscapeStringIds
 	waitmessage B_WAIT_TIME_LONG

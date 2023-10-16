@@ -782,10 +782,9 @@ static const union AffineAnimCmd sAffineAnim_KyogreGroudon_DipWest[] =
 
 static const union AnimCmd sAnim_HoOhFlapWings[] =
 {
-    ANIMCMD_FRAME(3, 8),
-    ANIMCMD_FRAME(4, 8),
-    ANIMCMD_FRAME(3, 8),
-    ANIMCMD_FRAME(4, 8),
+    ANIMCMD_FRAME(3, 10),
+    ANIMCMD_FRAME(4, 10),
+    ANIMCMD_FRAME(3, 10),
     ANIMCMD_JUMP(0),
 };
 

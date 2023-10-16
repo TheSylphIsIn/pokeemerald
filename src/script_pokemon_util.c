@@ -43,7 +43,7 @@ static const struct PresetMon sInitialParty[] = {
 		.abilityNum = 0, // rock head
 		.ivs = {25, 30, 10, 10, 30, 20},
 		.nature = NATURE_ADAMANT,
-		.moves = {MOVE_FLARE_BLITZ, MOVE_IRON_TAIL, MOVE_FLAMETHROWER, MOVE_TAKE_DOWN},
+		.moves = {MOVE_FLARE_BLITZ, MOVE_IRON_TAIL, MOVE_FLAMETHROWER, MOVE_TAKE_DOWN}, // can learn cut
 	},
 	{
 		.species = SPECIES_PORYGON2,
@@ -59,7 +59,7 @@ static const struct PresetMon sInitialParty[] = {
 		.abilityNum = 0, // Lightningrod
 		.ivs = {10, 10, 30, 0, 30, 0},
 		.nature = NATURE_BOLD,
-		.moves = {MOVE_THUNDER, MOVE_PROTECT, MOVE_CLOUD_BREAKER, MOVE_CUT},
+		.moves = {MOVE_THUNDER, MOVE_PROTECT, MOVE_CLOUD_BREAKER, MOVE_DRILL_PECK}, // can learn cut
 	},
 	{
 		.species = SPECIES_OCTILLERY,

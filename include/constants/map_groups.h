@@ -7,6 +7,9 @@
 
 // gMapGroup_TheForest
 #define MAP_FOREST_ENTRANCE (0 | (0 << 8))
+#define MAP_FOREST_KALPA1   (1 | (0 << 8))
+#define MAP_FOREST_KALPA2   (2 | (0 << 8))
+#define MAP_FOREST_KALPA3   (3 | (0 << 8))
 
 // gMapGroup_TownsAndRoutes
 #define MAP_PETALBURG_CITY      (0 | (1 << 8))

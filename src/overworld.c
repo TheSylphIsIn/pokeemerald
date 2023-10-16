@@ -791,8 +791,8 @@ void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
     SetWarpDestination(mapGroup, mapNum, WARP_ID_NONE, -1, -1);
 
     // Dont transition map music between BF Outside West/East
-    if (gMapHeader.regionMapSectionId != MAPSEC_BATTLE_FRONTIER)
-        TransitionMapMusic();
+    // if (gMapHeader.regionMapSectionId != MAPSEC_BATTLE_FRONTIER)
+        // TransitionMapMusic();
 
     ApplyCurrentWarp();
     LoadCurrentMapData();
@@ -821,10 +821,10 @@ void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
     DoCurrentWeather();
     ResetFieldTasksArgs();
     RunOnResumeMapScript();
-
-    if (gMapHeader.regionMapSectionId != MAPSEC_BATTLE_FRONTIER
-     || gMapHeader.regionMapSectionId != sLastMapSectionId)
-        ShowMapNamePopup();
+	// The only connections are between the same map, so i'm doing this rather than storing the previous mapsec for comparison
+    // if (gMapHeader.regionMapSectionId != MAPSEC_BATTLE_FRONTIER
+     // || gMapHeader.regionMapSectionId != sLastMapSectionId)
+        // ShowMapNamePopup();
 }
 
 static void LoadMapFromWarp(bool32 a1)

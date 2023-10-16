@@ -4316,6 +4316,13 @@ static void HandleTurnActionSelectionState(void)
                     BattleScriptExecute(BattleScript_PrintCantRunFromTrainer);
                     gBattleCommunication[gActiveBattler] = STATE_BEFORE_ACTION_CHOSEN;
                 }
+                else if (gBattleTypeFlags & BATTLE_TYPE_LEGENDARY
+                         && !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK))
+                         && gBattleBufferB[gActiveBattler][1] == B_ACTION_RUN)
+                {
+                    BattleScriptExecute(BattleScript_PrintCantRunFromForest);
+                    gBattleCommunication[gActiveBattler] = STATE_BEFORE_ACTION_CHOSEN;
+                }
                 else if (IsRunningFromBattleImpossible() != BATTLE_RUN_SUCCESS
                          && gBattleBufferB[gActiveBattler][1] == B_ACTION_RUN)
                 {

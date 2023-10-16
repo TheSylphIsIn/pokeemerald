@@ -37,7 +37,10 @@
     "gMapGroup_IndoorRoute124"
   ],
   "gMapGroup_TheForest": [
-    "ForestEntrance"
+    "ForestEntrance",
+    "ForestKalpa1",
+    "ForestKalpa2",
+    "ForestKalpa3"
   ],
   "gMapGroup_TownsAndRoutes": [
     "PetalburgCity",

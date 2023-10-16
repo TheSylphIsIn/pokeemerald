@@ -3,6 +3,106 @@ SafariZone_EventScript_OutOfBallsMidBattle::
 	special ExitSafariMode
 	setwarp MAP_ROUTE121_SAFARI_ZONE_ENTRANCE, 2, 5
 	end
+	
+TheForest_EventScript_StepCounter1::
+	lockall
+	playse SE_M_TWISTER
+	waitse
+	message TheForest_Text_TreesSway
+	waitmessage
+	delay 60
+	waitbuttonpress
+	releaseall
+	end
+
+TheForest_EventScript_StepCounter2::
+	lockall
+	message TheForest_Text_Tired
+	waitmessage
+	delay 60
+	waitbuttonpress
+	releaseall
+	end
+
+TheForest_EventScript_StepCounter3::
+	lockall
+	fadescreen FADE_TO_BLACK
+	fadescreen FADE_FROM_BLACK
+	fadenewbgm MUS_NONE
+	delay 120
+	message TheForest_Text_SomethingIsWrong
+	waitmessage
+	fadescreen FADE_TO_BLACK
+	delay 15
+	fadescreen FADE_FROM_BLACK
+	delay 90
+	fadescreen FADE_TO_BLACK
+	delay 15
+	fadescreen FADE_FROM_BLACK
+	delay 90
+	fadescreen FADE_TO_BLACK
+	delay 15
+	fadescreen FADE_FROM_BLACK
+	delay 15
+	fadescreen FADE_TO_BLACK
+	setobjectxy OBJ_EVENT_ID_PLAYER, 11, 15
+	setvar VAR_0x8000 11
+	setvar VAR_0x8001 15
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp
+	special TeleportCamera
+	delay 120
+	fadescreen FADE_FROM_BLACK
+	delay 60
+	applymovement OBJ_EVENT_ID_PLAYER, Forest_Movement_StumbleBack
+	waitmovement 0
+	fadescreen FADE_TO_BLACK
+	delay 15
+	addobject 1
+	fadescreen FADE_FROM_BLACK
+	delay 15
+	applymovement OBJ_EVENT_ID_PLAYER, Forest_Movement_StumbleBack
+	waitmovement 0
+	applymovement OBJ_EVENT_ID_PLAYER, Forest_Movement_StumbleBack
+	waitmovement 0
+	fadescreen FADE_TO_BLACK
+	delay 15
+	fadescreen FADE_FROM_BLACK
+	delay 30
+	applymovement OBJ_EVENT_ID_PLAYER, Forest_Movement_StumbleBack
+	waitmovement 0
+	delay 60
+	applymovement 1, Forest_Movement_Shamble
+	waitmovement 0
+	delay 60
+	applymovement 1, Forest_Movement_Shamble
+	waitmovement 0
+	delay 60
+	applymovement 1, Forest_Movement_Shamble
+	waitmovement 0
+	delay 60
+	setwildbattle SPECIES_ABSOL, 100
+	special BattleSetup_StartLegendaryBattle
+	end
+	
+Forest_Movement_StumbleBack:
+	lock_facing_direction
+	walk_slow_down
+	unlock_facing_direction
+	step_end
+
+Forest_Movement_Shamble:
+	walk_slow_down
+	step_end
+
+TheForest_Text_TreesSway:
+	.string "The trees are swaying restlessly…$"
+
+TheForest_Text_Tired:
+	.string "You're starting to feel tired.\n"
+	.string "Maybe you should head back soon.$"
+	
+TheForest_Text_SomethingIsWrong:
+	.string "Something is wrong.$"
 
 SafariZone_EventScript_Exit::
 	setvar VAR_SAFARI_ZONE_STATE, 1
