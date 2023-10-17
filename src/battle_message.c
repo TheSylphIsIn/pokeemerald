@@ -347,6 +347,7 @@ static const u8 sText_SunlightGotBright[] = _("The sunlight got bright!");
 static const u8 sText_SunlightStrong[] = _("The sunlight is strong.");
 static const u8 sText_SunlightFaded[] = _("The sunlight faded.");
 static const u8 sText_StartedHail[] = _("It started to hail!");
+static const u8 sText_WeatherCleared[] = _("The weather cleared up.");
 static const u8 sText_HailContinues[] = _("Hail continues to fall.");
 static const u8 sText_HailStopped[] = _("The hail stopped.");
 static const u8 sText_FailedToSpitUp[] = _("But it failed to SPIT UP\na thing!");
@@ -418,6 +419,7 @@ static const u8 sText_AllyPkmnPrefix2[] = _("Ally");
 static const u8 sText_FoePkmnPrefix4[] = _("Foe");
 static const u8 sText_AllyPkmnPrefix3[] = _("Ally");
 static const u8 sText_AttackerUsedX[] = _("{B_ATK_NAME_WITH_PREFIX} used\n{B_BUFF2}");
+static const u8 sText_Consume[] = _("{B_ATK_NAME_WITH_PREFIX} consumed {B_DEF_NAME_WITH_PREFIX}.");
 static const u8 sText_ExclamationMark[] = _("!");
 static const u8 sText_ExclamationMark2[] = _("!");
 static const u8 sText_ExclamationMark3[] = _("!");
@@ -887,6 +889,7 @@ const u8 * const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_S
     [STRINGID_PKMNBOXLANETTESPCFULL - BATTLESTRINGS_TABLE_START] = gText_PkmnTransferredLanettesPCBoxFull,
     [STRINGID_TRAINER1WINTEXT - BATTLESTRINGS_TABLE_START] = sText_Trainer1WinText,
     [STRINGID_TRAINER2WINTEXT - BATTLESTRINGS_TABLE_START] = sText_Trainer2WinText,
+	[STRINGID_WEATHERCLEARED - BATTLESTRINGS_TABLE_START] = sText_WeatherCleared,
 };
 
 const u16 gMissStringIds[] =
@@ -915,6 +918,7 @@ const u16 gMoveWeatherChangeStringIds[] =
     [B_MSG_STARTED_SANDSTORM] = STRINGID_SANDSTORMBREWED,
     [B_MSG_STARTED_SUNLIGHT]  = STRINGID_SUNLIGHTGOTBRIGHT,
     [B_MSG_STARTED_HAIL]      = STRINGID_STARTEDHAIL,
+	[B_MSG_WEATHER_CLEARED]	  = STRINGID_WEATHERCLEARED,
 };
 
 const u16 gSandStormHailContinuesStringIds[] =
@@ -2162,7 +2166,10 @@ void BufferStringBattle(u16 stringID)
             StringCopy(gBattleTextBuff2, gMoveNames[gBattleMsgDataPtr->currentMove]);
 
         ChooseTypeOfMoveUsedString(gBattleTextBuff2);
-        stringPtr = sText_AttackerUsedX;
+		if (gBattleMsgDataPtr->currentMove == MOVE_CONSUME)
+			stringPtr = sText_Consume;
+		else
+			stringPtr = sText_AttackerUsedX;
         break;
     case STRINGID_BATTLEEND: // battle end
         if (gBattleTextBuff1[0] & B_OUTCOME_LINK_BATTLE_RAN)

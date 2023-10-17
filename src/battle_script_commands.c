@@ -6650,17 +6650,30 @@ static void Cmd_trymirrormove(void)
 
 static void Cmd_setrain(void)
 {
-    if (gBattleWeather & B_WEATHER_RAIN)
-    {
-        gMoveResultFlags |= MOVE_RESULT_MISSED;
-        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_WEATHER_FAILED;
-    }
-    else
-    {
-        gBattleWeather = B_WEATHER_RAIN_TEMPORARY;
-        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STARTED_RAIN;
-        gWishFutureKnock.weatherDuration = 5;
-    }
+	if (gCurrentMove == MOVE_CLOUD_BREAKER)
+	{
+		if (gBattleWeather)
+		{
+			gBattleWeather = 0;
+			gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_WEATHER_CLEARED;
+		}
+		else
+			gBattlescriptCurrInstr += 13;
+	}
+	else
+	{
+		if (gBattleWeather & B_WEATHER_RAIN)
+		{
+			gMoveResultFlags |= MOVE_RESULT_MISSED;
+			gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_WEATHER_FAILED;
+		}
+		else
+		{
+			gBattleWeather = B_WEATHER_RAIN_TEMPORARY;
+			gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STARTED_RAIN;
+			gWishFutureKnock.weatherDuration = 5;
+		}
+	}
     gBattlescriptCurrInstr++;
 }
 

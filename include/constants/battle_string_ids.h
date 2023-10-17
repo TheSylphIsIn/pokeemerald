@@ -379,8 +379,9 @@
 #define STRINGID_TRAINER1WINTEXT            379
 #define STRINGID_TRAINER2WINTEXT            380
 #define STRINGID_ROOTEDTOGROUND				381
+#define STRINGID_WEATHERCLEARED				382
 
-#define BATTLESTRINGS_COUNT                 382
+#define BATTLESTRINGS_COUNT                 383
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,
@@ -441,6 +442,7 @@
 #define B_MSG_STARTED_SANDSTORM 3
 #define B_MSG_STARTED_SUNLIGHT  4
 #define B_MSG_STARTED_HAIL      5
+#define B_MSG_WEATHER_CLEARED	6
 
 // gRainContinuesStringIds
 #define B_MSG_RAIN_CONTINUES     0
