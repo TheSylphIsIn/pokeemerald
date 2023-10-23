@@ -2389,7 +2389,8 @@ static void Cmd_waitmessage(void)
         else
         {
             u16 toWait = T2_READ_16(gBattlescriptCurrInstr + 1);
-            if (++gPauseCounterBattle >= toWait || JOY_NEW(A_BUTTON | B_BUTTON) || JOY_NEW(DPAD_ANY))
+            if ((++gPauseCounterBattle >= toWait && gSaveBlock2Ptr->optionsBattleMessageScroll != OPTIONS_BATTLE_MESSAGE_SCROLL_WAIT_BUTTON)
+				|| (JOY_NEW(A_BUTTON | B_BUTTON) && gSaveBlock2Ptr->optionsBattleMessageScroll != OPTIONS_BATTLE_MESSAGE_SCROLL_DEFAULT))
             {
                 gPauseCounterBattle = 0;
                 gBattlescriptCurrInstr += 3;
@@ -6759,7 +6760,7 @@ static void Cmd_various(void)
             return;
         break;
     case VARIOUS_WAIT_CRY:
-        if (!IsCryFinished())
+        if (!IsCryFinished() || gSaveBlock2Ptr->optionsCrySkip)
             return;
         break;
     case VARIOUS_RETURN_OPPONENT_MON1:

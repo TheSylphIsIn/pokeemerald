@@ -1337,10 +1337,9 @@ bool8 ScrCmd_closemessage(struct ScriptContext *ctx)
 
 static bool8 WaitForAorBPress(void)
 {
-    if (JOY_NEW(A_BUTTON))
-        return TRUE;
-    if (JOY_NEW(B_BUTTON))
-        return TRUE;
+    if (JOY_NEW(A_BUTTON | B_BUTTON) || (gSaveBlock2Ptr->optionsTextMashInput >= OPTIONS_TEXT_MASH_INPUT_DPAD && JOY_NEW(DPAD_ANY))
+		|| (gSaveBlock2Ptr->optionsTextMashInput == OPTIONS_TEXT_MASH_INPUT_HOLD && (JOY_HELD(A_BUTTON | B_BUTTON | DPAD_ANY))))
+		return TRUE;
     return FALSE;
 }
 

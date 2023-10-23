@@ -874,7 +874,8 @@ bool16 TextPrinterWaitWithDownArrow(struct TextPrinter *textPrinter)
     else
     {
         TextPrinterDrawDownArrow(textPrinter);
-        if (JOY_NEW(A_BUTTON | B_BUTTON))
+        if (JOY_NEW(A_BUTTON | B_BUTTON) || (gSaveBlock2Ptr->optionsTextMashInput >= OPTIONS_TEXT_MASH_INPUT_DPAD && JOY_NEW(DPAD_ANY))
+			|| (gSaveBlock2Ptr->optionsTextMashInput == OPTIONS_TEXT_MASH_INPUT_HOLD && (JOY_HELD(A_BUTTON | B_BUTTON | DPAD_ANY))))
         {
             result = TRUE;
             PlaySE(SE_SELECT);
@@ -892,7 +893,8 @@ bool16 TextPrinterWait(struct TextPrinter *textPrinter)
     }
     else
     {
-        if (JOY_NEW(A_BUTTON | B_BUTTON))
+        if (JOY_NEW(A_BUTTON | B_BUTTON) || (gSaveBlock2Ptr->optionsTextMashInput >= OPTIONS_TEXT_MASH_INPUT_DPAD && JOY_NEW(DPAD_ANY))
+			|| (gSaveBlock2Ptr->optionsTextMashInput == OPTIONS_TEXT_MASH_INPUT_HOLD && (JOY_HELD(A_BUTTON | B_BUTTON | DPAD_ANY))))
         {
             result = TRUE;
             PlaySE(SE_SELECT);

@@ -151,6 +151,8 @@ static void BattleIntroSlideEnd(u8 taskId)
     SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG_ALL | WINOUT_WIN01_OBJ | WINOUT_WIN01_CLR | WINOUT_WINOBJ_BG_ALL | WINOUT_WINOBJ_OBJ | WINOUT_WINOBJ_CLR);
 }
 
+// I think this is where to go to fix the "slide finishes before anim" visual error. Fuck if I know what I'm looking at though.
+
 static void BattleIntroSlide1(u8 taskId)
 {
     int i;
