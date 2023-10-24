@@ -113,15 +113,15 @@ DropperPoint_Text_MorganWake:
 DropperPoint_Text_MorganIntro:
 	.string "Huh? Where am I!? Who are you?\p"
 	.string "… … …wait, I know you. You're…\n"
-	.string "{PLAYER}, right? From school?\p"
-	.string "I sit behind you in chemistry…\n"
+	.string "{PLAYER}, right? From university?\p"
+	.string "I sit behind you in chem…\n"
 	.string "I don't know if you know me…\p"
 	.string "My name's MORGAN.\n"
 	.string "…do you know where we are?$"
 	
 DropperPoint_Text_Morgan2:
 	.string "This must be a dream, right…?\n"
-	.string "I took the dare to go to sleep in\l"
+	.string "I took the dare to go to camp in\l"
 	.string "front of those ruins, and then…$"
 	
 DropperPoint_Text_CalvinWake:
@@ -133,9 +133,9 @@ DropperPoint_Text_CalvinIntro:
 	.string "doing in my…\p"
 	.string "Hey, this isn't my room!\n"
 	.string "Where are we? How'd we get here?\p"
-	.string "Huh…you don't remember me? From gym?\n"
-	.string "Name's CALVIN. But really, where\l"
-	.string "are we, anyway…?$"
+	.string "Huh…you don't know me? I've seen\n"
+	.string "you around on campus. Name's CALVIN.\p"
+	.string "But really, where are we, anyway…?$"
 	
 DropperPoint_Text_Calvin2:
 	.string "Last thing I remember was, uh…\n"
@@ -211,13 +211,13 @@ DropperPoint_TriggerScript_MorganSleep:
 	
 DropperPoint_Text_CalvinQuickIntro:
 	.string "Huh…? {PLAYER}, is that you?\n"
-	.string "It's me, CALVIN, from gym!\l"
+	.string "It's me, CALVIN, from uni!\l"
 	.string "Where am I?$"
 	
 DropperPoint_Text_MorganQuickIntro:
 	.string "Urgh… weird dream…\n"
 	.string "{PLAYER}? It's me, MORGAN…\l"
-	.string "We go to school together.\p"	
+	.string "We go to college together.\p"	
 	.string "What is this place? I don't remember\n"
 	.string "how I got here…$"
 
