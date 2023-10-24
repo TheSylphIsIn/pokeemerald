@@ -2782,7 +2782,7 @@ void CreateMonWithNature(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV,
 
 void CreateEnemyMonWithNature(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 nature)
 {
-    u32 personality = Random32();
+    u32 personality = Random32(&gPCGRng);
     
     CreateMon(mon, species, level, fixedIV, TRUE, personality, OT_ID_RANDOM_NO_SHINY, 0);
 	
