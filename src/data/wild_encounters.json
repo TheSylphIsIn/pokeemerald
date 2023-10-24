@@ -11526,7 +11526,7 @@
               {
                 "min_level": 33,
                 "max_level": 33,
-                "species": "SPECIES_GROWLITHE"
+                "species": "SPECIES_NIDORINO"
               },
               {
                 "min_level": 36,
@@ -11544,11 +11544,6 @@
                 "species": "SPECIES_BUTTERFREE"
               },
               {
-                "min_level": 42,
-                "max_level": 42,
-                "species": "SPECIES_BUTTERFREE"
-              },
-              {
                 "min_level": 50,
                 "max_level": 50,
                 "species": "SPECIES_BUTTERFREE"
@@ -11557,6 +11552,11 @@
                 "min_level": 60,
                 "max_level": 60,
                 "species": "SPECIES_BUTTERFREE"
+              },
+              {
+                "min_level": 10,
+                "max_level": 100,
+                "species": "SPECIES_WEEDLE"
               }
             ]
           }
