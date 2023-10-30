@@ -2293,17 +2293,20 @@ static const u8 *TryGetStatusString(u8 *src)
 
 #define HANDLE_NICKNAME_STRING_CASE(battlerId, monIndex)                \
     if (GetBattlerSide(battlerId) != B_SIDE_PLAYER)                     \
-    {                                                                   \
-        if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)                     \
-            toCpy = sText_FoePkmnPrefix;                                \
-        else                                                            \
-            toCpy = sText_WildPkmnPrefix;                               \
-        while (*toCpy != EOS)                                           \
-        {                                                               \
-            dst[dstID] = *toCpy;                                        \
-            dstID++;                                                    \
-            toCpy++;                                                    \
-        }                                                               \
+    {            	\
+		if (GetMonData(&gEnemyParty[monIndex], MON_DATA_SPECIES) != SPECIES_ABSOL) \
+		{ 																\
+			if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)                     \
+				toCpy = sText_FoePkmnPrefix;                                \
+			else                                                            \
+				toCpy = sText_WildPkmnPrefix;                               \
+			while (*toCpy != EOS)                                           \
+			{                                                               \
+				dst[dstID] = *toCpy;                                        \
+				dstID++;                                                    \
+				toCpy++;                                                    \
+			}                                                               \
+		}																	\
         GetMonData(&gEnemyParty[monIndex], MON_DATA_NICKNAME, text);    \
     }                                                                   \
     else                                                                \

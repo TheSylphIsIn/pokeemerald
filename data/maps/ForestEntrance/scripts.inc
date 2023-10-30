@@ -27,6 +27,8 @@ ForestEntrance_IntroScript:
 	setvar VAR_FOREST_STATE 1
 	setflag FLAG_SYS_B_DASH
 	setflag FLAG_SYS_POKEMON_GET
+	setflag FLAG_KALPA2_MAIN_TREE
+	setflag FLAG_KALPA2_TREE1
 	additem ITEM_HYPER_POTION, 5
 	additem ITEM_MAX_POTION, 3
 	additem ITEM_FULL_HEAL, 3

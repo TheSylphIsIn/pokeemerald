@@ -750,7 +750,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_DRAGON },
-        .abilities = {ABILITY_DROUGHT, ABILITY_DRIZZLE},
+        .abilities = {ABILITY_DRIZZLE, ABILITY_DROUGHT},
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
@@ -10588,12 +10588,12 @@ const struct SpeciesInfo gSpeciesInfo[] =
 
     [SPECIES_ABSOL] =
     {
-        .baseHP        = 114,
+        .baseHP        = 144,
         .baseAttack    = 126,
-        .baseDefense   = 83,
+        .baseDefense   = 113,
         .baseSpeed     = 142,
         .baseSpAttack  = 13,
-        .baseSpDefense = 73,
+        .baseSpDefense = 103,
         .types = { TYPE_BUG, TYPE_MYSTERY },
         .catchRate = 0,
         .expYield = 255,

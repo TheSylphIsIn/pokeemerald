@@ -46,6 +46,7 @@
 #include "constants/trainers.h"
 #include "constants/trainer_hill.h"
 #include "constants/weather.h"
+#include "text.h"
 
 enum {
     TRANSITION_TYPE_NORMAL,
@@ -645,7 +646,11 @@ u8 BattleSetup_GetTerrainId(void)
     if (MetatileBehavior_IsTallGrass(tileBehavior))
         return BATTLE_TERRAIN_GRASS;
     if (MetatileBehavior_IsLongGrass(tileBehavior) || gBattleTypeFlags & BATTLE_TYPE_LEGENDARY)
+	{
+		gTextFlags.forceMidTextSpeed = FALSE;
+		gSaveBlock2Ptr->optionsTextSpeed = OPTIONS_TEXT_SPEED_MID;
         return BATTLE_TERRAIN_LONG_GRASS;
+	}
     if (MetatileBehavior_IsSandOrDeepSand(tileBehavior))
         return BATTLE_TERRAIN_SAND;
 

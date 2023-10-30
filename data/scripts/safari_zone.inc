@@ -8,6 +8,8 @@ TheForest_EventScript_StepCounter1::
 	lockall
 	playse SE_M_TWISTER
 	waitse
+	setweather WEATHER_RAIN
+	doweather
 	message TheForest_Text_TreesSway
 	waitmessage
 	delay 60

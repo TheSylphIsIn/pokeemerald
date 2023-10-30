@@ -470,6 +470,9 @@ bool8 TryRunFromBattle(u8 battler)
 
         gBattleStruct->runTries++;
     }
+	
+	if (gBattleTypeFlags & BATTLE_TYPE_LEGENDARY)
+		return 0;
 
     if (effect != 0)
     {

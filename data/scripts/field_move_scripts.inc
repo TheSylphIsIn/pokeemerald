@@ -28,6 +28,7 @@ EventScript_CutTreeDown::
 	waitmovement 0
 	removeobject VAR_LAST_TALKED
 	addvar VAR_CUT_SCORE, 1
+	goto_if_eq VAR_FOREST_STATE, 2, EventScript_OpenKalpa2Path
 	releaseall
 	end
 
@@ -261,6 +262,54 @@ EventScript_CantSurface::
 EventScript_EndSurface::
 	releaseall
 	end
+
+EventScript_OpenKalpa2Path::
+	delay 30
+	applymovement 8, Movement_ForestKalpa2Flee
+	waitmovement 0
+	removeobject 8
+	playse SE_CLICK
+	setmetatile 29, 5, 0x00D, 0
+	setmetatile 29, 6, 0x1CF, 0
+	setmetatile 29, 7, 0x23C, 1
+	setmetatile 30, 5, 0x00D, 0
+	setmetatile 30, 6, 0x1CE, 0
+	setmetatile 30, 7, 0x23B, 1
+	setmetatile 31, 5, 0x1E4, 1
+	setmetatile 31, 6, 0x1CF, 0
+	setmetatile 31, 7, 0x23C, 1
+	setmetatile 32, 5, 0x1E5, 1
+	setmetatile 32, 6, 0x00D, 0
+	setmetatile 32, 7, 0x1CF, 0
+	setmetatile 32, 8, 0x1D5, 1
+	setmetatile 33, 5, 0x1E4, 1
+	setmetatile 33, 6, 0x00D, 0
+	setmetatile 33, 7, 0x00D, 0
+	setmetatile 33, 8, 0x00D, 0
+	setmetatile 33, 9, 0x00D, 0
+	setmetatile 34, 6, 0x1DC, 1
+	setmetatile 34, 7, 0x1D4, 1
+	setmetatile 34, 8, 0x1E4, 1
+	setmetatile 34, 9, 0x001, 0
+	setvar VAR_FOREST_STATE, 3
+	clearflag FLAG_KALPA2_TREE1
+	setflag FLAG_KALPA2_OPEN
+	releaseall
+	end
+
+Movement_ForestKalpa2Flee:
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	step_end
+	
 
 Text_CantDive:
 	.string "The sea is deep here. A POKéMON\n"

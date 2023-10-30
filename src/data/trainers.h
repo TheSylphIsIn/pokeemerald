@@ -4047,10 +4047,10 @@ const struct Trainer gTrainers[] = {
 
     [TRAINER_IVAN] =
     {
-        .trainerClass = TRAINER_CLASS_FISHERMAN,
-        .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_HIKER,
-        .trainerPic = TRAINER_PIC_FISHERMAN,
-        .trainerName = _("IVAN"),
+        .trainerClass = TRAINER_CLASS_BUG_CATCHER,
+        .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
+        .trainerPic = TRAINER_PIC_BUG_CATCHER,
+        .trainerName = _("MORPHO"),
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
@@ -4059,9 +4059,9 @@ const struct Trainer gTrainers[] = {
 
     [TRAINER_CLAUDE] =
     {
-        .trainerClass = TRAINER_CLASS_FISHERMAN,
-        .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_HIKER,
-        .trainerPic = TRAINER_PIC_FISHERMAN,
+        .trainerClass = TRAINER_CLASS_LASS,
+        .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_SWIMMER | F_TRAINER_FEMALE,
+        .trainerPic = TRAINER_PIC_LASS,
         .trainerName = _("CLAUDE"),
         .items = {},
         .doubleBattle = FALSE,
@@ -4083,10 +4083,10 @@ const struct Trainer gTrainers[] = {
 
     [TRAINER_NED] =
     {
-        .trainerClass = TRAINER_CLASS_FISHERMAN,
-        .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_HIKER,
-        .trainerPic = TRAINER_PIC_FISHERMAN,
-        .trainerName = _("NED"),
+        .trainerClass = TRAINER_CLASS_YOUNGSTER,
+        .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
+        .trainerPic = TRAINER_PIC_YOUNGSTER,
+        .trainerName = _("JEREMY"),
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
@@ -4095,9 +4095,9 @@ const struct Trainer gTrainers[] = {
 
     [TRAINER_DALE] =
     {
-        .trainerClass = TRAINER_CLASS_FISHERMAN,
-        .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_HIKER,
-        .trainerPic = TRAINER_PIC_FISHERMAN,
+        .trainerClass = TRAINER_CLASS_PKMN_RANGER,
+        .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_COOL,
+        .trainerPic = TRAINER_PIC_POKEMON_RANGER_M,
         .trainerName = _("DALE"),
         .items = {},
         .doubleBattle = FALSE,
@@ -4107,10 +4107,10 @@ const struct Trainer gTrainers[] = {
 
     [TRAINER_NOLAN] =
     {
-        .trainerClass = TRAINER_CLASS_FISHERMAN,
-        .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_HIKER,
-        .trainerPic = TRAINER_PIC_FISHERMAN,
-        .trainerName = _("NOLAN"),
+        .trainerClass = TRAINER_CLASS_TRIATHLETE,
+        .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
+        .trainerPic = TRAINER_PIC_RUNNING_TRIATHLETE_M,
+        .trainerName = _("DOUG"),
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
@@ -4119,10 +4119,10 @@ const struct Trainer gTrainers[] = {
 
     [TRAINER_BARNY] =
     {
-        .trainerClass = TRAINER_CLASS_FISHERMAN,
-        .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_HIKER,
-        .trainerPic = TRAINER_PIC_FISHERMAN,
-        .trainerName = _("BARNY"),
+        .trainerClass = TRAINER_CLASS_PKMN_RANGER,
+        .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_COOL,
+        .trainerPic = TRAINER_PIC_POKEMON_RANGER_F,
+        .trainerName = _("TESS"),
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
@@ -7683,10 +7683,10 @@ const struct Trainer gTrainers[] = {
 
     [TRAINER_DEZ_AND_LUKE] =
     {
-        .trainerClass = TRAINER_CLASS_YOUNG_COUPLE,
+        .trainerClass = TRAINER_CLASS_TWINS,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_GIRL,
-        .trainerPic = TRAINER_PIC_YOUNG_COUPLE,
-        .trainerName = _("DEZ & LUKE"),
+        .trainerPic = TRAINER_PIC_TWINS,
+        .trainerName = _("POPPY&ROSE"),
         .items = {},
         .doubleBattle = TRUE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
@@ -7708,7 +7708,7 @@ const struct Trainer gTrainers[] = {
     [TRAINER_KIRA_AND_DAN_1] =
     {
         .trainerClass = TRAINER_CLASS_YOUNG_COUPLE,
-        .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_GIRL,
+        .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_TWINS | F_TRAINER_FEMALE,
         .trainerPic = TRAINER_PIC_YOUNG_COUPLE,
         .trainerName = _("KIRA & DAN"),
         .items = {},
