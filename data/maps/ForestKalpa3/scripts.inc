@@ -1,5 +1,56 @@
 ForestKalpa3_MapScripts::
+	map_script MAP_SCRIPT_ON_RESUME, ForestKalpa3_OnLoad
 	.byte 0
+
+ForestKalpa3_OnLoad::
+	call_if_eq VAR_FOREST_STATE, 4, ForestKalpa3_CloseExit
+	end
+
+ForestKalpa3_CloseExit:
+	setmetatile 33, 9, 0x1C6, FALSE
+	setmetatile 33, 10, 0x1D4, TRUE
+	setmetatile 33, 11, 0x1F3, TRUE
+	setmetatile 34, 8, 0x1DE, TRUE
+	setmetatile 34, 9, 0x23B, TRUE
+	setmetatile 34, 10, 0x22D, TRUE
+	setmetatile 34, 11, 0x253, TRUE
+	setmetatile 35, 7, 0X236, TRUE
+	setmetatile 35, 8, 0x22E, TRUE
+	setmetatile 35, 9, 0X236, TRUE
+	setmetatile 35, 10, 0x22E, TRUE
+	setmetatile 35, 11, 0x254, TRUE
+	setmetatile 36, 8, 0x22D, TRUE
+	setmetatile 36, 9, 0X235, TRUE
+	setmetatile 36, 7, 0X235, TRUE
+	setmetatile 36, 10, 0x22D, TRUE
+	setmetatile 36, 11, 0x253, TRUE
+	setmetatile 37, 8, 0x22E, TRUE
+	setmetatile 37, 9, 0X236, TRUE
+	setmetatile 37, 7, 0X236, TRUE
+	setmetatile 37, 10, 0x22E, TRUE
+	setmetatile 37, 11, 0x254, TRUE
+	setmetatile 38, 8, 0x22D, TRUE
+	setmetatile 38, 9, 0X235, TRUE
+	setmetatile 38, 7, 0X235, TRUE
+	setmetatile 38, 10, 0x22D, TRUE
+	setmetatile 38, 11, 0x253, TRUE
+	setmetatile 39, 8, 0x22E, TRUE
+	setmetatile 39, 9, 0X236, TRUE
+	setmetatile 39, 7, 0X236, TRUE
+	setmetatile 39, 10, 0x22E, TRUE
+	setmetatile 39, 11, 0x254, TRUE
+	setmetatile 40, 8, 0x22D, TRUE
+	setmetatile 40, 9, 0X235, TRUE
+	setmetatile 40, 7, 0X235, TRUE
+	setmetatile 40, 10, 0x22D, TRUE
+	setmetatile 40, 11, 0x253, TRUE
+	setmetatile 41, 8, 0x22E, TRUE
+	setmetatile 41, 9, 0X236, TRUE
+	setmetatile 41, 7, 0X236, TRUE
+	setmetatile 41, 10, 0x22E, TRUE
+	setmetatile 41, 11, 0x254, TRUE
+	setmetatile 41, 8, 0x22D, TRUE
+	return
 	
 ForestKalpa3_Trigger_SetupStepCounter::
 	special EnterSafariMode
@@ -131,4 +182,20 @@ ForestKalpa3_Text_Flowers4:
 	.string "Stay away…\l"
 	.string "Stay away…\l"
 	.string "Stay away…$"
+
+ForestKalpa3_EmptyBall::
+	msgbox ForestKalpa3_Text_EmptyBall, MSGBOX_SIGN
+	end
+
+ForestKalpa3_Text_EmptyBall:
+	.string "It's locked shut.\n"
+	.string "Looks like it's empty.$"
+
+ForestKalpa3_BrokenBall::
+	msgbox ForestKalpa3_Text_BrokenBall, MSGBOX_SIGN
+	end
+
+ForestKalpa3_Text_BrokenBall:
+	.string "Shards of metal and plastic.$"
+
 

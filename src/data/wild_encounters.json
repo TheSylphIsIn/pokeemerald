@@ -11554,7 +11554,7 @@
                 "species": "SPECIES_BUTTERFREE"
               },
               {
-                "min_level": 10,
+                "min_level": 100,
                 "max_level": 100,
                 "species": "SPECIES_WEEDLE"
               }

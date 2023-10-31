@@ -608,7 +608,7 @@ void CB2_InitTitleScreen(void)
                                     | DISPCNT_OBJ_ON
                                     | DISPCNT_WIN0_ON
                                     | DISPCNT_OBJWIN_ON);
-        m4aSongNumStart(MUS_TITLE);
+        m4aSongNumStart(MUS_WEATHER_GROUDON);
         gMain.state = 5;
         break;
     case 5:
@@ -749,11 +749,6 @@ static void Task_TitleScreenPhase3(u8 taskId)
             gTasks[taskId].data[4]++;
             gBattle_BG1_Y = gTasks[taskId].data[4] / 2;
             gBattle_BG1_X = 0;
-        }
-        if ((gMPlayInfo_BGM.status & 0xFFFF) == 0)
-        {
-            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_WHITEALPHA);
-            SetMainCallback2(CB2_GoToCopyrightScreen);
         }
     }
 }

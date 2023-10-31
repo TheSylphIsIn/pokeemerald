@@ -1039,9 +1039,8 @@ static void MainCB2_Intro(void)
     AnimateSprites();
     BuildOamBuffer();
     UpdatePaletteFade();
-    if (gMain.newKeys != 0 && !gPaletteFade.active)
-        SetMainCallback2(MainCB2_EndIntro);
-    else if (gIntroFrameCounter != -1)
+    SetMainCallback2(MainCB2_EndIntro);
+	if (gIntroFrameCounter != -1)
         gIntroFrameCounter++;
 }
 
