@@ -84,7 +84,16 @@ TheForest_EventScript_StepCounter3::
 	delay 60
 	setwildbattle SPECIES_ABSOL, 100
 	special BattleSetup_StartLegendaryBattle
-	end
+	waitstate
+	goto Forest_Endless_Battle
+	
+Forest_Endless_Battle::
+	msgbox TheForest_Text_Unphased, MSGBOX_DEFAULT
+	delay 60
+	setwildbattle SPECIES_ABSOL, 100
+	special BattleSetup_StartLegendaryBattle
+	waitstate
+	goto Forest_Endless_Battle
 	
 Forest_Movement_StumbleBack:
 	lock_facing_direction
@@ -105,6 +114,9 @@ TheForest_Text_Tired:
 	
 TheForest_Text_SomethingIsWrong:
 	.string "Something is wrong.$"
+
+TheForest_Text_Unphased:
+	.string "The Forest is undeterred.$"
 
 SafariZone_EventScript_Exit::
 	setvar VAR_SAFARI_ZONE_STATE, 1

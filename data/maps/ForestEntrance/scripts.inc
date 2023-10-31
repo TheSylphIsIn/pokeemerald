@@ -8,7 +8,7 @@ ForestEntrance_OnFrame:
 
 ForestEntrance_IntroScript:
 	lockall
-	givemon SPECIES_TYPHLOSION, 44, 0, 0
+	givemon SPECIES_TYPHLOSION, 44, 0, 3
 	givemon SPECIES_PORYGON2, 65, 0, 1
 	delay 60
 	applymovement OBJ_EVENT_ID_PLAYER, ForestEntrance_Movement_ExitBedroll
@@ -18,7 +18,7 @@ ForestEntrance_IntroScript:
 	closemessage
 	applymovement OBJ_EVENT_ID_PLAYER, ForestEntrance_Movement_GoToEntrance
 	waitmovement 0
-	givemon SPECIES_OCTILLERY, 42, 0, 3
+	givemon SPECIES_OCTILLERY, 42, 0, 0
 	special SpawnCameraObject
 	applymovement OBJ_EVENT_ID_CAMERA, ForestEntrance_Movement_PanToForest
 	waitmovement 0

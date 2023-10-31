@@ -23,52 +23,62 @@
 #include "tv.h"
 #include "constants/items.h"
 #include "constants/battle_frontier.h"
+#include "constants/region_map_sections.h"
 
 static void CB2_ReturnFromChooseHalfParty(void);
 static void CB2_ReturnFromChooseBattleFrontierParty(void);
 
 struct PresetMon {
 	u8 nickname[POKEMON_NAME_LENGTH + 1];
-    u8 abilityNum;
     u16 species;
     u8 ivs[NUM_STATS];
-	u8 nature;
+	u32 personality;
 	u16 moves[MAX_MON_MOVES];
+	u8 metloc;
+	u8 otName[11];
+	u32 otId;
+	u8 otGender;
 };
 
 static const struct PresetMon sInitialParty[] = {
 	{
-		.species = SPECIES_TYPHLOSION,
-		.nickname = _("SALEZERKER"),
-		.abilityNum = 0, // rock head
-		.ivs = {25, 30, 10, 10, 30, 20},
-		.nature = NATURE_ADAMANT,
-		.moves = {MOVE_FLARE_BLITZ, MOVE_IRON_TAIL, MOVE_FLAMETHROWER, MOVE_TAKE_DOWN}, // can learn cut
+		.species = SPECIES_OCTILLERY,
+		.nickname = _("ONSENPURA"),
+		.ivs = {15, 30, 30, 30, 10, 30},
+		.personality = 20,
+		.moves = {MOVE_RAIN_DANCE, MOVE_HYDRO_PUMP, MOVE_ANCIENT_POWER, MOVE_WRAP},
+		.metloc = MAPSEC_ROUTE_103,
+		.otId = 31357,
 	},
 	{
 		.species = SPECIES_PORYGON2,
 		.nickname = _("IMPFECTION"),
-		.abilityNum = 0, // serene grace
 		.ivs = {30, 20, 10, 30, 30, 10},
-		.nature = NATURE_TIMID,
+		.personality = 10,
 		.moves = {MOVE_SLUDGE_BOMB, MOVE_AGILITY, MOVE_BATON_PASS, MOVE_WISH},
+		.metloc = MAPSEC_LITTLEROOT_TOWN,
+		.otName = _("PROF. K"),
+		.otGender = FEMALE,
+		.otId = 1122,
 	},
 	{
 		.species = SPECIES_SKARMORY,
 		.nickname = _("WETHERBANE"),
-		.abilityNum = 0, // Lightningrod
 		.ivs = {10, 10, 30, 0, 30, 0},
-		.nature = NATURE_BOLD,
+		.personality = 5,
 		.moves = {MOVE_THUNDER, MOVE_PROTECT, MOVE_CLOUD_BREAKER, MOVE_DRILL_PECK}, // can learn cut
+		.metloc = MAPSEC_ROUTE_104,
+		.otId = 31357,
 	},
 	{
-		.species = SPECIES_OCTILLERY,
-		.nickname = _("ONSENPURA"),
-		.abilityNum = 0, // rain dish
-		.ivs = {15, 30, 30, 30, 10, 30},
-		.nature = NATURE_CALM,
-		.moves = {MOVE_RAIN_DANCE, MOVE_HYDRO_PUMP, MOVE_ANCIENT_POWER, MOVE_WRAP},
-	},
+		.species = SPECIES_TYPHLOSION,
+		.nickname = _("SALEZERKER"),
+		.ivs = {25, 30, 10, 10, 30, 20},
+		.personality = 3,
+		.moves = {MOVE_FLARE_BLITZ, MOVE_IRON_TAIL, MOVE_FLAMETHROWER, MOVE_TAKE_DOWN}, // can learn cut
+		.metloc = MAPSEC_LITTLEROOT_TOWN,
+		.otId = 31357,
+	}
 };
 
 void HealPlayerParty(void)
@@ -110,8 +120,7 @@ u8 ScriptGiveMon(u16 species, u8 level, u16 item, u32 presetId, u32 unused2, u8 
     struct Pokemon *mon = &gEnemyParty[0];
 	const struct PresetMon *presetMon = &sInitialParty[presetId];
 	u32 i;
-
-    CreateMonWithNature(mon, species, level, USE_RANDOM_IVS, presetMon->nature);
+	CreateMon(mon, species, level, USE_RANDOM_IVS, TRUE, presetMon->personality, OT_ID_PLAYER_ID, 0);	
     heldItem[0] = item;
     heldItem[1] = item >> 8;
     SetMonData(mon, MON_DATA_HP_IV, &presetMon->ivs[0]);
@@ -120,7 +129,11 @@ u8 ScriptGiveMon(u16 species, u8 level, u16 item, u32 presetId, u32 unused2, u8 
     SetMonData(mon, MON_DATA_SPEED_IV, &presetMon->ivs[3]);
     SetMonData(mon, MON_DATA_SPATK_IV, &presetMon->ivs[4]);
     SetMonData(mon, MON_DATA_SPDEF_IV, &presetMon->ivs[5]);
-    SetMonData(mon, MON_DATA_NICKNAME, &presetMon->nickname);
+    SetMonData(mon, MON_DATA_NICKNAME, presetMon->nickname);
+	SetMonData(mon, MON_DATA_MET_LOCATION, &presetMon->metloc);
+	if (&presetMon->otName != 0)
+		SetMonData(mon, MON_DATA_OT_NAME, presetMon->otName);
+	SetMonData(mon, MON_DATA_OT_GENDER, &presetMon->otGender);
 	DeleteFirstMoveAndGiveMoveToMon(mon, presetMon->moves[0]);
 	DeleteFirstMoveAndGiveMoveToMon(mon, presetMon->moves[1]);
 	DeleteFirstMoveAndGiveMoveToMon(mon, presetMon->moves[2]);
