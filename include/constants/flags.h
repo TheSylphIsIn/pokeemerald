@@ -1254,7 +1254,7 @@
 #define FLAG_KALPA3_TREE21                                         0x4B5 // Unused Flag
 #define FLAG_KALPA3_TREE22                                         0x4B6 // Unused Flag
 #define FLAG_KALPA3_TREE23                                         0x4B7 // Unused Flag
-#define FLAG_UNUSED_0x4B8                                           0x4B8 // Unused Flag
+#define FLAG_SPAWN_INVISIBLE                                           0x4B8 // Unused Flag
 #define FLAG_UNUSED_0x4B9                                           0x4B9 // Unused Flag
 #define FLAG_UNUSED_0x4BA                                           0x4BA // Unused Flag
 #define FLAG_UNUSED_0x4BB                                           0x4BB // Unused Flag

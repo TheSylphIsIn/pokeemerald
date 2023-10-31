@@ -40,7 +40,9 @@
     "ForestEntrance",
     "ForestKalpa1",
     "ForestKalpa2",
-    "ForestKalpa3"
+    "ForestKalpa3",
+    "GameOverMap1",
+    "GameOverMap2"
   ],
   "gMapGroup_TownsAndRoutes": [
     "PetalburgCity",

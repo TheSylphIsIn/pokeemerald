@@ -143,6 +143,9 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     playerDirection = GetPlayerFacingDirection();
     GetPlayerPosition(&position);
     metatileBehavior = MapGridGetMetatileBehaviorAt(position.x, position.y);
+	
+	if (VarGet(VAR_FOREST_STATE) > 4)
+		return TRUE;
 
     if (CheckForTrainersWantingBattle() == TRUE)
         return TRUE;

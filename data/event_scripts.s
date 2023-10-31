@@ -578,6 +578,8 @@ gStdScripts_End::
 
 EventScript_WhiteOut::
 	call EverGrandeCity_HallOfFame_EventScript_ResetEliteFour
+	setvar VAR_FOREST_STATE, 5
+	setflag FLAG_SPAWN_INVISIBLE
 	goto EventScript_ResetMrBriney
 	end
 
@@ -1063,3 +1065,7 @@ Common_EventScript_LegendaryFlewAway::
 	.include "data/maps/ForestKalpa2/scripts.inc"
 
 	.include "data/maps/ForestKalpa3/scripts.inc"
+
+	.include "data/maps/GameOverMap1/scripts.inc"
+
+	.include "data/maps/GameOverMap2/scripts.inc"

@@ -8,7 +8,7 @@ ForestEntrance_OnFrame:
 
 ForestEntrance_IntroScript:
 	lockall
-	givemon SPECIES_TYPHLOSION, 44, 0, 3
+	givemon SPECIES_OCTILLERY, 42, 0, 0
 	givemon SPECIES_PORYGON2, 65, 0, 1
 	delay 60
 	applymovement OBJ_EVENT_ID_PLAYER, ForestEntrance_Movement_ExitBedroll
@@ -18,7 +18,7 @@ ForestEntrance_IntroScript:
 	closemessage
 	applymovement OBJ_EVENT_ID_PLAYER, ForestEntrance_Movement_GoToEntrance
 	waitmovement 0
-	givemon SPECIES_OCTILLERY, 42, 0, 0
+	givemon SPECIES_TYPHLOSION, 44, 0, 3
 	special SpawnCameraObject
 	applymovement OBJ_EVENT_ID_CAMERA, ForestEntrance_Movement_PanToForest
 	waitmovement 0
@@ -34,6 +34,8 @@ ForestEntrance_IntroScript:
 	additem ITEM_FULL_HEAL, 3
 	additem ITEM_REVIVE, 3
 	additem ITEM_MAX_REVIVE, 1
+	additem ITEM_MASTER_BALL, 1
+	setrespawn HEAL_LOCATION_GAME_OVER_MAP2
 	releaseall
 	end
 
@@ -50,6 +52,10 @@ ForestEntrance_Text_ReviewOrders:
 	.string "You've been given a team that\n"
 	.string "should do well against whatever's\l"
 	.string "living there, if it's aggressive.\p"
+	.string "You also have some supplies,\n"
+	.string "including an emergency MASTER BALL,\l"
+	.string "to be used if and only if you\l"
+	.string "discover a new species.\p"
 	.string "…these notes have been paraphrased\n"
 	.string "from Prof. K's less readable style.\p"
 	.string "It's time to go.$"

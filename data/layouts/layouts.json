@@ -4450,6 +4450,26 @@
       "secondary_tileset": "gTileset_TheForest",
       "border_filepath": "data/layouts/ForestKalpa3/border.bin",
       "blockdata_filepath": "data/layouts/ForestKalpa3/map.bin"
+    },
+    {
+      "id": "LAYOUT_GAME_OVER_MAP1",
+      "name": "GameOverMap1_Layout",
+      "width": 15,
+      "height": 11,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_TheForest",
+      "border_filepath": "data/layouts/GameOverMap1/border.bin",
+      "blockdata_filepath": "data/layouts/GameOverMap1/map.bin"
+    },
+    {
+      "id": "LAYOUT_GAME_OVER_MAP2",
+      "name": "GameOverMap2_Layout",
+      "width": 15,
+      "height": 11,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_GenericBuilding",
+      "border_filepath": "data/layouts/GameOverMap2/border.bin",
+      "blockdata_filepath": "data/layouts/GameOverMap2/map.bin"
     }
   ]
 }

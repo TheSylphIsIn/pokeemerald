@@ -1509,8 +1509,11 @@ u8 DoBattlerEndTurnEffects(void)
                 break;
             case ENDTURN_POISON:  // poison
                 if ((gBattleMons[gActiveBattler].status1 & STATUS1_POISON) && gBattleMons[gActiveBattler].hp != 0)
-                { // The Forest takes half damage from poison
-                    gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / (8 * (2 * gBattleMons[gActiveBattler].ability == ABILITY_SPEED_BOOST));
+                {
+					if (gBattleMons[gActiveBattler].species == SPECIES_ABSOL)
+						gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / 16;
+					else
+						gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / 8;
 					
                     if (gBattleMoveDamage == 0)
                         gBattleMoveDamage = 1;

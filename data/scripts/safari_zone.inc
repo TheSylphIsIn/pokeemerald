@@ -82,6 +82,7 @@ TheForest_EventScript_StepCounter3::
 	applymovement 1, Forest_Movement_Shamble
 	waitmovement 0
 	delay 60
+	setrespawn HEAL_LOCATION_GAME_OVER_MAP1
 	setwildbattle SPECIES_ABSOL, 100
 	special BattleSetup_StartLegendaryBattle
 	waitstate

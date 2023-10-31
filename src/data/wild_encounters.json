@@ -11565,7 +11565,7 @@
           "map": "MAP_FOREST_KALPA2",
           "base_label": "gForestKalpa20",
           "land_mons": {
-            "encounter_rate": 5,
+            "encounter_rate": 1,
             "mons": [
               {
                 "min_level": 40,

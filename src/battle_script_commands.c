@@ -9932,13 +9932,16 @@ static void Cmd_handleballthrow(void)
         {
             u8 shakes;
 
-            odds = Sqrt(Sqrt(16711680 / odds));
-            odds = 1048560 / odds;
+			if (odds != 0)
+			{
+				odds = Sqrt(Sqrt(16711680 / odds));
+				odds = 1048560 / odds;
+			}
 
             for (shakes = 0; shakes < BALL_3_SHAKES_SUCCESS && Random() < odds; shakes++);
 
             if (gLastUsedItem == ITEM_MASTER_BALL)
-                shakes = BALL_3_SHAKES_SUCCESS; // why calculate the shakes before that check?
+                shakes = BALL_3_SHAKES_FAIL; // why calculate the shakes before that check?
 
             BtlController_EmitBallThrowAnim(BUFFER_A, shakes);
             MarkBattlerForControllerExec(gActiveBattler);

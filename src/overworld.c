@@ -1562,7 +1562,6 @@ void CB2_WhiteOut(void)
         DoWhiteOut();
         ResetInitialPlayerAvatarState();
         ScriptContext_Init();
-        UnlockPlayerFieldControls();
         gFieldCallback = FieldCB_WarpExitFadeFromBlack;
         state = 0;
         DoMapLoadLoop(&state);
