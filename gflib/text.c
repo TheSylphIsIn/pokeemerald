@@ -34,6 +34,7 @@ static u32 GetGlyphWidth_Normal(u16, bool32);
 static u32 GetGlyphWidth_Short(u16, bool32);
 static u32 GetGlyphWidth_Narrow(u16, bool32);
 static u32 GetGlyphWidth_SmallNarrow(u16, bool32);
+static bool32 NotEnoughSpaceForNextWord(struct TextPrinter *);
 
 static EWRAM_DATA struct TextPrinter sTempTextPrinter = {0};
 static EWRAM_DATA struct TextPrinter sTextPrinters[WINDOWS_MAX] = {0};
@@ -966,6 +967,23 @@ static u16 RenderText(struct TextPrinter *textPrinter)
 
         switch (currChar)
         {
+		case CHAR_SPACE:
+			if (NotEnoughSpaceForNextWord(textPrinter))
+			{
+				if (textPrinter->printerTemplate.currentY < gFonts[textPrinter->printerTemplate.fontId].maxLetterHeight) // TODO: Replace with some combination of font max letter height and number of lines
+				{
+					textPrinter->printerTemplate.currentX = textPrinter->printerTemplate.x;
+					textPrinter->printerTemplate.currentY += (gFonts[textPrinter->printerTemplate.fontId].maxLetterHeight + textPrinter->printerTemplate.lineSpacing);
+					return RENDER_REPEAT;
+				}
+				else
+				{
+					textPrinter->state = RENDER_STATE_SCROLL_START;
+					TextPrinterInitDownArrowCounters(textPrinter);
+					return RENDER_UPDATE;
+				}
+			}
+			break;
         case CHAR_NEWLINE:
             textPrinter->printerTemplate.currentX = textPrinter->printerTemplate.x;
             textPrinter->printerTemplate.currentY += (gFonts[textPrinter->printerTemplate.fontId].maxLetterHeight + textPrinter->printerTemplate.lineSpacing);
@@ -1903,4 +1921,35 @@ static void DecompressGlyph_Bold(u16 glyphId)
     DecompressGlyphTile(glyphs + 0x80, gCurGlyph.gfxBufferBottom);
     gCurGlyph.width = 8;
     gCurGlyph.height = 12;
+}
+
+static bool32 NotEnoughSpaceForNextWord(struct TextPrinter *textPrinter)
+{
+	u32 i;
+	u32 currChar;
+
+	// Read ahead in the string to find the next space, which is where the next line break could logically be
+	for (i = 1; i < 30; i++)
+	{
+		textPrinter->printerTemplate.currentChar++;
+		currChar = *textPrinter->printerTemplate.currentChar;
+		
+		// If explicitly formatted, don't autoformat
+		if (currChar == CHAR_NEWLINE || currChar == CHAR_PROMPT_SCROLL)
+		{
+			textPrinter->printerTemplate.currentChar -= i;
+			return FALSE;
+		}
+		
+		if (currChar == CHAR_SPACE || currChar == EOS)
+			break;
+	}
+	
+	// Set currentChar back to its original value so it is correct when we return to rendering
+	textPrinter->printerTemplate.currentChar -= i;
+	
+	i *= gFonts[textPrinter->printerTemplate.fontId].maxLetterWidth; // Assumed width of the next word
+	
+	return (textPrinter->printerTemplate.currentX + 4 + i > gWindows[textPrinter->printerTemplate.windowId].window.width * 8); // checks if current pos + space + next word overruns 216, the width of the standard message box.
+	
 }
