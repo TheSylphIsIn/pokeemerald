@@ -1191,10 +1191,10 @@ void BtlController_EmitChoosePokemon(u8 bufferId, u8 caseId, u8 slotId, u8 abili
 // Unused
 static void BtlController_EmitCmd23(u8 bufferId)
 {
-    sBattleBuffersTransferData[0] = CONTROLLER_23;
-    sBattleBuffersTransferData[1] = CONTROLLER_23;
-    sBattleBuffersTransferData[2] = CONTROLLER_23;
-    sBattleBuffersTransferData[3] = CONTROLLER_23;
+    sBattleBuffersTransferData[0] = CONTROLLER_USETACTICS;
+    sBattleBuffersTransferData[1] = CONTROLLER_USETACTICS;
+    sBattleBuffersTransferData[2] = CONTROLLER_USETACTICS;
+    sBattleBuffersTransferData[3] = CONTROLLER_USETACTICS;
     PrepareBufferDataTransfer(bufferId, sBattleBuffersTransferData, 4);
 }
 
@@ -1302,7 +1302,7 @@ static void BtlController_EmitCmd32(u8 bufferId, u16 size, void *data)
 {
     s32 i;
 
-    sBattleBuffersTransferData[0] = CONTROLLER_32;
+    sBattleBuffersTransferData[0] = CONTROLLER_OPENFIELDSTATUS;
     sBattleBuffersTransferData[1] = size;
     sBattleBuffersTransferData[2] = (size & 0xFF00) >> 8;
     for (i = 0; i < size; i++)
