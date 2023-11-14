@@ -712,6 +712,7 @@ extern u16 gMoveToLearn;
 extern u8 gBattleMonForms[MAX_BATTLERS_COUNT];
 extern u16 gOriginalSpecies[MAX_BATTLERS_COUNT];
 extern u16 gTransformedSpecies[MAX_BATTLERS_COUNT];
+extern u8 gRecommendedBall;
 
 extern void (*gPreBattleCallback1)(void);
 extern void (*gBattleMainFunc)(void);

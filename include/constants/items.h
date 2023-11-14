@@ -637,7 +637,9 @@
 #define ITEM_WARD_DIAMOND 454
 #define ITEM_LIGHT_CLAY 456
 
-#define ITEMS_COUNT 457
+#define ITEM_ICON_FLEE 457
+
+#define ITEMS_COUNT 458
 #define ITEM_FIELD_ARROW ITEMS_COUNT
 
 // A special item id associated with "Cancel"/"Exit" etc. in a list of items or decorations

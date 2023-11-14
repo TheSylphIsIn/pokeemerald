@@ -243,6 +243,7 @@ EWRAM_DATA u8 gBattleMonForms[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u16 gOriginalSpecies[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u16 gTransformedSpecies[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u16 partyHeldItems[PARTY_SIZE] = {0};
+EWRAM_DATA u8 gRecommendedBall = 0;
 
 void (*gPreBattleCallback1)(void);
 void (*gBattleMainFunc)(void);
