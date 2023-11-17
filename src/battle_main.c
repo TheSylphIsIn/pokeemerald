@@ -1950,7 +1950,43 @@ void CustomTrainerPartyAssignMoves(struct Pokemon *mon, const struct TrainerMon 
     }
 }
 
-u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer *trainer, bool32 firstTrainer, u32 battleTypeFlags)
+#include "data/starter_dependent_parties.h"
+
+static u8 PickPartySizeValue(const struct Trainer *trainer, u16 trainerNum) 
+{
+	if (trainer->starterDependent)
+			return sStarterDependentPartySizes[gSaveBlock2Ptr->optionsDifficulty][trainerNum - FIRST_STARTER_DEPENDENT_INDEX];
+	if (gSaveBlock2Ptr->optionsDifficulty == OPTIONS_DIFFICULTY_UNFAIR)
+	{
+		return trainer->unfairPartySize;
+	}
+	if (gSaveBlock2Ptr->optionsDifficulty == OPTIONS_DIFFICULTY_HARD)
+	{
+		return trainer->hardPartySize;
+	}
+	return trainer->partySize;
+}
+
+static const struct TrainerMon* PickPartyData(const struct Trainer *trainer, u16 trainerNum)
+{
+	if (gSaveBlock2Ptr->optionsDifficulty == OPTIONS_DIFFICULTY_UNFAIR)
+	{		
+		if (trainer->starterDependent)
+			return sStarterDependentPartiesUnfair[VarGet(VAR_STARTER_MON)][trainerNum - FIRST_STARTER_DEPENDENT_INDEX];
+		return trainer->unfairParty;
+	}
+	if (gSaveBlock2Ptr->optionsDifficulty == OPTIONS_DIFFICULTY_HARD)
+	{
+		if (trainer->starterDependent)
+			return sStarterDependentPartiesHard[VarGet(VAR_STARTER_MON)][trainerNum - FIRST_STARTER_DEPENDENT_INDEX];
+		return trainer->hardParty;
+	}
+	if (trainer->starterDependent)
+		return sStarterDependentParties[VarGet(VAR_STARTER_MON)][trainerNum - FIRST_STARTER_DEPENDENT_INDEX];
+	return trainer->party;
+}
+
+u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer *trainer, bool32 firstTrainer, u32 battleTypeFlags, u16 trainerNum)
 {
     u32 personalityValue;
     u8 fixedIV;
@@ -1963,23 +1999,21 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
         if (firstTrainer == TRUE)
             ZeroEnemyPartyMons();
 
+		monsCount = PickPartySizeValue(trainer, trainerNum);
+		
         if (battleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
         {
-            if (trainer->partySize > PARTY_SIZE / 2)
+            if (monsCount > PARTY_SIZE / 2)
                 monsCount = PARTY_SIZE / 2;
-            else
-                monsCount = trainer->partySize;
         }
-        else
-        {
-            monsCount = trainer->partySize;
-        }
+		
+		DebugPrintf("%d", monsCount);
 
         for (i = 0; i < monsCount; i++)
         {
             s32 ball = -1;
             u32 personalityHash = GeneratePartyHash(trainer, i);
-            const struct TrainerMon *partyData = trainer->party;
+            const struct TrainerMon *partyData = PickPartyData(trainer, trainerNum);
             u32 otIdType = OT_ID_RANDOM_NO_SHINY;
             u32 fixedOtId = 0;
 
@@ -2059,7 +2093,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
     u8 retVal;
     if (trainerNum == TRAINER_SECRET_BASE)
         return 0;
-    retVal = CreateNPCTrainerPartyFromTrainer(party, &gTrainers[trainerNum], firstTrainer, gBattleTypeFlags);
+    retVal = CreateNPCTrainerPartyFromTrainer(party, &gTrainers[trainerNum], firstTrainer, gBattleTypeFlags, trainerNum);
 
     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && !(gBattleTypeFlags & (BATTLE_TYPE_FRONTIER
                                                                         | BATTLE_TYPE_EREADER_TRAINER
@@ -2074,7 +2108,7 @@ void CreateTrainerPartyForPlayer(void)
 {
     ZeroPlayerPartyMons();
     gPartnerTrainerId = gSpecialVar_0x8004;
-    CreateNPCTrainerPartyFromTrainer(gPlayerParty, &gTrainers[gSpecialVar_0x8004], TRUE, BATTLE_TYPE_TRAINER);
+    CreateNPCTrainerPartyFromTrainer(gPlayerParty, &gTrainers[gSpecialVar_0x8004], TRUE, BATTLE_TYPE_TRAINER, gSpecialVar_0x8004);
 }
 
 void VBlankCB_Battle(void)

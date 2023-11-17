@@ -373,15 +373,6 @@
 
 #define F_TRAINER_FEMALE (1 << 7)
 
-// All trainer parties specify the IV, level, and species for each Pokémon in the
-// party. Some trainer parties also specify held items and custom moves for each
-// Pokémon.
-#define F_TRAINER_PARTY_CUSTOM_MOVESET (1 << 0)
-#define F_TRAINER_PARTY_HELD_ITEM      (1 << 1)
-// Some trainers vary their party depending on which starter the player has. This flags them as such.
-// Parties are in src/data/starter_dependent_parties.h
-#define F_TRAINER_STARTER_DEPENDENT	   (1 << 2)
-
 // Speed of the "intro slide" animation at the start of a battle, in pixels per frame.
 // BG and enemy move to right, player moves to left.
 #define INTRO_SLIDE_SPEED ((gSaveBlock2Ptr->optionsBattleSlideSpeed * 2) + 2)

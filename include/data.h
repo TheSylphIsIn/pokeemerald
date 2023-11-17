@@ -52,20 +52,27 @@ struct TrainerMon
     bool8 isShiny : 1;
 };
 
-#define TRAINER_PARTY(partyArray) partyArray, .partySize = ARRAY_COUNT(partyArray)
+#define TRAINER_PARTY(partyArray) partyArray, .partySize = ARRAY_COUNT(partyArray), .hardParty = partyArray##Hard, .hardPartySize = ARRAY_COUNT(partyArray##Hard), .unfairParty = partyArray##Unfair, .unfairPartySize = ARRAY_COUNT(partyArray##Unfair)
+#define TRAINER_PARTY_NO_DIFF(partyArray) partyArray, .partySize = ARRAY_COUNT(partyArray), .hardParty = partyArray, .hardPartySize = ARRAY_COUNT(partyArray), .unfairParty = partyArray, .unfairPartySize = ARRAY_COUNT(partyArray)
+#define TRAINER_PARTY_STARTER_DEPENDENT sParty_Dummy, .starterDependent = TRUE, .partySize = ARRAY_COUNT(sParty_Dummy), .hardParty = sParty_Dummy, .hardPartySize = ARRAY_COUNT(sParty_Dummy), .unfairParty = sParty_Dummy, .unfairPartySize = ARRAY_COUNT(sParty_Dummy)
 
 struct Trainer
 {
     /*0x00*/ u32 aiFlags;
     /*0x04*/ const struct TrainerMon *party;
+			 const struct TrainerMon *hardParty;
+			 const struct TrainerMon *unfairParty;
     /*0x08*/ u16 items[MAX_TRAINER_ITEMS];
     /*0x10*/ u8 trainerClass;
     /*0x11*/ u8 encounterMusic_gender; // last bit is gender
     /*0x12*/ u8 trainerPic;
     /*0x13*/ u8 trainerName[TRAINER_NAME_LENGTH + 1];
     /*0x1E*/ bool8 doubleBattle:1;
-             u8 padding:7;
+             bool8 starterDependent:1;
+			 u8 free:6;
     /*0x1F*/ u8 partySize;
+			 u8 hardPartySize;
+			 u8 unfairPartySize;
 };
 
 #define TRAINER_ENCOUNTER_MUSIC(trainer)((gTrainers[trainer].encounterMusic_gender & 0x7F))
