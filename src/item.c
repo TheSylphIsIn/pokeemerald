@@ -21,6 +21,9 @@
 static bool8 CheckPyramidBagHasItem(u16 itemId, u16 count);
 static bool8 CheckPyramidBagHasSpace(u16 itemId, u16 count);
 
+static u16 GetBagItemQuantity(u16 *quantity);
+static void SetBagItemQuantity(u16 *quantity, u16 newValue);
+
 EWRAM_DATA struct BagPocket gBagPockets[POCKETS_COUNT] = {0};
 
 #include "data/text/item_descriptions.h"

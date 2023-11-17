@@ -2323,7 +2323,7 @@ static void MainMenu_DrawMonIcons(void)
 		{
 			if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != SPECIES_NONE)
 			{ // the X and Y coordinates here place the icons below the text, each with a 2 px gap between them.
-				spriteId = CreateMonIcon(GetMonData(&gPlayerParty[i], MON_DATA_SPECIES), SpriteCB_MonIcon, (35 + (34 * i)), 71, 4, GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY), TRUE);
+				spriteId = CreateMonIcon(GetMonData(&gPlayerParty[i], MON_DATA_SPECIES), SpriteCB_MonIcon, (35 + (34 * i)), 71, 4, GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY));
 				gSprites[spriteId].oam.priority = 0; // moves the icons over the window instead of behind it
 				gSprites[spriteId].invisible = 0;
 			}
@@ -2333,7 +2333,7 @@ static void MainMenu_DrawMonIcons(void)
 		{
 			if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != SPECIES_NONE)
 			{ // the X and Y coordinates here place the icons below the text, each with a 2 px gap between them.
-				spriteId = CreateMonIcon(GetMonData(&gPlayerParty[i], MON_DATA_SPECIES), SpriteCB_MonIcon, (35 + (34 * i)), 71, 4, GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY), TRUE);
+				spriteId = CreateMonIcon(GetMonData(&gPlayerParty[i], MON_DATA_SPECIES), SpriteCB_MonIcon, (35 + (34 * i)), 71, 4, GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY));
 				gSprites[spriteId].oam.priority = 0; // moves the icons over the window instead of behind it
 				gSprites[spriteId].invisible = 0;
 				gSprites[spriteId].oam.objMode = ST_OAM_OBJ_WINDOW;

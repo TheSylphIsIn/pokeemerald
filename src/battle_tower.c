@@ -3095,7 +3095,7 @@ static void FillPartnerParty(u16 trainerId)
     }
     else if (trainerId >= TRAINER_CUSTOM_PARTNER)
     {
-        otID = Random32();
+        otID = Random32(&gPCGRng);
 
         for (i = 0; i < 3; i++)
             ZeroMonData(&gPlayerParty[i + 3]);
@@ -3106,7 +3106,7 @@ static void FillPartnerParty(u16 trainerId)
             u32 otIdType = OT_ID_RANDOM_NO_SHINY;
             do
             {
-                j = Random32();
+                j = Random32(&gPCGRng);
             } while (IsShinyOtIdPersonality(otID, j));
 
             if (partyData[i].gender == TRAINER_MON_MALE)

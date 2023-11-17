@@ -3,7 +3,7 @@ EventScript_CutTree::
 	lockall
 	goto_if_unset FLAG_BADGE01_GET, EventScript_CheckTreeCantCut
 	goto_if_set FLAG_FREE_HMS, EventScript_CutTreeDown @ Skips party check; mon being able to learn the move is not required
-	checkpartymove ITEM_HM01
+	checkpartymove MOVE_CUT
 	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CheckTreeCantCut
 	goto_if_set FLAG_FAST_HMS, EventScript_CutTreeDown @ Skips animation
 	setfieldeffectargument 0, VAR_RESULT
@@ -62,7 +62,7 @@ EventScript_RockSmash::
 	lockall
 	goto_if_unset FLAG_BADGE03_GET, EventScript_CantSmashRock
 	goto_if_set FLAG_FREE_HMS, EventScript_SmashRock
-	checkpartymove ITEM_HM06
+	checkpartymove MOVE_ROCK_SMASH
 	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CantSmashRock
 	goto_if_set FLAG_FAST_HMS, EventScript_SmashRock
 	setfieldeffectargument 0, VAR_RESULT
@@ -129,7 +129,7 @@ EventScript_StrengthBoulder::
 	goto_if_unset FLAG_BADGE04_GET, EventScript_CantStrength
 	goto_if_set FLAG_SYS_USE_STRENGTH, EventScript_CheckActivatedBoulder
 	goto_if_set FLAG_FREE_HMS, EventScript_ActivateStrength
-	checkpartymove ITEM_HM04
+	checkpartymove MOVE_STRENGTH
 	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CantStrength
 	goto_if_set FLAG_FAST_HMS, EventScript_ActivateStrength
 	setfieldeffectargument 0, VAR_RESULT
@@ -191,7 +191,7 @@ EventScript_UseWaterfall::
 	lockall
 	bufferstring STR_VAR_1, Text_DefaultBuffer
 	goto_if_set FLAG_FREE_HMS, EventScript_WaterfallSkipPrompt
-	checkpartymove ITEM_HM07
+	checkpartymove MOVE_WATERFALL
 	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CantWaterfall
 	bufferpartymonnick STR_VAR_1, VAR_RESULT
 	setfieldeffectargument 0, VAR_RESULT
@@ -227,7 +227,7 @@ EventScript_UseDive::
 	lockall
 	bufferstring STR_VAR_1, Text_DefaultBuffer
 	goto_if_set FLAG_FREE_HMS, EventScript_DiveSkipPrompt
-	checkpartymove ITEM_HM08
+	checkpartymove MOVE_DIVE
 	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CantDive
 	bufferpartymonnick STR_VAR_1, VAR_RESULT
 	setfieldeffectargument 0, VAR_RESULT
@@ -253,7 +253,7 @@ EventScript_UseDiveUnderwater::
 	lockall
 	bufferstring STR_VAR_1, Text_DefaultBuffer
 	goto_if_set FLAG_FREE_HMS, EventScript_DiveSurfaceSkipPrompt
-	checkpartymove ITEM_HM08
+	checkpartymove MOVE_DIVE
 	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CantSurface
 	bufferpartymonnick STR_VAR_1, VAR_RESULT
 	setfieldeffectargument 0, VAR_RESULT

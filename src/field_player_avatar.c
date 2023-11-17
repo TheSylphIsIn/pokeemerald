@@ -12,6 +12,7 @@
 #include "metatile_behavior.h"
 #include "overworld.h"
 #include "party_menu.h"
+#include "pokemon.h"
 #include "random.h"
 #include "rotating_gate.h"
 #include "script.h"
@@ -1306,7 +1307,7 @@ bool8 PartyHasMonWithSurf(void)
         {
             if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) == SPECIES_NONE)
                 break;
-            if (CanMonLearnTMHM(&gPlayerParty[i], ITEM_HM03 - ITEM_TM01))
+            if (CanLearnTeachableMove(GetMonData(&gPlayerParty[i], MON_DATA_SPECIES), MOVE_SURF))
                 return TRUE;
         }
     }

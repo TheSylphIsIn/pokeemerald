@@ -123,7 +123,7 @@ static const struct MenuInfoIcon sMenuInfoIcons[] =
     [TYPE_BUG + 1]      = { 32, 12, 0x6C },
     [TYPE_GHOST + 1]    = { 32, 12, 0x68 },
     [TYPE_STEEL + 1]    = { 32, 12, 0x88 },
-    [TYPE_FAIRY + 1]  = { 32, 12, 0xA4 },
+    [TYPE_MYSTERY + 1]  = { 32, 12, 0xA4 },
     [TYPE_FIRE + 1]     = { 32, 12, 0x24 },
     [TYPE_WATER + 1]    = { 32, 12, 0x28 },
     [TYPE_GRASS + 1]    = { 32, 12, 0x2C },
@@ -140,10 +140,10 @@ static const struct MenuInfoIcon sMenuInfoIcons[] =
     [MENU_INFO_ICON_EFFECT]    = { 42, 12, 0xE8 }, // Unused
     [MENU_INFO_ICON_BALL_RED]  = {  8,  8, 0xAE }, // For placed decorations in Secret Base
     [MENU_INFO_ICON_BALL_BLUE] = {  8,  8, 0xAF }, // For placed decorations in player's room
-	[MOVE_CATEGORY_PHYSICAL + MENU_INFO_ICON_BALL_BLUE + 1] = {12, 11, 0xC6},
-	[MOVE_CATEGORY_SPECIAL + MENU_INFO_ICON_BALL_BLUE + 1] = {12, 11, 0xE6},
-	[MOVE_CATEGORY_STATUS + MENU_INFO_ICON_BALL_BLUE + 1] = {12, 11, 0xCE},
-	[MOVE_CATEGORY_DYNAMIC + MENU_INFO_ICON_BALL_BLUE + 1] = {12, 11, 0xEE},
+	[SPLIT_PHYSICAL + MENU_INFO_ICON_BALL_BLUE + 1] = {12, 11, 0xC6},
+	[SPLIT_SPECIAL + MENU_INFO_ICON_BALL_BLUE + 1] = {12, 11, 0xE6},
+	[SPLIT_STATUS + MENU_INFO_ICON_BALL_BLUE + 1] = {12, 11, 0xCE},
+	[SPLIT_DYNAMIC + MENU_INFO_ICON_BALL_BLUE + 1] = {12, 11, 0xEE},
 };
 
 void InitStandardTextBoxWindows(void)

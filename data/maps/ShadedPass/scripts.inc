@@ -2,7 +2,7 @@ ShadedPass_MapScripts::
 	.byte 0
 
 ShadedPass_EventScript_Item1::
-	finditem ITEM_X_SPECIAL
+	finditem ITEM_GREAT_BALL
 	end
 	
 ShadedPass_EventScript_Item2::
