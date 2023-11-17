@@ -15,6 +15,7 @@
 #include "constants/layouts.h"
 #include "constants/region_map_sections.h"
 #include "constants/weather.h"
+#include "constants/battle_frontier.h"
 
 // enums
 enum MapPopUp_Themes
@@ -185,7 +186,7 @@ static const u8 sText_PyramidFloor6[] = _("PYRAMID FLOOR 6");
 static const u8 sText_PyramidFloor7[] = _("PYRAMID FLOOR 7");
 static const u8 sText_Pyramid[] = _("PYRAMID");
 
-static const u8 * const sBattlePyramid_MapHeaderStrings[] =
+static const u8 *const sBattlePyramid_MapHeaderStrings[FRONTIER_STAGES_PER_CHALLENGE + 1] =
 {
     sText_PyramidFloor1,
     sText_PyramidFloor2,

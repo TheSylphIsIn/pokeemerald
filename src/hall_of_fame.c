@@ -35,7 +35,7 @@
 #include "confetti_util.h"
 #include "constants/rgb.h"
 
-#define HALL_OF_FAME_MAX_TEAMS 50
+#define HALL_OF_FAME_MAX_TEAMS 30
 #define TAG_CONFETTI 1001
 
 struct HallofFameMon
@@ -43,8 +43,8 @@ struct HallofFameMon
     u32 tid;
     u32 personality;
     u16 species;
-    u16 lvl;
-    u8 nick[POKEMON_NAME_LENGTH];
+    u8 lvl;
+    u8 nickname[POKEMON_NAME_LENGTH];
 };
 
 struct HallofFameTeam
@@ -338,7 +338,7 @@ static const struct HallofFameMon sDummyFameMon =
     .personality = 0,
     .species = SPECIES_NONE,
     .lvl = 0,
-    .nick = {0}
+    .nickname = {0}
 };
 
 // Unused, order of party slots on Hall of Fame screen
@@ -452,7 +452,7 @@ static void Task_Hof_InitMonData(u8 taskId)
             GetMonData(&gPlayerParty[i], MON_DATA_NICKNAME, nick);
             for (j = 0; j < POKEMON_NAME_LENGTH; j++)
             {
-                sHofMonPtr->mon[i].nick[j] = nick[j];
+                sHofMonPtr->mon[i].nickname[j] = nick[j];
             }
             gTasks[taskId].tMonNumber++;
         }
@@ -462,7 +462,7 @@ static void Task_Hof_InitMonData(u8 taskId)
             sHofMonPtr->mon[i].tid = 0;
             sHofMonPtr->mon[i].personality = 0;
             sHofMonPtr->mon[i].lvl = 0;
-            sHofMonPtr->mon[i].nick[0] = EOS;
+            sHofMonPtr->mon[i].nickname[0] = EOS;
         }
     }
 
@@ -931,7 +931,7 @@ static void Task_HofPC_DrawSpritesPrintText(u8 taskId)
             if (currMon->species == SPECIES_EGG)
                 posY += 10;
 
-            spriteId = CreateMonPicSprite_HandleDeoxys(currMon->species, currMon->tid, currMon->personality, TRUE, posX, posY, i, TAG_NONE);
+            spriteId = CreateMonPicSprite(currMon->species, currMon->tid, currMon->personality, TRUE, posX, posY, i, TAG_NONE);
             gSprites[spriteId].oam.priority = 1;
             gTasks[taskId].tMonSpriteId(i) = spriteId;
         }
@@ -1149,7 +1149,7 @@ static void HallOfFame_PrintMonInfo(struct HallofFameMon* currMon, u8 unused1, u
     }
 
     // nick, species names, gender and level
-    memcpy(text, currMon->nick, POKEMON_NAME_LENGTH);
+    memcpy(text, currMon->nickname, POKEMON_NAME_LENGTH);
     text[POKEMON_NAME_LENGTH] = EOS;
     if (currMon->species == SPECIES_EGG)
     {
@@ -1163,7 +1163,7 @@ static void HallOfFame_PrintMonInfo(struct HallofFameMon* currMon, u8 unused1, u
         AddTextPrinterParameterized3(0, FONT_NORMAL, width, 1, sMonInfoTextColors, TEXT_SKIP_DRAW, text);
 
         text[0] = CHAR_SLASH;
-        stringPtr = StringCopy(text + 1, gSpeciesNames[currMon->species]);
+        stringPtr = StringCopy(text + 1, GetSpeciesName(currMon->species));
 
         if (currMon->species != SPECIES_NIDORAN_M && currMon->species != SPECIES_NIDORAN_F)
         {

@@ -150,9 +150,9 @@ Note that in msys2, Copy is Ctrl+Insert and Paste is Shift+Insert.
     <details>
         <summary><i>Notes...</i></summary>
 
-    >   Note 1: While not shown, msys uses forward slashes `/` instead of backwards slashes `\` as the directory separator.  
-    >   Note 2: If the path has spaces, then the path must be wrapped with quotations, e.g. `cd "Downloads/My Downloads"`.  
-    >   Note 3: Windows path names are case-insensitive so adhering to capitalization isn’t needed.   
+    >   Note 1: While not shown, msys uses forward slashes `/` instead of backwards slashes `\` as the directory separator.
+    >   Note 2: If the path has spaces, then the path must be wrapped with quotations, e.g. `cd "Downloads/My Downloads"`.
+    >   Note 3: Windows path names are case-insensitive so adhering to capitalization isn’t needed.
     >   Note 4: If libpng was saved elsewhere, you will need to specify the full path to where libpng was downloaded, e.g. `cd c:/devkitpro/msys2` if it was saved there.
     </details>
 
@@ -392,7 +392,7 @@ If this works, then proceed to [Installation](#installation). Otherwise, ask for
 1. If pokeemerald is not already downloaded (some users may prefer to download pokeemerald via a git client like GitHub Desktop), run:
 
     ```bash
-    git clone https://github.com/pret/pokeemerald
+    git clone https://github.com/rh-hideout/pokeemerald-expansion
     ```
 
     <details>
