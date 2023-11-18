@@ -23,6 +23,7 @@
 #include "text.h"
 #include "constants/abilities.h"
 #include "constants/songs.h"
+#include "constants/trainers.h"
 
 static EWRAM_DATA u8 sLinkSendTaskId = 0;
 static EWRAM_DATA u8 sLinkReceiveTaskId = 0;
@@ -2494,7 +2495,7 @@ void BtlController_HandleDrawTrainerPic(u32 battler, u32 trainerPicId, bool32 is
 
         gSprites[gBattlerSpriteIds[battler]].oam.paletteNum = IndexOfSpritePaletteTag(gTrainerFrontPicPaletteTable[trainerPicId].tag);
         gSprites[gBattlerSpriteIds[battler]].x2 = -DISPLAY_WIDTH;
-        gSprites[gBattlerSpriteIds[battler]].sSpeedX = 2;
+        gSprites[gBattlerSpriteIds[battler]].sSpeedX = INTRO_SLIDE_SPEED;
         gSprites[gBattlerSpriteIds[battler]].oam.affineParam = trainerPicId;
     }
     else // Player's side
@@ -2529,7 +2530,7 @@ void BtlController_HandleDrawTrainerPic(u32 battler, u32 trainerPicId, bool32 is
             gSprites[gBattlerSpriteIds[battler]].oam.paletteNum = battler;
         }
         gSprites[gBattlerSpriteIds[battler]].x2 = DISPLAY_WIDTH;
-        gSprites[gBattlerSpriteIds[battler]].sSpeedX = -2;
+        gSprites[gBattlerSpriteIds[battler]].sSpeedX = -INTRO_SLIDE_SPEED;
     }
     gSprites[gBattlerSpriteIds[battler]].callback = SpriteCB_TrainerSlideIn;
 
@@ -2548,7 +2549,7 @@ void BtlController_HandleTrainerSlide(u32 battler, u32 trainerPicId)
                                                          30);
         gSprites[gBattlerSpriteIds[battler]].oam.paletteNum = battler;
         gSprites[gBattlerSpriteIds[battler]].x2 = -96;
-        gSprites[gBattlerSpriteIds[battler]].sSpeedX = 2;
+        gSprites[gBattlerSpriteIds[battler]].sSpeedX = INTRO_SLIDE_SPEED;
     }
     else
     {
@@ -2562,7 +2563,7 @@ void BtlController_HandleTrainerSlide(u32 battler, u32 trainerPicId)
         gSprites[gBattlerSpriteIds[battler]].oam.paletteNum = IndexOfSpritePaletteTag(gTrainerFrontPicPaletteTable[trainerPicId].tag);
         gSprites[gBattlerSpriteIds[battler]].x2 = 96;
         gSprites[gBattlerSpriteIds[battler]].x += 32;
-        gSprites[gBattlerSpriteIds[battler]].sSpeedX = -2;
+        gSprites[gBattlerSpriteIds[battler]].sSpeedX = -INTRO_SLIDE_SPEED;
     }
     gSprites[gBattlerSpriteIds[battler]].callback = SpriteCB_TrainerSlideIn;
 

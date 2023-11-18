@@ -1760,7 +1760,7 @@ static void MoveSelectionDisplayPpNumber(u32 battler)
 // rewrite these.
 u8 GetTypeEffectivenessColorForSelection(u32 battler, u8 targetId, u8 moveType)
 {
-    u8 moveFlags;
+    uq4_12_t effectiveness;
     u16 move;
     struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleResources->bufferA[battler][4]);
 	
@@ -1772,15 +1772,15 @@ u8 GetTypeEffectivenessColorForSelection(u32 battler, u8 targetId, u8 moveType)
 	if (gBattleMoves[move].split == SPLIT_STATUS)
 		return 10;
 	
-    moveFlags = CalcTypeEffectivenessMultiplier(move, moveType, battler, targetId, gBattleMons[targetId].ability, FALSE);
+    effectiveness = CalcTypeEffectivenessMultiplier(move, moveType, battler, targetId, gBattleMons[targetId].ability, FALSE);
 
-    if (moveFlags & MOVE_RESULT_NO_EFFECT) {
+    if (effectiveness == UQ_4_12(0.0)) {
         return 26;  // 26 - no effect
     }
-    else if (moveFlags & MOVE_RESULT_NOT_VERY_EFFECTIVE ) {
+    else if (effectiveness <= UQ_4_12(0.5)) {
         return 25;  // 25 - not very effective
     }
-    else if (moveFlags & MOVE_RESULT_SUPER_EFFECTIVE) {
+    else if (effectiveness >= UQ_4_12(2.0)) {
         return 24; // 24 - super effective
     } 
     else
