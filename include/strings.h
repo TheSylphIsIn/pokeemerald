@@ -317,6 +317,8 @@ extern const u8 gText_MessageButton[];
 extern const u8 gText_MessageBoth[];
 extern const u8 gText_MashDpad[];
 extern const u8 gText_MashHold[];
+extern const u8 gText_HotkeyFandango[];
+extern const u8 gText_HotkeyExpansion[];
 
 extern const u8 gText_Tab1Header[];
 extern const u8 gText_Tab2Header[];
@@ -336,7 +338,7 @@ extern const u8 gText_OptionMenuCancel[];
 extern const u8 gText_ButtonMode[];
 extern const u8 gText_FastHMs[];
 extern const u8 gText_BattleMessageScroll[];
-extern const u8 gText_CrySkip[];
+extern const u8 gText_HotkeyMode[];
 extern const u8 gText_IntroSlideSpeed[];
 extern const u8 gText_TextMash[];
 
@@ -351,8 +353,8 @@ extern const u8 gText_OptionDescription_BattleHelp[];
 extern const u8 gText_OptionDescription_BattleMessageWait[];
 extern const u8 gText_OptionDescription_BattleMessageButton[];
 extern const u8 gText_OptionDescription_BattleMessageBoth[];
-extern const u8 gText_OptionDescription_CrySkipOn[];
-extern const u8 gText_OptionDescription_CrySkipOff[];
+extern const u8 gText_OptionDescription_HotkeyFandango[];
+extern const u8 gText_OptionDescription_HotkeyExpansion[];
 extern const u8 gText_OptionDescription_IntroSlide[];
 extern const u8 gText_OptionDescription_BattleScene[];
 extern const u8 gText_OptionDescription_TextSpeedFast[];

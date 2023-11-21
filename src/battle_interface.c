@@ -3570,7 +3570,7 @@ bool32 CanThrowLastUsedBall(void)
 #endif
 }
 
-void TryAddLastUsedBallItemSprites(void)
+void TryAddLastUsedBallItemSprites(u32 battler)
 {
 #if B_LAST_USED_BALL == TRUE
     if (gLastThrownBall == 0
@@ -3607,7 +3607,7 @@ void TryAddLastUsedBallItemSprites(void)
 				gSprites[gBattleStruct->ballSpriteIds[FANDANGO_CUE_ICON_R]].sCueState = BUTTON_CUE_STATE_ACTION;
 			else
 				gSprites[gBattleStruct->ballSpriteIds[FANDANGO_CUE_ICON_R]].sCueState = BUTTON_CUE_STATE_WAIT;					
-			gSprites[gBattleStruct->ballSpriteIds[FANDANGO_CUE_ICON_R]].sCueBattler = MAX_SPRITES; // initialized by CreateMegaTriggerSprite or cousins
+			gSprites[gBattleStruct->ballSpriteIds[FANDANGO_CUE_ICON_R]].sCueBattler = battler; // initialized by CreateMegaTriggerSprite or cousins
 			gLastUsedBallMenuPresent = TRUE;
 			gSprites[gBattleStruct->ballSpriteIds[FANDANGO_CUE_ICON_R]].callback = SpriteCB_FandangoCueIcons;
 			gSprites[gBattleStruct->ballSpriteIds[FANDANGO_CUE_ICON_R]].sCueId = FANDANGO_CUE_ICON_R;
@@ -3617,10 +3617,10 @@ void TryAddLastUsedBallItemSprites(void)
 			gSprites[gBattleStruct->ballSpriteIds[FANDANGO_CUE_ICON_L]].x = FANDANGO_CUE_OFFSCREEN_X;
 			gSprites[gBattleStruct->ballSpriteIds[FANDANGO_CUE_ICON_L]].y = FANDANGO_CUE_Y;
 			if (!(gBattleTypeFlags & (BATTLE_TYPE_TRAINER | BATTLE_TYPE_FRONTIER)))
-				gSprites[gBattleStruct->ballSpriteIds[FANDANGO_CUE_ICON_R]].sCueState = BUTTON_CUE_STATE_ACTION;
+				gSprites[gBattleStruct->ballSpriteIds[FANDANGO_CUE_ICON_L]].sCueState = BUTTON_CUE_STATE_ACTION;
 			else
-				gSprites[gBattleStruct->ballSpriteIds[FANDANGO_CUE_ICON_R]].sCueState = BUTTON_CUE_STATE_WAIT;
-			gSprites[gBattleStruct->ballSpriteIds[FANDANGO_CUE_ICON_L]].sCueBattler = MAX_SPRITES;
+				gSprites[gBattleStruct->ballSpriteIds[FANDANGO_CUE_ICON_L]].sCueState = BUTTON_CUE_STATE_WAIT;
+			gSprites[gBattleStruct->ballSpriteIds[FANDANGO_CUE_ICON_L]].sCueBattler = battler;
 			gSprites[gBattleStruct->ballSpriteIds[FANDANGO_CUE_ICON_L]].callback = SpriteCB_FandangoCueIcons;
 			gSprites[gBattleStruct->ballSpriteIds[FANDANGO_CUE_ICON_L]].sCueId = FANDANGO_CUE_ICON_L;
 		}
@@ -3657,6 +3657,7 @@ void TryAddLastUsedBallItemSprites(void)
 			gSprites[gBattleStruct->ballSpriteIds[FANDANGO_CUE_BUTTON_R]].sCueState = gSprites[gBattleStruct->ballSpriteIds[FANDANGO_CUE_ICON_R]].sCueState;
 			StartSpriteAnim(&gSprites[gBattleStruct->ballSpriteIds[FANDANGO_CUE_BUTTON_R]], 1);
 			gSprites[gBattleStruct->ballSpriteIds[FANDANGO_CUE_BUTTON_R]].sCueId = FANDANGO_CUE_BUTTON_R;
+			gSprites[gBattleStruct->ballSpriteIds[FANDANGO_CUE_BUTTON_R]].sCueBattler = battler;
 		}
 		if (gBattleStruct->ballSpriteIds[FANDANGO_CUE_BUTTON_L] == MAX_SPRITES)
 		{
@@ -3665,6 +3666,7 @@ void TryAddLastUsedBallItemSprites(void)
 														   FANDANGO_CUE_Y, 5);
 			gSprites[gBattleStruct->ballSpriteIds[FANDANGO_CUE_BUTTON_L]].sCueState = gSprites[gBattleStruct->ballSpriteIds[FANDANGO_CUE_ICON_L]].sCueState;
 			gSprites[gBattleStruct->ballSpriteIds[FANDANGO_CUE_BUTTON_L]].sCueId = FANDANGO_CUE_BUTTON_L;
+			gSprites[gBattleStruct->ballSpriteIds[FANDANGO_CUE_BUTTON_L]].sCueBattler = battler;
 		}
 	}
 #endif
@@ -3728,8 +3730,14 @@ static void SpriteCB_LastUsedBall(struct Sprite *sprite)
 static void SpriteCB_FandangoCues(struct Sprite *sprite)
 {
 	DebugPrintf("state for %d: %d", sprite->sCueId, sprite->sCueState);
-	if (JOY_HELD(START_BUTTON) && sprite->x > FANDANGO_CUE_PEEKING_X)
-		sprite->x -= (2 - (sprite->x == FANDANGO_CUE_PEEKING_X));
+	if (JOY_HELD(START_BUTTON) || sprite->sCueInactive)
+	{
+		if (sprite->x > FANDANGO_CUE_PEEKING_X)
+			sprite->x--;
+		if (sprite->x < FANDANGO_CUE_PEEKING_X)
+			sprite->x++;
+		return;
+	}
 	switch (sprite->sCueState)
 	{
 		case BUTTON_CUE_STATE_ACTION: // stay open
@@ -3741,41 +3749,20 @@ static void SpriteCB_FandangoCues(struct Sprite *sprite)
 		case BUTTON_CUE_STATE_TRANS_MOVE: // close self, then check if should reopen
 			if (sprite-> x > FANDANGO_CUE_PEEKING_X)
 				sprite->x--;
-			else if (gSprites[sprite->sCueId - 1].sCueState == BUTTON_CUE_STATE_MOVE)
-			{
-				sprite->x++;
-				sprite->sCueState = BUTTON_CUE_STATE_MOVE;
-			}
 			else
-			{
-				sprite->sCueState = BUTTON_CUE_STATE_WAIT;
-			}
+				sprite->sCueState = BUTTON_CUE_STATE_MOVE;
 			break;
 		case BUTTON_CUE_STATE_TRANS_ACTION:
 			if (sprite-> x > FANDANGO_CUE_PEEKING_X)
 				sprite->x--;
-			else if (gSprites[sprite->sCueId - 1].sCueState == BUTTON_CUE_STATE_ACTION)
-			{
-				sprite->x++;
-				sprite->sCueState = BUTTON_CUE_STATE_ACTION;
-			}
 			else
-			{
-				sprite->sCueState = BUTTON_CUE_STATE_WAIT;
-			}
+				sprite->sCueState = BUTTON_CUE_STATE_ACTION;
 			break;
 		case BUTTON_CUE_STATE_TRANS_TACTICS:
 			if (sprite-> x > FANDANGO_CUE_PEEKING_X)
 				sprite->x--;
-			else if (gSprites[sprite->sCueId - 1].sCueState == BUTTON_CUE_STATE_TACTICS)
-			{
-				sprite->x++;
-				sprite->sCueState = BUTTON_CUE_STATE_TACTICS;
-			}
 			else
-			{
-				sprite->sCueState = BUTTON_CUE_STATE_WAIT;
-			}
+				sprite->sCueState = BUTTON_CUE_STATE_TACTICS;
 			break;
 		case BUTTON_CUE_STATE_WAIT:
 			if (sprite->x > FANDANGO_CUE_PEEKING_X)
@@ -3795,8 +3782,14 @@ static void SpriteCB_FandangoCues(struct Sprite *sprite)
 static void SpriteCB_FandangoCueIcons(struct Sprite *sprite)
 {
 	DebugPrintf("state for %d: %d", sprite->sCueId, sprite->sCueState);
-	if (JOY_HELD(START_BUTTON) && sprite->x > FANDANGO_CUE_PEEKING_X)
-		sprite->x -= (2 - (sprite->x == FANDANGO_CUE_PEEKING_X));
+	if (JOY_HELD(START_BUTTON) || sprite->sCueInactive)
+	{
+		if (sprite->x > FANDANGO_CUE_PEEKING_X)
+			sprite->x--;
+		if (sprite->x < FANDANGO_CUE_PEEKING_X)
+			sprite->x++;
+		return;
+	}
 	switch (sprite->sCueState)
 	{
 		case BUTTON_CUE_STATE_ACTION:
@@ -3826,10 +3819,16 @@ static void SpriteCB_FandangoCueIcons(struct Sprite *sprite)
 							SwapOutFandangoCueIcon(sprite, sprite->sCueId, ITEM_ICON_Z_MOVE, BUTTON_CUE_STATE_MOVE);
 						}
 						else
-							sprite->sCueState = BUTTON_CUE_STATE_WAIT;
+						{
+							sprite->sCueInactive = TRUE;
+							gSprites[gBattleStruct->ballSpriteIds[sprite->sCueId + 1]].sCueInactive = TRUE;
+						}
 						break;
 					case FANDANGO_CUE_ICON_R: // may do something in the future.
-						sprite->sCueState = BUTTON_CUE_STATE_WAIT;
+						{
+							sprite->sCueInactive = TRUE;
+							gSprites[gBattleStruct->ballSpriteIds[sprite->sCueId + 1]].sCueInactive = TRUE;
+						}
 						break;
 				}
 			}
@@ -3848,7 +3847,10 @@ static void SpriteCB_FandangoCueIcons(struct Sprite *sprite)
 							SwapOutFandangoCueIcon(sprite, sprite->sCueId, ITEM_ICON_FLEE, BUTTON_CUE_STATE_ACTION);
 						}
 						else
-							sprite->sCueState = BUTTON_CUE_STATE_WAIT;
+						{
+							sprite->sCueInactive = TRUE;
+							gSprites[gBattleStruct->ballSpriteIds[sprite->sCueId + 1]].sCueInactive = TRUE;
+						}
 						break;
 					case FANDANGO_CUE_ICON_R:
 						if (CanThrowLastUsedBall())
@@ -3857,7 +3859,10 @@ static void SpriteCB_FandangoCueIcons(struct Sprite *sprite)
 							SwapOutFandangoCueIcon(sprite, sprite->sCueId, gBallToDisplay, BUTTON_CUE_STATE_ACTION);
 						}
 						else
-							sprite->sCueState = BUTTON_CUE_STATE_WAIT;
+						{
+							sprite->sCueInactive = TRUE;
+							gSprites[gBattleStruct->ballSpriteIds[sprite->sCueId + 1]].sCueInactive = TRUE;
+						}
 						break;
 				}
 			}
@@ -3888,13 +3893,12 @@ static void SwapOutFandangoCueIcon(struct Sprite *sprite, u8 iconId, u16 targetI
     DestroySprite(sprite);
 	
 	gBattleStruct->ballSpriteIds[iconId] = AddItemIconSprite(TAG_BUTTON_CUE_ICONS + iconId, TAG_BUTTON_CUE_ICONS + iconId, targetIcon);
-	gSprites[gBattleStruct->ballSpriteIds[iconId]].x = FANDANGO_CUE_OFFSCREEN_X;
+	gSprites[gBattleStruct->ballSpriteIds[iconId]].x = FANDANGO_CUE_PEEKING_X;
 	gSprites[gBattleStruct->ballSpriteIds[iconId]].y = FANDANGO_CUE_Y + (24 - (12 * iconId)); // R (0) cue is 24px lower than L cue (2)
 	gSprites[gBattleStruct->ballSpriteIds[iconId]].sCueState = nextState;
 	gSprites[gBattleStruct->ballSpriteIds[iconId]].sCueBattler = battler;
 	gSprites[gBattleStruct->ballSpriteIds[iconId]].sCueId = iconId;
-	gSprites[gBattleStruct->ballSpriteIds[iconId]].callback = SpriteCB_FandangoCueIcons;
-	
+	gSprites[gBattleStruct->ballSpriteIds[iconId]].callback = SpriteCB_FandangoCueIcons;	
 }
 
 static void DestroyFandangoCueIconSprite(struct Sprite *sprite, u8 iconId)
@@ -3954,7 +3958,10 @@ static void TryHideOrRestoreLastUsedBall(u8 caseId)
 		for (i = 0; i < 4; i++)
 		{
 			if (gBattleStruct->ballSpriteIds[i] != MAX_SPRITES)
+			{
 				gSprites[gBattleStruct->ballSpriteIds[i]].sCueState = caseId;
+				gSprites[gBattleStruct->ballSpriteIds[i]].sCueInactive = FALSE;
+			}
 		}
 	}
 #endif
@@ -3967,13 +3974,13 @@ void ChangeButtonCueWindowStates(u8 caseId)
 #endif
 }
 
-void TryRestoreLastUsedBall(void)
+void TryRestoreLastUsedBall(u32 battler)
 {
 #if B_LAST_USED_BALL == TRUE
     if (gBattleStruct->ballSpriteIds[0] != MAX_SPRITES)
         TryHideOrRestoreLastUsedBall(BUTTON_CUE_STATE_TRANS_ACTION);
     else
-        TryAddLastUsedBallItemSprites();
+        TryAddLastUsedBallItemSprites(battler);
 #endif
 }
 

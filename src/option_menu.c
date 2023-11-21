@@ -50,7 +50,7 @@ enum
 enum
 {
 	MENUITEM_MSGWAIT,
-	MENUITEM_CRYSKIP,
+	MENUITEM_HOTKEYMODE,
 	MENUITEM_INTROSLIDE,
 	MENUITEM_BATTLESCENE
 };
@@ -105,8 +105,8 @@ static u8 FastHMs_ProcessInput(void);
 static void FastHMs_DrawChoices(u8 taskId);
 static u8 BattleMessageScroll_ProcessInput(void);
 static void BattleMessageScroll_DrawChoices(u8 taskId);
-static u8 CrySkip_ProcessInput(void);
-static void CrySkip_DrawChoices(u8 taskId);
+static u8 HotkeyMode_ProcessInput(void);
+static void HotkeyMode_DrawChoices(u8 taskId);
 static u8 SlideSpeed_ProcessInput(void);
 static void SlideSpeed_DrawChoices(u8 taskId);
 static u8 MashInput_ProcessInput(void);
@@ -122,14 +122,14 @@ static void UpdateSelection(u8 taskId, bool32 scrollDown);
 
 static void (*const sOptionMenuDrawChoiceFuncs[4][4])(u8 taskId) = {
     {Difficulty_DrawChoices, ExpAll_DrawChoices, BattleStyle_DrawChoices, BattleHelpers_DrawChoices},
-	{BattleMessageScroll_DrawChoices, CrySkip_DrawChoices, SlideSpeed_DrawChoices, BattleScene_DrawChoices},
+	{BattleMessageScroll_DrawChoices, HotkeyMode_DrawChoices, SlideSpeed_DrawChoices, BattleScene_DrawChoices},
 	{TextSpeed_DrawChoices, MashInput_DrawChoices, AutoRun_DrawChoices, FastHMs_DrawChoices},
 	{FrameType_DrawChoices, ButtonMode_DrawChoices, Sound_DrawChoices, Dummy_DrawChoices}
 };
 
 static u8 (*const sOptionMenuInputFuncs[4][4])(void) = {
     {Difficulty_ProcessInput, ExpAll_ProcessInput, BattleStyle_ProcessInput, BattleHelpers_ProcessInput},
-	{BattleMessageScroll_ProcessInput, CrySkip_ProcessInput, SlideSpeed_ProcessInput, BattleScene_ProcessInput},
+	{BattleMessageScroll_ProcessInput, HotkeyMode_ProcessInput, SlideSpeed_ProcessInput, BattleScene_ProcessInput},
 	{TextSpeed_ProcessInput, MashInput_ProcessInput, AutoRun_ProcessInput, FastHMs_ProcessInput},
 	{FrameType_ProcessInput, ButtonMode_ProcessInput, Sound_ProcessInput, Dummy_ProcessInput}
 };
@@ -151,7 +151,7 @@ static const u8 sEqualSignGfx[] = INCBIN_U8("graphics/interface/option_menu_equa
 static const u8 *const sOptionMenuItemsNames[TABS_COUNT][OPTIONS_PER_TAB] =
 {
 	{gText_Difficulty, gText_ExpAll, gText_BattleStyle, gText_BattleHelpers},
-	{gText_BattleMessageScroll, gText_CrySkip, gText_IntroSlideSpeed, gText_BattleScene},
+	{gText_BattleMessageScroll, gText_HotkeyMode, gText_IntroSlideSpeed, gText_BattleScene},
 	{gText_TextSpeed, gText_TextMash, gText_AutoRun, gText_FastHMs},
 	{gText_Frame, gText_ButtonMode, gText_Sound, gText_OptionMenuTabExit}
 };
@@ -423,7 +423,7 @@ static void HighlightOptionMenuItem(u8 index)
 
 static void DrawOptionMenuChoice(const u8 *text, u8 x, u8 y, u8 style)
 {
-    u8 dst[16];
+    u8 dst[24];
     u16 i;
 
     for (i = 0; *text != EOS && i < ARRAY_COUNT(dst) - 1; i++)
@@ -766,7 +766,7 @@ static void BattleMessageScroll_DrawChoices(u8 taskId)
 		DrawFooterText(sBattleMessageScrollDescs[gSaveBlock2Ptr->optionsBattleMessageScroll]);
 }
 
-static u8 CrySkip_ProcessInput(void)
+static u8 HotkeyMode_ProcessInput(void)
 {
     if (JOY_NEW(DPAD_LEFT | DPAD_RIGHT))
     {
@@ -777,21 +777,17 @@ static u8 CrySkip_ProcessInput(void)
     return gSaveBlock2Ptr->optionsHotkeyMode;
 }
 
-static const u8 *const sCrySkipDescs[2] =	{gText_OptionDescription_CrySkipOn, gText_OptionDescription_CrySkipOff};
+static const u8 *const sHotkeyModeDescs[2] =	{gText_OptionDescription_HotkeyFandango, gText_OptionDescription_HotkeyExpansion};
 
-static void CrySkip_DrawChoices(u8 taskId)
+static void HotkeyMode_DrawChoices(u8 taskId)
 {
-	u8 styles[2];
+	if (gSaveBlock2Ptr->optionsHotkeyMode)
+		DrawOptionMenuChoice(gText_HotkeyExpansion, 104, YPOS_SECOND_OPTION, 1);
+	else
+		DrawOptionMenuChoice(gText_HotkeyFandango, 104, YPOS_SECOND_OPTION, 1);
 
-    styles[0] = 0;
-    styles[1] = 0;
-    styles[gSaveBlock2Ptr->optionsHotkeyMode] = 1;
-
-    DrawOptionMenuChoice(gText_BattleSceneOff, 104, YPOS_SECOND_OPTION, styles[0]);
-    DrawOptionMenuChoice(gText_BattleSceneOn, GetStringRightAlignXOffset(FONT_NORMAL, gText_BattleSceneOff, 198), YPOS_SECOND_OPTION, styles[1]);
-	
-	if (gTasks[taskId].tMenuSelection == MENUITEM_CRYSKIP)
-		DrawFooterText(sCrySkipDescs[gSaveBlock2Ptr->optionsHotkeyMode]);
+	if (gTasks[taskId].tMenuSelection == MENUITEM_HOTKEYMODE)
+		DrawFooterText(sHotkeyModeDescs[gSaveBlock2Ptr->optionsHotkeyMode]);
 }
 
 static u8 SlideSpeed_ProcessInput(void)

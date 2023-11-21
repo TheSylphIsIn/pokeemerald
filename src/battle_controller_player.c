@@ -268,62 +268,70 @@ static void HandleInputChooseAction(u32 battler)
     else
         gPlayerDpadHoldFrames = 0;
 
-#if B_LAST_USED_BALL == TRUE && B_LAST_USED_BALL_CYCLE == TRUE
-    if (!gLastUsedBallMenuPresent)
+	if (gSaveBlock2Ptr->optionsHotkeyMode)
+	{
+		if (!gLastUsedBallMenuPresent)
+		{
+			sAckBallUseBtn = FALSE;
+		}
+		else if (JOY_NEW(B_LAST_USED_BALL_BUTTON))
+		{
+			sAckBallUseBtn = TRUE;
+			sBallSwapped = FALSE;
+			ArrowsChangeColorLastBallCycle(TRUE);
+		}
+		if (sAckBallUseBtn)
+		{
+			if (JOY_HELD(B_LAST_USED_BALL_BUTTON) && (JOY_NEW(DPAD_DOWN) || JOY_NEW(DPAD_RIGHT)))
+			{
+				bool8 sameBall = FALSE;
+				u16 nextBall = GetNextBall(gBallToDisplay);
+				sBallSwapped = TRUE;
+				if (gBallToDisplay == nextBall)
+					sameBall = TRUE;
+				else
+					gBallToDisplay = nextBall;
+				SwapBallToDisplay(sameBall);
+				PlaySE(SE_SELECT);
+			}
+			else if (JOY_HELD(B_LAST_USED_BALL_BUTTON) && (JOY_NEW(DPAD_UP) || JOY_NEW(DPAD_LEFT)))
+			{
+				bool8 sameBall = FALSE;
+				u16 prevBall = GetPrevBall(gBallToDisplay);
+				sBallSwapped = TRUE;
+				if (gBallToDisplay == prevBall)
+					sameBall = TRUE;
+				else
+					gBallToDisplay = prevBall;
+				SwapBallToDisplay(sameBall);
+				PlaySE(SE_SELECT);
+			}
+			else if (JOY_NEW(B_BUTTON) || (!JOY_HELD(B_LAST_USED_BALL_BUTTON) && sBallSwapped))
+			{
+				sAckBallUseBtn = FALSE;
+				sBallSwapped = FALSE;
+				ArrowsChangeColorLastBallCycle(FALSE);
+			}
+			else if (!JOY_HELD(B_LAST_USED_BALL_BUTTON) && CanThrowLastUsedBall())
+			{
+				sAckBallUseBtn = FALSE;
+				PlaySE(SE_SELECT);
+				ArrowsChangeColorLastBallCycle(FALSE);
+				ChangeButtonCueWindowStates(BUTTON_CUE_STATE_TURNOVER);
+				BtlController_EmitTwoReturnValues(battler, BUFFER_B, B_ACTION_THROW_BALL, 0);
+				PlayerBufferExecCompleted(battler);
+			}
+			return;
+		}
+	}
+	else if (JOY_NEW(B_LAST_USED_BALL_BUTTON) && CanThrowLastUsedBall())
     {
-        sAckBallUseBtn = FALSE;
+        PlaySE(SE_SELECT);
+        ChangeButtonCueWindowStates(BUTTON_CUE_STATE_TURNOVER);
+        BtlController_EmitTwoReturnValues(battler, BUFFER_B, B_ACTION_THROW_BALL, 0);
+        PlayerBufferExecCompleted(battler);
     }
-    else if (JOY_NEW(B_LAST_USED_BALL_BUTTON))
-    {
-        sAckBallUseBtn = TRUE;
-        sBallSwapped = FALSE;
-        ArrowsChangeColorLastBallCycle(TRUE);
-    }
-    if (sAckBallUseBtn)
-    {
-        if (JOY_HELD(B_LAST_USED_BALL_BUTTON) && (JOY_NEW(DPAD_DOWN) || JOY_NEW(DPAD_RIGHT)))
-        {
-            bool8 sameBall = FALSE;
-            u16 nextBall = GetNextBall(gBallToDisplay);
-            sBallSwapped = TRUE;
-            if (gBallToDisplay == nextBall)
-                sameBall = TRUE;
-            else
-                gBallToDisplay = nextBall;
-            SwapBallToDisplay(sameBall);
-            PlaySE(SE_SELECT);
-        }
-        else if (JOY_HELD(B_LAST_USED_BALL_BUTTON) && (JOY_NEW(DPAD_UP) || JOY_NEW(DPAD_LEFT)))
-        {
-            bool8 sameBall = FALSE;
-            u16 prevBall = GetPrevBall(gBallToDisplay);
-            sBallSwapped = TRUE;
-            if (gBallToDisplay == prevBall)
-                sameBall = TRUE;
-            else
-                gBallToDisplay = prevBall;
-            SwapBallToDisplay(sameBall);
-            PlaySE(SE_SELECT);
-        }
-        else if (JOY_NEW(B_BUTTON) || (!JOY_HELD(B_LAST_USED_BALL_BUTTON) && sBallSwapped))
-        {
-            sAckBallUseBtn = FALSE;
-            sBallSwapped = FALSE;
-            ArrowsChangeColorLastBallCycle(FALSE);
-        }
-        else if (!JOY_HELD(B_LAST_USED_BALL_BUTTON) && CanThrowLastUsedBall())
-        {
-            sAckBallUseBtn = FALSE;
-            PlaySE(SE_SELECT);
-            ArrowsChangeColorLastBallCycle(FALSE);
-            ChangeButtonCueWindowStates(BUTTON_CUE_STATE_TURNOVER);
-            BtlController_EmitTwoReturnValues(battler, BUFFER_B, B_ACTION_THROW_BALL, 0);
-            PlayerBufferExecCompleted(battler);
-        }
-        return;
-    }
-#endif
-
+	
     if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
@@ -418,15 +426,6 @@ static void HandleInputChooseAction(u32 battler)
     else if (JOY_NEW(SELECT_BUTTON))
     {
         BtlController_EmitTwoReturnValues(battler, BUFFER_B, B_ACTION_DEBUG, 0);
-        PlayerBufferExecCompleted(battler);
-    }
-#endif
-#if B_LAST_USED_BALL == TRUE && B_LAST_USED_BALL_CYCLE == FALSE
-    else if (JOY_NEW(B_LAST_USED_BALL_BUTTON) && CanThrowLastUsedBall())
-    {
-        PlaySE(SE_SELECT);
-        ChangeButtonCueWindowStates(BUTTON_CUE_STATE_TURNOVER);
-        BtlController_EmitTwoReturnValues(battler, BUFFER_B, B_ACTION_THROW_BALL, 0);
         PlayerBufferExecCompleted(battler);
     }
 #endif
@@ -2029,7 +2028,7 @@ static void PlayerHandleChooseAction(u32 battler)
     for (i = 0; i < 4; i++)
         ActionSelectionDestroyCursorAt(i);
 
-    TryRestoreLastUsedBall();
+    TryRestoreLastUsedBall(battler); // passing battler so that the fandango-style sprites will know who the mega evolution etc battler is
     ActionSelectionCreateCursorAt(gActionSelectionCursor[battler], 0);
     PREPARE_MON_NICK_BUFFER(gBattleTextBuff1, battler, gBattlerPartyIndexes[battler]);
     BattleStringExpandPlaceholdersToDisplayedString(gText_WhatWillPkmnDo);
