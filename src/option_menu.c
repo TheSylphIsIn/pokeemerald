@@ -770,11 +770,11 @@ static u8 CrySkip_ProcessInput(void)
 {
     if (JOY_NEW(DPAD_LEFT | DPAD_RIGHT))
     {
-        gSaveBlock2Ptr->optionsCrySkip ^= 1;
+        gSaveBlock2Ptr->optionsHotkeyMode ^= 1;
         sArrowPressed = TRUE;
     }
 
-    return gSaveBlock2Ptr->optionsCrySkip;
+    return gSaveBlock2Ptr->optionsHotkeyMode;
 }
 
 static const u8 *const sCrySkipDescs[2] =	{gText_OptionDescription_CrySkipOn, gText_OptionDescription_CrySkipOff};
@@ -785,13 +785,13 @@ static void CrySkip_DrawChoices(u8 taskId)
 
     styles[0] = 0;
     styles[1] = 0;
-    styles[gSaveBlock2Ptr->optionsCrySkip] = 1;
+    styles[gSaveBlock2Ptr->optionsHotkeyMode] = 1;
 
     DrawOptionMenuChoice(gText_BattleSceneOff, 104, YPOS_SECOND_OPTION, styles[0]);
     DrawOptionMenuChoice(gText_BattleSceneOn, GetStringRightAlignXOffset(FONT_NORMAL, gText_BattleSceneOff, 198), YPOS_SECOND_OPTION, styles[1]);
 	
 	if (gTasks[taskId].tMenuSelection == MENUITEM_CRYSKIP)
-		DrawFooterText(sCrySkipDescs[gSaveBlock2Ptr->optionsCrySkip]);
+		DrawFooterText(sCrySkipDescs[gSaveBlock2Ptr->optionsHotkeyMode]);
 }
 
 static u8 SlideSpeed_ProcessInput(void)

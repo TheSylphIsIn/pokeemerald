@@ -104,61 +104,6 @@ static void Task_SetControllerToWaitForString(u8);
 static void Task_GiveExpWithExpBar(u8);
 static void Task_UpdateLvlInHealthbox(u8);
 static void PrintLinkStandbyMsg(void);
-static u8 CreateButtonCueSprite(bool32 isRButton);
-static u8 GetRecommendedBall(void);
-static void Task_ManageButtonCueSprites(u8);
-
-#define TAG_BUTTON_CUES 40103
-
-#define BUTTON_CUE_OFFSCREEN_X -16
-#define BUTTON_CUE_PEEKING_X -8
-#define BUTTON_CUE_OUT_X 16
-#define BUTTON_CUE_Y 64
-
-static const u32 sButtonCues_Gfx[] = INCBIN_U32("graphics/battle_interface/button_cues.4bpp.lz");
-
-static const struct CompressedSpriteSheet sSpriteSheet_ButtonCues =
-{
-    .data = sButtonCues_Gfx,
-    .size = 32*32*2/2,
-    .tag = TAG_BUTTON_CUES,
-};
-
-static const union AnimCmd sSpriteAnim_ButtonCueL[] =
-{
-    ANIMCMD_FRAME(0, 0),
-    ANIMCMD_END
-};
-
-static const union AnimCmd sSpriteAnim_ButtonCueR[] =
-{
-    ANIMCMD_FRAME(16, 0),
-    ANIMCMD_END
-};
-
-static const union AnimCmd *const sSpriteAnimTable_ButtonCues[] =
-{
-    sSpriteAnim_ButtonCueL,
-    sSpriteAnim_ButtonCueR,
-};
-
-static const struct OamData sOamData_ButtonCues =
-{
-    .size = SPRITE_SIZE(32x32),
-    .shape = SPRITE_SHAPE(32x32),
-    .priority = 3,
-};
-
-static const struct SpriteTemplate sSpriteTemplate_ButtonCues =
-{
-    .tileTag = TAG_BUTTON_CUES,
-    .paletteTag = TAG_HEALTHBOX_PAL,
-    .oam = &sOamData_ButtonCues,
-    .anims = sSpriteAnimTable_ButtonCues,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy
-};
 
 static void ReloadMoveNames(u32 battler);
 
@@ -371,7 +316,7 @@ static void HandleInputChooseAction(u32 battler)
             sAckBallUseBtn = FALSE;
             PlaySE(SE_SELECT);
             ArrowsChangeColorLastBallCycle(FALSE);
-            TryHideLastUsedBall();
+            ChangeButtonCueWindowStates(BUTTON_CUE_STATE_TURNOVER);
             BtlController_EmitTwoReturnValues(battler, BUFFER_B, B_ACTION_THROW_BALL, 0);
             PlayerBufferExecCompleted(battler);
         }
@@ -382,12 +327,12 @@ static void HandleInputChooseAction(u32 battler)
     if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
-        TryHideLastUsedBall();
 
         switch (gActionSelectionCursor[battler])
         {
         case 0: // Top left
             BtlController_EmitTwoReturnValues(battler, BUFFER_B, B_ACTION_USE_MOVE, 0);
+			ChangeButtonCueWindowStates(BUTTON_CUE_STATE_TRANS_MOVE);
             break;
         case 1: // Top right
             BtlController_EmitTwoReturnValues(battler, BUFFER_B, B_ACTION_USE_ITEM, 0);
@@ -397,26 +342,15 @@ static void HandleInputChooseAction(u32 battler)
             break;
         case 3: // Bottom right
             BtlController_EmitTwoReturnValues(battler, BUFFER_B, B_ACTION_RUN, 0);
+			ChangeButtonCueWindowStates(BUTTON_CUE_STATE_TRANS_TACTICS);
             break;
         }
         PlayerBufferExecCompleted(battler);
     }
-	else if (JOY_NEW(R_BUTTON))
-	{
-		if (gRecommendedBall != 0 && IsPlayerPartyAndPokemonStorageFull() == FALSE)
-		{
-            PlaySE(SE_SELECT);
-			gSpecialVar_ItemId = gRecommendedBall;
-			RemoveBagItem(gSpecialVar_ItemId, 1);
-			BtlController_EmitOneReturnValue(battler, BUFFER_B, gSpecialVar_ItemId);
-			gChosenActionByBattler[battler] = B_ACTION_USE_ITEM;
-			gBattleCommunication[battler] = 3; // STATE_WAIT_ACTION_CASE_CHOSEN;
-			PlayerBufferExecCompleted(battler);
-		}
-	}
 	else if (JOY_NEW(L_BUTTON))
 	{
 		BtlController_EmitTwoReturnValues(battler, BUFFER_B, B_ACTION_RUN, 0);
+        ChangeButtonCueWindowStates(BUTTON_CUE_STATE_TURNOVER);
 		PlayerBufferExecCompleted(battler);
 	}
     else if (JOY_NEW(DPAD_LEFT))
@@ -491,7 +425,7 @@ static void HandleInputChooseAction(u32 battler)
     else if (JOY_NEW(B_LAST_USED_BALL_BUTTON) && CanThrowLastUsedBall())
     {
         PlaySE(SE_SELECT);
-        TryHideLastUsedBall();
+        ChangeButtonCueWindowStates(BUTTON_CUE_STATE_TURNOVER);
         BtlController_EmitTwoReturnValues(battler, BUFFER_B, B_ACTION_THROW_BALL, 0);
         PlayerBufferExecCompleted(battler);
     }
@@ -528,7 +462,7 @@ static void HandleInputChooseTarget(u32 battler)
         else
             BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, gMoveSelectionCursor[battler] | (gMultiUsePlayerCursor << 8));
         EndBounceEffect(gMultiUsePlayerCursor, BOUNCE_HEALTHBOX);
-        TryHideLastUsedBall();
+        ChangeButtonCueWindowStates(BUTTON_CUE_STATE_TURNOVER);
         HideTriggerSprites();
         PlayerBufferExecCompleted(battler);
     }
@@ -723,7 +657,7 @@ static void HandleInputShowTargets(u32 battler)
         else
             BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, gMoveSelectionCursor[battler] | (gMultiUsePlayerCursor << 8));
         HideTriggerSprites();
-        TryHideLastUsedBall();
+        ChangeButtonCueWindowStates(BUTTON_CUE_STATE_TURNOVER);
         PlayerBufferExecCompleted(battler);
     }
     else if (JOY_NEW(B_BUTTON) || gPlayerDpadHoldFrames > 59)
@@ -840,7 +774,7 @@ static void HandleInputChooseMove(u32 battler)
             else
                 BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, gMoveSelectionCursor[battler] | (gMultiUsePlayerCursor << 8));
             HideTriggerSprites();
-            TryHideLastUsedBall();
+            ChangeButtonCueWindowStates(BUTTON_CUE_STATE_TURNOVER);
             PlayerBufferExecCompleted(battler);
             break;
         case 1:
@@ -2065,47 +1999,6 @@ static void HandleChooseActionAfterDma3(u32 battler)
 
         gBattle_BG0_X = 0;
         gBattle_BG0_Y = DISPLAY_HEIGHT;	// Add L/R action sprites and a task to handle sliding them onscreen
-		if (!FuncIsActiveTask(Task_ManageButtonCueSprites))
-		{
-			taskId = CreateTask(Task_ManageButtonCueSprites, 12);
-			gTasks[taskId].data[5] = 4; // Number of active sprites. When this reaches 0, the task is removed.
-			gRecommendedBall = GetRecommendedBall();
-			
-			if (gRecommendedBall)
-			{
-				gTasks[taskId].data[4] = AddItemIconSprite(40104, 40104, gRecommendedBall);
-				gSprites[gTasks[taskId].data[4]].x2 = BUTTON_CUE_OFFSCREEN_X;
-				gSprites[gTasks[taskId].data[4]].y2 = BUTTON_CUE_Y + 24;
-			}
-			else
-			{
-				gTasks[taskId].data[4] = 0xFF; // inactive spriteId
-				gTasks[taskId].data[5]--;
-			}
-			
-			if (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER))
-				{
-				gTasks[taskId].data[3] = AddItemIconSprite(40105, 40105, ITEM_ICON_FLEE);
-				gSprites[gTasks[taskId].data[3]].x2 = BUTTON_CUE_OFFSCREEN_X;
-				gSprites[gTasks[taskId].data[3]].y2 = BUTTON_CUE_Y;
-			}
-			else
-			{
-				gTasks[taskId].data[3] = 0xFF;
-				gTasks[taskId].data[5]--;
-			}
-			
-			LoadCompressedSpriteSheet(&sSpriteSheet_ButtonCues); 
-			gTasks[taskId].data[1] = CreateButtonCueSprite(FALSE); // L sprite 
-			gSprites[gTasks[taskId].data[1]].x2 = BUTTON_CUE_OFFSCREEN_X; // for some reason, this only works properly if i set this explicitly here.
-			gSprites[gTasks[taskId].data[1]].y2 = BUTTON_CUE_Y;
-			gSprites[gTasks[taskId].data[1]].subpriority = 2; 
-			gTasks[taskId].data[2] = CreateButtonCueSprite(TRUE); // R sprite
-			gSprites[gTasks[taskId].data[2]].x2 = BUTTON_CUE_OFFSCREEN_X; // passing it to CreateSprite doesn't work. skill issue?
-			gSprites[gTasks[taskId].data[2]].y2 = BUTTON_CUE_Y + 24;
-			gSprites[gTasks[taskId].data[2]].subpriority = 2;
-			
-		}
 		
 		if (gBattleStruct->aiDelayTimer != 0)
         {
@@ -2198,18 +2091,25 @@ static void PlayerHandleChooseMove(u32 battler)
         gBattleStruct->burst.playerSelect = FALSE;
         if (!IsMegaTriggerSpriteActive())
             gBattleStruct->mega.triggerSpriteId = 0xFF;
-        if (CanMegaEvolve(battler))
-            CreateMegaTriggerSprite(battler, 0);
+		if (gSaveBlock2Ptr->optionsHotkeyMode)
+		{
+			if (CanMegaEvolve(battler))
+				CreateMegaTriggerSprite(battler, 0);
+		}
         if (!IsBurstTriggerSpriteActive())
             gBattleStruct->burst.triggerSpriteId = 0xFF;
-        if (CanUltraBurst(battler))
-            CreateBurstTriggerSprite(battler, 0);
+		if (gSaveBlock2Ptr->optionsHotkeyMode)
+		{
+			if (CanUltraBurst(battler))
+				CreateBurstTriggerSprite(battler, 0);
+		}
         if (!IsZMoveTriggerSpriteActive())
             gBattleStruct->zmove.triggerSpriteId = 0xFF;
 
         GetUsableZMoves(battler, moveInfo->moves);
         gBattleStruct->zmove.viable = IsZMoveUsable(battler, gMoveSelectionCursor[battler]);
-        CreateZMoveTriggerSprite(battler, gBattleStruct->zmove.viable);
+		if (gSaveBlock2Ptr->optionsHotkeyMode)
+			CreateZMoveTriggerSprite(battler, gBattleStruct->zmove.viable);
         gBattlerControllerFuncs[battler] = HandleChooseMoveAfterDma3;
     }
 }
@@ -2466,109 +2366,4 @@ static void PlayerHandleBattleDebug(u32 battler)
     BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
     SetMainCallback2(CB2_BattleDebugMenu);
     gBattlerControllerFuncs[battler] = Controller_WaitForDebug;
-}
-
-static u8 CreateButtonCueSprite(bool32 isRButton)
-{
-    u8 spriteId = CreateSprite(&sSpriteTemplate_ButtonCues, 0, 0, 3);
-
-    gSprites[spriteId].invisible = FALSE;
-    StartSpriteAnim(&gSprites[spriteId], isRButton);
-    return spriteId;
-}
-
-static u8 GetRecommendedBall(void)
-{
-	if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
-		return 0;
-	else if (CheckBagHasItem(ITEM_ULTRA_BALL, 1))
-		return ITEM_ULTRA_BALL;
-	else if (CheckBagHasItem(ITEM_GREAT_BALL, 1))
-		return ITEM_GREAT_BALL;
-	else if (CheckBagHasItem(ITEM_POKE_BALL, 1))
-		return ITEM_POKE_BALL;
-	else
-		return 0;
-}
-
-#define tLSpriteId gTasks[taskId].data[1]
-#define tRSpriteId gTasks[taskId].data[2]
-#define tLIconSpriteId gTasks[taskId].data[3]
-#define tRIconSpriteId gTasks[taskId].data[4]
-#define tIconsWatch gTasks[taskId].data[5]
-
-#define INC_TOWARD_BOUND(spriteId, bound)	\
-	if 	(gSprites[spriteId].x2 < bound)									\
-		gSprites[spriteId].x2++;										\
-		
-#define DEC_TOWARD_BOUND(spriteId, bound)	\
-	if 	(spriteId != 0xFF && gSprites[spriteId].x2 > bound)									\
-		gSprites[spriteId].x2--;										\
-
-static void Task_ManageButtonCueSprites(u8 taskId) 
-{
-	switch(gBattle_BG0_Y)
-	{
-		case DISPLAY_HEIGHT:
-			
-			if (gSprites[tLSpriteId].x2 < BUTTON_CUE_PEEKING_X || (gSprites[tLSpriteId].x2 < BUTTON_CUE_OUT_X && tLIconSpriteId != 0xFF))
-			{
-				gSprites[tLSpriteId].x2++;
-				if (tLIconSpriteId != 0xFF)
-					gSprites[tLIconSpriteId].x2++;
-			}
-			
-			if (gSprites[tRSpriteId].x2 < BUTTON_CUE_PEEKING_X || (gSprites[tRSpriteId].x2 < BUTTON_CUE_OUT_X && tRIconSpriteId != 0xFF))
-			{
-				gSprites[tRSpriteId].x2++;
-				if (tRIconSpriteId != 0xFF)
-					gSprites[tRIconSpriteId].x2++;
-			}
-			break;
-		case DISPLAY_HEIGHT * 2:
-			DEC_TOWARD_BOUND(tLSpriteId, BUTTON_CUE_PEEKING_X);
-			DEC_TOWARD_BOUND(tRSpriteId, BUTTON_CUE_PEEKING_X);
-			DEC_TOWARD_BOUND(tLIconSpriteId, BUTTON_CUE_PEEKING_X);
-			DEC_TOWARD_BOUND(tRIconSpriteId, BUTTON_CUE_PEEKING_X);
-			break;
-		default:
-			// if not in a state where the icons are meaningful, slide them all offscreen and destroy them.
-			DEC_TOWARD_BOUND(tLSpriteId, BUTTON_CUE_OFFSCREEN_X);
-			if (tLSpriteId != 0xFF && gSprites[tLSpriteId].x2 == BUTTON_CUE_OFFSCREEN_X)
-			{
-				DestroySprite(&gSprites[tLSpriteId]);
-				tLSpriteId = 0xFF;
-				tIconsWatch--;
-			}
-			
-			DEC_TOWARD_BOUND(tRSpriteId, BUTTON_CUE_OFFSCREEN_X);
-			if (tRSpriteId != 0xFF && gSprites[tRSpriteId].x2 == BUTTON_CUE_OFFSCREEN_X)
-			{
-				DestroySprite(&gSprites[tRSpriteId]);
-				tRSpriteId = 0xFF;
-				tIconsWatch--;
-			}
-			
-			DEC_TOWARD_BOUND(tLIconSpriteId, BUTTON_CUE_OFFSCREEN_X);
-			if (tLIconSpriteId != 0xFF && gSprites[tLIconSpriteId].x2 == BUTTON_CUE_OFFSCREEN_X)
-			{
-				DestroySprite(&gSprites[tLIconSpriteId]);
-				tLIconSpriteId = 0xFF;
-				tIconsWatch--;
-			}
-			
-			DEC_TOWARD_BOUND(tRIconSpriteId, BUTTON_CUE_OFFSCREEN_X);
-			if (tRIconSpriteId != 0xFF && gSprites[tRIconSpriteId].x2 == BUTTON_CUE_OFFSCREEN_X)
-			{
-				DestroySprite(&gSprites[tRIconSpriteId]);
-				tRIconSpriteId = 0xFF;
-				tIconsWatch--;
-			}
-			
-			// if all icons have been destroyed, destroy the task.
-			if (tIconsWatch == 0)
-			{
-				DestroyTask(taskId);
-			}
-	}
 }

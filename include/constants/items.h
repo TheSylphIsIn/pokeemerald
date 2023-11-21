@@ -963,7 +963,11 @@
 #define ITEM_ABILITY_PILL 843
 #define ITEM_DREAM_PILL 844
 
-#define ITEM_ICON_FLEE 845
+
+#define ITEM_ICON_MEGA_EVOLVE 845
+#define ITEM_ICON_Z_MOVE 846
+#define ITEM_ICON_ULTRA_BURST 847
+#define ITEM_ICON_FLEE 848
 
 #define ITEMS_COUNT ITEM_ICON_FLEE + 1
 #define ITEM_FIELD_ARROW ITEMS_COUNT
@@ -1044,5 +1048,16 @@
 
 // Enigma Berry dummy constant
 #define EFFECT_ITEM_ENIGMA_BERRY_EREADER    1
+
+// needed in both battle_controller_player.c and battle_interface.c
+#define BUTTON_CUE_STATE_ACTION  0 // buttons wait on action screen
+#define BUTTON_CUE_STATE_TRANS_MOVE 1 // buttons close to change to their moves menu icons
+#define BUTTON_CUE_STATE_MOVE 2 // buttons reopen if contextually appropriate action is available
+#define BUTTON_CUE_STATE_TRANS_ACTION 3 // buttons close to change to their action menu icons
+#define BUTTON_CUE_STATE_TRANS_TACTICS 4 // buttons  close to change to their tactics menu icons
+#define BUTTON_CUE_STATE_TACTICS 5 // buttons reopen if contextually appropriate tactic is available
+#define BUTTON_CUE_STATE_WAIT 6 // buttons remain closed because they have no available action
+#define BUTTON_CUE_STATE_TURNOVER 7 // buttons slide offscreen and destroy themselves
+// the icons should close themselves passively if Start is held.
 
 #endif  // GUARD_CONSTANTS_ITEMS_H

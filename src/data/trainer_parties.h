@@ -76,6 +76,11 @@ static const struct TrainerMon sParty_Kyle[] = {
 	.lvl = 4,
 	.species = SPECIES_NIDORAN_M
 	},
+	{
+	.iv = 0,
+	.lvl = 4,
+	.species = SPECIES_NIDORAN_M
+	},
 };
 
 static const struct TrainerMon sParty_Billy[] = {

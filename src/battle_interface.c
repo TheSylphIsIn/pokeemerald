@@ -34,6 +34,42 @@
 #include "constants/songs.h"
 #include "constants/items.h"
 
+#define LAST_USED_BALL_X_F    14
+#define LAST_USED_BALL_X_0    -14
+#define LAST_USED_BALL_Y      ((IsDoubleBattle()) ? 78 : 68)
+#define LAST_USED_BALL_Y_BNC  ((IsDoubleBattle()) ? 76 : 66)
+
+#define LAST_BALL_WIN_X_F       (LAST_USED_BALL_X_F - 0)
+#define LAST_BALL_WIN_X_0       (LAST_USED_BALL_X_0 - 0)
+#define LAST_USED_WIN_Y         (LAST_USED_BALL_Y - 8)
+
+#define FANDANGO_CUE_OFFSCREEN_X -16
+#define FANDANGO_CUE_PEEKING_X -8
+#define FANDANGO_CUE_OUT_X 16
+#define FANDANGO_CUE_Y 72
+
+#define FANDANGO_CUE_ICON_R 0
+#define FANDANGO_CUE_BUTTON_R 1
+#define FANDANGO_CUE_ICON_L 2
+#define FANDANGO_CUE_BUTTON_L 3
+
+// ball sprite data
+#define sHide  data[0]
+#define sTimer  data[1]
+#define sMoving data[2]
+#define sBounce data[3] // 0 = Bounce down; 1 = Bounce up
+
+// ball bounce task data
+#define sState     data[0]
+#define sSameBall  data[1]
+
+// fandango cue sprite data
+#define sCueState data[0]
+#define sCueId data[1] // ID into ballSpriteIds
+#define sCueBattler data[2] // active battler ID
+
+#define TAG_BUTTON_CUE_ICONS 40104
+
 enum
 {   // Corresponds to gHealthboxElementsGfxTable (and the tables after it) in graphics.c
     // These are indexes into the tables, which are filled with 8x8 square pixel data.
@@ -212,6 +248,13 @@ static void Task_FreeAbilityPopUpGfx(u8);
 
 static void SpriteCB_LastUsedBall(struct Sprite *);
 static void SpriteCB_LastUsedBallWin(struct Sprite *);
+
+static void SpriteCB_FandangoCues(struct Sprite *);
+static void SpriteCB_FandangoCueIcons(struct Sprite *);
+
+static void SwapOutFandangoCueIcon(struct Sprite *sprite, u8 iconId, u16 targetIcon, u8 nextState);
+static void DestroyFandangoCueIconSprite(struct Sprite *sprite, u8 iconId);
+static void DestroyFandangoCueSprite(struct Sprite *sprite, u8 iconId);
 
 static const struct OamData sOamData_64x32 =
 {
@@ -758,6 +801,8 @@ static void InitLastUsedBallAssets(void)
 {
     gBattleStruct->ballSpriteIds[0] = MAX_SPRITES;
     gBattleStruct->ballSpriteIds[1] = MAX_SPRITES;
+    gBattleStruct->ballSpriteIds[2] = MAX_SPRITES;
+    gBattleStruct->ballSpriteIds[3] = MAX_SPRITES;
 }
 
 // This function is here to cover a specific case - one player's mon in a 2 vs 1 double battle. In this scenario - display singles layout.
@@ -862,6 +907,8 @@ u8 CreateBattlerHealthboxSprites(u8 battlerId)
 
     gBattleStruct->ballSpriteIds[0] = MAX_SPRITES;
     gBattleStruct->ballSpriteIds[1] = MAX_SPRITES;
+    gBattleStruct->ballSpriteIds[2] = MAX_SPRITES;
+    gBattleStruct->ballSpriteIds[3] = MAX_SPRITES;
 
     return healthboxLeftSpriteId;
 }
@@ -1386,24 +1433,35 @@ void ChangeMegaTriggerSprite(u8 spriteId, u8 animId)
 
 void CreateMegaTriggerSprite(u8 battlerId, u8 palId)
 {
-    LoadSpritePalette(&sSpritePalette_MegaTrigger);
-    if (GetSpriteTileStartByTag(TAG_MEGA_TRIGGER_TILE) == 0xFFFF)
-        LoadSpriteSheet(&sSpriteSheet_MegaTrigger);
-    if (gBattleStruct->mega.triggerSpriteId == 0xFF)
-    {
-        if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
-            gBattleStruct->mega.triggerSpriteId = CreateSprite(&sSpriteTemplate_MegaTrigger,
-                                                             gSprites[gHealthboxSpriteIds[battlerId]].x - DOUBLES_MEGA_TRIGGER_POS_X_SLIDE,
-                                                             gSprites[gHealthboxSpriteIds[battlerId]].y - DOUBLES_MEGA_TRIGGER_POS_Y_DIFF, 0);
-        else
-            gBattleStruct->mega.triggerSpriteId = CreateSprite(&sSpriteTemplate_MegaTrigger,
-                                                             gSprites[gHealthboxSpriteIds[battlerId]].x - SINGLES_MEGA_TRIGGER_POS_X_SLIDE,
-                                                             gSprites[gHealthboxSpriteIds[battlerId]].y - SINGLES_MEGA_TRIGGER_POS_Y_DIFF, 0);
-    }
-    gSprites[gBattleStruct->mega.triggerSpriteId].tBattler = battlerId;
-    gSprites[gBattleStruct->mega.triggerSpriteId].tHide = FALSE;
+	if (gSaveBlock2Ptr->optionsHotkeyMode)
+	{
+		LoadSpritePalette(&sSpritePalette_MegaTrigger);
+		if (GetSpriteTileStartByTag(TAG_MEGA_TRIGGER_TILE) == 0xFFFF)
+			LoadSpriteSheet(&sSpriteSheet_MegaTrigger);
+		if (gBattleStruct->mega.triggerSpriteId == 0xFF)
+		{
+			if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+				gBattleStruct->mega.triggerSpriteId = CreateSprite(&sSpriteTemplate_MegaTrigger,
+																 gSprites[gHealthboxSpriteIds[battlerId]].x - DOUBLES_MEGA_TRIGGER_POS_X_SLIDE,
+																 gSprites[gHealthboxSpriteIds[battlerId]].y - DOUBLES_MEGA_TRIGGER_POS_Y_DIFF, 0);
+			else
+				gBattleStruct->mega.triggerSpriteId = CreateSprite(&sSpriteTemplate_MegaTrigger,
+																 gSprites[gHealthboxSpriteIds[battlerId]].x - SINGLES_MEGA_TRIGGER_POS_X_SLIDE,
+																 gSprites[gHealthboxSpriteIds[battlerId]].y - SINGLES_MEGA_TRIGGER_POS_Y_DIFF, 0);
+		}
+		gSprites[gBattleStruct->mega.triggerSpriteId].tBattler = battlerId;
+		gSprites[gBattleStruct->mega.triggerSpriteId].tHide = FALSE;
 
-    ChangeMegaTriggerSprite(gBattleStruct->mega.triggerSpriteId, palId);
+		ChangeMegaTriggerSprite(gBattleStruct->mega.triggerSpriteId, palId);
+	}
+	else
+	{
+		u32 i;
+		for (i = 0; i < 4; i++)
+		{
+			gSprites[gBattleStruct->ballSpriteIds[i]].sCueBattler = battlerId;
+		}
+	}
 }
 
 static void SpriteCb_MegaTrigger(struct Sprite *sprite)
@@ -1514,24 +1572,35 @@ void ChangeBurstTriggerSprite(u8 spriteId, u8 animId)
 
 void CreateBurstTriggerSprite(u8 battlerId, u8 palId)
 {
-    LoadSpritePalette(&sSpritePalette_BurstTrigger);
-    if (GetSpriteTileStartByTag(TAG_BURST_TRIGGER_TILE) == 0xFFFF)
-        LoadSpriteSheet(&sSpriteSheet_BurstTrigger);
-    if (gBattleStruct->burst.triggerSpriteId == 0xFF)
-    {
-        if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
-            gBattleStruct->burst.triggerSpriteId = CreateSprite(&sSpriteTemplate_BurstTrigger,
-                                                             gSprites[gHealthboxSpriteIds[battlerId]].x - DOUBLES_BURST_TRIGGER_POS_X_SLIDE,
-                                                             gSprites[gHealthboxSpriteIds[battlerId]].y - DOUBLES_BURST_TRIGGER_POS_Y_DIFF, 0);
-        else
-            gBattleStruct->burst.triggerSpriteId = CreateSprite(&sSpriteTemplate_BurstTrigger,
-                                                             gSprites[gHealthboxSpriteIds[battlerId]].x - SINGLES_BURST_TRIGGER_POS_X_SLIDE,
-                                                             gSprites[gHealthboxSpriteIds[battlerId]].y - SINGLES_BURST_TRIGGER_POS_Y_DIFF, 0);
-    }
-    gSprites[gBattleStruct->burst.triggerSpriteId].tBattler = battlerId;
-    gSprites[gBattleStruct->burst.triggerSpriteId].tHide = FALSE;
+	if (gSaveBlock2Ptr->optionsHotkeyMode)
+	{
+		LoadSpritePalette(&sSpritePalette_BurstTrigger);
+		if (GetSpriteTileStartByTag(TAG_BURST_TRIGGER_TILE) == 0xFFFF)
+			LoadSpriteSheet(&sSpriteSheet_BurstTrigger);
+		if (gBattleStruct->burst.triggerSpriteId == 0xFF)
+		{
+			if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+				gBattleStruct->burst.triggerSpriteId = CreateSprite(&sSpriteTemplate_BurstTrigger,
+																 gSprites[gHealthboxSpriteIds[battlerId]].x - DOUBLES_BURST_TRIGGER_POS_X_SLIDE,
+																 gSprites[gHealthboxSpriteIds[battlerId]].y - DOUBLES_BURST_TRIGGER_POS_Y_DIFF, 0);
+			else
+				gBattleStruct->burst.triggerSpriteId = CreateSprite(&sSpriteTemplate_BurstTrigger,
+																 gSprites[gHealthboxSpriteIds[battlerId]].x - SINGLES_BURST_TRIGGER_POS_X_SLIDE,
+																 gSprites[gHealthboxSpriteIds[battlerId]].y - SINGLES_BURST_TRIGGER_POS_Y_DIFF, 0);
+		}
+		gSprites[gBattleStruct->burst.triggerSpriteId].tBattler = battlerId;
+		gSprites[gBattleStruct->burst.triggerSpriteId].tHide = FALSE;
 
-    ChangeBurstTriggerSprite(gBattleStruct->burst.triggerSpriteId, palId);
+		ChangeBurstTriggerSprite(gBattleStruct->burst.triggerSpriteId, palId);
+	}
+	else
+	{
+		u32 i;
+		for (i = 0; i < 4; i++)
+		{
+			gSprites[gBattleStruct->ballSpriteIds[i]].sCueBattler = battlerId;
+		}
+	}
 }
 
 static void SpriteCb_BurstTrigger(struct Sprite *sprite)
@@ -3424,6 +3493,53 @@ static const struct SpriteTemplate sSpriteTemplate_LastUsedBallWindow =
     .callback = SpriteCB_LastUsedBallWin
 };
 
+#define TAG_BUTTON_CUES 40103
+
+static const u32 sButtonCues_Gfx[] = INCBIN_U32("graphics/battle_interface/button_cues.4bpp.lz");
+
+static const struct CompressedSpriteSheet sSpriteSheet_ButtonCues =
+{
+    .data = sButtonCues_Gfx,
+    .size = 32*32*2/2,
+    .tag = TAG_BUTTON_CUES,
+};
+
+static const union AnimCmd sSpriteAnim_ButtonCueL[] =
+{
+    ANIMCMD_FRAME(0, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_ButtonCueR[] =
+{
+    ANIMCMD_FRAME(16, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd *const sSpriteAnimTable_ButtonCues[] =
+{
+    sSpriteAnim_ButtonCueL,
+    sSpriteAnim_ButtonCueR,
+};
+
+static const struct OamData sOamData_ButtonCues =
+{
+    .size = SPRITE_SIZE(32x32),
+    .shape = SPRITE_SHAPE(32x32),
+    .priority = 3,
+};
+
+static const struct SpriteTemplate sSpriteTemplate_ButtonCues =
+{
+    .tileTag = TAG_BUTTON_CUES,
+    .paletteTag = TAG_HEALTHBOX_PAL,
+    .oam = &sOamData_ButtonCues,
+    .anims = sSpriteAnimTable_ButtonCues,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCB_FandangoCues
+};
+
 #if B_LAST_USED_BALL_BUTTON == R_BUTTON && B_LAST_USED_BALL_CYCLE == TRUE
     static const u8 ALIGNED(4) sLastUsedBallWindowGfx[] = INCBIN_U8("graphics/battle_interface/last_used_ball_r_cycle.4bpp");
 #elif B_LAST_USED_BALL_CYCLE == TRUE
@@ -3437,23 +3553,6 @@ static const struct SpriteSheet sSpriteSheet_LastUsedBallWindow =
 {
     sLastUsedBallWindowGfx, sizeof(sLastUsedBallWindowGfx), LAST_BALL_WINDOW_TAG
 };
-
-#define LAST_USED_BALL_X_F    14
-#define LAST_USED_BALL_X_0    -14
-#define LAST_USED_BALL_Y      ((IsDoubleBattle()) ? 78 : 68)
-#define LAST_USED_BALL_Y_BNC  ((IsDoubleBattle()) ? 76 : 66)
-
-#define LAST_BALL_WIN_X_F       (LAST_USED_BALL_X_F - 0)
-#define LAST_BALL_WIN_X_0       (LAST_USED_BALL_X_0 - 0)
-#define LAST_USED_WIN_Y         (LAST_USED_BALL_Y - 8)
-
-#define sHide  data[0]
-#define sTimer  data[1]
-#define sMoving data[2]
-#define sBounce data[3] // 0 = Bounce down; 1 = Bounce up
-
-#define sState     data[0]
-#define sSameBall  data[1]
 
 bool32 CanThrowLastUsedBall(void)
 {
@@ -3482,37 +3581,92 @@ void TryAddLastUsedBallItemSprites(void)
         CompactItemsInBagPocket(&gBagPockets[BALLS_POCKET]);
         gBallToDisplay = gBagPockets[BALLS_POCKET].itemSlots[0].itemId;
     }
-
-    if (!CanThrowLastUsedBall())
+	// only do this early exit in Expansion mode, cuz fandango mode still wants to create the L/R icons regardless of if a ball can be thrown
+    if (!CanThrowLastUsedBall() && gSaveBlock2Ptr->optionsHotkeyMode) 
         return;
 
     // ball
     if (gBattleStruct->ballSpriteIds[0] == MAX_SPRITES)
     {
-        gBattleStruct->ballSpriteIds[0] = AddItemIconSprite(102, 102, gBallToDisplay);
-        gSprites[gBattleStruct->ballSpriteIds[0]].x = LAST_USED_BALL_X_0;
-        gSprites[gBattleStruct->ballSpriteIds[0]].y = LAST_USED_BALL_Y;
-        gSprites[gBattleStruct->ballSpriteIds[0]].sHide = FALSE;   // restore
-        gLastUsedBallMenuPresent = TRUE;
-        gSprites[gBattleStruct->ballSpriteIds[0]].callback = SpriteCB_LastUsedBall;
+		if (gSaveBlock2Ptr->optionsHotkeyMode)
+		{
+			gBattleStruct->ballSpriteIds[0] = AddItemIconSprite(102, 102, gBallToDisplay);
+			gSprites[gBattleStruct->ballSpriteIds[0]].x = LAST_USED_BALL_X_0;
+			gSprites[gBattleStruct->ballSpriteIds[0]].y = LAST_USED_BALL_Y;
+			gSprites[gBattleStruct->ballSpriteIds[0]].sHide = FALSE;   // restore
+			gLastUsedBallMenuPresent = TRUE;
+			gSprites[gBattleStruct->ballSpriteIds[0]].callback = SpriteCB_LastUsedBall;
+		}
+		else
+		{
+			// R Icon
+			gBattleStruct->ballSpriteIds[FANDANGO_CUE_ICON_R] = AddItemIconSprite(TAG_BUTTON_CUE_ICONS, TAG_BUTTON_CUE_ICONS, gBallToDisplay);
+			gSprites[gBattleStruct->ballSpriteIds[FANDANGO_CUE_ICON_R]].x = FANDANGO_CUE_OFFSCREEN_X;
+			gSprites[gBattleStruct->ballSpriteIds[FANDANGO_CUE_ICON_R]].y = FANDANGO_CUE_Y + 24;
+			if (CanThrowLastUsedBall())
+				gSprites[gBattleStruct->ballSpriteIds[FANDANGO_CUE_ICON_R]].sCueState = BUTTON_CUE_STATE_ACTION;
+			else
+				gSprites[gBattleStruct->ballSpriteIds[FANDANGO_CUE_ICON_R]].sCueState = BUTTON_CUE_STATE_WAIT;					
+			gSprites[gBattleStruct->ballSpriteIds[FANDANGO_CUE_ICON_R]].sCueBattler = MAX_SPRITES; // initialized by CreateMegaTriggerSprite or cousins
+			gLastUsedBallMenuPresent = TRUE;
+			gSprites[gBattleStruct->ballSpriteIds[FANDANGO_CUE_ICON_R]].callback = SpriteCB_FandangoCueIcons;
+			gSprites[gBattleStruct->ballSpriteIds[FANDANGO_CUE_ICON_R]].sCueId = FANDANGO_CUE_ICON_R;
+			
+			// L Icon
+			gBattleStruct->ballSpriteIds[FANDANGO_CUE_ICON_L] = AddItemIconSprite(TAG_BUTTON_CUE_ICONS + 2, TAG_BUTTON_CUE_ICONS + 2, ITEM_ICON_FLEE);
+			gSprites[gBattleStruct->ballSpriteIds[FANDANGO_CUE_ICON_L]].x = FANDANGO_CUE_OFFSCREEN_X;
+			gSprites[gBattleStruct->ballSpriteIds[FANDANGO_CUE_ICON_L]].y = FANDANGO_CUE_Y;
+			if (!(gBattleTypeFlags & (BATTLE_TYPE_TRAINER | BATTLE_TYPE_FRONTIER)))
+				gSprites[gBattleStruct->ballSpriteIds[FANDANGO_CUE_ICON_R]].sCueState = BUTTON_CUE_STATE_ACTION;
+			else
+				gSprites[gBattleStruct->ballSpriteIds[FANDANGO_CUE_ICON_R]].sCueState = BUTTON_CUE_STATE_WAIT;
+			gSprites[gBattleStruct->ballSpriteIds[FANDANGO_CUE_ICON_L]].sCueBattler = MAX_SPRITES;
+			gSprites[gBattleStruct->ballSpriteIds[FANDANGO_CUE_ICON_L]].callback = SpriteCB_FandangoCueIcons;
+			gSprites[gBattleStruct->ballSpriteIds[FANDANGO_CUE_ICON_L]].sCueId = FANDANGO_CUE_ICON_L;
+		}
     }
 
     // window
-    LoadSpritePalette(&sSpritePalette_AbilityPopUp);
-    if (GetSpriteTileStartByTag(LAST_BALL_WINDOW_TAG) == 0xFFFF)
-        LoadSpriteSheet(&sSpriteSheet_LastUsedBallWindow);
-
-    if (gBattleStruct->ballSpriteIds[1] == MAX_SPRITES)
-    {
-        gBattleStruct->ballSpriteIds[1] = CreateSprite(&sSpriteTemplate_LastUsedBallWindow,
-                                                       LAST_BALL_WIN_X_0,
-                                                       LAST_USED_WIN_Y, 5);
-        gSprites[gBattleStruct->ballSpriteIds[1]].sHide = FALSE;   // restore
-        gLastUsedBallMenuPresent = TRUE;
-    }
-#if B_LAST_USED_BALL_CYCLE == TRUE
-    ArrowsChangeColorLastBallCycle(0); //Default the arrows to be invisible
-#endif
+	if (gSaveBlock2Ptr->optionsHotkeyMode)
+	{
+		LoadSpritePalette(&sSpritePalette_AbilityPopUp);
+		if (GetSpriteTileStartByTag(LAST_BALL_WINDOW_TAG) == 0xFFFF)
+			LoadSpriteSheet(&sSpriteSheet_LastUsedBallWindow);
+		if (gBattleStruct->ballSpriteIds[1] == MAX_SPRITES)
+		{
+			gBattleStruct->ballSpriteIds[1] = CreateSprite(&sSpriteTemplate_LastUsedBallWindow,
+														   LAST_BALL_WIN_X_0,
+														   LAST_USED_WIN_Y, 5);
+			gSprites[gBattleStruct->ballSpriteIds[1]].sHide = FALSE;   // restore
+			gLastUsedBallMenuPresent = TRUE;
+		}
+	#if B_LAST_USED_BALL_CYCLE == TRUE
+		ArrowsChangeColorLastBallCycle(0); //Default the arrows to be invisible
+	#endif
+	}
+	else
+	{
+		if (GetSpriteTileStartByTag(TAG_BUTTON_CUES) == 0xFFFF)
+			LoadCompressedSpriteSheet(&sSpriteSheet_ButtonCues);
+		
+		if (gBattleStruct->ballSpriteIds[FANDANGO_CUE_BUTTON_R] == MAX_SPRITES)
+		{
+			gBattleStruct->ballSpriteIds[FANDANGO_CUE_BUTTON_R] = CreateSprite(&sSpriteTemplate_ButtonCues,
+														   FANDANGO_CUE_OFFSCREEN_X,
+														   FANDANGO_CUE_Y + 24, 5);
+			gSprites[gBattleStruct->ballSpriteIds[FANDANGO_CUE_BUTTON_R]].sCueState = gSprites[gBattleStruct->ballSpriteIds[FANDANGO_CUE_ICON_R]].sCueState;
+			StartSpriteAnim(&gSprites[gBattleStruct->ballSpriteIds[FANDANGO_CUE_BUTTON_R]], 1);
+			gSprites[gBattleStruct->ballSpriteIds[FANDANGO_CUE_BUTTON_R]].sCueId = FANDANGO_CUE_BUTTON_R;
+		}
+		if (gBattleStruct->ballSpriteIds[FANDANGO_CUE_BUTTON_L] == MAX_SPRITES)
+		{
+			gBattleStruct->ballSpriteIds[FANDANGO_CUE_BUTTON_L] = CreateSprite(&sSpriteTemplate_ButtonCues,
+														   FANDANGO_CUE_OFFSCREEN_X,
+														   FANDANGO_CUE_Y, 5);
+			gSprites[gBattleStruct->ballSpriteIds[FANDANGO_CUE_BUTTON_L]].sCueState = gSprites[gBattleStruct->ballSpriteIds[FANDANGO_CUE_ICON_L]].sCueState;
+			gSprites[gBattleStruct->ballSpriteIds[FANDANGO_CUE_BUTTON_L]].sCueId = FANDANGO_CUE_BUTTON_L;
+		}
+	}
 #endif
 }
 
@@ -3569,39 +3723,247 @@ static void SpriteCB_LastUsedBall(struct Sprite *sprite)
     }
 }
 
+#define sCueInactive data[3]
+// The sprites' positions depend on their icons.
+static void SpriteCB_FandangoCues(struct Sprite *sprite)
+{
+	DebugPrintf("state for %d: %d", sprite->sCueId, sprite->sCueState);
+	if (JOY_HELD(START_BUTTON) && sprite->x > FANDANGO_CUE_PEEKING_X)
+		sprite->x -= (2 - (sprite->x == FANDANGO_CUE_PEEKING_X));
+	switch (sprite->sCueState)
+	{
+		case BUTTON_CUE_STATE_ACTION: // stay open
+		case BUTTON_CUE_STATE_MOVE:
+		case BUTTON_CUE_STATE_TACTICS:
+			if (sprite->x < FANDANGO_CUE_OUT_X)
+				sprite->x++;
+			break;
+		case BUTTON_CUE_STATE_TRANS_MOVE: // close self, then check if should reopen
+			if (sprite-> x > FANDANGO_CUE_PEEKING_X)
+				sprite->x--;
+			else if (gSprites[sprite->sCueId - 1].sCueState == BUTTON_CUE_STATE_MOVE)
+			{
+				sprite->x++;
+				sprite->sCueState = BUTTON_CUE_STATE_MOVE;
+			}
+			else
+			{
+				sprite->sCueState = BUTTON_CUE_STATE_WAIT;
+			}
+			break;
+		case BUTTON_CUE_STATE_TRANS_ACTION:
+			if (sprite-> x > FANDANGO_CUE_PEEKING_X)
+				sprite->x--;
+			else if (gSprites[sprite->sCueId - 1].sCueState == BUTTON_CUE_STATE_ACTION)
+			{
+				sprite->x++;
+				sprite->sCueState = BUTTON_CUE_STATE_ACTION;
+			}
+			else
+			{
+				sprite->sCueState = BUTTON_CUE_STATE_WAIT;
+			}
+			break;
+		case BUTTON_CUE_STATE_TRANS_TACTICS:
+			if (sprite-> x > FANDANGO_CUE_PEEKING_X)
+				sprite->x--;
+			else if (gSprites[sprite->sCueId - 1].sCueState == BUTTON_CUE_STATE_TACTICS)
+			{
+				sprite->x++;
+				sprite->sCueState = BUTTON_CUE_STATE_TACTICS;
+			}
+			else
+			{
+				sprite->sCueState = BUTTON_CUE_STATE_WAIT;
+			}
+			break;
+		case BUTTON_CUE_STATE_WAIT:
+			if (sprite->x > FANDANGO_CUE_PEEKING_X)
+				sprite->x--;
+			if (sprite->x < FANDANGO_CUE_PEEKING_X)
+				sprite->x++;
+			break;
+		case BUTTON_CUE_STATE_TURNOVER: // turn is over. Slide offscreen and destroy self.
+			if (sprite->x > FANDANGO_CUE_OFFSCREEN_X)
+				sprite->x--;
+			else
+				DestroyFandangoCueSprite(sprite, sprite->sCueId);
+			break;
+	}
+}
+
+static void SpriteCB_FandangoCueIcons(struct Sprite *sprite)
+{
+	DebugPrintf("state for %d: %d", sprite->sCueId, sprite->sCueState);
+	if (JOY_HELD(START_BUTTON) && sprite->x > FANDANGO_CUE_PEEKING_X)
+		sprite->x -= (2 - (sprite->x == FANDANGO_CUE_PEEKING_X));
+	switch (sprite->sCueState)
+	{
+		case BUTTON_CUE_STATE_ACTION:
+		case BUTTON_CUE_STATE_MOVE:
+		case BUTTON_CUE_STATE_TACTICS:
+			if (sprite->x < FANDANGO_CUE_OUT_X)
+				sprite->x++;
+			break;
+		case BUTTON_CUE_STATE_TRANS_MOVE:
+			if (sprite-> x > FANDANGO_CUE_PEEKING_X)
+				sprite->x--;
+			else
+			{
+				switch (sprite->sCueId)
+				{
+					case FANDANGO_CUE_ICON_L:
+						if (sprite->sCueBattler != MAX_SPRITES && CanMegaEvolve(sprite->sCueBattler))
+						{
+							SwapOutFandangoCueIcon(sprite, sprite->sCueId, ITEM_ICON_MEGA_EVOLVE, BUTTON_CUE_STATE_MOVE);
+						}
+						else if (sprite->sCueBattler != MAX_SPRITES && CanUltraBurst(sprite->sCueBattler))
+						{
+							SwapOutFandangoCueIcon(sprite, sprite->sCueId, ITEM_ICON_ULTRA_BURST, BUTTON_CUE_STATE_MOVE);
+						}
+						else if (sprite->sCueBattler != MAX_SPRITES && gBattleStruct->zmove.viable)
+						{
+							SwapOutFandangoCueIcon(sprite, sprite->sCueId, ITEM_ICON_Z_MOVE, BUTTON_CUE_STATE_MOVE);
+						}
+						else
+							sprite->sCueState = BUTTON_CUE_STATE_WAIT;
+						break;
+					case FANDANGO_CUE_ICON_R: // may do something in the future.
+						sprite->sCueState = BUTTON_CUE_STATE_WAIT;
+						break;
+				}
+			}
+			break;
+		case BUTTON_CUE_STATE_TRANS_ACTION:
+			if (sprite-> x > FANDANGO_CUE_PEEKING_X)
+				sprite->x--;
+			else
+			{
+				switch (sprite->sCueId)
+				{
+					case FANDANGO_CUE_ICON_L:
+						if (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER))
+						{
+							DebugPrintf("tried to restore flee icon", 0);
+							SwapOutFandangoCueIcon(sprite, sprite->sCueId, ITEM_ICON_FLEE, BUTTON_CUE_STATE_ACTION);
+						}
+						else
+							sprite->sCueState = BUTTON_CUE_STATE_WAIT;
+						break;
+					case FANDANGO_CUE_ICON_R:
+						if (CanThrowLastUsedBall())
+						{
+							DebugPrintf("tried to restore ball icon", 0);
+							SwapOutFandangoCueIcon(sprite, sprite->sCueId, gBallToDisplay, BUTTON_CUE_STATE_ACTION);
+						}
+						else
+							sprite->sCueState = BUTTON_CUE_STATE_WAIT;
+						break;
+				}
+			}
+			break;
+		case BUTTON_CUE_STATE_TRANS_TACTICS:
+		case BUTTON_CUE_STATE_WAIT:
+			if (sprite->x > FANDANGO_CUE_PEEKING_X)
+				sprite->x--;
+			if (sprite->x < FANDANGO_CUE_PEEKING_X)
+				sprite->x++;
+			break;
+		case BUTTON_CUE_STATE_TURNOVER:
+			if (sprite->x > FANDANGO_CUE_OFFSCREEN_X)
+				sprite->x--;
+			else
+				DestroyFandangoCueIconSprite(sprite, sprite->sCueId);
+			break;
+	}
+}
+
+static void SwapOutFandangoCueIcon(struct Sprite *sprite, u8 iconId, u16 targetIcon, u8 nextState) 
+{
+	u32 battler = sprite->sCueBattler;
+	DebugPrintf("exchanged icon.", 0);
+	
+	FreeSpriteTilesByTag(TAG_BUTTON_CUE_ICONS + iconId);
+    FreeSpritePaletteByTag(TAG_BUTTON_CUE_ICONS + iconId);
+    DestroySprite(sprite);
+	
+	gBattleStruct->ballSpriteIds[iconId] = AddItemIconSprite(TAG_BUTTON_CUE_ICONS + iconId, TAG_BUTTON_CUE_ICONS + iconId, targetIcon);
+	gSprites[gBattleStruct->ballSpriteIds[iconId]].x = FANDANGO_CUE_OFFSCREEN_X;
+	gSprites[gBattleStruct->ballSpriteIds[iconId]].y = FANDANGO_CUE_Y + (24 - (12 * iconId)); // R (0) cue is 24px lower than L cue (2)
+	gSprites[gBattleStruct->ballSpriteIds[iconId]].sCueState = nextState;
+	gSprites[gBattleStruct->ballSpriteIds[iconId]].sCueBattler = battler;
+	gSprites[gBattleStruct->ballSpriteIds[iconId]].sCueId = iconId;
+	gSprites[gBattleStruct->ballSpriteIds[iconId]].callback = SpriteCB_FandangoCueIcons;
+	
+}
+
+static void DestroyFandangoCueIconSprite(struct Sprite *sprite, u8 iconId)
+{
+	DebugPrintf("destroyed icon.", 0);
+	FreeSpriteTilesByTag(TAG_BUTTON_CUE_ICONS + iconId);
+    FreeSpritePaletteByTag(TAG_BUTTON_CUE_ICONS + iconId);
+    DestroySprite(sprite);
+	gBattleStruct->ballSpriteIds[iconId] = MAX_SPRITES;
+}
+
+static void DestroyFandangoCueSprite(struct Sprite *sprite, u8 iconId)
+{
+	DebugPrintf("destroyed button.", 0);
+    DestroySprite(sprite);
+    gBattleStruct->ballSpriteIds[iconId] = MAX_SPRITES;
+	
+	// Don't free the tiles unless both sprites are gone, since they both use the same ones.
+	if (gBattleStruct->ballSpriteIds[1] == MAX_SPRITES && gBattleStruct->ballSpriteIds[3] == MAX_SPRITES)
+		FreeSpriteTilesByTag(TAG_BUTTON_CUES);
+}
+
 static void TryHideOrRestoreLastUsedBall(u8 caseId)
 {
+	u32 i;
+	
+	DebugPrintf("altered states to %d", caseId);
 #if B_LAST_USED_BALL == TRUE
     if (gBattleStruct->ballSpriteIds[0] == MAX_SPRITES)
         return;
 
-    switch (caseId)
-    {
-    case 0: // hide
-        if (gBattleStruct->ballSpriteIds[0] != MAX_SPRITES)
-            gSprites[gBattleStruct->ballSpriteIds[0]].sHide = TRUE;   // hide
-        if (gBattleStruct->ballSpriteIds[1] != MAX_SPRITES)
-            gSprites[gBattleStruct->ballSpriteIds[1]].sHide = TRUE;   // hide
-        gLastUsedBallMenuPresent = FALSE;
-        break;
-    case 1: // restore
-        if (gBattleStruct->ballSpriteIds[0] != MAX_SPRITES)
-            gSprites[gBattleStruct->ballSpriteIds[0]].sHide = FALSE;   // restore
-        if (gBattleStruct->ballSpriteIds[1] != MAX_SPRITES)
-            gSprites[gBattleStruct->ballSpriteIds[1]].sHide = FALSE;   // restore
-        gLastUsedBallMenuPresent = TRUE;
-        break;
-    }
-#if B_LAST_USED_BALL_CYCLE == TRUE
-    ArrowsChangeColorLastBallCycle(0); //Default the arrows to be invisible
-#endif
+	if (gSaveBlock2Ptr->optionsHotkeyMode)
+	{
+		switch (caseId)
+		{
+		default: // hide
+			if (gBattleStruct->ballSpriteIds[0] != MAX_SPRITES)
+				gSprites[gBattleStruct->ballSpriteIds[0]].sHide = TRUE;   // hide
+			if (gBattleStruct->ballSpriteIds[1] != MAX_SPRITES)
+				gSprites[gBattleStruct->ballSpriteIds[1]].sHide = TRUE;   // hide
+			gLastUsedBallMenuPresent = FALSE;
+			break;
+		case BUTTON_CUE_STATE_TRANS_ACTION: // restore
+			if (gBattleStruct->ballSpriteIds[0] != MAX_SPRITES)
+				gSprites[gBattleStruct->ballSpriteIds[0]].sHide = FALSE;   // restore
+			if (gBattleStruct->ballSpriteIds[1] != MAX_SPRITES)
+				gSprites[gBattleStruct->ballSpriteIds[1]].sHide = FALSE;   // restore
+			gLastUsedBallMenuPresent = TRUE;
+			break;
+		}
+	#if B_LAST_USED_BALL_CYCLE == TRUE
+		ArrowsChangeColorLastBallCycle(0); //Default the arrows to be invisible
+	#endif
+	}
+	else
+	{
+		for (i = 0; i < 4; i++)
+		{
+			if (gBattleStruct->ballSpriteIds[i] != MAX_SPRITES)
+				gSprites[gBattleStruct->ballSpriteIds[i]].sCueState = caseId;
+		}
+	}
 #endif
 }
 
-void TryHideLastUsedBall(void)
+void ChangeButtonCueWindowStates(u8 caseId)
 {
 #if B_LAST_USED_BALL == TRUE
-    TryHideOrRestoreLastUsedBall(0);
+    TryHideOrRestoreLastUsedBall(caseId);
 #endif
 }
 
@@ -3609,7 +3971,7 @@ void TryRestoreLastUsedBall(void)
 {
 #if B_LAST_USED_BALL == TRUE
     if (gBattleStruct->ballSpriteIds[0] != MAX_SPRITES)
-        TryHideOrRestoreLastUsedBall(1);
+        TryHideOrRestoreLastUsedBall(BUTTON_CUE_STATE_TRANS_ACTION);
     else
         TryAddLastUsedBallItemSprites();
 #endif

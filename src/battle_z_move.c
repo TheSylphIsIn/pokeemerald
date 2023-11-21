@@ -253,28 +253,39 @@ bool32 TryChangeZIndicator(u8 battler, u8 moveIndex)
 
 void CreateZMoveTriggerSprite(u8 battler, bool8 viable)
 {
-    s16 x, y;
+	if (gSaveBlock2Ptr->optionsHotkeyMode)
+	{
+		s16 x, y;
 
-    LoadSpritePalette(&sSpritePalette_ZMoveTrigger);
-    if (GetSpriteTileStartByTag(TAG_ZMOVE_TRIGGER_TILE) == 0xFFFF)
-        LoadCompressedSpriteSheetUsingHeap(&sSpriteSheet_ZMoveTrigger);
+		LoadSpritePalette(&sSpritePalette_ZMoveTrigger);
+		if (GetSpriteTileStartByTag(TAG_ZMOVE_TRIGGER_TILE) == 0xFFFF)
+			LoadCompressedSpriteSheetUsingHeap(&sSpriteSheet_ZMoveTrigger);
 
-    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
-    {
-        x = gSprites[gHealthboxSpriteIds[battler]].x - DOUBLES_Z_TRIGGER_POS_X_SLIDE;
-        y = gSprites[gHealthboxSpriteIds[battler]].y - DOUBLES_Z_TRIGGER_POS_Y_DIFF;
-    }
-    else
-    {
-        x = gSprites[gHealthboxSpriteIds[battler]].x - SINGLES_Z_TRIGGER_POS_X_SLIDE;
-        y = gSprites[gHealthboxSpriteIds[battler]].y - SINGLES_Z_TRIGGER_POS_Y_DIFF, 0;
-    }
+		if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+		{
+			x = gSprites[gHealthboxSpriteIds[battler]].x - DOUBLES_Z_TRIGGER_POS_X_SLIDE;
+			y = gSprites[gHealthboxSpriteIds[battler]].y - DOUBLES_Z_TRIGGER_POS_Y_DIFF;
+		}
+		else
+		{
+			x = gSprites[gHealthboxSpriteIds[battler]].x - SINGLES_Z_TRIGGER_POS_X_SLIDE;
+			y = gSprites[gHealthboxSpriteIds[battler]].y - SINGLES_Z_TRIGGER_POS_Y_DIFF, 0;
+		}
 
-    if (gBattleStruct->zmove.triggerSpriteId == 0xFF)
-        gBattleStruct->zmove.triggerSpriteId = CreateSprite(&sSpriteTemplate_ZMoveTrigger, x, y, 0);
+		if (gBattleStruct->zmove.triggerSpriteId == 0xFF)
+			gBattleStruct->zmove.triggerSpriteId = CreateSprite(&sSpriteTemplate_ZMoveTrigger, x, y, 0);
 
-    gSprites[gBattleStruct->zmove.triggerSpriteId].tBattler = battler;
-    gSprites[gBattleStruct->zmove.triggerSpriteId].tHide = (viable == TRUE) ? FALSE : TRUE;
+		gSprites[gBattleStruct->zmove.triggerSpriteId].tBattler = battler;
+		gSprites[gBattleStruct->zmove.triggerSpriteId].tHide = (viable == TRUE) ? FALSE : TRUE;
+	}
+	else
+	{
+		u32 i;
+		for (i = 0; i < 4; i++)
+		{
+			gSprites[gBattleStruct->ballSpriteIds[i]].data[2] = battler;
+		}
+	}
 }
 
 static void SpriteCB_ZMoveTrigger(struct Sprite *sprite)

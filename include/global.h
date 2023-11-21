@@ -503,7 +503,7 @@ struct SaveBlock2
     /*0x12*/ u8 playTimeVBlanks;
     /*0x13*/ u8 optionsButtonMode:1;  // OPTIONS_BUTTON_MODE_[NORMAL/L_EQUALS_A]
 			 u8 optionsBattleMessageScroll:2; // OPTIONS_BATTLE_MESSAGE_SCROLL_[DEFAULT/SKIP PRESS/WAIT PRESS]
-			 u8 optionsCrySkip:1; // won't wait for cries in battle if true
+			 u8 optionsHotkeyMode:1; // won't wait for cries in battle if true
 			 u8 optionsBattleSlideSpeed:2; // OPTIONS_BATTLE_SLIDE_SPEED_[NORMAL/FAST/HYPER]
 			 u8 optionsTextMashInput:2; // OPTIONS_TEXT_MASH_INPUT_[NORMAL/DPAD/HOLD]
     /*0x14*/ u16 optionsTextSpeed:2; // OPTIONS_TEXT_SPEED_[SLOW/MID/FAST]
@@ -516,7 +516,7 @@ struct SaveBlock2
 			 u16 optionsSound:1; // stereo or mono
 			 u16 optionsBattleStyle:1; // shift or set
 			 u16 optionsBattleHelpers:1; // true or false. Provides information that the player should have memorized, such as type matchups or nature stat mods
-             //u8 padding2;
+			 u8 optionsPadding:8;
     /*0x18*/ struct Pokedex pokedex;
     /*0x90*/ u8 filler_90[0x8];
     /*0x98*/ struct Time localTimeOffset;
