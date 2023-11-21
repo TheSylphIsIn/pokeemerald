@@ -1587,7 +1587,7 @@ const u8 gText_MessageButton[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}BUTTON");
 const u8 gText_MessageBoth[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}BOTH");
 const u8 gText_MashDpad[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}DPAD");
 const u8 gText_MashHold[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}HOLD");
-const u8 gText_HotkeyFandango[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}FANDANGO-STYLE");
+const u8 gText_HotkeyFandango[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}FANDANGO-STYLE   ");
 const u8 gText_HotkeyExpansion[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}EXPANSION-STYLE");
 
 const u8 gText_OptionMenuTabExit[] = _("EXIT");

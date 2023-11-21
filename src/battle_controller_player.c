@@ -885,7 +885,7 @@ static void HandleInputChooseMove(u32 battler)
             gBattlerControllerFuncs[battler] = HandleMoveSwitching;
         }
     }
-    else if (JOY_NEW(START_BUTTON))
+    else if ((gSaveBlock2Ptr->optionsHotkeyMode && JOY_NEW(START_BUTTON)) || (!gSaveBlock2Ptr->optionsHotkeyMode && JOY_NEW(L_BUTTON)))
     {
         if (CanMegaEvolve(battler))
         {
