@@ -6374,9 +6374,11 @@ bool32 CanBeBurned(u32 battler)
 bool32 CanBeParalyzed(u32 battler)
 {
     u16 ability = GetBattlerAbility(battler);
+	u32 moveType;
+	GET_MOVE_TYPE(gCurrentMove, moveType);
     if (
     #if B_PARALYZE_ELECTRIC >= GEN_6
-        IS_BATTLER_OF_TYPE(battler, TYPE_ELECTRIC) ||
+        (IS_BATTLER_OF_TYPE(battler, TYPE_ELECTRIC) && moveType == TYPE_ELECTRIC) ||
     #endif
         gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_SAFEGUARD
         || ability == ABILITY_LIMBER

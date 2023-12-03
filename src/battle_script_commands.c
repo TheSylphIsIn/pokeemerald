@@ -8147,7 +8147,9 @@ bool32 CanPoisonType(u8 battlerAttacker, u8 battlerTarget)
 
 bool32 CanParalyzeType(u8 battlerAttacker, u8 battlerTarget)
 {
-    return !(B_PARALYZE_ELECTRIC >= GEN_6 && IS_BATTLER_OF_TYPE(battlerTarget, TYPE_ELECTRIC));
+	u32 moveType;
+	GET_MOVE_TYPE(gCurrentMove, moveType);
+    return !(B_PARALYZE_ELECTRIC >= GEN_6 && IS_BATTLER_OF_TYPE(battlerTarget, TYPE_ELECTRIC) && moveType == TYPE_ELECTRIC);
 }
 
 bool32 CanUseLastResort(u8 battler)
