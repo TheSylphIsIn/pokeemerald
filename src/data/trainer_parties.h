@@ -1,106 +1,77 @@
-/*
-
-static const struct TrainerMon sParty_Juan5[] = {
-    {
-    .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-    .lvl = 61,
-    .species = SPECIES_LAPRAS,
-    .heldItem = ITEM_NONE,
-    .moves = {MOVE_HYDRO_PUMP, MOVE_PERISH_SONG, MOVE_ICE_BEAM, MOVE_CONFUSE_RAY}
-    },
-    {
-    .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-    .lvl = 63,
-    .species = SPECIES_WHISCASH,
-    .heldItem = ITEM_NONE,
-    .moves = {MOVE_RAIN_DANCE, MOVE_WATER_PULSE, MOVE_DOUBLE_TEAM, MOVE_FISSURE}
-    },
-    {
-    .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-    .lvl = 61,
-    .species = SPECIES_POLITOED,
-    .heldItem = ITEM_NONE,
-    .moves = {MOVE_HYPNOSIS, MOVE_RAIN_DANCE, MOVE_HYDRO_PUMP, MOVE_PERISH_SONG}
-    },
-    {
-    .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-    .lvl = 63,
-    .species = SPECIES_WALREIN,
-    .heldItem = ITEM_NONE,
-    .moves = {MOVE_WATER_PULSE, MOVE_BODY_SLAM, MOVE_PROTECT, MOVE_SHEER_COLD}
-    },
-    {
-    .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-    .lvl = 63,
-    .species = SPECIES_CRAWDAUNT,
-    .heldItem = ITEM_CHESTO_BERRY,
-    .moves = {MOVE_REST, MOVE_GUILLOTINE, MOVE_TAUNT, MOVE_DOUBLE_TEAM}
-    },
-    {
-    .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-    .lvl = 66,
-    .species = SPECIES_KINGDRA,
-    .heldItem = ITEM_CHESTO_BERRY,
-    .moves = {MOVE_WATER_PULSE, MOVE_DOUBLE_TEAM, MOVE_ICE_BEAM, MOVE_REST}
-    }
-};
-*/
-
-/*
-	* A note about the way expansion generates trainer parties, for future reference.
-	* Default movesets still work.
-	* Abilities are assigned by ability name, not num. Still defaults to slot 0 ability.
-	* IVs are assigned by TRAINER_PARTY_IVS macro, in data order (HP/ATK/DEF/SPD/SAT/SDF).
-	* EVs are assigned by TRAINER_PARTY_EVS macro, in data order (HP/ATK/DEF/SPD/SAT/SDF).
-	* Nickname is a string pointer. If none is provided, uses default name.
-	* Ball is an item constant. Providing none defaults to Poke Ball. Providing -1 goes to trainer class ball.
-	* Gender is done by TRAINER_MON_MALE or TRAINER_MON_FEMALE.
-	* Shininess can be true.
-	* Friendship can be explicitly set for Return, Frustration (or...other purposes?)
-	* Nature will be random(?) if not provided but can be given with TRAINER_PARTY_NATURE macro.
-*/
-
 static const struct TrainerMon sParty_Dummy[] = {
     {
     .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
     .lvl = 6,
     .species = SPECIES_DUBSNAKE,
-	.ability = ABILITY_ICE_BODY,
+    .ability = ABILITY_ICE_BODY,
     .moves = {MOVE_ACID, MOVE_ICE_SHARD, MOVE_BLOCK, MOVE_PERISH_SONG}
     },
 };
 
 static const struct TrainerMon sParty_Kyle[] = {
 	{
-	.iv = 0,
+	.species = SPECIES_NIDORAN_M,
 	.lvl = 4,
-	.species = SPECIES_NIDORAN_M
-	},
-	{
-	.iv = 0,
-	.lvl = 4,
-	.species = SPECIES_NIDORAN_M
 	},
 };
 
 static const struct TrainerMon sParty_Billy[] = {
 	{
-	.iv = 0,
+	.species = SPECIES_POOCHYENA,
 	.lvl = 5,
-	.species = SPECIES_POOCHYENA
 	},
 };
 
 static const struct TrainerMon sParty_LackeyFisheyeLake[] = {
 	{
-	.iv = 5,
+	.species = SPECIES_KEESIGHT,
 	.lvl = 7,
-	.species = SPECIES_KEESIGHT
+	.iv = TRAINER_PARTY_IVS(5, 5, 5, 5, 5, 5),
+	.gender = TRAINER_MON_FEMALE,
 	},
 	{
-	.iv = 5,
+	.species = SPECIES_MAGNEMITE,
 	.lvl = 8,
-	.species = SPECIES_MAGNEMITE
+	.iv = TRAINER_PARTY_IVS(5, 5, 5, 5, 5, 5),
+	.moves = { MOVE_TACKLE, MOVE_SUPERSONIC, MOVE_THUNDER_SHOCK, MOVE_NONE, },
+	},
+};
+
+static const struct TrainerMon sParty_LackeyFisheyeLakeHard[] = {
+	{
+	.species = SPECIES_KEESIGHT,
+	.lvl = 7,
+	.iv = TRAINER_PARTY_IVS(8, 8, 8, 8, 8, 8),
+	.moves = { MOVE_CONFUSION, MOVE_NONE, MOVE_NONE, MOVE_NONE, },
+	.nature = TRAINER_PARTY_NATURE(NATURE_MILD),
+	.gender = TRAINER_MON_FEMALE,
+	},
+	{
+	.species = SPECIES_MAGNEMITE,
+	.lvl = 8,
+	.ability = ABILITY_STURDY,
+	.iv = TRAINER_PARTY_IVS(8, 8, 8, 8, 8, 8),
+	.nature = TRAINER_PARTY_NATURE(NATURE_LAX),
+	},
+};
+
+static const struct TrainerMon sParty_LackeyFisheyeLakeUnfair[] = {
+	{
+	.species = SPECIES_KEESIGHT,
+	.lvl = 7,
+	.ability = ABILITY_SHEER_FORCE,
+	.iv = TRAINER_PARTY_IVS(10, 10, 10, 10, 10, 10),
+	.moves = { MOVE_CONFUSION, MOVE_GUST, MOVE_NONE, MOVE_NONE, },
+	.nature = TRAINER_PARTY_NATURE(NATURE_MODEST),
+	},
+	{
+	.species = SPECIES_MAGNEMITE,
+	.lvl = 8,
+	.heldItem = ITEM_BERRY_JUICE,
+	.ability = ABILITY_STURDY,
+	.iv = TRAINER_PARTY_IVS(10, 10, 10, 10, 10, 10),
+	.moves = { MOVE_SONIC_BOOM, MOVE_SUPERSONIC, MOVE_THUNDER_SHOCK, MOVE_THUNDER_WAVE, },
+	.nature = TRAINER_PARTY_NATURE(NATURE_BOLD),
 	},
 };
 
