@@ -228,20 +228,20 @@ FirstTrail_Text_FatMan::
 	.string "Was, uh… … …\l"
 	.string "Darn! I forgot!$"
 
-FirstTrail_EventScript_TrainerKyle::
-	trainerbattle_single TRAINER_KYLE, FirstTrail_Text_KyleIntro, FirstTrail_Text_KyleDefeated
-	msgbox FirstTrail_Text_KylePostBattle, MSGBOX_AUTOCLOSE
+TrainerScript_Kyle::
+	trainerbattle_single TRAINER_KYLE, TrainerScript_Text_KyleIntro,TrainerScript_Text_KyleDefeated
+	msgbox TrainerScript_Text_KylePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-FirstTrail_Text_KyleIntro:
-	.string "Hey! Got any cool POKéMON?\n"
+TrainerScript_Text_KyleIntro:
+	.string ""Hey! Got any cool Pokémon?\n"
 	.string "Show me, show me!$"
 
-FirstTrail_Text_KyleDefeated:
+TrainerScript_Text_KyleDefeated:
 	.string "Aw, it's cooler than mine!$"
-	
-FirstTrail_Text_KylePostBattle:
-	.string "I wanna catch a cool WATER type, but\n"
+
+TrainerScript_Text_KylePostBattle:
+	.string "I wanna catch a cool Water type, but\n"
 	.string "they always swim away too fast.$"
 
 // welcome to fonei sign script

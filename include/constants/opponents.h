@@ -859,18 +859,7 @@
 // Above are the old opponent constants. I'm not removing them because I can't be bothered to right now.
 // They're referenced by scripts and some code.
 
-#define TRAINER_KYLE 							1
-#define TRAINER_BILLY							2
-#define TRAINER_KEY_LACKEY_FISHEYE_LAKE			3
-#define TRAINER_JESSE							4
-#define TRAINER_DOBSON							5
-#define TRAINER_KELLY							6
-#define TRAINER_COOPER							7
-// starter dependent party trainers. index into starter-dependent party array is ID - 500
-#define TRAINER_MORGAN_FISHEYE_LAKE 			500
-#define TRAINER_CALVIN_FISHEYE_LAKE				501
-#define TRAINER_MORGAN_CLIFF_FACE_CLIMB			502
-#define TRAINER_CALVIN_CLIFF_FACE_CLIMB			503
+#include "constants/fandango_opponents.h"
 
 // NOTE: Because each Trainer uses a flag to determine when they are defeated, there is only space for 9 additional trainers before trainer flag space overflows
 //       More space can be made by shifting flags around in constants/flags.h or changing how trainer flags are handled
@@ -878,8 +867,5 @@
 
 #define TRAINERS_COUNT                      855
 #define MAX_TRAINERS_COUNT                  864
-
-#define FIRST_STARTER_DEPENDENT_INDEX TRAINER_MORGAN_FISHEYE_LAKE 
-#define STARTER_DEPENDENT_PARTIES_COUNT 2
 
 #endif  // GUARD_CONSTANTS_OPPONENTS_H
