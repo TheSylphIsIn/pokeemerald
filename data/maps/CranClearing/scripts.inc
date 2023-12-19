@@ -335,14 +335,14 @@ CranClearing_Text_CalvinAfterBattle1:
 	.string "CALVIN: Dang, you're good.\n"
 	.string "How'd you get strong so quick?\p"
 	.string "Ah well, maybe you just know more\n"
-	.string " about POKéMON than me.\p"
+	.string "about Pokémon than me.\p"
 	.string "I'll get better than you, though,\n"
 	.string "mark my words.\p"
 	.string "I even used this, but it didn't\n"
 	.string "help. You can have it, I guess.$"
 
 CranClearing_Text_CalvinExplainSwift:
-	.string "It's a TM for SWIFT. Decent move.\n"
+	.string "It's a TM for Swift. Decent move.\n"
 	.string "It's {EMPHASIS_RED}reusable{EMPHASIS_OFF}, too, so try it out.\p"
 	.string "I'm going on ahead. I guess the thief\n"
 	.string "is hiding out in that cave.\l"
@@ -366,22 +366,22 @@ CranClearing_Movement_CalvinWalkOffscreen:
 	step_end
 	
 // youngster
-CranClearing_EventScript_TrainerBilly::
-	trainerbattle_single TRAINER_BILLY, CranClearing_Text_BillyIntro, CranClearing_Text_BillyDefeated
-	msgbox CranClearing_Text_BillyPostBattle, MSGBOX_AUTOCLOSE
+TrainerScript_Bobby::
+	trainerbattle_single TRAINER_BOBBY, TrainerScript_Text_BobbyIntro,TrainerScript_Text_BobbyDefeated
+	msgbox TrainerScript_Text_BobbyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-CranClearing_Text_BillyIntro:
+TrainerScript_Text_BobbyIntro:
 	.string "You wanna know why it's called\n"
-	.string "FISHEYE POND? I'll tell if you win!$"
+	.string "Fisheye Pond? I'll tell if you win!$"
 
-CranClearing_Text_BillyDefeated:
+TrainerScript_Text_BobbyDefeated:
 	.string "Glub!$"
-	
-CranClearing_Text_BillyPostBattle:
-	.string "It's called FISHEYE POND because\n"
-	.string "it's shaped like a fish POKéMON!\p"
-	.string "I think its name is GUPPAGE.$"
+
+TrainerScript_Text_BobbyPostBattle:
+	.string "It's called Fisheye Pond because\n"
+	.string "it's shaped like a fish Pokémon!\l"
+	.string "I think its name is Guppage.$"
 
 // trainer tip sign
 CranClearing_EventScript_TrainerTipsSign::

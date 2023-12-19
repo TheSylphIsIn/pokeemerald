@@ -35,7 +35,7 @@ FirstTrail_Text_TipsSign:
 	.string "TRAINER TIPS\p"
 	.string "If you see something sparkling\n"
 	.string "on the ground, pick it up!\p"
-	.string "It might be a STAR PIECE. Some\n"
+	.string "It might be a Star Piece. Some\n"
 	.string "people collect them, and they'll\l"
 	.string "trade rare items to get yours!$"
 	
@@ -96,9 +96,9 @@ FirstTrail_Text_Prof2::
 	.string "before. Are you new in town?\p"
 	.string "CALVIN: Who are you?\p"
 	.string "???: Oh, pardon me. My name is\n"
-	.string "MANGROVE. I'm a POKéMON PROFESSOR.\p"
+	.string "MANGROVE. I'm a Pokémon Professor.\p"
 	.string "MANGROVE: Speaking of which, those\n"
-	.string "POKéMON you have there…$"
+	.string "Pokémon you have there…$"
 	
 FirstTrail_Text_Prof3:
 	.string "MORGAN: I knew it! We ARE in\n"
@@ -106,7 +106,7 @@ FirstTrail_Text_Prof3:
 	.string "MANGROVE: Where else would\n"
 	.string "you be?\p"
 	.string "Anyway, these POKéMON are quite\n"
-	.string "rare. ELADRIFT, GLASMA, SANDUDE…\p"
+	.string "rare. Eladrift, Glasma, Sandude…\p"
 	.string "MANGROVE: Where did you get them?\p"
 	.string "MORGAN: Oh, ummm… we were attacked.\n"
 	.string "We got them from this bag to\l"
@@ -234,7 +234,7 @@ TrainerScript_Kyle::
 	end
 
 TrainerScript_Text_KyleIntro:
-	.string ""Hey! Got any cool Pokémon?\n"
+	.string "Hey! Got any cool Pokémon?\n"
 	.string "Show me, show me!$"
 
 TrainerScript_Text_KyleDefeated:
@@ -256,10 +256,10 @@ FirstTrail_EventScript_WelcomeSignRight::
 FirstTrail_Text_SignLeft:
 	.string "Welcome to the FONEI region!\p"
 	.string "Free real estate to the north.\n"
-	.string "Inquire in {EMPHASIS_BLUE}PENZELCASE CITY{EMPHASIS_OFF}.$"
+	.string "Inquire in {EMPHASIS_BLUE}Penzelcase City{EMPHASIS_OFF}.$"
 
 FirstTrail_Text_SignRight:
 	.string "{EMPHASIS_RED}HISTORY OF FONEI{EMPHASIS_OFF}\p"
 	.string "This is the trail that the first\n"
-	.string "humans to explore FONEI followed\l"
+	.string "humans to explore Fonei followed\l"
 	.string "upon starting their expedition.$"

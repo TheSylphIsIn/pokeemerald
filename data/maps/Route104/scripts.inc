@@ -851,11 +851,6 @@ Route104_EventScript_Ivan::
 	msgbox Route104_Text_IvanPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route104_EventScript_Billy::
-	trainerbattle_single TRAINER_BILLY, Route104_Text_BillyIntro, Route104_Text_BillyDefeat
-	msgbox Route104_Text_BillyPostBattle, MSGBOX_AUTOCLOSE
-	end
-
 Route104_EventScript_Haley::
 	trainerbattle_single TRAINER_HALEY_1, Route104_Text_HaleyIntro, Route104_Text_HaleyDefeat, Route104_EventScript_TryRegisterHaleyAfterBattle
 	specialvar VAR_RESULT, ShouldTryRematchBattle

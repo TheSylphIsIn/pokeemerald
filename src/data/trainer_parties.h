@@ -15,10 +15,38 @@ static const struct TrainerMon sParty_Kyle[] = {
 	},
 };
 
-static const struct TrainerMon sParty_Billy[] = {
+static const struct TrainerMon sParty_Bobby[] = {
 	{
 	.species = SPECIES_POOCHYENA,
 	.lvl = 5,
+	},
+};
+
+static const struct TrainerMon sParty_Kris[] = {
+	{
+	.species = SPECIES_RALTS_FONEI,
+	.lvl = 8,
+	.iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
+	},
+	{
+	.species = SPECIES_ELECTRIKE,
+	.lvl = 7,
+	.iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
+	.gender = TRAINER_MON_MALE,
+	},
+};
+
+static const struct TrainerMon sParty_Wilbur[] = {
+	{
+	.species = SPECIES_KRICKETOT,
+	.lvl = 7,
+	.gender = TRAINER_MON_MALE,
+	},
+	{
+	.species = SPECIES_SPOOLER,
+	.lvl = 9,
+	.iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
+	.gender = TRAINER_MON_FEMALE,
 	},
 };
 
