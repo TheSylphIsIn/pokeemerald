@@ -16,7 +16,6 @@
 #include "constants/pokemon.h"
 #include "constants/easy_chat.h"
 #include "constants/trainer_hill.h"
-#include "shop.h"
 
 #define FREE_MYSTERY_EVENT_BUFFERS 
 #define FREE_RECORD_MIXING_HALL_RECORDS
@@ -1009,8 +1008,8 @@ struct SaveBlock1
     /*0x9BC*/ u16 berryBlenderRecords[3];
     /*0x9C2*/ u8 unused_9C2[6];
     /*0x9C8*/ u16 trainerRematchStepCounter;
+			  u8 trainerRematches[80]; // arbitrary number because i haven't touched gRematchTable yet. Should be REMATCH_TABLE_ENTRIES
     /*0x9CA*/ u8 achievementFlags[NUM_ACHIEVEMENTS / 4];
-			  u8 filler[84];
     /*0xA30*/ struct ObjectEvent objectEvents[OBJECT_EVENTS_COUNT];
     /*0xC70*/ struct ObjectEventTemplate objectEventTemplates[OBJECT_EVENT_TEMPLATES_COUNT];
     /*0x1270*/ u8 flags[NUM_FLAG_BYTES];

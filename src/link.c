@@ -279,7 +279,7 @@ static void InitLinkTestBG(u8 paletteNum, u8 bgNum, u8 screenBaseBlock, u8 charB
 }
 
 // Unused
-static void LoadLinkTestBgGfx(u8 paletteNum, u8 bgNum, u8 screenBaseBlock, u8 charBaseBlock)
+static UNUSED void LoadLinkTestBgGfx(u8 paletteNum, u8 bgNum, u8 screenBaseBlock, u8 charBaseBlock)
 {
     LoadPalette(sLinkTestDigitsPal, BG_PLTT_ID(paletteNum), PLTT_SIZE_4BPP);
     DmaCopy16(3, sLinkTestDigitsGfx, (u16 *)BG_CHAR_ADDR(charBaseBlock), sizeof sLinkTestDigitsGfx);
@@ -290,7 +290,7 @@ static void LoadLinkTestBgGfx(u8 paletteNum, u8 bgNum, u8 screenBaseBlock, u8 ch
 }
 
 // Unused
-static void LinkTestScreen(void)
+static UNUSED void LinkTestScreen(void)
 {
     int i;
 
@@ -780,7 +780,7 @@ u32 LinkDummy_Return2(void)
 }
 
 // Unused
-static bool32 IsFullLinkGroupWithNoRS(void)
+static UNUSED bool32 IsFullLinkGroupWithNoRS(void)
 {
     if (GetLinkPlayerCount() != MAX_LINK_PLAYERS || AreAnyLinkPlayersUsingVersions(VERSION_RUBY, VERSION_SAPPHIRE) < 0)
     {
@@ -1013,13 +1013,13 @@ void SetBerryBlenderLinkCallback(void)
 }
 
 // Unused
-static u32 GetBerryBlenderKeySendAttempts(void)
+static UNUSED u32 GetBerryBlenderKeySendAttempts(void)
 {
     return gBerryBlenderKeySendAttempts;
 }
 
 // Unused
-static void SendBerryBlenderNoSpaceForPokeblocks(void)
+static UNUSED void SendBerryBlenderNoSpaceForPokeblocks(void)
 {
     BuildSendCmd(LINKCMD_BLENDER_NO_PBLOCK_SPACE);
 }
@@ -1165,7 +1165,7 @@ static void LinkTest_PrintHex(u32 num, u8 x, u8 y, u8 length)
     }
 }
 
-static void LinkTest_PrintInt(int num, u8 x, u8 y, u8 length)
+static UNUSED void LinkTest_PrintInt(int num, u8 x, u8 y, u8 length)
 {
     char buff[16];
     int negX;
@@ -1298,7 +1298,7 @@ u8 GetSavedPlayerCount(void)
 }
 
 // Unused
-static u8 GetSavedMultiplayerId(void)
+static UNUSED u8 GetSavedMultiplayerId(void)
 {
     return gSavedMultiplayerId;
 }
@@ -1335,7 +1335,7 @@ bool8 DoesLinkPlayerCountMatchSaved(void)
 
 void ClearSavedLinkPlayers(void)
 {
-    int i;
+    UNUSED int i;
     // The CpuSet loop below is incorrectly writing to NULL
     // instead of sSavedLinkPlayers.
     // Additionally it's using the wrong array size.
@@ -1383,7 +1383,7 @@ bool8 IsLinkMaster(void)
 }
 
 // Unused
-static u8 GetDummy2(void)
+static UNUSED u8 GetDummy2(void)
 {
     return sDummy2;
 }

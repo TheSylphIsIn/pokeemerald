@@ -1667,7 +1667,7 @@ static void UpdateGrassFieldEffectSubpriority(struct Sprite *sprite, u8 elevatio
 {
     u8 i;
     s16 var, xhi, lyhi, yhi, ylo;
-    const struct ObjectEventGraphicsInfo *graphicsInfo; // Unused Variable
+    const UNUSED struct ObjectEventGraphicsInfo *graphicsInfo; // Unused Variable
     struct Sprite *linkedSprite;
 
     SetObjectSubpriorityByElevation(elevation, sprite, subpriority);

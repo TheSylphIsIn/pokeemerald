@@ -41,9 +41,9 @@ static bool8 LightenSpritePaletteInFog(u8);
 static void BuildColorMaps(void);
 static void UpdateWeatherColorMap(void);
 static void ApplyColorMap(u8 startPalIndex, u8 numPalettes, s8 colorMapIndex);
-static void ApplyColorMapWithBlend(u8 startPalIndex, u8 numPalettes, s8 colorMapIndex, u8 blendCoeff, u16 blendColor);
-static void ApplyDroughtColorMapWithBlend(s8 colorMapIndex, u8 blendCoeff, u16 blendColor);
-static void ApplyFogBlend(u8 blendCoeff, u16 blendColor);
+static void ApplyColorMapWithBlend(u8 startPalIndex, u8 numPalettes, s8 colorMapIndex, u8 blendCoeff, u32 blendColor);
+static void ApplyDroughtColorMapWithBlend(s8 colorMapIndex, u8 blendCoeff, u32 blendColor);
+static void ApplyFogBlend(u8 blendCoeff, u32 blendColor);
 static bool8 FadeInScreen_RainShowShade(void);
 static bool8 FadeInScreen_Drought(void);
 static bool8 FadeInScreen_FogHorizontal(void);
@@ -104,7 +104,7 @@ void (*const gWeatherPalStateFuncs[])(void) =
     [WEATHER_PAL_STATE_IDLE]              = DoNothing,
 };
 
-EWRAM_DATA u8 sBasePaletteColorMapTypes[32] =
+EWRAM_DATA u8 ALIGNED(4) sBasePaletteColorMapTypes[32] = // modern compiler complained about this not being aligned. Idk if that's the right number there.
 {
     // background palettes
     COLOR_MAP_DARK_CONTRAST,
@@ -538,7 +538,7 @@ static void ApplyColorMap(u8 startPalIndex, u8 numPalettes, s8 colorMapIndex)
     }
 }
 
-static void ApplyColorMapWithBlend(u8 startPalIndex, u8 numPalettes, s8 colorMapIndex, u8 blendCoeff, u16 blendColor)
+static void ApplyColorMapWithBlend(u8 startPalIndex, u8 numPalettes, s8 colorMapIndex, u8 blendCoeff, u32 blendColor)
 {
     u16 palOffset;
     u16 curPalIndex;
@@ -589,7 +589,7 @@ static void ApplyColorMapWithBlend(u8 startPalIndex, u8 numPalettes, s8 colorMap
     }
 }
 
-static void ApplyDroughtColorMapWithBlend(s8 colorMapIndex, u8 blendCoeff, u16 blendColor)
+static void ApplyDroughtColorMapWithBlend(s8 colorMapIndex, u8 blendCoeff, u32 blendColor)
 {
     struct RGBColor color;
     u8 rBlend;
@@ -644,7 +644,7 @@ static void ApplyDroughtColorMapWithBlend(s8 colorMapIndex, u8 blendCoeff, u16 b
     }
 }
 
-static void ApplyFogBlend(u8 blendCoeff, u16 blendColor)
+static void ApplyFogBlend(u8 blendCoeff, u32 blendColor)
 {
     struct RGBColor color;
     u8 rBlend;
@@ -851,7 +851,7 @@ void ApplyWeatherColorMapToPal(u8 paletteIndex)
 }
 
 // Unused
-static bool8 IsFirstFrameOfWeatherFadeIn(void)
+static UNUSED bool8 IsFirstFrameOfWeatherFadeIn(void)
 {
     if (gWeatherPtr->palProcessingState == WEATHER_PAL_STATE_SCREEN_FADING_IN)
         return gWeatherPtr->fadeInFirstFrame;
@@ -993,7 +993,7 @@ bool8 Weather_UpdateBlend(void)
 }
 
 // Unused. Uses the same numbering scheme as the coord events
-static void SetFieldWeather(u8 weather)
+static UNUSED void SetFieldWeather(u8 weather)
 {
     switch (weather)
     {

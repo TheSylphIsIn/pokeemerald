@@ -74,6 +74,10 @@
 #define GIFT_RIBBONS_COUNT 11
 #define SAVED_TRENDS_COUNT 5
 #define PYRAMID_BAG_ITEMS_COUNT 10
+// Actually star piece shops.
+#define TMSHOP_COUNT 4
+#define TMSHOP_ITEMS_COUNT 16   // If changed to be more than 16, you'll need to change the data type in tmShopFlags from u16 to u32 or u64.
+
 
 // Number of facilities for Ranking Hall.
 // 7 facilities for single mode + tower double mode + tower multi mode.

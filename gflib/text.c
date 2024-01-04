@@ -556,7 +556,7 @@ void DecompressGlyphTile(const void *src_, void *dest_)
 }
 
 // Unused
-static u8 GetLastTextColor(u8 colorType)
+static UNUSED u8 GetLastTextColor(u8 colorType)
 {
     switch (colorType)
     {
@@ -1238,7 +1238,7 @@ static u16 RenderText(struct TextPrinter *textPrinter)
 }
 
 // Unused
-static u32 GetStringWidthFixedWidthFont(const u8 *str, u8 fontId, u8 letterSpacing)
+static UNUSED u32 GetStringWidthFixedWidthFont(const u8 *str, u8 fontId, u8 letterSpacing)
 {
     int i;
     u8 width;

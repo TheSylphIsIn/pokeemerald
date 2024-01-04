@@ -1078,7 +1078,7 @@ static void DrawBgWindowFrames(void)
 
 static void UpdateSelection(u8 taskId, bool32 scrollDown)
 {
-	bool32 updated = FALSE;
+	UNUSED bool32 updated = FALSE; // remnant from when there was vertical scrolling, i think
 	
 	if (scrollDown)
 	{

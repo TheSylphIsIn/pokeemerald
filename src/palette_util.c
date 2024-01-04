@@ -40,7 +40,7 @@ u8 RouletteFlash_Add(struct RouletteFlashUtil *flash, u8 id, const struct Roulet
 }
 
 // Unused
-static u8 RouletteFlash_Remove(struct RouletteFlashUtil *flash, u8 id)
+static UNUSED u8 RouletteFlash_Remove(struct RouletteFlashUtil *flash, u8 id)
 {
     if (id >= ARRAY_COUNT(flash->palettes))
         return 0xFF;
@@ -470,7 +470,7 @@ void SetTilemapRect(u16 *dest, u16 *src, u8 left, u8 top, u8 width, u8 height)
     }
 }
 
-static void FillTilemapRect_Unused(void *dest, u16 value, u8 left, u8 top, u8 width, u8 height)
+static UNUSED void FillTilemapRect_Unused(void *dest, u16 value, u8 left, u8 top, u8 width, u8 height)
 {
     u8 i, j;
     u8 x, y;
@@ -486,7 +486,7 @@ static void FillTilemapRect_Unused(void *dest, u16 value, u8 left, u8 top, u8 wi
     }
 }
 
-static void SetTilemapRect_Unused(void *dest, const u16 *src, u8 left, u8 top, u8 width, u8 height)
+static UNUSED void SetTilemapRect_Unused(void *dest, const u16 *src, u8 left, u8 top, u8 width, u8 height)
 {
     u8 i, j;
     u8 x, y;

@@ -262,8 +262,7 @@ const struct PokemonCrySong gPokemonCrySongTemplate =
     255, // priority
     0, // reverb
     (struct ToneData *)&voicegroup000,
-    NULL,
-    NULL,
+    {NULL, NULL},
     0,
     TUNE, // part 0
     C_V, // TUNE value

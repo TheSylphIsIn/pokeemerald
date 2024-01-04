@@ -177,7 +177,7 @@ bool8 GiveBerryPowder(u32 amountToAdd)
     }
 }
 
-static bool8 TakeBerryPowder_(u32 cost)
+static UNUSED bool8 TakeBerryPowder_(u32 cost)
 {
     u32 *powder = &gSaveBlock2Ptr->berryCrush.berryPowderAmount;
     if (!HasEnoughBerryPowder_(cost))

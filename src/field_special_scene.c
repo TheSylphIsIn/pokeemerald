@@ -48,24 +48,12 @@ static const u8 sSSTidalSailWestMovementScript[] =
     MOVEMENT_ACTION_STEP_END
 };
 
-static s16 GetTruckCameraBobbingY(int time)
-{
-    if (!(time % 120))
-        return -1;
-    else if ((time % 10) <= 4)
-        return 1;
-
-    return 0;
-}
-
-// Determines the frequency that the truck boxes bounce at.
-// The return value of this function is multiplied and added
-// to the boxes resting y offset, the result of which is that
-// when it returns 0 they remain vertically still and when it
-// returns -1 they jump upward.
-// Box 1 has 30 added to the time so it jumps earlier, and
-// box 2 has the return value multiplied by less, so it doesn't
-// jump as high.
+// Character moves:
+// - down if timer is 0-4
+// - center if timer is 5-10 or 15-19
+// - up if timer is 11-14
+// so, they bob 1 cycle in 20 frames, and change positions once every ~5 frames.
+// they only spend 4 frames down. probably a mistake, doesn't need to be fixed.
 static s16 GetTruckBoxYMovement(int time)
 {
 	u32 value;

@@ -160,16 +160,17 @@
 #define HOLD_EFFECT_COVERT_CLOAK        179
 #define HOLD_EFFECT_LOADED_DICE         180
 #define HOLD_EFFECT_BOOSTER_ENERGY      181 // Not implemented.
+#define HOLD_EFFECT_MASK                183
 
 // Fandango hold effects
-#define HOLD_EFFECT_SOUL		   182
-#define HOLD_EFFECT_BERSERK_GENE		   183
-#define HOLD_EFFECT_STATIC_ORB	   184
-#define HOLD_EFFECT_CHILLING_ORB   185
-#define HOLD_EFFECT_RAGE_BAND	   186
-#define HOLD_EFFECT_REDUCE_DAMAGE  187
-#define HOLD_EFFECT_EXTEND_SHIELDS 188
-#define HOLD_EFFECT_GOLD		   189 // protects holder from Toll Call
+#define HOLD_EFFECT_SOUL		   184
+#define HOLD_EFFECT_BERSERK_GENE		   185
+#define HOLD_EFFECT_STATIC_ORB	   186
+#define HOLD_EFFECT_CHILLING_ORB   187
+#define HOLD_EFFECT_RAGE_BAND	   188
+#define HOLD_EFFECT_REDUCE_DAMAGE  189
+#define HOLD_EFFECT_EXTEND_SHIELDS 190
+#define HOLD_EFFECT_GOLD		   191 // protects holder from Toll Call
 
 #define HOLD_EFFECT_CHOICE(holdEffect)((holdEffect == HOLD_EFFECT_CHOICE_BAND || holdEffect == HOLD_EFFECT_CHOICE_SCARF || holdEffect == HOLD_EFFECT_CHOICE_SPECS))
 

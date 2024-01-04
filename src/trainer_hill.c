@@ -571,7 +571,7 @@ static void IsTrainerHillChallengeActive(void)
         gSpecialVar_Result = TRUE;
 }
 
-static void TrainerHillDummy_Unused(void)
+static UNUSED void TrainerHillDummy_Unused(void)
 {
 
 }
@@ -770,7 +770,7 @@ u8 GetCurrentTrainerHillMapId(void)
 }
 
 // Unused
-static bool32 OnTrainerHillRoof(void)
+static UNUSED bool32 OnTrainerHillRoof(void)
 {
     bool32 onRoof;
 

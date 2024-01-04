@@ -27,8 +27,6 @@
 #include "constants/battle_move_effects.h"
 #include "gba/io_reg.h"
 
-extern const struct CompressedSpriteSheet gMonFrontPicTable[];
-
 EWRAM_DATA static u8 sMailboxWindowIds[MAILBOXWIN_COUNT] = {0};
 EWRAM_DATA static struct ListMenuItem *sMailboxList = NULL;
 
@@ -238,7 +236,7 @@ void MailboxMenu_RemoveWindow(u8 windowIdx)
 }
 
 // Unused
-static u8 MailboxMenu_GetWindowId(u8 windowIdx)
+static UNUSED u8 MailboxMenu_GetWindowId(u8 windowIdx)
 {
     return sMailboxWindowIds[windowIdx];
 }

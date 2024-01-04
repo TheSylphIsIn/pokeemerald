@@ -214,7 +214,11 @@ static const u8 sDisableDescription[] = _(
 
 static const u8 sAcidDescription[] = _(
     "Sprays a hide-melting acid.\n"
+#if B_UPDATED_MOVE_DATA >= GEN_4
+    "May lower Sp. Def.");
+#else
     "May lower Defense.");
+#endif
 
 static const u8 sEmberDescription[] = _(
     "A weak fire attack that may\n"
@@ -986,7 +990,11 @@ static const u8 sSunnyDayDescription[] = _(
 
 static const u8 sCrunchDescription[] = _(
     "Crunches with sharp fangs.\n"
+#if B_UPDATED_MOVE_DATA >= GEN_4
     "May lower Defense.");
+#else
+    "May lower Sp. Def.");
+#endif
 
 static const u8 sMirrorCoatDescription[] = _(
     "Counters the foe's special\n"
@@ -3259,7 +3267,6 @@ static const u8 sPsybladeDescription[] = _(
 static const u8 sHydroSteamDescription[] = _(
     "This move's power increases\n"
     "under harsh sunlight.");
-
 	
 static const u8 sContactDescription[] = _(
 	"Uses the foe as a ground.\n"
@@ -3396,6 +3403,22 @@ static const u8 sGemSparkDescription[] = _(
 static const u8 sMockeryDescription[] = _(
 	"Demoralizes the foe with\n"
 	"insults to drop ATTACK.");
+
+static const u8 sBloodMoonDescription[] = _(
+    "Unleashes the blood moon.\n"
+    "Can't be used twice in a row.");
+
+static const u8 sMatchaGotchaDescription[] = _(
+    "Absorbs half the damage\n"
+    "inflicted. May cause a burn.");
+
+static const u8 sSyrupBombDescription[] = _(
+    "Lowers the foe's speed\n"
+    "each turn for 3 turns.");
+
+static const u8 sIvyCudgelDescription[] = _(
+    "Type changes with held mask.\n"
+    "High critical-hit ratio.");
 
 const u8 gNotDoneYetDescription[] = _(
     "This move can't be used. Its\n"
@@ -4270,4 +4293,8 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
 	[MOVE_TANTRUM - 1] = sTantrumDescription,
 	[MOVE_GEM_SPARK - 1] = sGemSparkDescription,
 	[MOVE_MOCKERY - 1] = sMockeryDescription,
+    [MOVE_BLOOD_MOON - 1] = sBloodMoonDescription,
+    [MOVE_MATCHA_GOTCHA - 1] = sMatchaGotchaDescription,
+    [MOVE_SYRUP_BOMB - 1] = sSyrupBombDescription,
+    [MOVE_IVY_CUDGEL - 1] = sIvyCudgelDescription,
 };

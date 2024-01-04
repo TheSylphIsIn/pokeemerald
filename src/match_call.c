@@ -1029,7 +1029,7 @@ static u32 GetCurrentTotalMinutes(struct Time *time)
     return time->days * 24 * 60 + time->hours * 60 + time->minutes;
 }
 
-static bool32 UpdateMatchCallMinutesCounter(void)
+static UNUSED bool32 UpdateMatchCallMinutesCounter(void)
 {
     int curMinutes;
     RtcCalcLocalTime();
@@ -1043,7 +1043,7 @@ static bool32 UpdateMatchCallMinutesCounter(void)
     return FALSE;
 }
 
-static bool32 CheckMatchCallChance(void)
+static UNUSED bool32 CheckMatchCallChance(void)
 {
     int callChance = 1;
     if (!GetMonData(&gPlayerParty[0], MON_DATA_SANITY_IS_EGG) && GetMonAbility(&gPlayerParty[0]) == ABILITY_LIGHTNING_ROD)
@@ -1055,7 +1055,7 @@ static bool32 CheckMatchCallChance(void)
         return FALSE;
 }
 
-static bool32 MapAllowsMatchCall(void)
+static UNUSED bool32 MapAllowsMatchCall(void)
 {
     if (!Overworld_MapTypeAllowsTeleportAndFly(gMapHeader.mapType) || gMapHeader.regionMapSectionId == MAPSEC_SAFARI_ZONE)
         return FALSE;
@@ -1073,7 +1073,7 @@ static bool32 MapAllowsMatchCall(void)
     return TRUE;
 }
 
-static bool32 UpdateMatchCallStepCounter(void)
+static UNUSED bool32 UpdateMatchCallStepCounter(void)
 {
     if (++sMatchCallState.stepCounter >= 10)
     {
@@ -1222,7 +1222,7 @@ static bool32 MatchCall_DrawWindow(u8 taskId)
 
 static bool32 MatchCall_ReadyIntro(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    UNUSED s16 *data = gTasks[taskId].data;
     if (!IsDma3ManagerBusyWithBgCopy())
     {
         return TRUE;
@@ -2006,8 +2006,8 @@ void BufferPokedexRatingForMatchCall(u8 *destStr)
         *(str++) = CHAR_PROMPT_CLEAR;
         numSeen = GetNationalPokedexCount(FLAG_GET_SEEN);
         numCaught = GetNationalPokedexCount(FLAG_GET_CAUGHT);
-        ConvertIntToDecimalStringN(gStringVar1, numSeen, STR_CONV_MODE_LEFT_ALIGN, 3);
-        ConvertIntToDecimalStringN(gStringVar2, numCaught, STR_CONV_MODE_LEFT_ALIGN, 3);
+        ConvertIntToDecimalStringN(gStringVar1, numSeen, STR_CONV_MODE_LEFT_ALIGN, 4);
+        ConvertIntToDecimalStringN(gStringVar2, numCaught, STR_CONV_MODE_LEFT_ALIGN, 4);
         StringExpandPlaceholders(str, gBirchDexRatingText_OnANationwideBasis);
     }
 

@@ -1098,7 +1098,7 @@ static void LoadCallWindowAndFade(struct Pokenav_MatchCallGfx *gfx)
 
 static void DrawMsgBoxForMatchCallMsg(struct Pokenav_MatchCallGfx *gfx)
 {
-    struct Sprite *sprite;
+    UNUSED struct Sprite *sprite;
     LoadMatchCallWindowGfx(gfx->msgBoxWindowId, 1, 4);
     DrawMatchCallTextBoxBorder(gfx->msgBoxWindowId, 1, 4);
     FillWindowPixelBuffer(gfx->msgBoxWindowId, PIXEL_FILL(1));
@@ -1120,7 +1120,7 @@ static bool32 IsDma3ManagerBusyWithBgCopy2(struct Pokenav_MatchCallGfx *gfx)
     return IsDma3ManagerBusyWithBgCopy();
 }
 
-static void PrintCallingDots(struct Pokenav_MatchCallGfx *gfx)
+static UNUSED void PrintCallingDots(struct Pokenav_MatchCallGfx *gfx)
 {
     AddTextPrinterParameterized(gfx->msgBoxWindowId, FONT_NORMAL, sText_CallingDots, 32, 1, 1, NULL);
 }
@@ -1253,7 +1253,7 @@ static void LoadCheckPageTrainerPic(struct Pokenav_MatchCallGfx *gfx)
     int trainerPic = GetMatchCallTrainerPic(PokenavList_GetSelectedIndex());
     if (trainerPic >= 0)
     {
-        DecompressPicFromTable(&gTrainerFrontPicTable[trainerPic], gfx->trainerPicGfx, SPECIES_NONE);
+        DecompressPicFromTable(&gTrainerFrontPicTable[trainerPic], gfx->trainerPicGfx);
         LZ77UnCompWram(gTrainerFrontPicPaletteTable[trainerPic].data, gfx->trainerPicPal);
         cursor = RequestDma3Copy(gfx->trainerPicGfx, gfx->trainerPicGfxPtr, sizeof(gfx->trainerPicGfx), 1);
         LoadPalette(gfx->trainerPicPal, gfx->trainerPicPalOffset, sizeof(gfx->trainerPicPal));

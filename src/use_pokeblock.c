@@ -1132,7 +1132,7 @@ static u8 GetSelectionIdFromPartyId(u8 partyId)
 }
 
 // Unused
-static u8 GetPartyIdFromSelectionId_(u8 selectionId)
+static UNUSED u8 GetPartyIdFromSelectionId_(u8 selectionId)
 {
     return GetPartyIdFromSelectionId(selectionId);
 }

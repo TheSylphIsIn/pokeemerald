@@ -199,7 +199,7 @@ static const u8 *const sBattlePyramid_MapHeaderStrings[FRONTIER_STAGES_PER_CHALL
 };
 
 // Unused
-static bool8 StartMenu_ShowMapNamePopup(void)
+static UNUSED bool8 StartMenu_ShowMapNamePopup(void)
 {
     HideStartMenu();
     ShowMapNamePopup();

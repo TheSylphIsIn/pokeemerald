@@ -324,33 +324,45 @@
 #define ABILITY_ARMOR_TAIL 296
 #define ABILITY_EARTH_EATER 297
 #define ABILITY_MYCELIUM_MIGHT 298
+#define ABILITY_HOSPITALITY 299
+#define ABILITY_MINDS_EYE 300
+#define ABILITY_EMBODY_ASPECT_TEAL 301
+#define ABILITY_EMBODY_ASPECT_HEARTHFLAME 302
+#define ABILITY_EMBODY_ASPECT_WELLSPRING 303
+#define ABILITY_EMBODY_ASPECT_CORNERSTONE 304
+#define ABILITY_TOXIC_CHAIN 305
+#define ABILITY_SUPERSWEET_SYRUP 306
+#define ABILITY_307 307
+#define ABILITY_308 308
+#define ABILITY_309 309
+#define ABILITY_310 310
 
-#define ABILITIES_COUNT_GEN9 299
+#define ABILITIES_COUNT_GEN9 311
 
-#define ABILITY_CACOPHONY 300 // has punk rock's effects
-#define ABILITY_WHITEOUT 301 // physical hail solar powe
-#define ABILITY_BURNINATE 302 // Fire
-#define ABILITY_RESOLVE 303 // special guts
-#define ABILITY_BRAIN_POWER 304 // special huge power
-#define ABILITY_SLIME_COAT 305 // special fur coat
-#define ABILITY_SPECIALIST 306 // double-single type; 2.25x stab, 4x weaknesses, 1/4 resists
-#define ABILITY_EXPLOITATIVE 307 //SE moves do 3x damage; resisted moves do 1/3 damage
-#define ABILITY_DEFENDER 308 // defensive field effect (e.g. reflect) duration up
-#define ABILITY_SOPORIFIC 309 // when user inflicts sleep, it lasts for max turns. signature to Parasect.
-#define ABILITY_LULL 310 // Special Intimidate
-#define ABILITY_TRUESIGHT 311 // Psychic->Dark Scrappy
-#define ABILITY_TIME_SLIP 312 // Ground Gale Wings
-#define ABILITY_FIRE_AFFINITY 313 // Fire Steelworker
-#define ABILITY_UMBRALAMP 314 // unsure
-#define ABILITY_SPELL_SWAP 315 // Runicast's ability
-#define ABILITY_PURITY 316 // Makes user immune to Poison.
-#define ABILITY_STRIKER 317 // Powers up moves with the "kick" attribute by 20%.
-#define ABILITY_WARD 318 // On switch-in, sets Safeguard on the user's side.
-#define ABILITY_TOLL_CALL 319 // On switch-in, inflicts Perish Song on all foes that aren't holding a gold item or have Toll Call.
-#define ABILITY_ENTRAPMENT 320 // On switch-in, influcts Wrap on one foe for 3 turns.
-#define ABILITY_STRATIFIED 321
+#define ABILITY_CACOPHONY 311 // has punk rock's effects
+#define ABILITY_WHITEOUT 312 // physical hail solar powe
+#define ABILITY_BURNINATE 313 // Fire
+#define ABILITY_RESOLVE 314 // special guts
+#define ABILITY_BRAIN_POWER 315 // special huge power
+#define ABILITY_SLIME_COAT 316 // special fur coat
+#define ABILITY_SPECIALIST 317 // double-single type; 2.25x stab, 4x weaknesses, 1/4 resists
+#define ABILITY_EXPLOITATIVE 318 //SE moves do 3x damage; resisted moves do 1/3 damage
+#define ABILITY_DEFENDER 319 // defensive field effect (e.g. reflect) duration up
+#define ABILITY_SOPORIFIC 320 // when user inflicts sleep, it lasts for max turns. signature to Parasect.
+#define ABILITY_LULL 321 // Special Intimidate
+#define ABILITY_TRUESIGHT 322 // Psychic->Dark Scrappy
+#define ABILITY_TIME_SLIP 323 // Ground Gale Wings
+#define ABILITY_FIRE_AFFINITY 324 // Fire Steelworker
+#define ABILITY_UMBRALAMP 325 // unsure
+#define ABILITY_SPELL_SWAP 326 // Runicast's ability
+#define ABILITY_PURITY 327 // Makes user immune to Poison.
+#define ABILITY_STRIKER 328 // Powers up moves with the "kick" attribute by 20%.
+#define ABILITY_WARD 329 // On switch-in, sets Safeguard on the user's side.
+#define ABILITY_TOLL_CALL 330 // On switch-in, inflicts Perish Song on all foes that aren't holding a gold item or have Toll Call.
+#define ABILITY_ENTRAPMENT 331 // On switch-in, influcts Wrap on one foe for 3 turns.
+#define ABILITY_STRATIFIED 332
 
-#define ABILITIES_COUNT_FANDANGO 322
+#define ABILITIES_COUNT_FANDANGO 333
 
 
 #define ABILITIES_COUNT ABILITIES_COUNT_FANDANGO

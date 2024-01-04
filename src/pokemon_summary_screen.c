@@ -27,6 +27,7 @@
 #include "party_menu.h"
 #include "palette.h"
 #include "pokeball.h"
+#include "pokedex.h"
 #include "pokemon.h"
 #include "pokemon_debug.h"
 #include "pokemon_storage_system.h"
@@ -42,6 +43,7 @@
 #include "tv.h"
 #include "window.h"
 #include "constants/battle_move_effects.h"
+#include "constants/hold_effects.h"
 #include "constants/items.h"
 #include "constants/moves.h"
 #include "constants/party_menu.h"
@@ -554,7 +556,7 @@ static const struct WindowTemplate sSummaryTemplate[] =
         .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 2,
-        .width = 4,
+        .width = 5,
         .height = 2,
         .paletteNum = 7,
         .baseBlock = 387,
@@ -566,7 +568,7 @@ static const struct WindowTemplate sSummaryTemplate[] =
         .width = 9,
         .height = 2,
         .paletteNum = 6,
-        .baseBlock = 395,
+        .baseBlock = 397,
     },
     [PSS_LABEL_WINDOW_PORTRAIT_SPECIES] = {
         .bg = 0,
@@ -575,7 +577,7 @@ static const struct WindowTemplate sSummaryTemplate[] =
         .width = 9,
         .height = 4,
         .paletteNum = 6,
-        .baseBlock = 413,
+        .baseBlock = 415,
     },
     [PSS_LABEL_WINDOW_END] = DUMMY_WIN_TEMPLATE
 };
@@ -588,7 +590,7 @@ static const struct WindowTemplate sPageInfoTemplate[] =
         .width = 11,
         .height = 2,
         .paletteNum = 6,
-        .baseBlock = 449,
+        .baseBlock = 451,
     },
     [PSS_DATA_WINDOW_INFO_ID] = {
         .bg = 0,
@@ -597,7 +599,7 @@ static const struct WindowTemplate sPageInfoTemplate[] =
         .width = 7,
         .height = 2,
         .paletteNum = 6,
-        .baseBlock = 471,
+        .baseBlock = 473,
     },
     [PSS_DATA_WINDOW_INFO_ABILITY] = {
         .bg = 0,
@@ -606,7 +608,7 @@ static const struct WindowTemplate sPageInfoTemplate[] =
         .width = 18,
         .height = 6,
         .paletteNum = 6,
-        .baseBlock = 485,
+        .baseBlock = 487,
     },
     [PSS_DATA_WINDOW_INFO_MEMO] = {
         .bg = 0,
@@ -627,7 +629,7 @@ static const struct WindowTemplate sPageSkillsTemplate[] =
         .width = 10,
         .height = 2,
         .paletteNum = 6,
-        .baseBlock = 449,
+        .baseBlock = 451,
     },
     [PSS_DATA_WINDOW_SKILLS_RIBBON_COUNT] = {
         .bg = 0,
@@ -636,7 +638,7 @@ static const struct WindowTemplate sPageSkillsTemplate[] =
         .width = 10,
         .height = 2,
         .paletteNum = 6,
-        .baseBlock = 469,
+        .baseBlock = 471,
     },
     [PSS_DATA_WINDOW_SKILLS_STATS_LEFT] = {
         .bg = 0,
@@ -645,7 +647,7 @@ static const struct WindowTemplate sPageSkillsTemplate[] =
         .width = 6,
         .height = 6,
         .paletteNum = 6,
-        .baseBlock = 489,
+        .baseBlock = 491,
     },
     [PSS_DATA_WINDOW_SKILLS_STATS_RIGHT] = {
         .bg = 0,
@@ -654,7 +656,7 @@ static const struct WindowTemplate sPageSkillsTemplate[] =
         .width = 3,
         .height = 6,
         .paletteNum = 6,
-        .baseBlock = 525,
+        .baseBlock = 527,
     },
     [PSS_DATA_WINDOW_EXP] = {
         .bg = 0,
@@ -663,7 +665,7 @@ static const struct WindowTemplate sPageSkillsTemplate[] =
         .width = 6,
         .height = 4,
         .paletteNum = 6,
-        .baseBlock = 543,
+        .baseBlock = 545,
     },
 };
 static const struct WindowTemplate sPageMovesTemplate[] = // This is used for both battle and contest moves
@@ -675,7 +677,7 @@ static const struct WindowTemplate sPageMovesTemplate[] = // This is used for bo
         .width = 9,
         .height = 10,
         .paletteNum = 6,
-        .baseBlock = 449,
+        .baseBlock = 451,
     },
     [PSS_DATA_WINDOW_MOVE_PP] = {
         .bg = 0,
@@ -684,7 +686,7 @@ static const struct WindowTemplate sPageMovesTemplate[] = // This is used for bo
         .width = 6,
         .height = 10,
         .paletteNum = 8,
-        .baseBlock = 539,
+        .baseBlock = 541,
     },
     [PSS_DATA_WINDOW_MOVE_DESCRIPTION] = {
         .bg = 0,
@@ -693,7 +695,7 @@ static const struct WindowTemplate sPageMovesTemplate[] = // This is used for bo
         .width = 20,
         .height = 4,
         .paletteNum = 6,
-        .baseBlock = 599,
+        .baseBlock = 601,
     },
 };
 static const u8 sTextColors[][3] =
@@ -949,13 +951,13 @@ static const union AnimCmd *const sSpriteAnimTable_MoveTypes[NUMBER_OF_MON_TYPES
     sSpriteAnim_CategoryTough,
 };
 
-static const struct CompressedSpriteSheet sSpriteSheet_MoveTypes =
+const struct CompressedSpriteSheet gSpriteSheet_MoveTypes =
 {
     .data = gMoveTypes_Gfx,
     .size = (NUMBER_OF_MON_TYPES + CONTEST_CATEGORIES_COUNT) * 0x100,
     .tag = TAG_MOVE_TYPES
 };
-static const struct SpriteTemplate sSpriteTemplate_MoveTypes =
+const struct SpriteTemplate gSpriteTemplate_MoveTypes =
 {
     .tileTag = TAG_MOVE_TYPES,
     .paletteTag = TAG_MOVE_TYPES,
@@ -1441,7 +1443,7 @@ static bool8 DecompressGraphics(void)
         sMonSummaryScreen->switchCounter++;
         break;
     case 7:
-        LoadCompressedSpriteSheet(&sSpriteSheet_MoveTypes);
+        LoadCompressedSpriteSheet(&gSpriteSheet_MoveTypes);
         sMonSummaryScreen->switchCounter++;
         break;
     case 8:
@@ -1665,6 +1667,23 @@ static void Task_HandleInput(u8 taskId)
             PlaySE(SE_SELECT);
             BeginCloseSummaryScreen(taskId);
         }
+		else if (JOY_NEW(START_BUTTON))
+		{
+            StopPokemonAnimations();
+            PlaySE(SE_SELECT);
+			LoadDataScreenFromSummary(sMonSummaryScreen->summary.species, sMonSummaryScreen->mode, sMonSummaryScreen->monList.mons,
+				sMonSummaryScreen->curMonIndex, sMonSummaryScreen->maxMonIndex, sMonSummaryScreen->callback);
+			// not sure if this is necessary or wise.
+			SummaryScreen_DestroyAnimDelayTask();
+			ResetSpriteData();
+			FreeAllSpritePalettes();
+			StopCryAndClearCrySongs();
+			m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 0x100);
+			if (gMonSpritesGfxPtr == NULL)
+				DestroyMonSpritesGfxManager(MON_SPR_GFX_MANAGER_A);
+			FreeSummaryScreen();
+			DestroyTask(taskId);
+		}
     #if DEBUG_POKEMON_MENU == TRUE
         else if (JOY_NEW(SELECT_BUTTON) && !gMain.inBattle)
         {
@@ -2853,8 +2872,9 @@ static void PrintNotEggInfo(void)
 
     if (dexNum != 0xFFFF)
     {
+        u8 digitCount = (NATIONAL_DEX_COUNT > 999 && IsNationalPokedexEnabled()) ? 4 : 3; 
         StringCopy(gStringVar1, &gText_NumberClear01[0]);
-        ConvertIntToDecimalStringN(gStringVar2, dexNum, STR_CONV_MODE_LEADING_ZEROS, 3);
+        ConvertIntToDecimalStringN(gStringVar2, dexNum, STR_CONV_MODE_LEADING_ZEROS, digitCount);
         StringAppend(gStringVar1, gStringVar2);
         if (!IsMonShiny(mon))
         {
@@ -2918,7 +2938,7 @@ static void PrintGenderSymbol(struct Pokemon *mon, u16 species)
 static void PrintAOrBButtonIcon(u8 windowId, bool8 bButton, u32 x)
 {
     // sBButton_Gfx - sizeof(sBButton_Gfx) = sAButton_Gfx
-    BlitBitmapToWindow(windowId, (bButton) ? sBButton_Gfx : sBButton_Gfx - sizeof(sBButton_Gfx), x, 0, 16, 16);
+    BlitBitmapToWindow(windowId, (bButton) ? sBButton_Gfx : sAButton_Gfx, x, 0, 16, 16);
 }
 
 static void PrintPageNamesAndStats(void)
@@ -3491,23 +3511,37 @@ static void PrintRibbonCount(void)
     PrintTextOnWindow(AddWindowFromTemplateList(sPageSkillsTemplate, PSS_DATA_WINDOW_SKILLS_RIBBON_COUNT), text, x, 1, 0, 0);
 }
 
+static void BufferStat(u8 *dst, s8 natureMod, u32 stat, u32 strId, u32 n)
+{
+    static const u8 sTextNatureDown[] = _("{COLOR}{08}");
+    static const u8 sTextNatureUp[] = _("{COLOR}{05}");
+    static const u8 sTextNatureNeutral[] = _("{COLOR}{01}");
+    u8 *txtPtr;
+
+    if (natureMod == 0 || !SUMMARY_SCREEN_NATURE_COLORS)
+        txtPtr = StringCopy(dst, sTextNatureNeutral);
+    else if (natureMod > 0)
+        txtPtr = StringCopy(dst, sTextNatureUp);
+    else
+        txtPtr = StringCopy(dst, sTextNatureDown);
+
+    ConvertIntToDecimalStringN(txtPtr, stat, STR_CONV_MODE_RIGHT_ALIGN, n);
+    DynamicPlaceholderTextUtil_SetPlaceholderPtr(strId, dst);
+}
+
 static void BufferLeftColumnStats(void)
 {
-    u8 *currentHPString = Alloc(8);
-    u8 *maxHPString = Alloc(8);
-    u8 *attackString = Alloc(8);
-    u8 *defenseString = Alloc(8);
-
-    ConvertIntToDecimalStringN(currentHPString, sMonSummaryScreen->summary.currentHP, STR_CONV_MODE_RIGHT_ALIGN, 3);
-    ConvertIntToDecimalStringN(maxHPString, sMonSummaryScreen->summary.maxHP, STR_CONV_MODE_RIGHT_ALIGN, 3);
-    ConvertIntToDecimalStringN(attackString, sMonSummaryScreen->summary.atk, STR_CONV_MODE_RIGHT_ALIGN, 7);
-    ConvertIntToDecimalStringN(defenseString, sMonSummaryScreen->summary.def, STR_CONV_MODE_RIGHT_ALIGN, 7);
+    u8 *currentHPString = Alloc(20);
+    u8 *maxHPString = Alloc(20);
+    u8 *attackString = Alloc(20);
+    u8 *defenseString = Alloc(20);
+    const s8 *natureMod = gNatureStatTable[sMonSummaryScreen->summary.nature];
 
     DynamicPlaceholderTextUtil_Reset();
-    DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, currentHPString);
-    DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, maxHPString);
-    DynamicPlaceholderTextUtil_SetPlaceholderPtr(2, attackString);
-    DynamicPlaceholderTextUtil_SetPlaceholderPtr(3, defenseString);
+    BufferStat(currentHPString, 0, sMonSummaryScreen->summary.currentHP, 0, 3);
+    BufferStat(maxHPString, 0, sMonSummaryScreen->summary.maxHP, 1, 3);
+    BufferStat(attackString, natureMod[STAT_ATK - 1], sMonSummaryScreen->summary.atk, 2, 7);
+    BufferStat(defenseString, natureMod[STAT_DEF - 1], sMonSummaryScreen->summary.def, 3, 7);
     DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, sStatsLeftColumnLayout);
 
     Free(currentHPString);
@@ -3523,14 +3557,12 @@ static void PrintLeftColumnStats(void)
 
 static void BufferRightColumnStats(void)
 {
-    ConvertIntToDecimalStringN(gStringVar1, sMonSummaryScreen->summary.spatk, STR_CONV_MODE_RIGHT_ALIGN, 3);
-    ConvertIntToDecimalStringN(gStringVar2, sMonSummaryScreen->summary.spdef, STR_CONV_MODE_RIGHT_ALIGN, 3);
-    ConvertIntToDecimalStringN(gStringVar3, sMonSummaryScreen->summary.speed, STR_CONV_MODE_RIGHT_ALIGN, 3);
+    const s8 *natureMod = gNatureStatTable[sMonSummaryScreen->summary.nature];
 
     DynamicPlaceholderTextUtil_Reset();
-    DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gStringVar1);
-    DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, gStringVar2);
-    DynamicPlaceholderTextUtil_SetPlaceholderPtr(2, gStringVar3);
+    BufferStat(gStringVar1, natureMod[STAT_SPATK - 1], sMonSummaryScreen->summary.spatk, 0, 3);
+    BufferStat(gStringVar2, natureMod[STAT_SPDEF - 1], sMonSummaryScreen->summary.spdef, 1, 3);
+    BufferStat(gStringVar3, natureMod[STAT_SPEED - 1], sMonSummaryScreen->summary.speed, 2, 3);
     DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, sStatsRightColumnLayout);
 }
 
@@ -3782,9 +3814,8 @@ static void PrintMoveDetails(u16 move)
         if (sMonSummaryScreen->currPageIndex == PSS_PAGE_BATTLE_MOVES)
         {
             moveEffect = gBattleMoves[move].effect;
-        #if B_SHOW_SPLIT_ICON == TRUE
-            ShowSplitIcon(GetBattleMoveSplit(move));
-        #endif
+            if (B_SHOW_SPLIT_ICON == TRUE)
+                ShowSplitIcon(GetBattleMoveSplit(move));
             PrintMovePowerAndAccuracy(move);
 
             if (moveEffect != EFFECT_PLACEHOLDER)
@@ -3921,13 +3952,13 @@ static void CreateMoveTypeIcons(void)
     for (i = SPRITE_ARR_ID_TYPE; i < SPRITE_ARR_ID_TYPE + TYPE_ICON_SPRITE_COUNT; i++)
     {
         if (sMonSummaryScreen->spriteIds[i] == SPRITE_NONE)
-            sMonSummaryScreen->spriteIds[i] = CreateSprite(&sSpriteTemplate_MoveTypes, 0, 0, 2);
+            sMonSummaryScreen->spriteIds[i] = CreateSprite(&gSpriteTemplate_MoveTypes, 0, 0, 2);
 
         SetSpriteInvisibility(i, TRUE);
     }
 }
 
-static void SetTypeSpritePosAndPal(u8 typeId, u8 x, u8 y, u8 spriteArrayId)
+void SetTypeSpritePosAndPal(u8 typeId, u8 x, u8 y, u8 spriteArrayId)
 {
     struct Sprite *sprite = &gSprites[sMonSummaryScreen->spriteIds[spriteArrayId]];
     StartSpriteAnim(sprite, typeId);
@@ -3963,19 +3994,22 @@ static void SetMonTypeIcons(void)
 static void SetMoveTypeIcons(void)
 {
     u8 i;
-	u8 type;
     struct PokeSummary *summary = &sMonSummaryScreen->summary;
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
         if (summary->moves[i] != MOVE_NONE)
-		{
+        {
 			if (summary->moves[i] == MOVE_HIDDEN_POWER)
-				type = GetHiddenPowerType(summary->hpIv, summary->atkIv, summary->defIv, summary->speedIv, summary->spAtkIv, summary->spDefIv);
-			else
-				type = gBattleMoves[summary->moves[i]].type;
-            SetTypeSpritePosAndPal(type, 85, 32 + (i * 16), i + SPRITE_ARR_ID_TYPE);
+			{
+				SetTypeSpritePosAndPal(GetHiddenPowerType(summary->hpIv, summary->atkIv, summary->defIv, summary->speedIv, summary->spAtkIv, summary->spDefIv),
+					85, 32 + (i * 16), i + SPRITE_ARR_ID_TYPE);
+			}
+            else if (summary->moves[i] == MOVE_IVY_CUDGEL && ItemId_GetHoldEffect(summary->item) == HOLD_EFFECT_MASK)
+                SetTypeSpritePosAndPal(ItemId_GetSecondaryId(summary->item), 85, 32 + (i * 16), i + SPRITE_ARR_ID_TYPE);
+            else
+                SetTypeSpritePosAndPal(gBattleMoves[summary->moves[i]].type, 85, 32 + (i * 16), i + SPRITE_ARR_ID_TYPE);
         }
-		else
+        else
             SetSpriteInvisibility(i + SPRITE_ARR_ID_TYPE, TRUE);
     }
 }
@@ -3995,7 +4029,6 @@ static void SetContestMoveTypeIcons(void)
 
 static void SetNewMoveTypeIcon(void)
 {
-	u8 typeBits;
 	u8 type;
     struct PokeSummary *summary = &sMonSummaryScreen->summary;
 	
@@ -4040,7 +4073,6 @@ static void SwapMovesTypeSprites(u8 moveIndex1, u8 moveIndex2)
 
 static u8 LoadMonGfxAndSprite(struct Pokemon *mon, s16 *state)
 {
-    const struct CompressedSpritePalette *pal;
     struct PokeSummary *summary = &sMonSummaryScreen->summary;
 
     switch (*state)
@@ -4075,9 +4107,8 @@ static u8 LoadMonGfxAndSprite(struct Pokemon *mon, s16 *state)
         (*state)++;
         return 0xFF;
     case 1:
-        pal = GetMonSpritePalStructFromOtIdPersonality(summary->species2, summary->OTID, summary->pid);
-        LoadCompressedSpritePalette(pal);
-        SetMultiuseSpriteTemplateToPokemon(pal->tag, B_POSITION_OPPONENT_LEFT);
+        LoadCompressedSpritePaletteWithTag(GetMonSpritePalFromSpeciesAndPersonality(summary->species2, summary->OTID, summary->pid), summary->species2);
+        SetMultiuseSpriteTemplateToPokemon(summary->species2, B_POSITION_OPPONENT_LEFT);
         (*state)++;
         return 0xFF;
     }
@@ -4143,7 +4174,7 @@ static void SummaryScreen_DestroyAnimDelayTask(void)
 }
 
 // unused
-static bool32 IsMonAnimationFinished(void)
+static UNUSED bool32 IsMonAnimationFinished(void)
 {
     if (gSprites[sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_MON]].callback == SpriteCallbackDummy)
         return FALSE;

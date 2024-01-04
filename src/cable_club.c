@@ -196,7 +196,7 @@ static bool32 CheckSioErrored(u8 taskId)
 }
 
 // Unused
-static void Task_DelayedBlockRequest(u8 taskId)
+static UNUSED void Task_DelayedBlockRequest(u8 taskId)
 {
     gTasks[taskId].data[0]++;
     if (gTasks[taskId].data[0] == 10)
@@ -804,7 +804,7 @@ static void Task_ReestablishLinkAwaitConfirmation(u8 taskId)
 }
 
 // Unused
-void CableClubSaveGame(void)
+UNUSED void CableClubSaveGame(void)
 {
     SaveGame();
 }
@@ -1167,13 +1167,13 @@ void PlayerEnteredTradeSeat(void)
 }
 
 // Unused
-static void CreateTask_StartWiredTrade(void)
+static UNUSED void CreateTask_StartWiredTrade(void)
 {
     CreateTask(Task_StartWiredTrade, 80);
 }
 
 // Unused, implemented in Ruby/Sapphire
-void Script_StartWiredTrade(void)
+UNUSED void Script_StartWiredTrade(void)
 {
     // CreateTask_StartWiredTrade();
     // ScriptContext_Stop();
@@ -1190,9 +1190,9 @@ void ColosseumPlayerSpotTriggered(void)
 }
 
 // Unused
-static void CreateTask_EnterCableClubSeatNoFollowup(void)
+static UNUSED void CreateTask_EnterCableClubSeatNoFollowup(void)
 {
-    u8 taskId = CreateTask(Task_EnterCableClubSeat, 80);
+    UNUSED u8 taskId = CreateTask(Task_EnterCableClubSeat, 80);
     ScriptContext_Stop();
 }
 
@@ -1263,7 +1263,7 @@ static void Task_WaitExitToScript(u8 taskId)
 }
 
 // Unused
-static void ExitLinkToScript(u8 taskId)
+static UNUSED void ExitLinkToScript(u8 taskId)
 {
     SetCloseLinkCallback();
     gTasks[taskId].func = Task_WaitExitToScript;
