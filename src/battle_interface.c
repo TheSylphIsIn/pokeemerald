@@ -3716,7 +3716,6 @@ static void SpriteCB_LastUsedBall(struct Sprite *sprite)
 // The sprites' positions depend on their icons.
 static void SpriteCB_FandangoCues(struct Sprite *sprite)
 {
-	DebugPrintf("state for %d: %d", sprite->sCueId, sprite->sCueState);
 	if (JOY_HELD(START_BUTTON) || sprite->sCueInactive)
 	{
 		if (sprite->x > FANDANGO_CUE_PEEKING_X)
@@ -3768,7 +3767,6 @@ static void SpriteCB_FandangoCues(struct Sprite *sprite)
 
 static void SpriteCB_FandangoCueIcons(struct Sprite *sprite)
 {
-	DebugPrintf("state for %d: %d", sprite->sCueId, sprite->sCueState);
 	if (JOY_HELD(START_BUTTON) || sprite->sCueInactive)
 	{
 		if (sprite->x > FANDANGO_CUE_PEEKING_X)
@@ -3830,7 +3828,6 @@ static void SpriteCB_FandangoCueIcons(struct Sprite *sprite)
 					case FANDANGO_CUE_ICON_L:
 						if (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER))
 						{
-							DebugPrintf("tried to restore flee icon", 0);
 							SwapOutFandangoCueIcon(sprite, sprite->sCueId, ITEM_ICON_FLEE, BUTTON_CUE_STATE_ACTION);
 						}
 						else
@@ -3842,7 +3839,6 @@ static void SpriteCB_FandangoCueIcons(struct Sprite *sprite)
 					case FANDANGO_CUE_ICON_R:
 						if (CanThrowLastUsedBall())
 						{
-							DebugPrintf("tried to restore ball icon", 0);
 							SwapOutFandangoCueIcon(sprite, sprite->sCueId, gBallToDisplay, BUTTON_CUE_STATE_ACTION);
 						}
 						else
@@ -3873,7 +3869,6 @@ static void SpriteCB_FandangoCueIcons(struct Sprite *sprite)
 static void SwapOutFandangoCueIcon(struct Sprite *sprite, u8 iconId, u16 targetIcon, u8 nextState) 
 {
 	u32 battler = sprite->sCueBattler;
-	DebugPrintf("exchanged icon.", 0);
 	
 	FreeSpriteTilesByTag(TAG_BUTTON_CUE_ICONS + iconId);
     FreeSpritePaletteByTag(TAG_BUTTON_CUE_ICONS + iconId);
@@ -3890,7 +3885,6 @@ static void SwapOutFandangoCueIcon(struct Sprite *sprite, u8 iconId, u16 targetI
 
 static void DestroyFandangoCueIconSprite(struct Sprite *sprite, u8 iconId)
 {
-	DebugPrintf("destroyed icon.", 0);
 	FreeSpriteTilesByTag(TAG_BUTTON_CUE_ICONS + iconId);
     FreeSpritePaletteByTag(TAG_BUTTON_CUE_ICONS + iconId);
     DestroySprite(sprite);
@@ -3899,7 +3893,6 @@ static void DestroyFandangoCueIconSprite(struct Sprite *sprite, u8 iconId)
 
 static void DestroyFandangoCueSprite(struct Sprite *sprite, u8 iconId)
 {
-	DebugPrintf("destroyed button.", 0);
     DestroySprite(sprite);
     gBattleStruct->ballSpriteIds[iconId] = MAX_SPRITES;
 	

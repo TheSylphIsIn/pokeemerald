@@ -1989,8 +1989,6 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
             if (monsCount > PARTY_SIZE / 2)
                 monsCount = PARTY_SIZE / 2;
         }
-		
-		DebugPrintf("%d", monsCount);
 
         for (i = 0; i < monsCount; i++)
         {

@@ -264,10 +264,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
     #include "species_info/gen_7.h"
     #include "species_info/gen_8.h"
     #include "species_info/gen_9.h"
-	#include "species_info/fandango.h"
 
     [SPECIES_EGG] =
     {
+		.baseHP = 1, // Expansion checks baseHP to see if the species is enabled.
         FRONT_PIC(Egg, 24, 24),
         .frontPicYOffset = 20,
         .backPic = gMonFrontPic_Egg,
@@ -277,6 +277,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .shinyPalette = gMonPalette_Egg,
         ICON(Egg, 1),
     },
+
+	#include "species_info/fandango.h"
 
     /* You may add any custom species below this point based on the following structure: */
 

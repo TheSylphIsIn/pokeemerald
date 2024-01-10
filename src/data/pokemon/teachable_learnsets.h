@@ -35093,6 +35093,19 @@ static const u16 sEnamorusTeachableLearnset[] = {
 };
 #endif //P_FAMILY_ENAMORUS
 
+// Fandango mons
+static const u16 sDubsnakeTeachableLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+
+static const u16 sSloshmoshTeachableLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+
+static const u16 sKeeshTeachableLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+
 #if P_FAMILY_SPRIGATITO
 static const u16 sSprigatitoTeachableLearnset[] = {
     MOVE_ACROBATICS,

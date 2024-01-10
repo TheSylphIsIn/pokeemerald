@@ -5243,7 +5243,7 @@ static const union AnimCmd sAnims_DeoxysSpeed_1[] =
 };
 #endif //P_FAMILY_DEOXYS
 
-static const union AnimCmd sAnims_DUBSNAKE_1[] = 
+static const union AnimCmd sAnims_Dubsnake_1[] = 
 {
 	ANIMCMD_FRAME(0, 10),
 	ANIMCMD_FRAME(1, 60),
@@ -5378,7 +5378,7 @@ static const union AnimCmd sAnims_PRESCYLLON_1[] =
 	ANIMCMD_END
 };
 
-static const union AnimCmd sAnims_SLOSHMOSH_1[] =
+static const union AnimCmd sAnims_Sloshmosh_1[] =
 {
 	ANIMCMD_FRAME(0, 10),
 	ANIMCMD_FRAME(1, 20),
@@ -5395,7 +5395,7 @@ static const union AnimCmd sAnims_SLURPINSKI_1[] =
 	ANIMCMD_END
 };
 
-static const union AnimCmd sAnims_KEESH_1[] =
+static const union AnimCmd sAnims_Keesh_1[] =
 {
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_FRAME(1, 10),
@@ -13218,9 +13218,9 @@ SINGLE_ANIMATION(EnamorusIncarnate);
 SINGLE_ANIMATION(EnamorusTherian);
 #endif //P_FAMILY_ENAMORUS
 
-static const union AnimCmd *const sAnims_DUBSNAKE[] ={
+static const union AnimCmd *const sAnims_Dubsnake[] ={
 	sAnim_GeneralFrame0,
-	sAnims_DUBSNAKE_1,
+	sAnims_Dubsnake_1,
 };
 
 static const union AnimCmd *const sAnims_HYDROIL[] ={
@@ -13303,9 +13303,9 @@ static const union AnimCmd *const sAnims_PRESCYLLON[] ={
 	sAnims_PRESCYLLON_1,
 };
 
-static const union AnimCmd *const sAnims_SLOSHMOSH[] ={
+static const union AnimCmd *const sAnims_Sloshmosh[] ={
 	sAnim_GeneralFrame0,
-	sAnims_SLOSHMOSH_1,
+	sAnims_Sloshmosh_1,
 };
 
 static const union AnimCmd *const sAnims_SLURPINSKI[] ={
@@ -13313,9 +13313,9 @@ static const union AnimCmd *const sAnims_SLURPINSKI[] ={
 	sAnims_SLURPINSKI_1,
 };
 
-static const union AnimCmd *const sAnims_KEESH[] ={
+static const union AnimCmd *const sAnims_Keesh[] ={
 	sAnim_GeneralFrame0,
-	sAnims_KEESH_1,
+	sAnims_Keesh_1,
 };
 
 static const union AnimCmd *const sAnims_HATCHBLING[] ={

@@ -30,6 +30,5 @@ bool16 HasAllHoennMons(void);
 void ResetPokedexScrollPositions(void);
 bool16 HasAllMons(void);
 void CB2_OpenPokedex(void);
-void LoadDataScreenFromSummary(u16 species, u8 mode, void *mons, u8 monIndex, u8 maxMonIndex, void (*callback)(void));
 
 #endif // GUARD_POKEDEX_H

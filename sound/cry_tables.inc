@@ -2159,7 +2159,6 @@ gCryTable::
 	cry Cry_EnamorusTherian
 .endif @ P_FAMILY_ENAMORUS
 
-
 	cry Cry_Dubsnake
 	cry Cry_Hydroil
 	cry Cry_Wycern

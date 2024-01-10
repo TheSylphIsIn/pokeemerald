@@ -11275,11 +11275,7 @@ bool32 IsAlly(u32 battlerAtk, u32 battlerDef)
 
 bool32 IsGen6ExpShareEnabled(void)
 {
-#if I_EXP_SHARE_FLAG <= TEMP_FLAGS_END
-    return FALSE;
-#else
-    return FlagGet(I_EXP_SHARE_FLAG);
-#endif
+	return gSaveBlock2Ptr->optionsExpShare;
 }
 
 bool8 CanMonParticipateInSkyBattle(struct Pokemon *mon)

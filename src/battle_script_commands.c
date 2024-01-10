@@ -4205,7 +4205,9 @@ static void Cmd_getexp(void)
                     {
                         gBattleMoveDamage += gBattleStruct->expShareExpValue;
                     }
-
+					
+					// Buffer the amount before applying multipliers. This value is only displayed in the teamGotExpMsg.
+					PREPARE_WORD_NUMBER_BUFFER(gBattleTextBuff1, 6, gBattleMoveDamage);
                     ApplyExperienceMultipliers(&gBattleMoveDamage, *expMonId, gBattlerFainted);
 
                     if (IsTradedMon(&gPlayerParty[*expMonId]))
@@ -4215,6 +4217,10 @@ static void Cmd_getexp(void)
                             i = STRINGID_EMPTYSTRING4;
                         else
                             i = STRINGID_ABOOSTED;
+                    }
+                    else
+                    {
+                        i = STRINGID_EMPTYSTRING4;
                     }
 
                     // get exp getter battler
@@ -4235,19 +4241,18 @@ static void Cmd_getexp(void)
                         gBattleStruct->expGetterBattlerId = 0;
                     }
 
-                    PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, gBattleStruct->expGetterBattlerId, *expMonId);
-                    // buffer 'gained' or 'gained a boosted'
-                    PREPARE_STRING_BUFFER(gBattleTextBuff2, i);
-                    PREPARE_WORD_NUMBER_BUFFER(gBattleTextBuff3, 6, gBattleMoveDamage);
 
                     if (wasSentOut || holdEffect == HOLD_EFFECT_EXP_SHARE)
                     {
+						PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, gBattleStruct->expGetterBattlerId, *expMonId);
+						// buffer 'gained' or 'gained a boosted'
+						PREPARE_STRING_BUFFER(gBattleTextBuff2, i);
+						PREPARE_WORD_NUMBER_BUFFER(gBattleTextBuff3, 6, gBattleMoveDamage);
                         PrepareStringBattle(STRINGID_PKMNGAINEDEXP, gBattleStruct->expGetterBattlerId);
                     }
                     else if (IsGen6ExpShareEnabled() && !gBattleStruct->teamGotExpMsgPrinted) // Print 'the rest of your team got exp' message once, when all of the sent-in mons were given experience
                     {
-                        gLastUsedItem = ITEM_EXP_SHARE;
-                        PrepareStringBattle(STRINGID_TEAMGAINEDEXP, gBattleStruct->expGetterBattlerId); // TODO: buffer this properly
+                        PrepareStringBattle(STRINGID_TEAMGAINEDEXP, gBattleStruct->expGetterBattlerId);
                         gBattleStruct->teamGotExpMsgPrinted = TRUE;
                     }
 
