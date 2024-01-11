@@ -196,7 +196,7 @@ static EWRAM_DATA struct PokemonSummaryScreenData
     u8 secondMoveIndex;
     bool8 lockMovesFlag; // This is used to prevent the player from changing position of moves in a battle or when trading.
     u8 bgDisplayOrder; // Determines the order page backgrounds are loaded while scrolling between them
-    u8 filler40CA;
+    u8 ppMode;
     u8 windowIds[8];
     u8 spriteIds[SPRITE_ARR_ID_COUNT];
     bool8 handleDeoxys;
@@ -695,19 +695,19 @@ static const struct WindowTemplate sPageMovesTemplate[] = // This is used for bo
         .bg = 0,
         .tilemapLeft = 15,
         .tilemapTop = 4,
-        .width = 9,
+        .width = 12,
         .height = 10,
         .paletteNum = 6,
         .baseBlock = 451,
     },
     [PSS_DATA_WINDOW_MOVE_PP] = {
         .bg = 0,
-        .tilemapLeft = 24,
+        .tilemapLeft = 27,
         .tilemapTop = 4,
-        .width = 6,
+        .width = 3,
         .height = 10,
         .paletteNum = 8,
-        .baseBlock = 541,
+        .baseBlock = 571,
     },
     [PSS_DATA_WINDOW_MOVE_DESCRIPTION] = {
         .bg = 0,
@@ -790,7 +790,7 @@ static const u8 sMemoNatureTextColor[] = _("{COLOR LIGHT_RED}{SHADOW GREEN}");
 static const u8 sMemoMiscTextColor[] = _("{COLOR WHITE}{SHADOW DARK_GRAY}"); // This is also affected by palettes, apparently
 static const u8 sStatsLeftColumnLayout[] = _("{DYNAMIC 0}/{DYNAMIC 1}\n{DYNAMIC 2}\n{DYNAMIC 3}");
 static const u8 sStatsRightColumnLayout[] = _("{DYNAMIC 0}\n{DYNAMIC 1}\n{DYNAMIC 2}");
-static const u8 sMovesPPLayout[] = _("{PP}{DYNAMIC 0}/{DYNAMIC 1}");
+static const u8 sMovesPPLayout[] = _("{DYNAMIC 0}");
 
 #define TAG_MOVE_SELECTOR 30000
 #define TAG_MON_STATUS 30001
@@ -1223,7 +1223,7 @@ static u8 ShowSplitIcon(u32 split)
     if (sMonSummaryScreen->splitIconSpriteId == 0xFF)
         sMonSummaryScreen->splitIconSpriteId = CreateSprite(&sSpriteTemplate_SplitIcons, 48, 129, 0);
 
-    gSprites[sMonSummaryScreen->splitIconSpriteId].invisible = FALSE;
+    gSprites[sMonSummaryScreen->splitIconSpriteId].invisible = sMonSummaryScreen->currPageIndex == PSS_PAGE_CONTEST_MOVES;
     StartSpriteAnim(&gSprites[sMonSummaryScreen->splitIconSpriteId], split);
     return sMonSummaryScreen->splitIconSpriteId;
 }
@@ -1255,16 +1255,19 @@ void ShowPokemonSummaryScreen(u8 mode, void *mons, u8 monIndex, u8 maxMonIndex, 
     case SUMMARY_MODE_BOX:
         sMonSummaryScreen->minPageIndex = 0;
         sMonSummaryScreen->maxPageIndex = PSS_PAGE_COUNT - 1;
+	sMonSummaryScreen->ppMode = TRUE;
         break;
     case SUMMARY_MODE_LOCK_MOVES:
         sMonSummaryScreen->minPageIndex = 0;
         sMonSummaryScreen->maxPageIndex = PSS_PAGE_COUNT - 1;
         sMonSummaryScreen->lockMovesFlag = TRUE;
+		sMonSummaryScreen->ppMode = TRUE;
         break;
     case SUMMARY_MODE_SELECT_MOVE:
         sMonSummaryScreen->minPageIndex = PSS_PAGE_BATTLE_MOVES;
         sMonSummaryScreen->maxPageIndex = PSS_PAGE_COUNT - 1;
         sMonSummaryScreen->lockMonFlag = TRUE;
+	sMonSummaryScreen->ppMode = FALSE;
         break;
     }
 
@@ -2058,6 +2061,10 @@ static void SwitchToMoveSelection(u8 taskId)
     }
     TilemapFiveMovesDisplay(sMonSummaryScreen->bgTilemapBuffers[PSS_PAGE_BATTLE_MOVES][0], 3, FALSE);
     TilemapFiveMovesDisplay(sMonSummaryScreen->bgTilemapBuffers[PSS_PAGE_CONTEST_MOVES][0], 1, FALSE);
+    PrintMoveNameAndPP(0);
+    PrintMoveNameAndPP(1);
+    PrintMoveNameAndPP(2);
+    PrintMoveNameAndPP(3);
     PrintMoveDetails(move);
     PrintNewMoveDetailsOrCancelText();
     SetNewMoveTypeIcon();
@@ -2191,6 +2198,10 @@ static void CloseMoveSelectMode(u8 taskId)
     PrintMoveDetails(0);
     TilemapFiveMovesDisplay(sMonSummaryScreen->bgTilemapBuffers[PSS_PAGE_BATTLE_MOVES][0], 3, TRUE);
     TilemapFiveMovesDisplay(sMonSummaryScreen->bgTilemapBuffers[PSS_PAGE_CONTEST_MOVES][0], 1, TRUE);
+    PrintMoveNameAndPP(0);
+    PrintMoveNameAndPP(1);
+    PrintMoveNameAndPP(2);
+    PrintMoveNameAndPP(3);
     AddAndFillMoveNamesWindow(); // This function seems to have no effect.
     if (sMonSummaryScreen->firstMoveIndex != MAX_MON_MOVES)
     {
@@ -2849,9 +2860,13 @@ static void Task_ShowStatusWindow(u8 taskId)
 static void TilemapFiveMovesDisplay(u16 *dst, u16 palette, bool8 remove)
 {
     u16 i, id;
+	// u32 tilePal = palette;
+	// u32 tileBg = (tilePal == 3 ? 2 : 1);
 
     palette *= 0x1000;
     id = 0x56A;
+	
+	sMonSummaryScreen->ppMode = remove;
     if (!remove)
     {
         for (i = 0; i < 20; i++)
@@ -2860,6 +2875,13 @@ static void TilemapFiveMovesDisplay(u16 *dst, u16 palette, bool8 remove)
             dst[id + i + 0x20] = gSummaryScreen_MoveEffect_Cancel_Tilemap[i] + palette;
             dst[id + i + 0x40] = gSummaryScreen_MoveEffect_Cancel_Tilemap[i + 20] + palette;
         }
+		
+		// Replace "PP" with "MAX". The 0x1000 is offsetting the palette; the above code is handling tilemaps with base palette num 0.
+		dst[0x479] = 0x105E + palette - 0x1000;
+		dst[0x47A] = 0x107A + palette - 0x1000;
+		dst[0x47B] = 0x107B + palette - 0x1000;
+		dst[0x47C] = 0x107C + palette - 0x1000;
+		dst[0x47D] = 0x105D + palette - 0x1000;
     }
     else // Remove
     {
@@ -2869,6 +2891,12 @@ static void TilemapFiveMovesDisplay(u16 *dst, u16 palette, bool8 remove)
             dst[id + i + 0x20] = gSummaryScreen_MoveEffect_Cancel_Tilemap[i + 40] + palette;
             dst[id + i + 0x40] = gSummaryScreen_MoveEffect_Cancel_Tilemap[i + 40] + palette;
         }
+		// Replace "MAX" with "PP"
+		dst[0x479] = 0x1021 + palette - 0x1000;
+		dst[0x47A] = 0x105E + palette - 0x1000;
+		dst[0x47B] = 0x10A7 + palette - 0x1000;
+		dst[0x47C] = 0x10A8 + palette - 0x1000;
+		dst[0x47D] = 0x105D + palette - 0x1000;
     }
 }
 
@@ -3820,27 +3848,32 @@ static void PrintMoveNameAndPP(u8 moveIndex)
     u8 moveNameWindowId = AddWindowFromTemplateList(sPageMovesTemplate, PSS_DATA_WINDOW_MOVE_NAMES);
     u8 ppValueWindowId = AddWindowFromTemplateList(sPageMovesTemplate, PSS_DATA_WINDOW_MOVE_PP);
     u16 move = summary->moves[moveIndex];
+	
 
     if (move != 0)
     {
         pp = CalculatePPWithBonus(move, summary->ppBonuses, moveIndex);
         PrintTextOnWindow(moveNameWindowId, gMoveNames[move], 0, moveIndex * 16 + 1, 0, 1);
-        ConvertIntToDecimalStringN(gStringVar1, summary->pp[moveIndex], STR_CONV_MODE_RIGHT_ALIGN, 2);
-        ConvertIntToDecimalStringN(gStringVar2, pp, STR_CONV_MODE_RIGHT_ALIGN, 2);
+		if (pp != summary->pp[moveIndex])
+			FillWindowPixelRect(ppValueWindowId, PIXEL_FILL(0), 0, moveIndex * 16, 24, 16);
+			
+		if (!sMonSummaryScreen->ppMode)
+			ConvertIntToDecimalStringN(gStringVar1, pp, STR_CONV_MODE_RIGHT_ALIGN, 2);
+        else
+			ConvertIntToDecimalStringN(gStringVar1, summary->pp[moveIndex], STR_CONV_MODE_RIGHT_ALIGN, 2);
         DynamicPlaceholderTextUtil_Reset();
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gStringVar1);
-        DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, gStringVar2);
         DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, sMovesPPLayout);
         text = gStringVar4;
         ppState = GetCurrentPpToMaxPpState(summary->pp[moveIndex], pp) + 9;
-        x = GetStringRightAlignXOffset(FONT_NORMAL, text, 44);
+        x = GetStringCenterAlignXOffset(FONT_NORMAL, text, 24);
     }
     else
     {
         PrintTextOnWindow(moveNameWindowId, gText_OneDash, 0, moveIndex * 16 + 1, 0, 1);
         text = gText_TwoDashes;
         ppState = 12;
-        x = GetStringCenterAlignXOffset(FONT_NORMAL, text, 44);
+        x = GetStringCenterAlignXOffset(FONT_NORMAL, text, 24);
     }
 
     PrintTextOnWindow(ppValueWindowId, text, x, moveIndex * 16 + 1, 0, ppState);
@@ -3972,6 +4005,9 @@ static void PrintMoveDetails(u16 move)
                 PrintTextOnWindow(windowId, gMoveDescriptionPointers[move - 1], 6, 1, 0, 0);
             else
                 PrintTextOnWindow(windowId, gNotDoneYetDescription, 6, 1, 0, 0);
+			
+			if (B_SHOW_SPLIT_ICON == TRUE && sMonSummaryScreen->mode == SUMMARY_MODE_SELECT_MOVE)
+				ShowSplitIcon(GetBattleMoveSplit(move)); // always try to show the split icon when replacing a move
         }
         else
         {
@@ -4008,16 +4044,18 @@ static void PrintNewMoveDetailsOrCancelText(void)
         ConvertIntToDecimalStringN(gStringVar1, gBattleMoves[move].pp, STR_CONV_MODE_RIGHT_ALIGN, 2);
         DynamicPlaceholderTextUtil_Reset();
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gStringVar1);
-        DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, gStringVar1);
         DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, sMovesPPLayout);
-        PrintTextOnWindow(windowId2, gStringVar4, GetStringRightAlignXOffset(FONT_NORMAL, gStringVar4, 44), 65, 0, 12);
+        PrintTextOnWindow(windowId2, gStringVar4, GetStringCenterAlignXOffset(FONT_NORMAL, gStringVar4, 24), 65, 0, 12);
+		
+		// if (B_SHOW_SPLIT_ICON == TRUE && sMonSummaryScreen->mode == SUMMARY_MODE_SELECT_MOVE)
+			// ShowSplitIcon(GetBattleMoveSplit(move)); // always try to show the split icon when replacing a move
     }
 }
 
 static void AddAndFillMoveNamesWindow(void)
 {
     u8 windowId = AddWindowFromTemplateList(sPageMovesTemplate, PSS_DATA_WINDOW_MOVE_NAMES);
-    FillWindowPixelRect(windowId, PIXEL_FILL(0), 0, 66, 72, 16);
+    FillWindowPixelRect(windowId, PIXEL_FILL(0), 0, 66, 96, 16);
     CopyWindowToVram(windowId, COPYWIN_GFX);
 }
 
@@ -4026,11 +4064,11 @@ static void SwapMovesNamesPP(u8 moveIndex1, u8 moveIndex2)
     u8 windowId1 = AddWindowFromTemplateList(sPageMovesTemplate, PSS_DATA_WINDOW_MOVE_NAMES);
     u8 windowId2 = AddWindowFromTemplateList(sPageMovesTemplate, PSS_DATA_WINDOW_MOVE_PP);
 
-    FillWindowPixelRect(windowId1, PIXEL_FILL(0), 0, moveIndex1 * 16, 72, 16);
-    FillWindowPixelRect(windowId1, PIXEL_FILL(0), 0, moveIndex2 * 16, 72, 16);
+    FillWindowPixelRect(windowId1, PIXEL_FILL(0), 0, moveIndex1 * 16, 96, 16);
+    FillWindowPixelRect(windowId1, PIXEL_FILL(0), 0, moveIndex2 * 16, 96, 16);
 
-    FillWindowPixelRect(windowId2, PIXEL_FILL(0), 0, moveIndex1 * 16, 48, 16);
-    FillWindowPixelRect(windowId2, PIXEL_FILL(0), 0, moveIndex2 * 16, 48, 16);
+    FillWindowPixelRect(windowId2, PIXEL_FILL(0), 0, moveIndex1 * 16, 24, 16);
+    FillWindowPixelRect(windowId2, PIXEL_FILL(0), 0, moveIndex2 * 16, 24, 16);
 
     PrintMoveNameAndPP(moveIndex1);
     PrintMoveNameAndPP(moveIndex2);

@@ -5325,7 +5325,7 @@ static const union AnimCmd sAnims_SPOOKUM_1[] =
 	ANIMCMD_END,
 };
 
-static const union AnimCmd sAnims_GLASMA_1[] =
+static const union AnimCmd sAnims_Glasma_1[] =
 {
 	ANIMCMD_FRAME(0, 10),
 	ANIMCMD_FRAME(1, 60),
@@ -5343,7 +5343,7 @@ static const union AnimCmd sAnims_STORMAGE_1[] =
 	ANIMCMD_END
 };
 
-static const union AnimCmd sAnims_SANDUDE_1[] =
+static const union AnimCmd sAnims_Sandude_1[] =
 {
 	ANIMCMD_FRAME(0, 5),
 	ANIMCMD_FRAME(1, 40),
@@ -5361,7 +5361,7 @@ static const union AnimCmd sAnims_SANDUEL_1[] =
 	ANIMCMD_END
 };
 
-static const union AnimCmd sAnims_ELADRIFT_1[] =
+static const union AnimCmd sAnims_Eladrift_1[] =
 {
 	ANIMCMD_FRAME(1, 10),
 	ANIMCMD_FRAME(0, 10),
@@ -13258,9 +13258,9 @@ static const union AnimCmd *const sAnims_SPOOKUM[] ={
     sAnims_SPOOKUM_1,
 };
 
-static const union AnimCmd *const sAnims_GLASMA[] ={
+static const union AnimCmd *const sAnims_Glasma[] ={
 	sAnim_GeneralFrame0,
-	sAnims_GLASMA_1,
+	sAnims_Glasma_1,
 };
 
 static const union AnimCmd *const sAnims_PLASMOLYTE[] ={
@@ -13273,9 +13273,9 @@ static const union AnimCmd *const sAnims_STORMAGE[] ={
 	sAnims_STORMAGE_1,
 };
 
-static const union AnimCmd *const sAnims_SANDUDE[] ={
+static const union AnimCmd *const sAnims_Sandude[] ={
 	sAnim_GeneralFrame0,
-	sAnims_SANDUDE_1,
+	sAnims_Sandude_1,
 };
 
 static const union AnimCmd *const sAnims_SANDROSS[] ={
@@ -13288,9 +13288,9 @@ static const union AnimCmd *const sAnims_SANDUEL[] ={
 	sAnims_SANDUEL_1,
 };
 
-static const union AnimCmd *const sAnims_ELADRIFT[] ={
+static const union AnimCmd *const sAnims_Eladrift[] ={
 	sAnim_GeneralFrame0,
-	sAnims_ELADRIFT_1,
+	sAnims_Eladrift_1,
 };
 
 static const union AnimCmd *const sAnims_SLITHURENT[] ={

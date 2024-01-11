@@ -35098,6 +35098,19 @@ static const u16 sDubsnakeTeachableLearnset[] = {
     MOVE_UNAVAILABLE,
 };
 
+static const u16 sGlasmaTeachableLearnset[] = {
+	MOVE_FLASH,
+    MOVE_UNAVAILABLE,
+};
+
+static const u16 sSandudeTeachableLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+
+static const u16 sEladriftTeachableLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+
 static const u16 sSloshmoshTeachableLearnset[] = {
     MOVE_UNAVAILABLE,
 };
