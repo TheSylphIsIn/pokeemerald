@@ -185,38 +185,38 @@ static const struct WindowTemplate sStandardBattleWindowTemplates[] =
     [B_WIN_MOVE_NAME_1] = {
         .bg = 0,
         .tilemapLeft = 2,
-        .tilemapTop = 55,
-        .width = 16,    //for z move names
+        .tilemapTop = 51,
+        .width = 10,    //for z move names
         .height = 2,
         .paletteNum = 5,
         .baseBlock = 0x0300,
     },
     [B_WIN_MOVE_NAME_2] = {
         .bg = 0,
-        .tilemapLeft = 11,
-        .tilemapTop = 55,
-        .width = 8,
+        .tilemapLeft = 2,
+        .tilemapTop = 53,
+        .width = 10,
         .height = 2,
         .paletteNum = 5,
-        .baseBlock = 0x0318,
+        .baseBlock = 0x0314,
     },
     [B_WIN_MOVE_NAME_3] = {
         .bg = 0,
         .tilemapLeft = 2,
-        .tilemapTop = 57,
-        .width = 16,    //for z effect descriptions
+        .tilemapTop = 55,
+        .width = 10,    //for z effect descriptions
         .height = 2,
         .paletteNum = 5,
         .baseBlock = 0x0328,
     },
     [B_WIN_MOVE_NAME_4] = {
         .bg = 0,
-        .tilemapLeft = 11,
+        .tilemapLeft = 2,
         .tilemapTop = 57,
-        .width = 8,
+        .width = 10,
         .height = 2,
         .paletteNum = 5,
-        .baseBlock = 0x0340,
+        .baseBlock = 0x033C,
     },
     [B_WIN_PP] = {
         .bg = 0,
@@ -256,9 +256,9 @@ static const struct WindowTemplate sStandardBattleWindowTemplates[] =
     },
     [B_WIN_SWITCH_PROMPT] = {
         .bg = 0,
-        .tilemapLeft = 21,
+        .tilemapLeft = 14,
         .tilemapTop = 55,
-        .width = 8,
+        .width = 15,
         .height = 4,
         .paletteNum = 5,
         .baseBlock = 0x02b0,
@@ -371,7 +371,7 @@ static const struct WindowTemplate sStandardBattleWindowTemplates[] =
         .paletteNum = 0,
         .baseBlock = 0x00b0,
     },
-    [24] = { // super effective
+    [B_WIN_SE_PALETTE] = { // super effective
         .bg = 0,
         .tilemapLeft = 21,
         .tilemapTop = 57,
@@ -380,7 +380,7 @@ static const struct WindowTemplate sStandardBattleWindowTemplates[] =
         .paletteNum = 5,
         .baseBlock = 0x02a0,
     },
-    [25] = { // not very effective
+    [B_WIN_NVE_PALETTE] = { // not very effective
         .bg = 0,
         .tilemapLeft = 21,
         .tilemapTop = 57,
@@ -389,7 +389,7 @@ static const struct WindowTemplate sStandardBattleWindowTemplates[] =
         .paletteNum = 5,
         .baseBlock = 0x02a0,
     },
-    [26] = { // no effect
+    [B_WIN_IMMUNE_PALETTE] = { // no effect
         .bg = 0,
         .tilemapLeft = 21,
         .tilemapTop = 57,
@@ -397,6 +397,24 @@ static const struct WindowTemplate sStandardBattleWindowTemplates[] =
         .height = 2,
         .paletteNum = 5,
         .baseBlock = 0x02a0,
+    },
+    [B_WIN_MOVE_POWER] = {
+        .bg = 0,
+        .tilemapLeft = 14,
+        .tilemapTop = 55,
+        .width = 7,
+        .height = 2,
+        .paletteNum = 5,
+        .baseBlock = 0x350,
+    },
+    [B_WIN_MOVE_ACCURACY] = {
+        .bg = 0,
+        .tilemapLeft = 14,
+        .tilemapTop = 57,
+        .width = 7,
+        .height = 2,
+        .paletteNum = 5,
+        .baseBlock = 0x35F,
     },
      DUMMY_WIN_TEMPLATE
  };
@@ -764,7 +782,7 @@ void InitBattleBgsVideo(void)
 void LoadBattleMenuWindowGfx(void)
 {
     LoadUserWindowBorderGfx(2, 0x12, BG_PLTT_ID(1));
-    LoadUserWindowBorderGfx(2, 0x22, BG_PLTT_ID(1));
+    LoadUserWindowBorderGfx(2, 0x22, BG_PLTT_ID(1)); // for yes/no boxes
     LoadCompressedPalette(gBattleWindowTextPalette, BG_PLTT_ID(5), PLTT_SIZE_4BPP);
 
     if (gBattleTypeFlags & BATTLE_TYPE_ARENA)

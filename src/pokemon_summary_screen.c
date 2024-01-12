@@ -4046,9 +4046,7 @@ static void PrintNewMoveDetailsOrCancelText(void)
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gStringVar1);
         DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, sMovesPPLayout);
         PrintTextOnWindow(windowId2, gStringVar4, GetStringCenterAlignXOffset(FONT_NORMAL, gStringVar4, 24), 65, 0, 12);
-		
-		// if (B_SHOW_SPLIT_ICON == TRUE && sMonSummaryScreen->mode == SUMMARY_MODE_SELECT_MOVE)
-			// ShowSplitIcon(GetBattleMoveSplit(move)); // always try to show the split icon when replacing a move
+
     }
 }
 

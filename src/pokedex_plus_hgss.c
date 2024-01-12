@@ -635,7 +635,7 @@ static const struct OamData sOamData_SplitIcons =
 static const struct CompressedSpriteSheet sSpriteSheet_SplitIcons =
 {
     .data = sSplitIcons_Gfx,
-    .size = 16*16*3/2,
+    .size = 16*16*4/2,
     .tag = TAG_SPLIT_ICONS,
 };
 static const struct SpritePalette sSpritePal_SplitIcons =
@@ -658,11 +658,17 @@ static const union AnimCmd sSpriteAnim_SplitIcon2[] =
     ANIMCMD_FRAME(8, 0),
     ANIMCMD_END
 };
+static const union AnimCmd sSpriteAnim_SplitIcon3[] =
+{
+    ANIMCMD_FRAME(12, 0),
+    ANIMCMD_END
+};
 static const union AnimCmd *const sSpriteAnimTable_SplitIcons[] =
 {
     sSpriteAnim_SplitIcon0,
     sSpriteAnim_SplitIcon1,
     sSpriteAnim_SplitIcon2,
+    sSpriteAnim_SplitIcon3,
 };
 static const struct SpriteTemplate sSpriteTemplate_SplitIcons =
 {

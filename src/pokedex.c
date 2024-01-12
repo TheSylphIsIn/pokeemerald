@@ -4296,7 +4296,7 @@ static void DataScreenPrintEvolutionMethods(u16 species)
 	
 	for (numEvos = 0; numEvos < EVOS_PER_MON; numEvos++)
 	{
-		if (evolutions[numEvos].method == 0 || evolutions[numEvos].method == EVOLUTIONS_END)
+		if (evolutions == NULL || evolutions[numEvos].method == 0 || evolutions[numEvos].method == EVOLUTIONS_END)
 			break;
 	}
 	
@@ -4459,7 +4459,7 @@ static void DataScreenPrintNumEvos(u16 species)
 	
 	for (i = 0; i < EVOS_PER_MON; i++)
 	{
-		if (evolutions[i].method == 0 || evolutions[i].method == EVOLUTIONS_END)
+		if (evolutions == NULL || evolutions[i].method == 0 || evolutions[i].method == EVOLUTIONS_END)
 			break;
 	}
 	

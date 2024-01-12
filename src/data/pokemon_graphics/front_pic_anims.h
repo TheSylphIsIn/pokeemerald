@@ -5251,7 +5251,7 @@ static const union AnimCmd sAnims_Dubsnake_1[] =
 	ANIMCMD_END,
 };
 
-static const union AnimCmd sAnims_HYDROIL_1[] = 
+static const union AnimCmd sAnims_Hydroil_1[] = 
 {
 	ANIMCMD_FRAME(0, 10),
 	ANIMCMD_FRAME(1, 30),
@@ -5333,7 +5333,7 @@ static const union AnimCmd sAnims_Glasma_1[] =
 	ANIMCMD_END
 };
 
-static const union AnimCmd sAnims_PLASMOLYTE_1[] =
+static const union AnimCmd sAnims_Plasmolyte_1[] =
 {
 	ANIMCMD_END
 };
@@ -5492,7 +5492,7 @@ static const union AnimCmd sAnims_AEGISLASH_FONEI_E_1[] =
 	ANIMCMD_END
 };
 
-static const union AnimCmd sAnims_ELEMPTY_1[] =
+static const union AnimCmd sAnims_Elempty_1[] =
 {
 	ANIMCMD_FRAME(0, 20),
 	ANIMCMD_END
@@ -13223,9 +13223,9 @@ static const union AnimCmd *const sAnims_Dubsnake[] ={
 	sAnims_Dubsnake_1,
 };
 
-static const union AnimCmd *const sAnims_HYDROIL[] ={
+static const union AnimCmd *const sAnims_Hydroil[] ={
 	sAnim_GeneralFrame0,
-	sAnims_HYDROIL_1,
+	sAnims_Hydroil_1,
 };
 
 static const union AnimCmd *const sAnims_WYCERN[] ={
@@ -13263,9 +13263,9 @@ static const union AnimCmd *const sAnims_Glasma[] ={
 	sAnims_Glasma_1,
 };
 
-static const union AnimCmd *const sAnims_PLASMOLYTE[] ={
+static const union AnimCmd *const sAnims_Plasmolyte[] ={
 	sAnim_GeneralFrame0,
-	sAnims_PLASMOLYTE_1,
+	sAnims_Plasmolyte_1,
 };
 
 static const union AnimCmd *const sAnims_STORMAGE[] ={
@@ -13388,9 +13388,9 @@ static const union AnimCmd *const sAnims_AEGISLASH_FONEI_E[] ={
 	sAnims_AEGISLASH_FONEI_E_1,
 };
 
-static const union AnimCmd *const sAnims_ELEMPTY[] ={
+static const union AnimCmd *const sAnims_Elempty[] ={
 	sAnim_GeneralFrame0,
-	sAnims_ELEMPTY_1,
+	sAnims_Elempty_1,
 };
 
 static const union AnimCmd *const sAnims_VENEARTH[] ={

@@ -2047,6 +2047,8 @@ const u8 gText_BattleMenu[] = _("FIGHT{CLEAR_TO 56}BAG\nPOKéMON{CLEAR_TO 56}RUN
 const u8 gText_SafariZoneMenu[] = _("BALL{CLEAR_TO 56}{POKEBLOCK}\nGO NEAR{CLEAR_TO 56}RUN");
 const u8 gText_MoveInterfacePP[] = _("PP ");
 const u8 gText_MoveInterfaceType[] = _("TYPE/");
+const u8 gText_MoveInterfacePower[] = _("PWR/");
+const u8 gText_MoveInterfaceAcc[] = _("ACC/");
 const u8 gText_MoveInterfacePpType[] = _("{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW DYNAMIC_COLOR4 DYNAMIC_COLOR5 DYNAMIC_COLOR6}PP\nTYPE/");
 const u8 gText_MoveInterfaceDynamicColors[] = _("{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW DYNAMIC_COLOR4 DYNAMIC_COLOR5 DYNAMIC_COLOR6}");
 const u8 gText_WhichMoveToForget4[] = _("{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW DYNAMIC_COLOR4 DYNAMIC_COLOR5 DYNAMIC_COLOR6}Which move should\nbe forgotten?");
@@ -2482,7 +2484,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
         .fgColor = 1,
         .shadowColor = 6,
     },
-	[24] = { // 24 "type" super-effective
+	[B_WIN_SE_PALETTE] = { // 24 "type" super-effective
         .fillValue = PIXEL_FILL(0xE),
         .fontId = 7,
         .x = 0,
@@ -2494,7 +2496,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
         .bgColor = 14,
         .shadowColor = 5,
     },
-    [25] = { // 25 "type" not very effective
+    [B_WIN_NVE_PALETTE] = { // 25 "type" not very effective
         .fillValue = PIXEL_FILL(0xE),
         .fontId = 7,
         .x = 0,
@@ -2506,7 +2508,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
         .bgColor = 14,
         .shadowColor = 3,
     },
-    [26] = { // 26 "type" no effect
+    [B_WIN_IMMUNE_PALETTE] = { // 26 "type" no effect
         .fillValue = PIXEL_FILL(0xE),
         .fontId = 7,
         .x = 0,
@@ -2515,6 +2517,26 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
         .lineSpacing = 0,
         .speed = 0,
         .fgColor = 7,
+        .bgColor = 14,
+        .shadowColor = 15,
+    },
+    [B_WIN_MOVE_POWER] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NARROW,
+        .x = 0,
+        .y = 1,
+        .speed = 0,
+        .fgColor = 13,
+        .bgColor = 14,
+        .shadowColor = 15,
+    },
+    [B_WIN_MOVE_ACCURACY] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NARROW,
+        .x = 0,
+        .y = 1,
+        .speed = 0,
+        .fgColor = 13,
         .bgColor = 14,
         .shadowColor = 15,
     },
