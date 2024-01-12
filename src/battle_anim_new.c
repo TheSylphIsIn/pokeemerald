@@ -8599,7 +8599,7 @@ void AnimTask_PrimalReversion(u8 taskId)
 
 void AnimTask_ShellSideArm(u8 taskId)
 {
-    if (gBattleStruct->swapDamageCategory)
+    if (!gBattleStruct->dynamicCategory)
         gBattleAnimArgs[0] = TRUE;
     else
         gBattleAnimArgs[0] = FALSE;

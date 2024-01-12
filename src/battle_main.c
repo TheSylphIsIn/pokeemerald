@@ -3114,7 +3114,7 @@ static void BattleStartClearSetData(void)
         gBattleStruct->allowedToChangeFormInWeather[i][B_SIDE_OPPONENT] = FALSE;
     }
 
-    gBattleStruct->swapDamageCategory = FALSE; // Photon Geyser, Shell Side Arm, Light That Burns the Sky
+    gBattleStruct->dynamicCategory = SPLIT_PHYSICAL; // Photon Geyser, Shell Side Arm, Light That Burns the Sky
     gSelectedMonPartyId = PARTY_SIZE; // Revival Blessing
 }
 
@@ -5650,15 +5650,20 @@ static void LoadMonItems(void)
 
 u8 GetHiddenPowerType(u8 hpIV, u8 atkIV, u8 defIV, u8 speedIV, u8 spAtkIV, u8 spDefIV)
 {
+	u32 type;
 	u8 typeBits  = ((hpIV & 1) << 0)
-                 | ((atkIV & 1) << 1)
-                 | ((defIV & 1) << 2)
-                 | ((speedIV & 1) << 3)
-                 | ((spAtkIV & 1) << 4)
-                 | ((spDefIV & 1) << 5);
+                     | ((atkIV & 1) << 1)
+                     | ((defIV & 1) << 2)
+                     | ((speedIV & 1) << 3)
+                     | ((spAtkIV & 1) << 4)
+                     | ((spDefIV & 1) << 5);
 
-	// The -2 and subsequent +1 excludes NORMAL.
-    return ((NUMBER_OF_MON_TYPES - 2) * typeBits) / 63 + 1;
+	// Subtract 3 instead of 1 below because 2 types are excluded (TYPE_NORMAL and TYPE_MYSTERY)
+	// The final + 1 skips past Normal, and the following conditional skips TYPE_MYSTERY. Unlike vanilla, Fandango allows Fairy type Hidden Power.
+	type = ((NUMBER_OF_MON_TYPES - 3) * typeBits) / 63 + 1;
+	if (type >= TYPE_MYSTERY)
+		type++;
+	return type;
 }
 
 void SetTypeBeforeUsingMove(u32 move, u32 battlerAtk)
@@ -5691,18 +5696,8 @@ void SetTypeBeforeUsingMove(u32 move, u32 battlerAtk)
     }
     else if (gBattleMoves[move].effect == EFFECT_HIDDEN_POWER)
     {
-        u8 typeBits  = ((gBattleMons[battlerAtk].hpIV & 1) << 0)
-                     | ((gBattleMons[battlerAtk].attackIV & 1) << 1)
-                     | ((gBattleMons[battlerAtk].defenseIV & 1) << 2)
-                     | ((gBattleMons[battlerAtk].speedIV & 1) << 3)
-                     | ((gBattleMons[battlerAtk].spAttackIV & 1) << 4)
-                     | ((gBattleMons[battlerAtk].spDefenseIV & 1) << 5);
-
-        // Subtract 4 instead of 1 below because 3 types are excluded (TYPE_NORMAL and TYPE_MYSTERY and TYPE_FAIRY)
-        // The final + 1 skips past Normal, and the following conditional skips TYPE_MYSTERY
-        gBattleStruct->dynamicMoveType = ((NUMBER_OF_MON_TYPES - 4) * typeBits) / 63 + 1;
-        if (gBattleStruct->dynamicMoveType >= TYPE_MYSTERY)
-            gBattleStruct->dynamicMoveType++;
+        gBattleStruct->dynamicMoveType = GetHiddenPowerType(gBattleMons[battlerAtk].hpIV, gBattleMons[battlerAtk].attackIV, gBattleMons[battlerAtk].defenseIV,
+													gBattleMons[battlerAtk].speedIV, gBattleMons[battlerAtk].spAttackIV, gBattleMons[battlerAtk].spDefenseIV);
         gBattleStruct->dynamicMoveType |= F_DYNAMIC_TYPE_IGNORE_PHYSICALITY | F_DYNAMIC_TYPE_SET;
     }
     else if (gBattleMoves[move].effect == EFFECT_CHANGE_TYPE_ON_ITEM && holdEffect == gBattleMoves[move].argument)

@@ -8309,7 +8309,7 @@ bool32 IsMoveMakingContact(u32 move, u32 battlerAtk)
 
     if (!gBattleMoves[move].makesContact)
     {
-        if (gBattleMoves[move].effect == EFFECT_SHELL_SIDE_ARM && gBattleStruct->swapDamageCategory)
+        if (gBattleMoves[move].effect == EFFECT_SHELL_SIDE_ARM && !gBattleStruct->dynamicCategory)
             return TRUE;
         else
             return FALSE;
@@ -8350,7 +8350,7 @@ bool32 IsBattlerProtected(u32 battler, u32 move)
     // Protective Pads doesn't stop Unseen Fist from bypassing Protect effects, so IsMoveMakingContact() isn't used here.
     // This means extra logic is needed to handle Shell Side Arm.
     if (GetBattlerAbility(gBattlerAttacker) == ABILITY_UNSEEN_FIST
-        && (gBattleMoves[move].makesContact || (gBattleMoves[move].effect == EFFECT_SHELL_SIDE_ARM && gBattleStruct->swapDamageCategory))
+        && (gBattleMoves[move].makesContact || (gBattleMoves[move].effect == EFFECT_SHELL_SIDE_ARM && !gBattleStruct->dynamicCategory))
         && !gProtectStructs[battler].maxGuarded) // Max Guard cannot be bypassed by Unseen Fist
         return FALSE;
     else if (gBattleMoves[move].ignoresProtect)
@@ -9249,6 +9249,9 @@ static inline u32 CalcAttackStat(u32 move, u32 battlerAtk, u32 battlerDef, u32 m
 
     atkBaseSpeciesId = GET_BASE_SPECIES_ID(gBattleMons[battlerAtk].species);
 
+	if (gBattleMoves[move].split == SPLIT_DYNAMIC)
+		gBattleStruct->dynamicCategory = (GetSplitBasedOnStats(battlerAtk));
+
     if (gBattleMoves[move].effect == EFFECT_FOUL_PLAY)
     {
         if (IS_MOVE_PHYSICAL(move))
@@ -9256,7 +9259,7 @@ static inline u32 CalcAttackStat(u32 move, u32 battlerAtk, u32 battlerDef, u32 m
             atkStat = gBattleMons[battlerDef].attack;
             atkStage = gBattleMons[battlerDef].statStages[STAT_ATK];
         }
-        else
+        else // attacks with target's Special Attack if Special
         {
             atkStat = gBattleMons[battlerDef].spAttack;
             atkStage = gBattleMons[battlerDef].statStages[STAT_SPATK];
@@ -9264,8 +9267,16 @@ static inline u32 CalcAttackStat(u32 move, u32 battlerAtk, u32 battlerDef, u32 m
     }
     else if (gBattleMoves[move].effect == EFFECT_BODY_PRESS)
     {
-        atkStat = gBattleMons[battlerAtk].defense;
-        atkStage = gBattleMons[battlerAtk].statStages[STAT_DEF];
+        if (IS_MOVE_PHYSICAL(move))
+        {
+			atkStat = gBattleMons[battlerAtk].defense;
+			atkStage = gBattleMons[battlerAtk].statStages[STAT_DEF];
+        }
+        else // attacks with Sp. Def if Special
+        {
+			atkStat = gBattleMons[battlerAtk].spDefense;
+			atkStage = gBattleMons[battlerAtk].statStages[STAT_SPDEF];
+        }
     }
     else
     {
@@ -10712,8 +10723,8 @@ u8 GetBattleMoveSplit(u32 moveId)
         return gBattleStruct->zmove.activeSplit;
     if (gBattleStruct != NULL && IsMaxMove(moveId)) // TODO: Might be buggy depending on when this is called.
         return gBattleStruct->dynamax.activeSplit;
-    if (gBattleStruct != NULL && gBattleStruct->swapDamageCategory) // Photon Geyser, Shell Side Arm, Light That Burns the Sky
-        return SPLIT_PHYSICAL;
+    if (gBattleStruct != NULL && gBattleMoves[moveId].split == SPLIT_DYNAMIC) // Photon Geyser, Shell Side Arm, Light That Burns the Sky
+        return gBattleStruct->dynamicCategory;
     if (B_PHYSICAL_SPECIAL_SPLIT >= GEN_4)
         return gBattleMoves[moveId].split;
 

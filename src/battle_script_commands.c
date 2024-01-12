@@ -10252,10 +10252,10 @@ static void Cmd_various(void)
             gBattlescriptCurrInstr = cmd->nextInstr;
         return;
     }
-    case VARIOUS_PHOTON_GEYSER_CHECK:
+    case VARIOUS_PHOTON_GEYSER_CHECK: // this is unnecessary in Fandango.
     {
         VARIOUS_ARGS();
-        gBattleStruct->swapDamageCategory = (GetSplitBasedOnStats(battler) == SPLIT_SPECIAL);
+        gBattleStruct->dynamicCategory = (GetSplitBasedOnStats(battler));
         break;
     }
     case VARIOUS_SHELL_SIDE_ARM_CHECK: // 0% chance GameFreak actually checks this way according to DaWobblefet, but this is the only functional explanation at the moment
@@ -10270,7 +10270,7 @@ static void Cmd_various(void)
         u32 physical;
         u32 special;
 
-        gBattleStruct->swapDamageCategory = FALSE;
+        gBattleStruct->dynamicCategory = SPLIT_SPECIAL;
 
         statStage = gBattleMons[gBattlerAttacker].statStages[STAT_ATK];
         attackerAtkStat *= gStatStageRatios[statStage][0];
@@ -10293,7 +10293,7 @@ static void Cmd_various(void)
         special = ((((2 * gBattleMons[gBattlerAttacker].level / 5 + 2) * gBattleMoves[gCurrentMove].power * attackerSpAtkStat) / targetSpDefStat) / 50);
 
         if (((physical > special) || (physical == special && (Random() % 2) == 0)))
-            gBattleStruct->swapDamageCategory = TRUE;
+            gBattleStruct->dynamicCategory = SPLIT_PHYSICAL;
         break;
     }
     case VARIOUS_JUMP_IF_LEAF_GUARD_PROTECTED:

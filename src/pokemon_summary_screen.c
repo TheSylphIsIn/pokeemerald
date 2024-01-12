@@ -917,7 +917,7 @@ static const union AnimCmd sSpriteAnim_TypeSteel[] = {
     ANIMCMD_END
 };
 static const union AnimCmd sSpriteAnim_TypeMystery[] = {
-    ANIMCMD_FRAME(TYPE_FAIRY * 8, 0, FALSE, FALSE),
+    ANIMCMD_FRAME(TYPE_MYSTERY * 8, 0, FALSE, FALSE),
     ANIMCMD_END
 };
 static const union AnimCmd sSpriteAnim_TypeFire[] = {
@@ -1030,7 +1030,7 @@ static const u8 sMoveTypeToOamPaletteNum[NUMBER_OF_MON_TYPES + CONTEST_CATEGORIE
     [TYPE_BUG] = 15,
     [TYPE_GHOST] = 14,
     [TYPE_STEEL] = 13,
-    [TYPE_MYSTERY] = 15,
+    [TYPE_MYSTERY] = 14,
     [TYPE_FIRE] = 13,
     [TYPE_WATER] = 14,
     [TYPE_GRASS] = 15,
@@ -1039,7 +1039,7 @@ static const u8 sMoveTypeToOamPaletteNum[NUMBER_OF_MON_TYPES + CONTEST_CATEGORIE
     [TYPE_ICE] = 14,
     [TYPE_DRAGON] = 15,
     [TYPE_DARK] = 13,
-    [TYPE_FAIRY] = 14,
+    [TYPE_FAIRY] = 15,
     [NUMBER_OF_MON_TYPES + CONTEST_CATEGORY_COOL] = 13,
     [NUMBER_OF_MON_TYPES + CONTEST_CATEGORY_BEAUTY] = 14,
     [NUMBER_OF_MON_TYPES + CONTEST_CATEGORY_CUTE] = 14,
@@ -1477,7 +1477,6 @@ static bool8 DecompressGraphics(void)
         }
         break;
     case 2:
-        //LZDecompressWram(gSummaryPage_InfoEgg_Tilemap, sMonSummaryScreen->bgTilemapBuffers[PSS_PAGE_INFO][1]);
         sMonSummaryScreen->switchCounter++;
         break;
     case 3:

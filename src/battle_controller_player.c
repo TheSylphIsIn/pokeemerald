@@ -1736,10 +1736,22 @@ static void MoveSelectionDisplayMoveTypeDoubles(u32 battler, u8 targetId)
 {
 	u8 *txtPtr;
 	u8 type;
+    u32 itemId;
+    struct Pokemon *mon;
 	struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct*)(&gBattleResources->bufferA[battler][4]);
 	
 	if (moveInfo->moves[gMoveSelectionCursor[battler]] == MOVE_HIDDEN_POWER)
 		type = GetHiddenPowerType(gBattleMons[battler].hpIV, gBattleMons[battler].attackIV, gBattleMons[battler].defenseIV, gBattleMons[battler].speedIV, gBattleMons[battler].spAttackIV, gBattleMons[battler].spDefenseIV);
+	else if (moveInfo->moves[gMoveSelectionCursor[battler]] == MOVE_IVY_CUDGEL)
+    {
+        mon = &GetSideParty(GetBattlerSide(battler))[gBattlerPartyIndexes[battler]];
+        itemId = GetMonData(mon, MON_DATA_HELD_ITEM);
+
+        if (ItemId_GetHoldEffect(itemId) == HOLD_EFFECT_MASK)
+            type = ItemId_GetSecondaryId(itemId);
+        else
+            type = gBattleMoves[MOVE_IVY_CUDGEL].type;
+    }
 	else
 		type = gBattleMoves[moveInfo->moves[gMoveSelectionCursor[battler]]].type;
 
@@ -1766,20 +1778,7 @@ static void MoveSelectionDisplayMoveType(u32 battler)
 	
 	if (moveInfo->moves[gMoveSelectionCursor[battler]] == MOVE_HIDDEN_POWER)
 		type = GetHiddenPowerType(gBattleMons[battler].hpIV, gBattleMons[battler].attackIV, gBattleMons[battler].defenseIV, gBattleMons[battler].speedIV, gBattleMons[battler].spAttackIV, gBattleMons[battler].spDefenseIV);
-	else
-		type = gBattleMoves[moveInfo->moves[gMoveSelectionCursor[battler]]].type;
-	
-	if (IsDoubleBattle())
-		textPalette = B_WIN_MOVE_TYPE;
-	else
-		textPalette = GetTypeEffectivenessColorForSelection(battler, GetBattlerAtPosition(BATTLE_OPPOSITE(GetBattlerPosition(battler))), type);
-
-    txtPtr = StringCopy(gDisplayedStringBattle, gText_MoveInterfaceType);
-    *(txtPtr)++ = EXT_CTRL_CODE_BEGIN;
-    *(txtPtr)++ = EXT_CTRL_CODE_FONT;
-    *(txtPtr)++ = FONT_NORMAL;
-
-    if (moveInfo->moves[gMoveSelectionCursor[battler]] == MOVE_IVY_CUDGEL)
+	else if (moveInfo->moves[gMoveSelectionCursor[battler]] == MOVE_IVY_CUDGEL)
     {
         mon = &GetSideParty(GetBattlerSide(battler))[gBattlerPartyIndexes[battler]];
         itemId = GetMonData(mon, MON_DATA_HELD_ITEM);
@@ -1789,8 +1788,18 @@ static void MoveSelectionDisplayMoveType(u32 battler)
         else
             type = gBattleMoves[MOVE_IVY_CUDGEL].type;
     }
-    else
-        type = gBattleMoves[moveInfo->moves[gMoveSelectionCursor[battler]]].type;
+	else
+		type = gBattleMoves[moveInfo->moves[gMoveSelectionCursor[battler]]].type;
+
+	if (IsDoubleBattle())
+		textPalette = B_WIN_MOVE_TYPE;
+	else
+		textPalette = GetTypeEffectivenessColorForSelection(battler, GetBattlerAtPosition(BATTLE_OPPOSITE(GetBattlerPosition(battler))), type);
+
+    txtPtr = StringCopy(gDisplayedStringBattle, gText_MoveInterfaceType);
+    *(txtPtr)++ = EXT_CTRL_CODE_BEGIN;
+    *(txtPtr)++ = EXT_CTRL_CODE_FONT;
+    *(txtPtr)++ = FONT_NORMAL;
 
     StringCopy(txtPtr, gTypeNames[type]);
     BattlePutTextOnWindow(gDisplayedStringBattle, textPalette);
@@ -1829,7 +1838,11 @@ static void MoveSelectionDisplayMovePower(u32 battler)
 	else
 		ConvertIntToDecimalStringN(txtPtr, power, STR_CONV_MODE_RIGHT_ALIGN, 3);
     BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MOVE_POWER);
-	MoveSelectionDrawCategory(gBattleMoves[moveInfo->moves[gMoveSelectionCursor[battler]]].split, FALSE);
+	if (gBattleMoves[moveInfo->moves[gMoveSelectionCursor[battler]]].split == SPLIT_DYNAMIC)
+		power = GetSplitBasedOnStats(battler); // reusing this for category
+	else
+		power = gBattleMoves[moveInfo->moves[gMoveSelectionCursor[battler]]].split;
+	MoveSelectionDrawCategory(power, FALSE);
 }
 
 static void MoveSelectionDisplayMoveAccuracy(u32 battler)

@@ -51,7 +51,77 @@
     F(COLD_SNAP) \
     F(GASLIGHT) \
     F(TAUNT) \
-    F(WASH_OFF)
+    F(WASH_OFF) \
+    F(SWORDS_DANCE) \
+    F(IRON_DEFENSE) \
+    F(AGILITY) \
+    F(NASTY_PLOT) \
+    F(AMNESIA) \
+    F(RAIN_DANCE) \
+    F(SUNNY_DAY) \
+    F(SANDSTORM) \
+    F(HAIL) \
+    F(ENERGY_BALL) \
+    F(LAVA_PLUME) \
+    F(WHITEWATER) \
+    F(PIN_MISSILE) \
+    F(CHILL_TOUCH) \
+    F(BODY_PRESS) \
+    F(BLACKOUT) \
+    F(DRAGON_PULSE) \
+    F(GIGA_IMPACT) \
+    F(PLAY_ROUGH) \
+    F(BLADE_STORM) \
+    F(OVERHEAT) \
+    F(FOCUS_RUSH) \
+    F(POWER_GEM) \
+    F(EARTH_POWER) \
+    F(AIR_SLASH) \
+    F(BUZZ_BLITZ) \
+    F(STEEL_WING) \
+    F(HEAL_ORDER) \
+    F(POISON_JAB) \
+    F(FUMUGATE) \
+    F(U_TURN) \
+    F(VOLT_SWITCH) \
+    F(FADE_AWAY) \
+    F(TELEPORT) \
+    F(FOCUS_BLAST) \
+    F(HYDRO_PUMP) \
+    F(SIGNAL_BEAM) \
+    F(FLASH_CANNON) \
+    F(BITTER_SLASH) \
+    F(HORRIFY) \
+    F(MAGIC_BURST) \
+    F(SMART_STRIKE) \
+    F(DIG) \
+    F(X_SCISSOR) \
+    F(POISON_TAIL) \
+    F(REND) \
+    F(SUPERPOWER) \
+    F(TAILWIND) \
+    F(SWEET_KISS) \
+    F(SWIFT) \
+    F(ARMOR_CRUSH) \
+    F(REST) \
+    F(SHORE_UP) \
+    F(FLAME_CHARGE) \
+    F(TRAILBLAZE) \
+    F(ACID_SPRAY) \
+    F(SHOCK_WAVE) \
+    F(TWISTER) \
+    F(AERIAL_ACE) \
+    F(TANTRUM) \
+    F(SHADOW_SNEAK) \
+    F(THIEF) \
+    F(POISON_FANG) \
+    F(SILVER_WIND) \
+    F(STRUGGLE_BUG) \
+    F(AURA_WAVE) \
+    F(MUD_SHOT) \
+    F(GEM_SPARK) \
+    F(MOCKERY) \
+    F(TWINKLE_POP) 
 
 #define FOREACH_HM(F) \
     F(CUT) \
