@@ -50,18 +50,18 @@ CranClearing_TriggerScript_Calvin1::
 CranClearing_Text_MorganGreet:
 	.string "MORGAN: Hey, {PLAYER}! I'm going\n"
 	.string "up this way.\p"
-	.string "CALVIN went through the grass,\n"
-	.string "but it's a bit too spooky for me.\p"
-	.string "Both paths go to the same place,\n"
-	.string "though.$"
+	.string "Calvin went through the grass,\n"
+	.string "but this way looks safer.\p"
+	.string "{EMPHASIS_RED}Both paths go to the same place{EMPHASIS_OFF},\n"
+	.string "so go whichever way you want.$"
 	
 CranClearing_Text_CalvinGreet:
 	.string "CALVIN: Sup, {PLAYER}? I'm\n"
 	.string "blazing a trail through this grass!\p"
 	.string "We're supposed to toughen up, right?\n"
-	.string "Typical MORGAN, took the easy way.\p"
-	.string "We'll both end up where we need to\n"
-	.string "be, but this way I'll be stronger.$"
+	.string "Typical Morgan, took the easy way.\p"
+	.string "{EMPHASIS_RED}We'll both end up where we need to\n"
+	.string "{EMPHASIS_OFF}be, but this way I'll be stronger.$"
 	
 CranClearing_Movement_WalkToBattleZone:
 	walk_up
@@ -146,11 +146,11 @@ CranClearing_Movement_PlayerWalkToMArenaFromLeft:
 	
 CranClearing_Text_MorganCalvinBeaten:
 	.string "MORGAN: Huh…? Did you already go\n"
-	.string "and beat CALVIN? Wow…$"
+	.string "and beat Calvin? Wow…$"
 	
 CranClearing_Text_MorganBattleIntro:
 	.string "MORGAN: {PLAYER}, I just realized…\n"
-	.string "We're POKéMON TRAINERS now!\p"
+	.string "We're Pokémon Trainers now!\p"
 	.string "Do you know what that means?\p"
 	.string "When our eyes meet… well, we have\n"
 	.string "to have a battle! Come over here…$"
@@ -160,7 +160,7 @@ CranClearing_Text_MorganBattleIntro2:
 	
 CranClearing_Text_MorganDefeated:
 	.string "MORGAN: Whew… my first battle\n"
-	.string "as a real POKéMON TRAINER…$"
+	.string "as a real Pokémon Trainer…$"
 	
 CranClearing_Movement_MorganWalkToArena:
 	walk_left
@@ -184,16 +184,16 @@ CranClearing_Text_MorganAfterBattle1:
 	.string "I know it was a simple battle,\l"
 	.string "but still… wow!\p"
 	.string "I wanna battle again whenever\n"
-	.string "our POKéMON get stronger.\p"
+	.string "our Pokémon get stronger.\p"
 	.string "Okay, {PLAYER}?\n"
 	.string "Oh, speaking of which…\p"
-	.string "These friendly people in CRAN\n"
-	.string "TOWN gave me these.\p"
+	.string "These friendly people in Cran\n"
+	.string "Town gave me these.\p"
 	.string "You can have one too, {PLAYER}.$"
 
 CranClearing_Text_MorganExplainFlash:
-	.string "It's an HM for FLASH. Just like\n"
-	.string "in KANTO, remember?\p"
+	.string "It's an HM for Flash. Just like\n"
+	.string "in {EMPHASIS_BLUE}Kanto{EMPHASIS_OFF}, remember?\p"
 	.string "I wonder if you'd…\n"
 	.string "… … u-um, never mind!\p"
 	.string "I'll go ahead to try to catch\n"
@@ -294,7 +294,7 @@ CranClearing_Movement_PlayerWalkToCArenaFromLeft:
 
 	
 CranClearing_Text_CalvinMorganBeaten:
-	.string "CALVIN: You fought MORGAN and came\n"
+	.string "CALVIN: You fought Morgan and came\n"
 	.string "back? You like this battle thing,\l"
 	.string "huh.$"
 	
@@ -389,13 +389,13 @@ CranClearing_EventScript_TrainerTipsSign::
 	end
 	
 CranClearing_Text_TrainerTips:
-	.string "TRAINER TIPS\p"
+	.string "{EMPHASIS_RED}TRAINER TIPS{EMPHASIS_OFF}\p"
 	.string "Be sure to read the MANUAL!\p"
-	.string "Even if you're a POKéMON\n"
+	.string "Even if you're a Pokémon\n"
 	.string "expert, it will still tell you\l"
 	.string "about this game's unique features!\p"
-	.string "For example, {EMPHASIS_RED}ICE resists GRASS,\n"
-	.string "GROUND, and FLYING.$"
+	.string "For example, {EMPHASIS_RED}Ice resists Grass,\n"
+	.string "Ground, and Flying.{EMPHASIS_OFF}$"
 
 // surf hiker
 // surf item

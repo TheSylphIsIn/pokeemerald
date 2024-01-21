@@ -79,8 +79,8 @@ void SetUpBattleVarsAndBirchZigzagoon(void)
 
     if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
     {
-        ZeroEnemyPartyMons(); // Change once Fandango mons are redeclared
-        CreateMon(&gEnemyParty[0], SPECIES_POOCHYENA, 2, USE_RANDOM_IVS, 0, 0, OT_ID_PLAYER_ID, 0);
+        ZeroEnemyPartyMons();
+        CreateMon(&gEnemyParty[0], SPECIES_SLOSHMOSH, 2, USE_RANDOM_IVS, 0, 0, OT_ID_PLAYER_ID, 0);
         i = 0;
         SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, &i);
     }

@@ -6,7 +6,7 @@ OldaleTown_House1_EventScript_Woman::
 	end
 
 OldaleTown_House1_Text_LeftPokemonGoesOutFirst:
-	.string "What brings you to CRAN TOWN?\n"
+	.string "What brings you to Cran Town?\n"
 	.string "Not many people visit, lately.\p"
 	.string "There's not much to do around here,\n"
 	.string "But the natural beauty can't be beat.\p"

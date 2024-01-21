@@ -475,10 +475,11 @@ DYNAMIC_COLOR4 = 0D @ aquamarine
 DYNAMIC_COLOR5 = 0E @ blue-green
 DYNAMIC_COLOR6 = 0F @ cerulean
 
-EMPHASIS_OFF = FC 01 02 FC 03 03
-EMPHASIS_RED = FC 01 04 FC 03 05
-EMPHASIS_GREEN = FC 01 06 FC 03 07
-EMPHASIS_BLUE = FC 01 08 FC 03 09
+@ Nintendo style colored text for generic highlighting.
+EMPHASIS_OFF = FC 01 02 FC 03 03 @ Returns to normal text color
+EMPHASIS_RED = FC 01 04 FC 03 05 @ Highlights gameplay tips
+EMPHASIS_GREEN = FC 01 06 FC 03 07 @ Highlights names
+EMPHASIS_BLUE = FC 01 08 FC 03 09 @ Highlights locations
 
 @ sound and music
 

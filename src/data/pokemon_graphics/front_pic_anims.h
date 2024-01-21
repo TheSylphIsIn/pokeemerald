@@ -5415,7 +5415,7 @@ static const union AnimCmd sAnims_HUMMBLING_1[] =
 	ANIMCMD_END
 };
 
-static const union AnimCmd sAnims_KEESIGHT_1[] =
+static const union AnimCmd sAnims_Keesight_1[] =
 {
 	ANIMCMD_FRAME(0, 10),
 	ANIMCMD_FRAME(1, 20),
@@ -13328,9 +13328,9 @@ static const union AnimCmd *const sAnims_HUMMBLING[] ={
 	sAnims_HUMMBLING_1,
 };
 
-static const union AnimCmd *const sAnims_KEESIGHT[] ={
+static const union AnimCmd *const sAnims_Keesight[] ={
 	sAnim_GeneralFrame0,
-	sAnims_KEESIGHT_1,
+	sAnims_Keesight_1,
 };
 
 static const union AnimCmd *const sAnims_KEESPELL[] ={

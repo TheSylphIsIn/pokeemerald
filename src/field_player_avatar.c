@@ -742,7 +742,8 @@ static bool8 ShouldJumpLedge(s16 x, s16 y, u8 direction)
 
 	MoveCoords(direction, &x2, &y2);
 	
-    if (GetLedgeJumpDirection(x, y, direction) != DIR_NONE)
+    if (!MapGridGetCollisionAt(x2, y2) // player can't jump off a ledge into a wall
+		&& GetLedgeJumpDirection(x, y, direction) != DIR_NONE)
         return TRUE;
 	
 	// player can jump over 1 tile of water

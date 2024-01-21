@@ -114,9 +114,9 @@ DropperPoint_Text_MorganIntro:
 	.string "Huh? Where am I!? Who are you?\p"
 	.string "… … …wait, I know you. You're…\n"
 	.string "{PLAYER}, right? From university?\p"
-	.string "I sit behind you in chem…\n"
+	.string "I sit behind you sometimes…\n"
 	.string "I don't know if you know me…\p"
-	.string "My name's MORGAN.\n"
+	.string "My name's Morgan.\n"
 	.string "…do you know where we are?$"
 	
 DropperPoint_Text_Morgan2:
@@ -134,7 +134,7 @@ DropperPoint_Text_CalvinIntro:
 	.string "Hey, this isn't my room!\n"
 	.string "Where are we? How'd we get here?\p"
 	.string "Huh…you don't know me? I've seen\n"
-	.string "you around on campus. Name's CALVIN.\p"
+	.string "you around on campus. Name's Calvin.\p"
 	.string "But really, where are we, anyway…?$"
 	
 DropperPoint_Text_Calvin2:
@@ -211,12 +211,12 @@ DropperPoint_TriggerScript_MorganSleep:
 	
 DropperPoint_Text_CalvinQuickIntro:
 	.string "Huh…? {PLAYER}, is that you?\n"
-	.string "It's me, CALVIN, from uni!\l"
+	.string "It's me, Calvin, from uni!\l"
 	.string "Where am I?$"
 	
 DropperPoint_Text_MorganQuickIntro:
 	.string "Urgh… weird dream…\n"
-	.string "{PLAYER}? It's me, MORGAN…\l"
+	.string "{PLAYER}? It's me, Morgan…\l"
 	.string "We go to college together.\p"	
 	.string "What is this place? I don't remember\n"
 	.string "how I got here…$"
@@ -340,6 +340,8 @@ DropperPoint_EventScript_BagContinue:
 	applymovement LOCALID_MORGAN, DropperPoint_Movement_MorganStartWalkingAway
 	removeobject 1
 	waitmovement 0
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceRight
+	waitmovement 0
 	msgbox DropperPoint_Text_MorganLeave, MSGBOX_DEFAULT
 	closemessage
 	applymovement LOCALID_MORGAN, DropperPoint_Movement_MorganFinishWalkingAway
@@ -348,11 +350,6 @@ DropperPoint_EventScript_BagContinue:
 	removeobject LOCALID_MORGAN
 	clearflag FLAG_FAVORED_MORGAN
 	clearflag FLAG_FAVORED_CALVIN
-	setflag FLAG_SYS_POKENAV_GET
-	setflag FLAG_RECEIVED_POKENAV
-	setflag FLAG_ADDED_MATCH_CALL_TO_POKENAV
-	giveachievement ACHIEVEMENT_BEAT_FIRST_BOSS
-	addvar VAR_PENDING_ACHIEVEMENTS, 1
 	release
 	end
 	
@@ -470,12 +467,12 @@ DropperPoint_Text_AfterBattle1:
 	
 DropperPoint_Text_AfterBattle2:
 	.string "MORGAN: Yes! I knew it!\n"
-	.string "POKé BALLS! These are POKéMON!\p"
-	.string "CALVIN: POKéMON? Isn't that that\n"
+	.string "Poké Balls! These are Pokémon!\p"
+	.string "CALVIN: Pokémon? Isn't that that\n"
 	.string "game for nerds who don't have pets?\p"
 	.string "MORGAN: … … … … …\n"
 	.string "Well, I was right. We're not home\l"
-	.string "now. We're in the POKéMON world!\p"
+	.string "now. We're in the Pokémon world!\p"
 	.string "CALVIN: … Well, if these things can\n"
 	.string "protect us from monsters, then we\l"
 	.string "may as well take them.\p"

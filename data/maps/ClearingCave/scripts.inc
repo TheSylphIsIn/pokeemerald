@@ -66,7 +66,7 @@ ClearingCave_EventScript_Morgan::
 	end
 	
 ClearingCave_Text_MorganIdle1:
-	.string "MORGAN: CALVIN, you're hopeless…\n"
+	.string "MORGAN: Calvin, you're hopeless…\n"
 	.string "Listen, I'll guide you.$"
 
 ClearingCave_Text_MorganIdle2:
@@ -150,14 +150,14 @@ ClearingCave_TriggerScript_LackeyFight::
 	
 ClearingCave_Text_Lackey1:
 	.string "Ah! I've been followed!\p"
-	.string "So, you want this ABILITY SCANNER\n"
+	.string "So, you want this Ability Scanner\n"
 	.string "back, do you? Do you even understand\l"
 	.string "what this device does?\p"
-	.string "It reads the energies of POKéMON.\p"
+	.string "It reads the energies of Pokémon.\p"
 	.string "Using an amazing device like this\n"
 	.string "just to make yourself better\l"
 	.string "in battle is childish!\p"
-	.string "TEAM KEY has a much better use in\n"
+	.string "{EMPHASIS_GREEN}Team Key{EMPHASIS_OFF} has a much better use in\n"
 	.string "mind! So begone!$"
 
 ClearingCave_Text_LackeyDefeat:
@@ -183,11 +183,11 @@ ClearingCave_Text_Lackey3:
 ClearingCave_Text_Lackey4:
 	.string "Listen here! You twerps don't\n"
 	.string "understand what you're messing with.\p"
-	.string "What TEAM KEY does is none of your\n"
+	.string "What Team Key does is none of your\n"
 	.string "business! So butt out!$"
 
 ClearingCave_Text_Finish:
-	.string "MORGAN: TEAM KEY? So, that guy was\n"
+	.string "MORGAN: {EMPHASIS_GREEN}Team Key{EMPHASIS_OFF}? So, that guy was\n"
 	.string "working for someone else…\p"
 	.string "CALVIN: Who cares? We got the thing\n"
 	.string "back, right? Let's just get going.\p"

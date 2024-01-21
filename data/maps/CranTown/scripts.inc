@@ -50,13 +50,13 @@ CranTown_Movement_CalvinWalkOffscreen:
 
 CranTown_Text_CalvinCheckOnWipedPlayer:
 	.string "CALVIN: You okay, {PLAYER}? You got\n"
-	.string "punked by a wild POKéMON.\p"
+	.string "punked by a wild Pokémon.\p"
 	.string "We rushed you here to get help.\n"
 	.string "On the way, we met a lady named\l"
-	.string "PROFESSOR MANGROVE who wants to\l"
+	.string "{EMPHASIS_GREEN}Professor Mangrove{EMPHASIS_GREEN} who wants to\l"
 	.string "talk to us in her lab down here.\p"
-	.string "Oh, yeah, we're in the POKéMON\n"
-	.string "WORLD, by the way.\p"
+	.string "Oh, yeah, we're in the Pokémon\n"
+	.string "world, by the way.\p"
 	.string "Come along when you're feeling\n"
 	.string "up to it, yeah?$"
 
@@ -76,11 +76,11 @@ CranTown_TriggerScript_Scanner::
 	end
 	
 CranTown_Text_Block:
-	.string "PROFESSOR MANGROVE's words echoed…\n"
+	.string "Professor Mangrove's words echoed…\n"
 	.string "Come visit my lab, if you please.$"
 	
 CranTown_Text_Scanner:
-	.string "You should return the PROFESSOR's\n"
+	.string "You should return the Professor's\n"
 	.string "scanner before you go anywhere.$"
 	
 CranTown_Movement_StepDown:
@@ -119,12 +119,12 @@ CranTown_MapScript_LeavingLab::
 	end
 
 CranTown_Text_GoGetScanner:
-	.string "CALVIN: The PROF said the thief\n"
-	.string "ran up to the clearing up there.\p"
+	.string "CALVIN: The Prof said the thief\n"
+	.string "{EMPHASIS_RED}ran up to the clearing up there.{EMPHASIS_OFF}\p"
 	.string "Let's go pound him so we can\n"
 	.string "start finding our way home!\p"
 	.string "MORGAN: Don't you think we should,\n"
-	.string "um, use these POKé BALLS…\p"
+	.string "um, use these Poké Balls…\p"
 	.string "You know, to fill out our teams\n"
 	.string "so we're prepared to face him?\p"
 	.string "CALVIN: Nah. Who cares about\n"
@@ -178,7 +178,7 @@ CranTown_EventScript_Girl::
 	
 CranTown_Text_Girl:
 	.string "Mommy says the statues on\n"
-	.string "STONEFACE WAY are hiding treasure.\p"
+	.string "{EMPHASIS_BLUE}Stoneface Way{EMPHASIS_OFF} are hiding treasure.\p"
 	.string "But I'm a big girl! I know treasure\n"
 	.string "isn't real!$"
 
@@ -188,10 +188,10 @@ CranTown_EventScript_OldMan::
 	
 CranTown_Text_OldMan:
 	.string "Can you see land on the horizon?\p"
-	.string "FONEI's ocean is home to many islands\n"
+	.string "Fonei's ocean is home to many islands\n"
 	.string "both big and small.\p"
 	.string "As a matter of fact, I was born out\n"
-	.string "there in the {EMPHASIS_BLUE}GLUE VALLEY PIT{EMPHASIS_OFF}.\p"
+	.string "there in the {EMPHASIS_BLUE}Glue Valley Pit{EMPHASIS_OFF}.\p"
 	.string "…I promise it's more pleasant than\n"
 	.string "it sounds. Keheheh…$"
 
@@ -244,15 +244,15 @@ CranTown_Text_FamilySign:
 	.string "Home-made TMs and HMs!$"
 	
 CranTown_Text_TrainerTips:
-	.string "{EMPHASIS_GREEN}TRAINER TIPS{EMPHASIS_OFF}\p"
+	.string "{EMPHASIS_RED}TRAINER TIPS{EMPHASIS_OFF}\p"
 	.string "The base chance of a critical hit\n"
 	.string "landing in battle is zero.\p"
 	.string "This means {EMPHASIS_RED}critical hits won't\n"
 	.string "occur if crit ratio is not raised.{EMPHASIS_OFF}\p"
 	.string "On the flip side, critical hits are\n"
 	.string "certain with a ratio {EMPHASIS_RED}above four.{EMPHASIS_OFF}\p"
-	.string "For reference, FOCUS ENERGY boosts\n"
-	.string "the ratio by two.\p"
+	.string "For reference, the move Focus Energy\n"
+	.string "boosts the ratio by two.\p"
 	.string "High critical rate moves only\n"
 	.string "boost it by one.\p"
 	.string "Enjoy!$"

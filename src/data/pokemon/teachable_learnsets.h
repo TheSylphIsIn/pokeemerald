@@ -35103,8 +35103,9 @@ static const u16 sHydroilTeachableLearnset[] = {
 };
 
 static const u16 sGlasmaTeachableLearnset[] = {
-	MOVE_FLASH,
+	MOVE_SWIFT,
 	MOVE_HIDDEN_POWER,
+	MOVE_FLASH,
     MOVE_UNAVAILABLE,
 };
 
@@ -35126,6 +35127,10 @@ static const u16 sSloshmoshTeachableLearnset[] = {
 };
 
 static const u16 sKeeshTeachableLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+
+static const u16 sKeesightTeachableLearnset[] = {
     MOVE_UNAVAILABLE,
 };
 

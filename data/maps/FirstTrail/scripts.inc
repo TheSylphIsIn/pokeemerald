@@ -32,10 +32,10 @@ FirstTrail_EventScript_TipsSign::
 	end
 	
 FirstTrail_Text_TipsSign:
-	.string "TRAINER TIPS\p"
+	.string "{EMPHASIS_RED}TRAINER TIPS{EMPHASIS_OFF}\p"
 	.string "If you see something sparkling\n"
 	.string "on the ground, pick it up!\p"
-	.string "It might be a Star Piece. Some\n"
+	.string "It might be a {EMPHASIS_GREEN}Star Piece{EMPHASIS_OFF}. Some\n"
 	.string "people collect them, and they'll\l"
 	.string "trade rare items to get yours!$"
 	
@@ -96,16 +96,16 @@ FirstTrail_Text_Prof2::
 	.string "before. Are you new in town?\p"
 	.string "CALVIN: Who are you?\p"
 	.string "???: Oh, pardon me. My name is\n"
-	.string "MANGROVE. I'm a Pokémon Professor.\p"
+	.string "{EMPHASIS_GREEN}Mangrove{EMPHASIS_OFF}. I'm a Pokémon Professor.\p"
 	.string "MANGROVE: Speaking of which, those\n"
 	.string "Pokémon you have there…$"
 	
 FirstTrail_Text_Prof3:
 	.string "MORGAN: I knew it! We ARE in\n"
-	.string "the POKéMON world!\p"
+	.string "the Pokémon world!\p"
 	.string "MANGROVE: Where else would\n"
 	.string "you be?\p"
-	.string "Anyway, these POKéMON are quite\n"
+	.string "Anyway, these Pokémon are quite\n"
 	.string "rare. Eladrift, Glasma, Sandude…\p"
 	.string "MANGROVE: Where did you get them?\p"
 	.string "MORGAN: Oh, ummm… we were attacked.\n"
@@ -118,7 +118,7 @@ FirstTrail_Text_Prof4:
 	.string "MANGROVE: … … … … …\p"
 	.string "I think we need to talk more.\n"
 	.string "Come visit my lab, if you please.\l"
-	.string "It's just past here, in {EMPHASIS_BLUE}CRAN TOWN{EMPHASIS_OFF}.$"
+	.string "It's just past here, in {EMPHASIS_BLUE}Cran Town{EMPHASIS_OFF}.$"
 	
 FirstTrail_Text_MorganTrigger:
 	.string "MORGAN: W-wait! We're not thieves!\n"
@@ -225,7 +225,7 @@ FirstTrail_Text_FatMan::
 	.string "It doesn't list the year the settlers\n"
 	.string "arrived or anything.\p"
 	.string "Come on, not everyone knows it was…\n"
-	.string "Was, uh… … …\l"
+	.string "Was in, uh… … …\l"
 	.string "Darn! I forgot!$"
 
 TrainerScript_Kyle::
@@ -254,7 +254,7 @@ FirstTrail_EventScript_WelcomeSignRight::
 	end
 
 FirstTrail_Text_SignLeft:
-	.string "Welcome to the FONEI region!\p"
+	.string "Welcome to {EMPHASIS_BLUE}the Fonei region{EMPHASIS_OFF}!\p"
 	.string "Free real estate to the north.\n"
 	.string "Inquire in {EMPHASIS_BLUE}Penzelcase City{EMPHASIS_OFF}.$"
 

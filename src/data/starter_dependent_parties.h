@@ -102,7 +102,7 @@ static const struct TrainerMon sParty_MorganFisheyeSet0Choice2Unfair[] = {
 static const struct TrainerMon sParty_CalvinFisheyeSet0Choice0[] = {
 	{
 	.species = SPECIES_SANDUDE,
-	.lvl = 6,
+	.lvl = 7,
 	.iv = TRAINER_PARTY_IVS(5, 5, 5, 5, 5, 5),
 	.moves = { MOVE_TACKLE, MOVE_HARDEN, MOVE_MUD_SLAP, MOVE_SWIFT, },
 	.gender = TRAINER_MON_MALE,
@@ -112,7 +112,7 @@ static const struct TrainerMon sParty_CalvinFisheyeSet0Choice0[] = {
 static const struct TrainerMon sParty_CalvinFisheyeSet0Choice0Hard[] = {
 	{
 	.species = SPECIES_SANDUDE,
-	.lvl = 6,
+	.lvl = 7,
 	.heldItem = ITEM_ORAN_BERRY,
 	.iv = TRAINER_PARTY_IVS(10, 10, 10, 10, 10, 10),
 	.moves = { MOVE_TACKLE, MOVE_HARDEN, MOVE_MUD_SLAP, MOVE_SWIFT, },
@@ -123,7 +123,7 @@ static const struct TrainerMon sParty_CalvinFisheyeSet0Choice0Hard[] = {
 static const struct TrainerMon sParty_CalvinFisheyeSet0Choice0Unfair[] = {
 	{
 	.species = SPECIES_SANDUDE,
-	.lvl = 6,
+	.lvl = 8,
 	.heldItem = ITEM_BERRY_JUICE,
 	.iv = TRAINER_PARTY_IVS(15, 15, 15, 15, 15, 15),
 	.moves = { MOVE_TACKLE, MOVE_HARDEN, MOVE_SAND_TOMB, MOVE_SWIFT, },
@@ -135,7 +135,7 @@ static const struct TrainerMon sParty_CalvinFisheyeSet0Choice0Unfair[] = {
 static const struct TrainerMon sParty_CalvinFisheyeSet0Choice1[] = {
 	{
 	.species = SPECIES_ELADRIFT,
-	.lvl = 6,
+	.lvl = 7,
 	.iv = TRAINER_PARTY_IVS(5, 5, 5, 5, 5, 5),
 	.moves = { MOVE_TACKLE, MOVE_GROWL, MOVE_WATER_GUN, MOVE_SWIFT, },
 	.gender = TRAINER_MON_MALE,
@@ -145,7 +145,7 @@ static const struct TrainerMon sParty_CalvinFisheyeSet0Choice1[] = {
 static const struct TrainerMon sParty_CalvinFisheyeSet0Choice1Hard[] = {
 	{
 	.species = SPECIES_ELADRIFT,
-	.lvl = 6,
+	.lvl = 7,
 	.heldItem = ITEM_ORAN_BERRY,
 	.iv = TRAINER_PARTY_IVS(10, 10, 10, 10, 10, 10),
 	.moves = { MOVE_TACKLE, MOVE_GROWL, MOVE_WATER_GUN, MOVE_SWIFT, },
@@ -156,7 +156,7 @@ static const struct TrainerMon sParty_CalvinFisheyeSet0Choice1Hard[] = {
 static const struct TrainerMon sParty_CalvinFisheyeSet0Choice1Unfair[] = {
 	{
 	.species = SPECIES_ELADRIFT,
-	.lvl = 6,
+	.lvl = 8,
 	.heldItem = ITEM_BERRY_JUICE,
 	.iv = TRAINER_PARTY_IVS(15, 15, 15, 15, 15, 15),
 	.moves = { MOVE_TACKLE, MOVE_GROWL, MOVE_WATER_GUN, MOVE_SWIFT, },
@@ -168,7 +168,7 @@ static const struct TrainerMon sParty_CalvinFisheyeSet0Choice1Unfair[] = {
 static const struct TrainerMon sParty_CalvinFisheyeSet0Choice2[] = {
 	{
 	.species = SPECIES_GLASMA,
-	.lvl = 6,
+	.lvl = 7,
 	.iv = TRAINER_PARTY_IVS(5, 5, 5, 5, 5, 5),
 	.moves = { MOVE_TACKLE, MOVE_LEER, MOVE_THUNDER_SHOCK, MOVE_SWIFT, },
 	.gender = TRAINER_MON_MALE,
@@ -178,7 +178,7 @@ static const struct TrainerMon sParty_CalvinFisheyeSet0Choice2[] = {
 static const struct TrainerMon sParty_CalvinFisheyeSet0Choice2Hard[] = {
 	{
 	.species = SPECIES_GLASMA,
-	.lvl = 6,
+	.lvl = 7,
 	.heldItem = ITEM_ORAN_BERRY,
 	.iv = TRAINER_PARTY_IVS(10, 10, 10, 10, 10, 10),
 	.moves = { MOVE_TACKLE, MOVE_LEER, MOVE_THUNDER_SHOCK, MOVE_SWIFT, },
@@ -189,7 +189,7 @@ static const struct TrainerMon sParty_CalvinFisheyeSet0Choice2Hard[] = {
 static const struct TrainerMon sParty_CalvinFisheyeSet0Choice2Unfair[] = {
 	{
 	.species = SPECIES_GLASMA,
-	.lvl = 6,
+	.lvl = 8,
 	.heldItem = ITEM_BERRY_JUICE,
 	.iv = TRAINER_PARTY_IVS(15, 15, 15, 15, 15, 15),
 	.moves = { MOVE_TACKLE, MOVE_LEER, MOVE_THUNDER_SHOCK, MOVE_SWIFT, },
