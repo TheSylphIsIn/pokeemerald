@@ -5447,7 +5447,7 @@ static const union AnimCmd sAnims_BILLIARACH_1[] =
 	ANIMCMD_END
 };
 
-static const union AnimCmd sAnims_SLUGMA_FONEI_1[] =
+static const union AnimCmd sAnims_SlugmaFonei_1[] =
 {
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_FRAME(1, 10),
@@ -5457,7 +5457,7 @@ static const union AnimCmd sAnims_SLUGMA_FONEI_1[] =
     ANIMCMD_END,
 };
 
-static const union AnimCmd sAnims_MAGCARGO_FONEI_1[] =
+static const union AnimCmd sAnims_MagcargoFonei_1[] =
 {
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_FRAME(1, 10),
@@ -13353,14 +13353,14 @@ static const union AnimCmd *const sAnims_BILLIARACH[] ={
 	sAnims_BILLIARACH_1,
 };
 
-static const union AnimCmd *const sAnims_SLUGMA_FONEI[] ={
+static const union AnimCmd *const sAnims_SlugmaFonei[] ={
 	sAnim_GeneralFrame0,
-	sAnims_SLUGMA_FONEI_1,
+	sAnims_SlugmaFonei_1,
 };
 
-static const union AnimCmd *const sAnims_MAGCARGO_FONEI[] ={
+static const union AnimCmd *const sAnims_MagcargoFonei[] ={
 	sAnim_GeneralFrame0,
-	sAnims_MAGCARGO_FONEI_1,
+	sAnims_MagcargoFonei_1,
 };
 
 static const union AnimCmd *const sAnims_SUNFOREST[] ={

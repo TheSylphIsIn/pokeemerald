@@ -4137,6 +4137,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .footprint = gMonFootprint_Slugma,
         LEARNSETS(Slugma),
         .evolutions = EVOLUTION({EVO_LEVEL, 38, SPECIES_MAGCARGO}),
+		.formSpeciesIdTable = sSlugmaFormSpeciesIdTable,
     },
 
     [SPECIES_MAGCARGO] =
@@ -4185,6 +4186,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         ICON(Magcargo, 0),
         .footprint = gMonFootprint_Magcargo,
         LEARNSETS(Magcargo),
+		.formSpeciesIdTable = sMagcargoFormSpeciesIdTable,
     },
 #endif //P_FAMILY_SLUGMA
 

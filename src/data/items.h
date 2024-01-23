@@ -1764,12 +1764,13 @@ const struct Item gItems[] =
     [ITEM_STAR_PIECE] =
     {
         .name = _("Star Piece"),
-        .price = 12000,
+        .price = 0,
         .description = sStarPieceDesc,
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 30,
+		.importance = 5,
     },
 
     [ITEM_COMET_SHARD] =

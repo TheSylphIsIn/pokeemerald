@@ -5764,17 +5764,6 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
 
 #if P_FAMILY_CASTFORM
 #define CASTFORM_MISC_INFO                                      \
-        .baseHP        = 70,                                    \
-        .baseAttack    = 70,                                    \
-        .baseDefense   = 70,                                    \
-        .baseSpeed     = 70,                                    \
-        .baseSpAttack  = 70,                                    \
-        .baseSpDefense = 70,                                    \
-        .catchRate = 45,                                        \
-        .expYield = 147,                                        \
-        .evYield_HP = 1,                                        \
-        .itemCommon = ITEM_MYSTIC_WATER,                        \
-        .itemRare = ITEM_MYSTIC_WATER,                          \
         .genderRatio = PERCENT_FEMALE(50),                      \
         .eggCycles = 25,                                        \
         .friendship = STANDARD_FRIENDSHIP,                      \
@@ -5800,6 +5789,17 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
     {
         CASTFORM_MISC_INFO,
         .types = { TYPE_NORMAL, TYPE_NORMAL },
+        .baseHP        = 70,
+        .baseAttack    = 70,
+        .baseDefense   = 70,
+        .baseSpeed     = 70,
+        .baseSpAttack  = 70,
+        .baseSpDefense = 70,
+        .catchRate = 90,
+        .expYield = 147,
+        .evYield_HP = 1,
+        .itemCommon = ITEM_MYSTIC_WATER,
+        .itemRare = ITEM_MYSTIC_WATER,
         .bodyColor = BODY_COLOR_GRAY,
         .description = COMPOUND_STRING(
             "It alters its form depending on the\n"
@@ -5822,6 +5822,17 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
     {
         CASTFORM_MISC_INFO,
         .types = { TYPE_FIRE, TYPE_FIRE },
+        .baseHP        = 70,
+        .baseAttack    = 50,
+        .baseDefense   = 60,
+        .baseSpeed     = 90,
+        .baseSpAttack  = 110,
+        .baseSpDefense = 100,
+        .catchRate = 45,
+        .expYield = 212,
+        .evYield_SpAttack = 2,
+        .itemCommon = ITEM_HEAT_ROCK,
+        .itemRare = ITEM_HEAT_ROCK,
         .bodyColor = BODY_COLOR_RED,
         .description = COMPOUND_STRING(
             "Castform takes this form on bright days.\n"
@@ -5843,6 +5854,17 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
     [SPECIES_CASTFORM_RAINY] =
     {
         CASTFORM_MISC_INFO,
+        .baseHP        = 70,
+        .baseAttack    = 50,
+        .baseDefense   = 90,
+        .baseSpeed     = 60,
+        .baseSpAttack  = 100,
+        .baseSpDefense = 110,
+        .catchRate = 45,
+        .expYield = 212,
+        .evYield_SpDefense = 2,
+        .itemCommon = ITEM_DAMP_ROCK,
+        .itemRare = ITEM_DAMP_ROCK,
         .types = { TYPE_WATER, TYPE_WATER },
         .bodyColor = BODY_COLOR_BLUE,
         .description = COMPOUND_STRING(
@@ -5865,6 +5887,17 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
     [SPECIES_CASTFORM_SNOWY] =
     {
         CASTFORM_MISC_INFO,
+        .baseHP        = 70,
+        .baseAttack    = 60,
+        .baseDefense   = 90,
+        .baseSpeed     = 100,
+        .baseSpAttack  = 110,
+        .baseSpDefense = 50,
+        .catchRate = 45,
+        .expYield = 212,
+        .evYield_Speed = 2,
+        .itemCommon = ITEM_ICY_ROCK,
+        .itemRare = ITEM_ICY_ROCK,
         .types = { TYPE_ICE, TYPE_ICE },
         .bodyColor = BODY_COLOR_WHITE,
         .description = COMPOUND_STRING(

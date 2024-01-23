@@ -6,7 +6,7 @@ CliffFaceClimb_EventScript_Sign::
 	end
 	
 CliffFaceClimb_Text_Sign:
-	.string "CLIFF FACE CLIMB\p"
+	.string "{EMPHASIS_BLUE}CLIFF CLIMB CAVE{EMPHASIS_OFF}\p"
 	.string "Leads directly to Penzelcase City.\n"
 	.string "Watch your step outside!$"
 
@@ -23,7 +23,7 @@ TrainerScript_Text_KrisDefeated:
 
 TrainerScript_Text_KrisPostBattle:
 	.string "I'm not supposed to play in the\n"
-	.string "cliff caves, but they're way more\n"
+	.string "cliff caves, but they're way more\l"
 	.string "fun than the city!$"
 
 

@@ -539,6 +539,20 @@ static const u16 sSneaselFormSpeciesIdTable[] = {
 };
 #endif //P_FAMILY_SNEASEL
 
+#if P_FAMILY_SLUGMA
+static const u16 sSlugmaFormSpeciesIdTable[] = {
+	SPECIES_SLUGMA,
+	SPECIES_SLUGMA_FONEI,
+	FORM_SPECIES_END,
+};
+
+static const u16 sMagcargoFormSpeciesIdTable[] = {
+	SPECIES_MAGCARGO,
+	SPECIES_MAGCARGO_FONEI,
+	FORM_SPECIES_END,
+};
+#endif
+
 #if P_FAMILY_TEDDIURSA
 static const u16 sUrsalunaFormSpeciesIdTable[] = {
     SPECIES_URSALUNA,

@@ -275,7 +275,7 @@ CranTown_Lab_Text_ReturnScanner2:
 
 CranTown_Lab_Text_ReturnScannerEnd:
 	.string "You can reach the city by going\n"
-	.string "east to {EMPHASIS_BLUE}Cliff Face Climb Cave{EMPHASIS_OFF}.\p"
+	.string "east to {EMPHASIS_BLUE}Cliff Climb Cave{EMPHASIS_OFF}.\p"
 	.string "Good luck out there!$"
 
 LittlerootTown_ProfessorBirchsLab_EventScript_ReceivePokedex::

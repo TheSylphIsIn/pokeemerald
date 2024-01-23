@@ -787,9 +787,9 @@ static const u8 sStardustDesc[] = _(
     "high price.");
 
 static const u8 sStarPieceDesc[] = _(
-    "A red gem shard.\n"
-    "It would sell for a\n"
-    "very high price.");
+    "A sparkly stone\n"
+    "that some people\n"
+    "like to collect.");
 
 static const u8 sCometShardDesc[] = _(
     "A comet's shard.\n"

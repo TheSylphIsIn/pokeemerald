@@ -35138,6 +35138,16 @@ static const u16 sElemptyTeachableLearnset[] = {
     MOVE_UNAVAILABLE,
 };
 
+
+static const u16 sSlugmaFoneiTeachableLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+
+
+static const u16 sMagcargoFoneiTeachableLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+
 #if P_FAMILY_SPRIGATITO
 static const u16 sSprigatitoTeachableLearnset[] = {
     MOVE_ACROBATICS,

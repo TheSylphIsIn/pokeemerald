@@ -12,6 +12,6 @@ ShadedPass_EventScript_Item2::
 ShadedPass_EventTile_HideGirl::
 	removeobject 2
 	setvar VAR_TEMP_1, 1
-	setflag FLAG_HIDE_SHADED_PASS_GIRL
+	//setflag FLAG_HIDE_SHADED_PASS_GIRL
 	end
 	

@@ -197,8 +197,7 @@ struct PokedexView
     u16 scrollMonIncrement;
     u16 maxScrollTimer;
     u16 scrollSpeed;
-    u16 unkArr1[4]; // Cleared, never read
-    u8 filler[8];
+    u16 formSpecies; // Alt species ID for viewing form info
     u8 currentPage;
     u8 currentPageBackup;
     bool8 isSearchResults:1;
@@ -207,8 +206,6 @@ struct PokedexView
     u8 menuIsOpen;
     u16 menuCursorPos;
     s16 menuY;     //Menu Y position (inverted because we use REG_BG0VOFS for this)
-    u8 unkArr2[8]; // Cleared, never read
-    u8 unkArr3[8]; // Cleared, never read
 };
 	
 // this file's functions
@@ -259,6 +256,7 @@ static bool8 IsInfoScreenScrolling(u8);
 static u8 StartInfoScreenScroll(struct PokedexListItem *, u8);
 static void Task_LoadInfoScreen(u8);
 static void Task_HandleInfoScreenInput(u8);
+static u16 GetNextForm(u16);
 static void Task_SwitchScreensFromInfoScreen(u8);
 static void Task_LoadInfoScreenWaitForFade(u8);
 static void Task_ExitInfoScreen(u8);
@@ -337,6 +335,7 @@ static void EraseSelectorArrow(u32);
 static void PrintSelectorArrow(u32);
 static void PrintSearchParameterTitle(u32, const u8 *);
 static void ClearSearchParameterBoxText(void);
+static u16 NationalPokedexNumToSpecies_HandleForms(u16);
 
 // const rom data
 #include "data/pokemon/pokedex_orders.h"
@@ -1602,8 +1601,6 @@ static void ResetPokedexView(struct PokedexView *pokedexView)
     pokedexView->scrollMonIncrement = 0;
     pokedexView->maxScrollTimer = 0;
     pokedexView->scrollSpeed = 0;
-    for (i = 0; i < ARRAY_COUNT(pokedexView->unkArr1); i++)
-        pokedexView->unkArr1[i] = 0;
     pokedexView->currentPage = PAGE_MAIN;
     pokedexView->currentPageBackup = PAGE_MAIN;
     pokedexView->isSearchResults = FALSE;
@@ -1612,10 +1609,7 @@ static void ResetPokedexView(struct PokedexView *pokedexView)
     pokedexView->menuIsOpen = 0;
     pokedexView->menuCursorPos = 0;
     pokedexView->menuY = 0;
-    for (i = 0; i < ARRAY_COUNT(pokedexView->unkArr2); i++)
-        pokedexView->unkArr2[i] = 0;
-    for (i = 0; i < ARRAY_COUNT(pokedexView->unkArr3); i++)
-        pokedexView->unkArr3[i] = 0;
+    pokedexView->formSpecies = 0;
 }
 
 void CB2_OpenPokedex(void)
@@ -1692,6 +1686,7 @@ static void CB2_Pokedex(void)
 void Task_OpenPokedexMainPage(u8 taskId)
 {
     sPokedexView->isSearchResults = FALSE;
+	sPokedexView->formSpecies = 0;
     if (LoadPokedexListPage(PAGE_MAIN))
         gTasks[taskId].func = Task_HandlePokedexInput;
 }
@@ -1897,6 +1892,7 @@ static void Task_ClosePokedex(u8 taskId)
 static void Task_OpenSearchResults(u8 taskId)
 {
     sPokedexView->isSearchResults = TRUE;
+	sPokedexView->formSpecies = 0;
     if (LoadPokedexListPage(PAGE_SEARCH_RESULTS))
         gTasks[taskId].func = Task_HandleSearchResultsInput;
 }
@@ -3402,7 +3398,7 @@ static void Task_LoadInfoScreen(u8 taskId)
             if (!gTasks[taskId].tSkipCry)
             {
                 StopCryAndClearCrySongs();
-                PlayCry_NormalNoDucking(NationalPokedexNumToSpecies(sPokedexListItem->dexNum), 0, CRY_VOLUME_RS, CRY_PRIORITY_NORMAL);
+                PlayCry_NormalNoDucking(NationalPokedexNumToSpecies_HandleForms(sPokedexListItem->dexNum), 0, CRY_VOLUME_RS, CRY_PRIORITY_NORMAL);
             }
             else
             {
@@ -3449,6 +3445,7 @@ static void Task_HandleInfoScreenInput(u8 taskId)
     if (gTasks[taskId].tScrolling)
     {
         // Scroll up/down
+		sPokedexView->formSpecies = 0;
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         gTasks[taskId].func = Task_LoadInfoScreenWaitForFade;
         PlaySE(SE_DEX_SCROLL);
@@ -3522,6 +3519,51 @@ static void Task_HandleInfoScreenInput(u8 taskId)
         PlaySE(SE_DEX_PAGE);
         return;
     }
+	if (JOY_NEW(START_BUTTON))
+	{
+		sPokedexView->formSpecies = GetNextForm(sPokedexListItem->dexNum);
+		if (sPokedexView->formSpecies)
+		{
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+            gTasks[taskId].func = Task_LoadInfoScreenWaitForFade;
+            PlaySE(SE_PIN);
+			return;
+		}
+	}
+}
+
+static u16 GetNextForm(u16 dexNum)
+{
+	u32 i;
+	u32 species = NationalPokedexNumToSpecies_HandleForms(dexNum);
+	u32 nextId = 0;
+	u32 checkSpecies;
+	
+	if (GetSpeciesFormTable(species) == NULL)
+		return 0;
+	
+	for (i = 0; i < 30; i++)
+    {
+        checkSpecies = GetFormSpeciesId(species, i);
+        if (checkSpecies == FORM_SPECIES_END)
+		{
+			nextId = 0;
+            break;
+		}
+        else if (checkSpecies == species && GetFormSpeciesId(species, i + 1) != FORM_SPECIES_END)
+		{
+			nextId = i + 1;
+			break;
+		}
+    }
+	
+	checkSpecies = GetFormSpeciesId(species, nextId);
+	
+	if (checkSpecies != species)
+		return checkSpecies;
+	else
+		return 0;
+	
 }
 
 static void Task_SwitchScreensFromInfoScreen(u8 taskId)
@@ -3591,7 +3633,7 @@ static void Task_LoadAreaScreen(u8 taskId)
         gMain.state++;
         break;
     case 2:
-        ShowPokedexAreaScreen(NationalPokedexNumToSpecies(sPokedexListItem->dexNum), &sPokedexView->screenSwitchState);
+        ShowPokedexAreaScreen(NationalPokedexNumToSpecies_HandleForms(sPokedexListItem->dexNum), &sPokedexView->screenSwitchState);
         SetVBlankCallback(gPokedexVBlankCB);
         sPokedexView->screenSwitchState = 0;
         gMain.state = 0;
@@ -3740,7 +3782,7 @@ static void Task_HandleCryScreenInput(u8 taskId)
     if (JOY_NEW(A_BUTTON))
     {
         LoadPlayArrowPalette(TRUE);
-        CryScreenPlayButton(NationalPokedexNumToSpecies(sPokedexListItem->dexNum));
+        CryScreenPlayButton(NationalPokedexNumToSpecies_HandleForms(sPokedexListItem->dexNum));
         return;
     }
     else if (!gPaletteFade.active)
@@ -3983,7 +4025,7 @@ static void Task_LoadDataScreen(u8 taskId)
             ResetOtherVideoRegisters(DISPCNT_BG1_ON);
 			sPokedexView->currentPage = PAGE_DATA;
 			sPokedexView->selectedScreen = DATA_SCREEN;
-			gTasks[taskId].tSpecies = NationalPokedexNumToSpecies(sPokedexListItem->dexNum);
+			gTasks[taskId].tSpecies = NationalPokedexNumToSpecies_HandleForms(sPokedexListItem->dexNum);
             gMain.state = 1;
         }
         break;
@@ -4875,7 +4917,7 @@ static void Task_DisplayCaughtMonDexPage(u8 taskId)
         gTasks[taskId].tState++;
         break;
     case 4:
-        spriteId = CreateMonPicSprite(NationalPokedexNumToSpecies(dexNum), 0, ((u16)gTasks[taskId].tPersonalityHi << 16) | (u16)gTasks[taskId].tPersonalityLo, TRUE, MON_PAGE_X, MON_PAGE_Y, 0, TAG_NONE);
+        spriteId = CreateMonPicSprite(NationalPokedexNumToSpecies_HandleForms(dexNum), 0, ((u16)gTasks[taskId].tPersonalityHi << 16) | (u16)gTasks[taskId].tPersonalityLo, TRUE, MON_PAGE_X, MON_PAGE_Y, 0, TAG_NONE);
         gSprites[spriteId].oam.priority = 0;
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0x10, 0, RGB_BLACK);
         SetVBlankCallback(gPokedexVBlankCB);
@@ -4894,7 +4936,7 @@ static void Task_DisplayCaughtMonDexPage(u8 taskId)
     case 6:
         if (!gPaletteFade.active)
         {
-            PlayCry_Normal(NationalPokedexNumToSpecies(dexNum), 0);
+            PlayCry_Normal(NationalPokedexNumToSpecies_HandleForms(dexNum), 0);
             gTasks[taskId].tPalTimer = 0;
             gTasks[taskId].func = Task_HandleCaughtMonPageInput;
         }
@@ -4991,7 +5033,7 @@ static void PrintMonInfo(u32 num, u32 value, u32 owned, u32 newEntry)
 
     ConvertIntToDecimalStringN(StringCopy(str, gText_NumberClear01), value, STR_CONV_MODE_LEADING_ZEROS, digitCount);
     PrintInfoScreenText(str, 0x60, 0x19);
-    species = NationalPokedexNumToSpecies(num);
+    species = NationalPokedexNumToSpecies_HandleForms(num);
     if (species)
         name = GetSpeciesName(species);
     else
@@ -5326,7 +5368,7 @@ static u8 PrintCryScreenSpeciesName(u8 windowId, u16 num, u8 left, u8 top)
 
     for (i = 0; i < ARRAY_COUNT(str); i++)
         str[i] = EOS;
-    num = NationalPokedexNumToSpecies(num);
+    num = NationalPokedexNumToSpecies_HandleForms(num);
     switch (num)
     {
     default:
@@ -5409,7 +5451,7 @@ static UNUSED void PrintDecimalNum(u8 windowId, u16 num, u8 left, u8 top)
 static void DrawFootprint(u8 windowId, u16 dexNum)
 {
     u8 ALIGNED(4) footprint4bpp[TILE_SIZE_4BPP * NUM_FOOTPRINT_TILES];
-    const u8 *footprintGfx = gSpeciesInfo[NationalPokedexNumToSpecies(dexNum)].footprint;
+    const u8 *footprintGfx = gSpeciesInfo[NationalPokedexNumToSpecies_HandleForms(dexNum)].footprint;
     u32 i, j, tileIdx = 0;
 
     if (footprintGfx != NULL)
@@ -5496,31 +5538,31 @@ static u32 GetPokedexMonPersonality(u16 species)
 
 u16 CreateMonSpriteFromNationalDexNumber(u16 nationalNum, s16 x, s16 y, u16 paletteSlot)
 {
-    nationalNum = NationalPokedexNumToSpecies(nationalNum);
+    nationalNum = NationalPokedexNumToSpecies_HandleForms(nationalNum);
     return CreateMonPicSprite(nationalNum, SHINY_ODDS, GetPokedexMonPersonality(nationalNum), TRUE, x, y, paletteSlot, TAG_NONE);
 }
 
 static u16 GetPokemonScaleFromNationalDexNumber(u16 nationalNum)
 {
-    nationalNum = NationalPokedexNumToSpecies(nationalNum);
+    nationalNum = NationalPokedexNumToSpecies_HandleForms(nationalNum);
     return gSpeciesInfo[nationalNum].pokemonScale;
 }
 
 static u16 GetPokemonOffsetFromNationalDexNumber(u16 nationalNum)
 {
-    nationalNum = NationalPokedexNumToSpecies(nationalNum);
+    nationalNum = NationalPokedexNumToSpecies_HandleForms(nationalNum);
     return gSpeciesInfo[nationalNum].pokemonOffset;
 }
 
 static u16 GetTrainerScaleFromNationalDexNumber(u16 nationalNum)
 {
-    nationalNum = NationalPokedexNumToSpecies(nationalNum);
+    nationalNum = NationalPokedexNumToSpecies_HandleForms(nationalNum);
     return gSpeciesInfo[nationalNum].trainerScale;
 }
 
 static u16 GetTrainerOffsetFromNationalDexNumber(u16 nationalNum)
 {
-    nationalNum = NationalPokedexNumToSpecies(nationalNum);
+    nationalNum = NationalPokedexNumToSpecies_HandleForms(nationalNum);
     return gSpeciesInfo[nationalNum].trainerOffset;
 }
 
@@ -6511,4 +6553,15 @@ static void PrintSearchParameterTitle(u32 y, const u8 *str)
 static void ClearSearchParameterBoxText(void)
 {
     ClearSearchMenuRect(144, 8, 96, 96);
+}
+
+static u16 NationalPokedexNumToSpecies_HandleForms(u16 nationalNum)
+{
+    if (!nationalNum)
+        return 0;
+
+    if (sPokedexView->formSpecies != 0)
+        return sPokedexView->formSpecies;
+    else
+        return NationalPokedexNumToSpecies(nationalNum);
 }

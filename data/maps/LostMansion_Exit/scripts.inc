@@ -3,7 +3,7 @@ LostMansion_Exit_MapScripts::
 	.byte 0
 
 LostMansion_Exit_OnResume::
-	call_if_set FLAG_PHANTOM_SOUL_GOT, LostMansion_Exit_RemoveSoul
+	//call_if_set FLAG_PHANTOM_SOUL_GOT, LostMansion_Exit_RemoveSoul
 	end
 	
 LostMansion_Exit_RemoveSoul::

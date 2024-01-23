@@ -25,7 +25,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "LostMansion3_1F_EventScript_Psychic",
-      "flag": "FLAG_PHANTOM_SOUL_GOT"
+      "flag": "0"
     }
   ],
   "warp_events": [
