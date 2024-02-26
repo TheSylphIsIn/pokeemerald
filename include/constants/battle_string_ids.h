@@ -14,13 +14,13 @@
 #define STRINGID_PKMNGAINEDEXP                        13
 #define STRINGID_PKMNGREWTOLV                         14
 #define STRINGID_PKMNLEARNEDMOVE                      15
-#define STRINGID_TRYTOLEARNMOVE1                      16
-#define STRINGID_TRYTOLEARNMOVE2                      17
-#define STRINGID_TRYTOLEARNMOVE3                      18
+#define STRINGID_TRYTOLEARNMOVE                       16
+#define STRINGID_TRYTOLEARNMOVE2                      17 // unused
+#define STRINGID_TRYTOLEARNMOVE3                      18 // unused
 #define STRINGID_PKMNFORGOTMOVE                       19
 #define STRINGID_STOPLEARNINGMOVE                     20
 #define STRINGID_DIDNOTLEARNMOVE                      21
-#define STRINGID_PKMNLEARNEDMOVE2                     22
+#define STRINGID_PKMNLEARNEDMOVE2                     22 // Mimic
 #define STRINGID_ATTACKMISSED                         23
 #define STRINGID_PKMNPROTECTEDITSELF                  24
 #define STRINGID_STATSWONTINCREASE2                   25
