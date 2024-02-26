@@ -5351,8 +5351,11 @@ static const union AnimCmd sAnims_Sandude_1[] =
 	ANIMCMD_END
 };
 
-static const union AnimCmd sAnims_SANDROSS_1[] =
+static const union AnimCmd sAnims_Sandross_1[] =
 {
+	ANIMCMD_FRAME(0, 5),
+	ANIMCMD_FRAME(1, 40),
+	ANIMCMD_FRAME(0, 15),
 	ANIMCMD_END
 };
 
@@ -5570,23 +5573,23 @@ static const union AnimCmd sAnims_WATTITUDE_1[] =
 	ANIMCMD_END
 };
 
-static const union AnimCmd sAnims_RALTS_FONEI_1[] =
+static const union AnimCmd sAnims_RaltsFonei_1[] =
 {
 	ANIMCMD_FRAME(0, 20),
 	ANIMCMD_END
 };
 
-static const union AnimCmd sAnims_KIRLIA_FONEI_1[] =
+static const union AnimCmd sAnims_KirliaFonei_1[] =
 {
 	ANIMCMD_END
 };
 
-static const union AnimCmd sAnims_GARDEVOIR_FONEI_1[] =
+static const union AnimCmd sAnims_GardevoirFonei_1[] =
 {
 	ANIMCMD_END
 };
 
-static const union AnimCmd sAnims_GALLADE_FONEI_1[] =
+static const union AnimCmd sAnims_GalladeFonei_1[] =
 {
 	ANIMCMD_END
 };
@@ -13278,9 +13281,9 @@ static const union AnimCmd *const sAnims_Sandude[] ={
 	sAnims_Sandude_1,
 };
 
-static const union AnimCmd *const sAnims_SANDROSS[] ={
+static const union AnimCmd *const sAnims_Sandross[] ={
 	sAnim_GeneralFrame0,
-	sAnims_SANDROSS_1,
+	sAnims_Sandross_1,
 };
 
 static const union AnimCmd *const sAnims_SANDUEL[] ={
@@ -13458,24 +13461,24 @@ static const union AnimCmd *const sAnims_WATTITUDE[] ={
 	sAnims_WATTITUDE_1,
 };
 
-static const union AnimCmd *const sAnims_RALTS_FONEI[] ={
+static const union AnimCmd *const sAnims_RaltsFonei[] ={
 	sAnim_GeneralFrame0,
-	sAnims_RALTS_FONEI_1,
+	sAnims_RaltsFonei_1,
 };
 
-static const union AnimCmd *const sAnims_KIRLIA_FONEI[] ={
+static const union AnimCmd *const sAnims_KirliaFonei[] ={
 	sAnim_GeneralFrame0,
-	sAnims_KIRLIA_FONEI_1,
+	sAnims_KirliaFonei_1,
 };
 
-static const union AnimCmd *const sAnims_GARDEVOIR_FONEI[] ={
+static const union AnimCmd *const sAnims_GardevoirFonei[] ={
 	sAnim_GeneralFrame0,
-	sAnims_GARDEVOIR_FONEI_1,
+	sAnims_GardevoirFonei_1,
 };
 
-static const union AnimCmd *const sAnims_GALLADE_FONEI[] ={
+static const union AnimCmd *const sAnims_GalladeFonei[] ={
 	sAnim_GeneralFrame0,
-	sAnims_GALLADE_FONEI_1,
+	sAnims_GalladeFonei_1,
 };
 
 static const union AnimCmd *const sAnims_TRUEBAT[] ={

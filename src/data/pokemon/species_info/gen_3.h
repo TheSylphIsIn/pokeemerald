@@ -1677,6 +1677,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .footprint = gMonFootprint_Ralts,
         LEARNSETS(Ralts),
         .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_KIRLIA}),
+		.formSpeciesIdTable = sRaltsFormSpeciesIdTable,
     },
 
     [SPECIES_KIRLIA] =
@@ -1726,6 +1727,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         LEARNSETS(Kirlia),
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_GARDEVOIR},
                                 {EVO_ITEM_MALE, ITEM_DAWN_STONE, SPECIES_GALLADE}),
+		.formSpeciesIdTable = sKirliaFormSpeciesIdTable,
     },
 
 #define GARDEVOIR_MISC_INFO                                 \

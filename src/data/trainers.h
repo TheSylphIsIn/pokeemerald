@@ -63,6 +63,30 @@ const struct Trainer gTrainers[] = {
 		.party = TRAINER_PARTY_NO_DIFF(sParty_Wilbur),
 	},
 
+	[TRAINER_GRANT] =
+	{
+		.trainerName = _("Grant"),
+		.trainerClass = TRAINER_CLASS_HIKER,
+		.trainerPic = TRAINER_PIC_HIKER,
+		.encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_HIKER,
+		.aiFlags = 0,
+		.items = { },
+		.doubleBattle = FALSE,
+		.party = TRAINER_PARTY_NO_DIFF(sParty_Grant),
+	},
+
+	[TRAINER_ROSALYN] =
+	{
+		.trainerName = _("Rosalyn"),
+		.trainerClass = TRAINER_CLASS_LASS,
+		.trainerPic = TRAINER_PIC_LASS,
+		.encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE,
+		.aiFlags = 0,
+		.items = { },
+		.doubleBattle = FALSE,
+		.party = TRAINER_PARTY_NO_DIFF(sParty_Rosalyn),
+	},
+
 	[TRAINER_KEY_LACKEY_FISHEYE_LAKE] =
 	{
 		.trainerName = _("Lackey"),

@@ -50,6 +50,24 @@ static const struct TrainerMon sParty_Wilbur[] = {
 	},
 };
 
+static const struct TrainerMon sParty_Grant[] = {
+	{
+	.species = SPECIES_LAV,
+	.lvl = 10,
+	.iv = TRAINER_PARTY_IVS(7, 7, 7, 7, 7, 7),
+	.gender = TRAINER_MON_FEMALE,
+	},
+};
+
+static const struct TrainerMon sParty_Rosalyn[] = {
+	{
+	.species = SPECIES_HATCHBLING,
+	.lvl = 9,
+	.iv = TRAINER_PARTY_IVS(5, 5, 5, 5, 5, 5),
+	.gender = TRAINER_MON_FEMALE,
+	},
+};
+
 static const struct TrainerMon sParty_LackeyFisheyeLake[] = {
 	{
 	.species = SPECIES_KEESIGHT,

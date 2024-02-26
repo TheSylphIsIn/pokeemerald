@@ -1160,3 +1160,5 @@ EventScript_VsSeekerChargingDone::
 	.include "data/maps/SandbarCoast/scripts.inc"
 
 	.include "data/maps/PortWander/scripts.inc"
+
+	.include "data/maps/FirstDungeon_1F/scripts.inc"

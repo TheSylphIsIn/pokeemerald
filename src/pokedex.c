@@ -256,7 +256,7 @@ static bool8 IsInfoScreenScrolling(u8);
 static u8 StartInfoScreenScroll(struct PokedexListItem *, u8);
 static void Task_LoadInfoScreen(u8);
 static void Task_HandleInfoScreenInput(u8);
-static u16 GetNextForm(u16);
+static u16 GetNextForm(u16, bool8);
 static void Task_SwitchScreensFromInfoScreen(u8);
 static void Task_LoadInfoScreenWaitForFade(u8);
 static void Task_ExitInfoScreen(u8);
@@ -3519,9 +3519,9 @@ static void Task_HandleInfoScreenInput(u8 taskId)
         PlaySE(SE_DEX_PAGE);
         return;
     }
-	if (JOY_NEW(START_BUTTON))
+	if (JOY_NEW(START_BUTTON) || JOY_NEW(SELECT_BUTTON))
 	{
-		sPokedexView->formSpecies = GetNextForm(sPokedexListItem->dexNum);
+		sPokedexView->formSpecies = GetNextForm(sPokedexListItem->dexNum, JOY_NEW(START_BUTTON)); // use Start to go "next" form, Select to go "previous" form
 		if (sPokedexView->formSpecies)
 		{
             BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
@@ -3532,32 +3532,40 @@ static void Task_HandleInfoScreenInput(u8 taskId)
 	}
 }
 
-static u16 GetNextForm(u16 dexNum)
+static u16 GetNextForm(u16 dexNum, bool8 forward)
 {
-	u32 i;
+	u32 numForms;
 	u32 species = NationalPokedexNumToSpecies_HandleForms(dexNum);
-	u32 nextId = 0;
+	u32 currIndex = 0;
 	u32 checkSpecies;
 	
 	if (GetSpeciesFormTable(species) == NULL)
 		return 0;
 	
-	for (i = 0; i < 30; i++)
-    {
-        checkSpecies = GetFormSpeciesId(species, i);
+	for (numForms = 0; numForms < 30; numForms++) // get information about the mon's form table
+	{
+        checkSpecies = GetFormSpeciesId(species, numForms);
+		if (checkSpecies == species)
+			currIndex = numForms; // index of form that is being switched from
         if (checkSpecies == FORM_SPECIES_END)
-		{
-			nextId = 0;
-            break;
-		}
-        else if (checkSpecies == species && GetFormSpeciesId(species, i + 1) != FORM_SPECIES_END)
-		{
-			nextId = i + 1;
-			break;
-		}
-    }
+			break; // index of FORM_SPECIES_END (size of the table)
+		
+	}
 	
-	checkSpecies = GetFormSpeciesId(species, nextId);
+	if (forward)
+	{
+		if (currIndex + 1 == numForms)
+			checkSpecies = GetFormSpeciesId(species, 0);
+		else
+			checkSpecies = GetFormSpeciesId(species, currIndex + 1);
+	}
+	else
+	{
+		if (currIndex == 0)
+			checkSpecies = GetFormSpeciesId(species, numForms - 1);
+		else
+			checkSpecies = GetFormSpeciesId(species, currIndex - 1);
+	}
 	
 	if (checkSpecies != species)
 		return checkSpecies;

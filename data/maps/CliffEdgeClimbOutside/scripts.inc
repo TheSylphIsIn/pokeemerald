@@ -13,4 +13,5 @@ CliffClimbOutside_Text_Sign1:
 	.string "{EMPHASIS_RED}JUMP OFF! LIVE DANGEROUSLY! ROCK ON!{EMPHASIS_OFF}$"
 
 CliffClimbOutside_Trigger_RivalBattle::
+	
 	end

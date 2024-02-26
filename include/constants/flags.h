@@ -90,7 +90,7 @@
 #define FLAG_UNUSED_0x04E    0x4E // Unused Flag
 #define FLAG_UNUSED_0x04F    0x4F // Unused Flag
 
-// General
+// Story flags
 #define FLAG_ACCEPT_CHEAT_CODES                  				0x50
 #define FLAG_HIDE_FONEI_COAST_NPCS                   			0x51
 #define FLAG_FAVORED_MORGAN 									0x52 // These flags are set and cleared at various points depending on how you interact with your rivals.
@@ -103,10 +103,14 @@
 #define FLAG_HIDE_SLEEPING_CALVIN_INTRO							0x59
 #define FLAG_RECOVERED_ABILITY_SCANNER							0x5A
 
+// Overworld Objects/misc flags
+#define FLAG_CLIFF_CLIMB_OUTSIDE_ROCK_SMASHED					0x100
+
 // Hidden Items
 #define FLAG_HIDDEN_ITEMS_START                                                         0x200
 #define FLAG_HIDDEN_ITEM_FIRST_TRAIL_X_ACCURACY				(FLAG_HIDDEN_ITEMS_START + 0x00)
-#define FLAG_HIDDEN_ITEM_CRAN_CLEARING_HEAL_BALL			(FLAG_HIDDEN_ITEMS_START + 0x00)
+#define FLAG_HIDDEN_ITEM_CRAN_CLEARING_HEAL_BALL			(FLAG_HIDDEN_ITEMS_START + 0x01)
+#define FLAG_HIDDEN_ITEM_CLIFF_CLIMB_SODA_POP				(FLAG_HIDDEN_ITEMS_START + 0x02)
 
 // Star Pieces
 #define FLAG_STAR_PIECE_DROPPER_POINT								0x300
@@ -127,6 +131,7 @@
 #define FLAG_ITEM_STONEFACE_WAY_NEST_BALL							0x406
 #define FLAG_ITEM_CLIFF_CLIMB_HARD_STONE							0x407
 #define FLAG_ITEM_CLIFF_CLIMB_BURN_HEAL								0x408
+#define FLAG_ITEM_CLIFF_CLIMB_TM									0x409
 
 // Trainer Flags
 // Trainer flags occupy 0x500 - 0x85F, the last 9 of which are unused

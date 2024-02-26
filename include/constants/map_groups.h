@@ -35,6 +35,7 @@
 #define MAP_CLEARING_CAVE            (4 | (2 << 8))
 
 // gMapGroup_FoneiDungeons
+#define MAP_FIRST_DUNGEON_1F (0 | (3 << 8))
 
 // gMapGroup_DimensionWarps
 #define MAP_ISLE_OF_CALM      (0 | (4 << 8))

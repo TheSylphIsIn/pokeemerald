@@ -35118,6 +35118,10 @@ static const u16 sSandudeTeachableLearnset[] = {
     MOVE_UNAVAILABLE,
 };
 
+static const u16 sSandrossTeachableLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+
 static const u16 sEladriftTeachableLearnset[] = {
     MOVE_UNAVAILABLE,
 };
@@ -35138,13 +35142,27 @@ static const u16 sElemptyTeachableLearnset[] = {
     MOVE_UNAVAILABLE,
 };
 
-
 static const u16 sSlugmaFoneiTeachableLearnset[] = {
     MOVE_UNAVAILABLE,
 };
 
-
 static const u16 sMagcargoFoneiTeachableLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+
+static const u16 sRaltsFoneiTeachableLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+
+static const u16 sKirliaFoneiTeachableLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+
+static const u16 sGardevoirFoneiTeachableLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+
+static const u16 sGalladeFoneiTeachableLearnset[] = {
     MOVE_UNAVAILABLE,
 };
 

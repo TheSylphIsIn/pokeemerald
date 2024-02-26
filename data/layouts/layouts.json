@@ -4870,6 +4870,16 @@
       "secondary_tileset": "gTileset_Slateport",
       "border_filepath": "data/layouts/PortWander/border.bin",
       "blockdata_filepath": "data/layouts/PortWander/map.bin"
+    },
+    {
+      "id": "LAYOUT_FIRST_DUNGEON_1F",
+      "name": "FirstDungeon_1F_Layout",
+      "width": 20,
+      "height": 20,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_Facility",
+      "border_filepath": "data/layouts/FirstDungeon_1F/border.bin",
+      "blockdata_filepath": "data/layouts/FirstDungeon_1F/map.bin"
     }
   ]
 }
