@@ -43,7 +43,7 @@ static const struct TrainerMon sParty_Wilbur[] = {
 	.gender = TRAINER_MON_MALE,
 	},
 	{
-	.species = SPECIES_SPOOLER,
+	.species = SPECIES_LARVOOL,
 	.lvl = 9,
 	.iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 	.gender = TRAINER_MON_FEMALE,

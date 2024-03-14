@@ -320,8 +320,12 @@
 #define EVO_MOVE_THREE_SEGMENT            44     // Pokémon levels up, knows specified move, has a personality value with a modulus of 1-99
 #define EVO_LEVEL_FAMILY_OF_THREE         45     // Pokémon reaches the specified level with a personality value with a modulus of 0
 #define EVO_LEVEL_FAMILY_OF_FOUR          46     // Pokémon reaches the specified level with a personality value with a modulus of 1-99
+#define EVO_RELATIVE_TO_MET				  47	 // Pokémon reaches the level specified in the lower 8 bits, OR (level - metLevel) reaches the level specified in the upper 8 bits
 
 #define EVOS_PER_MON 10
+
+// Macro for EVO_RELATIVE_TO_MET
+#define RELATIVE_EVO(ceiling, difference) (ceiling | (difference << 8))
 
 // Evolution 'modes,' for GetEvolutionTargetSpecies
 #define EVO_MODE_NORMAL            0

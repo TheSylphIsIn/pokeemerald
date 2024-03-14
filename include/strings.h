@@ -627,6 +627,8 @@ extern const u8 gText_EvoMethodAttribute3[];
 extern const u8 gText_Period[];
 extern const u8 gText_MoveLowercase[];
 extern const u8 gText_Moves[];
+extern const u8 gText_EvoMethodRelative1[];
+extern const u8 gText_EvoMethodRelative2[];
 extern const u8 gText_EeveeEvoText[];
 extern const u8 gText_TyrogueEvoText[];
 extern const u8 gText_ElemptyEvoText[];

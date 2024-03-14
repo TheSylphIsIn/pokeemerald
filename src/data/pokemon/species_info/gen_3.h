@@ -6160,7 +6160,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         ICON(Duskull, 0),
         .footprint = gMonFootprint_Duskull,
         LEARNSETS(Duskull),
-        .evolutions = EVOLUTION({EVO_LEVEL, 37, SPECIES_DUSCLOPS}),
+        .evolutions = EVOLUTION({EVO_RELATIVE_TO_MET, RELATIVE_EVO(37, 2), SPECIES_DUSCLOPS}),
     },
 
     [SPECIES_DUSCLOPS] =

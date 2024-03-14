@@ -4207,6 +4207,12 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
                     targetSpecies = evolutions[i].targetSpecies;
                 }
                 break;
+			case EVO_RELATIVE_TO_MET:
+				if ((evolutions[i].param & 0xFF) <= level || ((evolutions[i].param & 0xFF00) >> 8 <= level - GetMonData(mon, MON_DATA_MET_LEVEL, 0)))
+				{
+					targetSpecies = evolutions[i].targetSpecies;
+				}
+				break;
             }
         }
         break;

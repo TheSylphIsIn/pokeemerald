@@ -3428,6 +3428,11 @@ u8 AtkCanceller_UnableToUseMove(u32 moveType)
             gStatuses3[gBattlerAttacker] &= ~STATUS3_GRUDGE;
             gStatuses4[gBattlerAttacker] &= ~ STATUS4_GLAIVE_RUSH;
             gBattleScripting.tripleKickPower = 0;
+			// EBF-style buff decay would go here. this would decrease the strength of stat boosts before the mon uses a move.
+			// quirks:
+			// - offensive buffs would get weaker before the mon gets a chance to use them at full strength. perhaps offense buffs base should be higher to offset this?
+			// - speed changing mid turn would probably be bad.
+			// maybe buffs should have context-dependent effects depending on if a stat is above or below base
             gBattleStruct->atkCancellerTracker++;
             break;
         case CANCELLER_SKY_DROP:

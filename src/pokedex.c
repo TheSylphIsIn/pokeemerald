@@ -4413,7 +4413,7 @@ static void DataScreenPrintMonEvoMethods(u16 species, u32 numEvos)
 			case EVO_LEVEL:					// Pokémon reaches the specified level
 				StringCopy(gStringVar1, gText_EvoMethodLevel);
 				if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_STUDIED))
-					ConvertIntToDecimalStringN(gStringVar2, evolutions[i].param, STR_CONV_MODE_RIGHT_ALIGN, 2);
+					ConvertIntToDecimalStringN(gStringVar2, evolutions[i].param, STR_CONV_MODE_LEFT_ALIGN, 3);
 				else
 					StringCopy(gStringVar2, gText_ThreeMarks);
 				break;
@@ -4437,7 +4437,7 @@ static void DataScreenPrintMonEvoMethods(u16 species, u32 numEvos)
 			case EVO_LEVEL_ATK_GT_DEF:		// Pokémon reaches the specified level with attack > defense
 				StringCopy(gStringVar1, gText_EvoMethodStatDependent);
 				if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_STUDIED))
-					ConvertIntToDecimalStringN(gStringVar2, evolutions[i].param, STR_CONV_MODE_RIGHT_ALIGN, 2);
+					ConvertIntToDecimalStringN(gStringVar2, evolutions[i].param, STR_CONV_MODE_LEFT_ALIGN, 3);
 				else
 					StringCopy(gStringVar2, gText_ThreeMarks);
 				StringCopy(gStringVar3, gText_EvoMethodStatAtk);
@@ -4445,7 +4445,7 @@ static void DataScreenPrintMonEvoMethods(u16 species, u32 numEvos)
 			case EVO_LEVEL_ATK_EQ_DEF:		// Pokémon reaches the specified level with attack = defense
 				StringCopy(gStringVar1, gText_EvoMethodStatDependent);
 				if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_STUDIED))
-					ConvertIntToDecimalStringN(gStringVar2, evolutions[i].param, STR_CONV_MODE_RIGHT_ALIGN, 2);
+					ConvertIntToDecimalStringN(gStringVar2, evolutions[i].param, STR_CONV_MODE_LEFT_ALIGN, 3);
 				else
 					StringCopy(gStringVar2, gText_ThreeMarks);
 				StringCopy(gStringVar3, gText_EvoMethodStatEqual);
@@ -4453,7 +4453,7 @@ static void DataScreenPrintMonEvoMethods(u16 species, u32 numEvos)
 			case EVO_LEVEL_ATK_LT_DEF:		// Pokémon reaches the specified level with attack < defense
 				StringCopy(gStringVar1, gText_EvoMethodStatDependent);
 				if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_STUDIED))
-					ConvertIntToDecimalStringN(gStringVar2, evolutions[i].param, STR_CONV_MODE_RIGHT_ALIGN, 2);
+					ConvertIntToDecimalStringN(gStringVar2, evolutions[i].param, STR_CONV_MODE_LEFT_ALIGN, 3);
 				else
 					StringCopy(gStringVar2, gText_ThreeMarks);
 				StringCopy(gStringVar3, gText_EvoMethodStatDef);
@@ -4462,14 +4462,14 @@ static void DataScreenPrintMonEvoMethods(u16 species, u32 numEvos)
 			case EVO_LEVEL_CASCOON:			// Pokémon reaches the specified level with a Cascoon personality value
 				StringCopy(gStringVar1, gText_EvoMethodSilcoonCascoon);
 				if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_STUDIED))
-					ConvertIntToDecimalStringN(gStringVar2, evolutions[i].param, STR_CONV_MODE_RIGHT_ALIGN, 2);
+					ConvertIntToDecimalStringN(gStringVar2, evolutions[i].param, STR_CONV_MODE_LEFT_ALIGN, 3);
 				else
 					StringCopy(gStringVar2, gText_ThreeMarks);
 				break;
 			case EVO_LEVEL_NINJASK:			// Pokémon reaches the specified level (special value for Ninjask)
 				StringCopy(gStringVar1, gText_EvoMethodLevel);
 				if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_STUDIED))
-					ConvertIntToDecimalStringN(gStringVar2, evolutions[i].param, STR_CONV_MODE_RIGHT_ALIGN, 2);
+					ConvertIntToDecimalStringN(gStringVar2, evolutions[i].param, STR_CONV_MODE_LEFT_ALIGN, 3);
 				else
 					StringCopy(gStringVar2, gText_ThreeMarks);
 				break;
@@ -4486,6 +4486,30 @@ static void DataScreenPrintMonEvoMethods(u16 species, u32 numEvos)
 				else
 					StringCopy(gStringVar2, gText_ThreeMarks);
 				break;
+			case EVO_RELATIVE_TO_MET:
+			{
+				u32 ceiling = evolutions[i].param & 0xFF;
+				u32 difference = (evolutions[i].param & 0xFF00) >> 8;
+				u8 *diffBuffer = Alloc(4);
+				
+				StringCopy(gStringVar1, gText_EvoMethodRelative1);
+				StringCopy(gStringVar2, gText_EvoMethodRelative2);
+				if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_STUDIED))
+				{
+					ConvertIntToDecimalStringN(diffBuffer, difference, STR_CONV_MODE_LEFT_ALIGN, 2);
+					StringAppend(gStringVar1, diffBuffer);
+					
+					ConvertIntToDecimalStringN(gStringVar3, ceiling, STR_CONV_MODE_LEFT_ALIGN, 2);
+					
+					Free(diffBuffer);
+				}
+				else
+				{
+					StringAppend(gStringVar1, gText_ThreeMarks);
+					StringCopy(gStringVar3, gText_ThreeMarks);
+				}
+				
+			}
 		}
 
 		DynamicPlaceholderTextUtil_Reset();

@@ -2971,7 +2971,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
             statusChanged = TRUE;
             break;
         case STATUS1_TOXIC_POISON:
-            if ((battlerAbility == ABILITY_IMMUNITY || battlerAbility == ABILITY_PASTEL_VEIL || ABILITY_PURITY)
+            if ((battlerAbility == ABILITY_IMMUNITY || battlerAbility == ABILITY_PASTEL_VEIL || battlerAbility == ABILITY_PURITY)
              && (primary == TRUE || certain == MOVE_EFFECT_CERTAIN))
             {
                 gLastUsedAbility = battlerAbility;
