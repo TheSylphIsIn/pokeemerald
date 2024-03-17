@@ -35138,6 +35138,10 @@ static const u16 sKeesightTeachableLearnset[] = {
     MOVE_UNAVAILABLE,
 };
 
+static const u16 sLarvoolTeachableLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+
 static const u16 sElemptyTeachableLearnset[] = {
     MOVE_UNAVAILABLE,
 };

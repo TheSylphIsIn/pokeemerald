@@ -107,6 +107,8 @@ enum {
     WIN_VU_METER,
 };
 
+#define WIN_CAUGHT_TYPES WIN_FOOTPRINT + 1
+
 // For scrolling search parameter
 #define MAX_SEARCH_PARAM_ON_SCREEN   6
 #define MAX_SEARCH_PARAM_CURSOR_POS  (MAX_SEARCH_PARAM_ON_SCREEN - 1)
@@ -126,6 +128,7 @@ static EWRAM_DATA struct PokedexView *sPokedexView = NULL;
 static EWRAM_DATA u16 sLastSelectedPokemon = 0;
 static EWRAM_DATA u8 sPokeBallRotation = 0;
 static EWRAM_DATA struct PokedexListItem *sPokedexListItem = NULL;
+static EWRAM_DATA u8 sFormFixBit = 0;
 
 // This is written to, but never read.
 u8 gUnusedPokedexU8;
@@ -932,7 +935,7 @@ static const struct WindowTemplate sInfoScreen_WindowTemplates[] =
         .tilemapTop = 0,
         .width = 32,
         .height = 20,
-        .paletteNum = 0,
+        .paletteNum = 1,
         .baseBlock = 1,
     },
     [WIN_FOOTPRINT] =
@@ -1012,6 +1015,16 @@ static const struct WindowTemplate sNewEntryInfoScreen_WindowTemplates[] =
         .paletteNum = 15,
         .baseBlock = 641,
     },
+	[WIN_CAUGHT_TYPES] =
+	{
+        .bg = 2,
+        .tilemapLeft = 13,
+        .tilemapTop = 7,
+        .width = 9,
+        .height = 2,
+        .paletteNum = 12,
+        .baseBlock = 645,		
+	},
     DUMMY_WIN_TEMPLATE
 };
 
@@ -1687,6 +1700,7 @@ void Task_OpenPokedexMainPage(u8 taskId)
 {
     sPokedexView->isSearchResults = FALSE;
 	sPokedexView->formSpecies = 0;
+	sFormFixBit = 0;
     if (LoadPokedexListPage(PAGE_MAIN))
         gTasks[taskId].func = Task_HandlePokedexInput;
 }
@@ -1893,6 +1907,7 @@ static void Task_OpenSearchResults(u8 taskId)
 {
     sPokedexView->isSearchResults = TRUE;
 	sPokedexView->formSpecies = 0;
+	sFormFixBit = 0;
     if (LoadPokedexListPage(PAGE_SEARCH_RESULTS))
         gTasks[taskId].func = Task_HandleSearchResultsInput;
 }
@@ -3446,6 +3461,7 @@ static void Task_HandleInfoScreenInput(u8 taskId)
     {
         // Scroll up/down
 		sPokedexView->formSpecies = 0;
+		sFormFixBit = 0;
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         gTasks[taskId].func = Task_LoadInfoScreenWaitForFade;
         PlaySE(SE_DEX_SCROLL);
@@ -4111,16 +4127,16 @@ static const struct ScrollArrowsTemplate sScrollArrowsTemplate_PokedexDataScreen
 
 #define DATA_SCREEN_TOP_LABELS_Y 	25
 #define DATA_SCREEN_BOTTOM_LABELS_Y 89
-#define DATA_SCREEN_STATS_LABEL_X 	120
-#define DATA_SCREEN_EVS_LABEL_X 	184
+#define DATA_SCREEN_STATS_LABEL_X 	136
+#define DATA_SCREEN_EVS_LABEL_X 	97
 #define DATA_SCREEN_EVOS_LABEL_X 	104
 
 #define DATA_SCREEN_LEFT_STATS_X 100
-#define DATA_SCREEN_RIGHT_STATS_X 148
+#define DATA_SCREEN_RIGHT_STATS_X 164
 #define DATA_SCREEN_TOP_STATS_Y 39
 #define DATA_SCREEN_MID_STATS_Y DATA_SCREEN_TOP_STATS_Y + 13
 #define DATA_SCREEN_BOT_STATS_Y DATA_SCREEN_MID_STATS_Y + 13
-#define DATA_SCREEN_EVS_DATA_X 195
+#define DATA_SCREEN_EVS_DATA_X 100
 
 #define DATA_SCREEN_EVO_TEXT_X 20
 #define DATA_SCREEN_EVO_TEXT_FIRST_LINE_Y 104
@@ -4239,7 +4255,6 @@ static void Task_SwitchScreensFromDataScreen(u8 taskId)
 void DataScreenPrintLabels(void)
 {	
 	PrintInfoScreenTextSmall(gText_BaseStats, DATA_SCREEN_STATS_LABEL_X, DATA_SCREEN_TOP_LABELS_Y);
-	PrintInfoScreenTextSmall(gText_Effort, DATA_SCREEN_EVS_LABEL_X, DATA_SCREEN_TOP_LABELS_Y);
 	PrintInfoScreenTextSmall(gText_Evolutions, DATA_SCREEN_EVOS_LABEL_X, DATA_SCREEN_BOTTOM_LABELS_Y);
 	
 	PrintInfoScreenTextSmall(gText_HP4, DATA_SCREEN_LEFT_STATS_X, DATA_SCREEN_TOP_STATS_Y);
@@ -4257,19 +4272,8 @@ void DataScreenPrintData(u16 species)
 	
 	if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_STUDIED))
 	{
-		DataScreenPrintBaseStatsLeft(species);
-		DataScreenPrintBaseStatsRight(species);
 		PrintInfoScreenTextSmall(gText_DataComplete, GetStringCenterAlignXOffset(FONT_SMALL, gText_DataComplete, 239), DATA_SCREEN_FOOTER_Y);
 		printedCompletionText = TRUE;
-	}
-	else
-	{
-		PrintInfoScreenTextSmall(gText_TwoMarks , GetStringRightAlignXOffset(FONT_SMALL, gText_TwoMarks, 135), DATA_SCREEN_TOP_STATS_Y);
-		PrintInfoScreenTextSmall(gText_TwoMarks , GetStringRightAlignXOffset(FONT_SMALL, gText_TwoMarks, 135), DATA_SCREEN_MID_STATS_Y);
-		PrintInfoScreenTextSmall(gText_TwoMarks , GetStringRightAlignXOffset(FONT_SMALL, gText_TwoMarks, 135), DATA_SCREEN_BOT_STATS_Y);
-		PrintInfoScreenTextSmall(gText_TwoMarks , GetStringRightAlignXOffset(FONT_SMALL, gText_TwoMarks, 187), DATA_SCREEN_TOP_STATS_Y);
-		PrintInfoScreenTextSmall(gText_TwoMarks , GetStringRightAlignXOffset(FONT_SMALL, gText_TwoMarks, 187), DATA_SCREEN_MID_STATS_Y);
-		PrintInfoScreenTextSmall(gText_TwoMarks , GetStringRightAlignXOffset(FONT_SMALL, gText_TwoMarks, 187), DATA_SCREEN_BOT_STATS_Y);
 	}
 	
 	if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT))
@@ -4299,7 +4303,8 @@ void DataScreenPrintData(u16 species)
 		
 	}
 	
-	DataScreenPrintEVYield(species);
+	DataScreenPrintBaseStatsLeft(species);
+	DataScreenPrintBaseStatsRight(species);
 	
 	if (!printedCompletionText)
 	{
@@ -4308,35 +4313,124 @@ void DataScreenPrintData(u16 species)
 	}
 }
 
+static const u8 sDataScreen_SingleDot[] = _("{SMALL_DOT}");
+static const u8 sDataScreen_EmptyDot[] = _("{SMALL_EMPTY_DOT}");
+
+// Prints a series of dots corresponding roughly to the range of the species's base stat. Each dot represents roughly 20 points, but 1 dot is 30.
+// The number of dots is the floor of the stat. So 4 dots means the stat's value  is between 90 and 110.
+// If over 150, all dots are filled and the overflow changes to red.
+// If over 250, all dots are colored gold.
+static void PrintBaseStatDots(u32 baseStat, u32 baseX, u32 baseY, u16 species) 
+{
+	u32 consideringStat = baseStat;
+	u32 dotsPrinted = 0;
+	u8 color[3];
+	
+	// If not caught, print 6 empty dots and "??" as the number, then exit.
+	if (!GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT))
+	{
+		color[0] = TEXT_COLOR_TRANSPARENT;
+		color[1] = TEXT_DYNAMIC_COLOR_6;
+		color[2] = TEXT_COLOR_LIGHT_GRAY;		
+		while (dotsPrinted < 6)
+		{
+			AddTextPrinterParameterized4(0, FONT_SMALL, baseX + (dotsPrinted * 5), baseY,
+				0, 0, color, TEXT_SKIP_DRAW, sDataScreen_EmptyDot);
+			dotsPrinted++;
+		}
+		
+		PrintInfoScreenTextSmall(gText_TwoMarks , baseX + 30 + 1, baseY + 1);
+		
+		return;
+	}
+	
+	if (consideringStat > 250)
+	{
+		color[0] = TEXT_COLOR_TRANSPARENT;
+		color[1] = TEXT_DYNAMIC_COLOR_5;
+		color[2] = TEXT_DYNAMIC_COLOR_1;
+
+		while (dotsPrinted < 6)
+		{
+			AddTextPrinterParameterized4(0, FONT_SMALL, baseX + (dotsPrinted * 5), baseY,
+				0, 0, color, TEXT_SKIP_DRAW, sDataScreen_SingleDot);
+			dotsPrinted++;
+		}
+	}
+	else if (consideringStat >= 150)
+	{
+		color[0] = TEXT_COLOR_TRANSPARENT;
+		color[1] = TEXT_COLOR_LIGHT_BLUE;
+		color[2] = TEXT_COLOR_BLUE;
+		
+		while (consideringStat >= 150 && dotsPrinted < 6)
+		{
+			AddTextPrinterParameterized4(0, FONT_SMALL, baseX + (dotsPrinted * 5), baseY,
+				0, 0, color, TEXT_SKIP_DRAW, sDataScreen_SingleDot);
+			dotsPrinted++;
+			consideringStat -= 20;
+		}
+		
+		color[0] = TEXT_COLOR_TRANSPARENT;
+		color[1] = TEXT_DYNAMIC_COLOR_6;
+		color[2] = TEXT_COLOR_LIGHT_GRAY;
+
+		while (dotsPrinted < 6)
+		{
+			AddTextPrinterParameterized4(0, FONT_SMALL, baseX + (dotsPrinted * 5), baseY,
+				0, 0, color, TEXT_SKIP_DRAW, sDataScreen_SingleDot);
+			dotsPrinted++;
+		}
+	}
+	else
+	{
+		color[0] = TEXT_COLOR_TRANSPARENT;
+		color[1] = TEXT_DYNAMIC_COLOR_6;
+		color[2] = TEXT_COLOR_LIGHT_GRAY;
+
+		while (consideringStat >= 30 && dotsPrinted < 6)
+		{
+			AddTextPrinterParameterized4(0, FONT_SMALL, baseX + (dotsPrinted * 5), baseY,
+				0, 0, color, TEXT_SKIP_DRAW, sDataScreen_SingleDot);
+			dotsPrinted++;
+			consideringStat -= 20;
+		}
+		
+		while (dotsPrinted < 6)
+		{
+			AddTextPrinterParameterized4(0, FONT_SMALL, baseX + (dotsPrinted * 5), baseY,
+				0, 0, color, TEXT_SKIP_DRAW, sDataScreen_EmptyDot);
+			dotsPrinted++;
+		}
+		
+	}
+	
+	// Only print the real value if studied.
+	if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_STUDIED))
+	{
+		u8 statBuffer[8];
+		
+		ConvertIntToDecimalStringN(statBuffer, baseStat, STR_CONV_MODE_LEFT_ALIGN, 3);
+		PrintInfoScreenTextSmall(statBuffer , baseX + 30 + 1, baseY + 1);
+	}
+}
 
 static void DataScreenPrintBaseStatsLeft(u16 species)
 {
-	u8 hpBuffer[8];
-	u8 atkBuffer[8];
-	u8 defBuffer[8];
+	u32 i;
+
+	for (i = 0; i < 3; i++)
+	{
+		PrintBaseStatDots(*(&gSpeciesInfo[species].baseHP + i), DATA_SCREEN_LEFT_STATS_X + 16, DATA_SCREEN_TOP_STATS_Y + (13 * i), species);
+	}
 	
-	ConvertIntToDecimalStringN(hpBuffer, gSpeciesInfo[species].baseHP, STR_CONV_MODE_RIGHT_ALIGN, 3);
-	ConvertIntToDecimalStringN(atkBuffer, gSpeciesInfo[species].baseAttack, STR_CONV_MODE_RIGHT_ALIGN, 3);
-	ConvertIntToDecimalStringN(defBuffer, gSpeciesInfo[species].baseDefense, STR_CONV_MODE_RIGHT_ALIGN, 3);
-	
-	PrintInfoScreenTextSmall(hpBuffer , GetStringRightAlignXOffset(FONT_SMALL, hpBuffer, 135), DATA_SCREEN_TOP_STATS_Y);
-	PrintInfoScreenTextSmall(atkBuffer , GetStringRightAlignXOffset(FONT_SMALL, atkBuffer, 135), DATA_SCREEN_MID_STATS_Y);
-	PrintInfoScreenTextSmall(defBuffer , GetStringRightAlignXOffset(FONT_SMALL, defBuffer, 135), DATA_SCREEN_BOT_STATS_Y);
 }
 
 static void DataScreenPrintBaseStatsRight(u16 species)
 {
-	u8 spAtkBuffer[8];
-	u8 spDefBuffer[8];
-	u8 spdBuffer[8];
-	
-	ConvertIntToDecimalStringN(spAtkBuffer, gSpeciesInfo[species].baseSpAttack, STR_CONV_MODE_RIGHT_ALIGN, 3);
-	ConvertIntToDecimalStringN(spDefBuffer, gSpeciesInfo[species].baseSpDefense, STR_CONV_MODE_RIGHT_ALIGN, 3);
-	ConvertIntToDecimalStringN(spdBuffer, gSpeciesInfo[species].baseSpeed, STR_CONV_MODE_RIGHT_ALIGN, 3);
-	
-	PrintInfoScreenTextSmall(spAtkBuffer , GetStringRightAlignXOffset(FONT_SMALL, spAtkBuffer, 187), DATA_SCREEN_TOP_STATS_Y);
-	PrintInfoScreenTextSmall(spDefBuffer , GetStringRightAlignXOffset(FONT_SMALL, spDefBuffer, 187), DATA_SCREEN_MID_STATS_Y);
-	PrintInfoScreenTextSmall(spdBuffer , GetStringRightAlignXOffset(FONT_SMALL, spdBuffer, 187), DATA_SCREEN_BOT_STATS_Y);
+	PrintBaseStatDots(gSpeciesInfo[species].baseSpAttack, DATA_SCREEN_RIGHT_STATS_X + 20, DATA_SCREEN_TOP_STATS_Y, species);
+	PrintBaseStatDots(gSpeciesInfo[species].baseSpDefense, DATA_SCREEN_RIGHT_STATS_X + 20, DATA_SCREEN_MID_STATS_Y, species);
+	PrintBaseStatDots(gSpeciesInfo[species].baseSpeed, DATA_SCREEN_RIGHT_STATS_X + 20, DATA_SCREEN_BOT_STATS_Y, species);
 }
 
 static void DataScreenPrintEvolutionMethods(u16 species)
@@ -4637,13 +4731,13 @@ static void DataScreenPrintEVYield(u16 species)
 			secondBestVal--;
 		} while (secondBestVal > 0);
 		
-		PrintInfoScreenTextSmall(stringBuffer, DATA_SCREEN_EVS_DATA_X, DATA_SCREEN_BOT_STATS_Y);
+		PrintInfoScreenTextSmall(stringBuffer, DATA_SCREEN_EVS_DATA_X, DATA_SCREEN_MOVES_STARTING_Y + 26);
 	}
 	
 	if (bestVal > 0)
 	{
 		StringCopy(stringBuffer, sEVStatNames[bestEV]);
-		PrintInfoScreenTextSmall(stringBuffer, DATA_SCREEN_EVS_DATA_X, DATA_SCREEN_TOP_STATS_Y);
+		PrintInfoScreenTextSmall(stringBuffer, DATA_SCREEN_EVS_DATA_X, DATA_SCREEN_MOVES_STARTING_Y);
 		
 		StringCopy(stringBuffer, gText_UpArrow);
 		bestVal--;
@@ -4653,12 +4747,12 @@ static void DataScreenPrintEVYield(u16 species)
 			bestVal--;
 		}
 		
-		PrintInfoScreenTextSmall(stringBuffer, DATA_SCREEN_EVS_DATA_X, DATA_SCREEN_MID_STATS_Y - 2);
+		PrintInfoScreenTextSmall(stringBuffer, DATA_SCREEN_EVS_DATA_X, DATA_SCREEN_MOVES_STARTING_Y + 11);
 		
 	}
 	else
 	{
-		PrintInfoScreenTextSmall(gText_None, DATA_SCREEN_EVS_DATA_X, DATA_SCREEN_TOP_STATS_Y);
+		PrintInfoScreenTextSmall(gText_None, DATA_SCREEN_EVS_DATA_X, DATA_SCREEN_MOVES_STARTING_Y);
 	}
 }
 
@@ -4668,6 +4762,7 @@ static void DataScreenPrintPage2Labels(void)
 	PrintInfoScreenTextSmall(gText_Ability,			DATA_SCREEN_ABILITY_LABEL_X,	DATA_SCREEN_ABILS_LABEL_Y);
 	PrintInfoScreenTextSmall(gText_HiddenAbility,	DATA_SCREEN_HIDDEN_LABEL_X,		DATA_SCREEN_ABILS_LABEL_Y);
 	PrintInfoScreenTextSmall(gText_LevelUpMoves,	DATA_SCREEN_LVL_MOVE_LABEL_X,	DATA_SCREEN_LVL_MOVE_LABEL_Y);
+	PrintInfoScreenTextSmall(gText_Effort, DATA_SCREEN_EVS_LABEL_X, DATA_SCREEN_TOP_LABELS_Y);
 }
 
 static void DataScreenPrintPage2Data(u16 species)
@@ -4700,6 +4795,8 @@ static void DataScreenPrintPage2Data(u16 species)
 		PrintInfoScreenTextSmall(gText_Unknown, DATA_SCREEN_ABILITY_X, DATA_SCREEN_ABIL_Y);
 	
 	// Level up move printing is handled outside this function, in Task_DataScreenHandleInput
+	
+	DataScreenPrintEVYield(species);
 	
 	if (!printedCompletionText)
 	{
@@ -4881,12 +4978,14 @@ static void HighlightSubmenuScreenSelectBarItem(u8 a, u16 b)
 #define tSpecies        data[1]
 #define tPalTimer      data[2]
 #define tMonSpriteId   data[3]
+#define tShowData	   data[4]
+#define tCaughtMonLevel data[5]
 #define tOtIdLo        data[12]
 #define tOtIdHi        data[13]
 #define tPersonalityLo data[14]
 #define tPersonalityHi data[15]
 
-u8 DisplayCaughtMonDexPage(u16 species, u32 otId, u32 personality)
+u8 DisplayCaughtMonDexPage(u16 species, u32 otId, u32 personality, u32 level)
 {
     u8 taskId = 0;
     if (POKEDEX_PLUS_HGSS)
@@ -4894,8 +4993,10 @@ u8 DisplayCaughtMonDexPage(u16 species, u32 otId, u32 personality)
     else
         taskId = CreateTask(Task_DisplayCaughtMonDexPage, 0);
 
-    gTasks[taskId].tState = 0;
+	sFormFixBit = 1; // Stupid hack to fix a stupid hack. The function that allows you to scroll forms when pressing Start will read garbage from catching a new mon without initializing sPokedexView.
+    gTasks[taskId].tState = 0; // ^ This bit prevents it from trying to read invalid forms while displaying a new mon's data. TODO: Fix this bullshit I guess.
     gTasks[taskId].tSpecies = species;
+	gTasks[taskId].tCaughtMonLevel = level;
     gTasks[taskId].tOtIdLo = otId;
     gTasks[taskId].tOtIdHi = otId >> 16;
     gTasks[taskId].tPersonalityLo = personality;
@@ -4931,7 +5032,7 @@ static void Task_DisplayCaughtMonDexPage(u8 taskId)
         CopyToBgTilemapBuffer(3, gPokedexInfoScreen_Tilemap, 0, 0);
         FillWindowPixelBuffer(WIN_INFO, PIXEL_FILL(0));
         PutWindowTilemap(WIN_INFO);
-        PutWindowTilemap(WIN_FOOTPRINT);
+        PutWindowTilemap(WIN_FOOTPRINT);	
         DrawFootprint(WIN_FOOTPRINT, dexNum);
         CopyWindowToVram(WIN_FOOTPRINT, COPYWIN_GFX);
         ResetPaletteFade();
@@ -4976,13 +5077,98 @@ static void Task_DisplayCaughtMonDexPage(u8 taskId)
     }
 }
 
+#define CAUGHT_SCREEN_STATS_LEFT_X 12
+#define CAUGHT_SCREEN_STATS_RIGHT_X 68
+#define CAUGHT_SCREEN_STATS_TOP_Y 115
+
 static void Task_HandleCaughtMonPageInput(u8 taskId)
 {
     if (JOY_NEW(A_BUTTON | B_BUTTON))
     {
-        BeginNormalPaletteFade(PALETTES_BG, 0, 0, 16, RGB_BLACK);
-        gSprites[gTasks[taskId].tMonSpriteId].callback = SpriteCB_SlideCaughtMonToCenter;
-        gTasks[taskId].func = Task_ExitCaughtMonPage;
+		if (gTasks[taskId].tShowData) // First A press advances to data screen. Second press closes screen.
+		{
+			BeginNormalPaletteFade(PALETTES_BG, 0, 0, 16, RGB_BLACK);
+			gSprites[gTasks[taskId].tMonSpriteId].callback = SpriteCB_SlideCaughtMonToCenter;
+			gTasks[taskId].func = Task_ExitCaughtMonPage;
+		}
+		else
+		{
+			u32 species = gTasks[taskId].tSpecies;
+			u8 string[8];
+			u32 i;
+			const struct Evolution *evolutions = GetSpeciesEvolutions(species);
+			const struct LevelUpMove *learnset = GetSpeciesLevelUpLearnset(species);
+			
+			gTasks[taskId].tShowData = TRUE;
+			FillWindowPixelRect(WIN_INFO, PIXEL_FILL(0), 0, 56, 240, 104);
+			PlaySE(SE_DEX_PAGE);
+			
+			// Print mon type icons
+			ListMenuLoadStdPalAt(BG_PLTT_ID(12), 1);
+			PutWindowTilemap(WIN_CAUGHT_TYPES);
+			FillWindowPixelBuffer(WIN_CAUGHT_TYPES, PIXEL_FILL(0));
+			
+			BlitMenuInfoIcon(WIN_CAUGHT_TYPES, gSpeciesInfo[species].types[0] + 1, 0, 2);
+			if (gSpeciesInfo[species].types[1] != gSpeciesInfo[species].types[0])
+				BlitMenuInfoIcon(WIN_CAUGHT_TYPES, gSpeciesInfo[species].types[1] + 1, 40, 2);
+			
+			// Print "Evolutions: X"
+			for (i = 0; i < EVOS_PER_MON; i++)
+			{
+				if (evolutions == NULL || evolutions[i].method == 0 || evolutions[i].method == EVOLUTIONS_END)
+					break;
+			}
+			
+			ConvertIntToDecimalStringN(string, i, STR_CONV_MODE_LEADING_ZEROS, 1);
+			PrintInfoScreenText(string, 164, 73);
+			PrintInfoScreenText(gText_Evolutions, 96, 73);
+			
+			// Print base stats labels and dots
+			PrintInfoScreenText(gText_BaseStats, 0x20, 0x62);
+	
+			PrintInfoScreenTextSmall(gText_HP4, CAUGHT_SCREEN_STATS_LEFT_X, CAUGHT_SCREEN_STATS_TOP_Y);
+			PrintInfoScreenTextSmall(gText_AttackShort, CAUGHT_SCREEN_STATS_LEFT_X, CAUGHT_SCREEN_STATS_TOP_Y + 13);
+			PrintInfoScreenTextSmall(gText_DefenseShort, CAUGHT_SCREEN_STATS_LEFT_X, CAUGHT_SCREEN_STATS_TOP_Y + 26);
+			PrintInfoScreenTextSmall(gText_SpAtkShort, CAUGHT_SCREEN_STATS_RIGHT_X, CAUGHT_SCREEN_STATS_TOP_Y);
+			PrintInfoScreenTextSmall(gText_SpDefShort, CAUGHT_SCREEN_STATS_RIGHT_X, CAUGHT_SCREEN_STATS_TOP_Y + 13);
+			PrintInfoScreenTextSmall(gText_SpeedShort, CAUGHT_SCREEN_STATS_RIGHT_X, CAUGHT_SCREEN_STATS_TOP_Y + 26);
+			PrintBaseStatDots(gSpeciesInfo[species].baseHP, CAUGHT_SCREEN_STATS_LEFT_X + 20, CAUGHT_SCREEN_STATS_TOP_Y, species);
+			PrintBaseStatDots(gSpeciesInfo[species].baseAttack, CAUGHT_SCREEN_STATS_LEFT_X + 20, CAUGHT_SCREEN_STATS_TOP_Y + 13, species);
+			PrintBaseStatDots(gSpeciesInfo[species].baseDefense, CAUGHT_SCREEN_STATS_LEFT_X + 20, CAUGHT_SCREEN_STATS_TOP_Y + 26, species);
+			PrintBaseStatDots(gSpeciesInfo[species].baseSpAttack, CAUGHT_SCREEN_STATS_RIGHT_X + 20, CAUGHT_SCREEN_STATS_TOP_Y, species);
+			PrintBaseStatDots(gSpeciesInfo[species].baseSpDefense, CAUGHT_SCREEN_STATS_RIGHT_X + 20, CAUGHT_SCREEN_STATS_TOP_Y + 13, species);
+			PrintBaseStatDots(gSpeciesInfo[species].baseSpeed, CAUGHT_SCREEN_STATS_RIGHT_X + 20, CAUGHT_SCREEN_STATS_TOP_Y + 26, species);
+			
+			// Print level up move
+			PrintInfoScreenTextSmall(gText_NextLearnedMove, 0x80, 0x62);
+			
+			for (i = 0; learnset[i].move != LEVEL_UP_MOVE_END; i++)
+			{
+				if (learnset[i].level > gTasks[taskId].tCaughtMonLevel)
+					break;
+			}
+			
+			if (learnset[i].move != LEVEL_UP_MOVE_END)
+			{
+				ConvertIntToDecimalStringN(string, learnset[i].level, STR_CONV_MODE_RIGHT_ALIGN, 2);
+				PrintInfoScreenTextSmall(string, 0x80, 0x6C);
+				PrintInfoScreenTextSmall(gMoveNames[learnset[i].move], 0x90, 0x6C);
+			}
+			else
+			{
+				PrintInfoScreenTextSmall(gText_ThreeDashes, 0x90, 0x6C);
+			}
+			
+			// Print Abilities
+			PrintInfoScreenTextSmall(gText_Ability, 0x80, 120);
+			
+			PrintInfoScreenTextSmall(gAbilityNames[gSpeciesInfo[species].abilities[0]], 0x80, 131);
+			if (gSpeciesInfo[species].abilities[1])
+				PrintInfoScreenTextSmall(gAbilityNames[gSpeciesInfo[species].abilities[0]], 0x80, 141);
+				
+			CopyWindowToVram(WIN_CAUGHT_TYPES, COPYWIN_FULL);
+			CopyWindowToVram(WIN_INFO, COPYWIN_GFX);
+		}
     }
     // Flicker caught screen color
     else if (++gTasks[taskId].tPalTimer & 16)
@@ -6592,7 +6778,7 @@ static u16 NationalPokedexNumToSpecies_HandleForms(u16 nationalNum)
     if (!nationalNum)
         return 0;
 
-    if (sPokedexView->formSpecies != 0)
+    if (sFormFixBit == 0 && sPokedexView->formSpecies != 0)
         return sPokedexView->formSpecies;
     else
         return NationalPokedexNumToSpecies(nationalNum);

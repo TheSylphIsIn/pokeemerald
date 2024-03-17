@@ -15184,7 +15184,8 @@ static void Cmd_displaydexinfo(void)
             FreeAllWindowBuffers();
             gBattleCommunication[TASK_ID] = DisplayCaughtMonDexPage(species,
                                                                         gBattleMons[GetCatchingBattler()].otId,
-                                                                        gBattleMons[GetCatchingBattler()].personality);
+                                                                        gBattleMons[GetCatchingBattler()].personality,
+																		gBattleMons[GetCatchingBattler()].level);
             gBattleCommunication[0]++;
         }
         break;
