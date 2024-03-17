@@ -4508,7 +4508,7 @@ static void DataScreenPrintMonEvoMethods(u16 species, u32 numEvos)
 					StringAppend(gStringVar1, gText_ThreeMarks);
 					StringCopy(gStringVar3, gText_ThreeMarks);
 				}
-				
+				break;
 			}
 		}
 
