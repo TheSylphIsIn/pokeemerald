@@ -494,7 +494,7 @@ bool8 ScrCmd_additem(struct ScriptContext *ctx)
     u16 itemId = VarGet(ScriptReadHalfword(ctx));
     u32 quantity = VarGet(ScriptReadHalfword(ctx));
 
-    gSpecialVar_Result = AddBagItem(itemId, (u8)quantity);
+    gSpecialVar_Result = AddBagItem(itemId, quantity);
     return FALSE;
 }
 
@@ -503,7 +503,7 @@ bool8 ScrCmd_removeitem(struct ScriptContext *ctx)
     u16 itemId = VarGet(ScriptReadHalfword(ctx));
     u32 quantity = VarGet(ScriptReadHalfword(ctx));
 
-    gSpecialVar_Result = RemoveBagItem(itemId, (u8)quantity);
+    gSpecialVar_Result = RemoveBagItem(itemId, quantity);
     return FALSE;
 }
 
@@ -512,7 +512,7 @@ bool8 ScrCmd_checkitemspace(struct ScriptContext *ctx)
     u16 itemId = VarGet(ScriptReadHalfword(ctx));
     u32 quantity = VarGet(ScriptReadHalfword(ctx));
 
-    gSpecialVar_Result = CheckBagHasSpace(itemId, (u8)quantity);
+    gSpecialVar_Result = CheckBagHasSpace(itemId, quantity);
     return FALSE;
 }
 
@@ -521,7 +521,7 @@ bool8 ScrCmd_checkitem(struct ScriptContext *ctx)
     u16 itemId = VarGet(ScriptReadHalfword(ctx));
     u32 quantity = VarGet(ScriptReadHalfword(ctx));
 
-    gSpecialVar_Result = CheckBagHasItem(itemId, (u8)quantity);
+    gSpecialVar_Result = CheckBagHasItem(itemId, quantity);
     return FALSE;
 }
 
@@ -1389,8 +1389,8 @@ static void DynamicMultichoiceSortList(struct ListMenuItem *items, u32 count)
 bool8 ScrCmd_dynmultichoice(struct ScriptContext *ctx)
 {
     u32 i;
-    u32 left = ScriptReadByte(ctx);
-    u32 top = ScriptReadByte(ctx);
+    u32 left = VarGet(ScriptReadHalfword(ctx));
+    u32 top = VarGet(ScriptReadHalfword(ctx));
     bool32 ignoreBPress = ScriptReadByte(ctx);
     u32 maxBeforeScroll = ScriptReadByte(ctx);
     bool32 shouldSort = ScriptReadByte(ctx);
@@ -1458,7 +1458,7 @@ bool8 ScrCmd_dynmultipush(struct ScriptContext *ctx)
     item.name = nameBuffer;
     item.id = id;
     MultichoiceDynamic_PushElement(item);
-	return FALSE;
+    return FALSE;
 }
 
 bool8 ScrCmd_multichoice(struct ScriptContext *ctx)
@@ -1720,7 +1720,7 @@ bool8 ScrCmd_buffermovename(struct ScriptContext *ctx)
     u8 stringVarIndex = ScriptReadByte(ctx);
     u16 moveId = VarGet(ScriptReadHalfword(ctx));
 
-    StringCopy(sScriptStringVars[stringVarIndex], gMoveNames[moveId]);
+    StringCopy(sScriptStringVars[stringVarIndex], GetMoveName(moveId));
     return FALSE;
 }
 
@@ -1786,19 +1786,6 @@ bool8 ScrCmd_bufferboxname(struct ScriptContext *ctx)
     u16 boxId = VarGet(ScriptReadHalfword(ctx));
 
     StringCopy(sScriptStringVars[stringVarIndex], GetBoxNamePtr(boxId));
-    return FALSE;
-}
-
-bool8 ScrCmd_givemon(struct ScriptContext *ctx)
-{
-    u16 species = VarGet(ScriptReadHalfword(ctx));
-    u8 level = ScriptReadByte(ctx);
-    u16 item = VarGet(ScriptReadHalfword(ctx));
-    u32 unkParam1 = ScriptReadWord(ctx);
-    u32 unkParam2 = ScriptReadWord(ctx);
-    u8 unkParam3 = ScriptReadByte(ctx);
-
-    gSpecialVar_Result = ScriptGiveMon(species, level, item, unkParam1, unkParam2, unkParam3);
     return FALSE;
 }
 

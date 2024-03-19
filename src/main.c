@@ -23,6 +23,7 @@
 #include "intro.h"
 #include "main.h"
 #include "trainer_hill.h"
+#include "test_runner.h"
 #include "constants/rgb.h"
 
 static void VBlankIntr(void);
@@ -60,8 +61,6 @@ const IntrFunc gIntrTableTemplate[] =
 
 #define INTR_COUNT ((int)(sizeof(gIntrTableTemplate)/sizeof(IntrFunc)))
 
-static u16 sUnusedVar; // Never read
-
 u16 gKeyRepeatStartDelay;
 bool8 gLinkTransferringData;
 struct Main gMain;
@@ -72,6 +71,8 @@ u8 gLinkVSyncDisabled;
 u32 IntrMain_Buffer[0x200];
 s8 gPcmDmaCounter;
 void *gAgbMainLoop_sp;
+
+static EWRAM_DATA u16 sTrainerId = 0;
 
 //EWRAM_DATA void (**gFlashTimerIntrFunc)(void) = NULL;
 
@@ -88,14 +89,16 @@ void EnableVCountIntrAtLine150(void);
 
 void AgbMain()
 {
-    // Modern compilers are liberal with the stack on entry to this function,
-    // so RegisterRamReset may crash if it resets IWRAM.
-#if !MODERN
-    RegisterRamReset(RESET_ALL);
-#endif //MODERN
     *(vu16 *)BG_PLTT = RGB_WHITE; // Set the backdrop to white on startup
     InitGpuRegManager();
-    REG_WAITCNT = WAITCNT_PREFETCH_ENABLE | WAITCNT_WS0_S_1 | WAITCNT_WS0_N_3;
+    // Setup waitstates for all ROM mirrors
+    if (DECAP_ENABLED && DECAP_MIRRORING)
+        REG_WAITCNT = WAITCNT_PREFETCH_ENABLE
+            | WAITCNT_WS0_S_1 | WAITCNT_WS0_N_3
+            | WAITCNT_WS1_S_1 | WAITCNT_WS1_N_3
+            | WAITCNT_WS2_S_1 | WAITCNT_WS2_N_3;
+    else
+        REG_WAITCNT = WAITCNT_PREFETCH_ENABLE | WAITCNT_WS0_S_1 | WAITCNT_WS0_N_3;
     InitKeys();
     InitIntrHandlers();
     m4aSoundInit();
@@ -117,7 +120,6 @@ void AgbMain()
         SetMainCallback2(NULL);
 
     gLinkTransferringData = FALSE;
-    sUnusedVar = 0xFC0;
 
 #ifndef NDEBUG
 #if (LOG_HANDLER == LOG_HANDLER_MGBA_PRINT)
@@ -204,6 +206,46 @@ void SetMainCallback2(MainCallback callback)
     gMain.state = 0;
 }
 
+void StartTimer1(void)
+{
+    if (HQ_RANDOM)
+    {
+        REG_TM2CNT_L = 0;
+        REG_TM2CNT_H = TIMER_ENABLE | TIMER_COUNTUP;
+    }
+
+    REG_TM1CNT_H = TIMER_ENABLE;
+}
+
+void SeedRngAndSetTrainerId(void)
+{
+    u32 val;
+
+    if (HQ_RANDOM)
+    {
+        REG_TM1CNT_H = 0;
+        REG_TM2CNT_H = 0;
+        val = ((u32)REG_TM2CNT_L) << 16;
+        val |= REG_TM1CNT_L;
+        SeedRng(val);
+        sTrainerId = Random();
+    }
+    else
+    {
+        // Do it exactly like it was originally done, including not stopping
+        // the timer beforehand.
+        val = REG_TM1CNT_L;
+        SeedRng((u16)val);
+        REG_TM1CNT_H = 0;
+        sTrainerId = val;
+    }
+}
+
+u16 GetGeneratedTrainerIdLower(void)
+{
+    return sTrainerId;
+}
+
 void EnableVCountIntrAtLine150(void)
 {
     u16 gpuReg = (GetGpuReg(REG_OFFSET_DISPSTAT) & 0xFF) | (150 << 8);
@@ -213,7 +255,22 @@ void EnableVCountIntrAtLine150(void)
 
 static void SeedRngWithRtc(void)
 {
-    SeedRng(RtcGetMinuteCount());
+    #if HQ_RANDOM == FALSE
+        u32 seed = RtcGetMinuteCount();
+        seed = (seed >> 16) ^ (seed & 0xFFFF);
+        SeedRng(seed);
+    #else
+        #define BCD8(x) ((((x) >> 4) & 0xF) * 10 + ((x) & 0xF))
+        u32 seconds;
+        struct SiiRtcInfo rtc;
+        RtcGetInfo(&rtc);
+        seconds =
+            ((HOURS_PER_DAY * RtcGetDayCount(&rtc) + BCD8(rtc.hour))
+            * MINUTES_PER_HOUR + BCD8(rtc.minute))
+            * SECONDS_PER_MINUTE + BCD8(rtc.second);
+        SeedRng(seconds);
+        #undef BCD8
+    #endif
 }
 
 void InitKeys(void)
@@ -343,8 +400,8 @@ static void VBlankIntr(void)
     m4aSoundMain();
     TryReceiveLinkBattleData();
 
-    if (!gMain.inBattle || !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_FRONTIER | BATTLE_TYPE_RECORDED)))
-        Random();
+    if (!gTestRunnerEnabled && (!gMain.inBattle || !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_FRONTIER | BATTLE_TYPE_RECORDED))))
+        AdvanceRandom();
 
     UpdateWirelessStatusIndicatorSprite();
 

@@ -139,10 +139,10 @@ static const struct MenuInfoIcon sMenuInfoIcons[] =
     [MENU_INFO_ICON_EFFECT]    = { 42, 12, 0xE8 }, // Unused
     [MENU_INFO_ICON_BALL_RED]  = {  8,  8, 0xAE }, // For placed decorations in Secret Base
     [MENU_INFO_ICON_BALL_BLUE] = {  8,  8, 0xAF }, // For placed decorations in player's room
-	[SPLIT_PHYSICAL + MENU_INFO_ICON_BALL_BLUE + 1] = {12, 11, 0xC6},
-	[SPLIT_SPECIAL + MENU_INFO_ICON_BALL_BLUE + 1] = {12, 11, 0xE6},
-	[SPLIT_STATUS + MENU_INFO_ICON_BALL_BLUE + 1] = {12, 11, 0xCE},
-	[SPLIT_DYNAMIC + MENU_INFO_ICON_BALL_BLUE + 1] = {12, 11, 0xEE},
+	[DAMAGE_CATEGORY_PHYSICAL + MENU_INFO_ICON_BALL_BLUE + 1] = {12, 11, 0xC6},
+	[DAMAGE_CATEGORY_SPECIAL + MENU_INFO_ICON_BALL_BLUE + 1] = {12, 11, 0xE6},
+	[DAMAGE_CATEGORY_STATUS + MENU_INFO_ICON_BALL_BLUE + 1] = {12, 11, 0xCE},
+	[DAMAGE_CATEGORY_DYNAMIC + MENU_INFO_ICON_BALL_BLUE + 1] = {12, 11, 0xEE},
 };
 
 void InitStandardTextBoxWindows(void)

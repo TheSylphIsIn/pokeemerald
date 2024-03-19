@@ -2,4 +2,3 @@
 
 This is the repository for **Pokémon Fandango**, a work in progress ROM hack of [pokeemerald-expansion](https://github.com/rh-hideout/pokeemerald-expansion/) set in the Fonei region.
 
-No further details are available at this time.

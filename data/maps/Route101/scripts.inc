@@ -223,15 +223,7 @@ Route101_EventScript_BirchsBag::
 	faceplayer
 	message Route101_Text_StarterSetChoice
 	waitmessage
-	multichoicedefault 15, 0, MULTI_STARTER_SET, 0, TRUE
-	switch VAR_RESULT
-	case 0, StarterSet0
-	case 1, StarterSet1
-	case 2, StarterSet2
-	case 3, StarterSet3
-	case 4, StarterSet4
-	case 5, StarterSetInfo
-	goto StarterSet0
+	goto Route101_EventScript_BirchsBagContinue
 	
 StarterSet0::
 	setvar VAR_STARTER_SET, 0

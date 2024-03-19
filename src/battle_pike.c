@@ -886,14 +886,8 @@ static bool8 TryInflictRandomStatus(void)
 
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
         indices[i] = i;
-    for (j = 0; j < 10; j++)
-    {
-        u8 temp, id;
 
-        i = Random() % FRONTIER_PARTY_SIZE;
-        id = Random() % FRONTIER_PARTY_SIZE;
-        SWAP(indices[i], indices[id], temp);
-    }
+    Shuffle(indices, FRONTIER_PARTY_SIZE, sizeof(indices[0]));
 
     if (gSaveBlock2Ptr->frontier.curChallengeBattleNum <= 4)
         count = 1;
@@ -1266,7 +1260,7 @@ static void Task_DoStatusInflictionScreenFlash(u8 taskId)
 
 static void TryHealMons(u8 healCount)
 {
-    u8 j, i, k;
+    u8 j, i;
     u8 indices[FRONTIER_PARTY_SIZE];
 
     if (healCount == 0)
@@ -1274,14 +1268,10 @@ static void TryHealMons(u8 healCount)
 
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
         indices[i] = i;
-    for (k = 0; k < 10; k++)
-    {
-        u8 temp;
 
-        i = Random() % FRONTIER_PARTY_SIZE;
-        j = Random() % FRONTIER_PARTY_SIZE;
-        SWAP(indices[i], indices[j], temp);
-    }
+    // Only 'healCount' number of Pokémon will be healed.
+    // The order in which they're (attempted to be) healed is random,
+    Shuffle(indices, FRONTIER_PARTY_SIZE, sizeof(indices[0]));
 
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
     {

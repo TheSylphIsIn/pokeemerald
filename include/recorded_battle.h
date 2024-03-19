@@ -3,9 +3,8 @@
 
 #include "random.h"
 
-extern struct PCG32 gRecordedBattleRngSeed;
-extern struct PCG32 gBattlePalaceMoveSelectionRngValue;
 #include "constants/battle.h"
+#include "random.h"
 
 #define BATTLER_RECORD_SIZE 664
 
@@ -17,7 +16,7 @@ struct RecordedBattleSave
     u8 playersGender[MAX_BATTLERS_COUNT];
     u32 playersTrainerId[MAX_BATTLERS_COUNT];
     u8 playersLanguage[MAX_BATTLERS_COUNT];
-    struct PCG32 rngSeed;
+    rng_value_t rngSeed;
     u32 battleFlags;
     u8 playersBattlers[MAX_BATTLERS_COUNT];
     u16 opponentA;
@@ -53,6 +52,8 @@ enum
     RECORDED_ITEM_MOVE,
 };
 
+extern rng_value_t gRecordedBattleRngSeed;
+extern rng_value_t gBattlePalaceMoveSelectionRngValue;
 extern u8 gRecordedBattleMultiplayerId;
 
 #define B_RECORD_MODE_RECORDING 1

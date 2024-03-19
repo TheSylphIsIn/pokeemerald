@@ -218,8 +218,7 @@ static void FreeListMenuItems(struct ListMenuItem *items, u32 count)
     Free(items);
 }
 
-// Unused
-static UNUSED u16 GetLengthWithExpandedPlayerName(const u8 *str)
+static u16 UNUSED GetLengthWithExpandedPlayerName(const u8 *str)
 {
     u16 length = 0;
 
@@ -388,7 +387,7 @@ static void DrawMultichoiceMenuDynamic(u8 left, u8 top, u8 argc, struct ListMenu
     gTasks[taskId].data[2] = windowId;
     gTasks[taskId].data[5] = argc;
     gTasks[taskId].data[7] = maxBeforeScroll;
-    StoreWordInTwoHalfwords((u16 *) &gTasks[taskId].data[3], (u32) items);
+    StoreWordInTwoHalfwords((u16*) &gTasks[taskId].data[3], (u32) items);
     list = (void *) gTasks[gTasks[taskId].data[0]].data;
     ListMenuChangeSelectionFull(list, TRUE, FALSE, initialRow, TRUE);
 
@@ -405,7 +404,7 @@ static void DrawMultichoiceMenuDynamic(u8 left, u8 top, u8 argc, struct ListMenu
         template.firstX = (newWidth / 2) * 8 + 12 + (left) * 8;
         template.firstY = top * 8 + 5;
         template.secondX = template.firstX;
-        template.secondY = windowHeight * 8 + 12;
+        template.secondY = top * 8 + windowHeight * 8 + 12;
         template.fullyUpThreshold = 0;
         template.fullyDownThreshold = argc - maxBeforeScroll;
         template.firstArrowType = SCROLL_ARROW_UP;
@@ -494,9 +493,9 @@ static void Task_HandleScrollingMultichoiceInput(u8 taskId)
     case LIST_NOTHING_CHOSEN:
         break;
     case LIST_CANCEL:
-        if (gTasks[taskId].data[1])
+        if (!gTasks[taskId].data[1])
         {
-            gSpecialVar_Result = 0x7F;
+            gSpecialVar_Result = MULTI_B_PRESSED;
             done = TRUE;
         }
         break;
@@ -525,7 +524,7 @@ static void Task_HandleScrollingMultichoiceInput(u8 taskId)
             RemoveScrollIndicatorArrowPair(gTasks[taskId].data[6]);
         }
 
-        LoadWordFromTwoHalfwords((u16 *) &gTasks[taskId].data[3], (u32* )(&items));
+        LoadWordFromTwoHalfwords((u16*) &gTasks[taskId].data[3], (u32* )(&items));
         FreeListMenuItems(items, gTasks[taskId].data[5]);
         TRY_FREE_AND_SET_NULL(sDynamicMenuEventScratchPad);
         DestroyListMenuTask(gTasks[taskId].data[0], NULL, NULL);

@@ -307,7 +307,6 @@ u16 GetMatchCallMapSec(int index)
 bool32 ShouldDrawRematchPokeballIcon(int index)
 {
     struct Pokenav_MatchCallMenu *state = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_MAIN);
-
     return AchievementGetUnlocked(state->matchCallEntries[index].headerId);
 }
 
@@ -318,7 +317,7 @@ int GetMatchCallTrainerPic(int index)
     if (!state->matchCallEntries[index].isSpecialTrainer)
     {
         index = GetTrainerIdxByRematchIdx(state->matchCallEntries[index].headerId);
-        return gTrainers[index].trainerPic;
+        return GetTrainerPicFromId(index);
     }
 
     headerId = state->matchCallEntries[index].headerId;
@@ -326,7 +325,7 @@ int GetMatchCallTrainerPic(int index)
     if (index != REMATCH_TABLE_ENTRIES)
     {
         index = GetTrainerIdxByRematchIdx(index);
-        return gTrainers[index].trainerPic;
+        return GetTrainerPicFromId(index);
     }
 
     index = MatchCall_GetOverrideFacilityClass(headerId);
@@ -388,9 +387,9 @@ void BufferMatchCallNameAndDesc(struct PokenavMatchCallEntry *matchCallEntry, u8
     if (!matchCallEntry->isSpecialTrainer)
     {
         int index = GetTrainerIdxByRematchIdx(matchCallEntry->headerId);
-        const struct Trainer *trainer = &gTrainers[index];
+        const struct Trainer *trainer = GetTrainerStructFromId(index);
         int class = trainer->trainerClass;
-        className = gTrainerClassNames[class];
+        className = gTrainerClasses[class].name;
         trainerName = trainer->trainerName;
     }
     else
@@ -453,6 +452,7 @@ int GetIndexDeltaOfNextCheckPageUp(int index)
 // Unused
 static UNUSED bool32 HasRematchEntry(void)
 {
+#if FREE_MATCH_CALL == FALSE
     int i;
 
     for (i = 0; i < REMATCH_TABLE_ENTRIES; i++)
@@ -469,12 +469,14 @@ static UNUSED bool32 HasRematchEntry(void)
                 return TRUE;
         }
     }
+#endif //FREE_MATCH_CALL
 
     return FALSE;
 }
 
 static bool32 ShouldDoNearbyMessage(void)
 {
+#if FREE_MATCH_CALL == FALSE
     struct Pokenav_MatchCallMenu *state = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_MAIN);
     int selection = PokenavList_GetSelectedIndex();
     if (!state->matchCallEntries[selection].isSpecialTrainer)
@@ -496,6 +498,6 @@ static bool32 ShouldDoNearbyMessage(void)
             }
         }
     }
-
+#endif //FREE_MATCH_CALL
     return FALSE;
 }

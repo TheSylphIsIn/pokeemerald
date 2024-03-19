@@ -15,6 +15,18 @@ const struct Trainer gTrainers[] = {
 		.party = NULL,
 	},
 
+	[TRAINER_KYLE] =
+	{
+		.trainerName = _("Kyle"),
+		.trainerClass = TRAINER_CLASS_YOUNGSTER,
+		.trainerPic = TRAINER_PIC_YOUNGSTER,
+		.encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
+		.aiFlags = AI_FLAG_CHECK_BAD_MOVE,
+		.items = { },
+		.doubleBattle = FALSE,
+		.party = TRAINER_PARTY_NO_DIFF(sParty_Kyle),
+	},
+
 	[TRAINER_BOBBY] =
 	{
 		.trainerName = _("Bobby"),
@@ -25,30 +37,6 @@ const struct Trainer gTrainers[] = {
 		.items = { },
 		.doubleBattle = FALSE,
 		.party = TRAINER_PARTY_NO_DIFF(sParty_Bobby),
-	},
-
-	[TRAINER_CALVIN_FISHEYE_LAKE] =
-	{
-		.trainerName = _("Calvin"),
-		.trainerClass = TRAINER_CLASS_RIVAL,
-		.trainerPic = TRAINER_PIC_CALVIN,
-		.encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
-		.aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
-		.items = { },
-		.doubleBattle = FALSE,
-		.party = TRAINER_PARTY_STARTER_DEPENDENT,
-	},
-
-	[TRAINER_GRANT] =
-	{
-		.trainerName = _("Grant"),
-		.trainerClass = TRAINER_CLASS_HIKER,
-		.trainerPic = TRAINER_PIC_HIKER,
-		.encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_HIKER,
-		.aiFlags = 0,
-		.items = { },
-		.doubleBattle = FALSE,
-		.party = TRAINER_PARTY_NO_DIFF(sParty_Grant),
 	},
 
 	[TRAINER_KRIS] =
@@ -63,16 +51,40 @@ const struct Trainer gTrainers[] = {
 		.party = TRAINER_PARTY_NO_DIFF(sParty_Kris),
 	},
 
-	[TRAINER_KYLE] =
+	[TRAINER_WILBUR] =
 	{
-		.trainerName = _("Kyle"),
-		.trainerClass = TRAINER_CLASS_YOUNGSTER,
-		.trainerPic = TRAINER_PIC_YOUNGSTER,
+		.trainerName = _("Wilbur"),
+		.trainerClass = TRAINER_CLASS_BUG_CATCHER,
+		.trainerPic = TRAINER_PIC_BUG_CATCHER,
 		.encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
-		.aiFlags = AI_FLAG_CHECK_BAD_MOVE,
+		.aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY,
 		.items = { },
 		.doubleBattle = FALSE,
-		.party = TRAINER_PARTY_NO_DIFF(sParty_Kyle),
+		.party = TRAINER_PARTY_NO_DIFF(sParty_Wilbur),
+	},
+
+	[TRAINER_GRANT] =
+	{
+		.trainerName = _("Grant"),
+		.trainerClass = TRAINER_CLASS_HIKER,
+		.trainerPic = TRAINER_PIC_HIKER,
+		.encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_HIKER,
+		.aiFlags = 0,
+		.items = { },
+		.doubleBattle = FALSE,
+		.party = TRAINER_PARTY_NO_DIFF(sParty_Grant),
+	},
+
+	[TRAINER_ROSALYN] =
+	{
+		.trainerName = _("Rosalyn"),
+		.trainerClass = TRAINER_CLASS_LASS,
+		.trainerPic = TRAINER_PIC_LASS,
+		.encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE,
+		.aiFlags = 0,
+		.items = { },
+		.doubleBattle = FALSE,
+		.party = TRAINER_PARTY_NO_DIFF(sParty_Rosalyn),
 	},
 
 	[TRAINER_KEY_LACKEY_FISHEYE_LAKE] =
@@ -99,6 +111,18 @@ const struct Trainer gTrainers[] = {
 		.party = TRAINER_PARTY_STARTER_DEPENDENT,
 	},
 
+	[TRAINER_CALVIN_FISHEYE_LAKE] =
+	{
+		.trainerName = _("Calvin"),
+		.trainerClass = TRAINER_CLASS_RIVAL,
+		.trainerPic = TRAINER_PIC_CALVIN,
+		.encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
+		.aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
+		.items = { },
+		.doubleBattle = FALSE,
+		.party = TRAINER_PARTY_STARTER_DEPENDENT,
+	},
+
 	[TRAINER_MORGAN_CLIFF_CLIMB] =
 	{
 		.trainerName = _("Morgan"),
@@ -109,30 +133,6 @@ const struct Trainer gTrainers[] = {
 		.items = { ITEM_POTION, ITEM_NONE, ITEM_NONE, ITEM_NONE, },
 		.doubleBattle = FALSE,
 		.party = TRAINER_PARTY_STARTER_DEPENDENT,
-	},
-
-	[TRAINER_ROSALYN] =
-	{
-		.trainerName = _("Rosalyn"),
-		.trainerClass = TRAINER_CLASS_LASS,
-		.trainerPic = TRAINER_PIC_LASS,
-		.encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE,
-		.aiFlags = 0,
-		.items = { },
-		.doubleBattle = FALSE,
-		.party = TRAINER_PARTY_NO_DIFF(sParty_Rosalyn),
-	},
-
-	[TRAINER_WILBUR] =
-	{
-		.trainerName = _("Wilbur"),
-		.trainerClass = TRAINER_CLASS_BUG_CATCHER,
-		.trainerPic = TRAINER_PIC_BUG_CATCHER,
-		.encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
-		.aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY,
-		.items = { },
-		.doubleBattle = FALSE,
-		.party = TRAINER_PARTY_NO_DIFF(sParty_Wilbur),
 	},
 
 

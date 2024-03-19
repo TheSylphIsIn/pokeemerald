@@ -22,6 +22,11 @@
 
 #define OPTIONS_PER_TAB 4
 
+#if (DECAP_ENABLED) && (DECAP_MIRRORING) && !(DECAP_OPTION_MENU)
+#define AddTextPrinterParameterized3(a, b, c, d, e, f, str) AddTextPrinterParameterized3(a, b, c, d, e, f, MirrorPtr(str))
+#define AddTextPrinterParameterized4(a, b, c, d, e, f, g, h, str) AddTextPrinterParameterized4(a, b, c, d, e, f, g, h, MirrorPtr(str))
+#endif
+
 enum
 {
     WIN_HEADER,
@@ -958,7 +963,7 @@ static u8 FrameType_ProcessInput(void)
 
 static void FrameType_DrawChoices(u8 taskId)
 {
-    u8 text[16];
+    u8 text[16] = {EOS};
     u8 n = gSaveBlock2Ptr->optionsWindowFrameType + 1;
     u16 i;
 
