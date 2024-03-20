@@ -5198,7 +5198,7 @@ static void Task_DisplayCaughtMonDexPage(u8 taskId)
         FillWindowPixelBuffer(WIN_INFO, PIXEL_FILL(0));
         PutWindowTilemap(WIN_INFO);
         PutWindowTilemap(WIN_FOOTPRINT);	
-        DrawFootprint(WIN_FOOTPRINT, dexNum);
+        DrawFootprint(WIN_FOOTPRINT, NationalPokedexNumToSpecies(dexNum));
         CopyWindowToVram(WIN_FOOTPRINT, COPYWIN_GFX);
         ResetPaletteFade();
         LoadPokedexBgPalette(FALSE);
