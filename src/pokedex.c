@@ -103,11 +103,10 @@ enum
 enum {
     WIN_INFO,
     WIN_FOOTPRINT,
+	WIN_CAUGHT_TYPES,
     WIN_CRY_WAVE,
     WIN_VU_METER,
 };
-
-#define WIN_CAUGHT_TYPES WIN_FOOTPRINT + 1
 
 // For scrolling search parameter
 #define MAX_SEARCH_PARAM_ON_SCREEN   6
@@ -280,6 +279,8 @@ static void DataScreenPrintLabels(void);
 static void DataScreenPrintData(u16 species);
 static void DataScreenPrintBaseStatsLeft(u16 species);
 static void DataScreenPrintBaseStatsRight(u16 species);
+static void PrintBstDots(u16 species, u32 x, u32 y);
+static void DataScreenPrintBaseStatTotal(u16 species);
 static void DataScreenPrintEvolutionMethods(u16 species);
 static void DataScreenHandleSpecialEvoText(u16 species);
 static void DataScreenPrintMonEvoMethods(u16 species, u32 numEvos);
@@ -958,6 +959,16 @@ static const struct WindowTemplate sInfoScreen_WindowTemplates[] =
         .paletteNum = 15,
         .baseBlock = 641,
     },
+	[WIN_CAUGHT_TYPES] =
+	{
+        .bg = 2,
+        .tilemapLeft = 2,
+        .tilemapTop = 11,
+        .width = 10,
+        .height = 2,
+        .paletteNum = 12,
+        .baseBlock = 645,		
+	},
     [WIN_CRY_WAVE] =
     {
         .bg = 0,
@@ -966,7 +977,7 @@ static const struct WindowTemplate sInfoScreen_WindowTemplates[] =
         .width = 32,
         .height = 7,
         .paletteNum = 8,
-        .baseBlock = 645,
+        .baseBlock = 665,
     },
     [WIN_VU_METER] =
     {
@@ -976,7 +987,7 @@ static const struct WindowTemplate sInfoScreen_WindowTemplates[] =
         .width = 10,
         .height = 8,
         .paletteNum = 9,
-        .baseBlock = 869,
+        .baseBlock = 889,
     },
     DUMMY_WIN_TEMPLATE
 };
@@ -4098,6 +4109,7 @@ static void Task_LoadDataScreen(u8 taskId)
         gMain.state++;
         break;
     case 6:
+		CopyWindowToVram(WIN_CAUGHT_TYPES, COPYWIN_FULL);
         CopyWindowToVram(WIN_INFO, COPYWIN_FULL);
         CopyBgTilemapBufferToVram(1);
         CopyBgTilemapBufferToVram(2);
@@ -4140,6 +4152,8 @@ static const struct ScrollArrowsTemplate sScrollArrowsTemplate_PokedexDataScreen
 #define DATA_SCREEN_STATS_LABEL_X 	136
 #define DATA_SCREEN_EVS_LABEL_X 	97
 #define DATA_SCREEN_EVOS_LABEL_X 	104
+#define DATA_SCREEN_BST_LABEL_X 	177
+#define DATA_SCREEN_BST_LABEL_Y 	80
 
 #define DATA_SCREEN_LEFT_STATS_X 100
 #define DATA_SCREEN_RIGHT_STATS_X 164
@@ -4204,6 +4218,7 @@ static void Task_HandleDataScreenInput(u8 taskId)
 			PutWindowTilemap(WIN_INFO);
 			DataScreenPrintLabels();
 			DataScreenPrintData(gTasks[taskId].tSpecies);
+			CopyWindowToVram(WIN_CAUGHT_TYPES, COPYWIN_FULL);
 			CopyWindowToVram(WIN_INFO, COPYWIN_FULL);
 			CopyBgTilemapBufferToVram(3);
 			PlaySE(SE_DEX_PAGE);	
@@ -4273,28 +4288,30 @@ void DataScreenPrintLabels(void)
 	PrintInfoScreenTextSmall(gText_SpAtkShort, DATA_SCREEN_RIGHT_STATS_X, DATA_SCREEN_TOP_STATS_Y);
 	PrintInfoScreenTextSmall(gText_SpDefShort, DATA_SCREEN_RIGHT_STATS_X, DATA_SCREEN_MID_STATS_Y);
 	PrintInfoScreenTextSmall(gText_SpeedShort, DATA_SCREEN_RIGHT_STATS_X, DATA_SCREEN_BOT_STATS_Y);
+	PrintInfoScreenTextSmall(gText_BaseStatTotal, DATA_SCREEN_BST_LABEL_X, DATA_SCREEN_BST_LABEL_Y);
 }
 
 void DataScreenPrintData(u16 species)
 {
-	u8 stringBuffer[32];
 	bool32 printedCompletionText = FALSE;
-	
+
+	FillWindowPixelBuffer(WIN_CAUGHT_TYPES, PIXEL_FILL(0));
+
 	if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_STUDIED))
 	{
 		PrintInfoScreenTextSmall(gText_DataComplete, GetStringCenterAlignXOffset(FONT_SMALL, gText_DataComplete, 239), DATA_SCREEN_FOOTER_Y);
 		printedCompletionText = TRUE;
 	}
 	
+	// Prints Type icons, evolution methods, and number of possible evolutions
 	if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT))
 	{
-		StringCopy(stringBuffer, gTypesInfo[gSpeciesInfo[species].types[0]].name);
-		if (gSpeciesInfo[species].types[0] != gSpeciesInfo[species].types[1])
-		{
-			StringAppend(stringBuffer, gText_Slash);
-			StringAppend(stringBuffer, gTypesInfo[gSpeciesInfo[species].types[1]].name);
-		}
-		PrintInfoScreenTextSmall(stringBuffer, GetStringCenterAlignXOffset(FONT_SMALL, stringBuffer, 112), DATA_SCREEN_BOTTOM_LABELS_Y - 2);
+		ListMenuLoadStdPalAt(BG_PLTT_ID(12), 1);
+		PutWindowTilemap(WIN_CAUGHT_TYPES);
+		
+		BlitMenuInfoIcon(WIN_CAUGHT_TYPES, gSpeciesInfo[species].types[0] + 1, 5, 1);
+		if (gSpeciesInfo[species].types[1] != gSpeciesInfo[species].types[0])
+			BlitMenuInfoIcon(WIN_CAUGHT_TYPES, gSpeciesInfo[species].types[1] + 1, 43, 1);
 		
 		DataScreenPrintEvolutionMethods(species); // If not studied, only prints method, not param or target species
 		DataScreenPrintNumEvos(species);
@@ -4305,7 +4322,7 @@ void DataScreenPrintData(u16 species)
 			printedCompletionText = TRUE;
 		}
 	}
-	else
+	else // If not caught, gives no useful info.
 	{
 		PrintInfoScreenTextSmall(gText_Unknown, DATA_SCREEN_EVO_TEXT_X, DATA_SCREEN_EVO_TEXT_FIRST_LINE_Y);
 		PrintInfoScreenTextSmall(gText_ThreeMarks, GetStringCenterAlignXOffset(FONT_SMALL, gText_ThreeMarks, 112), DATA_SCREEN_BOTTOM_LABELS_Y - 2);
@@ -4313,8 +4330,10 @@ void DataScreenPrintData(u16 species)
 		
 	}
 	
+	// Prints base stats. If not seen, nothing. If caught, dot "ratings". If studied, actual numbers.
 	DataScreenPrintBaseStatsLeft(species);
 	DataScreenPrintBaseStatsRight(species);
+	DataScreenPrintBaseStatTotal(species);
 	
 	if (!printedCompletionText)
 	{
@@ -4325,6 +4344,8 @@ void DataScreenPrintData(u16 species)
 
 static const u8 sDataScreen_SingleDot[] = _("{SMALL_DOT}");
 static const u8 sDataScreen_EmptyDot[] = _("{SMALL_EMPTY_DOT}");
+static const u8 sDataScreen_HalfDot[] = _("{SMALL_HALF_DOT}");
+static const u8 sDataScreen_TwoToneDot[] = _("{SMALL_2_TONE_DOT}");
 
 // Prints a series of dots corresponding roughly to the range of the species's base stat. Each dot represents roughly 20 points, but 1 dot is 30.
 // The number of dots is the floor of the stat. So 4 dots means the stat's value  is between 90 and 110.
@@ -4406,6 +4427,13 @@ static void PrintBaseStatDots(u32 baseStat, u32 baseX, u32 baseY, u16 species)
 			consideringStat -= 20;
 		}
 		
+		if (consideringStat >= 20 && dotsPrinted < 6)
+		{
+			AddTextPrinterParameterized4(0, FONT_SMALL, baseX + (dotsPrinted * 5), baseY,
+				0, 0, color, TEXT_SKIP_DRAW, sDataScreen_HalfDot);
+			dotsPrinted++;
+		}
+		
 		while (dotsPrinted < 6)
 		{
 			AddTextPrinterParameterized4(0, FONT_SMALL, baseX + (dotsPrinted * 5), baseY,
@@ -4441,6 +4469,132 @@ static void DataScreenPrintBaseStatsRight(u16 species)
 	PrintBaseStatDots(gSpeciesInfo[species].baseSpAttack, DATA_SCREEN_RIGHT_STATS_X + 20, DATA_SCREEN_TOP_STATS_Y, species);
 	PrintBaseStatDots(gSpeciesInfo[species].baseSpDefense, DATA_SCREEN_RIGHT_STATS_X + 20, DATA_SCREEN_MID_STATS_Y, species);
 	PrintBaseStatDots(gSpeciesInfo[species].baseSpeed, DATA_SCREEN_RIGHT_STATS_X + 20, DATA_SCREEN_BOT_STATS_Y, species);
+}
+
+static void PrintBstDots(u16 species, u32 baseX, u32 baseY)
+{
+	u32 bst = 0;
+	u32 total;
+	u32 dotsPrinted = 0;
+	u32 yAdd = 0;
+	u8 color[3];
+	
+	for (total = 0; total < 6; total++)
+	{
+		bst += *(&gSpeciesInfo[species].baseHP + total);
+	}
+	
+	total = bst;
+	
+	// If not caught, print 6 empty dots and "??" as the number, then exit.
+	if (!GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT))
+	{
+		color[0] = TEXT_COLOR_TRANSPARENT;
+		color[1] = TEXT_DYNAMIC_COLOR_6;
+		color[2] = TEXT_COLOR_LIGHT_GRAY;		
+		while (dotsPrinted < 6)
+		{
+			yAdd = (dotsPrinted > 2) * 6;
+			AddTextPrinterParameterized4(0, FONT_SMALL, baseX + ((dotsPrinted % 3) * 5), baseY + yAdd,
+				0, 0, color, TEXT_SKIP_DRAW, sDataScreen_EmptyDot);
+			dotsPrinted++;
+		}
+		
+		PrintInfoScreenTextSmall(gText_TwoMarks , baseX + 16, baseY + 3);
+		
+		return;
+	}
+
+	if (bst >= 720)
+	{
+		color[0] = TEXT_COLOR_TRANSPARENT;
+		color[1] = TEXT_DYNAMIC_COLOR_5;
+		color[2] = TEXT_DYNAMIC_COLOR_1;
+
+		while (dotsPrinted < 6)
+		{
+			yAdd = (dotsPrinted > 2) * 6; // This silly thing and the below modulus print the dots in 2 rows of 3.
+			AddTextPrinterParameterized4(0, FONT_SMALL, baseX + ((dotsPrinted % 3) * 5), baseY + yAdd,
+				0, 0, color, TEXT_SKIP_DRAW, sDataScreen_SingleDot);
+			dotsPrinted++;
+			DebugPrintf("printed");
+		}
+	}
+	else if (bst >= 620)
+	{
+		color[0] = TEXT_COLOR_TRANSPARENT;
+		color[1] = TEXT_COLOR_LIGHT_BLUE;
+		color[2] = TEXT_COLOR_BLUE;
+		
+		
+		while (bst >= 620 && dotsPrinted < 6)
+		{
+			yAdd = (dotsPrinted > 2) * 6;
+			AddTextPrinterParameterized4(0, FONT_SMALL, baseX + ((dotsPrinted % 3) * 5), baseY + yAdd,
+				0, 0, color, TEXT_SKIP_DRAW, sDataScreen_SingleDot);
+			dotsPrinted++;
+			bst -= 20;
+		}
+		
+		color[0] = TEXT_COLOR_TRANSPARENT;
+		color[1] = TEXT_DYNAMIC_COLOR_6;
+		color[2] = TEXT_COLOR_LIGHT_GRAY;
+
+		while (dotsPrinted < 6)
+		{
+			yAdd = (dotsPrinted > 2) * 6;
+			AddTextPrinterParameterized4(0, FONT_SMALL, baseX + ((dotsPrinted % 3) * 5), baseY + yAdd,
+				0, 0, color, TEXT_SKIP_DRAW, sDataScreen_SingleDot);
+			dotsPrinted++;
+		}
+	}
+	else
+	{
+		color[0] = TEXT_COLOR_TRANSPARENT;
+		color[1] = TEXT_DYNAMIC_COLOR_6;
+		color[2] = TEXT_COLOR_LIGHT_GRAY;
+
+		while (bst >= 100 && dotsPrinted < 6)
+		{
+			yAdd = (dotsPrinted > 2) * 6;
+			AddTextPrinterParameterized4(0, FONT_SMALL, baseX + ((dotsPrinted % 3) * 5), baseY + yAdd,
+				0, 0, color, TEXT_SKIP_DRAW, sDataScreen_SingleDot);
+			dotsPrinted++;
+			bst -= 100;
+		}
+		
+		if (bst >= 50 && dotsPrinted < 6)
+		{
+			yAdd = (dotsPrinted > 2) * 6;
+			AddTextPrinterParameterized4(0, FONT_SMALL, baseX + ((dotsPrinted % 3) * 5), baseY + yAdd,
+				0, 0, color, TEXT_SKIP_DRAW, sDataScreen_HalfDot);
+			
+			dotsPrinted++;
+		}
+		
+		while (dotsPrinted < 6)
+		{
+			yAdd = (dotsPrinted > 2) * 6;
+			AddTextPrinterParameterized4(0, FONT_SMALL, baseX + ((dotsPrinted % 3) * 5), baseY + yAdd,
+				0, 0, color, TEXT_SKIP_DRAW, sDataScreen_EmptyDot);
+			dotsPrinted++;
+		}
+		
+	}
+	
+	// Only print the real value if studied.
+	if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_STUDIED))
+	{
+		u8 statBuffer[8];
+		
+		ConvertIntToDecimalStringN(statBuffer, total, STR_CONV_MODE_LEFT_ALIGN, 3);
+		PrintInfoScreenTextSmall(statBuffer , baseX + 16, baseY + 3);
+	}
+}
+
+static void DataScreenPrintBaseStatTotal(u16 species)
+{
+	PrintBstDots(species, DATA_SCREEN_BST_LABEL_X + 24, DATA_SCREEN_BST_LABEL_Y - 3);
 }
 
 static void DataScreenPrintEvolutionMethods(u16 species)
@@ -4779,6 +4933,7 @@ static void DataScreenPrintPage2Data(u16 species)
 {
 	bool32 printedCompletionText = FALSE;
 	
+	// Prints hidden abilities and egg groups
 	if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_STUDIED))
 	{
 		DataScreenPrintHiddenAbilities(species);
@@ -4792,6 +4947,7 @@ static void DataScreenPrintPage2Data(u16 species)
 		PrintInfoScreenTextSmall(gText_ThreeMarks, DATA_SCREEN_EGG_X, DATA_SCREEN_EGG_Y);
 	}
 
+	// Prints normal abilities
 	if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT))
 	{
 		DataScreenPrintAbilities(species);
@@ -5956,7 +6112,6 @@ static u32 GetPokedexMonPersonality(u16 species)
 u16 CreateMonSpriteFromNationalDexNumber(u16 nationalNum, s16 x, s16 y, u16 paletteSlot)
 {
     nationalNum = NationalPokedexNumToSpecies_HandleForms(nationalNum);
-    return CreateMonPicSprite(nationalNum, SHINY_ODDS, GetPokedexMonPersonality(nationalNum), TRUE, x, y, paletteSlot, TAG_NONE);
     return CreateMonPicSprite(nationalNum, FALSE, GetPokedexMonPersonality(nationalNum), TRUE, x, y, paletteSlot, TAG_NONE);
 }
 

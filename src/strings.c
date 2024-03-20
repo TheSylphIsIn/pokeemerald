@@ -128,6 +128,7 @@ const u8 gText_DataIncompleteSeen[] = _("Incomplete data! Catch to learn more!")
 const u8 gText_DataIncompleteCaught[] = _("Incomplete data! Study to learn more!");
 const u8 gText_DataComplete[] = _("Data complete! Species is fully studied.");
 const u8 gText_NextLearnedMove[] = _("NEXT LEARNED MOVE");
+const u8 gText_BaseStatTotal[] = _("TOTAL");
 const u8 gText_EvoMethodFriendship[] = _("Train with high friendship");
 const u8 gText_EvoMethodFriendshipDay[] = _(" at day");
 const u8 gText_EvoMethodFriendshipNight[] = _(" at night");

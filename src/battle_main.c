@@ -353,7 +353,7 @@ const struct TypeInfo gTypesInfo[NUMBER_OF_MON_TYPES] =
     {
         .name = _("Poison"),
         .generic = _("a POISON move"),
-        .palette = 14,
+        .palette = 15,
         .zMove = MOVE_ACID_DOWNPOUR,
         .maxMove = MOVE_MAX_OOZE,
         //.enhanceItem = ITEM_POISON_BARB,
@@ -449,7 +449,7 @@ const struct TypeInfo gTypesInfo[NUMBER_OF_MON_TYPES] =
     {
         .name = _("???"),
         .generic = _("an UNKNOWN move"),
-        .palette = 15,
+        .palette = 14,
     },
     [TYPE_FIRE] =
     {
@@ -583,7 +583,7 @@ const struct TypeInfo gTypesInfo[NUMBER_OF_MON_TYPES] =
     {
         .name = _("Fairy"),
         .generic = _("a FAIRY move"),
-        .palette = 14,
+        .palette = 15,
         .zMove = MOVE_TWINKLE_TACKLE,
         .maxMove = MOVE_MAX_STARFALL,
         //.enhanceItem = ITEM_FAIRY_FEATHER,

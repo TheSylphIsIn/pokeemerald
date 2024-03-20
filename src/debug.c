@@ -2666,6 +2666,8 @@ static void DebugAction_FlagsVars_PokedexFlags_All(u8 taskId)
         GetSetPokedexFlag(i + 1, FLAG_SET_CAUGHT);
         GetSetPokedexFlag(i + 1, FLAG_SET_SEEN);
     }
+	FlagSet(FLAG_SYS_NATIONAL_DEX);
+	EnableNationalPokedex();
     Debug_DestroyMenu_Full(taskId);
     ScriptContext_Enable();
 }

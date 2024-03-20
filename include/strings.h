@@ -609,6 +609,7 @@ extern const u8 gText_DataIncompleteSeen[];
 extern const u8 gText_DataIncompleteCaught[];
 extern const u8 gText_DataComplete[];
 extern const u8 gText_NextLearnedMove[];
+extern const u8 gText_BaseStatTotal[];
 extern const u8 gText_EvoMethodFriendship[];
 extern const u8 gText_EvoMethodFriendshipDay[];
 extern const u8 gText_EvoMethodFriendshipNight[];
