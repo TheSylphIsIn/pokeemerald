@@ -16931,3 +16931,24 @@ void BS_TryTidyUp(void)
             gBattlescriptCurrInstr = cmd->nextInstr;
     }
 }
+
+void BS_TryBeastEye(void)
+{
+	NATIVE_ARGS(const u8 *jumpInstr);
+	u32 currStacks = ((gStatuses4[gBattlerAttacker] & STATUS4_BEAST_EYE) >> 7);
+	
+	if (currStacks < 6)
+	{
+		currStacks += gMovesInfo[gCurrentMove].argument;
+		if (currStacks > 7)
+			currStacks = 7; // error handling for exceeding the size of STATUS4_BEAST_EYE. which shouldn't be possible, but yknow
+		gStatuses4[gBattlerAttacker] &= ~ STATUS4_BEAST_EYE;
+		gStatuses4[gBattlerAttacker] |= currStacks << 7;
+
+		gBattlescriptCurrInstr = cmd->nextInstr;
+	}
+	else
+	{
+		gBattlescriptCurrInstr = cmd->jumpInstr;
+	}
+}

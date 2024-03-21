@@ -902,13 +902,13 @@ gBattleAnims_Moves::
 	.4byte Move_BLADE_STORM
 	.4byte Move_FUMUGATE
 	.4byte Move_FADE_AWAY
-	.4byte Move_BITTER_SLASH
 	.4byte Move_HORRIFY
 	.4byte Move_MAGIC_BURST
 	.4byte Move_REND
 	.4byte Move_TANTRUM
 	.4byte Move_GEM_SPARK
-	.4byte Move_MOCKERY
+	.4byte Move_DRAGON_EYE
+	.4byte Move_BEAST_EYE
 @@@@ Z MOVES
 	.4byte Move_BREAKNECK_BLITZ
 	.4byte Move_ALL_OUT_PUMMELING
@@ -27289,13 +27289,27 @@ Move_BLACKOUT:
 Move_BLADE_STORM:
 Move_FUMUGATE:
 Move_FADE_AWAY:
-Move_BITTER_SLASH:
 Move_HORRIFY:
 Move_MAGIC_BURST:
 Move_REND:
 Move_TANTRUM:
 Move_GEM_SPARK:
-Move_MOCKERY:
+Move_DRAGON_EYE:
+Move_BEAST_EYE:
+	loadspritegfx ANIM_TAG_TEAL_ALERT
+	loadspritegfx ANIM_TAG_OPENING_EYE
+	loadspritegfx ANIM_TAG_ROUND_WHITE_HALO
+	monbg ANIM_DEF_PARTNER
+	playsewithpan SE_M_CONFUSE_RAY, SOUND_PAN_TARGET
+	createsprite gOpeningEyeSpriteTemplate, ANIM_ATTACKER, 5, 0, 0, 1, 0
+	createsprite gWhiteHaloSpriteTemplate, ANIM_ATTACKER, 5
+	delay 40
+	playsewithpan SE_M_LEER, SOUND_PAN_TARGET
+	createvisualtask AnimTask_BlendColorCycle, 2, F_PAL_BG, 1, 2, 0, 10, RGB_BLACK
+	call MindReaderEyeSpikeEffect
+	waitforvisualfinish
+	clearmonbg ANIM_DEF_PARTNER
+	end
 
 Move_KNOCK_OFF:
 	loadspritegfx ANIM_TAG_SLAM_HIT_2

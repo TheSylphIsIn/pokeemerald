@@ -10789,7 +10789,7 @@ const struct Item gItemsInfo[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        .secondaryId = MOVE_BITTER_SLASH, // Todo
+        .secondaryId = MOVE_ICE_FANG, // placeholder
     },
 
     [ITEM_TM_HORRIFY] =
@@ -10933,7 +10933,7 @@ const struct Item gItemsInfo[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        .secondaryId = MOVE_ARMOR_CRUSH, // Todo
+        .secondaryId = MOVE_DRAGON_EYE, // Todo
     },
 
     [ITEM_TM_REST] =
@@ -11149,7 +11149,7 @@ const struct Item gItemsInfo[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        .secondaryId = MOVE_MOCKERY, // Todo
+        .secondaryId = MOVE_SNARL, // Todo
     },
 
     [ITEM_TM_TWINKLE_POP] =

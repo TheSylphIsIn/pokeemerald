@@ -909,43 +909,42 @@
 
 #define MOVES_COUNT_GEN9 848
 
-#define MOVE_CONTACT 849 // physical, electric, 90 power
-#define MOVE_BRAMBLE 850 // physical, grass, 85 power, chance to poison. maybe unnecessary?
-#define MOVE_TWINKLE_POP 851 // physical, fairy, 55 power
-#define MOVE_STAR_PUNCH 852 // physical, fairy, 90 power, 95 accuracy
-#define MOVE_FAIRY_LIGHT 853 // status, lowers sp atk
-#define MOVE_SPIRE 854 // physical, rock, 80 power, 100 accuracy
-#define MOVE_FOCUS_RUSH 855 // physical, psychic, 100 power, vital throw effect
-#define MOVE_SHADOW_STALK 856 // physical, ghost, 85 power, 95 accuracy
-#define MOVE_AURA_WAVE 857 // special, fighting, 65 power
-#define MOVE_COLD_SNAP 858 // will-o-wisp but for frostbite
-#define MOVE_TOMBSTONER 859 // physical, rock, 130 power, 80 accuracy. secret move.
-#define MOVE_GASLIGHT 860 // status. inflicts random status (brn/prz/psn/slp/frz) on first use, confusion on second use.
-#define MOVE_SCALE_PIERCE 861 // freeze dry but fighting->dragon. starter sig
-#define MOVE_HARPOON_LASH 862 // freeze dry but dragon -> flying. starter sig.
-#define MOVE_LIGHTNING 863 // freeze dry but electric -> grass. starter sig.
-#define MOVE_BUZZ_BLITZ 864 // special bug double edge. sound move.
-#define MOVE_INFERNO_RAY 865 // special fire triple axel
-#define MOVE_BOIL_OVER 866 // hydroil signature
-#define MOVE_CHILL_TOUCH 867
-#define MOVE_LIMBER_UP 868
-#define MOVE_SHEAR_WIND 869
-#define MOVE_WASH_OFF 870
-#define MOVE_WHITEWATER 871
-#define MOVE_BLACKOUT 872
-#define MOVE_BLADE_STORM 873
-#define MOVE_FUMUGATE 874
-#define MOVE_FADE_AWAY 875
-#define MOVE_BITTER_SLASH 876
-#define MOVE_HORRIFY 877
-#define MOVE_MAGIC_BURST 878
-#define MOVE_REND 879
-#define MOVE_ARMOR_CRUSH 880
-#define MOVE_TANTRUM 881
-#define MOVE_GEM_SPARK 882
-#define MOVE_MOCKERY 883
+#define MOVE_CONTACT 848 // physical, electric, 90 power
+#define MOVE_BRAMBLE 849 // physical, grass, 85 power, chance to poison. maybe unnecessary?
+#define MOVE_TWINKLE_POP 850 // physical, fairy, 55 power
+#define MOVE_STAR_PUNCH 851 // physical, fairy, 90 power, 95 accuracy
+#define MOVE_FAIRY_LIGHT 852 // status, lowers sp atk
+#define MOVE_SPIRE 853 // physical, rock, 80 power, 100 accuracy
+#define MOVE_FOCUS_RUSH 854 // physical, psychic, 100 power, vital throw effect
+#define MOVE_SHADOW_STALK 855 // physical, ghost, 85 power, 95 accuracy
+#define MOVE_AURA_WAVE 856 // special, fighting, 65 power
+#define MOVE_COLD_SNAP 857 // will-o-wisp but for frostbite
+#define MOVE_TOMBSTONER 858 // physical, rock, 130 power, 80 accuracy. secret move.
+#define MOVE_GASLIGHT 859 // status. inflicts random status (brn/prz/psn/slp/frz) on first use, confusion on second use.
+#define MOVE_SCALE_PIERCE 860 // freeze dry but fighting->dragon. starter sig
+#define MOVE_HARPOON_LASH 861 // freeze dry but dragon -> flying. starter sig.
+#define MOVE_LIGHTNING 862 // freeze dry but electric -> grass. starter sig.
+#define MOVE_BUZZ_BLITZ 863 // special bug double edge. sound move.
+#define MOVE_INFERNO_RAY 864 // special fire triple axel
+#define MOVE_BOIL_OVER 865 // hydroil signature
+#define MOVE_CHILL_TOUCH 866 // ghost physical move. does gaslight effect on-hit
+#define MOVE_LIMBER_UP 867 // completes the "bulk up" trio. +1 speed, 50% heal
+#define MOVE_SHEAR_WIND 868 // dynamic category flying cross chop
+#define MOVE_WASH_OFF 869 // water clear smog
+#define MOVE_WHITEWATER 870 // strong physical water move
+#define MOVE_BLACKOUT 871 // special def body press
+#define MOVE_BLADE_STORM 872 // dynamic strong steel attack
+#define MOVE_FUMUGATE 873 // strong special poison attack
+#define MOVE_FADE_AWAY 874 // ghost teleport
+#define MOVE_HORRIFY 875 // mid ghost move, astonish 2
+#define MOVE_MAGIC_BURST 876 // fairy overheat
+#define MOVE_REND 877 // dragon hex
+#define MOVE_TANTRUM 878 // fairy facade
+#define MOVE_GEM_SPARK 879 // mid rock special move
+#define MOVE_DRAGON_EYE 880 // special hone claws
+#define MOVE_BEAST_EYE 881 // beast eye
 
-#define MOVES_COUNT_FANGANDO 884
+#define MOVES_COUNT_FANGANDO 882
 
 #define MOVES_COUNT         MOVES_COUNT_FANGANDO
 

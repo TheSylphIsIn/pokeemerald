@@ -20,6 +20,22 @@
 
 	.section script_data, "aw", %progbits
 
+BattleScript_EffectBeastEye::
+	attackcanceler
+	attackstring
+	ppreduce
+	trybeasteye BattleScript_BeastEyeFail
+	attackanimation
+	waitanimation
+	printstring STRINGID_PKMNISGETTINGWILD
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
+BattleScript_BeastEyeFail::
+	printstring STRINGID_BEASTEYEMAX
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
 BattleScript_EffectTidyUp::
 	attackcanceler
 	attackstring

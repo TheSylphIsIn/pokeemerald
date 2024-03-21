@@ -19801,6 +19801,43 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         }),
     },
 
+    [MOVE_CONTACT] =
+    {
+        .name = COMPOUND_STRING("Contact"),
+        .description = COMPOUND_STRING(
+            "A high-voltage touch that\n"
+            "may paralyze."),
+        .effect = EFFECT_HIT,
+        .power = 85,
+        .type = TYPE_ELECTRIC,
+        .accuracy = 100,
+        .pp = 15,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_PARALYSIS,
+            .chance = 30,
+        }),
+    },
+
+    [MOVE_BEAST_EYE] =
+    {
+        .name = COMPOUND_STRING("Beast Eye"),
+        .description = COMPOUND_STRING(
+            "The user's next move will\n"
+			"be used 1 extra time."),
+        .effect = EFFECT_BEAST_EYE,
+        .power = 0,
+        .type = TYPE_DARK,
+        .accuracy = 0,
+        .pp = 5,
+        .target = MOVE_TARGET_USER,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_STATUS,
+		.argument = 1,
+    },
+
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =
     {
