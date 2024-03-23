@@ -6022,86 +6022,102 @@ u8 GetHiddenPowerType(u8 hpIV, u8 atkIV, u8 defIV, u8 speedIV, u8 spAtkIV, u8 sp
 	return type;
 }
 
-void SetTypeBeforeUsingMove(u32 move, u32 battlerAtk)
+u32 GetDynamicMoveType(u32 move, u32 battlerAtk)
 {
-    u32 moveType, ateType, attackerAbility;
-    u16 holdEffect = GetBattlerHoldEffect(battlerAtk, TRUE);
-
-    if (move == MOVE_STRUGGLE)
-        return;
-
-    gBattleStruct->dynamicMoveType = 0;
-    gBattleStruct->ateBoost[battlerAtk] = 0;
-    gSpecialStatuses[battlerAtk].gemBoost = FALSE;
-
-    if (gMovesInfo[move].effect == EFFECT_WEATHER_BALL)
+	u32 moveType, ateType, attackerAbility;
+	u16 holdEffect = GetBattlerHoldEffect(battlerAtk, TRUE);
+	
+	moveType = gMovesInfo[move].type;
+	
+	if (gMovesInfo[move].effect == EFFECT_WEATHER_BALL)
     {
         if (WEATHER_HAS_EFFECT)
         {
             if (gBattleWeather & B_WEATHER_RAIN && holdEffect != HOLD_EFFECT_UTILITY_UMBRELLA)
-                gBattleStruct->dynamicMoveType = TYPE_WATER | F_DYNAMIC_TYPE_SET;
+			{
+				if (gMovesInfo[move].argument == 1) // Boil Over
+					moveType = TYPE_FIRE;
+				else
+					moveType = TYPE_WATER;
+			}
             else if (gBattleWeather & B_WEATHER_SANDSTORM)
-                gBattleStruct->dynamicMoveType = TYPE_ROCK | F_DYNAMIC_TYPE_SET;
+			{
+				if (gMovesInfo[move].argument == 1)
+					moveType = TYPE_DRAGON;
+				else
+					moveType = TYPE_ROCK;
+			}
             else if (gBattleWeather & B_WEATHER_SUN && holdEffect != HOLD_EFFECT_UTILITY_UMBRELLA)
-                gBattleStruct->dynamicMoveType = TYPE_FIRE | F_DYNAMIC_TYPE_SET;
+			{
+				if (gMovesInfo[move].argument == 1)
+					moveType = TYPE_WATER;
+				else
+					moveType = TYPE_FIRE;
+			}
             else if (gBattleWeather & (B_WEATHER_HAIL |B_WEATHER_SNOW))
-                gBattleStruct->dynamicMoveType = TYPE_ICE | F_DYNAMIC_TYPE_SET;
+			{
+				if (gMovesInfo[move].argument == 1)
+					moveType = TYPE_DRAGON;
+				else
+					moveType = TYPE_ICE;
+			}
             else
-                gBattleStruct->dynamicMoveType = TYPE_NORMAL | F_DYNAMIC_TYPE_SET;
+			{
+                moveType = TYPE_NORMAL;
+			}
         }
     }
     else if (gMovesInfo[move].effect == EFFECT_HIDDEN_POWER)
     {
-        gBattleStruct->dynamicMoveType = GetHiddenPowerType(gBattleMons[battlerAtk].hpIV, gBattleMons[battlerAtk].attackIV, gBattleMons[battlerAtk].defenseIV,
+        moveType = GetHiddenPowerType(gBattleMons[battlerAtk].hpIV, gBattleMons[battlerAtk].attackIV, gBattleMons[battlerAtk].defenseIV,
 													gBattleMons[battlerAtk].speedIV, gBattleMons[battlerAtk].spAttackIV, gBattleMons[battlerAtk].spDefenseIV);
-        gBattleStruct->dynamicMoveType |= F_DYNAMIC_TYPE_IGNORE_PHYSICALITY | F_DYNAMIC_TYPE_SET;
     }
     else if (gMovesInfo[move].effect == EFFECT_CHANGE_TYPE_ON_ITEM && holdEffect == gMovesInfo[move].argument)
     {
-        gBattleStruct->dynamicMoveType = ItemId_GetSecondaryId(gBattleMons[battlerAtk].item) | F_DYNAMIC_TYPE_SET;
+        moveType = ItemId_GetSecondaryId(gBattleMons[battlerAtk].item);
     }
     else if (gMovesInfo[move].effect == EFFECT_REVELATION_DANCE)
     {
         if (gBattleMons[battlerAtk].type1 != TYPE_MYSTERY)
-            gBattleStruct->dynamicMoveType = gBattleMons[battlerAtk].type1 | F_DYNAMIC_TYPE_SET;
+            moveType = gBattleMons[battlerAtk].type1;
         else if (gBattleMons[battlerAtk].type2 != TYPE_MYSTERY)
-            gBattleStruct->dynamicMoveType = gBattleMons[battlerAtk].type2 | F_DYNAMIC_TYPE_SET;
+            moveType = gBattleMons[battlerAtk].type2;
         else if (gBattleMons[battlerAtk].type3 != TYPE_MYSTERY)
-            gBattleStruct->dynamicMoveType = gBattleMons[battlerAtk].type3 | F_DYNAMIC_TYPE_SET;
+            moveType = gBattleMons[battlerAtk].type3;
     }
     else if (gMovesInfo[move].effect == EFFECT_RAGING_BULL
             && (gBattleMons[battlerAtk].species == SPECIES_TAUROS_PALDEAN_COMBAT_BREED
              || gBattleMons[battlerAtk].species == SPECIES_TAUROS_PALDEAN_BLAZE_BREED
              || gBattleMons[battlerAtk].species == SPECIES_TAUROS_PALDEAN_AQUA_BREED))
     {
-            gBattleStruct->dynamicMoveType = gBattleMons[battlerAtk].type2 | F_DYNAMIC_TYPE_SET;
+            moveType = gBattleMons[battlerAtk].type2;
     }
     else if (gMovesInfo[move].effect == EFFECT_IVY_CUDGEL
             && (gBattleMons[battlerAtk].species == SPECIES_OGERPON_WELLSPRING_MASK || gBattleMons[battlerAtk].species == SPECIES_OGERPON_WELLSPRING_MASK_TERA
              || gBattleMons[battlerAtk].species == SPECIES_OGERPON_HEARTHFLAME_MASK || gBattleMons[battlerAtk].species == SPECIES_OGERPON_HEARTHFLAME_MASK_TERA
              || gBattleMons[battlerAtk].species == SPECIES_OGERPON_CORNERSTONE_MASK || gBattleMons[battlerAtk].species == SPECIES_OGERPON_CORNERSTONE_MASK_TERA ))
     {
-        gBattleStruct->dynamicMoveType = gBattleMons[battlerAtk].type2 | F_DYNAMIC_TYPE_SET;
+        moveType = gBattleMons[battlerAtk].type2;
     }
     else if (gMovesInfo[move].effect == EFFECT_NATURAL_GIFT)
     {
         if (ItemId_GetPocket(gBattleMons[battlerAtk].item) == POCKET_BERRIES)
-            gBattleStruct->dynamicMoveType = gNaturalGiftTable[ITEM_TO_BERRY(gBattleMons[battlerAtk].item)].type;
+            moveType = gNaturalGiftTable[ITEM_TO_BERRY(gBattleMons[battlerAtk].item)].type;
     }
     else if (gMovesInfo[move].effect == EFFECT_TERRAIN_PULSE)
     {
         if (IsBattlerTerrainAffected(battlerAtk, STATUS_FIELD_TERRAIN_ANY))
         {
             if (gFieldStatuses & STATUS_FIELD_ELECTRIC_TERRAIN)
-                gBattleStruct->dynamicMoveType = TYPE_ELECTRIC | F_DYNAMIC_TYPE_SET;
+                moveType = TYPE_ELECTRIC;
             else if (gFieldStatuses & STATUS_FIELD_GRASSY_TERRAIN)
-                gBattleStruct->dynamicMoveType = TYPE_GRASS | F_DYNAMIC_TYPE_SET;
+                moveType = TYPE_GRASS;
             else if (gFieldStatuses & STATUS_FIELD_MISTY_TERRAIN)
-                gBattleStruct->dynamicMoveType = TYPE_FAIRY | F_DYNAMIC_TYPE_SET;
+                moveType = TYPE_FAIRY;
             else if (gFieldStatuses & STATUS_FIELD_PSYCHIC_TERRAIN)
-                gBattleStruct->dynamicMoveType = TYPE_PSYCHIC | F_DYNAMIC_TYPE_SET;
+                moveType = TYPE_PSYCHIC;
             else //failsafe
-                gBattleStruct->dynamicMoveType = TYPE_NORMAL | F_DYNAMIC_TYPE_SET;
+                moveType = TYPE_NORMAL;
         }
     }
 
@@ -6119,7 +6135,7 @@ void SetTypeBeforeUsingMove(u32 move, u32 battlerAtk)
                 )
              )
     {
-        gBattleStruct->dynamicMoveType = ateType | F_DYNAMIC_TYPE_SET;
+        moveType = ateType;
         if (!IsDynamaxed(battlerAtk))
             gBattleStruct->ateBoost[battlerAtk] = 1;
     }
@@ -6128,23 +6144,42 @@ void SetTypeBeforeUsingMove(u32 move, u32 battlerAtk)
              && gMovesInfo[move].effect != EFFECT_WEATHER_BALL
              && attackerAbility == ABILITY_NORMALIZE)
     {
-        gBattleStruct->dynamicMoveType = TYPE_NORMAL | F_DYNAMIC_TYPE_SET;
+        moveType = TYPE_NORMAL;
         if (!IsDynamaxed(battlerAtk))
             gBattleStruct->ateBoost[battlerAtk] = 1;
     }
     else if (gMovesInfo[move].soundMove && attackerAbility == ABILITY_LIQUID_VOICE)
     {
-        gBattleStruct->dynamicMoveType = TYPE_WATER | F_DYNAMIC_TYPE_SET;
+        moveType = TYPE_WATER;
     }
     else if (gMovesInfo[move].effect == EFFECT_AURA_WHEEL && gBattleMons[battlerAtk].species == SPECIES_MORPEKO_HANGRY)
     {
-        gBattleStruct->dynamicMoveType = TYPE_DARK | F_DYNAMIC_TYPE_SET;
+        moveType = TYPE_DARK;
     }
 
-    GET_MOVE_TYPE(move, moveType);
     if ((gFieldStatuses & STATUS_FIELD_ION_DELUGE && moveType == TYPE_NORMAL)
         || gStatuses4[battlerAtk] & STATUS4_ELECTRIFIED)
-        gBattleStruct->dynamicMoveType = TYPE_ELECTRIC | F_DYNAMIC_TYPE_SET;
+        moveType = TYPE_ELECTRIC;
+		
+	return moveType;
+}
+
+void SetTypeBeforeUsingMove(u32 move, u32 battlerAtk)
+{
+    u32 moveType, ateType, attackerAbility;
+    u16 holdEffect = GetBattlerHoldEffect(battlerAtk, TRUE);
+
+    if (move == MOVE_STRUGGLE)
+        return;
+
+    gBattleStruct->dynamicMoveType = 0;
+    gBattleStruct->ateBoost[battlerAtk] = 0;
+    gSpecialStatuses[battlerAtk].gemBoost = FALSE;
+
+    moveType = GetDynamicMoveType(move, battlerAtk);
+	
+	if (moveType != gMovesInfo[move].type)
+		gBattleStruct->dynamicMoveType = moveType | F_DYNAMIC_TYPE_SET;
 
     // Check if a gem should activate.
     GET_MOVE_TYPE(move, moveType);

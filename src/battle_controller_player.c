@@ -6,6 +6,7 @@
 #include "battle_dome.h"
 #include "battle_interface.h"
 #include "battle_message.h"
+#include "battle_main.h"
 #include "battle_setup.h"
 #include "battle_tv.h"
 #include "battle_z_move.h"
@@ -1742,18 +1743,7 @@ static void MoveSelectionDisplayMoveTypeDoubles(u32 battler, u8 targetId)
     struct Pokemon *mon;
 	struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct*)(&gBattleResources->bufferA[battler][4]);
 	
-	if (moveInfo->moves[gMoveSelectionCursor[battler]] == MOVE_HIDDEN_POWER)
-		type = GetHiddenPowerType(gBattleMons[battler].hpIV, gBattleMons[battler].attackIV, gBattleMons[battler].defenseIV, gBattleMons[battler].speedIV, gBattleMons[battler].spAttackIV, gBattleMons[battler].spDefenseIV);
-	else if (moveInfo->moves[gMoveSelectionCursor[battler]] == MOVE_IVY_CUDGEL)
-    {
-        mon = &GetSideParty(GetBattlerSide(battler))[gBattlerPartyIndexes[battler]];
-        itemId = GetMonData(mon, MON_DATA_HELD_ITEM);
-
-		// Add proper ivy cudgel handling if you care
-		type = gMovesInfo[MOVE_IVY_CUDGEL].type;
-    }
-	else
-		type = gMovesInfo[moveInfo->moves[gMoveSelectionCursor[battler]]].type;
+	type = GetDynamicMoveType(moveInfo->moves[gMoveSelectionCursor[battler]], battler);
 
 	txtPtr = StringCopy(gDisplayedStringBattle, gText_MoveInterfaceType);
 	txtPtr[0] = EXT_CTRL_CODE_BEGIN;
@@ -1776,17 +1766,7 @@ static void MoveSelectionDisplayMoveType(u32 battler)
     struct Pokemon *mon;
     struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleResources->bufferA[battler][4]);
 	
-	if (moveInfo->moves[gMoveSelectionCursor[battler]] == MOVE_HIDDEN_POWER)
-		type = GetHiddenPowerType(gBattleMons[battler].hpIV, gBattleMons[battler].attackIV, gBattleMons[battler].defenseIV, gBattleMons[battler].speedIV, gBattleMons[battler].spAttackIV, gBattleMons[battler].spDefenseIV);
-	else if (moveInfo->moves[gMoveSelectionCursor[battler]] == MOVE_IVY_CUDGEL)
-    {
-        mon = &GetSideParty(GetBattlerSide(battler))[gBattlerPartyIndexes[battler]];
-        itemId = GetMonData(mon, MON_DATA_HELD_ITEM);
-		// Add proper ivy cudgel handling if you care
-        type = gMovesInfo[MOVE_IVY_CUDGEL].type;
-    }
-	else
-		type = gMovesInfo[moveInfo->moves[gMoveSelectionCursor[battler]]].type;
+	type = GetDynamicMoveType(moveInfo->moves[gMoveSelectionCursor[battler]], battler);
 
 	if (IsDoubleBattle())
 		textPalette = B_WIN_MOVE_TYPE;

@@ -3599,7 +3599,7 @@ u8 AtkCanceller_UnableToUseMove(u32 moveType)
                 gMultiHitCounter = 0;
             }
 			
-			if ((gStatuses4[gBattlerAttacker] & STATUS4_BEAST_EYE) != 0 && gMovesInfo[gCurrentMove].effect != MOVE_BEAST_EYE
+			if ((gStatuses4[gBattlerAttacker] & STATUS4_BEAST_EYE) != 0 && gMovesInfo[gCurrentMove].effect != EFFECT_BEAST_EYE
 				&& gMovesInfo[gCurrentMove].effect != EFFECT_BATON_PASS) // stacks are not consumed by Beast Eye and are passed by Baton Pass
 			{
 				if (gMultiHitCounter == 0)

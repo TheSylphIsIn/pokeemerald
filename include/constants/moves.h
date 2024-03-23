@@ -941,8 +941,13 @@
 #define MOVE_REND 877 // dragon hex
 #define MOVE_TANTRUM 878 // fairy facade
 #define MOVE_GEM_SPARK 879 // mid rock special move
-#define MOVE_DRAGON_EYE 880 // special hone claws
+	#define MOVE_DRAGON_EYE 880 // special hone claws
 #define MOVE_BEAST_EYE 881 // beast eye
+
+/*Concepts
+ * Dynamo Beam: Move that changes type depending on what move slot it's in (Normal / Ghost / Ice / Electric)
+ * 
+*/
 
 #define MOVES_COUNT_FANGANDO 882
 

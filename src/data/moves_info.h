@@ -4109,7 +4109,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
             "Kicks the foe 3 times in a\n"
             "row with rising intensity."),
         .effect = EFFECT_TRIPLE_KICK,
-        .power = 10,
+        .power = 20,
         .type = TYPE_FIGHTING,
         .accuracy = 90,
         .pp = 10,
@@ -19819,6 +19819,579 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
             .moveEffect = MOVE_EFFECT_PARALYSIS,
             .chance = 30,
         }),
+		.makesContact = TRUE,
+    },
+
+    [MOVE_BRAMBLE] =
+    {
+        .name = COMPOUND_STRING("Bramble"),
+        .description = COMPOUND_STRING(
+            "Thorny vines erupt from\n"
+			"below. May poison."),
+        .effect = EFFECT_HIT,
+        .power = 85,
+        .type = TYPE_GRASS,
+        .accuracy = 100,
+        .pp = 15,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_POISON,
+            .chance = 20,
+        }),
+    },
+
+    [MOVE_TWINKLE_POP] =
+    {
+        .name = COMPOUND_STRING("Twinkle Pop"),
+        .description = COMPOUND_STRING(
+            "A magic smack that copies\n"
+			"target's stat changes."),
+        .effect = EFFECT_PSYCH_UP_HIT,
+        .power = 55,
+        .type = TYPE_FAIRY,
+        .accuracy = 100,
+        .pp = 20,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+		.makesContact = TRUE,
+    },
+
+    [MOVE_STAR_PUNCH] =
+    {
+        .name = COMPOUND_STRING("Star Punch"),
+        .description = COMPOUND_STRING(
+            "A stunning supercharged\n"
+			"punch attack."),
+        .effect = EFFECT_HIT,
+        .power = 90,
+        .type = TYPE_FAIRY,
+        .accuracy = 100,
+        .pp = 10,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_FLINCH,
+            .chance = 10,
+        }),
+		.makesContact = TRUE,
+		.punchingMove = TRUE,
+    },
+
+    [MOVE_FAIRY_LIGHT] =
+    {
+        .name = COMPOUND_STRING("Fairy Light"),
+        .description = COMPOUND_STRING(
+            "A mystifying display\n"
+			"which lowers Sp. Atk."),
+        .effect = EFFECT_SPECIAL_ATTACK_DOWN,
+        .power = 0,
+        .type = TYPE_FAIRY,
+        .accuracy = 0,
+        .pp = 40,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_STATUS,
+		.magicCoatAffected = TRUE,
+    },
+
+    [MOVE_SPIRE] =
+    {
+        .name = COMPOUND_STRING("Spire"),
+        .description = COMPOUND_STRING(
+            "Attacks the foe with\n"
+			"a large, sharp rock."),
+        .effect = EFFECT_HIT,
+        .power = 80,
+        .type = TYPE_ROCK,
+        .accuracy = 100,
+        .pp = 15,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+    },
+
+    [MOVE_FOCUS_RUSH] =
+    {
+        .name = COMPOUND_STRING("Focus Rush"),
+        .description = COMPOUND_STRING(
+            "Analyzes the foe's\n"
+			"movements, then strikes."),
+        .effect = EFFECT_HIT,
+        .power = 100,
+        .type = TYPE_PSYCHIC,
+        .accuracy = 0,
+        .pp = 10,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = -1,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+		.makesContact = TRUE,
+    },
+
+    [MOVE_SHADOW_STALK] =
+    {
+        .name = COMPOUND_STRING("Shadow Stalk"),
+        .description = COMPOUND_STRING(
+            "Lunges from the foe's\n"
+			"shadow to attack."),
+        .effect = EFFECT_HIT,
+        .power = 85,
+        .type = TYPE_GHOST,
+        .accuracy = 95,
+        .pp = 15,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+		.makesContact = TRUE,
+    },
+
+    [MOVE_AURA_WAVE] =
+    {
+        .name = COMPOUND_STRING("Aura Wave"),
+        .description = COMPOUND_STRING(
+            "Blasts the foe with a\n"
+			"wave of life energy."),
+        .effect = EFFECT_HIT,
+        .power = 60,
+        .type = TYPE_FIGHTING,
+        .accuracy = 100,
+        .pp = 25,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+		.additionalEffects = ADDITIONAL_EFFECTS({
+			.moveEffect = MOVE_EFFECT_SP_ATK_PLUS_1,
+            .self = TRUE,
+            .chance = 10,
+		}),
+    },
+
+    [MOVE_COLD_SNAP] =
+    {
+        .name = COMPOUND_STRING("Cold Snap"),
+        .description = COMPOUND_STRING(
+            "A sudden chill that\n"
+			"gives the foe Frostbite."),
+        .effect = EFFECT_FREEZE,
+        .power = 0,
+        .type = TYPE_ICE,
+        .accuracy = 85,
+        .pp = 15,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_STATUS,
+		.magicCoatAffected = TRUE,
+    },
+
+    [MOVE_TOMBSTONER] =
+    {
+        .name = COMPOUND_STRING("Tombstoner"),
+        .description = COMPOUND_STRING(
+            "Crushes the foe with\n"
+			"a cave-in."),
+        .effect = EFFECT_HIT,
+        .power = 130,
+        .type = TYPE_ROCK,
+        .accuracy = 80,
+        .pp = 5,
+        .target = MOVE_TARGET_SELECTED,
+		.criticalHitStage = 1,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+    },
+
+    [MOVE_GASLIGHT] =
+    {
+        .name = COMPOUND_STRING("Gaslight"),
+        .description = COMPOUND_STRING(
+            "Tricks the foe into\n"
+			"having a status problem."),
+        .effect = EFFECT_GASLIGHT,
+        .power = 0,
+        .type = TYPE_PSYCHIC,
+        .accuracy = 90,
+        .pp = 15,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_STATUS,
+		.ignoresProtect = TRUE,
+    },
+
+    [MOVE_SCALE_PIERCE] =
+    {
+        .name = COMPOUND_STRING("Scale Pierce"),
+        .description = COMPOUND_STRING(
+            "Super Effective on\n."
+			"Dragon type targets."),
+        .effect = EFFECT_SE_ON_ARG_TYPE,
+		.argument = TYPE_DRAGON,
+        .power = 80,
+        .type = TYPE_FIGHTING,
+        .accuracy = 100,
+        .pp = 15,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+		.makesContact = TRUE,
+    },
+
+    [MOVE_HARPOON_LASH] =
+    {
+        .name = COMPOUND_STRING("Harpoon Lash"),
+        .description = COMPOUND_STRING(
+            "Super Effective on\n"
+			"Flying type targets."),
+        .effect = EFFECT_SE_ON_ARG_TYPE,
+		.argument = TYPE_FLYING,
+        .power = 80,
+        .type = TYPE_DRAGON,
+        .accuracy = 100,
+        .pp = 15,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+		.makesContact = TRUE,
+    },
+
+    [MOVE_LIGHTNING] =
+    {
+        .name = COMPOUND_STRING("Lightning"),
+        .description = COMPOUND_STRING(
+            "Super Effective on\n"
+			"Grass type targets."),
+        .effect = EFFECT_SE_ON_ARG_TYPE,
+		.argument = TYPE_GRASS,
+        .power = 80,
+        .type = TYPE_ELECTRIC,
+        .accuracy = 100,
+        .pp = 15,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+    },
+
+    [MOVE_BUZZ_BLITZ] =
+    {
+        .name = COMPOUND_STRING("Buzz Blitz"),
+        .description = COMPOUND_STRING(
+            "An all-out sound attack\n"
+			"that hurts user's wings."),
+        .effect = EFFECT_HIT,
+        .power = 120,
+        .type = TYPE_BUG,
+        .accuracy = 100,
+		.recoil = 33,
+        .pp = 10,
+        .target = MOVE_TARGET_BOTH,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+    },
+
+    [MOVE_INFERNO_RAY] =
+    {
+        .name = COMPOUND_STRING("Inferno Ray"),
+        .description = COMPOUND_STRING(
+            "Fires 3 rays that get\n"
+			"successively stronger."),
+        .effect = EFFECT_TRIPLE_KICK,
+        .power = 20,
+        .type = TYPE_FIRE,
+        .accuracy = 90,
+        .pp = 10,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+    },
+
+    [MOVE_BOIL_OVER] =
+    {
+        .name = COMPOUND_STRING("Boil Over"),
+        .description = COMPOUND_STRING(
+            "A raging tantrum which\n"
+			"changes type in weather."),
+        .effect = EFFECT_WEATHER_BALL,
+        .power = 80,
+		.argument = 1,
+        .type = TYPE_NORMAL,
+        .accuracy = 100,
+        .pp = 10,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+		.makesContact = TRUE,
+    },
+
+    [MOVE_CHILL_TOUCH] =
+    {
+        .name = COMPOUND_STRING("Chill Touch"),
+        .description = COMPOUND_STRING(
+            "\n"
+			""),
+        .effect = EFFECT_HIT,
+        .power = 60,
+        .type = TYPE_GHOST,
+        .accuracy = 100,
+        .pp = 20,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+		.makesContact = TRUE,
+		.additionalEffects = ADDITIONAL_EFFECTS({
+			.moveEffect = MOVE_EFFECT_GASLIGHT,
+			.chance = 30,
+		}),
+    },
+
+    [MOVE_LIMBER_UP] =
+    {
+        .name = COMPOUND_STRING("Limber Up"),
+        .description = COMPOUND_STRING(
+            "Stretches and relaxes to\n"
+			"restore HP and up Speed."),
+        .effect = EFFECT_LIMBER_UP,
+        .power = 0,
+        .type = TYPE_FIGHTING,
+        .accuracy = 0,
+        .pp = 20,
+        .target = MOVE_TARGET_USER,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_STATUS,
+		.snatchAffected = TRUE,
+    },
+
+    [MOVE_SHEAR_WIND] =
+    {
+        .name = COMPOUND_STRING("Shear Wind"),
+        .description = COMPOUND_STRING(
+            "A blast of wind strong\n"
+			"enough to cause cuts."),
+        .effect = EFFECT_HIT,
+        .power = 100,
+        .type = TYPE_FLYING,
+        .accuracy = 85,
+        .pp = 10,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+		.criticalHitStage = 1,
+        .category = DAMAGE_CATEGORY_DYNAMIC,
+		.slicingMove = TRUE,
+		.windMove = TRUE,
+    },
+
+    [MOVE_WASH_OFF] =
+    {
+        .name = COMPOUND_STRING("Wash Off"),
+        .description = COMPOUND_STRING(
+            "Washes away the target's\n"
+			"stat changes."),
+        .effect = EFFECT_HIT,
+        .power = 50,
+        .type = TYPE_WATER,
+        .accuracy = 90,
+        .pp = 30,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_DYNAMIC,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_CLEAR_SMOG,
+        }),
+    },
+
+    [MOVE_WHITEWATER] =
+    {
+        .name = COMPOUND_STRING("Whitewater"),
+        .description = COMPOUND_STRING(
+            "Crushes the foe with\n"
+			"rushing water."),
+        .effect = EFFECT_HIT,
+        .power = 110,
+        .type = TYPE_WATER,
+        .accuracy = 85,
+        .pp = 10,
+        .target = MOVE_TARGET_BOTH,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+    },
+
+    [MOVE_BLACKOUT] =
+    {
+        .name = COMPOUND_STRING("Blackout"),
+        .description = COMPOUND_STRING(
+            "Traps foe with illusions.\n"
+			"Hits with Sp. Def."),
+        .effect = EFFECT_BODY_PRESS,
+        .power = 80,
+        .type = TYPE_GHOST,
+        .accuracy = 100,
+        .pp = 10,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+    },
+
+    [MOVE_BLADE_STORM] =
+    {
+        .name = COMPOUND_STRING("Blade Storm"),
+        .description = COMPOUND_STRING(
+            "Strikes the foe with a\n"
+			"whirl of cutting power."),
+        .effect = EFFECT_HIT,
+        .power = 120,
+        .type = TYPE_STEEL,
+        .accuracy = 80,
+        .pp = 5,
+        .target = MOVE_TARGET_BOTH,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_DYNAMIC,
+		.slicingMove = TRUE,
+    },
+
+    [MOVE_FUMUGATE] =
+    {
+        .name = COMPOUND_STRING("Fumugate"),
+        .description = COMPOUND_STRING(
+            "Blankets the field in\n"
+			"deadly gases."),
+        .effect = EFFECT_HIT,
+        .power = 120,
+        .type = TYPE_POISON,
+        .accuracy = 85,
+        .pp = 5,
+        .target = MOVE_TARGET_FOES_AND_ALLY,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+    },
+
+    [MOVE_FADE_AWAY] =
+    {
+        .name = COMPOUND_STRING("Fade Away"),
+        .description = COMPOUND_STRING(
+            "Fades into shadow and\n"
+			"switches the user out."),
+        .effect = EFFECT_TELEPORT,
+        .power = 0,
+        .type = TYPE_GHOST,
+        .accuracy = 0,
+        .pp = 20,
+        .target = MOVE_TARGET_USER,
+        .priority = -6,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .zMove = { .effect = Z_EFFECT_RECOVER_HP },
+        .ignoresProtect = TRUE,
+        .mirrorMoveBanned = TRUE,
+    },
+
+    [MOVE_HORRIFY] =
+    {
+        .name = COMPOUND_STRING("Horrify"),
+        .description = COMPOUND_STRING(
+            "A frightening display.\n"
+			"May cause flinching."),
+        .effect = EFFECT_HIT,
+        .power = 60,
+        .type = TYPE_GHOST,
+        .accuracy = 100,
+        .pp = 25,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_DYNAMIC,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_FLINCH,
+            .chance = 20,
+        }),
+    },
+
+    [MOVE_MAGIC_BURST] =
+    {
+        .name = COMPOUND_STRING("Magic Burst"),
+        .description = COMPOUND_STRING(
+            "A blast of magic. Harshly\n"
+			"lowers user's Sp. Atk."),
+        .effect = EFFECT_HIT,
+        .power = 130 ,
+        .type = TYPE_FAIRY,
+        .accuracy = 90,
+        .pp = 5,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_SP_ATK_TWO_DOWN,
+            .self = TRUE,
+        }),
+    },
+
+    [MOVE_REND] =
+    {
+        .name = COMPOUND_STRING("Rend"),
+        .description = COMPOUND_STRING(
+            "Does double damage if the\n"
+            "foe has a status problem."),
+        .effect = EFFECT_DOUBLE_POWER_ON_ARG_STATUS,
+        .power = 65,
+        .type = TYPE_DRAGON,
+        .accuracy = 100,
+        .pp = 10,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .zMove = { .powerOverride = 160 },
+        .argument = STATUS1_ANY,
+    },
+
+    [MOVE_TANTRUM] =
+    {
+        .name = COMPOUND_STRING("Tantrum"),
+        .description = COMPOUND_STRING(
+            "User throws a fit.\n"
+			"Stronger when suffering."),
+        .effect = EFFECT_FACADE,
+        .power = 65,
+        .type = TYPE_FAIRY,
+        .accuracy = 100,
+        .pp = 20,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_DYNAMIC,
+        .makesContact = TRUE,
+    },
+
+    [MOVE_GEM_SPARK] =
+    {
+        .name = COMPOUND_STRING("Gem Spark"),
+        .description = COMPOUND_STRING(
+            "Flashes crystal energy\n"
+			"to deal damage."),
+        .effect = EFFECT_HIT,
+        .power = 60,
+        .type = TYPE_ROCK,
+        .accuracy = 0,
+        .pp = 25,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+    },
+
+    [MOVE_DRAGON_EYE] =
+    {
+        .name = COMPOUND_STRING("Dragon Eye"),
+        .description = COMPOUND_STRING(
+            "A calculating glare.\n"
+			"Ups Sp. Atk and Acc."),
+        .effect = EFFECT_SPECIAL_ATTACK_ACCURACY_UP,
+        .power = 0,
+        .type = TYPE_DRAGON,
+        .accuracy = 0,
+        .pp = 15,
+        .target = MOVE_TARGET_USER,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .snatchAffected = TRUE,
+        .ignoresProtect = TRUE,
+        .mirrorMoveBanned = TRUE,
     },
 
     [MOVE_BEAST_EYE] =

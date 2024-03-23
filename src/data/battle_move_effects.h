@@ -2230,6 +2230,39 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleTvScore = 0, // TODO: Assign points
         .encourageEncore = TRUE,
     },
+
+    [EFFECT_LIMBER_UP] =
+    {
+        .battleScript = BattleScript_EffectLimberUp,
+        .battleTvScore = 0, // TODO: Assign points
+    },
+	
+	[EFFECT_FREEZE] =
+    {
+        .battleScript = BattleScript_EffectFreeze,
+        .battleTvScore = 0, // TODO: Assign points
+        .encourageEncore = TRUE,
+    },
+	
+	[EFFECT_GASLIGHT] =
+    {
+        .battleScript = BattleScript_EffectGaslight,
+        .battleTvScore = 0, // TODO: Assign points
+        .encourageEncore = TRUE,
+    },
+	
+	[EFFECT_PSYCH_UP_HIT] = 
+	{
+		.battleScript = BattleScript_EffectPsychUpHit,
+		.battleTvScore = 1,
+	},
+	
+	[EFFECT_SPECIAL_ATTACK_ACCURACY_UP] = 
+	{
+		.battleScript = BattleScript_EffectSpAtkAccUp,
+		.battleTvScore = 1,
+		.encourageEncore = TRUE,
+	},
 	
 	[EFFECT_BEAST_EYE] =
 	{

@@ -833,6 +833,11 @@ extern const u8 BattleScript_EffectFilletAway[];
 extern const u8 BattleScript_EffectShedTail[];
 extern const u8 BattleScript_EffectUpperHand[];
 extern const u8 BattleScript_EffectTidyUp[];
+extern const u8 BattleScript_EffectFreeze[];
+extern const u8 BattleScript_EffectLimberUp[];
+extern const u8 BattleScript_EffectGaslight[];
+extern const u8 BattleScript_EffectPsychUpHit[];
+extern const u8 BattleScript_EffectSpAtkAccUp[];
 extern const u8 BattleScript_EffectBeastEye[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

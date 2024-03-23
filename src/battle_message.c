@@ -853,9 +853,11 @@ static const u8 sText_SupersweetAromaWafts[] = _("A supersweet aroma is wafting 
 static const u8 sText_TidyingUpComplete[] = _("Tidying up complete!");
 static const u8 sText_PkmnIsGettingWild[] = _("{B_ATK_NAME_WITH_PREFIX} is\ngetting wild!");
 static const u8 sText_BeastEyeMax[] = _("{B_ATK_NAME_WITH_PREFIX} can't\nget any wilder!");
+static const u8 sText_PkmnAlreadyFrozen[] = _("{B_DEF_NAME_WITH_PREFIX} is\nalready frostbitten!");
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
+	[STRINGID_PKMNALREADYFROZEN - BATTLESTRINGS_TABLE_START] = sText_PkmnAlreadyFrozen,
 	[STRINGID_BEASTEYEMAX - BATTLESTRINGS_TABLE_START] = sText_BeastEyeMax,
 	[STRINGID_PKMNISGETTINGWILD - BATTLESTRINGS_TABLE_START] = sText_PkmnIsGettingWild,
     [STRINGID_TIDYINGUPCOMPLETE - BATTLESTRINGS_TABLE_START] = sText_TidyingUpComplete,

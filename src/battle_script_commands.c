@@ -3269,8 +3269,16 @@ void SetMoveEffect(bool32 primary, bool32 certain)
                 }
                 else
                 {
-                    gBattleCommunication[MOVE_EFFECT_BYTE] = Random() % 5 + 1;
-                    SetMoveEffect(FALSE, 0);
+					static const u8 sGaslightEffects[] =
+					{
+						MOVE_EFFECT_BURN,
+						MOVE_EFFECT_FROSTBITE,
+						MOVE_EFFECT_PARALYSIS,
+						MOVE_EFFECT_POISON,
+						MOVE_EFFECT_SLEEP
+					};
+                    gBattleScripting.moveEffect = RandomElement(RNG_SECONDARY_EFFECT, sGaslightEffects);
+                    SetMoveEffect(primary, certain);
                 }
                 break;
             case MOVE_EFFECT_CHARGING:

@@ -1074,7 +1074,7 @@ BattleScript_EffectAllySwitch::
 	allyswitchfailchance BattleScript_ButItFailed
 	attackanimation
 	waitanimation
-	@ The actual data/gfx swap happens in the move animation. Here it's just the gBattlerAttacker / scripting battler change
+	@ The actual data/gfx swap happens in the move animation. Here its just the gBattlerAttacker / scripting battler change
 	allyswitchswapbattlers
 	printstring STRINGID_ALLYSWITCHPOSITION
 	waitmessage B_WAIT_TIME_LONG
@@ -2200,6 +2200,24 @@ BattleScript_AttackAccUpTrySpDef::
 	waitmessage B_WAIT_TIME_LONG
 BattleScript_AttackAccUpEnd:
 	goto BattleScript_MoveEnd
+	
+BattleScript_EffectSpAtkAccUp::
+	attackcanceler
+	attackstring
+	ppreduce
+	jumpifstat BS_ATTACKER, CMP_LESS_THAN, STAT_SPATK, MAX_STAT_STAGE, BattleScript_SpAtkAccUpDoMoveAnim
+	jumpifstat BS_ATTACKER, CMP_EQUAL, STAT_ACC, MAX_STAT_STAGE, BattleScript_CantRaiseMultipleStats
+BattleScript_SpAtkAccUpDoMoveAnim::
+	attackanimation
+	waitanimation
+	setbyte sSTAT_ANIM_PLAYED, FALSE
+	playstatchangeanimation BS_ATTACKER, BIT_SPATK | BIT_SPDEF, 0
+	setstatchanger STAT_SPATK, 1, FALSE
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_CHANGE_ALLOW_PTR, BattleScript_AttackAccUpTrySpDef
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_INCREASE, BattleScript_AttackAccUpTrySpDef
+	printfromtable gStatUpStringIds
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_AttackAccUpTrySpDef
 
 BattleScript_EffectMistyTerrain::
 BattleScript_EffectGrassyTerrain::
@@ -2942,6 +2960,14 @@ BattleScript_AlreadyAsleep::
 	orhalfword gMoveResultFlags, MOVE_RESULT_FAILED
 	goto BattleScript_MoveEnd
 
+BattleScript_AlreadyFrozen::
+	setalreadystatusedmoveattempt BS_ATTACKER
+	pause B_WAIT_TIME_SHORT
+	printstring STRINGID_PKMNALREADYFROZEN
+	waitmessage B_WAIT_TIME_LONG
+	orhalfword gMoveResultFlags, MOVE_RESULT_FAILED
+	goto BattleScript_MoveEnd
+
 BattleScript_WasntAffected::
 	pause B_WAIT_TIME_SHORT
 	printstring STRINGID_PKMNWASNTAFFECTED
@@ -3510,7 +3536,7 @@ BattleScript_MoveMissedDoDamage::
 .if B_CRASH_IF_TARGET_IMMUNE < GEN_4
 	jumpifhalfword CMP_COMMON_BITS, gMoveResultFlags, MOVE_RESULT_DOESNT_AFFECT_FOE, BattleScript_MoveEnd
 .endif
-	moveendcase MOVEEND_PROTECT_LIKE_EFFECT @ Spiky Shield's damage happens before recoil.'
+	moveendcase MOVEEND_PROTECT_LIKE_EFFECT @ Spiky Shields damage happens before recoil.
 	jumpifhasnohp BS_ATTACKER, BattleScript_MoveEnd
 	printstring STRINGID_PKMNCRASHED
 	waitmessage B_WAIT_TIME_LONG
@@ -4597,6 +4623,21 @@ BattleScript_EffectBellyDrum::
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
+BattleScript_EffectPsychUpHit::
+	attackcanceler
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	attackstring
+	ppreduce
+	critcalc
+	damagecalc 
+	adjustdamage
+	call BattleScript_Hit_RetFromAtkAnimation
+	copyfoestats BattleScript_ButItFailed
+	printstring STRINGID_PKMNCOPIEDSTATCHANGES
+	waitmessage B_WAIT_TIME_LONG
+	tryfaintmon BS_TARGET
+	goto BattleScript_MoveEnd
+
 BattleScript_EffectPsychUp::
 	attackcanceler
 	attackstring
@@ -4975,7 +5016,7 @@ BattleScript_EffectMementoPrintNoEffect:
 	printstring STRINGID_BUTNOEFFECT
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_EffectMementoTryFaint
-@ If the target is protected there's no need to check the target's stats or animate, the user will just faint
+@ If the target is protected theres no need to check the targets stats or animate, the user will just faint
 BattleScript_MementoTargetProtect:
 	attackstring
 	ppreduce
@@ -5477,51 +5518,39 @@ BattleScript_EffectFreeze::
 	attackcanceler
 	attackstring
 	ppreduce
-	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_ButItFailed
+	jumpifsubstituteblocks BattleScript_ButItFailed
+	jumpifstatus BS_TARGET, STATUS1_SLEEP, BattleScript_AlreadyFrozen
+	jumpifability BS_TARGET, ABILITY_MAGMA_ARMOR, BattleScript_AbilityProtectsDoesntAffect
+	jumpifability BS_TARGET, ABILITY_COMATOSE, BattleScript_AbilityProtectsDoesntAffect
+	jumpifability BS_TARGET, ABILITY_PURIFYING_SALT, BattleScript_AbilityProtectsDoesntAffect
+	jumpifflowerveil BattleScript_FlowerVeilProtects
+	jumpifability BS_TARGET_SIDE, ABILITY_SWEET_VEIL, BattleScript_SweetVeilProtects
+	jumpifleafguardprotected BS_TARGET, BattleScript_AbilityProtectsDoesntAffect
+	jumpifshieldsdown BS_TARGET, BattleScript_AbilityProtectsDoesntAffect
+	jumpifstatus BS_TARGET, STATUS1_ANY, BattleScript_ButItFailed
+	jumpifterrainaffected BS_TARGET, STATUS_FIELD_MISTY_TERRAIN, BattleScript_MistyTerrainPrevents
 	jumpiftype BS_TARGET, TYPE_ICE, BattleScript_NotAffected
 	jumpiftype BS_TARGET, TYPE_FIRE, BattleScript_NotAffected
-	jumpifability BS_TARGET, ABILITY_MAGMA_ARMOR, BattleScript_PrintBattlerAbilityMadeIneffective
-	jumpifability BS_TARGET, ABILITY_SHIELDS_DOWN, BattleScript_PrintBattlerAbilityMadeIneffective
-	jumpifstatus BS_TARGET, STATUS1_ANY, BattleScript_ButItFailed
 	accuracycheck BattleScript_ButItFailed, ACC_CURR_MOVE
-	jumpifsideaffecting BS_TARGET, SIDE_STATUS_SAFEGUARD, BattleScript_SafeguardProtected
+	jumpifsafeguard BattleScript_SafeguardProtected
 	attackanimation
 	waitanimation
-	setmoveeffect MOVE_EFFECT_FREEZE
-	seteffectprimary
-	resultmessage
-	waitmessage B_WAIT_TIME_LONG
+	seteffectprimary MOVE_EFFECT_FROSTBITE
 	goto BattleScript_MoveEnd
 
-BattleScript_EffectGaslight::
+BattleScript_EffectGaslight:: @ gaslight bypasses status protection. Im calling this a feature.
 	attackcanceler
 	attackstring
 	ppreduce
-	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_ButItFailed
+	jumpifsubstituteblocks BattleScript_ButItFailed
 	jumpifstatus BS_TARGET, STATUS1_ANY, BattleScript_EffectConfuse
+	jumpifsafeguard BattleScript_SafeguardProtected
 	accuracycheck BattleScript_ButItFailed, ACC_CURR_MOVE
-	jumpifsideaffecting BS_TARGET, SIDE_STATUS_SAFEGUARD, BattleScript_SafeguardProtected
 	attackanimation
 	waitanimation
 	setmoveeffect MOVE_EFFECT_GASLIGHT
 	seteffectprimary
 	goto BattleScript_MoveEnd
-
-BattleScript_EffectScalePierce::
-	setmoveeffect MOVE_EFFECT_FLINCH
-	goto BattleScript_EffectHit
-	
-BattleScript_EffectHarpoonLash::
-	setmoveeffect MOVE_EFFECT_SPD_MINUS_1
-	goto BattleScript_EffectHit
-	
-BattleScript_EffectLightning::
-	setmoveeffect MOVE_EFFECT_SP_DEF_MINUS_1
-	goto BattleScript_EffectHit
-
-BattleScript_EffectGaslightHit::
-	setmoveeffect MOVE_EFFECT_GASLIGHT
-	goto BattleScript_EffectHit
 	
 BattleScript_EffectLimberUp::
 	attackcanceler 
@@ -5559,32 +5588,6 @@ BattleScript_LimberUpCheckSpeed:: @ if HP and speed are both capped, display fai
 BattleScript_EffectSpecialDefenseDown2Hit::
 	setmoveeffect MOVE_EFFECT_SP_DEF_MINUS_2
 	goto BattleScript_EffectHit
-	
-BattleScript_EffectPsychUpHit::
-	attackcanceler
-	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
-	attackstring
-	ppreduce
-	critcalc
-	damagecalc
-	adjustdamage
-	attackanimation
-	waitanimation
-	effectivenesssound
-	hitanimation BS_TARGET
-	waitstate
-	healthbarupdate BS_TARGET
-	datahpupdate BS_TARGET
-	critmessage
-	waitmessage B_WAIT_TIME_LONG
-	resultmessage
-	waitmessage B_WAIT_TIME_LONG
-	copyfoestats BattleScript_PsychUpHitSkipMessage
-	printstring STRINGID_PKMNCOPIEDSTATCHANGES
-	waitmessage B_WAIT_TIME_LONG
-BattleScript_PsychUpHitSkipMessage::
-	tryfaintmon BS_TARGET
-	goto BattleScript_MoveEnd
 
 BattleScript_FaintAttacker::
 	tryillusionoff BS_ATTACKER
@@ -7714,7 +7717,7 @@ BattleScript_SpeedBoostActivates::
 BattleScript_SpeedBoostActivatesEnd:
 	end3
 
-@ Can't compare directly to a value, have to compare to value at pointer
+@ Cant compare directly to a value, have to compare to value at pointer
 sZero:
 .byte 0
 
@@ -8508,7 +8511,7 @@ BattleScript_WeakArmorActivates::
 	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_FELL_EMPTY, BattleScript_WeakArmorActivatesSpeed
 	pause B_WAIT_TIME_SHORTEST
 	printfromtable gStatDownStringIds
-	bichalfword gMoveResultFlags, MOVE_RESULT_MISSED @ Set by statbuffchange when stat can't be decreased
+	bichalfword gMoveResultFlags, MOVE_RESULT_MISSED @ Set by statbuffchange when stat cant be decreased
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_WeakArmorActivatesSpeed
 BattleScript_WeakArmorDefAnim:
@@ -8636,7 +8639,7 @@ BattleScript_RoughSkinActivates::
 	return
 
 BattleScript_RockyHelmetActivates::
-	@ don't play the animation for a fainted mon'
+	@ dont play the animation for a fainted mon
 	jumpifabsent BS_TARGET, BattleScript_RockyHelmetActivatesDmg
 	playanimation BS_TARGET, B_ANIM_HELD_ITEM_EFFECT
 	waitanimation
