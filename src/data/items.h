@@ -11812,13 +11812,13 @@ const struct Item gItemsInfo[] =
         .name = _("Teachy TV"),
         .price = 0,
         .description = COMPOUND_STRING(
-            "A TV set tuned to\n"
-            "an advice program\n"
-            "for Trainers."),
+            "A TV set to play\n"
+            "move-teaching\n"
+            "discs and tapes."),
         .importance = 1,
         .pocket = POCKET_KEY_ITEMS,
-        .type = ITEM_USE_FIELD,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .type = ITEM_USE_PBLOCK_CASE,
+        .fieldUseFunc = ItemUseOutOfBattle_TeachyTV,
     },
 
 // Story Key Items

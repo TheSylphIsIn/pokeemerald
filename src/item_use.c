@@ -39,6 +39,7 @@
 #include "task.h"
 #include "text.h"
 #include "vs_seeker.h"
+#include "teachy_tv.h"
 #include "constants/event_bg.h"
 #include "constants/event_objects.h"
 #include "constants/item_effects.h"
@@ -58,6 +59,7 @@ static u8 GetDirectionToHiddenItem(s16, s16);
 static void PlayerFaceHiddenItem(u8);
 static void CheckForHiddenItemsInMapConnection(u8);
 static void Task_OpenRegisteredPokeblockCase(u8);
+static void Task_OpenRegisteredTeachyTV(u8);
 static void Task_AccessPokemonBoxLink(u8);
 static void ItemUseOnFieldCB_Bike(u8);
 static void ItemUseOnFieldCB_Rod(u8);
@@ -77,6 +79,7 @@ static void Task_UseLure(u8 taskId);
 static void Task_CloseCantUseKeyItemMessage(u8);
 static void SetDistanceOfClosestHiddenItem(u8, s16, s16);
 static void CB2_OpenPokeblockFromBag(void);
+static void CB2_OpenTeachyTVFromBag(void);
 static void ItemUseOnFieldCB_Honey(u8 taskId);
 static bool32 IsValidLocationForVsSeeker(void);
 
@@ -677,6 +680,40 @@ static void Task_OpenRegisteredPokeblockCase(u8 taskId)
     {
         CleanupOverworldWindowsAndTilemaps();
         OpenPokeblockCase(PBLOCK_CASE_FIELD, CB2_ReturnToField);
+        DestroyTask(taskId);
+    }
+}
+
+void ItemUseOutOfBattle_TeachyTV(u8 taskId)
+{
+    if (MenuHelpers_IsLinkActive() == TRUE)
+    {
+        DisplayDadsAdviceCannotUseItemMessage(taskId, gTasks[taskId].tUsingRegisteredKeyItem);
+    }
+    else if (gTasks[taskId].tUsingRegisteredKeyItem != TRUE)
+    {
+        gBagMenu->newScreenCallback = CB2_OpenTeachyTVFromBag;
+        Task_FadeAndCloseBagMenu(taskId);
+    }
+    else
+    {
+        gFieldCallback = FieldCB_ReturnToFieldNoScript;
+        FadeScreen(FADE_TO_BLACK, 0);
+        gTasks[taskId].func = Task_OpenRegisteredTeachyTV;
+    }
+}
+
+static void CB2_OpenTeachyTVFromBag(void)
+{
+    StartTeachyTV(CB2_ReturnToBagMenuPocket);
+}
+
+static void Task_OpenRegisteredTeachyTV(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        CleanupOverworldWindowsAndTilemaps();
+        StartTeachyTV(CB2_ReturnToField);
         DestroyTask(taskId);
     }
 }
