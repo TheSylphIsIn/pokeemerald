@@ -20,13 +20,24 @@
 #include "sound.h"
 #include "sprite.h"
 #include "string_util.h"
+#include "strings.h"
+#include "party_menu.h"
+#include "pokemon.h"
 #include "pokemon_icon.h"
 #include "graphics.h"
 #include "data.h"
 #include "pokedex.h"
 #include "gpu_regs.h"
+#include "constants/pokemon.h"
 
 // Sample UI base provided by grunt-lucas.
+
+/* Needed:
+ * A way to map Flags to Move ID 
+ * A way to track a list of which TMs you have, and iterate over them (u16 array?)
+ * Val to track how many TMs you own
+ * Array of party mon sprite IDs
+*/
 
 /*
  * The code in this file assumes you have read and understood everything in `sample_ui_start_here.c'. The comments here
@@ -48,6 +59,13 @@ enum Region
     REGION_NONE = 0xFF
 };
 
+enum {
+	INDICATOR_MAIN_BAR_TEACH,
+	INDICATOR_MAIN_BAR_PARTY,
+	INDICATOR_MAIN_BAR_REMIND,
+	INDICATOR_MAIN_PARTY_SLOT,
+};
+
 struct SampleUiState
 {
     MainCallback savedCallback;
@@ -59,7 +77,8 @@ struct SampleUiState
     // This will store not the current dex region, but which region button is "hovering" in the panel
     enum Region selectedRegion;
 
-    u8 monIconSpriteId;
+    u8 monIconSpriteIds[PARTY_SIZE];
+	u8 selectedMonIndex;
     u16 monIconDexNum;
 
     // Store the Y coordinate for the panel (for scrolling), and a flag if the panel is open or not
@@ -72,18 +91,26 @@ struct SampleUiState
      * index 3, etc.
      */
     u8 regionButtonSpriteIds[6];
+	u8 indicatorSpriteIds[4];
+	u8 timer; // general timer for idle anims e.g. indicator corners, so their animations stay synced
+	u8 cursorLocation; // Menu state, which determines how certain elements should behave e.g. indicator corners
 };
 
 enum WindowIds
 {
-    WIN_UI_HINTS,
-    WIN_MON_INFO
+    WIN_MAIN_SCREEN,	// Screen 0 "TV screen", used for mon info
+    WIN_MAIN_BAR,		// Screen 0 bar at bottom, used for navigating between screens
+	WIN_MAIN_TYPES,		// Type icons on the main screen
+	WIN_SELECTED_NAME,	// Screen 1 bar in middle, displays selected move name
+	WIN_MOVE_INFO,		// Sliding panel window, displays selected move info
 };
 
 static EWRAM_DATA struct SampleUiState *sSampleUiState = NULL;
 static EWRAM_DATA u8 *sBg1TilemapBuffer = NULL;
 // We'll have an additional tilemap buffer for the sliding panel, which will live on BG2
 static EWRAM_DATA u8 *sBg2TilemapBuffer = NULL;
+
+static void SpriteCB_TeachyTvSelectIndicators(struct Sprite *sprite);
 
 #define MON_ICON_X     39
 #define MON_ICON_Y     36
@@ -195,7 +222,7 @@ static const u8 *const sModeNames[3] = {
     [MODE_OTHER]  = sModeNameOther
 };
 
-static const struct BgTemplate sSampleUiBgTemplates[] =
+static const struct BgTemplate sTeachyTvBgTemplates[] =
 {
     {
         .bg = 0,
@@ -206,7 +233,8 @@ static const struct BgTemplate sSampleUiBgTemplates[] =
     {
         .bg = 1,
         .charBaseIndex = 3,
-        .mapBaseIndex = 30,
+        .mapBaseIndex = 27,
+		.screenSize = 2,
         .priority = 2
     },
     {
@@ -218,31 +246,42 @@ static const struct BgTemplate sSampleUiBgTemplates[] =
         .bg = 2,
         .charBaseIndex = 3,
         .mapBaseIndex = 29,
+		.screenSize = 1,
         .priority = 0
     }
 };
 
-static const struct WindowTemplate sSampleUiWindowTemplates[] =
+static const struct WindowTemplate sTeachyTvWindowTemplates[] =
 {
-    [WIN_UI_HINTS] =
-    {
-        .bg = 0,
-        .tilemapLeft = 14,
-        .tilemapTop = 0,
-        .width = 16,
-        .height = 7,
-        .paletteNum = 15,
-        .baseBlock = 1
-    },
-    [WIN_MON_INFO] =
+    [WIN_MAIN_SCREEN] =
     {
         .bg = 0,
         .tilemapLeft = 2,
-        .tilemapTop = 9,
+        .tilemapTop = 1,
         .width = 26,
-        .height = 10,
+        .height = 14,
         .paletteNum = 15,
-        .baseBlock = 1 + (16 * 7)
+        .baseBlock = 1
+    },
+    [WIN_MAIN_BAR] =
+    {
+        .bg = 0,
+        .tilemapLeft = 2,
+        .tilemapTop = 17,
+        .width = 26,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 1 + (26 * 14)
+    },
+    [WIN_MAIN_TYPES] =
+    {
+        .bg = 0,
+        .tilemapLeft = 3,
+        .tilemapTop = 5,
+        .width = 9,
+        .height = 2,
+        .paletteNum = 13,
+        .baseBlock = 1 + (26 * 14) + (26 * 2)
     },
     DUMMY_WIN_TEMPLATE
 };
@@ -250,7 +289,8 @@ static const struct WindowTemplate sSampleUiWindowTemplates[] =
 static const u32 sSampleUiTiles[] = INCBIN_U32("graphics/teachy_tv/tiles.4bpp.lz");
 
 // New graphics for the buttons. Create these from 4bpp indexed PNGs, just like before.
-static const u32 sSampleUiKantoButton[] = INCBIN_U32("graphics/teachy_tv/kanto.4bpp");
+static const u32 sTeachyTv_IndicatorCorner[] = INCBIN_U32("graphics/teachy_tv/indicator_corner.4bpp");
+static const u32 sTeachyTv_IndicatorCorner2[] = INCBIN_U32("graphics/teachy_tv/indicator_corner_2.4bpp");
 static const u32 sSampleUiJohtoButton[] = INCBIN_U32("graphics/teachy_tv/johto.4bpp");
 static const u32 sSampleUiHoennButton[] = INCBIN_U32("graphics/teachy_tv/hoenn.4bpp");
 static const u32 sSampleUiSinnohButton[] = INCBIN_U32("graphics/teachy_tv/sinnoh.4bpp");
@@ -261,7 +301,7 @@ static const u32 sSampleUiTilemap[] = INCBIN_U32("graphics/teachy_tv/tilemap.bin
 static const u32 sSampleUiPanelTilemap[] = INCBIN_U32("graphics/teachy_tv/panel_tilemap.bin.lz");
 
 static const u16 sSampleUiPalette[] = INCBIN_U16("graphics/teachy_tv/00.gbapal");
-static const u16 sSampleUi_KantoJohtoHoennPalette[] = INCBIN_U16("graphics/teachy_tv/kanto_johto_hoenn.gbapal");
+static const u16 sTeachyTv_IndicatorPalette[] = INCBIN_U16("graphics/teachy_tv/indicator_corner.gbapal");
 static const u16 sSampleUi_SinnohUnovaKalosPalette[] = INCBIN_U16("graphics/teachy_tv/sinnoh_unova_kalos.gbapal");
 
 /*
@@ -278,12 +318,12 @@ static const u16 sSampleUi_SinnohUnovaKalosPalette[] = INCBIN_U16("graphics/teac
  * you'll need to make sure you don't accidentally duplicate a palette tag value, else the game will start to mix up
  * the various sprite palettes and your sprites will look incorrect.
  */
-#define PALETTE_TAG_KANTO_JOHTO_HOENN 0x1000
+#define PALETTE_TAG_INDICATOR 0x1000
 #define PALETTE_TAG_SINNOH_UNOVA_KALOS 0x1001
-static const struct SpritePalette sKantoJohtoHoennButtonsSpritePalette =
+static const struct SpritePalette sIndicatorCornerSpritePalette =
 {
-    .data = sSampleUi_KantoJohtoHoennPalette,
-    .tag = PALETTE_TAG_KANTO_JOHTO_HOENN
+    .data = sTeachyTv_IndicatorPalette,
+    .tag = PALETTE_TAG_INDICATOR
 };
 static  const struct SpritePalette sSinnohUnovaKalosButtonsSpritePalette =
 {
@@ -349,9 +389,9 @@ static const struct SpriteFrameImage sKantoButtonPicTable[] =
 {
     /*
      * `obj_frame_tiles' is a macro that auto-magically creates a SpriteFrameImage structure with the data set to our
-     * graphics data defined in the `sSampleUiKantoButton' array and the size properly set to the size of this array.
+     * graphics data defined in the `sTeachyTv_IndicatorCorner' array and the size properly set to the size of this array.
      */
-    obj_frame_tiles(sSampleUiKantoButton)
+    obj_frame_tiles(sTeachyTv_IndicatorCorner)
 };
 
 /*
@@ -420,7 +460,7 @@ static const struct SpriteTemplate sKantoButtonSpriteTemplate =
      */
     .tileTag = TAG_NONE,
     // Here we will use the palette tag that matches the SpritePalette for the Kanto button.
-    .paletteTag = PALETTE_TAG_KANTO_JOHTO_HOENN,
+    .paletteTag = PALETTE_TAG_INDICATOR,
     // Set OAM to our define OAM structure
     .oam = &sKantoButtonOam,
     // Set anims to our defined anims
@@ -436,6 +476,81 @@ static const struct SpriteTemplate sKantoButtonSpriteTemplate =
      * in `AnimateSprites()' in `gflib/sprite.c' to see how this callback is used.
      */
     .callback = SpriteCallbackDummy,
+};
+
+// Indices for the anim arrays
+#define ANIM_TOP_LEFT 0
+#define ANIM_TOP_RIGHT 1
+#define ANIM_BOT_LEFT 2
+#define ANIM_BOT_RIGHT 3
+static const union AnimCmd sIndicatorAnim_TopLeft[] =
+{
+    ANIMCMD_FRAME(0, 30),
+    ANIMCMD_FRAME(1, 30),
+    ANIMCMD_JUMP(0)
+};
+
+static const union AnimCmd sIndicatorAnim_TopRight[] =
+{
+    ANIMCMD_FRAME(0, 30, .hFlip = TRUE),
+    ANIMCMD_FRAME(1, 30, .hFlip = TRUE),
+    ANIMCMD_JUMP(0)
+};
+
+static const union AnimCmd sIndicatorAnim_BottomLeft[] =
+{
+    ANIMCMD_FRAME(0, 30, .vFlip = TRUE),
+    ANIMCMD_FRAME(1, 30, .vFlip = TRUE),
+    ANIMCMD_JUMP(0)
+};
+
+static const union AnimCmd sIndicatorAnim_BottomRight[] =
+{
+    ANIMCMD_FRAME(0, 30, .hFlip = TRUE, .vFlip = TRUE),
+    ANIMCMD_FRAME(1, 30, .hFlip = TRUE, .vFlip = TRUE),
+    ANIMCMD_JUMP(0)
+};
+
+// Anims for the selection indicator, which is 4 sprites arranged into a rectangle.
+static const union AnimCmd *const sIndicatorAnims[] =
+{
+    [ANIM_TOP_LEFT] = sIndicatorAnim_TopLeft,
+    [ANIM_TOP_RIGHT] = sIndicatorAnim_TopRight,
+    [ANIM_BOT_LEFT] = sIndicatorAnim_BottomLeft,
+    [ANIM_BOT_RIGHT] = sIndicatorAnim_BottomRight,
+};
+
+static const struct SpriteFrameImage sIndicatorCornersPicTable[] =
+{
+    obj_frame_tiles(sTeachyTv_IndicatorCorner),
+    obj_frame_tiles(sTeachyTv_IndicatorCorner2),
+};
+
+static const struct OamData sIndicatorOam =
+{
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(8x8),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(8x8),
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const struct SpriteTemplate sIndicatorCornerSpriteTemplate =
+{
+    .tileTag = TAG_NONE,
+    .paletteTag = PALETTE_TAG_INDICATOR,
+    .oam = &sIndicatorOam,
+    .anims = sIndicatorAnims,
+    .images = sIndicatorCornersPicTable,
+    .affineAnims = sButtonAffineAnims,
+    .callback = SpriteCB_TeachyTvSelectIndicators,
 };
 
 /*
@@ -466,7 +581,7 @@ static const struct OamData sJohtoButtonOam =
 static const struct SpriteTemplate sJohtoButtonSpriteTemplate =
 {
     .tileTag = TAG_NONE,
-    .paletteTag = PALETTE_TAG_KANTO_JOHTO_HOENN,
+    .paletteTag = PALETTE_TAG_INDICATOR,
     .oam = &sJohtoButtonOam,
     .anims = sButtonAnims,
     .images = sJohtoButtonPicTable,
@@ -497,7 +612,7 @@ static const struct OamData sHoennButtonOam =
 static const struct SpriteTemplate sHoennButtonSpriteTemplate =
 {
     .tileTag = TAG_NONE,
-    .paletteTag = PALETTE_TAG_KANTO_JOHTO_HOENN,
+    .paletteTag = PALETTE_TAG_INDICATOR,
     .oam = &sHoennButtonOam,
     .anims = sButtonAnims,
     .images = sHoennButtonPicTable,
@@ -613,6 +728,14 @@ static const u8 sSampleUiWindowFontColors[][3] =
     [FONT_BLUE]   = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_BLUE,       TEXT_COLOR_LIGHT_GRAY},
 };
 
+
+// UI element coords
+
+// Used for both printing the text and showing the selector sprite
+#define MAIN_BAR_OPTION_1_X 16
+#define MAIN_BAR_OPTION_2_X 96
+#define MAIN_BAR_OPTION_3_X 168
+
 // Callbacks for the sample UI
 static void SampleUi_SetupCB(void);
 static void SampleUi_MainCB(void);
@@ -620,8 +743,8 @@ static void SampleUi_VBlankCB(void);
 
 // Sample UI tasks
 static void Task_SampleUiWaitFadeIn(u8 taskId);
-static void Task_SampleUiMainInput(u8 taskId);
-static void Task_SampleUiPanelInput(u8 taskId);
+static void Task_TeachyTvMainScreenBarInput(u8 taskId);
+static void Task_TeachyTvMainScreenPartyInput(u8 taskId);
 static void Task_SampleUiPanelSlide(u8 taskId);
 static void Task_SampleUiWaitFadeAndBail(u8 taskId);
 static void Task_SampleUiWaitFadeAndExitGracefully(u8 taskId);
@@ -630,14 +753,15 @@ static void Task_SampleUiWaitFadeAndExitGracefully(u8 taskId);
 static bool8 SampleUi_InitBgs(void);
 static void SampleUi_FadeAndBail(void);
 static bool8 SampleUi_LoadGraphics(void);
-static void SampleUi_InitWindows(void);
-static void SampleUi_PrintUiButtonHints(void);
-static void SampleUi_PrintUiMonInfo(void);
-static void SampleUi_DrawMonIcon(u16 dexNum);
-static void SampleUi_CreateRegionButtons(void);
+static void TeachyTv_InitWindows(void);
+static void TeachyTv_PrintSelectedMonInfo(u32 partyIndex);
+static void TeachyTv_PrintBarLabels(void);
+static void TeachyTv_DrawPartyMonIcons(u32 baseX, u32 y);
+static void TeachyTv_CreateSelectionIndicators(void);
 static void SampleUi_StartRegionButtonAnim(enum Region region);
 static void SampleUi_StopRegionButtonAnim(enum Region region);
 static void SampleUi_FreeResources(void);
+
 
 void StartTeachyTV(MainCallback callback)
 {
@@ -692,7 +816,7 @@ static void SampleUi_SetupCB(void)
         }
         break;
     case 4:
-        SampleUi_InitWindows();
+        TeachyTv_InitWindows();
         gMain.state++;
         break;
     case 5:
@@ -703,17 +827,17 @@ static void SampleUi_SetupCB(void)
         FreeMonIconPalettes();
         LoadMonIconPalettes();
 
-        SampleUi_DrawMonIcon(sSampleUiState->monIconDexNum);
-        SampleUi_PrintUiButtonHints();
-        SampleUi_PrintUiMonInfo();
+        TeachyTv_DrawPartyMonIcons(40, 104);
+        TeachyTv_PrintSelectedMonInfo(0);
+        TeachyTv_PrintBarLabels();
 
         sSampleUiState->panelY = 0;
         sSampleUiState->panelIsOpen = FALSE;
 
-        // Create sprites for the region buttons off screen
-        SampleUi_CreateRegionButtons();
-        // Start button select animation for the current region, i.e. Kanto
-        SampleUi_StartRegionButtonAnim(sSampleUiState->selectedRegion);
+        TeachyTv_CreateSelectionIndicators();
+		
+		ListMenuLoadStdPalAt(BG_PLTT_ID(13), 1);
+		
 
         taskId = CreateTask(Task_SampleUiWaitFadeIn, 0);
         gMain.state++;
@@ -749,11 +873,31 @@ static void Task_SampleUiWaitFadeIn(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        gTasks[taskId].func = Task_SampleUiMainInput;
+        gTasks[taskId].func = Task_TeachyTvMainScreenBarInput;
     }
 }
 
-static void Task_SampleUiMainInput(u8 taskId)
+static const u8 sMainBarNextStates[][2] = // [initial state][left, right]
+{
+	[INDICATOR_MAIN_BAR_TEACH] = {INDICATOR_MAIN_BAR_REMIND, INDICATOR_MAIN_BAR_PARTY},
+	[INDICATOR_MAIN_BAR_PARTY] = {INDICATOR_MAIN_BAR_TEACH, INDICATOR_MAIN_BAR_REMIND},
+	[INDICATOR_MAIN_BAR_REMIND] = {INDICATOR_MAIN_BAR_PARTY, INDICATOR_MAIN_BAR_TEACH},
+};
+
+static void (*const sMainBarSelectFuncs[])(u8 taskId) = {
+	[INDICATOR_MAIN_BAR_TEACH] = Task_TeachyTvMainScreenPartyInput,
+	[INDICATOR_MAIN_BAR_PARTY] = Task_TeachyTvMainScreenPartyInput,
+	[INDICATOR_MAIN_BAR_REMIND] = Task_TeachyTvMainScreenPartyInput,
+};
+
+static const u8 sMainBarSelectLocations[] = 
+{
+	[INDICATOR_MAIN_BAR_TEACH] = 0,
+	[INDICATOR_MAIN_BAR_PARTY] = INDICATOR_MAIN_PARTY_SLOT,
+	[INDICATOR_MAIN_BAR_REMIND] = 0,	
+};
+
+static void Task_TeachyTvMainScreenBarInput(u8 taskId)
 {
     if (JOY_NEW(B_BUTTON))
     {
@@ -764,7 +908,6 @@ static void Task_SampleUiMainInput(u8 taskId)
     if (JOY_REPEAT(DPAD_DOWN))
     {
         PlaySE(SE_SELECT);
-        FreeAndDestroyMonIconSprite(&gSprites[sSampleUiState->monIconSpriteId]);
         if (sSampleUiState->monIconDexNum < sDexRanges[sSampleUiState->region][1])
         {
             sSampleUiState->monIconDexNum++;
@@ -773,13 +916,10 @@ static void Task_SampleUiMainInput(u8 taskId)
         {
             sSampleUiState->monIconDexNum = sDexRanges[sSampleUiState->region][0];
         }
-        SampleUi_DrawMonIcon(sSampleUiState->monIconDexNum);
-        SampleUi_PrintUiMonInfo();
     }
     if (JOY_REPEAT(DPAD_UP))
     {
         PlaySE(SE_SELECT);
-        FreeAndDestroyMonIconSprite(&gSprites[sSampleUiState->monIconSpriteId]);
         if (sSampleUiState->monIconDexNum > sDexRanges[sSampleUiState->region][0])
         {
             sSampleUiState->monIconDexNum--;
@@ -788,92 +928,116 @@ static void Task_SampleUiMainInput(u8 taskId)
         {
             sSampleUiState->monIconDexNum = sDexRanges[sSampleUiState->region][1];
         }
-        SampleUi_DrawMonIcon(sSampleUiState->monIconDexNum);
-        SampleUi_PrintUiMonInfo();
     }
     if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
-        if (sSampleUiState->mode == MODE_OTHER)
-        {
-            sSampleUiState->mode = MODE_INFO;
-        }
-        else
-        {
-            sSampleUiState->mode++;
-        }
-        SampleUi_PrintUiButtonHints();
-        SampleUi_PrintUiMonInfo();
+        
+		gTasks[taskId].func = sMainBarSelectFuncs[sSampleUiState->cursorLocation];
+		sSampleUiState->cursorLocation = sMainBarSelectLocations[sSampleUiState->cursorLocation];
     }
     if (JOY_NEW(START_BUTTON))
     {
         gTasks[taskId].func = Task_SampleUiPanelSlide;
         PlaySE(SE_SELECT);
     }
+	if (JOY_NEW(DPAD_LEFT | DPAD_RIGHT) || JOY_REPEAT(DPAD_LEFT | DPAD_RIGHT))
+	{
+		bool32 right = JOY_NEW(DPAD_RIGHT) || JOY_REPEAT(DPAD_RIGHT);
+		
+		sSampleUiState->cursorLocation = sMainBarNextStates[sSampleUiState->cursorLocation][right];
+		PlaySE(SE_SELECT);
+	}
 }
 
-static void Task_SampleUiPanelInput(u8 taskId)
+static void Task_TeachyTvMainScreenPartyInput(u8 taskId)
 {
-    // Exit panel when Start or B is pressed
-    if (JOY_NEW(START_BUTTON | B_BUTTON))
+	if (JOY_NEW(DPAD_RIGHT) || JOY_REPEAT(DPAD_RIGHT))
+	{
+		if (++sSampleUiState->selectedMonIndex == gPlayerPartyCount)
+			sSampleUiState->selectedMonIndex = 0; // loops back from last mon to first mon
+        TeachyTv_PrintSelectedMonInfo(sSampleUiState->selectedMonIndex);
+		PlaySE(SE_SELECT);
+	}
+	if (JOY_NEW(DPAD_LEFT) || JOY_REPEAT(DPAD_LEFT))
+	{
+		if (sSampleUiState->selectedMonIndex == 0)
+			sSampleUiState->selectedMonIndex = gPlayerPartyCount; // loops back from first mon to last mon
+        TeachyTv_PrintSelectedMonInfo(--sSampleUiState->selectedMonIndex);
+		PlaySE(SE_SELECT);
+	}
+	if (JOY_NEW(B_BUTTON))
+	{
+		gTasks[taskId].func = Task_TeachyTvMainScreenBarInput;
+		sSampleUiState->cursorLocation = INDICATOR_MAIN_BAR_PARTY;
+		PlaySE(SE_SELECT);
+	}
+    if (JOY_NEW(START_BUTTON))
     {
-        gTasks[taskId].func = Task_SampleUiPanelSlide;
-        PlaySE(SE_SELECT);
-    }
-    else if (JOY_NEW(A_BUTTON))
-    {
-        sSampleUiState->region = sSampleUiState->selectedRegion;
-        // Sneakily swap out color 2 in BG1's palette for the new region-specific color
-        LoadPalette(&sRegionBgColors[sSampleUiState->region], BG_PLTT_ID(0) + 2, 2);
-        FreeAndDestroyMonIconSprite(&gSprites[sSampleUiState->monIconSpriteId]);
-        sSampleUiState->monIconDexNum = sDexRanges[sSampleUiState->region][0];
-        SampleUi_DrawMonIcon(sSampleUiState->monIconDexNum);
-        SampleUi_PrintUiButtonHints();
-        SampleUi_PrintUiMonInfo();
-        PlaySE(SE_SELECT);
-        gTasks[taskId].func = Task_SampleUiPanelSlide;
-    }
-    else if (JOY_NEW(DPAD_UP))
-    {
-        if (sRegionSelections[sSampleUiState->selectedRegion].upRegion != REGION_NONE)
-        {
-            SampleUi_StopRegionButtonAnim(sSampleUiState->selectedRegion);
-            sSampleUiState->selectedRegion = sRegionSelections[sSampleUiState->selectedRegion].upRegion;
-            SampleUi_StartRegionButtonAnim(sSampleUiState->selectedRegion);
-            PlaySE(SE_SELECT);
-        }
-    }
-    else if (JOY_NEW(DPAD_DOWN))
-    {
-        if (sRegionSelections[sSampleUiState->selectedRegion].downRegion != REGION_NONE)
-        {
-            SampleUi_StopRegionButtonAnim(sSampleUiState->selectedRegion);
-            sSampleUiState->selectedRegion = sRegionSelections[sSampleUiState->selectedRegion].downRegion;
-            SampleUi_StartRegionButtonAnim(sSampleUiState->selectedRegion);
-            PlaySE(SE_SELECT);
-        }
-    }
-    else if (JOY_NEW(DPAD_LEFT))
-    {
-        if (sRegionSelections[sSampleUiState->selectedRegion].leftRegion != REGION_NONE)
-        {
-            SampleUi_StopRegionButtonAnim(sSampleUiState->selectedRegion);
-            sSampleUiState->selectedRegion = sRegionSelections[sSampleUiState->selectedRegion].leftRegion;
-            SampleUi_StartRegionButtonAnim(sSampleUiState->selectedRegion);
-            PlaySE(SE_SELECT);
-        }
-    }
-    else if (JOY_NEW(DPAD_RIGHT))
-    {
-        if (sRegionSelections[sSampleUiState->selectedRegion].rightRegion != REGION_NONE)
-        {
-            SampleUi_StopRegionButtonAnim(sSampleUiState->selectedRegion);
-            sSampleUiState->selectedRegion = sRegionSelections[sSampleUiState->selectedRegion].rightRegion;
-            SampleUi_StartRegionButtonAnim(sSampleUiState->selectedRegion);
-            PlaySE(SE_SELECT);
-        }
+        PlaySE(SE_PC_OFF);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+        gTasks[taskId].func = Task_SampleUiWaitFadeAndExitGracefully;
     }
 }
+
+// static void Task_TeachyTvMainScreenPartyInput(u8 taskId)
+// {
+    //Exit panel when Start or B is pressed
+    // if (JOY_NEW(START_BUTTON | B_BUTTON))
+    // {
+        // gTasks[taskId].func = Task_SampleUiPanelSlide;
+        // PlaySE(SE_SELECT);
+    // }
+    // else if (JOY_NEW(A_BUTTON))
+    // {
+        // sSampleUiState->region = sSampleUiState->selectedRegion;
+        //Sneakily swap out color 2 in BG1's palette for the new region-specific color
+        // LoadPalette(&sRegionBgColors[sSampleUiState->region], BG_PLTT_ID(0) + 2, 2);
+        // sSampleUiState->monIconDexNum = sDexRanges[sSampleUiState->region][0];
+        // PlaySE(SE_SELECT);
+        // gTasks[taskId].func = Task_SampleUiPanelSlide;
+    // }
+    // else if (JOY_NEW(DPAD_UP))
+    // {
+        // if (sRegionSelections[sSampleUiState->selectedRegion].upRegion != REGION_NONE)
+        // {
+            // SampleUi_StopRegionButtonAnim(sSampleUiState->selectedRegion);
+            // sSampleUiState->selectedRegion = sRegionSelections[sSampleUiState->selectedRegion].upRegion;
+            // SampleUi_StartRegionButtonAnim(sSampleUiState->selectedRegion);
+            // PlaySE(SE_SELECT);
+        // }
+    // }
+    // else if (JOY_NEW(DPAD_DOWN))
+    // {
+        // if (sRegionSelections[sSampleUiState->selectedRegion].downRegion != REGION_NONE)
+        // {
+            // SampleUi_StopRegionButtonAnim(sSampleUiState->selectedRegion);
+            // sSampleUiState->selectedRegion = sRegionSelections[sSampleUiState->selectedRegion].downRegion;
+            // SampleUi_StartRegionButtonAnim(sSampleUiState->selectedRegion);
+            // PlaySE(SE_SELECT);
+        // }
+    // }
+    // else if (JOY_NEW(DPAD_LEFT))
+    // {
+        // if (sRegionSelections[sSampleUiState->selectedRegion].leftRegion != REGION_NONE)
+        // {
+            // SampleUi_StopRegionButtonAnim(sSampleUiState->selectedRegion);
+            // sSampleUiState->selectedRegion = sRegionSelections[sSampleUiState->selectedRegion].leftRegion;
+            // SampleUi_StartRegionButtonAnim(sSampleUiState->selectedRegion);
+            // PlaySE(SE_SELECT);
+        // }
+    // }
+    // else if (JOY_NEW(DPAD_RIGHT))
+    // {
+        // if (sRegionSelections[sSampleUiState->selectedRegion].rightRegion != REGION_NONE)
+        // {
+            // SampleUi_StopRegionButtonAnim(sSampleUiState->selectedRegion);
+            // sSampleUiState->selectedRegion = sRegionSelections[sSampleUiState->selectedRegion].rightRegion;
+            // SampleUi_StartRegionButtonAnim(sSampleUiState->selectedRegion);
+            // PlaySE(SE_SELECT);
+        // }
+    // }
+// }
 
 static void Task_SampleUiPanelSlide(u8 taskId)
 {
@@ -902,7 +1066,7 @@ static void Task_SampleUiPanelSlide(u8 taskId)
         {
             // Panel is done closing, so set state to closed and change task to read main input
             sSampleUiState->panelIsOpen = FALSE;
-            gTasks[taskId].func = Task_SampleUiMainInput;
+            gTasks[taskId].func = Task_TeachyTvMainScreenBarInput;
         }
     }
     // Panel is closed, so slide it up into view
@@ -922,7 +1086,7 @@ static void Task_SampleUiPanelSlide(u8 taskId)
         {
             // Panel is done opening, so set state to open and change task to read panel input
             sSampleUiState->panelIsOpen = TRUE;
-            gTasks[taskId].func = Task_SampleUiPanelInput;
+            gTasks[taskId].func = Task_TeachyTvMainScreenPartyInput;
         }
     }
     #undef PANEL_MAX_Y
@@ -947,7 +1111,7 @@ static void Task_SampleUiWaitFadeAndExitGracefully(u8 taskId)
         DestroyTask(taskId);
     }
 }
-#define TILEMAP_BUFFER_SIZE (1024 * 2)
+#define TILEMAP_BUFFER_SIZE (2048 * 2)
 static bool8 SampleUi_InitBgs(void)
 {
     ResetAllBgsCoordinates();
@@ -964,7 +1128,7 @@ static bool8 SampleUi_InitBgs(void)
     }
 
     ResetBgsAndClearDma3BusyFlags(0);
-    InitBgsFromTemplates(0, sSampleUiBgTemplates, NELEMS(sSampleUiBgTemplates));
+    InitBgsFromTemplates(0, sTeachyTvBgTemplates, NELEMS(sTeachyTvBgTemplates));
 
     SetBgTilemapBuffer(1, sBg1TilemapBuffer);
     SetBgTilemapBuffer(2, sBg2TilemapBuffer);
@@ -1021,122 +1185,165 @@ static bool8 SampleUi_LoadGraphics(void)
     return FALSE;
 }
 
-static void SampleUi_InitWindows(void)
+static void TeachyTv_InitWindows(void)
 {
-    InitWindows(sSampleUiWindowTemplates);
+    InitWindows(sTeachyTvWindowTemplates);
     DeactivateAllTextPrinters();
     ScheduleBgCopyTilemapToVram(0);
-    FillWindowPixelBuffer(WIN_UI_HINTS, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
-    FillWindowPixelBuffer(WIN_MON_INFO, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
-    PutWindowTilemap(WIN_UI_HINTS);
-    PutWindowTilemap(WIN_MON_INFO);
-    CopyWindowToVram(WIN_UI_HINTS, 3);
-    CopyWindowToVram(WIN_MON_INFO, 3);
+    FillWindowPixelBuffer(WIN_MAIN_SCREEN, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+    FillWindowPixelBuffer(WIN_MAIN_BAR, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+    FillWindowPixelBuffer(WIN_MAIN_TYPES, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+    PutWindowTilemap(WIN_MAIN_SCREEN);
+    PutWindowTilemap(WIN_MAIN_BAR);
+    PutWindowTilemap(WIN_MAIN_TYPES);
+    CopyWindowToVram(WIN_MAIN_SCREEN, 3);
+    CopyWindowToVram(WIN_MAIN_BAR, 3);
+    CopyWindowToVram(WIN_MAIN_TYPES, 3);
 }
 
-static const u8 sText_SampleUiButtonHint1[] = _("{DPAD_UPDOWN}Change POKéMON");
-static const u8 sText_SampleUiButtonHint2[] = _("{A_BUTTON}Mode: {STR_VAR_1}");
-static const u8 sText_SampleUiButtonHint3[] = _("{START_BUTTON}Region");
-static const u8 sText_SampleUiButtonHint4[] = _("{B_BUTTON}Exit");
-static void SampleUi_PrintUiButtonHints(void)
+#define MAIN_SCREEN_MON_INFO_LEFT_X 8
+static const u8 sText_TeachyTvAbility[] = _("ABILITY/");
+static const u8 sText_TeachyTvKnownMoves[] = _("KNOWN MOVES");
+static void TeachyTv_PrintSelectedMonInfo(u32 partyIndex)
 {
-    FillWindowPixelBuffer(WIN_UI_HINTS, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+	struct Pokemon *mon = &gPlayerParty[partyIndex];
+	u8 stringBuffer[16];
+	u32 species = GetMonData(mon, MON_DATA_SPECIES);
+	u32 i;
 
-    StringCopy(gStringVar1, sModeNames[sSampleUiState->mode]);
-    StringExpandPlaceholders(gStringVar2, sText_SampleUiButtonHint2);
+    FillWindowPixelBuffer(WIN_MAIN_SCREEN, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+    FillWindowPixelBuffer(WIN_MAIN_TYPES, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+	
+	// Nickname
+    GetMonNickname(mon, gStringVar1);
+    AddTextPrinterParameterized4(WIN_MAIN_SCREEN, FONT_NORMAL, MAIN_SCREEN_MON_INFO_LEFT_X, 8, 0, 0,
+        sSampleUiWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, gStringVar1);
 
-    AddTextPrinterParameterized4(WIN_UI_HINTS, FONT_NORMAL, 0, 3, 0, 0,
-        sSampleUiWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, sRegionNames[sSampleUiState->region]);
-    AddTextPrinterParameterized4(WIN_UI_HINTS, FONT_SMALL, 47, 0, 0, 0,
-        sSampleUiWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, sText_SampleUiButtonHint1);
-    AddTextPrinterParameterized4(WIN_UI_HINTS, FONT_SMALL, 47, 10, 0, 0,
-        sSampleUiWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, gStringVar2);
-    AddTextPrinterParameterized4(WIN_UI_HINTS, FONT_SMALL, 47, 20, 0, 0,
-        sSampleUiWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, sText_SampleUiButtonHint3);
-        AddTextPrinterParameterized4(WIN_UI_HINTS, FONT_SMALL, 47, 30, 0, 0,
-        sSampleUiWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, sText_SampleUiButtonHint4);
+	// Species name
+    stringBuffer[0] = CHAR_SLASH;
+    StringCopy(&stringBuffer[1], &GetSpeciesName(species)[0]);
+    AddTextPrinterParameterized4(WIN_MAIN_SCREEN, FONT_SMALL, MAIN_SCREEN_MON_INFO_LEFT_X, 20, 0, 0,
+        sSampleUiWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, stringBuffer);
+	
+	// Level (printed to the right of Species name)
+    StringCopy(gStringVar1, gText_LevelSymbol);
+    ConvertIntToDecimalStringN(gStringVar2, GetMonData(mon, MON_DATA_LEVEL), STR_CONV_MODE_LEFT_ALIGN, 3);
+    StringAppend(gStringVar1, gStringVar2);
+    AddTextPrinterParameterized4(WIN_MAIN_SCREEN, FONT_SMALL, GetStringWidth(FONT_SMALL, stringBuffer, 0) + 14, 20, 0, 0,
+        sSampleUiWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, gStringVar1);
+	
+	// Types
+	BlitMenuInfoIcon(WIN_MAIN_TYPES, gSpeciesInfo[species].types[0] + 1, 0, 2);
+	if (gSpeciesInfo[species].types[1] != gSpeciesInfo[species].types[0])
+		BlitMenuInfoIcon(WIN_MAIN_TYPES, gSpeciesInfo[species].types[1] + 1, 38, 2);
+	
+	// Ability
+	AddTextPrinterParameterized4(WIN_MAIN_SCREEN, FONT_SMALL, MAIN_SCREEN_MON_INFO_LEFT_X, 44, 0, 0,
+		sSampleUiWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, sText_TeachyTvAbility);
+	AddTextPrinterParameterized4(WIN_MAIN_SCREEN, FONT_NORMAL, MAIN_SCREEN_MON_INFO_LEFT_X, 56, 0, 0,
+		sSampleUiWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, gAbilitiesInfo[GetMonAbility(mon)].name);
+	
+	// Moves
+	AddTextPrinterParameterized4(WIN_MAIN_SCREEN, FONT_NORMAL, 104, 8, 0, 0,
+		sSampleUiWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, sText_TeachyTvKnownMoves);
+	
+	for (i = 0; i < MAX_MON_MOVES; i++)
+	{
+		AddTextPrinterParameterized4(WIN_MAIN_SCREEN, FONT_NORMAL, 112, 21 + (i * 12), 0, 0,
+			sSampleUiWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, gMovesInfo[GetMonData(mon, MON_DATA_MOVE1 + i)].name);
+	}
 
-    CopyWindowToVram(WIN_UI_HINTS, COPYWIN_GFX);
+    CopyWindowToVram(WIN_MAIN_SCREEN, COPYWIN_GFX);
+    CopyWindowToVram(WIN_MAIN_TYPES, COPYWIN_GFX);
 }
 
-static const u8 sText_SampleUiMonInfoSpecies[] = _("{NO}{STR_VAR_1} {STR_VAR_2}");
-static const u8 sText_SampleUiMonStats[] = _("Put stats info here");
-static const u8 sText_SampleUiMonOther[] = _("Put other info here");
-static void SampleUi_PrintUiMonInfo(void)
+static const u8 sText_TeachyTvBarTeach[] = _("TEACH");
+static const u8 sText_TeachyTvBarParty[] = _("PARTY");
+static const u8 sText_TeachyTvBarRemind[] = _("REMIND");
+static void TeachyTv_PrintBarLabels(void)
 {
-    u16 speciesId = NationalPokedexNumToSpecies(sSampleUiState->monIconDexNum);
-
-    FillWindowPixelBuffer(WIN_MON_INFO, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
-    switch (sSampleUiState->mode)
-    {
-    case MODE_INFO: 
-        ConvertIntToDecimalStringN(gStringVar1, sSampleUiState->monIconDexNum, STR_CONV_MODE_LEADING_ZEROS, 3);
-        StringCopy(gStringVar2, gSpeciesInfo[speciesId].speciesName);
-        StringExpandPlaceholders(gStringVar3, sText_SampleUiMonInfoSpecies);
-        AddTextPrinterParameterized4(WIN_MON_INFO, FONT_SHORT, 5, 3, 0, 0, sSampleUiWindowFontColors[FONT_BLACK],
-            TEXT_SKIP_DRAW, gStringVar3);
-        break;
-    case MODE_STATS:
-        AddTextPrinterParameterized4(WIN_MON_INFO, FONT_SHORT, 5, 3, 0, 0, sSampleUiWindowFontColors[FONT_BLACK],
-            TEXT_SKIP_DRAW, sText_SampleUiMonStats);
-        break;
-    case MODE_OTHER:
-        AddTextPrinterParameterized4(WIN_MON_INFO, FONT_SHORT, 5, 3, 0, 0, sSampleUiWindowFontColors[FONT_BLACK],
-            TEXT_SKIP_DRAW, sText_SampleUiMonOther);
-        break;
-    default:
-        break;
-    }
-
-    CopyWindowToVram(WIN_MON_INFO, COPYWIN_GFX);
+    FillWindowPixelBuffer(WIN_MAIN_BAR, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+	
+	AddTextPrinterParameterized4(WIN_MAIN_BAR, FONT_NORMAL, MAIN_BAR_OPTION_1_X, 0, 0, 0, sSampleUiWindowFontColors[FONT_WHITE],
+            TEXT_SKIP_DRAW, sText_TeachyTvBarTeach);
+	AddTextPrinterParameterized4(WIN_MAIN_BAR, FONT_NORMAL, MAIN_BAR_OPTION_2_X, 0, 0, 0, sSampleUiWindowFontColors[FONT_WHITE],
+            TEXT_SKIP_DRAW, sText_TeachyTvBarParty);
+	AddTextPrinterParameterized4(WIN_MAIN_BAR, FONT_NORMAL, MAIN_BAR_OPTION_3_X, 0, 0, 0, sSampleUiWindowFontColors[FONT_WHITE],
+            TEXT_SKIP_DRAW, sText_TeachyTvBarRemind);
+    
+    CopyWindowToVram(WIN_MAIN_BAR, COPYWIN_GFX);
 }
 
-static void SampleUi_DrawMonIcon(u16 dexNum)
+static void TeachyTv_DrawPartyMonIcons(u32 baseX, u32 y)
 {
-    u16 speciesId = NationalPokedexNumToSpecies(dexNum);
+    u32 i;
+	
+	CalculatePlayerPartyCount();
+	
+	for (i = 0; i < gPlayerPartyCount; i++)
+	{
+		sSampleUiState->monIconSpriteIds[i] =
+            CreateMonIcon(GetMonData(&gPlayerParty[i], MON_DATA_SPECIES), SpriteCB_MonIcon, baseX + (32 * i), y, 4, GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY));
+    
+		gSprites[sSampleUiState->monIconSpriteIds[i]].oam.priority = 0;
+	}
 
-    sSampleUiState->monIconSpriteId =
-            CreateMonIcon(speciesId, SpriteCB_MonIcon, MON_ICON_X, MON_ICON_Y, 4, 0);
-    gSprites[sSampleUiState->monIconSpriteId].oam.priority = 0;
+    
 }
 
-static void SampleUi_CreateRegionButtons(void)
+#define sCorner data[0] // which corner the sprite is
+#define sLocation data[1] // where the cursor currently is
+#define sMonIcon data[2] // last selected mon index
+
+// Format: topleftX, topleftY, botrightX, botrightY.
+static const u8 sSelectIndicatorCoords[][4] = {
+	[INDICATOR_MAIN_BAR_TEACH] 	= {17,	137,	63,		151},
+	[INDICATOR_MAIN_BAR_PARTY] 	= {97,	137,	143,	151},
+	[INDICATOR_MAIN_BAR_REMIND] = {169,	137,	223,	151},
+	[INDICATOR_MAIN_PARTY_SLOT] = {25,	89,		55,		119},
+	
+};
+
+static void TeachyTv_CreateSelectionIndicators(void)
 {
-    #define BUTTON_START_X 50
-    #define BUTTON_START_Y 184
-    /*
-     * Load the palettes for our sprites into VRAM. Note here we are passing the SpritePalette palette templates we
-     * defined earlier. If a palette with the tag given in one of these templates is already loaded, the
-     * `LoadSpritePalette' method will skip the actual load step. Otherwise, it finds the first free palette slot and
-     * loads the palette there. Note that if you have manually loaded other palettes into OBJ palette memory without
-     * tagging them in the sprite system, this loading code may clobber your palette. Also, the `LoadSpritePalette'
-     * method returns the palette index it ended up using. If it returns 0xFF that means the load failed. So if you want
-     * you can check the result to make sure your load was successful and handle the problem if it wasn't. In our case,
-     * we just assume the load succeeded.
-     */
-    LoadSpritePalette(&sKantoJohtoHoennButtonsSpritePalette);
-    LoadSpritePalette(&sSinnohUnovaKalosButtonsSpritePalette);
-    /*
-     * Create a sprite for each button at the given X/Y position. We set subpriority to 0 so they draw on top. Sprite
-     * subpriorities provide you a way to have multiple different "priorities" within the same layer. So for example,
-     * say you want Sprite A and Sprite B to draw on top of a BG with priority 1. You can set the priority of Sprite A
-     * and Sprite B to 0 for that. But now suppose you also want Sprite A to draw on top of Sprite B. For that, set
-     * Sprite A's subpriority to 0 and Sprite B's subpriority to 1.
-     */
-    sSampleUiState->regionButtonSpriteIds[REGION_KANTO] =
-        CreateSprite(&sKantoButtonSpriteTemplate, BUTTON_START_X, BUTTON_START_Y, 0);
-    sSampleUiState->regionButtonSpriteIds[REGION_JOHTO] =
-        CreateSprite(&sJohtoButtonSpriteTemplate, BUTTON_START_X + 70, BUTTON_START_Y, 0);
-    sSampleUiState->regionButtonSpriteIds[REGION_HOENN] =
-        CreateSprite(&sHoennButtonSpriteTemplate, BUTTON_START_X + 2*70, BUTTON_START_Y, 0);
-    sSampleUiState->regionButtonSpriteIds[REGION_SINNOH] =
-        CreateSprite(&sSinnohButtonSpriteTemplate, BUTTON_START_X, BUTTON_START_Y + 40, 0);
-    sSampleUiState->regionButtonSpriteIds[REGION_UNOVA] =
-        CreateSprite(&sUnovaButtonSpriteTemplate, BUTTON_START_X + 70, BUTTON_START_Y + 40, 0);
-    sSampleUiState->regionButtonSpriteIds[REGION_KALOS] =
-        CreateSprite(&sKalosButtonSpriteTemplate, BUTTON_START_X + 2*70, BUTTON_START_Y + 40, 0);
-    #undef BUTTON_START_X
-    #undef BUTTON_START_Y
+	u32 i;
+    LoadSpritePalette(&sIndicatorCornerSpritePalette);
+
+	for (i = 0; i < 4; i++)
+	{ // The stupid math here is to get the right coords. The X coord at index 0 for sprites 0 and 2, the Y coord at index 1 for sprites 2 and 3
+		sSampleUiState->indicatorSpriteIds[i] = CreateSprite(&sIndicatorCornerSpriteTemplate,
+			sSelectIndicatorCoords[0][2 * (i % 2)], sSelectIndicatorCoords[0][1 + (2 * (i > 1))], 0);
+		StartSpriteAnim(&gSprites[sSampleUiState->indicatorSpriteIds[i]], i);
+		
+		gSprites[sSampleUiState->indicatorSpriteIds[i]].sCorner = i;
+		gSprites[sSampleUiState->indicatorSpriteIds[i]].sLocation = 0;
+	}
+}
+
+static void SpriteCB_TeachyTvSelectIndicators(struct Sprite *sprite)
+{
+	u32 state = sSampleUiState->cursorLocation;
+	u32 iconIndex = sSampleUiState->selectedMonIndex;
+	
+	if (state != sprite->sLocation)
+	{
+		sprite->x = sSelectIndicatorCoords[state][2 * (sprite->sCorner % 2)];
+		sprite->y = sSelectIndicatorCoords[state][1 + (2 * (sprite->sCorner > 1))];
+		sprite->sLocation = state;
+		
+		if (state == INDICATOR_MAIN_PARTY_SLOT)
+		{
+			sprite->x +=  iconIndex * 32;
+			sprite->sMonIcon = iconIndex;
+		}
+	}
+	else if (state == INDICATOR_MAIN_PARTY_SLOT && iconIndex != sprite->sMonIcon)
+	{
+		sprite->x = sSelectIndicatorCoords[state][2 * (sprite->sCorner % 2)];
+		sprite->x +=  iconIndex * 32;
+		sprite->sMonIcon = iconIndex;
+		
+	}
 }
 
 static void SampleUi_StartRegionButtonAnim(enum Region region)
