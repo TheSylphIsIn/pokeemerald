@@ -1028,6 +1028,28 @@ bool8 ScrCmd_applymovementat(struct ScriptContext *ctx)
     return FALSE;
 }
 
+bool8 ScrCmd_walkobjecttocoords(struct ScriptContext *ctx)
+{
+	// u16 localId = VarGet(ScriptReadHalfword(ctx));
+	// s32 targetX, currentX, targetY, currentY;
+	
+	// targetX = VarGet(ScriptReadHalfword(ctx));
+	// targetY = VarGet(ScriptReadHalfword(ctx));
+	
+	//currentX = gObjectEvents[do something to get obj ev ID]->currentCoords.x - MAP_OFFSET;
+	
+	// targetX -= currentX;
+	// targetY -= currentY;
+	
+	return FALSE;
+
+	
+	// get target coords from ctx
+	// get current location from (idk, gObjectEvents?)
+	// calculate path to target, accounting for blocked squares
+	// probably don't account for completely blocked paths
+}
+
 static bool8 WaitForMovementFinish(void)
 {
     return ScriptMovement_IsObjectMovementFinished(sMovingNpcId, sMovingNpcMapNum, sMovingNpcMapGroup);
