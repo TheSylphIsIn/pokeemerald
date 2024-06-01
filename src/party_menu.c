@@ -5017,7 +5017,7 @@ void ItemUseCB_AbilityPatch(u8 taskId, TaskFunc task)
 void Task_Mint(u8 taskId)
 {
     static const u8 askText[] = _("It might affect {STR_VAR_1}'s stats.\nAre you sure you want to use it?");
-    static const u8 doneText[] = _("{STR_VAR_1}'s stats may have changed due\nto the effects of the {STR_VAR_2}!{PAUSE_UNTIL_PRESS}");
+    static const u8 doneText[] = _("{STR_VAR_1}'s natural stats changed\nthanks to the {STR_VAR_2}!{PAUSE_UNTIL_PRESS}");
     s16 *data = gTasks[taskId].data;
 
     switch (tState)
@@ -5088,6 +5088,67 @@ void Task_Mint(u8 taskId)
     }
 }
 
+static u8 GetMintNatureChange(u8 oldNature, u8 statChange)
+{
+	u32 boostingStat = 0;
+	u32 loweringStat = 0;
+	u32 mintStat = statChange & 0xF; // lower 4 bits
+	u32 i;
+	
+	if (statChange == MINT_RESET_STATS) // neutral mint
+		return NATURE_SERIOUS;
+	
+	// Get stat changes from old nature
+	for (i = 0; i < NUM_NATURE_STATS; i++)
+	{
+		if (gNatureStatTable[oldNature][i] == 1)
+			boostingStat = i + 1;
+		if (gNatureStatTable[oldNature][i] == -1)
+			loweringStat = i + 1;
+	}
+	
+	// Get mint stat change 
+	if (statChange & MINT_LOWERING_STAT)
+	{
+		if (loweringStat == mintStat)
+			return oldNature; // Item fails if the relevant stat wouldn't change
+
+		loweringStat = mintStat;
+		
+		if (boostingStat == 0 || boostingStat == mintStat) // If changing from a neutral nature, or affecting the same stat twice, the stat you aren't minting is randomized.
+		{
+			do {
+				boostingStat = (Random32() % NUM_NATURE_STATS) + 1;
+			} while (boostingStat == loweringStat);
+		}
+	}
+	else
+	{
+		if (boostingStat == mintStat)
+			return oldNature; // Item fails if the relevant stat wouldn't change
+
+		boostingStat = mintStat;
+		
+		if (loweringStat == 0 || loweringStat == mintStat) // If changing from a neutral nature, or affecting the same stat twice, the stat you aren't minting is randomized.
+		{
+			do {
+				loweringStat = (Random32() % NUM_NATURE_STATS) + 1;
+			} while (loweringStat == boostingStat);
+		}
+	}
+	
+	// Search nature table for the nature with the stat changes specified above, and return it
+	for (i = 0; i < NUM_NATURES; i++)
+	{
+		if (gNatureStatTable[i][boostingStat - 1] == 1 && gNatureStatTable[i][loweringStat - 1] == -1)
+		{
+			return i;
+		}
+	}
+	
+	return NATURE_SERIOUS;
+}
+
 void ItemUseCB_Mint(u8 taskId, TaskFunc task)
 {
     s16 *data = gTasks[taskId].data;
@@ -5095,7 +5156,7 @@ void ItemUseCB_Mint(u8 taskId, TaskFunc task)
     tState = 0;
     tMonId = gPartyMenu.slotId;
     tOldNature = GetMonData(&gPlayerParty[tMonId], MON_DATA_HIDDEN_NATURE);
-    tNewNature = ItemId_GetSecondaryId(gSpecialVar_ItemId);
+    tNewNature = GetMintNatureChange(tOldNature, ItemId_GetSecondaryId(gSpecialVar_ItemId));
     SetWordTaskArg(taskId, tOldFunc, (uintptr_t)(gTasks[taskId].func));
     gTasks[taskId].func = Task_Mint;
 }

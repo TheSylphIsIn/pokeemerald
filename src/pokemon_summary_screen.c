@@ -3216,7 +3216,6 @@ static void PutPageWindowTilemaps(u8 page)
 
     for (i = 0; i < ARRAY_COUNT(sMonSummaryScreen->windowIds); i++)
 	{
-		DebugPrintf("%d", sMonSummaryScreen->windowIds[i]);
         PutWindowTilemap(sMonSummaryScreen->windowIds[i]);
 	}
 

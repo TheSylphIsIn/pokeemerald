@@ -72,6 +72,10 @@
 #define NATURE_QUIRKY   24
 #define NUM_NATURES     25
 
+// Flag for refactored mint items
+#define MINT_LOWERING_STAT 0x10
+#define MINT_RESET_STATS 0xFF
+
 // Pokémon Stats
 #define STAT_HP      0
 #define STAT_ATK     1

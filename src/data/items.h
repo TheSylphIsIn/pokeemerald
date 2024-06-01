@@ -1416,153 +1416,153 @@ const struct Item gItemsInfo[] =
 
 // Mints
 
-    [ITEM_LONELY_MINT] =
+    [ITEM_RED_MINT_LEAF] =
     {
-        .name = _("Lonely Mint"),
+        .name = _("R. Mint Leaf"),
         .price = (I_PRICE >= GEN_9) ? 20000 : 20,
         .description = COMPOUND_STRING(
-            "Can be smelled. It\n"
-            "ups Attack, but\n"
-            "reduces Defense."),
+            "When smelled,\n"
+            "raises a Pokémon's\n"
+            "natural Attack."),
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_Mint,
-        .secondaryId = NATURE_LONELY,
+        .secondaryId = STAT_ATK,
         .flingPower = 10,
     },
 
-    [ITEM_ADAMANT_MINT] =
+    [ITEM_RED_MINT_ROOT] =
     {
-        .name = _("Adamant Mint"),
+        .name = _("R. Mint Root"),
         .price = (I_PRICE >= GEN_9) ? 20000 : 20,
         .description = COMPOUND_STRING(
-            "Can be smelled. It\n"
-            "ups Attack, but\n"
-            "reduces Sp. Atk."),
+            "When smelled,\n"
+            "lowers a Pokémon's\n"
+            "natural Attack."),
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_Mint,
-        .secondaryId = NATURE_ADAMANT,
+        .secondaryId = STAT_ATK | MINT_LOWERING_STAT,
         .flingPower = 10,
     },
 
-    [ITEM_NAUGHTY_MINT] =
+    [ITEM_BLUE_MINT_LEAF] =
     {
-        .name = _("Naughty Mint"),
+        .name = _("B. Mint Leaf"),
         .price = (I_PRICE >= GEN_9) ? 20000 : 20,
         .description = COMPOUND_STRING(
-            "Can be smelled. It\n"
-            "ups Attack, but\n"
-            "reduces Sp. Def."),
+            "When smelled,\n"
+            "raises a Pokémon's\n"
+            "natural Defense."),
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_Mint,
-        .secondaryId = NATURE_NAUGHTY,
+        .secondaryId = STAT_DEF,
         .flingPower = 10,
     },
 
-    [ITEM_BRAVE_MINT] =
+    [ITEM_BLUE_MINT_ROOT] =
     {
-        .name = _("Brave Mint"),
+        .name = _("B. Mint Root"),
         .price = (I_PRICE >= GEN_9) ? 20000 : 20,
         .description = COMPOUND_STRING(
-            "Can be smelled. It\n"
-            "ups Attack, but\n"
-            "reduces Speed."),
+            "When smelled,\n"
+            "lowers a Pokémon's\n"
+            "natural Defense."),
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_Mint,
-        .secondaryId = NATURE_BRAVE,
+        .secondaryId = STAT_DEF | MINT_LOWERING_STAT,
         .flingPower = 10,
     },
 
-    [ITEM_BOLD_MINT] =
+    [ITEM_GREEN_MINT_LEAF] =
     {
-        .name = _("Bold Mint"),
+        .name = _("G. Mint Leaf"),
         .price = (I_PRICE >= GEN_9) ? 20000 : 20,
         .description = COMPOUND_STRING(
-            "Can be smelled. It\n"
-            "ups Defense, but\n"
-            "reduces Attack."),
+            "When smelled,\n"
+            "raises a Pokémon's\n"
+            "natural Speed."),
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_Mint,
-        .secondaryId = NATURE_BOLD,
+        .secondaryId = STAT_SPEED,
         .flingPower = 10,
     },
 
-    [ITEM_IMPISH_MINT] =
+    [ITEM_GREEN_MINT_ROOT] =
     {
-        .name = _("Impish Mint"),
+        .name = _("G. Mint Root"),
         .price = (I_PRICE >= GEN_9) ? 20000 : 20,
         .description = COMPOUND_STRING(
-            "Can be smelled. It\n"
-            "ups Defense, but\n"
-            "reduces Sp. Atk."),
+            "When smelled,\n"
+            "lowers a Pokémon's\n"
+            "natural Speed."),
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_Mint,
-        .secondaryId = NATURE_IMPISH,
+        .secondaryId = STAT_SPEED | MINT_LOWERING_STAT,
         .flingPower = 10,
     },
 
-    [ITEM_LAX_MINT] =
+    [ITEM_SKY_MINT_LEAF] =
     {
-        .name = _("Lax Mint"),
+        .name = _("T. Mint Leaf"),
         .price = (I_PRICE >= GEN_9) ? 20000 : 20,
         .description = COMPOUND_STRING(
-            "Can be smelled. It\n"
-            "ups Defense, but\n"
-            "reduces Sp. Def."),
+            "When smelled,\n"
+            "raises a Pokémon's\n"
+            "natural Sp. Atk."),
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_Mint,
-        .secondaryId = NATURE_LAX,
+        .secondaryId = STAT_SPATK,
         .flingPower = 10,
     },
 
-    [ITEM_RELAXED_MINT] =
+    [ITEM_SKY_MINT_ROOT] =
     {
-        .name = _("Relaxed Mint"),
+        .name = _("T. Mint Root"),
         .price = (I_PRICE >= GEN_9) ? 20000 : 20,
         .description = COMPOUND_STRING(
-            "Can be smelled. It\n"
-            "ups Defense, but\n"
-            "reduces Speed."),
+            "When smelled,\n"
+            "lowers a Pokémon's\n"
+            "natural Sp. Atk."),
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_Mint,
-        .secondaryId = NATURE_RELAXED,
+        .secondaryId = STAT_SPATK | MINT_LOWERING_STAT,
         .flingPower = 10,
     },
 
-    [ITEM_MODEST_MINT] =
+    [ITEM_PINK_MINT_LEAF] =
     {
-        .name = _("Modest Mint"),
+        .name = _("P. Mint Leaf"),
         .price = (I_PRICE >= GEN_9) ? 20000 : 20,
         .description = COMPOUND_STRING(
-            "Can be smelled. It\n"
-            "ups Sp. Atk, but\n"
-            "reduces Attack."),
+            "When smelled,\n"
+            "raises a Pokémon's\n"
+            "natural Sp. Def."),
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_Mint,
-        .secondaryId = NATURE_MODEST,
+        .secondaryId = STAT_SPDEF,
         .flingPower = 10,
     },
 
-    [ITEM_MILD_MINT] =
+    [ITEM_PINK_MINT_ROOT] =
     {
-        .name = _("Mild Mint"),
+        .name = _("P. Mint Root"),
         .price = (I_PRICE >= GEN_9) ? 20000 : 20,
         .description = COMPOUND_STRING(
-            "Can be smelled. It\n"
-            "ups Sp. Atk, but\n"
-            "reduces Defense."),
+            "When smelled,\n"
+            "lowers a Pokémon's\n"
+            "natural Sp. Def."),
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_Mint,
-        .secondaryId = NATURE_MILD,
+        .secondaryId = STAT_SPDEF | MINT_LOWERING_STAT,
         .flingPower = 10,
     },
 
@@ -1716,18 +1716,18 @@ const struct Item gItemsInfo[] =
         .flingPower = 10,
     },
 
-    [ITEM_SERIOUS_MINT] =
+    [ITEM_WHITE_MINT] =
     {
-        .name = _("Serious Mint"),
+        .name = _("White Mint"),
         .price = (I_PRICE >= GEN_9) ? 20000 : 20,
         .description = COMPOUND_STRING(
-            "Can be smelled. It\n"
-            "makes each stat\n"
-            "grow equally."),
+            "When smelled,\n"
+            "resets a Pokémon's\n"
+            "natural stats."),
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_Mint,
-        .secondaryId = NATURE_SERIOUS,
+        .secondaryId = MINT_RESET_STATS,
         .flingPower = 10,
     },
 
