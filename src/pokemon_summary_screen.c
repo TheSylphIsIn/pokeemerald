@@ -3987,8 +3987,6 @@ static void PrintMoveDetails(u16 move)
         if (sMonSummaryScreen->currPageIndex == PSS_PAGE_BATTLE_MOVES)
         {
             moveEffect = gMovesInfo[move].effect;
-            if (B_SHOW_CATEGORY_ICON == TRUE)
-                ShowCategoryIcon(GetBattleMoveCategory(move));
             PrintMovePowerAndAccuracy(move);
 
             if (moveEffect != EFFECT_PLACEHOLDER)
