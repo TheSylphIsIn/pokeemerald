@@ -1056,7 +1056,7 @@ static void CalculateConditionEnhancements(void)
     for (i = 0; i < CONDITION_COUNT; i++)
         sInfo->enhancements[i] = sInfo->conditionsAfterBlock[i] - sInfo->conditionsBeforeBlock[i];
 	
-	sInfo->changedNature = TryUpdateNature(mon);
+	// sInfo->changedNature = TryUpdateNature(mon);
 }
 
 static void CalculatePokeblockEffectiveness(struct Pokeblock *pokeblock, struct Pokemon *mon)
@@ -1698,7 +1698,8 @@ static const u8 sConditionToStat[CONDITION_COUNT] =
     [CONDITION_BEAUTY] = STAT_SPATK
 };
 
-static u8 TryUpdateNature(struct Pokemon *mon)
+// Deprecated by mints. Worth revisiting at some point ?
+static UNUSED u8 TryUpdateNature(struct Pokemon *mon)
 {
 	u32 statToBoost = 0;
 	u32 highestCondition = 0;
@@ -1725,16 +1726,16 @@ static u8 TryUpdateNature(struct Pokemon *mon)
 	if (statToBoost == statToLower || highestCondition < 30) // don't change nature if best condition is below 30 or it would be a neutral nature
 		return FALSE;
 	
-	for (value = 0; value < NUM_NATURES; value++)
-	{
-		if (gNatureStatTable[value][statToBoost - 1] == 1 && gNatureStatTable[value][statToLower - 1] == -1
-			&& GetMonData(mon, MON_DATA_NATURE, 0) != value)
-		{
-			SetMonData(mon, MON_DATA_NATURE, &value);
-			CalculateMonStats(mon);
-			return value;
-		}
-	}
+	// for (value = 0; value < NUM_NATURES; value++)
+	// {
+		// if (gNatureStatTable[value][statToBoost - 1] == 1 && gNatureStatTable[value][statToLower - 1] == -1
+			// && GetMonData(mon, MON_DATA_NATURE, 0) != value)
+		// {
+			// SetMonData(mon, MON_DATA_NATURE, &value);
+			// CalculateMonStats(mon);
+			// return value;
+		// }
+	// }
 	
 	return FALSE;
 	

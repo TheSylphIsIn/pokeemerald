@@ -333,7 +333,6 @@ static void DestroyMoveSelectorSprites(u8);
 static void SetMainMoveSelectorColor(u8);
 static void KeepMoveSelectorVisible(u8);
 static void SummaryScreen_DestroyAnimDelayTask(void);
-static u8 GetNatureStatChange(u8 stat);
 static void SwitchToDataScreen(u8 taskId);
 static void Task_ScrollDownToDataScreen(u8 taskId);
 static void DrawSummaryDataScreenText(void);
@@ -3142,19 +3141,19 @@ static void PrintPageNamesAndStats(void)
     statsXPos = 6 + GetStringCenterAlignXOffset(FONT_NORMAL, gText_HP4, 42);
     PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_LEFT, gText_HP4, statsXPos, 1, 0, 1);
     statsXPos = 6 + GetStringCenterAlignXOffset(FONT_NORMAL, gText_Attack3, 42);
-    PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_LEFT, gText_Attack3, statsXPos, 17, 0, GetNatureStatChange(statIndex));
+    PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_LEFT, gText_Attack3, statsXPos, 17, 0, 1);
 	statIndex++;
     statsXPos = 6 + GetStringCenterAlignXOffset(FONT_NORMAL, gText_Defense3, 42);
-    PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_LEFT, gText_Defense3, statsXPos, 33, 0, GetNatureStatChange(statIndex));
+    PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_LEFT, gText_Defense3, statsXPos, 33, 0, 1);
 	statIndex++;
     statsXPos = 2 + GetStringCenterAlignXOffset(FONT_NORMAL, gText_SpAtk4, 36);
-    PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_RIGHT, gText_SpAtk4, statsXPos, 1, 0, GetNatureStatChange(statIndex + 1)); // this is the 3rd entry, but STAT_SPATK is 4
+    PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_RIGHT, gText_SpAtk4, statsXPos, 1, 0, 1); // this is the 3rd entry, but STAT_SPATK is 4
 	statIndex++;
     statsXPos = 2 + GetStringCenterAlignXOffset(FONT_NORMAL, gText_SpDef4, 36);
-    PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_RIGHT, gText_SpDef4, statsXPos, 17, 0, GetNatureStatChange(statIndex + 1)); //  this is the 4th entry, but STAT_SPDEF is 5
+    PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_RIGHT, gText_SpDef4, statsXPos, 17, 0, 1); //  this is the 4th entry, but STAT_SPDEF is 5
 	statIndex++;
     statsXPos = 2 + GetStringCenterAlignXOffset(FONT_NORMAL, gText_Speed2, 36);
-    PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_RIGHT, gText_Speed2, statsXPos, 33, 0, GetNatureStatChange(statIndex - 2)); // this is the 5th entry, but STAT_SPEED is 3
+    PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_RIGHT, gText_Speed2, statsXPos, 33, 0, 1); // this is the 5th entry, but STAT_SPEED is 3
     PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_EXP, gText_ExpPoints, 6, 1, 0, 1);
     PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_EXP, gText_NextLv, 6, 17, 0, 1);
     PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATUS, gText_Status, 2, 1, 0, 1);
@@ -4516,18 +4515,3 @@ static void KeepMoveSelectorVisible(u8 firstSpriteId)
     }
 }
 
-static u8 GetNatureStatChange(u8 stat)
-{
-	const s8 *natureMod = gNatureStatTable[sMonSummaryScreen->summary.nature];
-	u32 modifier = natureMod[stat];
-	
-	switch (modifier) 
-	{
-		case 1:
-			return 2;
-		case -1:
-			return 5;
-		default:
-			return 1;
-	}
-}

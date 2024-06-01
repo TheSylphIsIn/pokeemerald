@@ -91,7 +91,6 @@ enum {
     MON_DATA_LAND_RIBBON,
     MON_DATA_SKY_RIBBON,
     MON_DATA_COUNTRY_RIBBON,
-	MON_DATA_NATURE,
     MON_DATA_MODERN_FATEFUL_ENCOUNTER,
     MON_DATA_KNOWN_MOVES,
     MON_DATA_RIBBON_COUNT,
@@ -198,7 +197,7 @@ struct PokemonSubstruct3
     u32 landRibbon:1;     // Never distributed.
     u32 skyRibbon:1;      // Never distributed.
     u32 countryRibbon:1;  // Distributed during Pokémon Festa '04 and '05 to tournament winners.
-	u32 nature:5;
+	u32 filler:5; // formerly nature, obsoleted by expansion's mints
     u32 abilityNum:2;
  // The functionality of this bit changed in FRLG:
  // In RS, this bit does nothing, is never set, & is accidentally unset when hatching Eggs.
@@ -637,7 +636,6 @@ void ZeroMonData(struct Pokemon *mon);
 void ZeroPlayerPartyMons(void);
 void ZeroEnemyPartyMons(void);
 void CreateMon(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 hasFixedPersonality, u32 fixedPersonality, u8 otIdType, u32 fixedOtId);
-void CreateEnemyMonWithNature(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 nature);
 void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, u8 hasFixedPersonality, u32 fixedPersonality, u8 otIdType, u32 fixedOtId);
 void CreateMonWithNature(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 nature);
 void CreateMonWithGenderNatureLetter(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 gender, u8 nature, u8 unownLetter);

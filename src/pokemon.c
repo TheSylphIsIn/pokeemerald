@@ -1029,7 +1029,6 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
     SetBoxMonData(boxMon, MON_DATA_POKEBALL, &value);
     SetBoxMonData(boxMon, MON_DATA_OT_GENDER, &gSaveBlock2Ptr->playerGender);
 	value = GetNatureFromPersonality(personality);
-	SetBoxMonData(boxMon, MON_DATA_NATURE, &value);
 
     if (fixedIV < USE_RANDOM_IVS)
     {
@@ -1129,28 +1128,15 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
 
 void CreateMonWithNature(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 nature)
 {
-    u32 personality = Random32();
+    u32 personality;
+	
+	do
+    {
+        personality = Random32();
+    }
+    while (nature != GetNatureFromPersonality(personality));
 
     CreateMon(mon, species, level, fixedIV, TRUE, personality, OT_ID_PLAYER_ID, 0);
-	
-	if (nature != GetNatureFromPersonality(personality))
-	{
-		SetMonData(mon, MON_DATA_NATURE, &nature);
-		CalculateMonStats(mon);
-	}
-}
-
-void CreateEnemyMonWithNature(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 nature)
-{
-    u32 personality = Random32();
-    
-    CreateMon(mon, species, level, fixedIV, TRUE, personality, OT_ID_RANDOM_NO_SHINY, 0);
-	
-	if (nature != GetNatureFromPersonality(personality))
-	{
-		SetMonData(mon, MON_DATA_NATURE, &nature);
-		CalculateMonStats(mon);
-	}
 }
 
 void CreateMonWithGenderNatureLetter(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 gender, u8 nature, u8 unownLetter)
@@ -1166,7 +1152,8 @@ void CreateMonWithGenderNatureLetter(struct Pokemon *mon, u16 species, u8 level,
             personality = Random32();
             actualLetter = GET_UNOWN_LETTER(personality);
         }
-        while (gender != GetGenderFromSpeciesAndPersonality(species, personality)
+        while (nature != GetNatureFromPersonality(personality)
+            || gender != GetGenderFromSpeciesAndPersonality(species, personality)
             || actualLetter != unownLetter - 1);
     }
     else
@@ -1175,16 +1162,11 @@ void CreateMonWithGenderNatureLetter(struct Pokemon *mon, u16 species, u8 level,
         {
             personality = Random32();
         }
-        while (gender != GetGenderFromSpeciesAndPersonality(species, personality));
+        while (nature != GetNatureFromPersonality(personality)
+            || gender != GetGenderFromSpeciesAndPersonality(species, personality));
     }
 
     CreateMon(mon, species, level, fixedIV, TRUE, personality, OT_ID_PLAYER_ID, 0);
-	
-	if (nature != GetNatureFromPersonality(personality))
-	{
-		SetMonData(mon, MON_DATA_NATURE, &nature);
-		CalculateMonStats(mon);
-	}
 }
 
 // This is only used to create Wally's Ralts.
@@ -1409,13 +1391,12 @@ void CreateMonWithEVSpreadNatureOTID(struct Pokemon *mon, u16 species, u8 level,
     u16 evAmount;
 
     // i is reused as personality value
-    i = Random32();
+    do
+    {
+        i = Random32();
+    } while (nature != GetNatureFromPersonality(i));
 
     CreateMon(mon, species, level, fixedIV, TRUE, i, OT_ID_PRESET, otId);
-	
-	if (nature != GetNatureFromPersonality(i))
-		SetMonData(mon, MON_DATA_NATURE, &nature);
-	
     evsBits = evSpread;
     for (i = 0; i < NUM_STATS; i++)
     {
@@ -4239,7 +4220,7 @@ u8 *UseStatIncreaseItem(u16 itemId)
 
 u8 GetNature(struct Pokemon *mon)
 {
-    return GetMonData(mon, MON_DATA_NATURE, 0);
+    return GetMonData(mon, MON_DATA_PERSONALITY, 0) % NUM_NATURES;
 }
 
 u8 GetNatureFromPersonality(u32 personality)
