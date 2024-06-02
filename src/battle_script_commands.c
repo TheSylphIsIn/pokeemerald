@@ -617,6 +617,7 @@ static void Cmd_jumpifoppositegenders(void);
 static void Cmd_unused(void);
 static void Cmd_tryworryseed(void);
 static void Cmd_callnative(void);
+static void ShowDamageNumbers(void);
 
 void (* const gBattleScriptingCommandsTable[])(void) =
 {
@@ -7512,6 +7513,8 @@ static void Cmd_hitanimation(void)
     }
     else if (!(gHitMarker & HITMARKER_IGNORE_SUBSTITUTE) || !(DoesSubstituteBlockMove(gBattlerAttacker, battler, gCurrentMove)) || gDisableStructs[battler].substituteHP == 0)
     {
+		if (gSaveBlock2Ptr->optionsDamageNumbers)
+			ShowDamageNumbers();
         BtlController_EmitHitAnimation(battler, BUFFER_A);
         MarkBattlerForControllerExec(battler);
         gBattlescriptCurrInstr = cmd->nextInstr;
@@ -15690,6 +15693,270 @@ static void Cmd_callnative(void)
     void (*func)(void) = cmd->func;
     func();
 }
+
+static const u32 sDamageNumber_0[] = INCBIN_U32("graphics/battle_interface/damage_0.4bpp");
+static const u32 sDamageNumber_1[] = INCBIN_U32("graphics/battle_interface/damage_1.4bpp");
+static const u32 sDamageNumber_2[] = INCBIN_U32("graphics/battle_interface/damage_2.4bpp");
+static const u32 sDamageNumber_3[] = INCBIN_U32("graphics/battle_interface/damage_3.4bpp");
+static const u32 sDamageNumber_4[] = INCBIN_U32("graphics/battle_interface/damage_4.4bpp");
+static const u32 sDamageNumber_5[] = INCBIN_U32("graphics/battle_interface/damage_5.4bpp");
+static const u32 sDamageNumber_6[] = INCBIN_U32("graphics/battle_interface/damage_6.4bpp");
+static const u32 sDamageNumber_7[] = INCBIN_U32("graphics/battle_interface/damage_7.4bpp");
+static const u32 sDamageNumber_8[] = INCBIN_U32("graphics/battle_interface/damage_8.4bpp");
+static const u32 sDamageNumber_9[] = INCBIN_U32("graphics/battle_interface/damage_9.4bpp");
+
+static const u16 sDamageNumber_NormalPalette[] = INCBIN_U16("graphics/battle_interface/damage_num_normal.gbapal");
+
+static const struct SpriteFrameImage sDamageNumberPicTable[] =
+{
+    obj_frame_tiles(sDamageNumber_0),
+    obj_frame_tiles(sDamageNumber_1),
+    obj_frame_tiles(sDamageNumber_2),
+    obj_frame_tiles(sDamageNumber_3),
+    obj_frame_tiles(sDamageNumber_4),
+    obj_frame_tiles(sDamageNumber_5),
+    obj_frame_tiles(sDamageNumber_6),
+    obj_frame_tiles(sDamageNumber_7),
+    obj_frame_tiles(sDamageNumber_8),
+    obj_frame_tiles(sDamageNumber_9),
+};
+
+static const struct OamData sDamageNumberOam =
+{
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(16x16),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(16x16),
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const union AnimCmd sDamageNumsAnim_0[] =
+{
+    ANIMCMD_FRAME(0, 30),
+	ANIMCMD_END
+};
+
+static const union AnimCmd sDamageNumsAnim_1[] =
+{
+    ANIMCMD_FRAME(1, 30),
+	ANIMCMD_END
+};
+
+static const union AnimCmd sDamageNumsAnim_2[] =
+{
+    ANIMCMD_FRAME(2, 30),
+	ANIMCMD_END
+};
+
+static const union AnimCmd sDamageNumsAnim_3[] =
+{
+    ANIMCMD_FRAME(3, 30),
+	ANIMCMD_END
+};
+
+static const union AnimCmd sDamageNumsAnim_4[] =
+{
+    ANIMCMD_FRAME(4, 30),
+	ANIMCMD_END
+};
+
+static const union AnimCmd sDamageNumsAnim_5[] =
+{
+    ANIMCMD_FRAME(5, 30),
+	ANIMCMD_END
+};
+
+static const union AnimCmd sDamageNumsAnim_6[] =
+{
+    ANIMCMD_FRAME(6, 30),
+	ANIMCMD_END
+};
+
+static const union AnimCmd sDamageNumsAnim_7[] =
+{
+    ANIMCMD_FRAME(7, 30),
+	ANIMCMD_END
+};
+
+static const union AnimCmd sDamageNumsAnim_8[] =
+{
+    ANIMCMD_FRAME(8, 30),
+	ANIMCMD_END
+};
+
+static const union AnimCmd sDamageNumsAnim_9[] =
+{
+    ANIMCMD_FRAME(9, 30),
+	ANIMCMD_END
+};
+
+static const union AnimCmd *const sDamageNumAnims[] =
+{
+    sDamageNumsAnim_0,
+    sDamageNumsAnim_1,
+    sDamageNumsAnim_2,
+    sDamageNumsAnim_3,
+    sDamageNumsAnim_4,
+    sDamageNumsAnim_5,
+    sDamageNumsAnim_6,
+    sDamageNumsAnim_7,
+    sDamageNumsAnim_8,
+    sDamageNumsAnim_9,
+};
+
+#define PALETTE_TAG_DAMAGE_NUMS 33033
+
+static const struct SpritePalette sIndicatorCornerSpritePalette =
+{
+    .data = sDamageNumber_NormalPalette,
+    .tag = PALETTE_TAG_DAMAGE_NUMS
+};
+
+static void SpriteCB_DamageNumber(struct Sprite *sprite);
+
+static const struct SpriteTemplate sDamageNumberSpriteTemplate =
+{
+    .tileTag = TAG_NONE,
+    .paletteTag = PALETTE_TAG_DAMAGE_NUMS,
+    .oam = &sDamageNumberOam,
+    .anims = sDamageNumAnims,
+    .images = sDamageNumberPicTable,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCB_DamageNumber,
+};
+
+#define sDelay data[0]
+#define sStayTimer data[1]
+#define sState data[2]
+#define sTracker data[3]
+
+static void SpriteCB_DamageNumber(struct Sprite *sprite)
+{
+	sprite->sTracker++;
+	
+	switch (sprite->sState)
+	{
+		case 0: // Sprites appear in sequence if there are multiple
+			if (sprite->sDelay == 0)
+			{
+				sprite->invisible = FALSE;
+				sprite->sState++;
+				sprite->sTracker = 0;
+			}
+			else
+				sprite->sDelay--;
+			break;
+		case 1: // Sprite bounces up a teeny bit 
+			sprite->y--;
+			if (sprite->sTracker == 4)
+			{
+				sprite->sTracker = 0;
+				sprite->sState++;
+			}
+			break;
+		case 2:
+			sprite->y++; // Sprite slides back down to a resting position
+			if (sprite->sTracker == 2)
+			{
+				sprite->sTracker = 0;
+				sprite->sState++;
+			}
+			break;
+		case 3: // Sprite slides down again when it's about to disappear
+			if (sprite->sStayTimer < 4)
+				sprite->y++;
+			break;
+		default:
+			sprite->sTracker = 0;
+	}
+	
+	if (sprite->invisible == FALSE)
+	{
+		sprite->sStayTimer--;
+		if (sprite->sStayTimer == 0)
+			DestroySprite(sprite);
+	}
+}
+
+static u32 GetDamageDigit(u32 damage, u32 digit) 
+{
+	u32 result = 0;
+	while (damage >= digit)
+	{
+		result++;
+		damage -= digit;
+	}
+	
+	return result;
+}
+
+#define DAMAGE_NUMBER_TIME 45
+#define DAMAGE_NUMBER_DELAY 2
+
+static void CreateDamageNumberSprite(u32 number, u32 numPrinted)
+{
+	u32 spriteId;
+	
+	spriteId = CreateSprite(&sDamageNumberSpriteTemplate, GetBattlerSpriteCoord(gBattlerTarget, BATTLER_COORD_X) + (7 * numPrinted),
+							GetBattlerSpriteCoord(gBattlerTarget, BATTLER_COORD_Y) + 2, 0);
+	StartSpriteAnim(&gSprites[spriteId], number);
+	gSprites[spriteId].sDelay = DAMAGE_NUMBER_DELAY * numPrinted;
+	gSprites[spriteId].sStayTimer = DAMAGE_NUMBER_TIME;
+	gSprites[spriteId].invisible = TRUE;
+}
+
+
+static void ShowDamageNumbers(void)
+{
+	u32 damage;
+	u32 spriteNumber;
+	u32 numPrinted = 0; // used to avoid printing 0s if it is the highest place in the value
+	
+	damage = (gBattleMoveDamage < 10000) ? gBattleMoveDamage : 9999;
+	
+	LoadSpritePalette(&sIndicatorCornerSpritePalette);
+	
+	spriteNumber = GetDamageDigit(damage, 1000);
+	damage -= spriteNumber * 1000;
+	if (spriteNumber > 0)
+	{
+		CreateDamageNumberSprite(spriteNumber, numPrinted);
+		numPrinted++;
+	}
+	
+	spriteNumber = GetDamageDigit(damage, 100);
+	damage -= spriteNumber * 100;
+	if (spriteNumber > 0 || numPrinted != 0)
+	{
+		CreateDamageNumberSprite(spriteNumber, numPrinted);
+		numPrinted++;
+	}
+	
+	spriteNumber = GetDamageDigit(damage, 10);
+	damage -= spriteNumber * 10;
+	if (spriteNumber > 0 || numPrinted != 0)
+	{
+		CreateDamageNumberSprite(spriteNumber, numPrinted);
+		numPrinted++;
+	}
+	
+	spriteNumber = damage;
+	CreateDamageNumberSprite(spriteNumber, numPrinted);
+}
+
+#undef sDelay
+#undef sStayTimer
+#undef sState
+#undef sTracker
+#undef DAMAGE_NUMBER_TIME
+#undef DAMAGE_NUMBER_DELAY
 
 // Callnative Funcs
 void BS_CalcMetalBurstDmg(void)

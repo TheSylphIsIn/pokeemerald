@@ -513,7 +513,8 @@ struct SaveBlock2
 			 u16 optionsSound:1; // stereo or mono
 			 u16 optionsBattleStyle:1; // shift or set
 			 u16 optionsBattleHelpers:1; // true or false. Provides information that the player should have memorized, such as type matchups or nature stat mods
-			 u8 optionsPadding:8;
+			 u8 optionsDamageNumbers:1;
+			 u8 optionsPadding:7;
     /*0x18*/ struct Pokedex pokedex;
     /*0x90*/ u8 filler_90[0x8];
     /*0x98*/ struct Time localTimeOffset;

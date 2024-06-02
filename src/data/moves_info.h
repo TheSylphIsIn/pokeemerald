@@ -20128,8 +20128,8 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     {
         .name = COMPOUND_STRING("Chill Touch"),
         .description = COMPOUND_STRING(
-            "\n"
-			""),
+            "May inflict a status\n"
+			"problem with evil power."),
         .effect = EFFECT_HIT,
         .power = 60,
         .type = TYPE_GHOST,
