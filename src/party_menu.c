@@ -4749,61 +4749,6 @@ void ItemUseCB_Medicine(u8 taskId, TaskFunc task)
             ResetHPTaskData(taskId, 0, hp);
             return;
         }
-		else if (item == ITEM_ABILITY_PILL) // ability pills swap slots without changing between normal/hidden.
-		{
-			value = GetMonData(mon, MON_DATA_ABILITY_NUM, NULL);
-			if (value == 0 || value == 2) // if ability is 0/2, set it to 1/3.
-			{
-				value++;
-				SetMonData(mon, MON_DATA_ABILITY_NUM, &value);
-			}
-			else // if ability is 1/3, set it to 0/2.
-			{
-				value--;
-				SetMonData(mon, MON_DATA_ABILITY_NUM, &value);
-			}
-			GetMonNickname(mon, gStringVar1);
-			StringCopy(gStringVar2, gAbilitiesInfo[gSpeciesInfo[GetMonData(mon, MON_DATA_SPECIES, NULL)].abilities[value]].name);
-			StringExpandPlaceholders(gStringVar4, gText_PkmnAbilityChanged);
-			DisplayPartyMenuMessage(gStringVar4, FALSE);
-			ScheduleBgCopyTilemapToVram(2);
-			gTasks[taskId].func = task;
-		}
-		else if (item == ITEM_DREAM_PILL) // dream pills swap between normal/hidden without changing ability slots*.
-		{
-			value = GetMonData(mon, MON_DATA_ABILITY_NUM, NULL);
-			if (value == 3 && gSpeciesInfo[GetMonData(mon, MON_DATA_SPECIES, NULL)].abilities[1] == 0)
-			/*
-			If a mon has one normal ability but two hidden abilities
-			(e.g. {ABILITY_OVERGROW, ABILITY_NONE, ABILITY_CHLOROPHYLL, ABILITY_THICK_FAT}),
-			this allows dream pill to change ability from hidden to normal without needing to
-			use an ability pill to change from hidden 2 to hidden 1 first.
-			*/
-			{
-				value = 0;
-				SetMonData(mon, MON_DATA_ABILITY_NUM, &value);
-			}
-			else if (value < 2)
-			{ /* 
-			If mon has its normal ability, change to the corresponding hidden slot.
-			Note that if a mon does not have two different hidden abilities,
-			The second hidden slot should be set to the same as the first, not ABILITY_NONE.
-			*/
-				value += 2;
-				SetMonData(mon, MON_DATA_ABILITY_NUM, &value);
-			}
-			else
-			{ // If a mon has its hidden ability, change to the corresponding normal slot.
-				value -= 2;
-				SetMonData(mon, MON_DATA_ABILITY_NUM, &value);
-			}
-			GetMonNickname(mon, gStringVar1);
-			StringCopy(gStringVar2, gAbilitiesInfo[gSpeciesInfo[GetMonData(mon, MON_DATA_SPECIES, NULL)].abilities[value]].name);
-			StringExpandPlaceholders(gStringVar4, gText_PkmnAbilityChanged);
-			DisplayPartyMenuMessage(gStringVar4, FALSE);
-			ScheduleBgCopyTilemapToVram(2);
-			gTasks[taskId].func = task;
-		}
         else
         {
             GetMonNickname(mon, gStringVar1);
@@ -4834,9 +4779,8 @@ void Task_AbilityCapsule(u8 taskId)
     {
     case 0:
         // Can't use.
-        if (gSpeciesInfo[tSpecies].abilities[0] == gSpeciesInfo[tSpecies].abilities[1]
-            || gSpeciesInfo[tSpecies].abilities[1] == 0
-            || tAbilityNum > 1
+        if (gSpeciesInfo[tSpecies].abilities[tAbilityNum] == gSpeciesInfo[tSpecies].abilities[tAbilityNum ^ 1]
+            || gSpeciesInfo[tSpecies].abilities[tAbilityNum] == 0
             || !tSpecies)
         {
             gPartyMenuUseExitCallback = FALSE;
@@ -4917,6 +4861,13 @@ void Task_AbilityPatch(u8 taskId)
     static const u8 askText[] = _("Would you like to change {STR_VAR_1}'s\nability to {STR_VAR_2}?");
     static const u8 doneText[] = _("{STR_VAR_1}'s ability became\n{STR_VAR_2}!{PAUSE_UNTIL_PRESS}");
     s16 *data = gTasks[taskId].data;
+	
+	// Sanitize edge cases of mons having 2 normal/1 hidden or 1 normal/2 hidden, so you don't have to capsule them first
+	if (gSpeciesInfo[tSpecies].abilities[tAbilityNum] == 0
+		&& gSpeciesInfo[tSpecies].abilities[tAbilityNum ^ 1] != 0)
+	{
+		tAbilityNum = tAbilityNum ^ 1;
+	}
 
     switch (tState)
     {
@@ -4994,10 +4945,7 @@ void ItemUseCB_AbilityPatch(u8 taskId, TaskFunc task)
     tState = 0;
     tMonId = gPartyMenu.slotId;
     tSpecies = GetMonData(&gPlayerParty[tMonId], MON_DATA_SPECIES, NULL);
-    if (GetMonData(&gPlayerParty[tMonId], MON_DATA_ABILITY_NUM, NULL) == 2)
-        tAbilityNum = 0;
-    else
-        tAbilityNum = 2;
+    tAbilityNum = GetMonData(&gPlayerParty[tMonId], MON_DATA_ABILITY_NUM, NULL) ^ 2;
     SetWordTaskArg(taskId, tOldFunc, (uintptr_t)(gTasks[taskId].func));
     gTasks[taskId].func = Task_AbilityPatch;
 }
