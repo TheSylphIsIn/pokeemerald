@@ -94,11 +94,13 @@ DropperPoint_EventScript_Calvin::
 	end
 	
 DropperPoint_EventScript_MorganAwake::
+	speakername SpeakerName_Morgan
 	goto_if_eq VAR_FONEI_COAST_STATE, 2, DropperPoint_EventScript_MorganPanic
 	msgbox DropperPoint_Text_Morgan2, MSGBOX_NPC
 	end
 	
 DropperPoint_EventScript_CalvinAwake::
+	speakername SpeakerName_Player
 	msgbox DropperPoint_Text_Calvin2, MSGBOX_NPC
 	end
 
