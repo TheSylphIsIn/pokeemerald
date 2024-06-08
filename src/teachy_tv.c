@@ -291,11 +291,11 @@ static const u32 sSampleUiTiles[] = INCBIN_U32("graphics/teachy_tv/tiles.4bpp.lz
 // New graphics for the buttons. Create these from 4bpp indexed PNGs, just like before.
 static const u32 sTeachyTv_IndicatorCorner[] = INCBIN_U32("graphics/teachy_tv/indicator_corner.4bpp");
 static const u32 sTeachyTv_IndicatorCorner2[] = INCBIN_U32("graphics/teachy_tv/indicator_corner_2.4bpp");
-static const u32 sSampleUiJohtoButton[] = INCBIN_U32("graphics/teachy_tv/johto.4bpp");
-static const u32 sSampleUiHoennButton[] = INCBIN_U32("graphics/teachy_tv/hoenn.4bpp");
-static const u32 sSampleUiSinnohButton[] = INCBIN_U32("graphics/teachy_tv/sinnoh.4bpp");
-static const u32 sSampleUiUnovaButton[] = INCBIN_U32("graphics/teachy_tv/unova.4bpp");
-static const u32 sSampleUiKalosButton[] = INCBIN_U32("graphics/teachy_tv/kalos.4bpp");
+static const u32 sSampleUiJohtoButton[] = INCBIN_U32("graphics/teachy_tv/indicator_corner.4bpp");
+static const u32 sSampleUiHoennButton[] = INCBIN_U32("graphics/teachy_tv/indicator_corner.4bpp");
+static const u32 sSampleUiSinnohButton[] = INCBIN_U32("graphics/teachy_tv/indicator_corner.4bpp");
+static const u32 sSampleUiUnovaButton[] = INCBIN_U32("graphics/teachy_tv/indicator_corner.4bpp");
+static const u32 sSampleUiKalosButton[] = INCBIN_U32("graphics/teachy_tv/indicator_corner.4bpp");
 
 static const u32 sSampleUiTilemap[] = INCBIN_U32("graphics/teachy_tv/tilemap.bin.lz");
 static const u32 sSampleUiPanelTilemap[] = INCBIN_U32("graphics/teachy_tv/panel_tilemap.bin.lz");
