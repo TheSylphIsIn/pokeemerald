@@ -100,7 +100,7 @@ DropperPoint_EventScript_MorganAwake::
 	end
 	
 DropperPoint_EventScript_CalvinAwake::
-	speakername SpeakerName_Player
+	speakername SpeakerName_Calvin
 	msgbox DropperPoint_Text_Calvin2, MSGBOX_NPC
 	end
 
