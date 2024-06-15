@@ -1,0 +1,275 @@
+const LOCALID_MANGROVE = 1
+const LOCALID_MORGAN = 2
+const LOCALID_CALVIN = 3
+const LOCALID_GRUNT = 4
+
+mapscripts LittlerootTown_ProfessorBirchsLab_MapScripts
+{
+	MAP_SCRIPT_ON_LOAD 
+	{
+		if (var(VAR_FONEI_COAST_STATE) >= 4)
+		{
+			setmetatile(6, 1, 0x20B, TRUE)
+		}
+	}
+	MAP_SCRIPT_ON_FRAME_TABLE
+	[
+		VAR_FONEI_COAST_STATE, 3 
+		{
+			lockall
+			speakername(SpeakerName_Mangrove)
+			msgbox("{PLAYER}, there you are.\n" "Come here, please.", MSGBOX_AUTOCLOSE)
+			applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_WalkUp6)
+			waitmovement(0)
+			speakername(SpeakerName_Mangrove)
+			msgbox("Your friends were just telling me\n" "an interesting story…\p" "You say you're from a world where\n" "Pokémon only exist in video games.\l"
+					"The three of you spent a night\l" "camping in some supposedly haunted\l" "ruins, and when you woke up, you were\l" "here in the {EMPHASIS_BLUE}Fonei{EMPHASIS_OFF} region."
+					, MSGBOX_AUTOCLOSE)
+			applymovement(LOCALID_MANGROVE, Common_Movement_FaceRight)
+			waitmovement(0)
+			delay(30)
+			speakername(SpeakerName_Mangrove)
+			msgbox("It sounds quite unbelievable…", MSGBOX_DEFAULT)
+			applymovement(LOCALID_MANGROVE, Common_Movement_FaceDown)
+			msgbox("But, I do believe it.", MSGBOX_DEFAULT)
+			speakername(SpeakerName_Morgan)
+			msgbox("Oh, that's a relief.{PAUSE 30}\n" "…Wait, why?", MSGBOX_DEFAULT)
+			speakername(SpeakerName_Mangrove)
+			msgbox("This sort of story is very common\n" "in the Fonei region.\p" "Either everyone who doesn't want to\n" "talk about their past makes up the\l"
+					"same story, or it's actually true.\p" "It lines up with some folklore we've\n" "found records of as well…\p" "But that's not what I called you\n"
+					"here to talk about.\l" "First, please take this.", MSGBOX_AUTOCLOSE)
+			applymovement(LOCALID_MANGROVE, CranTown_Lab_Movement_ProfGiveDex)
+			waitmovement(0)
+			call(LittlerootTown_ProfessorBirchsLab_EventScript_ReceivePokedex)
+			speakername(SpeakerName_Mangrove)
+			msgbox("I'm sure you know what that is.\n" "Take these, too.", MSGBOX_AUTOCLOSE)
+			giveitem(ITEM_POKE_BALL, 10)
+			closemessage
+			applymovement(LOCALID_MANGROVE, CranTown_Lab_Movement_ProfGiveDexesToRivals)
+			applymovement(LOCALID_GRUNT, CranTown_Lab_Movement_GruntStealAbilScanner)
+			waitmovement(LOCALID_MANGROVE)
+			speakername(SpeakerName_Calvin)
+			msgbox("Wait, what? I thought we were in big\n" "trouble…you're giving us gifts?", MSGBOX_DEFAULT)
+			speakername(SpeakerName_Mangrove)
+			msgbox("Yes. Listen closely. Those Pokémon\n" "are part of our research.\p" "I am the head of a research team\n" "whose goal is to survey the Pokémon\l"
+					"of the Fonei region. Fonei has only\l" "recently been settled by humans.\p" "There's no scientific data on the\n" "unique Pokémon that live here.\p"
+					"It's our team's goal to change that,\n" "but…none of us are Trainers.\l" "It's too dangerous to explore far\l" "from civilization without Pokémon.\p"
+					"I'll let you keep the Pokémon if you\n" "collect data for our Pokédex by\l" "exploring and catching more Pokémon.", MSGBOX_DEFAULT)
+			speakername(SpeakerName_Calvin)
+			msgbox("Why do you need us to do your work?\n" "We're not Trainers either!", MSGBOX_DEFAULT)
+			speakername(SpeakerName_Mangrove)
+			msgbox("You want to find a way back to your\n" "home world, don't you?", MSGBOX_DEFAULT)
+			speakername(NULL)
+			msgbox("CALVIN: Well, duh!\n" "MORGAN: Um…yeah…?", MSGBOX_DEFAULT)
+			speakername(SpeakerName_Mangrove)
+			msgbox("Then you'll want to become Trainers\n" "anyway, so it's a fair exchange. It's…", MSGBOX_DEFAULT)
+			speakername(SpeakerName_Calvin)
+			msgbox("Hey, who's that?", MSGBOX_DEFAULT)
+			applymovement(LOCALID_MANGROVE, Common_Movement_FaceUp)
+			waitmovement(0)
+			playse(SE_PIN)
+			applymovement(LOCALID_GRUNT, Common_Movement_ExclamationMark)
+			speakername(SpeakerName_Mangrove)
+			msgbox("Hey! Get your hands off my Scanner!", MSGBOX_DEFAULT)
+			applymovement(LOCALID_GRUNT, Common_Movement_FaceDown)
+			speakername(SpeakerName_Unknown)
+			msgbox("Uh-oh! I've been spotted!", MSGBOX_AUTOCLOSE)
+			setmetatile(6, 1, 0x20B, TRUE)
+			special(DrawWholeMapView)
+			applymovement(LOCALID_GRUNT, CranTown_Lab_Movement_GruntRunAway1)
+			waitmovement(0)
+			applymovement(LOCALID_GRUNT, CranTown_Lab_Movement_GruntRunAway2)
+			delay(8)
+			applymovement(LOCALID_MANGROVE, CranTown_Lab_Movement_TryStopGrunt)
+			delay(16)
+			applymovement(LOCALID_CALVIN, CranTown_Lab_Movement_CalvinWatchGrunt)
+			speakername(SpeakerName_Morgan)
+			msgbox("EEEEEEEEK!!")
+			waitmovement(LOCALID_GRUNT)
+			removeobject(LOCALID_GRUNT)
+			closemessage
+			delay(60)
+			delay(30)
+			speakername(SpeakerName_Mangrove)
+			msgbox("… … … … … … … … … …\p" "Well, this seems like a good chance\n" "for you beginner Trainers to hone\l" "your skills, hmmm?\p"
+					"Follow that thief and get back my\n" "Scanner, please. He is likely hiding\l" "in the clearing north of town.", MSGBOX_AUTOCLOSE)
+			closemessage
+			releaseall
+			setvar(VAR_FONEI_COAST_STATE, 4)
+			clearflag(FLAG_HIDE_FONEI_COAST_NPCS)
+		}
+	]
+}
+
+script CranTown_Lab_EventScript_ProfessorMangrove // TODO
+{
+	lock
+	faceplayer
+	checkitem(ITEM_SCANNER, 1)
+	if (var(VAR_RESULT) == TRUE)
+	{
+		dynmultipush("Return Scanner", 0)
+	}
+	speakername(SpeakerName_Mangrove)
+	message("Did you need something from me?")
+	waitmessage
+	dynmultipush("Check Pokédex", 1)
+	dynmultipush("About Fonei", 2)
+	dynmultipush("Where to go?", 3)
+	dynmultistack(0, 0, TRUE, 6, FALSE, 0, DYN_MULTICHOICE_CB_NONE)
+	switch(var(VAR_RESULT))
+	{
+		case 0:
+			playfanfare(MUS_OBTAIN_ITEM)
+			removeitem(ITEM_SCANNER)
+			message("{PLAYER} returned the Scanner to\n" "Professor Mangrove.")
+			waitfanfare		
+			speakername(SpeakerName_Mangrove)
+			msgbox("Wonderful!\p" "Oh, Morgan and Calvin aren't with\n" "you? This is important…\l" "Well, you'll have to fill them in.\p" "About your chances of going home…\n"
+					"It…MIGHT be possible.\p" "I study Pokémon, not history, so I\n" "can't say for sure if it's\l" "ever happened before.\p" "But traveling between worlds is a\n" "common theme in Fonei folklore.\p"
+					"Perhaps by exploring, you could\n" "find clues about how this might\l" "be done.\p" "But first, I'd ask another favor…\p" "Those Pokémon I gave you were in the\n"
+					"care of Professor Spade, my colleague.\l" "If you meet him, please show that\l" "Pokémon to him. His lab is near\l" "{EMPHASIS_BLUE}Port Wander{EMPHASIS_OFF}, but he tends to make\l"
+					"trips to the city regularly.\p" "Oh, pardon me, you wouldn't know\n" "where those are…I think there's a\l" "map in the Pokémon Center.\p"
+					"If you need any help, you can\n" "always ask me. I'll be here.", MSGBOX_AUTOCLOSE)
+			setvar(VAR_FONEI_COAST_STATE, 7)
+		case 1:
+			goto(ProfBirch_EventScript_RatePokedexOrRegister)
+		case 2:
+			message("What are you curious about?")
+			dynmultipush("Cran Town", 0)
+			dynmultipush("Folklore: World travel", 1)
+		case 3:
+			if (var(VAR_FONEI_COAST_STATE) > 6)
+			{
+				msgbox("", MSGBOX_DEFAULT)
+			}
+	}
+	release
+}
+
+script CranTown_Lab_EventScript_Morgan
+{
+	speakername(SpeakerName_Morgan)
+	msgbox("That was scary! A robber ran right\n" "past me…", MSGBOX_NPC)
+}
+	
+script CranTown_Lab_EventScript_Calvin
+{
+	speakername(SpeakerName_Calvin)
+	msgbox("That punk! But he was bold, too…", MSGBOX_NPC)
+}
+
+movement CranTown_Lab_Movement_ProfGiveDex
+{
+	walk_down
+	delay_16
+	walk_in_place_down
+	delay_16
+}
+
+movement CranTown_Lab_Movement_ProfGiveDexesToRivals
+{
+	walk_right
+	face_down
+	delay_16
+	walk_in_place_down
+	delay_16 * 2
+	walk_left * 2
+	face_down
+	delay_16
+	walk_in_place_down
+	delay_16 * 2
+	walk_right
+	walk_up
+	face_down
+}
+
+movement CranTown_Lab_Movement_GruntStealAbilScanner
+{
+	walk_slow_up
+	walk_slow_right
+	walk_slow_up
+	walk_slow_right
+	delay_16
+	walk_slow_right
+	walk_slow_up
+	walk_slow_right * 3
+	face_up
+}
+
+movement CranTown_Lab_Movement_GruntRunAway1
+{
+	walk_fast_left * 2
+}
+
+movement CranTown_Lab_Movement_GruntRunAway2
+{
+	jump_2_down
+	walk_fast_down * 8
+	walk_fast_right * 2
+}
+
+movement CranTown_Lab_Movement_TryStopGrunt
+{
+	walk_fast_left
+	delay_16
+	delay_16
+	face_down
+}
+
+movement CranTown_Lab_Movement_CalvinWatchGrunt
+{
+	walk_fast_up
+	face_left
+	delay_16
+	walk_fast_down * 2
+}
+
+raw `
+.set LOCALID_MANGROVE, 1
+.set LOCALID_MORGAN, 2
+.set LOCALID_CALVIN, 3
+.set LOCALID_GRUNT, 4
+
+LittlerootTown_ProfessorBirchsLab_EventScript_ReceivePokedex::
+	playfanfare MUS_OBTAIN_ITEM
+	message LittlerootTown_ProfessorBirchsLab_Text_ReceivedPokedex
+	waitfanfare
+	setflag FLAG_SYS_POKEDEX_GET
+	special SetUnlockedPokedexFlags
+	return
+
+LittlerootTown_ProfessorBirchsLab_EventScript_Machine::
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_SeriousLookingMachine, MSGBOX_SIGN
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_PC::
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_PCUsedForResearch, MSGBOX_SIGN
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_Bookshelf::
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_CrammedWithBooksOnPokemon, MSGBOX_SIGN
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_Book::
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_BookTooHardToRead, MSGBOX_SIGN
+	end
+
+LittlerootTown_ProfessorBirchsLab_Text_ReceivedPokedex:
+	.string "{PLAYER} received the Pokédex!$"
+
+LittlerootTown_ProfessorBirchsLab_Text_SeriousLookingMachine:
+	.string "It's a serious-looking machine.\n"
+	.string "The Prof must use this for research.$"
+
+LittlerootTown_ProfessorBirchsLab_Text_PCUsedForResearch:
+	.string "It's a PC used for research.\n"
+	.string "Better not mess around with it.$"
+
+LittlerootTown_ProfessorBirchsLab_Text_CrammedWithBooksOnPokemon:
+	.string "It's crammed with books on Pokémon.$"
+
+LittlerootTown_ProfessorBirchsLab_Text_BookTooHardToRead:
+	.string "It's a book that's too hard to read.$"
+
+`

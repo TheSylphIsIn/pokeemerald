@@ -1429,6 +1429,9 @@ bool8 ScrCmd_dynmultichoice(struct ScriptContext *ctx)
     // Read vararg
     u32 argc = ScriptReadByte(ctx);
     struct ListMenuItem *items;
+	
+	DebugPrintf("left: %d, top: %d, B: %d, scroll: %d, sort: %d, init: %d, CB: %d", left, top, ignoreBPress, maxBeforeScroll,
+				shouldSort, initialSelected, callbackSet);
 
     if (argc == 0)
         return FALSE;
@@ -1441,13 +1444,16 @@ bool8 ScrCmd_dynmultichoice(struct ScriptContext *ctx)
         items = AllocZeroed(sizeof(struct ListMenuItem) * argc);
         for (i = 0; i < argc; ++i)
         {
+			DebugPrintf("1 %d", i);
             u8 *nameBuffer = Alloc(100);
             const u8 *arg = (const u8 *) ScriptReadWord(ctx);
+			DebugPrintf("2 %d", i);
             StringExpandPlaceholders(nameBuffer, arg);
             items[i].name = nameBuffer;
             items[i].id = i;
             if (i == initialSelected)
                 initialRow = i;
+			DebugPrintf("3 %d", i);
         }
     }
     else
@@ -1466,6 +1472,7 @@ bool8 ScrCmd_dynmultichoice(struct ScriptContext *ctx)
         MultichoiceDynamic_DestroyStack();
     }
 
+			DebugPrintf("4 %d", i);
     if (ScriptMenu_MultichoiceDynamic(left, top, argc, items, ignoreBPress, maxBeforeScroll, initialRow, callbackSet))
     {
         ScriptContext_Stop();

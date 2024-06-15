@@ -12,3 +12,6 @@ SpeakerName_Mangrove: @ "Prof. Mangrove" is too long. Limit is 12ish chars?
 
 SpeakerName_Player: @ looks bad
 	.string "{PLAYER}$"
+	
+SpeakerName_TrainerTips:
+	.string "Trainer Tips$"

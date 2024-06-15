@@ -1,0 +1,192 @@
+const LOCALID_MORGAN = 4
+const LOCALID_CALVIN = 3
+const LOCALID_MANGROVE = 7
+
+mapscripts FirstTrail_MapScripts {}
+
+script FirstTrail_EventScript_TipsSign
+{
+	speakername(SpeakerName_TrainerTips)
+	msgbox("If you see a little sparkle on the\n" "ground, pick it up!\p" "It might be a {EMPHASIS_GREEN}Star Piece{EMPHASIS_OFF}.\n"
+			"Some people like to barter with them.\p" "You might be able to buy rare items\n" "if you collect a lot!", MSGBOX_SIGN)
+}
+
+script FirstTrail_EventScript_Morgan
+{
+	speakername(SpeakerName_Morgan)
+	msgbox("I think I see a town up ahead.\n" "Maybe we can find out where we are.", MSGBOX_NPC)
+}
+
+script FirstTrail_EventScript_Calvin
+{
+	speakername(SpeakerName_Calvin)
+	msgbox("This little guy can do some work.\n" "These wild monsters don't stand\l" "a chance!", MSGBOX_NPC)
+}
+
+script FirstTrail_TriggerScript_ProfessorMeeting
+{
+	lockall
+	speakername(SpeakerName_Unknown)
+	msgbox("Hey, you three!", MSGBOX_DEFAULT)
+	closemessage
+	addobject(LOCALID_MANGROVE)
+	setobjectxy(LOCALID_MANGROVE, 34, 16)
+	applymovement(LOCALID_MANGROVE, FirstTrail_Movement_ProfJumpFromTree)
+	playse(SE_BIKE_HOP)
+	waitse
+	waitmovement(0)
+	playse(SE_PIN)
+	applymovement(LOCALID_MORGAN, FirstTrail_Movement_MorganShock)
+	applymovement(LOCALID_CALVIN, Common_Movement_FaceUp)
+	waitmovement(LOCALID_CALVIN)
+	applymovement(LOCALID_CALVIN, Common_Movement_ExclamationMark)
+	applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp)
+	waitmovement(LOCALID_MORGAN)
+	speakername(SpeakerName_Unknown)
+	msgbox("I haven't seen you around here.\n" "Where are you from?", MSGBOX_DEFAULT)
+	speakername(SpeakerName_Calvin)
+	msgbox("Who are you?", MSGBOX_DEFAULT)
+	speakername(SpeakerName_Unknown)
+	msgbox("Oh, pardon me. My name is Mangrove.\n" "I'm a Pokémon Professor.\p" "Speaking of which, those Pokémon\n" "you have there…let me see…", MSGBOX_AUTOCLOSE)
+	applymovement(LOCALID_MANGROVE, FirstTrail_Movement_ProfCheckMons)
+	delay(120)
+	applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceRight)
+	waitmovement(LOCALID_MANGROVE)
+	speakername(SpeakerName_Morgan)
+	msgbox("A Pokémon Professor! For real?", MSGBOX_DEFAULT)
+	speakername(SpeakerName_Mangrove)
+	msgbox("Indeed. And I know that these Pokémon\n" "don't live around here.\l" "Where did you get them?", MSGBOX_DEFAULT)
+	speakername(SpeakerName_Morgan)
+	msgbox("Umm…a monster attacked us, but we\n" "found the Pokémon in this bag.", MSGBOX_AUTOCLOSE)
+	closemessage
+	applymovement(LOCALID_MORGAN, FirstTrail_Movement_MorganGiveBag)
+	waitmovement(0)
+	delay(30)
+	speakername(SpeakerName_Mangrove)
+	msgbox("I see…as I thought, this belongs to\n" "one of my colleagues.\p" "He was studying these Pokémon.\n" "I don't know how his bag ended up\l" 
+			"laying on {EMPHASIS_BLUE}Dropper Point{EMPHASIS_OFF} like that.", MSGBOX_DEFAULT)
+	applymovement(LOCALID_MANGROVE, Common_Movement_FaceRight)
+	msgbox("Hmm… … {PAUSE 15}… … {PAUSE 15}… … {PAUSE 15}… … {PAUSE 15}… …", MSGBOX_DEFAULT)
+	applymovement(LOCALID_MANGROVE, Common_Movement_FaceLeft)
+	msgbox("I think we need to talk more.\n" "But this isn't a good place to talk.\p" "Come visit my lab in {EMPHASIS_BLUE}Cran Town{EMPHASIS_OFF},\n" "if you please. And bring the Pokémon.", MSGBOX_AUTOCLOSE)
+	applymovement(LOCALID_MANGROVE FirstTrail_Movement_ProfWalkAway)
+	delay(60)
+	speakername(SpeakerName_Morgan)
+	msgbox("W-wait, it was self-defense, really!\n" "We're not thieves! You get that, right?", MSGBOX_AUTOCLOSE)
+	applymovement(LOCALID_MORGAN, FirstTrail_Movement_MorganWalkAway)
+	delay(20)
+	speakername(SpeakerName_Calvin)
+	msgbox("I hope she points us on our way\n" "home instead of throwing us in jail.\p" "Think our Pokémon are strong enough\n" "to fight off a whole town?\l"
+			"If you hear me yell, run away.\l" "Heh, just kidding. …Kinda. Whatever.", MSGBOX_AUTOCLOSE)
+	applymovement(LOCALID_CALVIN, FirstTrail_Movement_CalvinWalkAway)
+	waitmovement(0)
+	setvar(VAR_FONEI_COAST_STATE, 3)
+	setflag(FLAG_MET_PROFESSOR)
+	removeobject(LOCALID_CALVIN)
+	removeobject(LOCALID_MORGAN)
+	removeobject(LOCALID_MANGROVE)
+	releaseall
+}
+
+script FirstTrail_EventScript_OldWoman
+{
+	msgbox("I remember walking this path as a\n" "little girl when we first arrived\l" "in this region.\p" "It seemed so much longer back then.", MSGBOX_NPC)
+}
+
+script FirstTrail_EventScript_LittleBoy
+{
+	msgbox("If I had a Pokémon with {EMPHASIS_RED}Dig{EMPHASIS_OFF},\n" "I could look for buried treasure.\p" "I think there's some around here\n" "somewhere! It's my instinct!", MSGBOX_NPC)
+}
+
+script FirstTrail_EventScript_FatMan
+{
+	msgbox("History…yeah, right!\n" "It was less than two generations ago!", MSGBOX_NPC)
+}
+
+script FirstTrail_EventScript_WelcomeSignLeft
+{
+	msgbox("Welcome to the {EMPHASIS_BLUE}Fonei{EMPHASIS_OFF} region!\p" "Free real estate to the north.\n" "Inquire in {EMPHASIS_BLUE}Penzelcase City{EMPHASIS_OFF}.", MSGBOX_SIGN)
+}
+	
+script FirstTrail_EventScript_WelcomeSignRight
+{
+	speakername("HISTORY")
+	msgbox("{EMPHASIS_BLUE}The first modern settlers of Fonei\n" "made landfall at Dropper Point and\l" "followed this trail to reach the\l" "site of historic Cran Town.{EMPHASIS_OFF}", MSGBOX_SIGN)
+}
+
+movement FirstTrail_Movement_ProfJumpFromTree
+{
+	jump_2_down
+}
+
+movement FirstTrail_Movement_MorganShock
+{
+	face_right
+	lock_facing_direction
+	jump_left
+	unlock_facing_direction
+	jump_in_place_right
+}
+
+movement FirstTrail_Movement_ProfCheckMons
+{
+	walk_left
+	delay_16 * 2
+	face_down
+	delay_16 * 2
+	walk_right
+	walk_down
+	delay_16 * 2
+	walk_right
+	face_left
+}
+
+movement FirstTrail_Movement_MorganGiveBag
+{
+	walk_right * 2
+	walk_down
+	face_right
+	delay_8
+	walk_in_place_right
+	delay_16
+	walk_fast_up
+	walk_fast_left
+	face_right
+}
+
+movement FirstTrail_Movement_ProfWalkAway
+{
+	walk_right * 7
+}
+
+movement FirstTrail_Movement_MorganWalkAway
+{
+	walk_fast_right
+	walk_fast_down
+	walk_fast_right * 7
+}
+
+movement FirstTrail_Movement_CalvinWalkAway
+{
+	walk_right * 2
+	walk_fast_right * 5
+}
+
+raw `
+
+TrainerScript_Kyle::
+	trainerbattle_single TRAINER_KYLE, TrainerScript_Text_KyleIntro,TrainerScript_Text_KyleDefeated
+	msgbox TrainerScript_Text_KylePostBattle, MSGBOX_AUTOCLOSE
+	end
+
+TrainerScript_Text_KyleIntro:
+	.string "Hey! Got any cool Pokémon?\n"
+	.string "Show me, show me!$"
+
+TrainerScript_Text_KyleDefeated:
+	.string "Aw, it's cooler than mine!$"
+
+TrainerScript_Text_KylePostBattle:
+	.string "I wanna catch a cool Water type, but\n"
+	.string "they always swim away too fast.$"
+	`

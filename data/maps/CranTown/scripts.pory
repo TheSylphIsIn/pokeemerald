@@ -1,0 +1,165 @@
+const LOCALID_CALVIN = 6
+const LOCALID_MORGAN = 5
+
+mapscripts CranTown_MapScripts
+{
+	MAP_SCRIPT_ON_FRAME_TABLE 
+	[
+		VAR_FONEI_COAST_STATE, 2 
+		{
+			lock
+			addobject(LOCALID_CALVIN)
+			setobjectxy(LOCALID_CALVIN, 9, 21)
+			applymovement(LOCALID_CALVIN, CranTown_Movement_CalvinCheckOnWipedPlayer)
+			waitmovement(0)
+			speakername(SpeakerName_Calvin)
+			msgbox("You okay, {PLAYER}? A wild Pokémon\n" "got to you.\p" "We rushed you to this town for help,\n" "and on the way we met this lady\l"
+					"named Professor Mangrove. She wants\l" "to talk to us about something.\p" "Come down here when you're feeling\n" "better, yeah?", MSGBOX_AUTOCLOSE)
+			applymovement(LOCALID_CALVIN, CranTown_Movement_CalvinWalkOffscreen)
+			waitmovement(0)
+			removeobject(LOCALID_CALVIN)
+			setvar(VAR_FONEI_COAST_STATE, 3)
+			setflag(FLAG_MET_PROFESSOR)
+			release
+		}
+		VAR_FONEI_COAST_STATE, 4
+		{
+			lock
+			applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_WalkDown)
+			waitmovement(0)
+			applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp)
+			waitmovement(0)
+			opendoor(15, 19)
+			delay(30)
+			addobject(LOCALID_MORGAN)
+			applymovement(LOCALID_MORGAN, CranTown_Movement_DownAndLeft)
+			waitmovement(0)
+			addobject(LOCALID_CALVIN)
+			applymovement(LOCALID_CALVIN, Common_Movement_WalkDown)
+			waitmovement(0)
+			closedoor(15, 19)
+			delay(10)
+			speakername(SpeakerName_Calvin)
+			msgbox("The thief ran up to that clearing.\n" "Let's go pound him so we can start\l" "looking for the way home!", MSGBOX_DEFAULT)
+			speakername(SpeakerName_Morgan)
+			msgbox("Don't you think we should, um,\n" "use these Poké Balls…\l" "to fill out our Pokémon teams?", MSGBOX_DEFAULT)
+			speakername(SpeakerName_Calvin)
+			msgbox("Nah, our starters are good enough.\n" "Let's hurry up!", MSGBOX_DEFAULT)
+			speakername(SpeakerName_Morgan)
+			msgbox("O-okay, sure.", MSGBOX_AUTOCLOSE)
+			applymovement(LOCALID_CALVIN, CranTown_Movement_CalvinWalkAway)
+			delay(10)
+			applymovement(LOCALID_MORGAN, CranTown_Movement_MorganWalkAway)
+			waitmovement(LOCALID_MORGAN)
+			removeobject(LOCALID_CALVIN)
+			removeobject(LOCALID_MORGAN)
+			setvar(VAR_FONEI_COAST_STATE, 5)
+			release
+		}
+	]
+}
+
+script CranTown_TriggerScript_NorthBlock
+{
+	msgbox("Professor Mangrove's words echoed…\n" "Come visit my lab, if you please.", MSGBOX_SIGN)
+	applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_WalkDown)
+	waitmovement(0)
+}
+	
+script CranTown_TriggerScript_MeetProf
+{
+	msgbox("Professor Mangrove's words echoed…\n" "Come visit my lab, if you please.", MSGBOX_SIGN)
+	applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_WalkLeft)
+	waitmovement(0)
+}
+	
+script CranTown_TriggerScript_Scanner
+{
+	msgbox("But the scanner…", MSGBOX_SIGN)
+	applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_WalkLeft)
+}
+
+script CranTown_EventScript_TechnologyGuy
+{
+	msgbox("Technology is incredible!\n" "You can use a Pokédex to view data\l" "about a species, like Abilities or\l" "what Moves it learns by leveling up!", MSGBOX_NPC)
+}
+
+script CranTown_EventScript_Girl
+{
+	msgbox("Some day I'll be good at teaching\n" "Pokémon moves like Mommy and Theo are!", MSGBOX_NPC)
+}
+
+script CranTown_EventScript_OldMan
+{
+	msgbox("Can you see land on the horizon?\n" "There are many islands out there.\p" "As a matter of fact, I was born out\n" 
+	"there in the {EMPHASIS_BLUE}Glue Valley Pit{EMPHASIS_OFF}.\p" "…I promise it's more pleasant\n" "than it sounds. Keheheh…", MSGBOX_NPC)
+}
+
+script CranTown_EventScript_Shop
+{
+	lock
+	faceplayer
+	message("Um, hello! We don't have much here,\n" "but I sell some basic supplies.")
+	waitmessage
+	pokemart(CranTown_Mart)
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+}
+
+mart CranTown_Mart
+{
+	ITEM_BERRY_JUICE
+	ITEM_POKE_BALL
+	ITEM_CHERI_BERRY
+	ITEM_PECHA_BERRY
+	ITEM_REPEL
+	ITEM_NONE
+}
+
+script CranTown_Sign_TownSign
+{
+	msgbox("{EMPHASIS_BLUE}Cran Town{EMPHASIS_OFF}\n" "“A town of humble beginnings.”", MSGBOX_SIGN)
+}
+	
+script CranTown_Sign_TrainerTips
+{
+	speakername(SpeakerName_TrainerTips)
+	msgbox("Don't forget to check out the Options\n" "menu to customize your experience!\p", MSGBOX_DEFAULT)
+	speakername(NULL)
+	msgbox("{EMPHASIS_PLAYER}…The sign doesn't specify an app\n" "or anything. What could it mean?", MSGBOX_AUTOCLOSE)
+}
+	
+script CranTown_Sign_FamilySign
+{
+	msgbox("Move Machine Family: Home-made TMs\n" "and HMs! {EMPHASIS_GREEN}Teachy TV{EMPHASIS_OFF} sold here!", MSGBOX_SIGN)
+}
+
+movement CranTown_Movement_CalvinCheckOnWipedPlayer
+{
+	walk_up * 7
+	face_left
+}
+
+movement CranTown_Movement_CalvinWalkOffscreen
+{
+	walk_down * 8
+}
+
+movement CranTown_Movement_DownAndLeft
+{
+	walk_down
+	walk_left
+	face_down
+}
+
+movement CranTown_Movement_CalvinWalkAway
+{
+	walk_right * 3
+	walk_up * 5
+}
+
+movement CranTown_Movement_MorganWalkAway
+{
+	walk_left * 4
+	walk_up * 5
+}

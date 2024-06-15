@@ -1,261 +1,388 @@
-.set LOCALID_MORGAN, 5
-.set LOCALID_CALVIN, 6
-
 CranTown_MapScripts::
-	map_script MAP_SCRIPT_ON_FRAME_TABLE, CranTown_OnFrame
+# 6 "data/maps/CranTown/scripts.pory"
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, CranTown_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE
 	.byte 0
 
-CranTown_OnFrame:
-	map_script_2 VAR_FONEI_COAST_STATE, 2, CranTown_MapScript_WipedBeforeMeetingProf
-	map_script_2 VAR_FONEI_COAST_STATE, 4, CranTown_MapScript_LeavingLab
+CranTown_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE:
+# 8 "data/maps/CranTown/scripts.pory"
+	map_script_2 VAR_FONEI_COAST_STATE, 2, CranTown_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0
+# 25 "data/maps/CranTown/scripts.pory"
+	map_script_2 VAR_FONEI_COAST_STATE, 4, CranTown_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_1
 	.2byte 0
 
-CranTown_MapScript_WipedBeforeMeetingProf:
+CranTown_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0:
+# 10 "data/maps/CranTown/scripts.pory"
 	lock
-	addobject LOCALID_CALVIN
-	setobjectxy LOCALID_CALVIN, 9, 21
-	applymovement LOCALID_CALVIN, CranTown_Movement_CalvinCheckOnWipedPlayer
+# 11 "data/maps/CranTown/scripts.pory"
+	addobject 6
+# 12 "data/maps/CranTown/scripts.pory"
+	setobjectxy 6, 9, 21
+# 13 "data/maps/CranTown/scripts.pory"
+	applymovement 6, CranTown_Movement_CalvinCheckOnWipedPlayer
+# 14 "data/maps/CranTown/scripts.pory"
 	waitmovement 0
-	msgbox CranTown_Text_CalvinCheckOnWipedPlayer, MSGBOX_DEFAULT
-	closemessage
-	applymovement LOCALID_CALVIN, CranTown_Movement_CalvinWalkOffscreen
+# 15 "data/maps/CranTown/scripts.pory"
+	speakername SpeakerName_Calvin
+# 16 "data/maps/CranTown/scripts.pory"
+	msgbox CranTown_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_0, MSGBOX_AUTOCLOSE
+# 18 "data/maps/CranTown/scripts.pory"
+	applymovement 6, CranTown_Movement_CalvinWalkOffscreen
+# 19 "data/maps/CranTown/scripts.pory"
 	waitmovement 0
-	removeobject LOCALID_CALVIN
+# 20 "data/maps/CranTown/scripts.pory"
+	removeobject 6
+# 21 "data/maps/CranTown/scripts.pory"
 	setvar VAR_FONEI_COAST_STATE, 3
+# 22 "data/maps/CranTown/scripts.pory"
 	setflag FLAG_MET_PROFESSOR
+# 23 "data/maps/CranTown/scripts.pory"
 	release
-	end
-	
-CranTown_Movement_CalvinCheckOnWipedPlayer:
-	walk_up
-	walk_up
-	walk_up
-	walk_up
-	walk_up
-	walk_up
-	walk_up
-	face_left
-	step_end
-	
-CranTown_Movement_CalvinWalkOffscreen:
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	step_end
+	return
 
-CranTown_Text_CalvinCheckOnWipedPlayer:
-	.string "CALVIN: You okay, {PLAYER}? You got\n"
-	.string "punked by a wild Pokémon.\p"
-	.string "We rushed you here to get help.\n"
-	.string "On the way, we met a lady named\l"
-	.string "{EMPHASIS_GREEN}Professor Mangrove{EMPHASIS_GREEN} who wants to\l"
-	.string "talk to us in her lab down here.\p"
-	.string "Oh, yeah, we're in the Pokémon\n"
-	.string "world, by the way.\p"
-	.string "Come along when you're feeling\n"
-	.string "up to it, yeah?$"
+CranTown_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_1:
+# 27 "data/maps/CranTown/scripts.pory"
+	lock
+# 28 "data/maps/CranTown/scripts.pory"
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkDown
+# 29 "data/maps/CranTown/scripts.pory"
+	waitmovement 0
+# 30 "data/maps/CranTown/scripts.pory"
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp
+# 31 "data/maps/CranTown/scripts.pory"
+	waitmovement 0
+# 32 "data/maps/CranTown/scripts.pory"
+	opendoor 15, 19
+# 33 "data/maps/CranTown/scripts.pory"
+	delay 30
+# 34 "data/maps/CranTown/scripts.pory"
+	addobject 5
+# 35 "data/maps/CranTown/scripts.pory"
+	applymovement 5, CranTown_Movement_DownAndLeft
+# 36 "data/maps/CranTown/scripts.pory"
+	waitmovement 0
+# 37 "data/maps/CranTown/scripts.pory"
+	addobject 6
+# 38 "data/maps/CranTown/scripts.pory"
+	applymovement 6, Common_Movement_WalkDown
+# 39 "data/maps/CranTown/scripts.pory"
+	waitmovement 0
+# 40 "data/maps/CranTown/scripts.pory"
+	closedoor 15, 19
+# 41 "data/maps/CranTown/scripts.pory"
+	delay 10
+# 42 "data/maps/CranTown/scripts.pory"
+	speakername SpeakerName_Calvin
+# 43 "data/maps/CranTown/scripts.pory"
+	msgbox CranTown_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_1_Text_0, MSGBOX_DEFAULT
+# 44 "data/maps/CranTown/scripts.pory"
+	speakername SpeakerName_Morgan
+# 45 "data/maps/CranTown/scripts.pory"
+	msgbox CranTown_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_1_Text_1, MSGBOX_DEFAULT
+# 46 "data/maps/CranTown/scripts.pory"
+	speakername SpeakerName_Calvin
+# 47 "data/maps/CranTown/scripts.pory"
+	msgbox CranTown_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_1_Text_2, MSGBOX_DEFAULT
+# 48 "data/maps/CranTown/scripts.pory"
+	speakername SpeakerName_Morgan
+# 49 "data/maps/CranTown/scripts.pory"
+	msgbox CranTown_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_1_Text_3, MSGBOX_AUTOCLOSE
+# 50 "data/maps/CranTown/scripts.pory"
+	applymovement 6, CranTown_Movement_CalvinWalkAway
+# 51 "data/maps/CranTown/scripts.pory"
+	delay 10
+# 52 "data/maps/CranTown/scripts.pory"
+	applymovement 5, CranTown_Movement_MorganWalkAway
+# 53 "data/maps/CranTown/scripts.pory"
+	waitmovement 5
+# 54 "data/maps/CranTown/scripts.pory"
+	removeobject 6
+# 55 "data/maps/CranTown/scripts.pory"
+	removeobject 5
+# 56 "data/maps/CranTown/scripts.pory"
+	setvar VAR_FONEI_COAST_STATE, 5
+# 57 "data/maps/CranTown/scripts.pory"
+	release
+	return
+
 
 CranTown_TriggerScript_NorthBlock::
-	msgbox CranTown_Text_Block, MSGBOX_SIGN
-	applymovement OBJ_EVENT_ID_PLAYER, CranTown_Movement_StepDown
-	end
-	
+# 64 "data/maps/CranTown/scripts.pory"
+	msgbox CranTown_TriggerScript_NorthBlock_Text_0, MSGBOX_SIGN
+# 65 "data/maps/CranTown/scripts.pory"
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkDown
+# 66 "data/maps/CranTown/scripts.pory"
+	waitmovement 0
+	return
+
+
 CranTown_TriggerScript_MeetProf::
-	msgbox CranTown_Text_Block, MSGBOX_SIGN
-	applymovement OBJ_EVENT_ID_PLAYER, CranTown_Movement_StepLeft
-	end
-	
+# 71 "data/maps/CranTown/scripts.pory"
+	msgbox CranTown_TriggerScript_NorthBlock_Text_0, MSGBOX_SIGN
+# 72 "data/maps/CranTown/scripts.pory"
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkLeft
+# 73 "data/maps/CranTown/scripts.pory"
+	waitmovement 0
+	return
+
+
 CranTown_TriggerScript_Scanner::
-	msgbox CranTown_Text_Scanner, MSGBOX_SIGN
-	applymovement OBJ_EVENT_ID_PLAYER, CranTown_Movement_StepLeft
-	end
-	
-CranTown_Text_Block:
-	.string "Professor Mangrove's words echoed…\n"
-	.string "Come visit my lab, if you please.$"
-	
-CranTown_Text_Scanner:
-	.string "You should return the Professor's\n"
-	.string "scanner before you go anywhere.$"
-	
-CranTown_Movement_StepDown:
-	walk_down
-	step_end
-	
-CranTown_Movement_StepLeft:
-	walk_left
-	step_end
-	
-CranTown_MapScript_LeavingLab::
-	lock
-	applymovement OBJ_EVENT_ID_PLAYER, CranTown_Movement_StepDown
-	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp
-	waitmovement 0
-	opendoor 15, 22
-	addobject LOCALID_MORGAN
-	applymovement LOCALID_MORGAN, CranTown_Movement_DownAndLeft
-	waitmovement 0
-	addobject LOCALID_CALVIN
-	applymovement LOCALID_CALVIN, CranTown_Movement_StepDown
-	waitmovement 0
-	closedoor 15, 22
-	delay 10
-	msgbox CranTown_Text_GoGetScanner, MSGBOX_DEFAULT
-	closemessage
-	applymovement LOCALID_CALVIN, CranTown_Movement_CalvinWalkAway
-	delay 10
-	applymovement LOCALID_MORGAN, CranTown_Movement_MorganWalkAway
-	waitmovement LOCALID_MORGAN
-	removeobject LOCALID_CALVIN
-	removeobject LOCALID_MORGAN
-	setvar VAR_FONEI_COAST_STATE, 5
-	release
-	end
+# 78 "data/maps/CranTown/scripts.pory"
+	msgbox CranTown_TriggerScript_Scanner_Text_0, MSGBOX_SIGN
+# 79 "data/maps/CranTown/scripts.pory"
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkLeft
+	return
 
-CranTown_Text_GoGetScanner:
-	.string "CALVIN: The Prof said the thief\n"
-	.string "{EMPHASIS_RED}ran up to the clearing up there.{EMPHASIS_OFF}\p"
-	.string "Let's go pound him so we can\n"
-	.string "start finding our way home!\p"
-	.string "MORGAN: Don't you think we should,\n"
-	.string "um, use these Poké Balls…\p"
-	.string "You know, to fill out our teams\n"
-	.string "so we're prepared to face him?\p"
-	.string "CALVIN: Nah. Who cares about\n"
-	.string "a team? This guy's strong enough.\p"
-	.string "MORGAN: O-okay…$"
 
-CranTown_Movement_CalvinWalkAway:
-	walk_right
-	walk_right
-	walk_right
-	walk_up
-	walk_up
-	walk_up
-	walk_up
-	walk_up
-	step_end
+CranTown_EventScript_TechnologyGuy::
+# 84 "data/maps/CranTown/scripts.pory"
+	msgbox CranTown_EventScript_TechnologyGuy_Text_0, MSGBOX_NPC
+	return
 
-CranTown_Movement_MorganWalkAway:
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_up
-	walk_up
-	walk_up
-	walk_up
-	walk_up
-	step_end
-	
-CranTown_Movement_DownAndLeft:
-	walk_down
-	walk_left
-	face_down
-	step_end
-	
-// little boy script
-CranTown_EventScript_Boy::
-	msgbox CranTown_Text_Boy, MSGBOX_NPC
-	applymovement 4, Common_Movement_FaceOriginalDirection
-	end
-	
-CranTown_Text_Boy:
-	.string "Yah! Yah! Yah!\p"
-	.string "I'm trying to knock this tree down.\n"
-	.string "It's in my way!$"
 
-// little girl script
 CranTown_EventScript_Girl::
-	msgbox CranTown_Text_Girl, MSGBOX_NPC
-	end
-	
-CranTown_Text_Girl:
-	.string "Mommy says the statues on\n"
-	.string "{EMPHASIS_BLUE}Stoneface Way{EMPHASIS_OFF} are hiding treasure.\p"
-	.string "But I'm a big girl! I know treasure\n"
-	.string "isn't real!$"
+# 89 "data/maps/CranTown/scripts.pory"
+	msgbox CranTown_EventScript_Girl_Text_0, MSGBOX_NPC
+	return
+
 
 CranTown_EventScript_OldMan::
-	msgbox CranTown_Text_OldMan, MSGBOX_NPC
-	end
-	
-CranTown_Text_OldMan:
-	.string "Can you see land on the horizon?\p"
-	.string "Fonei's ocean is home to many islands\n"
-	.string "both big and small.\p"
+# 94 "data/maps/CranTown/scripts.pory"
+	msgbox CranTown_EventScript_OldMan_Text_0, MSGBOX_NPC
+	return
+
+
+CranTown_EventScript_Shop::
+# 100 "data/maps/CranTown/scripts.pory"
+	lock
+# 101 "data/maps/CranTown/scripts.pory"
+	faceplayer
+# 102 "data/maps/CranTown/scripts.pory"
+	message CranTown_EventScript_Shop_Text_0
+# 103 "data/maps/CranTown/scripts.pory"
+	waitmessage
+# 104 "data/maps/CranTown/scripts.pory"
+	pokemart CranTown_Mart
+# 105 "data/maps/CranTown/scripts.pory"
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+# 106 "data/maps/CranTown/scripts.pory"
+	release
+	return
+
+
+	.align 2
+# 109 "data/maps/CranTown/scripts.pory"
+CranTown_Mart:
+# 111 "data/maps/CranTown/scripts.pory"
+	.2byte ITEM_BERRY_JUICE
+# 112 "data/maps/CranTown/scripts.pory"
+	.2byte ITEM_POKE_BALL
+# 113 "data/maps/CranTown/scripts.pory"
+	.2byte ITEM_CHERI_BERRY
+# 114 "data/maps/CranTown/scripts.pory"
+	.2byte ITEM_PECHA_BERRY
+# 115 "data/maps/CranTown/scripts.pory"
+	.2byte ITEM_REPEL
+	.2byte ITEM_NONE
+
+CranTown_Sign_TownSign::
+# 121 "data/maps/CranTown/scripts.pory"
+	msgbox CranTown_Sign_TownSign_Text_0, MSGBOX_SIGN
+	return
+
+
+CranTown_Sign_TrainerTips::
+# 126 "data/maps/CranTown/scripts.pory"
+	speakername SpeakerName_TrainerTips
+# 127 "data/maps/CranTown/scripts.pory"
+	msgbox CranTown_Sign_TrainerTips_Text_0, MSGBOX_DEFAULT
+# 128 "data/maps/CranTown/scripts.pory"
+	speakername NULL
+# 129 "data/maps/CranTown/scripts.pory"
+	msgbox CranTown_Sign_TrainerTips_Text_1, MSGBOX_AUTOCLOSE
+	return
+
+
+CranTown_Sign_FamilySign::
+# 134 "data/maps/CranTown/scripts.pory"
+	msgbox CranTown_Sign_FamilySign_Text_0, MSGBOX_SIGN
+	return
+
+
+# 137 "data/maps/CranTown/scripts.pory"
+CranTown_Movement_CalvinCheckOnWipedPlayer:
+# 139 "data/maps/CranTown/scripts.pory"
+	walk_up
+# 139 "data/maps/CranTown/scripts.pory"
+	walk_up
+# 139 "data/maps/CranTown/scripts.pory"
+	walk_up
+# 139 "data/maps/CranTown/scripts.pory"
+	walk_up
+# 139 "data/maps/CranTown/scripts.pory"
+	walk_up
+# 139 "data/maps/CranTown/scripts.pory"
+	walk_up
+# 139 "data/maps/CranTown/scripts.pory"
+	walk_up
+# 140 "data/maps/CranTown/scripts.pory"
+	face_left
+	step_end
+
+# 143 "data/maps/CranTown/scripts.pory"
+CranTown_Movement_CalvinWalkOffscreen:
+# 145 "data/maps/CranTown/scripts.pory"
+	walk_down
+# 145 "data/maps/CranTown/scripts.pory"
+	walk_down
+# 145 "data/maps/CranTown/scripts.pory"
+	walk_down
+# 145 "data/maps/CranTown/scripts.pory"
+	walk_down
+# 145 "data/maps/CranTown/scripts.pory"
+	walk_down
+# 145 "data/maps/CranTown/scripts.pory"
+	walk_down
+# 145 "data/maps/CranTown/scripts.pory"
+	walk_down
+# 145 "data/maps/CranTown/scripts.pory"
+	walk_down
+	step_end
+
+# 148 "data/maps/CranTown/scripts.pory"
+CranTown_Movement_DownAndLeft:
+# 150 "data/maps/CranTown/scripts.pory"
+	walk_down
+# 151 "data/maps/CranTown/scripts.pory"
+	walk_left
+# 152 "data/maps/CranTown/scripts.pory"
+	face_down
+	step_end
+
+# 155 "data/maps/CranTown/scripts.pory"
+CranTown_Movement_CalvinWalkAway:
+# 157 "data/maps/CranTown/scripts.pory"
+	walk_right
+# 157 "data/maps/CranTown/scripts.pory"
+	walk_right
+# 157 "data/maps/CranTown/scripts.pory"
+	walk_right
+# 158 "data/maps/CranTown/scripts.pory"
+	walk_up
+# 158 "data/maps/CranTown/scripts.pory"
+	walk_up
+# 158 "data/maps/CranTown/scripts.pory"
+	walk_up
+# 158 "data/maps/CranTown/scripts.pory"
+	walk_up
+# 158 "data/maps/CranTown/scripts.pory"
+	walk_up
+	step_end
+
+# 161 "data/maps/CranTown/scripts.pory"
+CranTown_Movement_MorganWalkAway:
+# 163 "data/maps/CranTown/scripts.pory"
+	walk_left
+# 163 "data/maps/CranTown/scripts.pory"
+	walk_left
+# 163 "data/maps/CranTown/scripts.pory"
+	walk_left
+# 163 "data/maps/CranTown/scripts.pory"
+	walk_left
+# 164 "data/maps/CranTown/scripts.pory"
+	walk_up
+# 164 "data/maps/CranTown/scripts.pory"
+	walk_up
+# 164 "data/maps/CranTown/scripts.pory"
+	walk_up
+# 164 "data/maps/CranTown/scripts.pory"
+	walk_up
+# 164 "data/maps/CranTown/scripts.pory"
+	walk_up
+	step_end
+
+CranTown_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_0:
+# 16 "data/maps/CranTown/scripts.pory"
+	.string "You okay, {PLAYER}? A wild Pokémon\n"
+	.string "got to you.\p"
+	.string "We rushed you to this town for help,\n"
+	.string "and on the way we met this lady\l"
+	.string "named Professor Mangrove. She wants\l"
+	.string "to talk to us about something.\p"
+	.string "Come down here when you're feeling\n"
+	.string "better, yeah?$"
+
+CranTown_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_1_Text_0:
+# 43 "data/maps/CranTown/scripts.pory"
+	.string "The thief ran up to that clearing.\n"
+	.string "Let's go pound him so we can start\l"
+	.string "looking for the way home!$"
+
+CranTown_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_1_Text_1:
+# 45 "data/maps/CranTown/scripts.pory"
+	.string "Don't you think we should, um,\n"
+	.string "use these Poké Balls…\l"
+	.string "to fill out our Pokémon teams?$"
+
+CranTown_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_1_Text_2:
+# 47 "data/maps/CranTown/scripts.pory"
+	.string "Nah, our starters are good enough.\n"
+	.string "Let's hurry up!$"
+
+CranTown_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_1_Text_3:
+# 49 "data/maps/CranTown/scripts.pory"
+	.string "O-okay, sure.$"
+
+CranTown_TriggerScript_NorthBlock_Text_0:
+# 64 "data/maps/CranTown/scripts.pory"
+	.string "Professor Mangrove's words echoed…\n"
+	.string "Come visit my lab, if you please.$"
+
+CranTown_TriggerScript_Scanner_Text_0:
+# 78 "data/maps/CranTown/scripts.pory"
+	.string "But the scanner…$"
+
+CranTown_EventScript_TechnologyGuy_Text_0:
+# 84 "data/maps/CranTown/scripts.pory"
+	.string "Technology is incredible!\n"
+	.string "You can use a Pokédex to view data\l"
+	.string "about a species, like Abilities or\l"
+	.string "what Moves it learns by leveling up!$"
+
+CranTown_EventScript_Girl_Text_0:
+# 89 "data/maps/CranTown/scripts.pory"
+	.string "Some day I'll be good at teaching\n"
+	.string "Pokémon moves like Mommy and Theo are!$"
+
+CranTown_EventScript_OldMan_Text_0:
+# 94 "data/maps/CranTown/scripts.pory"
+	.string "Can you see land on the horizon?\n"
+	.string "There are many islands out there.\p"
 	.string "As a matter of fact, I was born out\n"
 	.string "there in the {EMPHASIS_BLUE}Glue Valley Pit{EMPHASIS_OFF}.\p"
-	.string "…I promise it's more pleasant than\n"
-	.string "it sounds. Keheheh…$"
+	.string "…I promise it's more pleasant\n"
+	.string "than it sounds. Keheheh…$"
 
-// Mart script
-CranTown_EventScript_Shop::
-	lock
-	faceplayer
-	message CranTown_Text_ShopIntro
-	waitmessage
-	pokemart CranTown_Mart
-	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
-	release
-	end
-
-CranTown_Text_ShopIntro:
+CranTown_EventScript_Shop_Text_0:
+# 102 "data/maps/CranTown/scripts.pory"
 	.string "Um, hello! We don't have much here,\n"
 	.string "but I sell some basic supplies.$"
 
-	.align 2
-CranTown_Mart:
-	.2byte ITEM_BERRY_JUICE
-	.2byte ITEM_POKE_BALL
-	.2byte ITEM_CHERI_BERRY
-	.2byte ITEM_PECHA_BERRY
-	.2byte ITEM_REPEL
-	.2byte ITEM_NONE
-	release
-	end
-
-// Old man script
-
-CranTown_Sign_TownSign::
-	msgbox CranTown_Text_TownSign, MSGBOX_SIGN
-	end
-	
-CranTown_Sign_TrainerTips::
-	msgbox CranTown_Text_TrainerTips, MSGBOX_SIGN
-	end
-	
-CranTown_Sign_FamilySign::
-	msgbox CranTown_Text_FamilySign, MSGBOX_SIGN
-	end
-	
-CranTown_Text_TownSign:
-	.string "{EMPHASIS_BLUE}CRAN TOWN{EMPHASIS_OFF}\n"
+CranTown_Sign_TownSign_Text_0:
+# 121 "data/maps/CranTown/scripts.pory"
+	.string "{EMPHASIS_BLUE}Cran Town{EMPHASIS_OFF}\n"
 	.string "“A town of humble beginnings.”$"
-	
-CranTown_Text_FamilySign:
-	.string "{EMPHASIS_RED}MOVE MACHINE FAMILY{EMPHASIS_OFF}\n"
-	.string "Home-made TMs and HMs!$"
-	
-CranTown_Text_TrainerTips:
-	.string "{EMPHASIS_RED}TRAINER TIPS{EMPHASIS_OFF}\p"
-	.string "The base chance of a critical hit\n"
-	.string "landing in battle is zero.\p"
-	.string "This means {EMPHASIS_RED}critical hits won't\n"
-	.string "occur if crit ratio is not raised.{EMPHASIS_OFF}\p"
-	.string "On the flip side, critical hits are\n"
-	.string "certain with a ratio {EMPHASIS_RED}above four.{EMPHASIS_OFF}\p"
-	.string "For reference, the move Focus Energy\n"
-	.string "boosts the ratio by two.\p"
-	.string "High critical rate moves only\n"
-	.string "boost it by one.\p"
-	.string "Enjoy!$"
 
+CranTown_Sign_TrainerTips_Text_0:
+# 127 "data/maps/CranTown/scripts.pory"
+	.string "Don't forget to check out the Options\n"
+	.string "menu to customize your experience!\p$"
 
+CranTown_Sign_TrainerTips_Text_1:
+# 129 "data/maps/CranTown/scripts.pory"
+	.string "{EMPHASIS_PLAYER}…The sign doesn't specify an app\n"
+	.string "or anything. What could it mean?$"
 
+CranTown_Sign_FamilySign_Text_0:
+# 134 "data/maps/CranTown/scripts.pory"
+	.string "Move Machine Family: Home-made TMs\n"
+	.string "and HMs! {EMPHASIS_GREEN}Teachy TV{EMPHASIS_OFF} sold here!$"
