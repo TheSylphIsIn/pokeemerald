@@ -137,6 +137,10 @@ Debug_EventScript_Text_DefensiveIVs:
 	.string "HP IVs: {STR_VAR_1}, DEF IVs: {STR_VAR_2}, SPDEF IVs: {STR_VAR_3}$"
 
 Debug_EventScript_Script_1::
+	setflag FLAG_MOVE_MACHINE_105
+	setflag FLAG_MOVE_MACHINE_001
+	setflag FLAG_MOVE_MACHINE_013
+	setflag FLAG_MOVE_MACHINE_026
 	end
 
 Debug_EventScript_Script_2::

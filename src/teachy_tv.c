@@ -17,6 +17,8 @@
 #include "constants/rgb.h"
 #include "decompress.h"
 #include "constants/songs.h"
+#include "event_data.h"
+#include "list_menu.h"
 #include "sound.h"
 #include "sprite.h"
 #include "string_util.h"
@@ -29,6 +31,7 @@
 #include "pokedex.h"
 #include "gpu_regs.h"
 #include "constants/pokemon.h"
+#include "constants/flags.h"
 
 // Sample UI base provided by grunt-lucas.
 
@@ -64,6 +67,7 @@ enum {
 	INDICATOR_MAIN_BAR_PARTY,
 	INDICATOR_MAIN_BAR_REMIND,
 	INDICATOR_MAIN_PARTY_SLOT,
+	INDICATOR_HIDE,
 };
 
 struct SampleUiState
@@ -94,6 +98,10 @@ struct SampleUiState
 	u8 indicatorSpriteIds[4];
 	u8 timer; // general timer for idle anims e.g. indicator corners, so their animations stay synced
 	u8 cursorLocation; // Menu state, which determines how certain elements should behave e.g. indicator corners
+	struct ListMenuItem movesList[NUM_MOVE_MACHINES];
+	u8 moveNamesBuffer[NUM_MOVE_MACHINES][MOVE_NAME_LENGTH + 8];
+	u16 scrollPos;
+	u16 cursorPos;
 };
 
 enum WindowIds
@@ -101,7 +109,7 @@ enum WindowIds
     WIN_MAIN_SCREEN,	// Screen 0 "TV screen", used for mon info
     WIN_MAIN_BAR,		// Screen 0 bar at bottom, used for navigating between screens
 	WIN_MAIN_TYPES,		// Type icons on the main screen
-	WIN_SELECTED_NAME,	// Screen 1 bar in middle, displays selected move name
+	WIN_MOVES_LIST,		// Screen 1 bar in middle, displays selected move name
 	WIN_MOVE_INFO,		// Sliding panel window, displays selected move info
 };
 
@@ -244,7 +252,7 @@ static const struct BgTemplate sTeachyTvBgTemplates[] =
          * the text in the dex info window.
          */
         .bg = 2,
-        .charBaseIndex = 3,
+        .charBaseIndex = 0,
         .mapBaseIndex = 29,
 		.screenSize = 1,
         .priority = 0
@@ -282,6 +290,16 @@ static const struct WindowTemplate sTeachyTvWindowTemplates[] =
         .height = 2,
         .paletteNum = 13,
         .baseBlock = 1 + (26 * 14) + (26 * 2)
+    },
+    [WIN_MOVES_LIST] =
+    {
+        .bg = 2,
+        .tilemapLeft = 14,
+        .tilemapTop = 2,
+        .width = 15,
+        .height = 12,
+        .paletteNum = 15,
+        .baseBlock = 1 + (26 * 14) + (26 * 2) + (9 * 2)
     },
     DUMMY_WIN_TEMPLATE
 };
@@ -728,7 +746,6 @@ static const u8 sSampleUiWindowFontColors[][3] =
     [FONT_BLUE]   = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_BLUE,       TEXT_COLOR_LIGHT_GRAY},
 };
 
-
 // UI element coords
 
 // Used for both printing the text and showing the selector sprite
@@ -745,6 +762,10 @@ static void SampleUi_VBlankCB(void);
 static void Task_SampleUiWaitFadeIn(u8 taskId);
 static void Task_TeachyTvMainScreenBarInput(u8 taskId);
 static void Task_TeachyTvMainScreenPartyInput(u8 taskId);
+static void Task_SwapToMainScreen(u8 taskId);
+static void SwapToMoveListForTeach(u8 taskId);
+static void Task_SwapToMoveListForTeach(u8 taskId);
+static void Task_TeachyTvMovesListHandleInput(u8 taskId);
 static void Task_SampleUiPanelSlide(u8 taskId);
 static void Task_SampleUiWaitFadeAndBail(u8 taskId);
 static void Task_SampleUiWaitFadeAndExitGracefully(u8 taskId);
@@ -757,11 +778,40 @@ static void TeachyTv_InitWindows(void);
 static void TeachyTv_PrintSelectedMonInfo(u32 partyIndex);
 static void TeachyTv_PrintBarLabels(void);
 static void TeachyTv_DrawPartyMonIcons(u32 baseX, u32 y);
+static void TeachyTv_DrawTeachingMonIcons(u32 baseX, u32 y);
 static void TeachyTv_CreateSelectionIndicators(void);
 static void SampleUi_StartRegionButtonAnim(enum Region region);
 static void SampleUi_StopRegionButtonAnim(enum Region region);
 static void SampleUi_FreeResources(void);
 
+static void TeachyTv_BuildMovesLists(u8 source);
+static void TeachyTv_MoveCursorCallback(s32, bool8, struct ListMenu *);
+static void TeachyTv_ItemPrintCallback(u8, u32, u8, u8);
+
+static const struct ListMenuTemplate sMoveListMenu =
+{
+    .items = NULL,
+    .moveCursorFunc = TeachyTv_MoveCursorCallback,
+    .itemPrintFunc = TeachyTv_ItemPrintCallback,
+    .totalItems = 0,
+    .maxShowed = 0,
+    .windowId = WIN_MOVES_LIST,
+    .header_X = 0,
+    .item_X = 8,
+    .cursor_X = 0,
+    .upText_Y = 1,
+    .cursorPal = 1,
+    .fillValue = 0,
+    .cursorShadowPal = 3,
+    .lettersSpacing = 0,
+    .itemVerticalPadding = 0,
+    .scrollMultiple = LIST_NO_MULTIPLE_SCROLL,
+    .fontId = FONT_NARROW,
+    .cursorKind = CURSOR_BLACK_ARROW
+};
+
+
+#define tListTaskId data[0]
 
 void StartTeachyTV(MainCallback callback)
 {
@@ -844,6 +894,8 @@ static void SampleUi_SetupCB(void)
         break;
     case 6:
         BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
+		TeachyTv_BuildMovesLists(0);
+		PlaySE(SE_PC_LOGIN);
         gMain.state++;
         break;
     case 7:
@@ -885,7 +937,7 @@ static const u8 sMainBarNextStates[][2] = // [initial state][left, right]
 };
 
 static void (*const sMainBarSelectFuncs[])(u8 taskId) = {
-	[INDICATOR_MAIN_BAR_TEACH] = Task_TeachyTvMainScreenPartyInput,
+	[INDICATOR_MAIN_BAR_TEACH] = SwapToMoveListForTeach,
 	[INDICATOR_MAIN_BAR_PARTY] = Task_TeachyTvMainScreenPartyInput,
 	[INDICATOR_MAIN_BAR_REMIND] = Task_TeachyTvMainScreenPartyInput,
 };
@@ -952,6 +1004,22 @@ static void Task_TeachyTvMainScreenBarInput(u8 taskId)
 
 static void Task_TeachyTvMainScreenPartyInput(u8 taskId)
 {
+	if (JOY_NEW(B_BUTTON))
+	{
+		gTasks[taskId].func = Task_TeachyTvMainScreenBarInput;
+		sSampleUiState->cursorLocation = INDICATOR_MAIN_BAR_PARTY;
+		PlaySE(SE_SELECT);
+	}
+    if (JOY_NEW(START_BUTTON))
+    {
+        PlaySE(SE_PC_OFF);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+        gTasks[taskId].func = Task_SampleUiWaitFadeAndExitGracefully;
+    }
+	
+	if (gPlayerPartyCount == 1) // don't bother taking input if the player only has 1 mon
+		return;
+	
 	if (JOY_NEW(DPAD_RIGHT) || JOY_REPEAT(DPAD_RIGHT))
 	{
 		if (++sSampleUiState->selectedMonIndex == gPlayerPartyCount)
@@ -966,10 +1034,74 @@ static void Task_TeachyTvMainScreenPartyInput(u8 taskId)
         TeachyTv_PrintSelectedMonInfo(--sSampleUiState->selectedMonIndex);
 		PlaySE(SE_SELECT);
 	}
+}
+
+static void SwapToMoveListForTeach(u8 taskId)
+{
+	u32 i = 0;
+		
+	for(i = 0; i < gPlayerPartyCount; i++)
+	{
+		FreeAndDestroyMonIconSprite(&gSprites[sSampleUiState->monIconSpriteIds[i]]);
+	}
+	
+	FillWindowPixelBuffer(WIN_MAIN_SCREEN, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+	FillWindowPixelBuffer(WIN_MAIN_BAR, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+	FillWindowPixelBuffer(WIN_MAIN_TYPES, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+	CopyWindowToVram(WIN_MAIN_SCREEN, COPYWIN_GFX);
+	CopyWindowToVram(WIN_MAIN_BAR, COPYWIN_GFX);
+	CopyWindowToVram(WIN_MAIN_TYPES, COPYWIN_GFX);
+	sSampleUiState->cursorLocation = INDICATOR_HIDE;
+	
+	gTasks[taskId].func = Task_SwapToMoveListForTeach;
+}
+
+static void Task_SwapToMoveListForTeach(u8 taskId)
+{
+	u32 offset = GetGpuReg(REG_OFFSET_BG1VOFS);
+	
+	if (offset < DISPLAY_HEIGHT)
+		SetGpuReg(REG_OFFSET_BG1VOFS, offset + 8);
+	else
+	{
+		TeachyTv_DrawTeachingMonIcons(24, 32);
+		gTasks[taskId].func = Task_TeachyTvMovesListHandleInput;
+		// Init list menu
+		gTasks[taskId].tListTaskId = ListMenuInit(&gMultiuseListMenuTemplate, 0, 0);
+	}
+}
+
+static void Task_SwapToMainScreen(u8 taskId)
+{
+	u32 offset = GetGpuReg(REG_OFFSET_BG1VOFS);
+	
+	if (offset > 0)
+		SetGpuReg(REG_OFFSET_BG1VOFS, offset - 8);
+	else
+	{
+		TeachyTv_DrawPartyMonIcons(40, 104);
+		TeachyTv_PrintBarLabels();
+		TeachyTv_PrintSelectedMonInfo(sSampleUiState->selectedMonIndex);
+		sSampleUiState->cursorLocation = INDICATOR_MAIN_BAR_TEACH;		
+		gTasks[taskId].func = Task_TeachyTvMainScreenBarInput;
+	}
+}
+
+static void Task_TeachyTvMovesListHandleInput(u8 taskId)
+{
+	u16 *scrollPos = &sSampleUiState->scrollPos;
+	u16 *cursorPos = &sSampleUiState->cursorPos;
+	s32 listPosition;
+
 	if (JOY_NEW(B_BUTTON))
 	{
-		gTasks[taskId].func = Task_TeachyTvMainScreenBarInput;
-		sSampleUiState->cursorLocation = INDICATOR_MAIN_BAR_PARTY;
+		u32 i;
+		
+		for (i = 0; i < gPlayerPartyCount; i++)
+		{
+			FreeAndDestroyMonIconSprite(&gSprites[sSampleUiState->monIconSpriteIds[i]]);
+		}
+		gTasks[taskId].func = Task_SwapToMainScreen;
 		PlaySE(SE_SELECT);
 	}
     if (JOY_NEW(START_BUTTON))
@@ -978,6 +1110,26 @@ static void Task_TeachyTvMainScreenPartyInput(u8 taskId)
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         gTasks[taskId].func = Task_SampleUiWaitFadeAndExitGracefully;
     }
+	
+	listPosition = ListMenu_ProcessInput(gTasks[taskId].tListTaskId);
+    ListMenuGetScrollAndRow(gTasks[taskId].tListTaskId, scrollPos, cursorPos);
+        switch (listPosition)
+        {
+        case LIST_NOTHING_CHOSEN:
+            break;
+        case LIST_CANCEL:
+            u32 i;
+		
+			for (i = 0; i < gPlayerPartyCount; i++)
+			{
+				FreeAndDestroyMonIconSprite(&gSprites[sSampleUiState->monIconSpriteIds[i]]);
+			}
+			FillWindowPixelBuffer(WIN_MOVES_LIST, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+			CopyWindowToVram(WIN_MOVES_LIST, COPYWIN_GFX);
+			gTasks[taskId].func = Task_SwapToMainScreen;
+			PlaySE(SE_SELECT);
+            break;
+		}
 }
 
 // static void Task_TeachyTvMainScreenPartyInput(u8 taskId)
@@ -1190,15 +1342,19 @@ static void TeachyTv_InitWindows(void)
     InitWindows(sTeachyTvWindowTemplates);
     DeactivateAllTextPrinters();
     ScheduleBgCopyTilemapToVram(0);
+    ScheduleBgCopyTilemapToVram(2);
     FillWindowPixelBuffer(WIN_MAIN_SCREEN, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
     FillWindowPixelBuffer(WIN_MAIN_BAR, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
     FillWindowPixelBuffer(WIN_MAIN_TYPES, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+    FillWindowPixelBuffer(WIN_MOVES_LIST, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
     PutWindowTilemap(WIN_MAIN_SCREEN);
     PutWindowTilemap(WIN_MAIN_BAR);
     PutWindowTilemap(WIN_MAIN_TYPES);
+    PutWindowTilemap(WIN_MOVES_LIST);
     CopyWindowToVram(WIN_MAIN_SCREEN, 3);
     CopyWindowToVram(WIN_MAIN_BAR, 3);
     CopyWindowToVram(WIN_MAIN_TYPES, 3);
+    CopyWindowToVram(WIN_MOVES_LIST, 3);
 }
 
 #define MAIN_SCREEN_MON_INFO_LEFT_X 8
@@ -1291,6 +1447,23 @@ static void TeachyTv_DrawPartyMonIcons(u32 baseX, u32 y)
     
 }
 
+static void TeachyTv_DrawTeachingMonIcons(u32 baseX, u32 y)
+{
+    u32 i;
+	
+	CalculatePlayerPartyCount();
+	
+	for (i = 0; i < gPlayerPartyCount; i++)
+	{
+		sSampleUiState->monIconSpriteIds[i] =
+            CreateMonIcon(GetMonData(&gPlayerParty[i], MON_DATA_SPECIES), SpriteCallbackDummy, baseX + (32 * (i % 3)), y + (32 * (i / 3)), 4, GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY));
+    
+		gSprites[sSampleUiState->monIconSpriteIds[i]].oam.priority = 0;
+	}
+
+    
+}
+
 #define sCorner data[0] // which corner the sprite is
 #define sLocation data[1] // where the cursor currently is
 #define sMonIcon data[2] // last selected mon index
@@ -1324,9 +1497,12 @@ static void SpriteCB_TeachyTvSelectIndicators(struct Sprite *sprite)
 {
 	u32 state = sSampleUiState->cursorLocation;
 	u32 iconIndex = sSampleUiState->selectedMonIndex;
-	
+
+	sprite->invisible = (state == INDICATOR_HIDE);
+
 	if (state != sprite->sLocation)
 	{
+		sprite->invisible = TRUE;
 		sprite->x = sSelectIndicatorCoords[state][2 * (sprite->sCorner % 2)];
 		sprite->y = sSelectIndicatorCoords[state][1 + (2 * (sprite->sCorner > 1))];
 		sprite->sLocation = state;
@@ -1411,4 +1587,172 @@ static void SampleUi_FreeResources(void)
     }
     FreeAllWindowBuffers();
     ResetSpriteData();
+}
+
+static const u16 sFlagIdToMoveId[NUM_MOVE_MACHINES] = 
+{
+	[FLAG_MOVE_MACHINE_001 - MOVE_MACHINES_FLAGS_START] = MOVE_FOCUS_PUNCH,
+	[FLAG_MOVE_MACHINE_002 - MOVE_MACHINES_FLAGS_START] = MOVE_DRAGON_CLAW,
+	[FLAG_MOVE_MACHINE_003 - MOVE_MACHINES_FLAGS_START] = MOVE_WATER_PULSE,
+	[FLAG_MOVE_MACHINE_004 - MOVE_MACHINES_FLAGS_START] = MOVE_CALM_MIND,
+	[FLAG_MOVE_MACHINE_005 - MOVE_MACHINES_FLAGS_START] = MOVE_ROAR,
+	[FLAG_MOVE_MACHINE_006 - MOVE_MACHINES_FLAGS_START] = MOVE_TOXIC,
+	[FLAG_MOVE_MACHINE_007 - MOVE_MACHINES_FLAGS_START] = MOVE_LEAF_BLADE,
+	[FLAG_MOVE_MACHINE_008 - MOVE_MACHINES_FLAGS_START] = MOVE_BULK_UP,
+	[FLAG_MOVE_MACHINE_009 - MOVE_MACHINES_FLAGS_START] = MOVE_BULLET_SEED,
+	[FLAG_MOVE_MACHINE_010 - MOVE_MACHINES_FLAGS_START] = MOVE_HIDDEN_POWER,
+	[FLAG_MOVE_MACHINE_011 - MOVE_MACHINES_FLAGS_START] = MOVE_BLAZE_KICK,
+	[FLAG_MOVE_MACHINE_012 - MOVE_MACHINES_FLAGS_START] = MOVE_LIMBER_UP,
+	[FLAG_MOVE_MACHINE_013 - MOVE_MACHINES_FLAGS_START] = MOVE_ICE_BEAM,
+	[FLAG_MOVE_MACHINE_014 - MOVE_MACHINES_FLAGS_START] = MOVE_BLIZZARD,
+	[FLAG_MOVE_MACHINE_015 - MOVE_MACHINES_FLAGS_START] = MOVE_HYPER_BEAM,
+	[FLAG_MOVE_MACHINE_016 - MOVE_MACHINES_FLAGS_START] = MOVE_GROWTH,
+	[FLAG_MOVE_MACHINE_017 - MOVE_MACHINES_FLAGS_START] = MOVE_PROTECT,
+	[FLAG_MOVE_MACHINE_018 - MOVE_MACHINES_FLAGS_START] = MOVE_DARK_PULSE,
+	[FLAG_MOVE_MACHINE_019 - MOVE_MACHINES_FLAGS_START] = MOVE_SOLAR_BEAM,
+	[FLAG_MOVE_MACHINE_020 - MOVE_MACHINES_FLAGS_START] = MOVE_SAFEGUARD,
+	[FLAG_MOVE_MACHINE_021 - MOVE_MACHINES_FLAGS_START] = MOVE_REFLECT,
+	[FLAG_MOVE_MACHINE_022 - MOVE_MACHINES_FLAGS_START] = MOVE_LIGHT_SCREEN,
+	[FLAG_MOVE_MACHINE_023 - MOVE_MACHINES_FLAGS_START] = MOVE_IRON_TAIL,
+	[FLAG_MOVE_MACHINE_024 - MOVE_MACHINES_FLAGS_START] = MOVE_THUNDERBOLT,
+	[FLAG_MOVE_MACHINE_025 - MOVE_MACHINES_FLAGS_START] = MOVE_THUNDER,
+	[FLAG_MOVE_MACHINE_026 - MOVE_MACHINES_FLAGS_START] = MOVE_EARTHQUAKE,
+	[FLAG_MOVE_MACHINE_027 - MOVE_MACHINES_FLAGS_START] = MOVE_RETURN,
+	[FLAG_MOVE_MACHINE_028 - MOVE_MACHINES_FLAGS_START] = MOVE_TOMBSTONER,
+	[FLAG_MOVE_MACHINE_029 - MOVE_MACHINES_FLAGS_START] = MOVE_PSYCHIC,
+	[FLAG_MOVE_MACHINE_030 - MOVE_MACHINES_FLAGS_START] = MOVE_SHEAR_WIND,
+	[FLAG_MOVE_MACHINE_031 - MOVE_MACHINES_FLAGS_START] = MOVE_BRICK_BREAK,
+	[FLAG_MOVE_MACHINE_032 - MOVE_MACHINES_FLAGS_START] = MOVE_DOUBLE_TEAM,
+	[FLAG_MOVE_MACHINE_033 - MOVE_MACHINES_FLAGS_START] = MOVE_GIGA_DRAIN,
+	[FLAG_MOVE_MACHINE_034 - MOVE_MACHINES_FLAGS_START] = MOVE_ICICLE_CRASH,
+	[FLAG_MOVE_MACHINE_035 - MOVE_MACHINES_FLAGS_START] = MOVE_FLAMETHROWER,
+	[FLAG_MOVE_MACHINE_036 - MOVE_MACHINES_FLAGS_START] = MOVE_SLUDGE_BOMB,
+	[FLAG_MOVE_MACHINE_037 - MOVE_MACHINES_FLAGS_START] = MOVE_STONE_EDGE,
+	[FLAG_MOVE_MACHINE_038 - MOVE_MACHINES_FLAGS_START] = MOVE_FIRE_BLAST,
+	[FLAG_MOVE_MACHINE_039 - MOVE_MACHINES_FLAGS_START] = MOVE_SHADOW_BALL,
+	[FLAG_MOVE_MACHINE_040 - MOVE_MACHINES_FLAGS_START] = MOVE_HURRICANE,
+	[FLAG_MOVE_MACHINE_041 - MOVE_MACHINES_FLAGS_START] = MOVE_DAZZLING_GLEAM,
+	[FLAG_MOVE_MACHINE_042 - MOVE_MACHINES_FLAGS_START] = MOVE_FACADE,
+	[FLAG_MOVE_MACHINE_043 - MOVE_MACHINES_FLAGS_START] = MOVE_SECRET_POWER,
+	[FLAG_MOVE_MACHINE_044 - MOVE_MACHINES_FLAGS_START] = MOVE_ATTRACT,
+	[FLAG_MOVE_MACHINE_045 - MOVE_MACHINES_FLAGS_START] = MOVE_THUNDER_WAVE,
+	[FLAG_MOVE_MACHINE_046 - MOVE_MACHINES_FLAGS_START] = MOVE_WILL_O_WISP,
+	[FLAG_MOVE_MACHINE_047 - MOVE_MACHINES_FLAGS_START] = MOVE_COLD_SNAP,
+	[FLAG_MOVE_MACHINE_048 - MOVE_MACHINES_FLAGS_START] = MOVE_GASLIGHT,
+	[FLAG_MOVE_MACHINE_049 - MOVE_MACHINES_FLAGS_START] = MOVE_TAUNT,
+	[FLAG_MOVE_MACHINE_050 - MOVE_MACHINES_FLAGS_START] = MOVE_WASH_OFF,
+	[FLAG_MOVE_MACHINE_051 - MOVE_MACHINES_FLAGS_START] = MOVE_SWORDS_DANCE,
+	[FLAG_MOVE_MACHINE_052 - MOVE_MACHINES_FLAGS_START] = MOVE_IRON_DEFENSE,
+	[FLAG_MOVE_MACHINE_053 - MOVE_MACHINES_FLAGS_START] = MOVE_AGILITY,
+	[FLAG_MOVE_MACHINE_054 - MOVE_MACHINES_FLAGS_START] = MOVE_NASTY_PLOT,
+	[FLAG_MOVE_MACHINE_055 - MOVE_MACHINES_FLAGS_START] = MOVE_AMNESIA,
+	[FLAG_MOVE_MACHINE_056 - MOVE_MACHINES_FLAGS_START] = MOVE_RAIN_DANCE,
+	[FLAG_MOVE_MACHINE_057 - MOVE_MACHINES_FLAGS_START] = MOVE_SUNNY_DAY,
+	[FLAG_MOVE_MACHINE_058 - MOVE_MACHINES_FLAGS_START] = MOVE_SANDSTORM,
+	[FLAG_MOVE_MACHINE_059 - MOVE_MACHINES_FLAGS_START] = MOVE_HAIL,
+	[FLAG_MOVE_MACHINE_060 - MOVE_MACHINES_FLAGS_START] = MOVE_ENERGY_BALL,
+	[FLAG_MOVE_MACHINE_061 - MOVE_MACHINES_FLAGS_START] = MOVE_LAVA_PLUME,
+	[FLAG_MOVE_MACHINE_062 - MOVE_MACHINES_FLAGS_START] = MOVE_WHITEWATER,
+	[FLAG_MOVE_MACHINE_063 - MOVE_MACHINES_FLAGS_START] = MOVE_PIN_MISSILE,
+	[FLAG_MOVE_MACHINE_064 - MOVE_MACHINES_FLAGS_START] = MOVE_CHILL_TOUCH,
+	[FLAG_MOVE_MACHINE_065 - MOVE_MACHINES_FLAGS_START] = MOVE_BODY_PRESS,
+	[FLAG_MOVE_MACHINE_066 - MOVE_MACHINES_FLAGS_START] = MOVE_BLACKOUT,
+	[FLAG_MOVE_MACHINE_067 - MOVE_MACHINES_FLAGS_START] = MOVE_DRAGON_PULSE,
+	[FLAG_MOVE_MACHINE_068 - MOVE_MACHINES_FLAGS_START] = MOVE_GIGA_IMPACT,
+	[FLAG_MOVE_MACHINE_069 - MOVE_MACHINES_FLAGS_START] = MOVE_PLAY_ROUGH,
+	[FLAG_MOVE_MACHINE_070 - MOVE_MACHINES_FLAGS_START] = MOVE_BLADE_STORM,
+	[FLAG_MOVE_MACHINE_071 - MOVE_MACHINES_FLAGS_START] = MOVE_OVERHEAT,
+	[FLAG_MOVE_MACHINE_072 - MOVE_MACHINES_FLAGS_START] = MOVE_FOCUS_RUSH,
+	[FLAG_MOVE_MACHINE_073 - MOVE_MACHINES_FLAGS_START] = MOVE_POWER_GEM,
+	[FLAG_MOVE_MACHINE_074 - MOVE_MACHINES_FLAGS_START] = MOVE_EARTH_POWER,
+	[FLAG_MOVE_MACHINE_075 - MOVE_MACHINES_FLAGS_START] = MOVE_AIR_SLASH,
+	[FLAG_MOVE_MACHINE_076 - MOVE_MACHINES_FLAGS_START] = MOVE_BUZZ_BLITZ,
+	[FLAG_MOVE_MACHINE_077 - MOVE_MACHINES_FLAGS_START] = MOVE_STEEL_WING,
+	[FLAG_MOVE_MACHINE_078 - MOVE_MACHINES_FLAGS_START] = MOVE_HEAL_ORDER,
+	[FLAG_MOVE_MACHINE_079 - MOVE_MACHINES_FLAGS_START] = MOVE_POISON_JAB,
+	[FLAG_MOVE_MACHINE_080 - MOVE_MACHINES_FLAGS_START] = MOVE_FUMUGATE,
+	[FLAG_MOVE_MACHINE_081 - MOVE_MACHINES_FLAGS_START] = MOVE_U_TURN,
+	[FLAG_MOVE_MACHINE_082 - MOVE_MACHINES_FLAGS_START] = MOVE_VOLT_SWITCH,
+	[FLAG_MOVE_MACHINE_083 - MOVE_MACHINES_FLAGS_START] = MOVE_FADE_AWAY,
+	[FLAG_MOVE_MACHINE_084 - MOVE_MACHINES_FLAGS_START] = MOVE_TELEPORT,
+	[FLAG_MOVE_MACHINE_085 - MOVE_MACHINES_FLAGS_START] = MOVE_FOCUS_BLAST,
+	[FLAG_MOVE_MACHINE_086 - MOVE_MACHINES_FLAGS_START] = MOVE_HYDRO_PUMP,
+	[FLAG_MOVE_MACHINE_087 - MOVE_MACHINES_FLAGS_START] = MOVE_SIGNAL_BEAM,
+	[FLAG_MOVE_MACHINE_088 - MOVE_MACHINES_FLAGS_START] = MOVE_FLASH_CANNON,
+	[FLAG_MOVE_MACHINE_089 - MOVE_MACHINES_FLAGS_START] = MOVE_ICE_FANG, // placeholder
+	[FLAG_MOVE_MACHINE_090 - MOVE_MACHINES_FLAGS_START] = MOVE_HORRIFY,
+	[FLAG_MOVE_MACHINE_091 - MOVE_MACHINES_FLAGS_START] = MOVE_MAGIC_BURST,
+	[FLAG_MOVE_MACHINE_092 - MOVE_MACHINES_FLAGS_START] = MOVE_SMART_STRIKE,
+	[FLAG_MOVE_MACHINE_093 - MOVE_MACHINES_FLAGS_START] = MOVE_DIG,
+	[FLAG_MOVE_MACHINE_094 - MOVE_MACHINES_FLAGS_START] = MOVE_X_SCISSOR,
+	[FLAG_MOVE_MACHINE_095 - MOVE_MACHINES_FLAGS_START] = MOVE_POISON_TAIL,
+	[FLAG_MOVE_MACHINE_096 - MOVE_MACHINES_FLAGS_START] = MOVE_REND,
+	[FLAG_MOVE_MACHINE_097 - MOVE_MACHINES_FLAGS_START] = MOVE_SUPERPOWER,
+	[FLAG_MOVE_MACHINE_098 - MOVE_MACHINES_FLAGS_START] = MOVE_TAILWIND,
+	[FLAG_MOVE_MACHINE_099 - MOVE_MACHINES_FLAGS_START] = MOVE_SWEET_KISS,
+	[FLAG_MOVE_MACHINE_100 - MOVE_MACHINES_FLAGS_START] = MOVE_SWIFT,
+	[FLAG_MOVE_MACHINE_101 - MOVE_MACHINES_FLAGS_START] = MOVE_DRAGON_EYE,
+	[FLAG_MOVE_MACHINE_102 - MOVE_MACHINES_FLAGS_START] = MOVE_REST,
+	[FLAG_MOVE_MACHINE_103 - MOVE_MACHINES_FLAGS_START] = MOVE_SHORE_UP,
+	[FLAG_MOVE_MACHINE_104 - MOVE_MACHINES_FLAGS_START] = MOVE_FLAME_CHARGE,
+	[FLAG_MOVE_MACHINE_105 - MOVE_MACHINES_FLAGS_START] = MOVE_TRAILBLAZE,
+	[FLAG_MOVE_MACHINE_106 - MOVE_MACHINES_FLAGS_START] = MOVE_ACID_SPRAY,
+	[FLAG_MOVE_MACHINE_107 - MOVE_MACHINES_FLAGS_START] = MOVE_SHOCK_WAVE,
+	[FLAG_MOVE_MACHINE_108 - MOVE_MACHINES_FLAGS_START] = MOVE_TWISTER,
+	[FLAG_MOVE_MACHINE_109 - MOVE_MACHINES_FLAGS_START] = MOVE_AERIAL_ACE,
+	[FLAG_MOVE_MACHINE_110 - MOVE_MACHINES_FLAGS_START] = MOVE_TANTRUM,
+	[FLAG_MOVE_MACHINE_111 - MOVE_MACHINES_FLAGS_START] = MOVE_SHADOW_SNEAK,
+	[FLAG_MOVE_MACHINE_112 - MOVE_MACHINES_FLAGS_START] = MOVE_THIEF,
+	[FLAG_MOVE_MACHINE_113 - MOVE_MACHINES_FLAGS_START] = MOVE_POISON_FANG,
+	[FLAG_MOVE_MACHINE_114 - MOVE_MACHINES_FLAGS_START] = MOVE_SILVER_WIND,
+	[FLAG_MOVE_MACHINE_115 - MOVE_MACHINES_FLAGS_START] = MOVE_STRUGGLE_BUG,
+	[FLAG_MOVE_MACHINE_116 - MOVE_MACHINES_FLAGS_START] = MOVE_AURA_WAVE,
+	[FLAG_MOVE_MACHINE_117 - MOVE_MACHINES_FLAGS_START] = MOVE_MUD_SHOT,
+	[FLAG_MOVE_MACHINE_118 - MOVE_MACHINES_FLAGS_START] = MOVE_GEM_SPARK,
+	[FLAG_MOVE_MACHINE_119 - MOVE_MACHINES_FLAGS_START] = MOVE_SNARL, // placeholder
+	[FLAG_MOVE_MACHINE_120 - MOVE_MACHINES_FLAGS_START] = MOVE_TWINKLE_POP,
+	[FLAG_MOVE_MACHINE_121 - MOVE_MACHINES_FLAGS_START] = MOVE_CUT,
+	[FLAG_MOVE_MACHINE_122 - MOVE_MACHINES_FLAGS_START] = MOVE_FLY,
+	[FLAG_MOVE_MACHINE_123 - MOVE_MACHINES_FLAGS_START] = MOVE_SURF,
+	[FLAG_MOVE_MACHINE_124 - MOVE_MACHINES_FLAGS_START] = MOVE_STRENGTH,
+	[FLAG_MOVE_MACHINE_125 - MOVE_MACHINES_FLAGS_START] = MOVE_FLASH,
+	[FLAG_MOVE_MACHINE_126 - MOVE_MACHINES_FLAGS_START] = MOVE_ROCK_SMASH,
+	[FLAG_MOVE_MACHINE_127 - MOVE_MACHINES_FLAGS_START] = MOVE_WATERFALL,
+	[FLAG_MOVE_MACHINE_128 - MOVE_MACHINES_FLAGS_START] = MOVE_DIVE,
+};
+
+static void TeachyTv_BuildMovesLists(u8 moveSource)
+{
+	u32 i;
+	u32 numMoveMachines = 0;
+	u32 numTeachyTapes = 0;
+	
+	for (i = 0; i < NUM_MOVE_MACHINES; i++)
+	{
+		if(FlagGet(i + MOVE_MACHINES_FLAGS_START))
+		{
+			StringCopy(sSampleUiState->moveNamesBuffer[i], GetMoveName(sFlagIdToMoveId[i]));
+			sSampleUiState->movesList[numMoveMachines].name = sSampleUiState->moveNamesBuffer[i];
+			sSampleUiState->movesList[numMoveMachines].id = numMoveMachines;
+			numMoveMachines++;
+		}
+	}
+	
+	StringCopy(sSampleUiState->moveNamesBuffer[numMoveMachines], gText_CloseBag);
+	sSampleUiState->movesList[numMoveMachines].name = sSampleUiState->moveNamesBuffer[numMoveMachines];
+	sSampleUiState->movesList[numMoveMachines].id = LIST_CANCEL;
+	
+	gMultiuseListMenuTemplate = sMoveListMenu;
+    gMultiuseListMenuTemplate.totalItems = numMoveMachines + 1;
+    gMultiuseListMenuTemplate.items = sSampleUiState->movesList;
+    gMultiuseListMenuTemplate.maxShowed = 6;	
+}
+
+static void TeachyTv_MoveCursorCallback(s32, bool8, struct ListMenu *)
+{
+	// TODO: Tints mon icons depending on if they can learn the move, and print move data
+}
+static void TeachyTv_ItemPrintCallback(u8, u32, u8, u8)
+{
+	// TODO: Colors the line of that move in the window depending on its type
 }
