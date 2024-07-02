@@ -29,7 +29,7 @@
 #define STD_WINDOW_PALETTE_SIZE PLTT_SIZEOF(10)
 #define STD_WINDOW_BASE_TILE_NUM 0x214
 
-#define DLW_WIN_PLATE_SIZE  8
+#define DLW_WIN_PLATE_SIZE  10
 
 struct MenuInfoIcon
 {
@@ -373,7 +373,7 @@ static void WindowFunc_DrawDialogueFrameWithPlate(u8 bg, u8 L, u8 T, u8 w, u8 h,
     int PR = w - DLW_WIN_PLATE_SIZE - 2;
     FillBgTilemapBufferRect(bg,                DLG_WINDOW_BASE_TILE_NUM +  0,  L - 2,     T - 1, 1,     1, DLG_WINDOW_PALETTE_NUM);
     FillBgTilemapBufferRect(bg,                DLG_WINDOW_BASE_TILE_NUM + 11,  L - 1,     T - 1, 1,     1, DLG_WINDOW_PALETTE_NUM);
-    FillBgTilemapBufferRect(bg,                DLG_WINDOW_BASE_TILE_NUM + 10,  L - 1,     T - 2, 1,     1, DLG_WINDOW_PALETTE_NUM);
+    FillBgTilemapBufferRect(bg, BG_TILE_H_FLIP(DLG_WINDOW_BASE_TILE_NUM + 6),  L - 1,     T - 2, 1,     1, DLG_WINDOW_PALETTE_NUM);
     
     FillBgTilemapBufferRect(bg,                DLG_WINDOW_BASE_TILE_NUM + 12,  L,         T - 1, PW,    1, DLG_WINDOW_PALETTE_NUM);
     FillBgTilemapBufferRect(bg,                DLG_WINDOW_BASE_TILE_NUM +  5,  L,         T - 2, PW,    1, DLG_WINDOW_PALETTE_NUM);
