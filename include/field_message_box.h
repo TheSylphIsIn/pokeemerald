@@ -10,6 +10,14 @@ enum
 };
 
 extern const u8* gSpeakerName;
+extern u8 showPortraitState; // used to control visibility of portraits. 
+
+enum
+{
+	PORTRAIT_STATE_VISIBLE, // Portrait and dialogue window are visible
+	PORTRAIT_STATE_WAITING, // Portrait is drawn but invisible until the dialogue window appears
+	PORTRAIT_STATE_DEACTIVATE, // Dialogue window is disappearing, Portrait should clear itself
+};
 
 bool8 ShowFieldMessage(const u8 *message);
 bool8 ShowPokenavFieldMessage(const u8 *message);

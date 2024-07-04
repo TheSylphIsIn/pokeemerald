@@ -927,6 +927,16 @@ u8 CreateMonSprite_PicBox(u16 species, s16 x, s16 y, u8 subpriority)
         return spriteId;
 }
 
+u8 CreateDialoguePortrait(u16 id, s16 x, s16 y)
+{
+    s32 spriteId = CreateMonPicSprite(id + 0xF000, FALSE, 0, TRUE, x, y, 0, id + 0xF000); // dumb hack: id > 0xF000 is an identifier to treat this as a portrait id instead of a mon species
+    PreservePaletteInWeather(IndexOfSpritePaletteTag(id + 0xF000) + 0x10);
+    if (spriteId == 0xFFFF)
+        return MAX_SPRITES;
+    else
+        return spriteId;
+}
+
 u8 CreateMonSprite_FieldMove(u16 species, bool8 isShiny, u32 personality, s16 x, s16 y, u8 subpriority)
 {
     u16 spriteId = CreateMonPicSprite(species, isShiny, personality, TRUE, x, y, 0, species);

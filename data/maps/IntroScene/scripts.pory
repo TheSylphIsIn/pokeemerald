@@ -10,13 +10,24 @@ mapscripts IntroScene_MapScripts
 
 script Test_MonPic
 {
-	showmonpic(SPECIES_DUNSPARCE, 0, 0)
+	msgbox("message when no tags", MSGBOX_AUTOCLOSE)
+	delay(30)
+	speakername("oenis", PORTRAIT_FLYGON_NEUTRAL, 21, 6, TRUE)
+	msgbox("message when haves tags", MSGBOX_AUTOCLOSE)
+	delay(30)
+	msgbox("message when no tags", MSGBOX_AUTOCLOSE)	
+}
+
+script Test_Portrait
+{
+	speakername("h", PORTRAIT_KINGLER_NEUTRAL, 21, 6, TRUE)
 	waitbuttonpress
-	showmonpic(SPECIES_DUSKULL, 2, 2)
-	waitbuttonpress
-	hidemonpic
-	showmonpic(SPECIES_DUSKULL, 0, 0)
-	waitbuttonpress
-	hidemonpic
+	msgbox(format("It will show up when the message box appears."), MSGBOX_DEFAULT)
+	speakername("b", PORTRAIT_NIDOKING_NEUTRAL)
+	msgbox(format("It can change mid-dialogue."), MSGBOX_DEFAULT)
+	speakername("h", PORTRAIT_NONE)
+	msgbox(format("Or even disappear."), MSGBOX_DEFAULT)
+	speakername(NULL, PORTRAIT_AMELIA_NEUTRAL)
+	msgbox(format("Portrait and name can be controlled separately too."), MSGBOX_AUTOCLOSE)
 }
 

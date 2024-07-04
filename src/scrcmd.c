@@ -1314,7 +1314,14 @@ bool8 ScrCmd_release(struct ScriptContext *ctx)
 bool8 ScrCmd_setspeaker(struct ScriptContext *ctx)
 {
     const u8 *name = (const u8 *)ScriptReadWord(ctx);
+	u32 portraitId = ScriptReadHalfword(ctx);
+	u32 x = ScriptReadByte(ctx);
+	u32 y = ScriptReadByte(ctx);
+	u32 hFlip = ScriptReadByte(ctx);
+	
     SetSpeakerName(name);
+	ScriptMenu_ShowDialoguePortrait(portraitId, x, y, hFlip);
+	
     return FALSE;
 }
 

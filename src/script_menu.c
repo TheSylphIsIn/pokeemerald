@@ -21,6 +21,8 @@
 #include "constants/items.h"
 #include "constants/script_menu.h"
 #include "constants/songs.h"
+#include "constants/portraits.h"
+#include "field_message_box.h"
 
 #include "data/script_menu.h"
 
@@ -934,6 +936,7 @@ void GetLilycoveSSTidalSelection(void)
 #define tWindowX     data[3]
 #define tWindowY     data[4]
 #define tWindowId    data[5]
+#define tPortrait	 data[6]
 
 static void Task_PokemonPicWindow(u8 taskId)
 {
@@ -945,6 +948,18 @@ static void Task_PokemonPicWindow(u8 taskId)
         task->tState++;
         break;
     case 1:
+		if (task->tPortrait)
+		{
+			if (showPortraitState == PORTRAIT_STATE_DEACTIVATE)
+			{
+				task->tState++;
+				showPortraitState = PORTRAIT_STATE_WAITING;
+			}
+			else
+			{
+				gSprites[task->tMonSpriteId].invisible = showPortraitState;
+			}
+		}
         // Wait until state is advanced by ScriptMenu_HidePokemonPic
         break;
     case 2:
@@ -952,7 +967,8 @@ static void Task_PokemonPicWindow(u8 taskId)
         task->tState++;
         break;
     case 3:
-        ClearToTransparentAndRemoveWindow(task->tWindowId);
+		if (task->tPortrait == FALSE)
+			ClearToTransparentAndRemoveWindow(task->tWindowId);
         DestroyTask(taskId);
         break;
     }
@@ -963,7 +979,7 @@ bool8 ScriptMenu_ShowPokemonPic(u16 species, u8 x, u8 y)
     u8 taskId;
     u8 spriteId;
 
-    if (FindTaskIdByFunc(Task_PokemonPicWindow) != TASK_NONE)
+    if ((FindTaskIdByFunc(Task_PokemonPicWindow)) != TASK_NONE)
     {
         return FALSE;
     }
@@ -981,6 +997,44 @@ bool8 ScriptMenu_ShowPokemonPic(u16 species, u8 x, u8 y)
         ScheduleBgCopyTilemapToVram(0);
         return TRUE;
     }
+}
+
+bool8 ScriptMenu_ShowDialoguePortrait(u16 id, u8 x, u8 y, bool8 hFlip)
+{
+    u8 taskId;
+    u8 spriteId;
+	
+	if (id == PORTRAIT_NONE || id >= PORTRAITS_COUNT)
+	{
+		taskId = FindTaskIdByFunc(Task_PokemonPicWindow);
+
+		if (taskId == TASK_NONE)
+			return NULL;
+        FreeResourcesAndDestroySprite(&gSprites[gTasks[taskId].tMonSpriteId], gTasks[taskId].tMonSpriteId);
+		DestroyTask(taskId);
+		return TRUE;	
+	}
+
+    if ((taskId = FindTaskIdByFunc(Task_PokemonPicWindow)) != TASK_NONE)
+    {
+        FreeResourcesAndDestroySprite(&gSprites[gTasks[taskId].tMonSpriteId], gTasks[taskId].tMonSpriteId);
+	}
+	else
+	{
+		showPortraitState = PORTRAIT_STATE_WAITING;
+        taskId = CreateTask(Task_PokemonPicWindow, 0x50);		
+	}
+	
+	spriteId = CreateDialoguePortrait(id, x * 8 + 40, y * 8 + 40);
+	gTasks[taskId].tState = 0;
+	gTasks[taskId].tMonSpecies = id;
+	gTasks[taskId].tMonSpriteId = spriteId;
+	gTasks[taskId].tPortrait = TRUE;
+	gSprites[spriteId].callback = SpriteCallbackDummy;
+	gSprites[spriteId].oam.priority = 0;
+	gSprites[spriteId].hFlip = hFlip;
+	gSprites[spriteId].invisible = showPortraitState;
+	return TRUE;
 }
 
 bool8 (*ScriptMenu_HidePokemonPic(void))(void)
@@ -1007,6 +1061,7 @@ static bool8 IsPicboxClosed(void)
 #undef tWindowX
 #undef tWindowY
 #undef tWindowId
+#undef tPortrait
 
 u8 CreateWindowFromRect(u8 x, u8 y, u8 width, u8 height)
 {

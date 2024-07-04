@@ -1886,9 +1886,13 @@
 	.endm
 
 	@ Sets the text of the name box in the next-shown message box.
-	.macro speakername text:req
+	.macro speakername text:req, portraitId=0, portraitX=20, portraitY=5, hFlip=FALSE
 	.byte 0xe5
 	.4byte \text
+	.2byte \portraitId
+	.byte \portraitX
+	.byte \portraitY
+	.byte \hFlip
 	.endm
 
 @ Supplementary

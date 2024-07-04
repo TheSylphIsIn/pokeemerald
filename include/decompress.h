@@ -28,4 +28,12 @@ void LoadSpecialPokePic(void *dest, s32 species, u32 personality, bool8 isFrontP
 
 u32 GetDecompressedDataSize(const u32 *ptr);
 
+struct PortraitData
+{
+	const u32 * pic;
+	const u32 * palette;
+};
+
+extern const struct PortraitData gPortraits[];
+
 #endif // GUARD_DECOMPRESS_H

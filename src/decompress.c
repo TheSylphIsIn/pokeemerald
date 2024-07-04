@@ -5,6 +5,7 @@
 #include "pokemon.h"
 #include "pokemon_sprite_visualizer.h"
 #include "text.h"
+#include "constants/portraits.h"
 
 EWRAM_DATA ALIGNED(4) u8 gDecompressionBuffer[0x4000] = {0};
 
@@ -122,8 +123,20 @@ void HandleLoadSpecialPokePic(bool32 isFrontPic, void *dest, s32 species, u32 pe
     LoadSpecialPokePic(dest, species, personality, isFrontPic);
 }
 
+#include "data/graphics/portraits.h"
+
+static void LoadDialoguePortrait(void *dest, s32 id)
+{
+	LZ77UnCompWram(gPortraits[id - 0xF000].pic, dest);
+}
+
 void LoadSpecialPokePic(void *dest, s32 species, u32 personality, bool8 isFrontPic)
 {
+	if (species > 0xF000)
+	{
+		LoadDialoguePortrait(dest, species);
+		return;
+	}
     species = SanitizeSpeciesId(species);
     if (species == SPECIES_UNOWN)
         species = GetUnownSpeciesId(personality);

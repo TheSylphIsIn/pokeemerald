@@ -77,6 +77,13 @@ static void LoadPicPaletteByTagOrSlot(u16 species, bool8 isShiny, u32 personalit
 {
     if (!isTrainer)
     {
+		if (species > 0xF000)
+		{
+            sCreatingSpriteTemplate.paletteTag = paletteTag;			
+			LoadCompressedSpritePaletteWithTag(gPortraits[species - 0xF000].palette, species);
+			return;
+		}
+
         if (paletteTag == TAG_NONE)
         {
             sCreatingSpriteTemplate.paletteTag = TAG_NONE;

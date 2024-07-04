@@ -9,6 +9,7 @@
 
 static EWRAM_DATA u8 sFieldMessageBoxMode = 0;
 EWRAM_DATA const u8* gSpeakerName = NULL;
+EWRAM_DATA u8 showPortraitState = 0;
 
 static void ExpandStringAndStartDrawFieldMessage(const u8 *, bool32);
 static void StartDrawFieldMessage(void);
@@ -43,6 +44,7 @@ static void Task_DrawFieldMessage(u8 taskId)
             else {
                 DrawDialogueFrame(0, TRUE);
             } 
+			showPortraitState = PORTRAIT_STATE_VISIBLE;
             task->tState++;
            break;
         case 2:
@@ -161,6 +163,7 @@ void HideFieldMessageBox(void)
     ClearDialogWindowAndFrame(0, TRUE);
     sFieldMessageBoxMode = FIELD_MESSAGE_BOX_HIDDEN;
     gSpeakerName = NULL;
+	showPortraitState = PORTRAIT_STATE_DEACTIVATE;
 }
 
 u8 GetFieldMessageBoxMode(void)
