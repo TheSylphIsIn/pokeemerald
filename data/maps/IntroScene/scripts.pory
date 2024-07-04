@@ -1,0 +1,11 @@
+mapscripts IntroScene_MapScripts
+{
+	MAP_SCRIPT_ON_FRAME_TABLE [
+		VAR_TEMP_0, 0 {
+			msgbox("hello chat", MSGBOX_AUTOCLOSE)
+			setvar(VAR_TEMP_0, 1)
+		}
+	]
+}
+
+

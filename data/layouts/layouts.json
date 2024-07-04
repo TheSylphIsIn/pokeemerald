@@ -4410,6 +4410,26 @@
       "secondary_tileset": "gTileset_MysteryEventsHouse",
       "border_filepath": "data/layouts/SootopolisCity_MysteryEventsHouse_1F_StairsUnblocked/border.bin",
       "blockdata_filepath": "data/layouts/SootopolisCity_MysteryEventsHouse_1F_StairsUnblocked/map.bin"
+    },
+    {
+      "id": "LAYOUT_INTRO_SCENE",
+      "name": "IntroScene_Layout",
+      "width": 15,
+      "height": 11,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_ShadyForest",
+      "border_filepath": "data/layouts/IntroScene/border.bin",
+      "blockdata_filepath": "data/layouts/IntroScene/map.bin"
+    },
+    {
+      "id": "LAYOUT_ELTHE_ROAD",
+      "name": "EltheRoad_Layout",
+      "width": 40,
+      "height": 40,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_ShadyForest",
+      "border_filepath": "data/layouts/EltheRoad/border.bin",
+      "blockdata_filepath": "data/layouts/EltheRoad/map.bin"
     }
   ]
 }

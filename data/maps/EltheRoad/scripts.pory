@@ -1,0 +1,7 @@
+mapscripts EltheRoad_MapScripts {}
+
+script EltheRoad_EventScript_FirstTrigger
+{
+	lock
+	applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft)
+}
