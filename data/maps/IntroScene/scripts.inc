@@ -22,7 +22,7 @@ Test_MonPic::
 # 14 "data/maps/IntroScene/scripts.pory"
 	delay 30
 # 15 "data/maps/IntroScene/scripts.pory"
-	speakername Test_MonPic_Text_1, PORTRAIT_FLYGON_NEUTRAL, 21, 6, TRUE
+	speakername Test_MonPic_Text_1, PORTRAIT_FLYGON_NEUTRAL, 20, 5, TRUE
 # 16 "data/maps/IntroScene/scripts.pory"
 	msgbox Test_MonPic_Text_2, MSGBOX_AUTOCLOSE
 # 17 "data/maps/IntroScene/scripts.pory"

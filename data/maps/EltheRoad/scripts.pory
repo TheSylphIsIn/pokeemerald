@@ -5,3 +5,16 @@ script EltheRoad_EventScript_FirstTrigger
 	lock
 	applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft)
 }
+
+script Sign_Test
+{
+	msgbox("Cave Story", MSGBOX_DEFAULT)
+	speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+	msgbox("What's Cave Story?", MSGBOX_DEFAULT)
+	speakername(NULL, 0)
+	msgbox("CAVE STORE DEEZ NUTS IN YOUR MOUTH", MSGBOX_DEFAULT)
+	speakername("Amelia", PORTRAIT_AMELIA_SHOCK)
+	playbgm(MUS_DUMMY, FALSE)
+	playse(SE_THUNDER)
+	msgbox("!!!!!", MSGBOX_AUTOCLOSE)
+}

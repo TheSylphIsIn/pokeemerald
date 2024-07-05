@@ -12,7 +12,7 @@ script Test_MonPic
 {
 	msgbox("message when no tags", MSGBOX_AUTOCLOSE)
 	delay(30)
-	speakername("oenis", PORTRAIT_FLYGON_NEUTRAL, 21, 6, TRUE)
+	speakername("oenis", PORTRAIT_FLYGON_NEUTRAL, 20, 5, TRUE)
 	msgbox("message when haves tags", MSGBOX_AUTOCLOSE)
 	delay(30)
 	msgbox("message when no tags", MSGBOX_AUTOCLOSE)	
