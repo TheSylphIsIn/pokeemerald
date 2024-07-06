@@ -1894,6 +1894,18 @@
 	.byte \portraitY
 	.byte \hFlip
 	.endm
+	
+	@ Adds visual offsets to a sprite
+	.macro addobjectspriteoffset localId:req, x:req, y:req
+	.byte 0xe6
+	.byte \localId
+	.byte \x
+	.byte \y
+	.endm
+	
+	.macro resetobjectspriteoffset localId:req
+	addobjectspriteoffset \localId, 0, 0
+	.endm
 
 @ Supplementary
 

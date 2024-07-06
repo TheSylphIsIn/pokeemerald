@@ -1325,6 +1325,32 @@ bool8 ScrCmd_setspeaker(struct ScriptContext *ctx)
     return FALSE;
 }
 
+bool8 ScrCmd_addobjectspriteoffset(struct ScriptContext *ctx)
+{
+	u32 localId = ScriptReadByte(ctx);
+	s8 x = ScriptReadByte(ctx);
+	s8 y = ScriptReadByte(ctx);
+    u8 objectEventId;
+    struct Sprite *sprite;
+
+    if (!TryGetObjectEventIdByLocalIdAndMap(localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objectEventId))
+    {
+        sprite = &gSprites[gObjectEvents[objectEventId].spriteId];
+		
+		if (x == 0 && y == 0)
+		{
+			sprite->x2 = 0;
+			sprite->y2 = 0;
+		}
+		else
+		{
+			sprite->x2 += x;
+			sprite->y2 += y;
+		}
+    }
+	return FALSE;
+}
+
 bool8 ScrCmd_message(struct ScriptContext *ctx)
 {
     const u8 *msg = (const u8 *)ScriptReadWord(ctx);

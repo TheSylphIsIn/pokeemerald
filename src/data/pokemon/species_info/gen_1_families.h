@@ -10934,7 +10934,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .iconSprite = gMonIcon_Kingler,
         .iconPalIndex = 0,
         FOOTPRINT(Kingler)
-        OVERWORLD(
+        OVERWORLD_ASYM(
             sPicTable_Kingler,
             SIZE_32x32,
             SHADOW_SIZE_M,
