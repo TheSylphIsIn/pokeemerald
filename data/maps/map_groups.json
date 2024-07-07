@@ -38,7 +38,8 @@
   ],
   "gMapGroup_TarcMaps": [
     "IntroScene",
-    "EltheRoad"
+    "EltheRoad",
+    "BilliardsDen"
   ],
   "gMapGroup_TownsAndRoutes": [
     "PetalburgCity",

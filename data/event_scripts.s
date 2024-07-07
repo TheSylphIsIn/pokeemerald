@@ -1079,3 +1079,5 @@ EventScript_VsSeekerChargingDone::
 	.include "data/maps/IntroScene/scripts.inc"
 
 	.include "data/maps/EltheRoad/scripts.inc"
+
+	.include "data/maps/BilliardsDen/scripts.inc"

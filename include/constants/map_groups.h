@@ -6,8 +6,9 @@
 //
 
 // gMapGroup_TarcMaps
-#define MAP_INTRO_SCENE (0 | (0 << 8))
-#define MAP_ELTHE_ROAD  (1 | (0 << 8))
+#define MAP_INTRO_SCENE   (0 | (0 << 8))
+#define MAP_ELTHE_ROAD    (1 | (0 << 8))
+#define MAP_BILLIARDS_DEN (2 | (0 << 8))
 
 // gMapGroup_TownsAndRoutes
 #define MAP_PETALBURG_CITY      (0 | (1 << 8))
