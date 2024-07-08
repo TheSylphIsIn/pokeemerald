@@ -75,7 +75,25 @@ mapscripts EltheRoad_MapScripts
 script EltheRoad_EventScript_FirstTrigger
 {
 	lock
+	delay(30)
 	applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft)
+	speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+	msgbox("I meant to ask earlier, but, uh,\n" "what are you, exactly?\p" "You look like an Eevee, but those\n" "markings…are they natural?", MSGBOX_DEFAULT)
+	speakername("Eevee?", PORTRAIT_DEMIVEE_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
+	msgbox("Yes, I…well, I don't fully remember\n" "the circumstances. My body has gone\l" "through some changes.\p"
+			"It probably has something to do\n" "with these crystals I eat…\p" "But now, I can't really evolve.\n" "I gain power from evolution stones,\l"
+			"but it's different.", MSGBOX_DEFAULT)
+	speakername("Amelia", PORTRAIT_AMELIA_SMUG)
+	msgbox("So you're some kind of…Demi-Vee?", MSGBOX_DEFAULT)
+	setpartymemberinfo(0) // Sets nickname, metloc, and Poke ball.
+	speakername("Demi-Vee", PORTRAIT_DEMIVEE_ANNOYED, PORTRAIT_DEFAULT_LEFT)
+	msgbox("What?", MSGBOX_DEFAULT)
+	speakername("Demi-Vee", PORTRAIT_DEMIVEE_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
+	msgbox("Regardless…if you find any evolution\n" "shards, I can change form with them.\p" "My stats and moves in battle\n" "depend on my current form.\p"
+			"Also, I've lived here for as long\n" "as I can remember.\p" "If you need more info or advice\n" "about anything, just ask me.", MSGBOX_DEFAULT)
+	speakername(NULL, 0)
+	msgbox("(Press R while Demi-Vee is following\n" "you to get advice!)\p" "(He will talk about the person\n" "you're facing, or give general hints\l" "for how to progress.)", MSGBOX_AUTOCLOSE)
+	setvar(VAR_MAIN_GAME_STATE, 2)
 }
 
 script EltheRoad_EventScript_FirstSign

@@ -1351,6 +1351,33 @@ bool8 ScrCmd_addobjectspriteoffset(struct ScriptContext *ctx)
 	return FALSE;
 }
 
+struct PartyMemberInfo 
+{
+	u8 nickname[POKEMON_NAME_LENGTH + 1];
+	u8 metLoc;
+	u8 ball;
+};
+
+static const struct PartyMemberInfo sPartyMemberInfo[5] = 
+{
+	{.nickname = _("Demi-Vee"), .metLoc = MAPSEC_OLDALE_TOWN, .ball = ITEM_POKE_BALL},
+	{.nickname = _("Marcel"), .metLoc = MAPSEC_FALLARBOR_TOWN, .ball = ITEM_GREAT_BALL},
+	{.nickname = _("Vice"), .metLoc = MAPSEC_VERDANTURF_TOWN, .ball = ITEM_POKE_BALL},
+	{.nickname = _("Bradley"), .metLoc = MAPSEC_PACIFIDLOG_TOWN, .ball = ITEM_ULTRA_BALL},
+	{.nickname = _("Python"), .metLoc = MAPSEC_PETALBURG_CITY, .ball = ITEM_NEST_BALL},
+};
+
+bool8 ScrCmd_setpartymemberinfo(struct ScriptContext *ctx)
+{
+	u8 partySlot = ScriptReadByte(ctx);
+	
+	SetMonData(&gPlayerParty[partySlot], MON_DATA_NICKNAME, &sPartyMemberInfo[partySlot].nickname);
+	SetMonData(&gPlayerParty[partySlot], MON_DATA_MET_LOCATION, &sPartyMemberInfo[partySlot].metLoc);
+	SetMonData(&gPlayerParty[partySlot], MON_DATA_POKEBALL, &sPartyMemberInfo[partySlot].ball);	
+	
+	return FALSE;
+}
+
 bool8 ScrCmd_message(struct ScriptContext *ctx)
 {
     const u8 *msg = (const u8 *)ScriptReadWord(ctx);

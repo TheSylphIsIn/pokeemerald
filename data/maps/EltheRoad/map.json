@@ -42,7 +42,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_JIGGLYPUFF_DOLL",
-      "x": 29,
+      "x": 27,
       "y": 24,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
@@ -105,21 +105,21 @@
   "coord_events": [
     {
       "type": "trigger",
-      "x": 23,
-      "y": 28,
+      "x": 19,
+      "y": 27,
       "elevation": 0,
-      "var": "VAR_TEMP_0",
-      "var_value": "0",
-      "script": "NULL"
+      "var": "VAR_MAIN_GAME_STATE",
+      "var_value": "1",
+      "script": "EltheRoad_EventScript_FirstTrigger"
     },
     {
       "type": "trigger",
-      "x": 23,
-      "y": 29,
+      "x": 19,
+      "y": 28,
       "elevation": 0,
-      "var": "VAR_TEMP_0",
-      "var_value": "0",
-      "script": "NULL"
+      "var": "VAR_MAIN_GAME_STATE",
+      "var_value": "1",
+      "script": "EltheRoad_EventScript_FirstTrigger"
     },
     {
       "type": "trigger",
