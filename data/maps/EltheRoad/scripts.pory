@@ -1,4 +1,76 @@
-mapscripts EltheRoad_MapScripts {}
+const LOCALID_DEMIVEE=1
+const LOCALID_AMELIA=2
+
+mapscripts EltheRoad_MapScripts 
+{
+	MAP_SCRIPT_ON_FRAME_TABLE [
+		VAR_MAIN_GAME_STATE, 0 {
+			clearflag(FLAG_NO_MUSIC_ON_WARP)
+			addobjectspriteoffset(LOCALID_AMELIA, 5, 0)
+			addobjectspriteoffset(LOCALID_DEMIVEE, 6, 0)
+			delay(60)
+			delay(60)
+			delay(60)
+			speakername("???")
+			msgbox("Wait…is it alive…?", MSGBOX_AUTOCLOSE)
+			fadescreen(FADE_FROM_WHITE)
+			delay(60)
+			speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+			msgbox("…yes, I am. Personal space?", MSGBOX_DEFAULT)
+			addobjectspriteoffset(LOCALID_DEMIVEE, 0, 0)
+			speakername("Eevee?", PORTRAIT_DEMIVEE_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
+			msgbox("Oh. Pardon me. I was considering\n" "eating you.", MSGBOX_DEFAULT)
+			speakername("Amelia", PORTRAIT_AMELIA_SHOCK)
+			msgbox("Dude! Seriously?", MSGBOX_DEFAULT)
+			speakername("Eevee?", PORTRAIT_DEMIVEE_ANNOYED, PORTRAIT_DEFAULT_LEFT)
+			msgbox("I saw you getting tossed around\n" "unconscious in a flood.\l" "I really didn't think you survived.", MSGBOX_DEFAULT)
+			speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+			msgbox("I'm made of tough stuff. It takes\n" "more than a little water to…", MSGBOX_AUTOCLOSE)
+			playse(SE_PIN)
+			applymovement(LOCALID_AMELIA, Common_Movement_ExclamationMark)
+			waitmovement(0)
+			applymovement(LOCALID_AMELIA, Common_Movement_Delay48)
+			waitmovement(0)
+			removeobject(LOCALID_AMELIA)
+			playse(SE_BIKE_HOP)
+			applymovement(OBJ_EVENT_ID_PLAYER, EltheRoad_Movement_AmeliaJumpUp)
+			waitmovement(0)
+			speakername("Amelia", PORTRAIT_AMELIA_SHOCK)
+			msgbox("The flood! What happened to my team?", MSGBOX_AUTOCLOSE)
+			applymovement(OBJ_EVENT_ID_PLAYER, EltheRoad_Movement_AmeliaLookAround)
+			waitmovement(0)
+			speakername("Amelia", PORTRAIT_AMELIA_STRAINED)
+			msgbox("My team…ugh, my head. I can't think.", MSGBOX_DEFAULT)
+			speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+			msgbox("I have their Poké Balls here.\n" "Guess I should go find them.", MSGBOX_AUTOCLOSE)
+			applymovement(OBJ_EVENT_ID_PLAYER, EltheRoad_Movement_AmeliaStartLeaving)
+			delay(30)
+			speakername("Eevee?", PORTRAIT_DEMIVEE_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
+			msgbox("Wait! You shouldn't go alone.", MSGBOX_AUTOCLOSE)
+			playse(SE_BIKE_HOP)
+			applymovement(LOCALID_DEMIVEE, EltheRoad_Movement_DemiveeFollow)
+			waitmovement(0)
+			speakername("Eevee?", PORTRAIT_DEMIVEE_ANNOYED, PORTRAIT_DEFAULT_LEFT)
+			msgbox("The local Pokémon always get irate\n" "after a flood. It would be dangerous\l" "for a human wandering alone.", MSGBOX_DEFAULT)
+			speakername("Amelia", PORTRAIT_AMELIA_SMUG)
+			msgbox("I can handle myself pretty well.\n" "And I'm a Pokémon Ranger, too.", MSGBOX_DEFAULT)
+			speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+			msgbox("But if you want to come along,\n" "I won't say no. Welcome aboard!", MSGBOX_AUTOCLOSE)
+			applymovement(LOCALID_DEMIVEE, EltheRoad_Movement_DemiveeJoin)
+			waitmovement(0)
+			removeobject(LOCALID_DEMIVEE)
+			playfanfare(MUS_CAUGHT)
+			message("Eevee joined your party!")
+			givemon(SPECIES_EEVEE, 30, ITEM_EVERSTONE, ITEM_POKE_BALL, NATURE_SERIOUS, 0, MON_MALE, 0, 0, 0, 0, 0, 0, 31, 31, 31, 31, 31, 31, MOVE_TAKE_DOWN, MOVE_BITE, MOVE_COPYCAT, MOVE_SWIFT, FALSE, FALSE, TYPE_DRAGON)
+			waitmessage
+			waitfanfare
+			waitbuttonpress
+			closemessage
+			fadedefaultbgm
+			setvar(VAR_MAIN_GAME_STATE, 1)
+		}
+	]
+}	
 
 script EltheRoad_EventScript_FirstTrigger
 {
@@ -14,4 +86,48 @@ script EltheRoad_EventScript_FirstSign
 script EltheRoad_EventScript_SecondSign
 {
 	msgbox("{CLEAR_TO 66}{LEFT_ARROW} To Elthe City\n" "{CLEAR_TO 36}BEWARE BILLIARACH WEBS {RIGHT_ARROW}", MSGBOX_SIGN)
+}
+
+movement EltheRoad_Movement_AmeliaJumpUp
+{
+	set_visible
+	jump_in_place_left
+}
+
+movement EltheRoad_Movement_AmeliaLookAround
+{
+	face_up
+	delay_16
+	face_down
+	delay_16
+	face_up
+	delay_16
+	face_down
+	delay_16
+	face_right
+	delay_16 * 3
+	face_left
+	delay_16 * 3
+}
+
+movement EltheRoad_Movement_AmeliaStartLeaving
+{
+	walk_up * 2
+	walk_right * 3
+	delay_16 * 2
+	face_left
+}
+
+movement EltheRoad_Movement_DemiveeFollow
+{
+	jump_up
+	walk_fast_up
+	walk_fast_right * 2
+}
+
+movement EltheRoad_Movement_DemiveeJoin
+{
+	walk_slow_right
+	delay_16 * 4
+	enter_pokeball
 }

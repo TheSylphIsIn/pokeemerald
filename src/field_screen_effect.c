@@ -74,16 +74,21 @@ static void FillPalBufferBlack(void)
 void WarpFadeInScreen(void)
 {
     u8 previousMapType = GetLastUsedWarpMapType();
-    switch (GetMapPairFadeFromType(previousMapType, GetCurrentMapType()))
-    {
-    case 0:
-        FillPalBufferBlack();
-        FadeScreen(FADE_FROM_BLACK, 0);
-        break;
-    case 1:
-        FillPalBufferWhite();
-        FadeScreen(FADE_FROM_WHITE, 0);
-    }
+	
+	switch (GetMapPairFadeFromType(previousMapType, GetCurrentMapType()))
+	{
+	case 0:
+		FillPalBufferBlack();
+		if(!FlagGet(FLAG_REMOVE_WARP_FADE))
+			FadeScreen(FADE_FROM_BLACK, 0);
+		break;
+	case 1:
+		FillPalBufferWhite();
+		if(!FlagGet(FLAG_REMOVE_WARP_FADE))
+			FadeScreen(FADE_FROM_WHITE, 0);
+	}
+
+    FlagClear(FLAG_REMOVE_WARP_FADE);  // reset flag internally
 }
 
 void FadeInFromWhite(void)
@@ -101,13 +106,16 @@ void FadeInFromBlack(void)
 void WarpFadeOutScreen(void)
 {
     u8 currentMapType = GetCurrentMapType();
-    switch (GetMapPairFadeToType(currentMapType, GetDestinationWarpMapHeader()->mapType))
+    if (!FlagGet(FLAG_REMOVE_WARP_FADE)) // fadescreen if flag not set
     {
-    case 0:
-        FadeScreen(FADE_TO_BLACK, 0);
-        break;
-    case 1:
-        FadeScreen(FADE_TO_WHITE, 0);
+        switch (GetMapPairFadeToType(currentMapType, GetDestinationWarpMapHeader()->mapType))
+        {
+        case 0:
+            FadeScreen(FADE_TO_BLACK, 0);
+            break;
+        case 1:
+            FadeScreen(FADE_TO_WHITE, 0);
+        }
     }
 }
 

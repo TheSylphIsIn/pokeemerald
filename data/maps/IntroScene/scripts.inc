@@ -1,97 +1,295 @@
 IntroScene_MapScripts::
-# 3 "data/maps/IntroScene/scripts.pory"
+# 6 "data/maps/IntroScene/scripts.pory"
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE
 	.byte 0
 
 IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE:
-# 4 "data/maps/IntroScene/scripts.pory"
+# 7 "data/maps/IntroScene/scripts.pory"
 	map_script_2 VAR_TEMP_0, 0, IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0
 	.2byte 0
 
 IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0:
-# 5 "data/maps/IntroScene/scripts.pory"
-	msgbox IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_0, MSGBOX_AUTOCLOSE
-# 6 "data/maps/IntroScene/scripts.pory"
+# 8 "data/maps/IntroScene/scripts.pory"
+	applymovement 2, IntroScene_Movement_AmeliaSnooze
+# 9 "data/maps/IntroScene/scripts.pory"
+	waitmovement 0
+# 10 "data/maps/IntroScene/scripts.pory"
+	playse SE_RAIN
+# 11 "data/maps/IntroScene/scripts.pory"
+	delay 60
+# 12 "data/maps/IntroScene/scripts.pory"
+	applymovement 1, Common_Movement_QuestionMark
+# 13 "data/maps/IntroScene/scripts.pory"
+	waitmovement 0
+# 14 "data/maps/IntroScene/scripts.pory"
+	delay 60
+# 15 "data/maps/IntroScene/scripts.pory"
+	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_0, PORTRAIT_NIDOKING_NEUTRAL, PORTRAIT_DEFAULT_X, PORTRAIT_DEFAULT_Y, TRUE
+# 16 "data/maps/IntroScene/scripts.pory"
+	msgbox IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_1, MSGBOX_AUTOCLOSE
+# 17 "data/maps/IntroScene/scripts.pory"
+	applymovement 1, IntroScene_Movement_BradleyInvestigate
+# 18 "data/maps/IntroScene/scripts.pory"
+	waitmovement 0
+# 19 "data/maps/IntroScene/scripts.pory"
+	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_0, PORTRAIT_NIDOKING_NEUTRAL, PORTRAIT_DEFAULT_X, PORTRAIT_DEFAULT_Y, TRUE
+# 20 "data/maps/IntroScene/scripts.pory"
+	msgbox IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_2, MSGBOX_DEFAULT
+# 21 "data/maps/IntroScene/scripts.pory"
+	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_3, PORTRAIT_AMELIA_ASLEEP
+# 22 "data/maps/IntroScene/scripts.pory"
+	msgbox IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_4, MSGBOX_DEFAULT
+# 23 "data/maps/IntroScene/scripts.pory"
+	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_5, PORTRAIT_NIDOKING_NERVOUS, PORTRAIT_DEFAULT_X, PORTRAIT_DEFAULT_Y, TRUE
+# 24 "data/maps/IntroScene/scripts.pory"
+	msgbox IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_6, MSGBOX_DEFAULT
+# 25 "data/maps/IntroScene/scripts.pory"
+	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_3, PORTRAIT_AMELIA_ASLEEP
+# 26 "data/maps/IntroScene/scripts.pory"
+	msgbox IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_7, MSGBOX_AUTOCLOSE
+# 27 "data/maps/IntroScene/scripts.pory"
+	playse SE_M_HYDRO_PUMP
+# 28 "data/maps/IntroScene/scripts.pory"
+	fadescreen FADE_TO_WHITE
+# 29 "data/maps/IntroScene/scripts.pory"
+	delay 60
+# 30 "data/maps/IntroScene/scripts.pory"
+	setflag FLAG_SPAWN_INVISIBLE
+# 31 "data/maps/IntroScene/scripts.pory"
+	setflag FLAG_REMOVE_WARP_FADE
+# 32 "data/maps/IntroScene/scripts.pory"
+	setflag FLAG_NO_MUSIC_ON_WARP
+# 33 "data/maps/IntroScene/scripts.pory"
+	warpsilent MAP_ELTHE_ROAD, 0, -1, -1
+# 34 "data/maps/IntroScene/scripts.pory"
 	setvar VAR_TEMP_0, 1
 	return
 
 
 Test_MonPic::
-# 13 "data/maps/IntroScene/scripts.pory"
+# 41 "data/maps/IntroScene/scripts.pory"
 	msgbox Test_MonPic_Text_0, MSGBOX_AUTOCLOSE
-# 14 "data/maps/IntroScene/scripts.pory"
+# 42 "data/maps/IntroScene/scripts.pory"
 	delay 30
-# 15 "data/maps/IntroScene/scripts.pory"
+# 43 "data/maps/IntroScene/scripts.pory"
 	speakername Test_MonPic_Text_1, PORTRAIT_FLYGON_NEUTRAL, 20, 5, TRUE
-# 16 "data/maps/IntroScene/scripts.pory"
+# 44 "data/maps/IntroScene/scripts.pory"
 	msgbox Test_MonPic_Text_2, MSGBOX_AUTOCLOSE
-# 17 "data/maps/IntroScene/scripts.pory"
+# 45 "data/maps/IntroScene/scripts.pory"
 	delay 30
-# 18 "data/maps/IntroScene/scripts.pory"
+# 46 "data/maps/IntroScene/scripts.pory"
 	msgbox Test_MonPic_Text_0, MSGBOX_AUTOCLOSE
 	return
 
 
 Test_Portrait::
-# 23 "data/maps/IntroScene/scripts.pory"
+# 51 "data/maps/IntroScene/scripts.pory"
 	speakername Test_Portrait_Text_0, PORTRAIT_KINGLER_NEUTRAL, 21, 6, TRUE
-# 24 "data/maps/IntroScene/scripts.pory"
+# 52 "data/maps/IntroScene/scripts.pory"
 	waitbuttonpress
-# 25 "data/maps/IntroScene/scripts.pory"
+# 53 "data/maps/IntroScene/scripts.pory"
 	msgbox Test_Portrait_Text_1, MSGBOX_DEFAULT
-# 26 "data/maps/IntroScene/scripts.pory"
+# 54 "data/maps/IntroScene/scripts.pory"
 	speakername Test_Portrait_Text_2, PORTRAIT_NIDOKING_NEUTRAL
-# 27 "data/maps/IntroScene/scripts.pory"
+# 55 "data/maps/IntroScene/scripts.pory"
 	msgbox Test_Portrait_Text_3, MSGBOX_DEFAULT
-# 28 "data/maps/IntroScene/scripts.pory"
+# 56 "data/maps/IntroScene/scripts.pory"
 	speakername Test_Portrait_Text_0, PORTRAIT_NONE
-# 29 "data/maps/IntroScene/scripts.pory"
+# 57 "data/maps/IntroScene/scripts.pory"
 	msgbox Test_Portrait_Text_4, MSGBOX_DEFAULT
-# 30 "data/maps/IntroScene/scripts.pory"
+# 58 "data/maps/IntroScene/scripts.pory"
 	speakername NULL, PORTRAIT_AMELIA_NEUTRAL
-# 31 "data/maps/IntroScene/scripts.pory"
+# 59 "data/maps/IntroScene/scripts.pory"
 	msgbox Test_Portrait_Text_5, MSGBOX_AUTOCLOSE
 	return
 
 
+# 62 "data/maps/IntroScene/scripts.pory"
+IntroScene_Movement_AmeliaSnooze:
+# 64 "data/maps/IntroScene/scripts.pory"
+	delay_16
+# 64 "data/maps/IntroScene/scripts.pory"
+	delay_16
+# 64 "data/maps/IntroScene/scripts.pory"
+	delay_16
+# 65 "data/maps/IntroScene/scripts.pory"
+	face_up
+# 66 "data/maps/IntroScene/scripts.pory"
+	delay_16
+# 66 "data/maps/IntroScene/scripts.pory"
+	delay_16
+# 66 "data/maps/IntroScene/scripts.pory"
+	delay_16
+# 67 "data/maps/IntroScene/scripts.pory"
+	face_down
+# 68 "data/maps/IntroScene/scripts.pory"
+	delay_16
+# 68 "data/maps/IntroScene/scripts.pory"
+	delay_16
+# 68 "data/maps/IntroScene/scripts.pory"
+	delay_16
+# 69 "data/maps/IntroScene/scripts.pory"
+	face_up
+# 70 "data/maps/IntroScene/scripts.pory"
+	delay_16
+# 70 "data/maps/IntroScene/scripts.pory"
+	delay_16
+# 70 "data/maps/IntroScene/scripts.pory"
+	delay_16
+# 71 "data/maps/IntroScene/scripts.pory"
+	face_down
+# 72 "data/maps/IntroScene/scripts.pory"
+	delay_16
+# 72 "data/maps/IntroScene/scripts.pory"
+	delay_16
+# 72 "data/maps/IntroScene/scripts.pory"
+	delay_16
+# 73 "data/maps/IntroScene/scripts.pory"
+	face_up
+# 74 "data/maps/IntroScene/scripts.pory"
+	delay_16
+# 74 "data/maps/IntroScene/scripts.pory"
+	delay_16
+# 74 "data/maps/IntroScene/scripts.pory"
+	delay_16
+# 75 "data/maps/IntroScene/scripts.pory"
+	face_down
+# 76 "data/maps/IntroScene/scripts.pory"
+	delay_16
+# 76 "data/maps/IntroScene/scripts.pory"
+	delay_16
+# 76 "data/maps/IntroScene/scripts.pory"
+	delay_16
+# 77 "data/maps/IntroScene/scripts.pory"
+	face_up
+# 78 "data/maps/IntroScene/scripts.pory"
+	delay_16
+# 78 "data/maps/IntroScene/scripts.pory"
+	delay_16
+# 78 "data/maps/IntroScene/scripts.pory"
+	delay_16
+# 79 "data/maps/IntroScene/scripts.pory"
+	face_down
+	step_end
+
+# 82 "data/maps/IntroScene/scripts.pory"
+IntroScene_Movement_BradleyInvestigate:
+# 84 "data/maps/IntroScene/scripts.pory"
+	walk_slow_down
+# 85 "data/maps/IntroScene/scripts.pory"
+	delay_16
+# 85 "data/maps/IntroScene/scripts.pory"
+	delay_16
+# 86 "data/maps/IntroScene/scripts.pory"
+	face_right
+# 87 "data/maps/IntroScene/scripts.pory"
+	delay_16
+# 87 "data/maps/IntroScene/scripts.pory"
+	delay_16
+# 87 "data/maps/IntroScene/scripts.pory"
+	delay_16
+# 88 "data/maps/IntroScene/scripts.pory"
+	face_left
+# 89 "data/maps/IntroScene/scripts.pory"
+	delay_16
+# 89 "data/maps/IntroScene/scripts.pory"
+	delay_16
+# 89 "data/maps/IntroScene/scripts.pory"
+	delay_16
+# 90 "data/maps/IntroScene/scripts.pory"
+	walk_slow_left
+# 91 "data/maps/IntroScene/scripts.pory"
+	delay_16
+# 91 "data/maps/IntroScene/scripts.pory"
+	delay_16
+# 92 "data/maps/IntroScene/scripts.pory"
+	face_down
+# 93 "data/maps/IntroScene/scripts.pory"
+	delay_16
+# 93 "data/maps/IntroScene/scripts.pory"
+	delay_16
+# 93 "data/maps/IntroScene/scripts.pory"
+	delay_16
+# 93 "data/maps/IntroScene/scripts.pory"
+	delay_16
+# 93 "data/maps/IntroScene/scripts.pory"
+	delay_16
+# 94 "data/maps/IntroScene/scripts.pory"
+	face_right
+	step_end
+
 IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_0:
-# 5 "data/maps/IntroScene/scripts.pory"
-	.string "hello chat$"
+# 15 "data/maps/IntroScene/scripts.pory"
+	.string "Nidoking$"
+
+IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_1:
+# 16 "data/maps/IntroScene/scripts.pory"
+	.string "Hmm? I hear something…$"
+
+IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_2:
+# 20 "data/maps/IntroScene/scripts.pory"
+	.string "Amelia, I hear a strange noise…\n"
+	.string "It sounds like rushing water.$"
+
+IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_3:
+# 21 "data/maps/IntroScene/scripts.pory"
+	.string "Amelia$"
+
+IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_4:
+# 22 "data/maps/IntroScene/scripts.pory"
+	.string "No, Bradley, I just got comfortable…\n"
+	.string "Don't talk to me about rushing water.\p"
+	.string "It's probably nothing.$"
+
+IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_5:
+# 23 "data/maps/IntroScene/scripts.pory"
+	.string "Bradley$"
+
+IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_6:
+# 24 "data/maps/IntroScene/scripts.pory"
+	.string "I'm on watch! It's my job to talk\n"
+	.string "to you about these things.\p"
+	.string "It's getting louder…$"
+
+IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_7:
+# 26 "data/maps/IntroScene/scripts.pory"
+	.string "Unless it's a flash flood, we can\n"
+	.string "just deal with it in the morning -$"
 
 Test_MonPic_Text_0:
-# 13 "data/maps/IntroScene/scripts.pory"
+# 41 "data/maps/IntroScene/scripts.pory"
 	.string "message when no tags$"
 
 Test_MonPic_Text_1:
-# 15 "data/maps/IntroScene/scripts.pory"
+# 43 "data/maps/IntroScene/scripts.pory"
 	.string "oenis$"
 
 Test_MonPic_Text_2:
-# 16 "data/maps/IntroScene/scripts.pory"
+# 44 "data/maps/IntroScene/scripts.pory"
 	.string "message when haves tags$"
 
 Test_Portrait_Text_0:
-# 23 "data/maps/IntroScene/scripts.pory"
+# 51 "data/maps/IntroScene/scripts.pory"
 	.string "h$"
 
 Test_Portrait_Text_1:
-# 25 "data/maps/IntroScene/scripts.pory"
+# 53 "data/maps/IntroScene/scripts.pory"
 	.string "It will show up when the message box\n"
 	.string "appears.$"
 
 Test_Portrait_Text_2:
-# 26 "data/maps/IntroScene/scripts.pory"
+# 54 "data/maps/IntroScene/scripts.pory"
 	.string "b$"
 
 Test_Portrait_Text_3:
-# 27 "data/maps/IntroScene/scripts.pory"
+# 55 "data/maps/IntroScene/scripts.pory"
 	.string "It can change mid-dialogue.$"
 
 Test_Portrait_Text_4:
-# 29 "data/maps/IntroScene/scripts.pory"
+# 57 "data/maps/IntroScene/scripts.pory"
 	.string "Or even disappear.$"
 
 Test_Portrait_Text_5:
-# 31 "data/maps/IntroScene/scripts.pory"
+# 59 "data/maps/IntroScene/scripts.pory"
 	.string "Portrait and name can be controlled\n"
 	.string "separately too.$"

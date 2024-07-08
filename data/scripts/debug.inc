@@ -138,10 +138,16 @@ Debug_EventScript_Text_DefensiveIVs:
 	.string "HP IVs: {STR_VAR_1}, DEF IVs: {STR_VAR_2}, SPDEF IVs: {STR_VAR_3}$"
 
 Debug_EventScript_Script_1::
+	setflag FLAG_SPAWN_INVISIBLE
+	warp MAP_INTRO_SCENE, 0, -1, -1
 	release
 	end
 
 Debug_EventScript_Script_2::
+	fadescreen FADE_TO_BLACK
+	setflag FLAG_SPAWN_INVISIBLE
+	setflag FLAG_REMOVE_WARP_FADE
+	warp MAP_ELTHE_ROAD, 0, -1, -1
 	release
 	end
 

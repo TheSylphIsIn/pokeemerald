@@ -1,8 +1,36 @@
+const LOCALID_AMELIA=2
+const LOCALID_NIDOKING=1
+
 mapscripts IntroScene_MapScripts
 {
 	MAP_SCRIPT_ON_FRAME_TABLE [
 		VAR_TEMP_0, 0 {
-			msgbox("hello chat", MSGBOX_AUTOCLOSE)
+			applymovement(LOCALID_AMELIA, IntroScene_Movement_AmeliaSnooze)
+			waitmovement(0)
+			playse(SE_RAIN)
+			delay(60)
+			applymovement(LOCALID_NIDOKING, Common_Movement_QuestionMark)
+			waitmovement(0)
+			delay(60)
+			speakername("Nidoking", PORTRAIT_NIDOKING_NEUTRAL, PORTRAIT_DEFAULT_X, PORTRAIT_DEFAULT_Y, TRUE)
+			msgbox("Hmm? I hear something…", MSGBOX_AUTOCLOSE)
+			applymovement(LOCALID_NIDOKING, IntroScene_Movement_BradleyInvestigate)
+			waitmovement(0)
+			speakername("Nidoking", PORTRAIT_NIDOKING_NEUTRAL, PORTRAIT_DEFAULT_X, PORTRAIT_DEFAULT_Y, TRUE)
+			msgbox("Amelia, I hear a strange noise…\n" "It sounds like rushing water.", MSGBOX_DEFAULT)
+			speakername("Amelia", PORTRAIT_AMELIA_ASLEEP)
+			msgbox("No, Bradley, I just got comfortable…\n" "Don't talk to me about rushing water.\p" "It's probably nothing.", MSGBOX_DEFAULT)
+			speakername("Bradley", PORTRAIT_NIDOKING_NERVOUS, PORTRAIT_DEFAULT_X, PORTRAIT_DEFAULT_Y, TRUE)
+			msgbox("I'm on watch! It's my job to talk\n" "to you about these things.\p" "It's getting louder…", MSGBOX_DEFAULT)
+			speakername("Amelia", PORTRAIT_AMELIA_ASLEEP)
+			msgbox("Unless it's a flash flood, we can\n" "just deal with it in the morning -", MSGBOX_AUTOCLOSE)
+			playse(SE_M_HYDRO_PUMP)
+			fadescreen(FADE_TO_WHITE)
+			delay(60)
+			setflag(FLAG_SPAWN_INVISIBLE)
+			setflag(FLAG_REMOVE_WARP_FADE)
+			setflag(FLAG_NO_MUSIC_ON_WARP)
+			warpsilent(MAP_ELTHE_ROAD, 0, -1, -1)
 			setvar(VAR_TEMP_0, 1)
 		}
 	]
@@ -29,5 +57,40 @@ script Test_Portrait
 	msgbox(format("Or even disappear."), MSGBOX_DEFAULT)
 	speakername(NULL, PORTRAIT_AMELIA_NEUTRAL)
 	msgbox(format("Portrait and name can be controlled separately too."), MSGBOX_AUTOCLOSE)
+}
+
+movement IntroScene_Movement_AmeliaSnooze
+{
+	delay_16 * 3
+	face_up
+	delay_16 * 3
+	face_down
+	delay_16 * 3
+	face_up
+	delay_16 * 3
+	face_down
+	delay_16 * 3
+	face_up
+	delay_16 * 3
+	face_down
+	delay_16 * 3
+	face_up
+	delay_16 * 3
+	face_down
+}
+
+movement IntroScene_Movement_BradleyInvestigate
+{
+	walk_slow_down
+	delay_16 * 2
+	face_right
+	delay_16 * 3
+	face_left
+	delay_16 * 3
+	walk_slow_left
+	delay_16 * 2
+	face_down
+	delay_16 * 5
+	face_right
 }
 
