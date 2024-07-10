@@ -9166,9 +9166,12 @@ u8 GetLedgeJumpDirection(s16 x, s16 y, u8 direction)
         [DIR_WEST - 1]  = MetatileBehavior_IsJumpWest,
         [DIR_EAST - 1]  = MetatileBehavior_IsJumpEast,
     };
-
     u8 behavior;
     u8 index = direction;
+	s16 x2 = x;
+	s16 y2 = y;
+	
+	MoveCoords(direction, &x2, &y2);
 
     if (index == DIR_NONE)
         return DIR_NONE;
@@ -9178,7 +9181,8 @@ u8 GetLedgeJumpDirection(s16 x, s16 y, u8 direction)
     index--;
     behavior = MapGridGetMetatileBehaviorAt(x, y);
 
-    if (ledgeBehaviorFuncs[index](behavior) == TRUE)
+    if (ledgeBehaviorFuncs[index](behavior) == TRUE // jumping over water is handled here so it doesn't desync followers
+		|| (MapGridGetElevationAt(x, y) == 1 && MapGridGetElevationAt(x2, y2) != 1 && !MapGridGetCollisionAt(x2, y2))) // jump over water
         return index + 1;
 
     return DIR_NONE;

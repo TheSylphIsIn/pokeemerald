@@ -738,10 +738,16 @@ static bool8 CanStopSurfing(s16 x, s16 y, u8 direction)
 
 static bool8 ShouldJumpLedge(s16 x, s16 y, u8 direction)
 {
-    if (GetLedgeJumpDirection(x, y, direction) != DIR_NONE)
+	s16 x2 = x;
+	s16 y2 = y;
+
+	MoveCoords(direction, &x2, &y2);
+	
+    if (!MapGridGetCollisionAt(x2, y2) // player can't jump off a ledge into a wall
+		&& GetLedgeJumpDirection(x, y, direction) != DIR_NONE) // GetLedgeJumpDirection handles jumping over water
         return TRUE;
-    else
-        return FALSE;
+	
+	return FALSE;
 }
 
 static bool8 TryPushBoulder(s16 x, s16 y, u8 direction)

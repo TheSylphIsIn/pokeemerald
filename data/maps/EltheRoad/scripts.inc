@@ -160,129 +160,123 @@ EltheRoad_EventScript_FirstTrigger::
 # 88 "data/maps/EltheRoad/scripts.pory"
 	setpartymemberinfo 0
 # 89 "data/maps/EltheRoad/scripts.pory"
-	setpartymemberinfo 1
-# 90 "data/maps/EltheRoad/scripts.pory"
-	setpartymemberinfo 2
-# 91 "data/maps/EltheRoad/scripts.pory"
-	setpartymemberinfo 3
-# 92 "data/maps/EltheRoad/scripts.pory"
 	speakername EltheRoad_EventScript_FirstTrigger_Text_3, PORTRAIT_DEMIVEE_ANNOYED, PORTRAIT_DEFAULT_LEFT
-# 93 "data/maps/EltheRoad/scripts.pory"
+# 90 "data/maps/EltheRoad/scripts.pory"
 	msgbox EltheRoad_EventScript_FirstTrigger_Text_4, MSGBOX_DEFAULT
-# 94 "data/maps/EltheRoad/scripts.pory"
+# 91 "data/maps/EltheRoad/scripts.pory"
 	speakername EltheRoad_EventScript_FirstTrigger_Text_3, PORTRAIT_DEMIVEE_NEUTRAL, PORTRAIT_DEFAULT_LEFT
-# 95 "data/maps/EltheRoad/scripts.pory"
+# 92 "data/maps/EltheRoad/scripts.pory"
 	msgbox EltheRoad_EventScript_FirstTrigger_Text_5, MSGBOX_DEFAULT
-# 97 "data/maps/EltheRoad/scripts.pory"
+# 94 "data/maps/EltheRoad/scripts.pory"
 	speakername NULL, 0
-# 98 "data/maps/EltheRoad/scripts.pory"
+# 95 "data/maps/EltheRoad/scripts.pory"
 	msgbox EltheRoad_EventScript_FirstTrigger_Text_6, MSGBOX_AUTOCLOSE
-# 99 "data/maps/EltheRoad/scripts.pory"
+# 96 "data/maps/EltheRoad/scripts.pory"
 	setvar VAR_MAIN_GAME_STATE, 2
 	return
 
 
 EltheRoad_EventScript_FirstSign::
-# 104 "data/maps/EltheRoad/scripts.pory"
+# 101 "data/maps/EltheRoad/scripts.pory"
 	msgbox EltheRoad_EventScript_FirstSign_Text_0, MSGBOX_SIGN
 	return
 
 
 EltheRoad_EventScript_SecondSign::
-# 109 "data/maps/EltheRoad/scripts.pory"
+# 106 "data/maps/EltheRoad/scripts.pory"
 	msgbox EltheRoad_EventScript_SecondSign_Text_0, MSGBOX_SIGN
 	return
 
 
-# 112 "data/maps/EltheRoad/scripts.pory"
+# 109 "data/maps/EltheRoad/scripts.pory"
 EltheRoad_Movement_AmeliaJumpUp:
-# 114 "data/maps/EltheRoad/scripts.pory"
+# 111 "data/maps/EltheRoad/scripts.pory"
 	set_visible
-# 115 "data/maps/EltheRoad/scripts.pory"
+# 112 "data/maps/EltheRoad/scripts.pory"
 	jump_in_place_left
 	step_end
 
-# 118 "data/maps/EltheRoad/scripts.pory"
+# 115 "data/maps/EltheRoad/scripts.pory"
 EltheRoad_Movement_AmeliaLookAround:
-# 120 "data/maps/EltheRoad/scripts.pory"
+# 117 "data/maps/EltheRoad/scripts.pory"
 	face_up
-# 121 "data/maps/EltheRoad/scripts.pory"
+# 118 "data/maps/EltheRoad/scripts.pory"
 	delay_16
-# 122 "data/maps/EltheRoad/scripts.pory"
+# 119 "data/maps/EltheRoad/scripts.pory"
 	face_down
-# 123 "data/maps/EltheRoad/scripts.pory"
+# 120 "data/maps/EltheRoad/scripts.pory"
 	delay_16
-# 124 "data/maps/EltheRoad/scripts.pory"
+# 121 "data/maps/EltheRoad/scripts.pory"
 	face_up
+# 122 "data/maps/EltheRoad/scripts.pory"
+	delay_16
+# 123 "data/maps/EltheRoad/scripts.pory"
+	face_down
+# 124 "data/maps/EltheRoad/scripts.pory"
+	delay_16
 # 125 "data/maps/EltheRoad/scripts.pory"
+	face_right
+# 126 "data/maps/EltheRoad/scripts.pory"
 	delay_16
 # 126 "data/maps/EltheRoad/scripts.pory"
-	face_down
+	delay_16
+# 126 "data/maps/EltheRoad/scripts.pory"
+	delay_16
 # 127 "data/maps/EltheRoad/scripts.pory"
+	face_left
+# 128 "data/maps/EltheRoad/scripts.pory"
 	delay_16
 # 128 "data/maps/EltheRoad/scripts.pory"
-	face_right
-# 129 "data/maps/EltheRoad/scripts.pory"
 	delay_16
-# 129 "data/maps/EltheRoad/scripts.pory"
-	delay_16
-# 129 "data/maps/EltheRoad/scripts.pory"
-	delay_16
-# 130 "data/maps/EltheRoad/scripts.pory"
-	face_left
-# 131 "data/maps/EltheRoad/scripts.pory"
-	delay_16
-# 131 "data/maps/EltheRoad/scripts.pory"
-	delay_16
-# 131 "data/maps/EltheRoad/scripts.pory"
+# 128 "data/maps/EltheRoad/scripts.pory"
 	delay_16
 	step_end
 
-# 134 "data/maps/EltheRoad/scripts.pory"
+# 131 "data/maps/EltheRoad/scripts.pory"
 EltheRoad_Movement_AmeliaStartLeaving:
-# 136 "data/maps/EltheRoad/scripts.pory"
+# 133 "data/maps/EltheRoad/scripts.pory"
 	walk_up
-# 136 "data/maps/EltheRoad/scripts.pory"
+# 133 "data/maps/EltheRoad/scripts.pory"
 	walk_up
-# 137 "data/maps/EltheRoad/scripts.pory"
+# 134 "data/maps/EltheRoad/scripts.pory"
 	walk_right
-# 137 "data/maps/EltheRoad/scripts.pory"
+# 134 "data/maps/EltheRoad/scripts.pory"
 	walk_right
-# 137 "data/maps/EltheRoad/scripts.pory"
+# 134 "data/maps/EltheRoad/scripts.pory"
 	walk_right
-# 138 "data/maps/EltheRoad/scripts.pory"
+# 135 "data/maps/EltheRoad/scripts.pory"
 	delay_16
-# 138 "data/maps/EltheRoad/scripts.pory"
+# 135 "data/maps/EltheRoad/scripts.pory"
 	delay_16
-# 139 "data/maps/EltheRoad/scripts.pory"
+# 136 "data/maps/EltheRoad/scripts.pory"
 	face_left
 	step_end
 
-# 142 "data/maps/EltheRoad/scripts.pory"
+# 139 "data/maps/EltheRoad/scripts.pory"
 EltheRoad_Movement_DemiveeFollow:
-# 144 "data/maps/EltheRoad/scripts.pory"
+# 141 "data/maps/EltheRoad/scripts.pory"
 	jump_up
-# 145 "data/maps/EltheRoad/scripts.pory"
+# 142 "data/maps/EltheRoad/scripts.pory"
 	walk_fast_up
-# 146 "data/maps/EltheRoad/scripts.pory"
+# 143 "data/maps/EltheRoad/scripts.pory"
 	walk_fast_right
-# 146 "data/maps/EltheRoad/scripts.pory"
+# 143 "data/maps/EltheRoad/scripts.pory"
 	walk_fast_right
 	step_end
 
-# 149 "data/maps/EltheRoad/scripts.pory"
+# 146 "data/maps/EltheRoad/scripts.pory"
 EltheRoad_Movement_DemiveeJoin:
-# 151 "data/maps/EltheRoad/scripts.pory"
+# 148 "data/maps/EltheRoad/scripts.pory"
 	walk_slow_right
-# 152 "data/maps/EltheRoad/scripts.pory"
+# 149 "data/maps/EltheRoad/scripts.pory"
 	delay_16
-# 152 "data/maps/EltheRoad/scripts.pory"
+# 149 "data/maps/EltheRoad/scripts.pory"
 	delay_16
-# 152 "data/maps/EltheRoad/scripts.pory"
+# 149 "data/maps/EltheRoad/scripts.pory"
 	delay_16
-# 152 "data/maps/EltheRoad/scripts.pory"
+# 149 "data/maps/EltheRoad/scripts.pory"
 	delay_16
-# 153 "data/maps/EltheRoad/scripts.pory"
+# 150 "data/maps/EltheRoad/scripts.pory"
 	enter_pokeball
 	step_end
 
@@ -386,15 +380,15 @@ EltheRoad_EventScript_FirstTrigger_Text_2:
 	.string "So you're some kind of…Demi-Vee?$"
 
 EltheRoad_EventScript_FirstTrigger_Text_3:
-# 92 "data/maps/EltheRoad/scripts.pory"
+# 89 "data/maps/EltheRoad/scripts.pory"
 	.string "Demi-Vee$"
 
 EltheRoad_EventScript_FirstTrigger_Text_4:
-# 93 "data/maps/EltheRoad/scripts.pory"
+# 90 "data/maps/EltheRoad/scripts.pory"
 	.string "What?$"
 
 EltheRoad_EventScript_FirstTrigger_Text_5:
-# 95 "data/maps/EltheRoad/scripts.pory"
+# 92 "data/maps/EltheRoad/scripts.pory"
 	.string "Regardless…if you find any evolution\n"
 	.string "shards, I can change form with them.\p"
 	.string "My stats and moves in battle\n"
@@ -402,22 +396,22 @@ EltheRoad_EventScript_FirstTrigger_Text_5:
 	.string "Also, I've lived here for as long\n"
 	.string "as I can remember.\p"
 	.string "If you need more info or advice\n"
-	.string "about anything, just ask me.\p$"
+	.string "about anything, just ask me.$"
 
 EltheRoad_EventScript_FirstTrigger_Text_6:
-# 98 "data/maps/EltheRoad/scripts.pory"
+# 95 "data/maps/EltheRoad/scripts.pory"
 	.string "(Press R while Demi-Vee is following\n"
-	.string "you to get advice! He will talk\l"
-	.string "about the person you're facing, or\l"
-	.string "give general hints for advancement\l"
-	.string "if asked while idle.)$"
+	.string "you to get advice!)\p"
+	.string "(He will talk about the person\n"
+	.string "you're facing, or give general hints\l"
+	.string "for how to progress.)$"
 
 EltheRoad_EventScript_FirstSign_Text_0:
-# 104 "data/maps/EltheRoad/scripts.pory"
+# 101 "data/maps/EltheRoad/scripts.pory"
 	.string "{CLEAR_TO 60}{LEFT_ARROW} To Rehocan Town\n"
 	.string "{CLEAR_TO 76}To Elthe City {RIGHT_ARROW}$"
 
 EltheRoad_EventScript_SecondSign_Text_0:
-# 109 "data/maps/EltheRoad/scripts.pory"
+# 106 "data/maps/EltheRoad/scripts.pory"
 	.string "{CLEAR_TO 66}{LEFT_ARROW} To Elthe City\n"
 	.string "{CLEAR_TO 36}BEWARE BILLIARACH WEBS {RIGHT_ARROW}$"
