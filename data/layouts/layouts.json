@@ -4445,7 +4445,7 @@
       "id": "LAYOUT_ELTHE_CITY",
       "name": "EltheCity_Layout",
       "width": 40,
-      "height": 60,
+      "height": 40,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_ShadyForest",
       "border_filepath": "data/layouts/EltheCity/border.bin",

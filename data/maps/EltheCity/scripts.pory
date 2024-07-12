@@ -1,1 +1,13 @@
 mapscripts EltheCity_MapScripts {}
+
+script ObjEventVarTest
+{
+	setvar(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_BRENDAN_NORMAL)
+	waitbuttonpress
+	setvar(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_MAY_NORMAL)
+	waitbuttonpress
+	setvar(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_ANABEL)
+	waitbuttonpress
+	setvar(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_SPECIES(ZOROARK))
+	waitbuttonpress
+}
