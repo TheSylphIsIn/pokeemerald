@@ -1,3 +1,11 @@
+const DPAD_RIGHT=0x0010
+const DPAD_LEFT=0x0020
+const DPAD_UP=0x0040
+const DPAD_DOWN=0x0080
+const A_BUTTON=0x0001
+const B_BUTTON=0x0002
+const FLAG_AT_BOTTOM_OF_BENCH=FLAG_TEMP_F
+
 mapscripts EltheCity_MapScripts {}
 
 script ObjEventVarTest
@@ -10,4 +18,146 @@ script ObjEventVarTest
 	waitbuttonpress
 	setvar(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_SPECIES(ZOROARK))
 	waitbuttonpress
+}
+
+script Test_ScriptGetInput
+{
+	lock
+	message("Which button will you press?")
+	waitmessage
+	do {
+		waitforscriptinput
+		switch(var(VAR_RESULT))
+		{
+			case DPAD_LEFT:
+				msgbox("Left!", MSGBOX_AUTOCLOSE)
+			case DPAD_RIGHT:
+				msgbox("Right!", MSGBOX_AUTOCLOSE)
+			case DPAD_DOWN:
+				msgbox("Down!", MSGBOX_AUTOCLOSE)
+			case DPAD_UP:
+				msgbox("Up!", MSGBOX_AUTOCLOSE)
+		}
+	} while (var(VAR_RESULT) != DPAD_LEFT && var(VAR_RESULT) != DPAD_RIGHT && var(VAR_RESULT) != DPAD_DOWN && var(VAR_RESULT) != DPAD_UP)
+	release
+}
+
+script EltheCity_Trigger_JumpOnBenchLeft_TopTile
+{
+	setvar(VAR_0x8004, ANIM_SIT_WEST)
+	callnative(DoAmeliaOverworldAnim)
+	playse(SE_BIKE_HOP)
+	applymovement(OBJ_EVENT_ID_PLAYER, EltheCity_Movement_JumpOnBenchLeft)
+	waitmovement(0)
+	addobjectspriteoffset(OBJ_EVENT_ID_PLAYER, 0, -6)
+	do {
+		waitforscriptinput
+		switch(var(VAR_RESULT))
+		{
+			case DPAD_LEFT:
+			case A_BUTTON:
+			case B_BUTTON:
+				resetobjectspriteoffset(OBJ_EVENT_ID_PLAYER)
+				applymovement(OBJ_EVENT_ID_PLAYER, EltheCity_Movement_GetOffBenchLeft)
+				waitmovement(0)
+//			case DPAD_DOWN:
+//				if (!flag(FLAG_AT_BOTTOM_OF_BENCH))
+//				{
+//					applymovement(OBJ_EVENT_ID_PLAYER, EltheCity_Movement_MoveDownBench)
+//					waitmovement(0)
+//					setflag(FLAG_AT_BOTTOM_OF_BENCH)
+//				}
+//			case DPAD_UP:
+//				if (flag(FLAG_AT_BOTTOM_OF_BENCH))
+//				{
+//					applymovement(OBJ_EVENT_ID_PLAYER, EltheCity_Movement_MoveUpBench)
+//					waitmovement(0)
+//					clearflag(FLAG_AT_BOTTOM_OF_BENCH)				
+//				}
+			
+		}
+	} while (var(VAR_RESULT) != DPAD_LEFT && var(VAR_RESULT) != A_BUTTON && var(VAR_RESULT) != B_BUTTON)
+	release
+}
+
+script EltheCity_Trigger_JumpOnBenchLeft_BottomTile
+{
+	goto(EltheCity_Trigger_JumpOnBenchLeft_TopTile)
+}
+
+script EltheCity_Trigger_JumpOnBenchRight_TopTile
+{
+	setvar(VAR_0x8004, ANIM_SIT_EAST)
+	callnative(DoAmeliaOverworldAnim)
+	playse(SE_BIKE_HOP)
+	applymovement(OBJ_EVENT_ID_PLAYER, EltheCity_Movement_JumpOnBenchRight)
+	waitmovement(0)
+	addobjectspriteoffset(OBJ_EVENT_ID_PLAYER, 0, -6)
+	do {
+		waitforscriptinput
+		switch(var(VAR_RESULT))
+		{
+			case DPAD_RIGHT:
+			case A_BUTTON:
+			case B_BUTTON:
+				resetobjectspriteoffset(OBJ_EVENT_ID_PLAYER)
+				applymovement(OBJ_EVENT_ID_PLAYER, EltheCity_Movement_GetOffBenchRight)
+				waitmovement(0)
+//			case DPAD_DOWN:
+//				if (!flag(FLAG_AT_BOTTOM_OF_BENCH))
+//				{
+//					applymovement(OBJ_EVENT_ID_PLAYER, EltheCity_Movement_MoveDownBench)
+//					waitmovement(0)
+//					setflag(FLAG_AT_BOTTOM_OF_BENCH)
+//				}
+//			case DPAD_UP:
+//				if (flag(FLAG_AT_BOTTOM_OF_BENCH))
+//				{
+//					applymovement(OBJ_EVENT_ID_PLAYER, EltheCity_Movement_MoveUpBench)
+//					waitmovement(0)
+//					clearflag(FLAG_AT_BOTTOM_OF_BENCH)				
+//				}
+			
+		}
+	} while (var(VAR_RESULT) != DPAD_RIGHT && var(VAR_RESULT) != A_BUTTON && var(VAR_RESULT) != B_BUTTON)
+	release
+}
+
+script EltheCity_Trigger_JumpOnBenchRight_BottomTile
+{
+	goto(EltheCity_Trigger_JumpOnBenchRight_TopTile)
+}
+
+movement EltheCity_Movement_JumpOnBenchLeft
+{
+	lock_anim
+	jump_in_place_left
+}
+
+movement EltheCity_Movement_GetOffBenchLeft
+{
+	unlock_anim
+	walk_slow_left	
+}
+
+movement EltheCity_Movement_JumpOnBenchRight
+{
+	lock_anim
+	jump_in_place_right
+}
+
+movement EltheCity_Movement_GetOffBenchRight
+{
+	unlock_anim
+	walk_slow_right
+}
+
+movement EltheCity_Movement_MoveDownBench
+{
+	walk_slow_down
+}
+
+movement EltheCity_Movement_MoveUpBench
+{
+	walk_slow_up
 }

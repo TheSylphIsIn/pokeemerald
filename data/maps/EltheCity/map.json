@@ -43,7 +43,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "ObjEventVarTest",
+      "script": "Test_ScriptGetInput",
       "flag": "0"
     }
   ],
@@ -64,7 +64,78 @@
     }
   ],
   "coord_events": [
-
+    {
+      "type": "trigger",
+      "x": 33,
+      "y": 5,
+      "elevation": 0,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "EltheCity_Trigger_JumpOnBenchLeft_TopTile"
+    },
+    {
+      "type": "trigger",
+      "x": 33,
+      "y": 6,
+      "elevation": 0,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "EltheCity_Trigger_JumpOnBenchLeft_BottomTile"
+    },
+    {
+      "type": "trigger",
+      "x": 33,
+      "y": 10,
+      "elevation": 0,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "EltheCity_Trigger_JumpOnBenchLeft_BottomTile"
+    },
+    {
+      "type": "trigger",
+      "x": 33,
+      "y": 9,
+      "elevation": 0,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "EltheCity_Trigger_JumpOnBenchLeft_TopTile"
+    },
+    {
+      "type": "trigger",
+      "x": 21,
+      "y": 5,
+      "elevation": 0,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "EltheCity_Trigger_JumpOnBenchRight_TopTile"
+    },
+    {
+      "type": "trigger",
+      "x": 21,
+      "y": 6,
+      "elevation": 0,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "EltheCity_Trigger_JumpOnBenchRight_BottomTile"
+    },
+    {
+      "type": "trigger",
+      "x": 21,
+      "y": 9,
+      "elevation": 0,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "EltheCity_Trigger_JumpOnBenchRight_TopTile"
+    },
+    {
+      "type": "trigger",
+      "x": 21,
+      "y": 10,
+      "elevation": 0,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "EltheCity_Trigger_JumpOnBenchRight_BottomTile"
+    }
   ],
   "bg_events": [
     {

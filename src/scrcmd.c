@@ -1450,6 +1450,35 @@ bool8 ScrCmd_waitbuttonpress(struct ScriptContext *ctx)
     return TRUE;
 }
 
+static bool8 GetScriptPlayerInput(void)
+{
+	if (gMain.newKeys)
+	{
+		u32 i;
+		
+		for (i = 0; i <= 10; i++) // Checking all keys; the last key, L, is (1 << 10)
+		{
+			if (JOY_NEW(1 << i))
+			{
+				gSpecialVar_Result = (1 << i);
+				return TRUE;
+			}
+		}
+	}
+	return FALSE;
+}
+
+void DoAmeliaOverworldAnim(void)
+{
+	StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], gSpecialVar_0x8004);
+}
+
+bool8 ScrCmd_waitforscriptinput(struct ScriptContext *ctx)
+{
+	SetupNativeScript(ctx, GetScriptPlayerInput);
+	return TRUE;
+}
+
 bool8 ScrCmd_yesnobox(struct ScriptContext *ctx)
 {
     u8 left = ScriptReadByte(ctx);

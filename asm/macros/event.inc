@@ -1907,11 +1907,16 @@
 	addobjectspriteoffset \localId, 0, 0
 	.endm
 	
-	// Sets the partySlot's nickname, ball, and metloc according to their position in a data array.
-	// Assumes mons will be obtained in the order Eevee, Kingler, Flygon, Nidoking, Zoroark
+	@ Sets the partySlot's nickname, ball, and metloc according to their position in a data array.
+	@ Assumes mons will be obtained in the order Eevee, Kingler, Flygon, Nidoking, Zoroark
 	.macro setpartymemberinfo partySlot:req
 	.byte 0xe7
 	.byte \partySlot
+	.endm
+	
+	@ Waits for the player to give an input and stores the input in VAR_RESULT
+	.macro waitforscriptinput
+	.byte 0xe8
 	.endm
 
 @ Supplementary
