@@ -6,269 +6,312 @@ ObjEventVarTest::
 # 13 "data/maps/EltheCity/scripts.pory"
 	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_BRENDAN_NORMAL
 # 14 "data/maps/EltheCity/scripts.pory"
-	waitbuttonpress
+	removeobject VAR_LAST_TALKED
 # 15 "data/maps/EltheCity/scripts.pory"
-	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_MAY_NORMAL
+	addobject VAR_LAST_TALKED
 # 16 "data/maps/EltheCity/scripts.pory"
 	waitbuttonpress
 # 17 "data/maps/EltheCity/scripts.pory"
-	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_ANABEL
+	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_MAY_NORMAL
 # 18 "data/maps/EltheCity/scripts.pory"
-	waitbuttonpress
+	removeobject VAR_LAST_TALKED
 # 19 "data/maps/EltheCity/scripts.pory"
-	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_SPECIES ( ZOROARK )
+	addobject VAR_LAST_TALKED
 # 20 "data/maps/EltheCity/scripts.pory"
+	waitbuttonpress
+# 21 "data/maps/EltheCity/scripts.pory"
+	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_ANABEL
+# 22 "data/maps/EltheCity/scripts.pory"
+	removeobject VAR_LAST_TALKED
+# 23 "data/maps/EltheCity/scripts.pory"
+	addobject VAR_LAST_TALKED
+# 24 "data/maps/EltheCity/scripts.pory"
+	waitbuttonpress
+# 25 "data/maps/EltheCity/scripts.pory"
+	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_SPECIES ( ZOROARK )
+# 26 "data/maps/EltheCity/scripts.pory"
+	removeobject VAR_LAST_TALKED
+# 27 "data/maps/EltheCity/scripts.pory"
+	addobject VAR_LAST_TALKED
+# 28 "data/maps/EltheCity/scripts.pory"
 	waitbuttonpress
 	return
 
 
 Test_ScriptGetInput::
-# 25 "data/maps/EltheCity/scripts.pory"
+# 33 "data/maps/EltheCity/scripts.pory"
 	lock
-# 26 "data/maps/EltheCity/scripts.pory"
-	message Test_ScriptGetInput_Text_0
-# 27 "data/maps/EltheCity/scripts.pory"
-	waitmessage
-Test_ScriptGetInput_3:
-# 29 "data/maps/EltheCity/scripts.pory"
-	waitforscriptinput
-# 30 "data/maps/EltheCity/scripts.pory"
-	switch VAR_RESULT
-# 32 "data/maps/EltheCity/scripts.pory"
-	case 0x0020, Test_ScriptGetInput_12
 # 34 "data/maps/EltheCity/scripts.pory"
-	case 0x0010, Test_ScriptGetInput_13
-# 36 "data/maps/EltheCity/scripts.pory"
-	case 0x0080, Test_ScriptGetInput_14
-# 38 "data/maps/EltheCity/scripts.pory"
-	case 0x0040, Test_ScriptGetInput_15
+	message Test_ScriptGetInput_Text_0
+# 35 "data/maps/EltheCity/scripts.pory"
+	waitmessage
 Test_ScriptGetInput_2:
-# 41 "data/maps/EltheCity/scripts.pory"
-	compare VAR_RESULT, 0x0020
-	goto_if_ne Test_ScriptGetInput_5
-Test_ScriptGetInput_1:
-# 42 "data/maps/EltheCity/scripts.pory"
+# 37 "data/maps/EltheCity/scripts.pory"
+	waitforscriptinput
+# 38 "data/maps/EltheCity/scripts.pory"
+	switch VAR_RESULT
+# 40 "data/maps/EltheCity/scripts.pory"
+	case 0x0020, Test_ScriptGetInput_5
+# 43 "data/maps/EltheCity/scripts.pory"
+	case 0x0010, Test_ScriptGetInput_6
+# 46 "data/maps/EltheCity/scripts.pory"
+	case 0x0080, Test_ScriptGetInput_7
+# 49 "data/maps/EltheCity/scripts.pory"
+	case 0x0040, Test_ScriptGetInput_8
+	goto Test_ScriptGetInput_2
+
+# 54 "data/maps/EltheCity/scripts.pory"
 	release
 	return
-
-Test_ScriptGetInput_4:
-# 41 "data/maps/EltheCity/scripts.pory"
-	compare VAR_RESULT, 0x0080
-	goto_if_ne Test_ScriptGetInput_8
-	goto Test_ScriptGetInput_1
 
 Test_ScriptGetInput_5:
 # 41 "data/maps/EltheCity/scripts.pory"
-	compare VAR_RESULT, 0x0010
-	goto_if_ne Test_ScriptGetInput_4
-	goto Test_ScriptGetInput_1
+	applymovement OBJ_EVENT_ID_PLAYER, StepLeft
+# 42 "data/maps/EltheCity/scripts.pory"
+	waitmovement 0
+	goto Test_ScriptGetInput_2
+
+Test_ScriptGetInput_6:
+# 44 "data/maps/EltheCity/scripts.pory"
+	applymovement OBJ_EVENT_ID_PLAYER, StepRight
+# 45 "data/maps/EltheCity/scripts.pory"
+	waitmovement 0
+	goto Test_ScriptGetInput_2
+
+Test_ScriptGetInput_7:
+# 47 "data/maps/EltheCity/scripts.pory"
+	applymovement OBJ_EVENT_ID_PLAYER, StepDown
+# 48 "data/maps/EltheCity/scripts.pory"
+	waitmovement 0
+	goto Test_ScriptGetInput_2
 
 Test_ScriptGetInput_8:
-# 41 "data/maps/EltheCity/scripts.pory"
-	compare VAR_RESULT, 0x0040
-	goto_if_ne Test_ScriptGetInput_3
-	goto Test_ScriptGetInput_1
-
-Test_ScriptGetInput_12:
-# 33 "data/maps/EltheCity/scripts.pory"
-	msgbox Test_ScriptGetInput_Text_1, MSGBOX_AUTOCLOSE
-	goto Test_ScriptGetInput_2
-
-Test_ScriptGetInput_13:
-# 35 "data/maps/EltheCity/scripts.pory"
-	msgbox Test_ScriptGetInput_Text_2, MSGBOX_AUTOCLOSE
-	goto Test_ScriptGetInput_2
-
-Test_ScriptGetInput_14:
-# 37 "data/maps/EltheCity/scripts.pory"
-	msgbox Test_ScriptGetInput_Text_3, MSGBOX_AUTOCLOSE
-	goto Test_ScriptGetInput_2
-
-Test_ScriptGetInput_15:
-# 39 "data/maps/EltheCity/scripts.pory"
-	msgbox Test_ScriptGetInput_Text_4, MSGBOX_AUTOCLOSE
-	goto Test_ScriptGetInput_2
-
-
-EltheCity_Trigger_JumpOnBenchLeft_TopTile::
-# 47 "data/maps/EltheCity/scripts.pory"
-	setvar VAR_0x8004, ANIM_SIT_WEST
-# 48 "data/maps/EltheCity/scripts.pory"
-	callnative DoAmeliaOverworldAnim
-# 49 "data/maps/EltheCity/scripts.pory"
-	playse SE_BIKE_HOP
 # 50 "data/maps/EltheCity/scripts.pory"
-	applymovement OBJ_EVENT_ID_PLAYER, EltheCity_Movement_JumpOnBenchLeft
+	applymovement OBJ_EVENT_ID_PLAYER, StepUp
 # 51 "data/maps/EltheCity/scripts.pory"
 	waitmovement 0
-# 52 "data/maps/EltheCity/scripts.pory"
-	addobjectspriteoffset OBJ_EVENT_ID_PLAYER, 0, -6
-EltheCity_Trigger_JumpOnBenchLeft_TopTile_3:
-# 54 "data/maps/EltheCity/scripts.pory"
-	waitforscriptinput
-# 55 "data/maps/EltheCity/scripts.pory"
-	switch VAR_RESULT
-# 57 "data/maps/EltheCity/scripts.pory"
-	case 0x0020, EltheCity_Trigger_JumpOnBenchLeft_TopTile_10
-# 58 "data/maps/EltheCity/scripts.pory"
-	case 0x0001, EltheCity_Trigger_JumpOnBenchLeft_TopTile_10
+	goto Test_ScriptGetInput_2
+
+
+EltheCity_Sign_InnLeft::
 # 59 "data/maps/EltheCity/scripts.pory"
-	case 0x0002, EltheCity_Trigger_JumpOnBenchLeft_TopTile_10
-EltheCity_Trigger_JumpOnBenchLeft_TopTile_2:
-# 79 "data/maps/EltheCity/scripts.pory"
-	compare VAR_RESULT, 0x0020
-	goto_if_ne EltheCity_Trigger_JumpOnBenchLeft_TopTile_5
-EltheCity_Trigger_JumpOnBenchLeft_TopTile_1:
+	msgbox EltheCity_Sign_InnLeft_Text_0, MSGBOX_SIGN
+	return
+
+
+EltheCity_Sign_InnRight::
+# 64 "data/maps/EltheCity/scripts.pory"
+	speakername EltheCity_Sign_InnRight_Text_0, PORTRAIT_AMELIA_SERIOUSLY
+# 65 "data/maps/EltheCity/scripts.pory"
+	msgbox EltheCity_Sign_InnRight_Text_1, MSGBOX_SIGN
+	return
+
+
+# 68 "data/maps/EltheCity/scripts.pory"
+StepDown:
+# 70 "data/maps/EltheCity/scripts.pory"
+	walk_down
+	step_end
+
+# 73 "data/maps/EltheCity/scripts.pory"
+StepUp:
+# 75 "data/maps/EltheCity/scripts.pory"
+	walk_up
+	step_end
+
+# 78 "data/maps/EltheCity/scripts.pory"
+StepLeft:
 # 80 "data/maps/EltheCity/scripts.pory"
-	release
-	return
+	walk_left
+	step_end
 
-EltheCity_Trigger_JumpOnBenchLeft_TopTile_4:
-# 79 "data/maps/EltheCity/scripts.pory"
-	compare VAR_RESULT, 0x0002
-	goto_if_ne EltheCity_Trigger_JumpOnBenchLeft_TopTile_3
-	goto EltheCity_Trigger_JumpOnBenchLeft_TopTile_1
-
-EltheCity_Trigger_JumpOnBenchLeft_TopTile_5:
-# 79 "data/maps/EltheCity/scripts.pory"
-	compare VAR_RESULT, 0x0001
-	goto_if_ne EltheCity_Trigger_JumpOnBenchLeft_TopTile_4
-	goto EltheCity_Trigger_JumpOnBenchLeft_TopTile_1
-
-EltheCity_Trigger_JumpOnBenchLeft_TopTile_10:
-# 60 "data/maps/EltheCity/scripts.pory"
-	resetobjectspriteoffset OBJ_EVENT_ID_PLAYER
-# 61 "data/maps/EltheCity/scripts.pory"
-	applymovement OBJ_EVENT_ID_PLAYER, EltheCity_Movement_GetOffBenchLeft
-# 62 "data/maps/EltheCity/scripts.pory"
-	waitmovement 0
-	goto EltheCity_Trigger_JumpOnBenchLeft_TopTile_2
-
-
-EltheCity_Trigger_JumpOnBenchLeft_BottomTile::
+# 83 "data/maps/EltheCity/scripts.pory"
+StepRight:
 # 85 "data/maps/EltheCity/scripts.pory"
-	goto EltheCity_Trigger_JumpOnBenchLeft_TopTile
-	return
+	walk_right
+	step_end
 
-
-EltheCity_Trigger_JumpOnBenchRight_TopTile::
+EltheCity_Trigger_JumpOnBenchLeft_TopTile::
 # 90 "data/maps/EltheCity/scripts.pory"
-	setvar VAR_0x8004, ANIM_SIT_EAST
+	setvar VAR_0x8004, ANIM_SIT_WEST
 # 91 "data/maps/EltheCity/scripts.pory"
 	callnative DoAmeliaOverworldAnim
 # 92 "data/maps/EltheCity/scripts.pory"
 	playse SE_BIKE_HOP
 # 93 "data/maps/EltheCity/scripts.pory"
-	applymovement OBJ_EVENT_ID_PLAYER, EltheCity_Movement_JumpOnBenchRight
+	applymovement OBJ_EVENT_ID_PLAYER, EltheCity_Movement_JumpOnBenchLeft
 # 94 "data/maps/EltheCity/scripts.pory"
 	waitmovement 0
 # 95 "data/maps/EltheCity/scripts.pory"
 	addobjectspriteoffset OBJ_EVENT_ID_PLAYER, 0, -6
-EltheCity_Trigger_JumpOnBenchRight_TopTile_2:
+EltheCity_Trigger_JumpOnBenchLeft_TopTile_3:
 # 97 "data/maps/EltheCity/scripts.pory"
 	waitforscriptinput
 # 98 "data/maps/EltheCity/scripts.pory"
 	switch VAR_RESULT
 # 100 "data/maps/EltheCity/scripts.pory"
-	case 0x0010, EltheCity_Trigger_JumpOnBenchRight_TopTile_9
+	case 0x0020, EltheCity_Trigger_JumpOnBenchLeft_TopTile_10
 # 101 "data/maps/EltheCity/scripts.pory"
-	case 0x0001, EltheCity_Trigger_JumpOnBenchRight_TopTile_9
+	case 0x0001, EltheCity_Trigger_JumpOnBenchLeft_TopTile_10
 # 102 "data/maps/EltheCity/scripts.pory"
-	case 0x0002, EltheCity_Trigger_JumpOnBenchRight_TopTile_9
-EltheCity_Trigger_JumpOnBenchRight_TopTile_1:
+	case 0x0002, EltheCity_Trigger_JumpOnBenchLeft_TopTile_10
+EltheCity_Trigger_JumpOnBenchLeft_TopTile_2:
 # 122 "data/maps/EltheCity/scripts.pory"
-	compare VAR_RESULT, 0x0010
-	goto_if_ne EltheCity_Trigger_JumpOnBenchRight_TopTile_4
+	compare VAR_RESULT, 0x0020
+	goto_if_ne EltheCity_Trigger_JumpOnBenchLeft_TopTile_5
+EltheCity_Trigger_JumpOnBenchLeft_TopTile_1:
+# 123 "data/maps/EltheCity/scripts.pory"
+	release
 	return
 
-EltheCity_Trigger_JumpOnBenchRight_TopTile_3:
+EltheCity_Trigger_JumpOnBenchLeft_TopTile_4:
 # 122 "data/maps/EltheCity/scripts.pory"
 	compare VAR_RESULT, 0x0002
-	goto_if_ne EltheCity_Trigger_JumpOnBenchRight_TopTile_2
-	return
+	goto_if_ne EltheCity_Trigger_JumpOnBenchLeft_TopTile_3
+	goto EltheCity_Trigger_JumpOnBenchLeft_TopTile_1
 
-EltheCity_Trigger_JumpOnBenchRight_TopTile_4:
+EltheCity_Trigger_JumpOnBenchLeft_TopTile_5:
 # 122 "data/maps/EltheCity/scripts.pory"
 	compare VAR_RESULT, 0x0001
-	goto_if_ne EltheCity_Trigger_JumpOnBenchRight_TopTile_3
-	return
+	goto_if_ne EltheCity_Trigger_JumpOnBenchLeft_TopTile_4
+	goto EltheCity_Trigger_JumpOnBenchLeft_TopTile_1
 
-EltheCity_Trigger_JumpOnBenchRight_TopTile_9:
+EltheCity_Trigger_JumpOnBenchLeft_TopTile_10:
 # 103 "data/maps/EltheCity/scripts.pory"
 	resetobjectspriteoffset OBJ_EVENT_ID_PLAYER
 # 104 "data/maps/EltheCity/scripts.pory"
-	applymovement OBJ_EVENT_ID_PLAYER, EltheCity_Movement_GetOffBenchRight
+	applymovement OBJ_EVENT_ID_PLAYER, EltheCity_Movement_GetOffBenchLeft
 # 105 "data/maps/EltheCity/scripts.pory"
 	waitmovement 0
+	goto EltheCity_Trigger_JumpOnBenchLeft_TopTile_2
+
+
+EltheCity_Trigger_JumpOnBenchLeft_BottomTile::
+# 128 "data/maps/EltheCity/scripts.pory"
+	goto EltheCity_Trigger_JumpOnBenchLeft_TopTile
+	return
+
+
+EltheCity_Trigger_JumpOnBenchRight_TopTile::
+# 133 "data/maps/EltheCity/scripts.pory"
+	setvar VAR_0x8004, ANIM_SIT_EAST
+# 134 "data/maps/EltheCity/scripts.pory"
+	callnative DoAmeliaOverworldAnim
+# 135 "data/maps/EltheCity/scripts.pory"
+	playse SE_BIKE_HOP
+# 136 "data/maps/EltheCity/scripts.pory"
+	applymovement OBJ_EVENT_ID_PLAYER, EltheCity_Movement_JumpOnBenchRight
+# 137 "data/maps/EltheCity/scripts.pory"
+	waitmovement 0
+# 138 "data/maps/EltheCity/scripts.pory"
+	addobjectspriteoffset OBJ_EVENT_ID_PLAYER, 0, -6
+EltheCity_Trigger_JumpOnBenchRight_TopTile_3:
+# 140 "data/maps/EltheCity/scripts.pory"
+	waitforscriptinput
+# 141 "data/maps/EltheCity/scripts.pory"
+	switch VAR_RESULT
+# 143 "data/maps/EltheCity/scripts.pory"
+	case 0x0010, EltheCity_Trigger_JumpOnBenchRight_TopTile_10
+# 144 "data/maps/EltheCity/scripts.pory"
+	case 0x0001, EltheCity_Trigger_JumpOnBenchRight_TopTile_10
+# 145 "data/maps/EltheCity/scripts.pory"
+	case 0x0002, EltheCity_Trigger_JumpOnBenchRight_TopTile_10
+EltheCity_Trigger_JumpOnBenchRight_TopTile_2:
+# 165 "data/maps/EltheCity/scripts.pory"
+	compare VAR_RESULT, 0x0010
+	goto_if_ne EltheCity_Trigger_JumpOnBenchRight_TopTile_5
+EltheCity_Trigger_JumpOnBenchRight_TopTile_1:
+# 166 "data/maps/EltheCity/scripts.pory"
+	release
+	return
+
+EltheCity_Trigger_JumpOnBenchRight_TopTile_4:
+# 165 "data/maps/EltheCity/scripts.pory"
+	compare VAR_RESULT, 0x0002
+	goto_if_ne EltheCity_Trigger_JumpOnBenchRight_TopTile_3
 	goto EltheCity_Trigger_JumpOnBenchRight_TopTile_1
+
+EltheCity_Trigger_JumpOnBenchRight_TopTile_5:
+# 165 "data/maps/EltheCity/scripts.pory"
+	compare VAR_RESULT, 0x0001
+	goto_if_ne EltheCity_Trigger_JumpOnBenchRight_TopTile_4
+	goto EltheCity_Trigger_JumpOnBenchRight_TopTile_1
+
+EltheCity_Trigger_JumpOnBenchRight_TopTile_10:
+# 146 "data/maps/EltheCity/scripts.pory"
+	resetobjectspriteoffset OBJ_EVENT_ID_PLAYER
+# 147 "data/maps/EltheCity/scripts.pory"
+	applymovement OBJ_EVENT_ID_PLAYER, EltheCity_Movement_GetOffBenchRight
+# 148 "data/maps/EltheCity/scripts.pory"
+	waitmovement 0
+	goto EltheCity_Trigger_JumpOnBenchRight_TopTile_2
 
 
 EltheCity_Trigger_JumpOnBenchRight_BottomTile::
-# 127 "data/maps/EltheCity/scripts.pory"
+# 171 "data/maps/EltheCity/scripts.pory"
 	goto EltheCity_Trigger_JumpOnBenchRight_TopTile
 	return
 
 
-# 130 "data/maps/EltheCity/scripts.pory"
+# 174 "data/maps/EltheCity/scripts.pory"
 EltheCity_Movement_JumpOnBenchLeft:
-# 132 "data/maps/EltheCity/scripts.pory"
+# 176 "data/maps/EltheCity/scripts.pory"
 	lock_anim
-# 133 "data/maps/EltheCity/scripts.pory"
+# 177 "data/maps/EltheCity/scripts.pory"
 	jump_in_place_left
 	step_end
 
-# 136 "data/maps/EltheCity/scripts.pory"
+# 180 "data/maps/EltheCity/scripts.pory"
 EltheCity_Movement_GetOffBenchLeft:
-# 138 "data/maps/EltheCity/scripts.pory"
+# 182 "data/maps/EltheCity/scripts.pory"
 	unlock_anim
-# 139 "data/maps/EltheCity/scripts.pory"
+# 183 "data/maps/EltheCity/scripts.pory"
 	walk_slow_left
 	step_end
 
-# 142 "data/maps/EltheCity/scripts.pory"
+# 186 "data/maps/EltheCity/scripts.pory"
 EltheCity_Movement_JumpOnBenchRight:
-# 144 "data/maps/EltheCity/scripts.pory"
+# 188 "data/maps/EltheCity/scripts.pory"
 	lock_anim
-# 145 "data/maps/EltheCity/scripts.pory"
+# 189 "data/maps/EltheCity/scripts.pory"
 	jump_in_place_right
 	step_end
 
-# 148 "data/maps/EltheCity/scripts.pory"
+# 192 "data/maps/EltheCity/scripts.pory"
 EltheCity_Movement_GetOffBenchRight:
-# 150 "data/maps/EltheCity/scripts.pory"
+# 194 "data/maps/EltheCity/scripts.pory"
 	unlock_anim
-# 151 "data/maps/EltheCity/scripts.pory"
+# 195 "data/maps/EltheCity/scripts.pory"
 	walk_slow_right
 	step_end
 
-# 154 "data/maps/EltheCity/scripts.pory"
+# 198 "data/maps/EltheCity/scripts.pory"
 EltheCity_Movement_MoveDownBench:
-# 156 "data/maps/EltheCity/scripts.pory"
+# 200 "data/maps/EltheCity/scripts.pory"
 	walk_slow_down
 	step_end
 
-# 159 "data/maps/EltheCity/scripts.pory"
+# 203 "data/maps/EltheCity/scripts.pory"
 EltheCity_Movement_MoveUpBench:
-# 161 "data/maps/EltheCity/scripts.pory"
+# 205 "data/maps/EltheCity/scripts.pory"
 	walk_slow_up
 	step_end
 
 Test_ScriptGetInput_Text_0:
-# 26 "data/maps/EltheCity/scripts.pory"
+# 34 "data/maps/EltheCity/scripts.pory"
 	.string "Which button will you press?$"
 
-Test_ScriptGetInput_Text_1:
-# 33 "data/maps/EltheCity/scripts.pory"
-	.string "Left!$"
+EltheCity_Sign_InnLeft_Text_0:
+# 59 "data/maps/EltheCity/scripts.pory"
+	.string "Elysi Inn$"
 
-Test_ScriptGetInput_Text_2:
-# 35 "data/maps/EltheCity/scripts.pory"
-	.string "Right!$"
+EltheCity_Sign_InnRight_Text_0:
+# 64 "data/maps/EltheCity/scripts.pory"
+	.string "Amelia$"
 
-Test_ScriptGetInput_Text_3:
-# 37 "data/maps/EltheCity/scripts.pory"
-	.string "Down!$"
-
-Test_ScriptGetInput_Text_4:
-# 39 "data/maps/EltheCity/scripts.pory"
-	.string "Up!$"
+EltheCity_Sign_InnRight_Text_1:
+# 65 "data/maps/EltheCity/scripts.pory"
+	.string "Phew, these room prices…I'm glad\n"
+	.string "Pokémon Centers were free…\p"
+	.string "Then again, not like I have any\n"
+	.string "money anyway…$"

@@ -58,6 +58,18 @@ Common_Movement_FaceDown:
 Common_Movement_FaceUp:
 	face_up
 	step_end
+	
+Common_Movement_WalkRight:
+	walk_right
+	step_end
+	
+Common_Movement_WalkLeft:
+	walk_left
+	step_end
+	
+Common_Movement_WalkDown:
+	walk_down
+	step_end
 
 Common_Movement_WalkInPlaceDown:
 	walk_in_place_down

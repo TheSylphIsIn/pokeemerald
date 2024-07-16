@@ -11,12 +11,20 @@ mapscripts EltheCity_MapScripts {}
 script ObjEventVarTest
 {
 	setvar(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_BRENDAN_NORMAL)
+	removeobject(VAR_LAST_TALKED)
+	addobject(VAR_LAST_TALKED)
 	waitbuttonpress
 	setvar(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_MAY_NORMAL)
+	removeobject(VAR_LAST_TALKED)
+	addobject(VAR_LAST_TALKED)
 	waitbuttonpress
 	setvar(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_ANABEL)
+	removeobject(VAR_LAST_TALKED)
+	addobject(VAR_LAST_TALKED)
 	waitbuttonpress
 	setvar(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_SPECIES(ZOROARK))
+	removeobject(VAR_LAST_TALKED)
+	addobject(VAR_LAST_TALKED)
 	waitbuttonpress
 }
 
@@ -25,21 +33,56 @@ script Test_ScriptGetInput
 	lock
 	message("Which button will you press?")
 	waitmessage
-	do {
+	while {
 		waitforscriptinput
 		switch(var(VAR_RESULT))
 		{
 			case DPAD_LEFT:
-				msgbox("Left!", MSGBOX_AUTOCLOSE)
+				applymovement(OBJ_EVENT_ID_PLAYER, StepLeft)
+				waitmovement(0)
 			case DPAD_RIGHT:
-				msgbox("Right!", MSGBOX_AUTOCLOSE)
+				applymovement(OBJ_EVENT_ID_PLAYER, StepRight)
+				waitmovement(0)
 			case DPAD_DOWN:
-				msgbox("Down!", MSGBOX_AUTOCLOSE)
+				applymovement(OBJ_EVENT_ID_PLAYER, StepDown)
+				waitmovement(0)
 			case DPAD_UP:
-				msgbox("Up!", MSGBOX_AUTOCLOSE)
+				applymovement(OBJ_EVENT_ID_PLAYER, StepUp)
+				waitmovement(0)
 		}
-	} while (var(VAR_RESULT) != DPAD_LEFT && var(VAR_RESULT) != DPAD_RIGHT && var(VAR_RESULT) != DPAD_DOWN && var(VAR_RESULT) != DPAD_UP)
+	}
 	release
+}
+
+script EltheCity_Sign_InnLeft
+{
+	msgbox("Elysi Inn", MSGBOX_SIGN)
+}
+
+script EltheCity_Sign_InnRight
+{
+	speakername("Amelia", PORTRAIT_AMELIA_SERIOUSLY)
+	msgbox("Phew, these room prices…I'm glad\n" "Pokémon Centers were free…\p" "Then again, not like I have any\n" "money anyway…", MSGBOX_SIGN)
+}
+
+movement StepDown
+{
+	walk_down
+}
+
+movement StepUp
+{
+	walk_up
+}
+
+movement StepLeft
+{
+	walk_left
+}
+
+movement StepRight
+{
+	walk_right
 }
 
 script EltheCity_Trigger_JumpOnBenchLeft_TopTile

@@ -506,6 +506,7 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_Lugia,                 OBJ_EVENT_PAL_TAG_LUGIA},
     {gObjectEventPal_RubySapphireBrendan,   OBJ_EVENT_PAL_TAG_RS_BRENDAN},
     {gObjectEventPal_RubySapphireMay,       OBJ_EVENT_PAL_TAG_RS_MAY},
+	{gObjectEventPal_CutBranch,				OBJ_EVENT_PAL_TAG_CUT_BRANCH},
 #if OW_FOLLOWERS_POKEBALLS
     {gObjectEventPal_MasterBall,            OBJ_EVENT_PAL_TAG_BALL_MASTER},
     {gObjectEventPal_UltraBall,             OBJ_EVENT_PAL_TAG_BALL_ULTRA},
@@ -6004,6 +6005,7 @@ static bool8 DoesObjectCollideWithObjectAt(struct ObjectEvent *objectEvent, s16 
 {
     u8 i;
     struct ObjectEvent *curObject;
+	s16 x2, y2;
 
     if (objectEvent->localId == OBJ_EVENT_ID_FOLLOWER)
         return FALSE; // follower cannot collide with other objects, but they can collide with it
@@ -6018,8 +6020,39 @@ static bool8 DoesObjectCollideWithObjectAt(struct ObjectEvent *objectEvent, s16 
                 if (AreElevationsCompatible(objectEvent->currentElevation, curObject->currentElevation))
                     return TRUE;
             }
+			
+			if (curObject->graphicsId == OBJ_EVENT_GFX_PUSHABLE_BOULDER) // Strength objects are 3 tiles wide
+			{
+				x2 = x;
+				y2 = y;
+				MoveCoords(DIR_EAST, &x2, &y2);
+				if ((curObject->currentCoords.x == x2 && curObject->currentCoords.y == y2) || (curObject->previousCoords.x == x2 && curObject->previousCoords.y == y2))
+				{
+					if (AreElevationsCompatible(objectEvent->currentElevation, curObject->currentElevation))
+						return TRUE;
+				}
+				x2 = x;
+				MoveCoords(DIR_WEST, &x2, &y2);
+				if ((curObject->currentCoords.x == x2 && curObject->currentCoords.y == y2) || (curObject->previousCoords.x == x2 && curObject->previousCoords.y == y2))
+				{
+					if (AreElevationsCompatible(objectEvent->currentElevation, curObject->currentElevation))
+						return TRUE;
+				}
+			}
+			if (curObject->graphicsId == OBJ_EVENT_GFX_CUTTABLE_TREE) // Cut objects are 2 tiles tall
+			{
+				x2 = x;
+				y2 = y;
+				MoveCoords(DIR_SOUTH, &x2, &y2);
+				if ((curObject->currentCoords.x == x2 && curObject->currentCoords.y == y2) || (curObject->previousCoords.x == x2 && curObject->previousCoords.y == y2))
+				{
+					if (AreElevationsCompatible(objectEvent->currentElevation, curObject->currentElevation))
+						return TRUE;
+				}
+			}
         }
     }
+	
     return FALSE;
 }
 
