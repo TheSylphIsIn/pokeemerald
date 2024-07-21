@@ -4266,3 +4266,42 @@ void PreparePartyForSkyBattle(void)
     VarSet(B_VAR_SKY_BATTLE,participatingPokemonSlot);
     CompactPartySlots();
 }
+
+void GetNegotiationTopic(void)
+{
+	u32 numTopics = gSpecialVar_0x8008;
+	u32 i;
+	u32 usedTopicsBits = 0;
+	u32 usedTopicsCount = 0;
+	
+	for (i = 0; i < numTopics; i++)
+	{
+		if (FlagGet(FLAG_TEMP_1 + i))
+		{
+			usedTopicsBits |= (1 << i);
+			usedTopicsCount++;
+		}
+	}
+	
+	if (usedTopicsCount == numTopics) // topics exhausted
+	{
+		gSpecialVar_Result = 0xFF;
+		return;
+	}
+	else
+	{
+		do {
+			i = Random() % numTopics;
+			gSpecialVar_Result = i;
+		} while(usedTopicsBits & (1 << i));
+	}
+	
+	FlagSet(FLAG_TEMP_1 + i);
+}
+
+void ParalyzeLead(void)
+{
+	u8 status1 = STATUS1_PARALYSIS;
+	
+	SetMonData(&gPlayerParty[0], MON_DATA_STATUS, &status1);
+}

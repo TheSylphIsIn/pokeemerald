@@ -33,6 +33,12 @@ const u32 sPortraitPal_AmeliaSmug[] = INCBIN_U32("graphics/portraits/amelia_smug
 const u32 sPortraitPic_AmeliaSeriously[] = INCBIN_U32("graphics/portraits/amelia_seriously.4bpp.lz");
 const u32 sPortraitPal_AmeliaSeriously[] = INCBIN_U32("graphics/portraits/amelia_seriously.gbapal.lz");
 
+const u32 sPortraitPic_AmeliaWink[] = INCBIN_U32("graphics/portraits/amelia_wink.4bpp.lz");
+const u32 sPortraitPal_AmeliaWink[] = INCBIN_U32("graphics/portraits/amelia_wink.gbapal.lz");
+
+const u32 sPortraitPic_AmeliaMunch[] = INCBIN_U32("graphics/portraits/amelia_munch.4bpp.lz");
+const u32 sPortraitPal_AmeliaMunch[] = INCBIN_U32("graphics/portraits/amelia_munch.gbapal.lz");
+
 const u32 sPortraitPic_DemiveeNeutral[] = INCBIN_U32("graphics/portraits/demivee_neutral.4bpp.lz");
 const u32 sPortraitPal_DemiveeNeutral[] = INCBIN_U32("graphics/portraits/demivee_neutral.gbapal.lz");
 
@@ -54,4 +60,6 @@ const struct PortraitData gPortraits[PORTRAITS_COUNT] =
 	[PORTRAIT_AMELIA_STRAINED] = INCLUDE_PORTRAIT(AmeliaStrained),
 	[PORTRAIT_AMELIA_SMUG]		= INCLUDE_PORTRAIT(AmeliaSmug),
 	[PORTRAIT_AMELIA_SERIOUSLY]		= INCLUDE_PORTRAIT(AmeliaSeriously),
+	[PORTRAIT_AMELIA_WINK]			= INCLUDE_PORTRAIT(AmeliaWink),
+	[PORTRAIT_AMELIA_MUNCH]			= INCLUDE_PORTRAIT(AmeliaMunch),
 };

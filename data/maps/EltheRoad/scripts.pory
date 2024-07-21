@@ -99,7 +99,7 @@ script EltheRoad_EventScript_FirstTrigger
 
 script EltheRoad_EventScript_FirstSign
 {
-	msgbox("{CLEAR_TO 60}{LEFT_ARROW} To {CENSOR}Rehocan{UNCENSOR} Town\n" "{CLEAR_TO 76}To Elthe City {RIGHT_ARROW}", MSGBOX_SIGN)
+	msgbox("{CLEAR_TO 60}{LEFT_ARROW} To Rehocan Town\n" "{CLEAR_TO 76}To Elthe City {RIGHT_ARROW}", MSGBOX_SIGN)
 }
 
 script EltheRoad_EventScript_SecondSign
@@ -143,7 +143,13 @@ script EltheRoad_Trigger_VinosTrigger
 			switch(var(VAR_RESULT))
 			{
 				case 0:
-				// Amelia tries to talk to it. It humors her. Difficult negotiation ensues
+					speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+					msgbox("Do you mind if I pass through here?", MSGBOX_AUTOCLOSE)
+					playse(SE_PIN)
+					applymovement(LOCALID_VINOS, Common_Movement_ExclamationMark)
+					waitmovement(0)
+					delay(48)
+					goto(EltheRoad_VinosNegotiationMain)
 				case 1:
 				// It jumps Amelia as soon as she steps forward. Do battle with +1 def/+2 speed on Vinos
 				case 2:
@@ -183,10 +189,162 @@ script EltheRoad_Trigger_VinosTrigger
 	//  -- exhausting the questions without reaching 3 counts as a passable negotiation, as does reaching 3 points after a fail.
 	//  -- some questions will be an instant failure state if you get them wrong.
 	// - Question: What's your favorite type of Pokemon? (Grass: instant Fail, Dark: Mid, Fire: Success)
-	// - Question: Eat one of my berries! (Accept: Fail, Question logistics: Mid, Eat trail mix: Success)
-	// - Question: Why do you need to get through? (To get a bath: Fail, Cuz I don't want to fight you: Mid, For thrills: Success)
-	// - Question: How long have you been training Pokemon? (30 years: mid, just started: fail, long enough: success)
 	// fuck grass types. i hate em. - amelia
+}
+
+// Does a random negotiation topic
+script EltheRoad_VinosNegotiationMain
+{
+	speakername("Vinos")
+	message("Alright, then…")
+	waitmessage
+	waitbuttonpress
+	setvar(VAR_0x8008, 2)
+	special(GetNegotiationTopic) // this sets temp flags
+	if (var(VAR_RESULT) == 0xFF) // all topics used up
+	{
+		goto(EltheRoad_VinosNegotiationMidSuccess)
+	}
+	else
+	{
+		switch(var(VAR_RESULT))
+		{
+			case 0:
+				dynmultipush("Dark", 1)
+				dynmultipush("Grass", 0)
+				dynmultipush("Fire", 2)
+				message("Which Type of Pokémon is best,\n" "in your opinion?")
+				waitmessage
+				dynmultistack(0, 0, FALSE, 6, TRUE, 0, DYN_MULTICHOICE_CB_NONE)
+				switch(var(VAR_RESULT))
+				{
+					case 0:
+						speakername("Amelia", PORTRAIT_AMELIA_SERIOUSLY)
+						msgbox("It's, uh…Grass. Yeah. I just love\n" "Grass type Pokémon…\p" "… … … … …", MSGBOX_DEFAULT)
+						speakername("Amelia", PORTRAIT_AMELIA_SHOCK)
+						msgbox("You know what, no, I can't even {CENSOR}fuck{UNCENSOR}ing\n" "joke about it. All the major\l"
+						"terrible events in my life were\l" "caused by Grass types.\l" "{CENSOR}Fuck{UNCENSOR} Grass types. I hate 'em.", MSGBOX_DEFAULT)
+						speakername("Vinos")
+						msgbox("You'd disrespect me to my face…\n" "You have some nerve, human.", MSGBOX_AUTOCLOSE)
+						setflag(FLAG_NOT_PERFECT_CONVERSATION)
+						if (var(VAR_NEGOTIATION_SCORE) > 0)
+						{
+							subvar(VAR_NEGOTIATION_SCORE, 1)
+						}
+					case 1:
+						speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+						msgbox("Oh, Dark is the best, obviously!", MSGBOX_DEFAULT)
+						speakername("Vinos")
+						msgbox("Hmmhmm, yes, we are quite…\n" "Wait! You're just buttering me up!", MSGBOX_DEFAULT)
+						speakername("Amelia", PORTRAIT_AMELIA_SHOCK)
+						msgbox("No way! I'm being honest! Some of my\n" "best friends are Dark types!", MSGBOX_DEFAULT)
+						speakername("Vinos")
+						msgbox("…Well, alright. It's a good answer.", MSGBOX_AUTOCLOSE)
+						addvar(VAR_NEGOTIATION_SCORE, 1)
+					case 2:
+						speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+						msgbox("Hmm…I think it must be Fire.\n" "It's just such a cool element.", MSGBOX_DEFAULT)
+						speakername("Amelia", PORTRAIT_AMELIA_WINK)
+						msgbox("Plus, I was a Fire type for a while,\n" "myself. Self love, yo!", MSGBOX_DEFAULT)
+						speakername("Vinos")
+						msgbox("You have some nerve, telling a Grass\n" "type that Fire is best…\p"
+								"But I appreciate your honesty.\n" "The time for tricks has passed.", MSGBOX_AUTOCLOSE)
+						addvar(VAR_NEGOTIATION_SCORE, 2)
+				}
+			case 1:
+	// - Question: Eat one of my berries! (Accept: Fail, Question logistics: Mid, Eat trail mix: Success)
+				dynmultipush("Your berries?", 1)
+				dynmultipush("Eat trail mix", 2)
+				dynmultipush("Just eat it", 0)
+				message("Would you like to eat\n" "one of my berries?")
+				waitmessage
+				dynmultistack(0, 0, FALSE, 6, TRUE, 0, DYN_MULTICHOICE_CB_NONE)
+				switch(var(VAR_RESULT))
+				{
+					case 0:
+						callnative(ParalyzeLead)
+						speakername("Demi-Vee", PORTRAIT_DEMIVEE_NEUTRAL)
+						msgbox("Ooh, I'll take one!", MSGBOX_AUTOCLOSE)
+						delay(90)
+						speakername("Demi-Vee", PORTRAIT_DEMIVEE_ANNOYED)
+						msgbox("Urp…", MSGBOX_DEFAULT)
+						speakername("Vinos")
+						msgbox("Ha! What an idiot! You didn't even\n" "fall for my camouflage, but you\l"
+								"still ate my paralyzing berries!\l" "You're mine!", MSGBOX_AUTOCLOSE)
+						call(EltheRoad_CleanUpNegotiationValues)
+						goto(EltheRoad_VinosDoBattle)
+					case 1:
+						speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+						msgbox("Berries? They grow on your body?\n" "And you…WANT us to eat them?", MSGBOX_DEFAULT)
+						speakername("Vinos")
+						msgbox("Well…yes. They're delicious.\n" "Or so I'm told.", MSGBOX_DEFAULT)
+						speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+						msgbox("What about the ones that your eyes\n" "are on? Are they edible?", MSGBOX_DEFAULT)
+						speakername("Vinos")
+						msgbox("No, they're…my eyes. Not berries.", MSGBOX_DEFAULT)
+						speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+						msgbox("Has anyone ever tried to pick your\n" "eyes instead of a berry?", MSGBOX_DEFAULT)
+						speakername("Vinos")
+						msgbox("Look, are you gonna eat a berry\n" "or not!?", MSGBOX_DEFAULT)
+						speakername("Amelia", PORTRAIT_AMELIA_SMUG)
+						msgbox("Nope.", MSGBOX_DEFAULT)
+						speakername("Vinos")
+						msgbox("… … … … … … … … … …\p" "Okay, forget it. Next question.", MSGBOX_AUTOCLOSE)
+						addvar(VAR_NEGOTIATION_SCORE, 1)
+					case 2:
+						speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+						msgbox("Oh, that reminds me I have…", MSGBOX_AUTOCLOSE)
+						// setvar(VAR_0x8004, ANIM_REACH_IN_POCKET)
+						// callnative(DoAmeliaOverworldAnim)
+						speakername("Amelia", PORTRAIT_AMELIA_MUNCH)
+						msgbox("Trail mix!", MSGBOX_DEFAULT)
+						speakername("Vinos")
+						msgbox("… … … … …\p" "Your ways confuse me, human.\n" "I would like to stop talking to you.", MSGBOX_AUTOCLOSE)
+						addvar(VAR_NEGOTIATION_SCORE, 2)
+				}
+				
+			case 2:
+	// - Question: Why do you need to get through? (To get a bath: Fail, Cuz I don't want to fight you: Mid, For thrills: Success)
+			case 3:
+	// - Question: How long have you been training Pokemon? (30 years: mid, just started: fail, long enough: success)
+		}
+		
+		delay(16)
+		if (var(VAR_NEGOTIATION_SCORE) > 2)
+		{
+			//goto()
+		}
+		elif(var(VAR_NEGOTIATION_SCORE) == 0)
+		{
+			goto(EltheRoad_VinosDoBattle)
+		}
+		else
+		{
+			goto(EltheRoad_VinosNegotiationMain)
+		}
+	}
+}
+
+script EltheRoad_VinosNegotiationMidSuccess
+{
+
+}
+
+script EltheRoad_VinosDoBattle
+{
+	setwildbattle(SPECIES_BELLSPROUT, 35, ITEM_NONE)
+	dowildbattle
+	waitstate
+}
+
+script EltheRoad_CleanUpNegotiationValues
+{
+	setvar(VAR_NEGOTIATION_SCORE, 0)
+	clearflag(FLAG_TEMP_4)
+	clearflag(FLAG_TEMP_1)
+	clearflag(FLAG_TEMP_2)
+	clearflag(FLAG_TEMP_3)
+	clearflag(FLAG_NOT_PERFECT_CONVERSATION)
 }
 
 script EltheRoad_EventScript_SpiderRoadblock
