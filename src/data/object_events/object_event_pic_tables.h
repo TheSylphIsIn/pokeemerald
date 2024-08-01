@@ -709,7 +709,15 @@ static const struct SpriteFrameImage sPicTable_TotodileDoll[] = {
 };
 
 static const struct SpriteFrameImage sPicTable_JigglypuffDoll[] = {
-    obj_frame_tiles(gObjectEventPic_JigglypuffDoll),
+    overworld_frame(gObjectEventPic_JigglypuffDoll, 2, 2, 0),
+    overworld_frame(gObjectEventPic_JigglypuffDoll, 2, 2, 1),
+    overworld_frame(gObjectEventPic_JigglypuffDoll, 2, 2, 2),
+    overworld_frame(gObjectEventPic_JigglypuffDoll, 2, 2, 0),
+    overworld_frame(gObjectEventPic_JigglypuffDoll, 2, 2, 0),
+    overworld_frame(gObjectEventPic_JigglypuffDoll, 2, 2, 1),
+    overworld_frame(gObjectEventPic_JigglypuffDoll, 2, 2, 1),
+    overworld_frame(gObjectEventPic_JigglypuffDoll, 2, 2, 2),
+    overworld_frame(gObjectEventPic_JigglypuffDoll, 2, 2, 2),
 };
 
 static const struct SpriteFrameImage sPicTable_MeowthDoll[] = {

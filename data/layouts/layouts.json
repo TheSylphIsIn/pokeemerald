@@ -4450,6 +4450,36 @@
       "secondary_tileset": "gTileset_ShadyForest",
       "border_filepath": "data/layouts/EltheCity/border.bin",
       "blockdata_filepath": "data/layouts/EltheCity/map.bin"
+    },
+    {
+      "id": "LAYOUT_UNUSED_SCRATCHPAD",
+      "name": "UnusedScratchpad_Layout",
+      "width": 40,
+      "height": 40,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_ShadyForest",
+      "border_filepath": "data/layouts/UnusedScratchpad/border.bin",
+      "blockdata_filepath": "data/layouts/UnusedScratchpad/map.bin"
+    },
+    {
+      "id": "LAYOUT_JUMPING_MINIGAME_MAIN",
+      "name": "JumpingMinigame_Main_Layout",
+      "width": 40,
+      "height": 20,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_ShadyForest",
+      "border_filepath": "data/layouts/JumpingMinigame_Main/border.bin",
+      "blockdata_filepath": "data/layouts/JumpingMinigame_Main/map.bin"
+    },
+    {
+      "id": "LAYOUT_INN_FLOOR1",
+      "name": "InnFloor1_Layout",
+      "width": 20,
+      "height": 11,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_EltheIndoor",
+      "border_filepath": "data/layouts/InnFloor1/border.bin",
+      "blockdata_filepath": "data/layouts/InnFloor1/map.bin"
     }
   ]
 }

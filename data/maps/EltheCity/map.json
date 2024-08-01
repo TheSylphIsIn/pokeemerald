@@ -143,8 +143,8 @@
       "x": 7,
       "y": 30,
       "elevation": 0,
-      "dest_map": "MAP_ELTHE_CITY",
-      "dest_warp_id": "1"
+      "dest_map": "MAP_INN_FLOOR1",
+      "dest_warp_id": "0"
     },
     {
       "x": 18,

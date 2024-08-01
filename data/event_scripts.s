@@ -1083,3 +1083,9 @@ EventScript_VsSeekerChargingDone::
 	.include "data/maps/BilliardsDen/scripts.inc"
 
 	.include "data/maps/EltheCity/scripts.inc"
+
+	.include "data/maps/UnusedScratchpad/scripts.inc"
+
+	.include "data/maps/JumpingMinigame_Main/scripts.inc"
+
+	.include "data/maps/InnFloor1/scripts.inc"

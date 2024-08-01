@@ -1,6 +1,9 @@
 {
   "group_order": [
     "gMapGroup_TarcMaps",
+    "gMapGroup_TarcInteriors",
+    "gMapGroup_TarcExtra",
+    "gMapGroup_TarcDump",
     "gMapGroup_TownsAndRoutes",
     "gMapGroup_IndoorLittleroot",
     "gMapGroup_IndoorOldale",
@@ -39,8 +42,17 @@
   "gMapGroup_TarcMaps": [
     "IntroScene",
     "EltheRoad",
-    "BilliardsDen",
     "EltheCity"
+  ],
+  "gMapGroup_TarcInteriors": [
+    "InnFloor1"
+  ],
+  "gMapGroup_TarcExtra": [
+    "JumpingMinigame_Main"
+  ],
+  "gMapGroup_TarcDump": [
+    "BilliardsDen",
+    "UnusedScratchpad"
   ],
   "gMapGroup_TownsAndRoutes": [
     "PetalburgCity",

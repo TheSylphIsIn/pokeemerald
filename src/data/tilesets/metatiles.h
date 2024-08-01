@@ -213,3 +213,6 @@ const u16 gMetatileAttributes_ShadyForest[] = INCBIN_U16("data/tilesets/secondar
 
 const u16 gMetatiles_SpiderForest[] = INCBIN_U16("data/tilesets/secondary/spider_forest/metatiles.bin");
 const u16 gMetatileAttributes_SpiderForest[] = INCBIN_U16("data/tilesets/secondary/spider_forest/metatile_attributes.bin");
+
+const u16 gMetatiles_EltheIndoor[] = INCBIN_U16("data/tilesets/secondary/elthe_indoor/metatiles.bin");
+const u16 gMetatileAttributes_EltheIndoor[] = INCBIN_U16("data/tilesets/secondary/elthe_indoor/metatile_attributes.bin");
