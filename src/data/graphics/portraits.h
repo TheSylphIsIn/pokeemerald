@@ -45,6 +45,9 @@ const u32 sPortraitPal_DemiveeNeutral[] = INCBIN_U32("graphics/portraits/demivee
 const u32 sPortraitPic_DemiveeAnnoyed[] = INCBIN_U32("graphics/portraits/demivee_annoyed.4bpp.lz");
 const u32 sPortraitPal_DemiveeAnnoyed[] = INCBIN_U32("graphics/portraits/demivee_annoyed.gbapal.lz");
 
+const u32 sPortraitPic_DemiveeHuh[] = INCBIN_U32("graphics/portraits/demivee_huh.4bpp.lz");
+const u32 sPortraitPal_DemiveeHuh[] = INCBIN_U32("graphics/portraits/demivee_huh.gbapal.lz");
+
 const u32 sPortraitPic_VinosNeutral[] = INCBIN_U32("graphics/portraits/vinos_neutral.4bpp.lz");
 const u32 sPortraitPal_VinosNeutral[] = INCBIN_U32("graphics/portraits/vinos_neutral.gbapal.lz");
 
@@ -70,4 +73,5 @@ const struct PortraitData gPortraits[PORTRAITS_COUNT] =
 	[PORTRAIT_AMELIA_MUNCH]			= INCLUDE_PORTRAIT(AmeliaMunch),
 	[PORTRAIT_VINOS_NEUTRAL]		= INCLUDE_PORTRAIT(VinosNeutral),
 	[PORTRAIT_VINOS_MAD]			= INCLUDE_PORTRAIT(VinosMad),
+	[PORTRAIT_DEMIVEE_HUH]			= INCLUDE_PORTRAIT(DemiveeHuh),
 };

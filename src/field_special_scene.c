@@ -18,6 +18,7 @@
 #include "constants/field_specials.h"
 #include "constants/songs.h"
 #include "constants/metatile_labels.h"
+#include "constants/rgb.h"
 
 // Most of the boxes in the moving truck are map tiles, with the
 // exception of three boxes that are map events that jostle around
@@ -193,63 +194,17 @@ static void Task_HandleTruckSequence(u8 taskId)
     switch (tState)
     {
     case 0:
-        tTimer++;
-        if (tTimer == 90)
-        {
-            SetCameraPanningCallback(NULL);
-            tTimer = 0;
-            tTaskId1 = CreateTask(Task_Truck1, 0xA);
-            tState = 1;
-            PlaySE(SE_TRUCK_MOVE);
-        }
+		tTimer++;
+		if (tTimer > 60)
+		{
+			BeginNormalPaletteFade(PALETTES_ALL, 10, 16, 0, RGB_BLACK);
+			tState = 1;        
+		}
         break;
     case 1:
-        tTimer++;
-        if (tTimer == 150)
+        if (!gPaletteFade.active)
         {
-            FadeInFromBlack();
-            tTimer = 0;
-            tState = 2;
-        }
-        break;
-    case 2:
-        tTimer++;
-        if (!gPaletteFade.active && tTimer > 300)
-        {
-            tTimer = 0;
-            DestroyTask(tTaskId1);
-            tTaskId2 = CreateTask(Task_Truck2, 0xA);
-            tState = 3;
-            PlaySE(SE_TRUCK_STOP);
-        }
-        break;
-    case 3:
-        if (!gTasks[tTaskId2].isActive)
-        {
-            // Task_Truck2 / Task_Truck3 has finished
-            InstallCameraPanAheadCallback();
-            tTimer = 0;
-            tState = 4;
-        }
-        break;
-    case 4:
-        tTimer++;
-        if (tTimer == 90)
-        {
-            PlaySE(SE_TRUCK_UNLOAD);
-            tTimer = 0;
-            tState = 5;
-        }
-        break;
-    case 5:
-        tTimer++;
-        if (tTimer == 120)
-        {
-            MapGridSetMetatileIdAt(4 + MAP_OFFSET, 1 + MAP_OFFSET, METATILE_InsideOfTruck_ExitLight_Top);
-            MapGridSetMetatileIdAt(4 + MAP_OFFSET, 2 + MAP_OFFSET, METATILE_InsideOfTruck_ExitLight_Mid);
-            MapGridSetMetatileIdAt(4 + MAP_OFFSET, 3 + MAP_OFFSET, METATILE_InsideOfTruck_ExitLight_Bottom);
             DrawWholeMapView();
-            PlaySE(SE_TRUCK_DOOR);
             DestroyTask(taskId);
             UnlockPlayerFieldControls();
         }
@@ -259,9 +214,6 @@ static void Task_HandleTruckSequence(u8 taskId)
 
 void ExecuteTruckSequence(void)
 {
-    MapGridSetMetatileIdAt(4 + MAP_OFFSET, 1 + MAP_OFFSET, METATILE_InsideOfTruck_DoorClosedFloor_Top);
-    MapGridSetMetatileIdAt(4 + MAP_OFFSET, 2 + MAP_OFFSET, METATILE_InsideOfTruck_DoorClosedFloor_Mid);
-    MapGridSetMetatileIdAt(4 + MAP_OFFSET, 3 + MAP_OFFSET, METATILE_InsideOfTruck_DoorClosedFloor_Bottom);
     DrawWholeMapView();
     LockPlayerFieldControls();
     CpuFastFill(0, gPlttBufferFaded, PLTT_SIZE);

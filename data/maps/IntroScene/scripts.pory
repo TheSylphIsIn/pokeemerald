@@ -30,8 +30,8 @@ mapscripts IntroScene_MapScripts
 			setflag(FLAG_SPAWN_INVISIBLE)
 			setflag(FLAG_REMOVE_WARP_FADE)
 			setflag(FLAG_NO_MUSIC_ON_WARP)
-			warpsilent(MAP_ELTHE_ROAD, 0, -1, -1)
 			setvar(VAR_TEMP_0, 1)
+			warpsilent(MAP_ELTHE_ROAD, 0, -1, -1)
 		}
 	]
 }

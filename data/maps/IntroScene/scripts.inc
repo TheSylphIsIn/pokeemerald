@@ -60,9 +60,9 @@ IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0:
 # 32 "data/maps/IntroScene/scripts.pory"
 	setflag FLAG_NO_MUSIC_ON_WARP
 # 33 "data/maps/IntroScene/scripts.pory"
-	warpsilent MAP_ELTHE_ROAD, 0, -1, -1
-# 34 "data/maps/IntroScene/scripts.pory"
 	setvar VAR_TEMP_0, 1
+# 34 "data/maps/IntroScene/scripts.pory"
+	warpsilent MAP_ELTHE_ROAD, 0, -1, -1
 	return
 
 
