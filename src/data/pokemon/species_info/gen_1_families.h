@@ -15194,78 +15194,109 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
     },
 #endif //P_FAMILY_DITTO
 
+#define DEMIVEE_DATA(hp, atk, def, speed, spatk, spdef, type, formName, ability, cry)		\
+        .baseHP        = hp,		\
+        .baseAttack    = atk,		\
+        .baseDefense   = def,		\
+        .baseSpeed     = speed,		\
+        .baseSpAttack  = spatk,		\
+        .baseSpDefense = spdef,		\
+        .types = MON_TYPES(type),		\
+        .catchRate = 45,		\
+        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 65 : 92,		\
+        .evYield_SpDefense = 1,		\
+        .genderRatio = PERCENT_FEMALE(12.5),		\
+        .eggCycles = 35,		\
+        .friendship = STANDARD_FRIENDSHIP,		\
+        .growthRate = GROWTH_MEDIUM_FAST,		\
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD),		\
+        .abilities = { ability, ABILITY_ADAPTABILITY, ABILITY_ANTICIPATION },		\
+        .bodyColor = BODY_COLOR_BROWN,		\
+        .speciesName = _("Eevee"),		\
+        .cryId = cry,				\
+        .natDexNum = NATIONAL_DEX_EEVEE,		\
+        .categoryName = _("Evolution"),			\
+        .height = 3,							\
+        .weight = 65,							\
+        .description = gEeveePokedexText,		\
+        .pokemonScale = 476,					\
+        .pokemonOffset = 18,					\
+        .trainerScale = 256,					\
+        .trainerOffset = 0,						\
+        .frontPic = gMonFrontPic_Eevee,			\
+        .frontPicSize = MON_COORDS_SIZE(40, 48),		\
+        .frontPicSizeFemale = MON_COORDS_SIZE(40, 48),		\
+        .frontPicYOffset = 11,			\
+        .frontAnimFrames = sAnims_Eevee,		\
+        .frontAnimId = ANIM_V_STRETCH,			\
+        .backPic = gMonBackPic_Eevee,			\
+        .backPicSize = MON_COORDS_SIZE(56, 48),		\
+        .backPicSizeFemale = MON_COORDS_SIZE(56, 48),		\
+        .backPicYOffset = 10,								\
+        .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,			\
+        .palette = gMonPalette_##formName,						\
+        .shinyPalette = gMonShinyPalette_Eevee,				\
+        .iconSprite = gMonIcon_Eevee,						\
+        .iconPalIndex = 2,					\
+        FOOTPRINT(Eevee)	\
+        OVERWORLD(			\
+            sPicTable_Eevee,		\
+            SIZE_32x32,				\
+            SHADOW_SIZE_M,			\
+            TRACKS_FOOT,				\
+            gOverworldPalette_Eevee,		\
+            gShinyOverworldPalette_Eevee		\
+        )													\
+        .levelUpLearnset = s##formName##LevelUpLearnset,			\
+        .teachableLearnset = sEeveeTeachableLearnset,		\
+        .eggMoveLearnset = sEeveeEggMoveLearnset,			\
+        .formSpeciesIdTable = sEeveeFormSpeciesIdTable,		\
+        .formChangeTable = sEeveeFormChangeTable,			\		
+
 #if P_FAMILY_EEVEE
     [SPECIES_EEVEE] =
     {
-        .baseHP        = 55,
-        .baseAttack    = 55,
-        .baseDefense   = 50,
-        .baseSpeed     = 55,
-        .baseSpAttack  = 45,
-        .baseSpDefense = 65,
-        .types = MON_TYPES(TYPE_NORMAL),
-        .catchRate = 45,
-        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 65 : 92,
-        .evYield_SpDefense = 1,
-        .genderRatio = PERCENT_FEMALE(12.5),
-        .eggCycles = 35,
-        .friendship = STANDARD_FRIENDSHIP,
-        .growthRate = GROWTH_MEDIUM_FAST,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD),
-        .abilities = { ABILITY_RUN_AWAY, ABILITY_ADAPTABILITY, ABILITY_ANTICIPATION },
-        .bodyColor = BODY_COLOR_BROWN,
-        .speciesName = _("Eevee"),
-        .cryId = CRY_EEVEE,
-        .natDexNum = NATIONAL_DEX_EEVEE,
-        .categoryName = _("Evolution"),
-        .height = 3,
-        .weight = 65,
-        .description = gEeveePokedexText,
-        .pokemonScale = 476,
-        .pokemonOffset = 18,
-        .trainerScale = 256,
-        .trainerOffset = 0,
-        .frontPic = gMonFrontPic_Eevee,
-        .frontPicFemale = gMonFrontPic_EeveeF,
-        .frontPicSize = MON_COORDS_SIZE(40, 48),
-        .frontPicSizeFemale = MON_COORDS_SIZE(40, 48),
-        .frontPicYOffset = 11,
-        .frontAnimFrames = sAnims_Eevee,
-        .frontAnimId = ANIM_V_STRETCH,
-        .backPic = gMonBackPic_Eevee,
-        .backPicFemale = gMonBackPic_EeveeF,
-        .backPicSize = MON_COORDS_SIZE(56, 48),
-        .backPicSizeFemale = MON_COORDS_SIZE(56, 48),
-        .backPicYOffset = 10,
-        .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
-        .palette = gMonPalette_Eevee,
-        .shinyPalette = gMonShinyPalette_Eevee,
-        .iconSprite = gMonIcon_Eevee,
-        .iconPalIndex = 2,
-        FOOTPRINT(Eevee)
-        OVERWORLD(
-            sPicTable_Eevee,
-            SIZE_32x32,
-            SHADOW_SIZE_M,
-            TRACKS_FOOT,
-            gOverworldPalette_Eevee,
-            gShinyOverworldPalette_Eevee
-        )
-        .levelUpLearnset = sEeveeLevelUpLearnset,
-        .teachableLearnset = sEeveeTeachableLearnset,
-        .eggMoveLearnset = sEeveeEggMoveLearnset,
-        .formSpeciesIdTable = sEeveeFormSpeciesIdTable,
-        .formChangeTable = sEeveeFormChangeTable,
-        .evolutions = EVOLUTION({EVO_ITEM, ITEM_THUNDER_STONE, SPECIES_JOLTEON},
-                                {EVO_ITEM, ITEM_WATER_STONE, SPECIES_VAPOREON},
-                                {EVO_ITEM, ITEM_FIRE_STONE, SPECIES_FLAREON},
-                                {EVO_FRIENDSHIP_DAY, 0, SPECIES_ESPEON},
-                                {EVO_FRIENDSHIP_NIGHT, 0, SPECIES_UMBREON},
-                                {EVO_SPECIFIC_MAP, MAP_PETALBURG_WOODS, SPECIES_LEAFEON},
-                                {EVO_ITEM, ITEM_LEAF_STONE, SPECIES_LEAFEON},
-                                {EVO_SPECIFIC_MAP, MAP_SHOAL_CAVE_LOW_TIDE_ICE_ROOM, SPECIES_GLACEON},
-                                {EVO_ITEM, ITEM_ICE_STONE, SPECIES_GLACEON},
-                                {EVO_FRIENDSHIP_MOVE_TYPE, TYPE_FAIRY, SPECIES_SYLVEON}),
+		DEMIVEE_DATA(65, 75, 70, 75, 65, 85, TYPE_NORMAL, Eevee, ABILITY_CLEAR_BODY, CRY_EEVEE)
+    },
+
+    [SPECIES_DEMIVEE_WATER] =
+    {
+		DEMIVEE_DATA(95, 65, 60, 55, 85, 75, TYPE_WATER, DemiveeWater, ABILITY_WATER_ABSORB, CRY_VAPOREON)
+    },
+
+    [SPECIES_DEMIVEE_ELECTRIC] =
+    {
+		DEMIVEE_DATA(65, 65, 60, 105, 75, 65, TYPE_ELECTRIC, DemiveeElectric, ABILITY_VOLT_ABSORB, CRY_JOLTEON)
+    },
+
+    [SPECIES_DEMIVEE_FIRE] =
+    {
+		DEMIVEE_DATA(75, 95, 70, 75, 55, 65, TYPE_FIRE, DemiveeFire, ABILITY_FLASH_FIRE, CRY_FLAREON)
+    },
+
+    [SPECIES_DEMIVEE_PSYCHIC] =
+    {
+		DEMIVEE_DATA(65, 55, 50, 85, 95, 85, TYPE_PSYCHIC, DemiveePsychic, ABILITY_SYNCHRONIZE, CRY_ESPEON)
+    },
+
+    [SPECIES_DEMIVEE_DARK] =
+    {
+		DEMIVEE_DATA(75, 55, 90, 65, 55, 95, TYPE_DARK, DemiveeDark, ABILITY_INFILTRATOR, CRY_UMBREON)
+    },
+
+    [SPECIES_DEMIVEE_GRASS] =
+    {
+		DEMIVEE_DATA(85, 85, 80, 65, 45, 75, TYPE_GRASS, DemiveeGrass, ABILITY_SAP_SIPPER, CRY_LEAFEON)
+    },
+
+    [SPECIES_DEMIVEE_ICE] =
+    {
+		DEMIVEE_DATA(85, 55, 60, 85, 85, 65, TYPE_ICE, DemiveeIce, ABILITY_ICE_BODY, CRY_GLACEON)
+    },
+
+    [SPECIES_DEMIVEE_FAIRY] =
+    {
+		DEMIVEE_DATA(75, 65, 60, 55, 75, 105, TYPE_FAIRY, DemiveeFairy, ABILITY_NATURAL_CURE, CRY_SYLVEON)
     },
 
 #if P_GIGANTAMAX_FORMS

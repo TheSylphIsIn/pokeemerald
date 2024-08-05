@@ -134,7 +134,6 @@
 #define SPECIES_GYARADOS                                130
 #define SPECIES_LAPRAS                                  131
 #define SPECIES_DITTO                                   132
-#define SPECIES_EEVEE                                   133
 #define SPECIES_VAPOREON                                134
 #define SPECIES_JOLTEON                                 135
 #define SPECIES_FLAREON                                 136
@@ -1629,7 +1628,22 @@
 #define SPECIES_URSHIFU_RAPID_STRIKE_STYLE_GIGANTAMAX   1522
 #define SPECIES_MIMIKYU_TOTEM_BUSTED                    1523
 
-#define SPECIES_EGG SPECIES_MIMIKYU_TOTEM_BUSTED + 1
+#define SPECIES_EEVEE                                   1524
+#define SPECIES_DEMIVEE_WATER                           1525
+#define SPECIES_DEMIVEE_ELECTRIC                        1526
+#define SPECIES_DEMIVEE_FIRE                            1527
+#define SPECIES_DEMIVEE_PSYCHIC                         1528
+#define SPECIES_DEMIVEE_DARK                            1529
+#define SPECIES_DEMIVEE_GRASS                           1530
+#define SPECIES_DEMIVEE_ICE                             1531
+#define SPECIES_DEMIVEE_FAIRY                           1532
+
+#define SPECIES_VINOS									1533
+#define SPECIES_PANTOM									1534
+#define SPECIES_HYDROIL									1535
+#define SPECIES_WEATHERBANE								1536
+
+#define SPECIES_EGG SPECIES_WEATHERBANE + 1
 
 #define NUM_SPECIES SPECIES_EGG
 

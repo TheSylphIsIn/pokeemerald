@@ -79,14 +79,11 @@ mapscripts EltheRoad_MapScripts
 			removeobject(LOCALID_DEMIVEE)
 			playfanfare(MUS_CAUGHT)
 			message("Eevee joined your party!")
-			setflag(FLAG_SYS_POKEMON_GET)
-			givemon(SPECIES_EEVEE, 30, ITEM_EVERSTONE, ITEM_POKE_BALL, NATURE_QUIRKY, 0, MON_MALE, 0, 0, 0, 0, 0, 0, 31, 31, 31, 31, 31, 31, MOVE_TAKE_DOWN, MOVE_BITE, MOVE_COPYCAT, MOVE_SWIFT, FALSE, FALSE, TYPE_DRAGON)
 			waitmessage
 			waitfanfare
 			waitbuttonpress
 			closemessage
 			fadedefaultbgm
-			callnative(UpdateFollowingPokemon)
 			setvar(VAR_MAIN_GAME_STATE, 1)
 		}
 	]
@@ -120,15 +117,6 @@ script EltheRoad_EventScript_FirstTrigger
 script EltheRoad_EventScript_FirstSign
 {
 	msgbox("{CLEAR_TO 60}{LEFT_ARROW} To Rehocan Town\n" "{CLEAR_TO 76}To Elthe City {RIGHT_ARROW}", MSGBOX_SIGN)
-}
-
-script EltheRoad_EventScript_SecondSign
-{
-	msgbox("{CLEAR_TO 66}{LEFT_ARROW} To Elthe City\n" "{CLEAR_TO 36}BEWARE BILLIARACH WEBS {RIGHT_ARROW}", MSGBOX_SIGN)
-	applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceRight)
-	waitmovement(0)
-	delay(8)
-	goto(EltheRoad_EventScript_SpiderRoadblock)
 }
 
 script EltheRoad_Trigger_VinosTrigger 

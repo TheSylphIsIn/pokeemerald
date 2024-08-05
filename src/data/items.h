@@ -13506,6 +13506,134 @@ const struct Item gItemsInfo[] =
         .iconPalette = gItemIconPalette_GriseousCore,
     },
 
+    [ITEM_VAPORSHARD] =
+    {
+        .name = _("Vaporshard"),
+        .price = 0,
+        .description = COMPOUND_STRING(
+            "Demi-Vee likes this.\n"
+			"Move 1: Hydro Pump\n"
+			"Move 2: Heal Bell"),
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .flingPower = 60,
+        .iconPic = gItemIcon_WaterStone,
+        .iconPalette = gItemIconPalette_WaterStone,
+    },
+
+    [ITEM_JOLTSHARD] =
+    {
+        .name = _("Joltshard"),
+        .price = 0,
+        .description = COMPOUND_STRING(
+            "Demi-Vee likes this.\n"
+			"Move 1: Thunder\n"
+			"Move 2: Light Screen"),
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .flingPower = 60,
+        .iconPic = gItemIcon_ThunderStone,
+        .iconPalette = gItemIconPalette_ThunderStone,
+    },
+
+    [ITEM_FLARESHARD] =
+    {
+        .name = _("Flareshard"),
+        .price = 0,
+        .description = COMPOUND_STRING(
+            "Demi-Vee likes this.\n"
+			"Move 1: Flare Blitz\n"
+			"Move 2: Rest"),
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .flingPower = 60,
+        .iconPic = gItemIcon_FireStone,
+        .iconPalette = gItemIconPalette_FireStone,
+    },
+
+    [ITEM_ESPERSHARD] =
+    {
+        .name = _("Espershard"),
+        .price = 0,
+        .description = COMPOUND_STRING(
+            "Demi-Vee likes this.\n"
+			"Move 1: Psychic\n"
+			"Move 2: Reflect"),
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .flingPower = 60,
+        .iconPic = gItemIcon_ShinyStone,
+        .iconPalette = gItemIconPalette_ShinyStone,
+    },
+
+    [ITEM_UMBRASHARD] =
+    {
+        .name = _("Umbrashard"),
+        .price = 0,
+        .description = COMPOUND_STRING(
+            "Demi-Vee likes this.\n"
+			"Move 1: Toxic\n"
+			"Move 2: Parting Shot"),
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .flingPower = 60,
+        .iconPic = gItemIcon_DuskStone,
+        .iconPalette = gItemIconPalette_DuskStone,
+    },
+
+    [ITEM_LEAFSHARD] =
+    {
+        .name = _("Leafshard"),
+        .price = 0,
+        .description = COMPOUND_STRING(
+            "Demi-Vee likes this.\n"
+			"Move 1: Leaf Blade\n"
+			"Move 2: Leech Seed"),
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .flingPower = 60,
+        .iconPic = gItemIcon_LeafStone,
+        .iconPalette = gItemIconPalette_LeafStone,
+    },
+
+    [ITEM_GLACIALSHARD] =
+    {
+        .name = _("Glacialshard"),
+        .price = 0,
+        .description = COMPOUND_STRING(
+            "Demi-Vee likes this.\n"
+			"Move 1: Ice Beam\n"
+			"Move 2: Aurora Veil"),
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .flingPower = 60,
+        .iconPic = gItemIcon_IceStone,
+        .iconPalette = gItemIconPalette_IceStone,
+    },
+
+    [ITEM_SYLVANSHARD] =
+    {
+        .name = _("Sylvanshard"),
+        .price = 0,
+        .description = COMPOUND_STRING(
+            "Demi-Vee likes this.\n"
+			"Move 1: Moonblast\n"
+			"Move 2: Wish"),
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .flingPower = 60,
+        .iconPic = gItemIcon_DawnStone,
+        .iconPalette = gItemIconPalette_DawnStone,
+    },
+
     [ITEM_LUSTROUS_GLOBE] =
     {
         .name = HANDLE_EXPANDED_ITEM_NAME("LustrousGlobe", "Lustrous Globe"),

@@ -6577,6 +6577,7 @@ static void CursorCb_ChangeAbility(u8 taskId)
 
 void TryItemHoldFormChange(struct Pokemon *mon)
 {
+	u32 currentSpecies = GetMonData(mon, MON_DATA_SPECIES);
     u16 targetSpecies = GetFormChangeTargetSpecies(mon, FORM_CHANGE_ITEM_HOLD, 0);
     if (targetSpecies != SPECIES_NONE)
     {
@@ -6586,6 +6587,23 @@ void TryItemHoldFormChange(struct Pokemon *mon)
         CreatePartyMonIconSpriteParameterized(targetSpecies, GetMonData(mon, MON_DATA_PERSONALITY, NULL), &sPartyMenuBoxes[gPartyMenu.slotId], 1);
         CalculateMonStats(mon);
         UpdatePartyMonHeldItemSprite(mon, &sPartyMenuBoxes[gPartyMenu.slotId]);
+        UpdateMonDisplayInfoAfterRareCandy(gPartyMenu.slotId, mon);
+		if (GET_BASE_SPECIES_ID(targetSpecies) == SPECIES_EEVEE)
+		{ // Replaces demivee moves with the corresponding move from the form it's changing to
+			u32 i, j;
+			
+			for (i = 0; i < MAX_MON_MOVES; i++)
+			{
+				for (j = 0; j < 9; j++)
+				{
+					if (GetMonData(mon, MON_DATA_MOVE1 + i) == sDemiveeFormChangeMoves[currentSpecies - SPECIES_EEVEE][j])
+					{
+						RemoveMonPPBonus(mon, i);
+						SetMonMoveSlot(mon, sDemiveeFormChangeMoves[targetSpecies - SPECIES_EEVEE][j], i);
+					}
+				}
+			}
+		}
     }
 }
 

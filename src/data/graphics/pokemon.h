@@ -3806,6 +3806,14 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #if P_FAMILY_EEVEE
     const u32 gMonFrontPic_Eevee[] = INCBIN_U32("graphics/pokemon/eevee/anim_front.4bpp.lz");
     const u32 gMonPalette_Eevee[] = INCBIN_U32("graphics/pokemon/eevee/normal.gbapal.lz");
+    const u32 gMonPalette_DemiveeWater[] = INCBIN_U32("graphics/pokemon/eevee/normal_water.gbapal.lz");
+    const u32 gMonPalette_DemiveeElectric[] = INCBIN_U32("graphics/pokemon/eevee/normal_electric.gbapal.lz");
+    const u32 gMonPalette_DemiveeFire[] = INCBIN_U32("graphics/pokemon/eevee/normal_fire.gbapal.lz");
+    const u32 gMonPalette_DemiveePsychic[] = INCBIN_U32("graphics/pokemon/eevee/normal_psychic.gbapal.lz");
+    const u32 gMonPalette_DemiveeDark[] = INCBIN_U32("graphics/pokemon/eevee/normal_dark.gbapal.lz");
+    const u32 gMonPalette_DemiveeGrass[] = INCBIN_U32("graphics/pokemon/eevee/normal_grass.gbapal.lz");
+    const u32 gMonPalette_DemiveeIce[] = INCBIN_U32("graphics/pokemon/eevee/normal_ice.gbapal.lz");
+    const u32 gMonPalette_DemiveeFairy[] = INCBIN_U32("graphics/pokemon/eevee/normal_fairy.gbapal.lz");
     const u32 gMonBackPic_Eevee[] = INCBIN_U32("graphics/pokemon/eevee/back.4bpp.lz");
     const u32 gMonShinyPalette_Eevee[] = INCBIN_U32("graphics/pokemon/eevee/shiny.gbapal.lz");
     const u8 gMonIcon_Eevee[] = INCBIN_U8("graphics/pokemon/eevee/icon.4bpp");

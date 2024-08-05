@@ -1823,8 +1823,14 @@ void CalculateMonStats(struct Pokemon *mon)
             currentHP = newMaxHP;
         else if (currentHP != 0)
         {
-            if (newMaxHP > oldMaxHP)
-                currentHP += newMaxHP - oldMaxHP;
+			if (currentHP == oldMaxHP)
+			{
+				currentHP = newMaxHP;
+			}
+			else
+			{
+				currentHP = ((currentHP * 100) / ((oldMaxHP * 100) / newMaxHP)); // sets HP to the same percentage
+			}
             if (currentHP <= 0)
                 currentHP = 1;
             if (currentHP > newMaxHP)
