@@ -1856,3 +1856,4 @@ const u8 gText_MarcelRefuseCandyMessage[] = _("Ooh, what a pretty little gem…\
 const u8 gText_ViceRefuseCandyMessage[] = _("I maybe could've chewed that when\nI was a Trapinch. But no thanks.{PAUSE_UNTIL_PRESS}");
 const u8 gText_BradleyRefuseCandyMessage[] = _("I think Giovanni used to traffic these.\nGet it away from me.{PAUSE_UNTIL_PRESS}");
 const u8 gText_PythonRefuseCandyMessage[] = _("I don't got no gizzard!\nWhy would I wanna eat a rock?{PAUSE_UNTIL_PRESS}");
+const u8 gText_StatEditor[] = _("EDIT STATS");

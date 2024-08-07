@@ -360,6 +360,7 @@ SECTIONS {
         src/international_string_util.o(.text);
         src/pokemon_sprite_visualizer.o(.text);
         src/expansion_intro.o(.text);
+		src/ui_stat_editor.o(.text);
     } > ROM =0
 
     script_data :
@@ -726,9 +727,14 @@ SECTIONS {
         data/mystery_gift.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/sound_data.o(.rodata);
+<<<<<<< HEAD:ld_script.ld
         src/pokemon_sprite_visualizer.o(.rodata);
         src/expansion_intro.o(.rodata);
     } > ROM =0
+=======
+		src/ui_stat_editor.o(.rodata);
+    } =0
+>>>>>>> aa3d521ea709327e9cceaac6edef139785dafa50:ld_script.txt
 
     song_data :
     ALIGN(4)
