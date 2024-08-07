@@ -4028,7 +4028,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Pikachu = {
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Azumarill = {
     .tileTag = TAG_NONE,
-    .paletteTag = OBJ_EVENT_PAL_TAG_NPC_1,
+    .paletteTag = OBJ_EVENT_PAL_TAG_NPC_4,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 128,
     .width = 16,

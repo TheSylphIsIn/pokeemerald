@@ -5,8 +5,23 @@ const DPAD_DOWN=0x0080
 const A_BUTTON=0x0001
 const B_BUTTON=0x0002
 const FLAG_AT_BOTTOM_OF_BENCH=FLAG_TEMP_F
+const LOCALID_KEESIGHT = 10
+const LOCALID_ESPERSHARD = 11
+const LOCALID_UMBRASHARD = 12
 
-mapscripts EltheCity_MapScripts {}
+mapscripts EltheCity_MapScripts 
+{
+	MAP_SCRIPT_ON_TRANSITION {
+		if(flag(FLAG_SCALE_DESCENDING_DONE))
+		{
+			setobjectxyperm(LOCALID_UMBRASHARD, 11, 21)
+		}
+		if(flag(FLAG_SCALE_ASCENDING_DONE))
+		{
+			setobjectxyperm(LOCALID_ESPERSHARD, 13, 21)
+		}
+	}
+}
 
 script ObjEventVarTest
 {
@@ -169,6 +184,291 @@ script EltheCity_Trigger_JumpOnBenchRight_TopTile
 script EltheCity_Trigger_JumpOnBenchRight_BottomTile
 {
 	goto(EltheCity_Trigger_JumpOnBenchRight_TopTile)
+}
+
+script EltheCity_EventScript_Keesight
+{
+	if (flag(FLAG_SCALE_ASCENDING_DONE) && flag(FLAG_SCALE_DESCENDING_DONE))
+	{
+		speakername("Keesight", PORTRAIT_KEESIGHT)
+		msgbox("… … … … …\n" "Thanks for the song.", MSGBOX_NPC)
+	}
+	else
+	{
+		speakername("Batmon", PORTRAIT_KEESIGHT)
+		msgbox("… … … … … … … … … …")
+		speakername(NULL, 0)
+		msgbox("The Pokémon is staring intently\n" "at the pond…", MSGBOX_AUTOCLOSE)
+	}
+}
+
+script EltheCity_Trigger_MusicStump1
+{
+	playse(SE_NOTE_C)
+	turnobject(LOCALID_KEESIGHT, DIR_WEST)
+	
+	// descending scale
+	if(var(VAR_TEMP_2) == 7 && !flag(FLAG_SCALE_DESCENDING_DONE))
+	{
+		delay(60)
+		applymovement(LOCALID_KEESIGHT, EltheCity_Movement_KeesightHops)
+		playse(SE_BIKE_HOP)
+		delay(16)
+		playse(SE_BIKE_HOP)
+		delay(32)
+		playmoncry(SPECIES_WOOBAT, CRY_MODE_NORMAL)
+		waitmoncry
+		delay(30)
+		applymovement(LOCALID_KEESIGHT, Common_Movement_FaceUp)
+		waitmovement(0)
+		delay(16)
+		playse(SE_M_SUPERSONIC)
+		applymovement(LOCALID_UMBRASHARD, EltheCity_Movement_MoveUmbrashard)
+		waitmovement(0)
+		applymovement(LOCALID_KEESIGHT, Common_Movement_FaceDown)
+		waitmovement(0)
+		setobjectxyperm(LOCALID_UMBRASHARD, 11, 21)
+		setflag(FLAG_SCALE_DESCENDING_DONE)
+	}
+	else
+	{
+		setvar(VAR_TEMP_2, 0)
+		setvar(VAR_TEMP_1, 1)
+	}
+	
+	release
+}
+
+script EltheCity_Trigger_MusicStump2
+{
+	playse(SE_NOTE_D)
+	turnobject(LOCALID_KEESIGHT, DIR_WEST)
+	
+	// ascending scale
+	if(var(VAR_TEMP_1) == 1) 
+	{
+		addvar(VAR_TEMP_1, 1)
+	}
+	else
+	{
+		setvar(VAR_TEMP_1, 0)
+	}
+	
+	// descending scale
+	if(var(VAR_TEMP_2) == 6)
+	{
+		addvar(VAR_TEMP_2, 1)
+	}
+	else
+	{
+		setvar(VAR_TEMP_2, 0)
+	}
+	
+	release
+}
+
+script EltheCity_Trigger_MusicStump3
+{
+	playse(SE_NOTE_E)
+	turnobject(LOCALID_KEESIGHT, DIR_WEST)
+	
+	// ascending scale
+	if(var(VAR_TEMP_1) == 2) 
+	{
+		addvar(VAR_TEMP_1, 1)
+	}
+	else
+	{
+		setvar(VAR_TEMP_1, 0)
+	}
+	
+	// descending scale
+	if(var(VAR_TEMP_2) == 5)
+	{
+		addvar(VAR_TEMP_2, 1)
+	}
+	else
+	{
+		setvar(VAR_TEMP_2, 0)
+	}
+	
+	release
+}
+
+script EltheCity_Trigger_MusicStump4
+{
+	playse(SE_NOTE_F)
+	turnobject(LOCALID_KEESIGHT, DIR_SOUTH)
+	
+	// ascending scale
+	if(var(VAR_TEMP_1) == 3) 
+	{
+		addvar(VAR_TEMP_1, 1)
+	}
+	else
+	{
+		setvar(VAR_TEMP_1, 0)
+	}
+	
+	// descending scale
+	if(var(VAR_TEMP_2) == 4)
+	{
+		addvar(VAR_TEMP_2, 1)
+	}
+	else
+	{
+		setvar(VAR_TEMP_2, 0)
+	}
+	
+	release
+}
+
+script EltheCity_Trigger_MusicStump5
+{
+	playse(SE_NOTE_G)
+	turnobject(LOCALID_KEESIGHT, DIR_SOUTH)
+	
+	// ascending scale
+	if(var(VAR_TEMP_1) == 4) 
+	{
+		addvar(VAR_TEMP_1, 1)
+	}
+	else
+	{
+		setvar(VAR_TEMP_1, 0)
+	}
+	
+	// descending scale
+	if(var(VAR_TEMP_2) == 3)
+	{
+		addvar(VAR_TEMP_2, 1)
+	}
+	else
+	{
+		setvar(VAR_TEMP_2, 0)
+	}
+	
+	release
+}
+
+script EltheCity_Trigger_MusicStump6
+{
+	playse(SE_NOTE_A)
+	turnobject(LOCALID_KEESIGHT, DIR_EAST)
+	
+	// ascending scale
+	if(var(VAR_TEMP_1) == 5) 
+	{
+		addvar(VAR_TEMP_1, 1)
+	}
+	else
+	{
+		setvar(VAR_TEMP_1, 0)
+	}
+	
+	// descending scale
+	if(var(VAR_TEMP_2) == 2)
+	{
+		addvar(VAR_TEMP_2, 1)
+	}
+	else
+	{
+		setvar(VAR_TEMP_2, 0)
+	}
+	
+	release
+}
+
+script EltheCity_Trigger_MusicStump7
+{
+	playse(SE_NOTE_B)
+	turnobject(LOCALID_KEESIGHT, DIR_EAST)
+	
+	// ascending scale
+	if(var(VAR_TEMP_1) == 6) 
+	{
+		addvar(VAR_TEMP_1, 1)
+	}
+	else
+	{
+		setvar(VAR_TEMP_1, 0)
+	}
+	
+	// descending scale
+	if(var(VAR_TEMP_2) == 1)
+	{
+		addvar(VAR_TEMP_2, 1)
+	}
+	else
+	{
+		setvar(VAR_TEMP_2, 0)
+	}
+	
+	release
+}
+
+script EltheCity_Trigger_MusicStump8
+{
+	playse(SE_NOTE_C_HIGH)
+	turnobject(LOCALID_KEESIGHT, DIR_EAST)
+	
+	
+	// ascending scale
+	if(var(VAR_TEMP_1) == 7 && !flag(FLAG_SCALE_ASCENDING_DONE)) 
+	{
+		delay(60)
+		applymovement(LOCALID_KEESIGHT, EltheCity_Movement_KeesightHops)
+		playse(SE_BIKE_HOP)
+		delay(16)
+		playse(SE_BIKE_HOP)
+		delay(32)
+		playmoncry(SPECIES_WOOBAT, CRY_MODE_NORMAL)
+		waitmoncry
+		delay(30)
+		applymovement(LOCALID_KEESIGHT, Common_Movement_FaceUp)
+		waitmovement(0)
+		delay(16)
+		playse(SE_M_SUPERSONIC)
+		applymovement(LOCALID_ESPERSHARD, EltheCity_Movement_MoveEspershard)
+		waitmovement(0)
+		applymovement(LOCALID_KEESIGHT, Common_Movement_FaceDown)
+		waitmovement(0)
+		setobjectxyperm(LOCALID_ESPERSHARD, 13, 21)
+		setflag(FLAG_SCALE_ASCENDING_DONE)
+	}
+	else
+	{
+		setvar(VAR_TEMP_1, 0)
+		setvar(VAR_TEMP_2, 1) // can't instantly start the next scale after the cutscene from finishing the previous
+	}
+	
+	release
+}
+
+movement EltheCity_Movement_KeesightHops
+{
+	jump_in_place_down * 2
+}
+
+movement EltheCity_Movement_MoveUmbrashard
+{
+	levitate
+	delay_16
+	walk_up * 3
+	walk_right * 8
+	walk_up
+	delay_16
+	stop_levitate
+}
+
+movement EltheCity_Movement_MoveEspershard
+{
+	levitate
+	delay_16
+	walk_left * 8
+	walk_up
+	delay_16
+	stop_levitate
 }
 
 movement EltheCity_Movement_JumpOnBenchLeft

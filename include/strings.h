@@ -3065,4 +3065,9 @@ extern const u8 gText_PlantBerry[];
 extern const u8 gText_AM[];
 extern const u8 gText_PM[];
 
+extern const u8 gText_MarcelRefuseCandyMessage[];
+extern const u8 gText_ViceRefuseCandyMessage[];
+extern const u8 gText_BradleyRefuseCandyMessage[];
+extern const u8 gText_PythonRefuseCandyMessage[];
+
 #endif // GUARD_STRINGS_H

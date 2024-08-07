@@ -707,6 +707,16 @@
 #define METATILE_SecretBase_YellowBrick_Bottom          0x22E
 #define METATILE_SecretBase_YellowBrick_Top             0x226
 
+// gTileset_ShadyForest
+#define METATILE_ShadyForest_NoteStump_Fa      0x363
+#define METATILE_ShadyForest_NoteStump_HighDo  0x367
+#define METATILE_ShadyForest_NoteStump_La      0x365
+#define METATILE_ShadyForest_NoteStump_LowDo   0x360
+#define METATILE_ShadyForest_NoteStump_Mi      0x362
+#define METATILE_ShadyForest_NoteStump_Re      0x361
+#define METATILE_ShadyForest_NoteStump_So      0x364
+#define METATILE_ShadyForest_NoteStump_Ti      0x366
+
 // gTileset_Shop
 #define METATILE_Shop_Door_Elevator   0x285
 #define METATILE_Shop_Laptop1_Flash   0x258

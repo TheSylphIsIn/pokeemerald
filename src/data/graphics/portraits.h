@@ -48,11 +48,17 @@ const u32 sPortraitPal_DemiveeAnnoyed[] = INCBIN_U32("graphics/portraits/demivee
 const u32 sPortraitPic_DemiveeHuh[] = INCBIN_U32("graphics/portraits/demivee_huh.4bpp.lz");
 const u32 sPortraitPal_DemiveeHuh[] = INCBIN_U32("graphics/portraits/demivee_huh.gbapal.lz");
 
+const u32 sPortraitPic_DemiveeYay[] = INCBIN_U32("graphics/portraits/demivee_yay.4bpp.lz");
+const u32 sPortraitPal_DemiveeYay[] = INCBIN_U32("graphics/portraits/demivee_yay.gbapal.lz");
+
 const u32 sPortraitPic_VinosNeutral[] = INCBIN_U32("graphics/portraits/vinos_neutral.4bpp.lz");
 const u32 sPortraitPal_VinosNeutral[] = INCBIN_U32("graphics/portraits/vinos_neutral.gbapal.lz");
 
 const u32 sPortraitPic_VinosMad[] = INCBIN_U32("graphics/portraits/vinos_mad.4bpp.lz");
 const u32 sPortraitPal_VinosMad[] = INCBIN_U32("graphics/portraits/vinos_mad.gbapal.lz");
+
+const u32 sPortraitPic_Keesight[] = INCBIN_U32("graphics/portraits/keesight.4bpp.lz");
+const u32 sPortraitPal_Keesight[] = INCBIN_U32("graphics/portraits/keesight.gbapal.lz");
 
 const struct PortraitData gPortraits[PORTRAITS_COUNT] = 
 {
@@ -74,4 +80,6 @@ const struct PortraitData gPortraits[PORTRAITS_COUNT] =
 	[PORTRAIT_VINOS_NEUTRAL]		= INCLUDE_PORTRAIT(VinosNeutral),
 	[PORTRAIT_VINOS_MAD]			= INCLUDE_PORTRAIT(VinosMad),
 	[PORTRAIT_DEMIVEE_HUH]			= INCLUDE_PORTRAIT(DemiveeHuh),
+	[PORTRAIT_DEMIVEE_YAY]			= INCLUDE_PORTRAIT(DemiveeYay),
+	[PORTRAIT_KEESIGHT]				= INCLUDE_PORTRAIT(Keesight),
 };

@@ -958,27 +958,35 @@ static void Task_SecretBaseMusicNoteMatSound(u8 taskId)
         switch (gTasks[taskId].tMetatileID)
         {
         case METATILE_SecretBase_NoteMat_C_Low:
+		case METATILE_ShadyForest_NoteStump_LowDo:
             PlaySE(SE_NOTE_C);
             break;
         case METATILE_SecretBase_NoteMat_D:
+		case METATILE_ShadyForest_NoteStump_Re:
             PlaySE(SE_NOTE_D);
             break;
         case METATILE_SecretBase_NoteMat_E:
+		case METATILE_ShadyForest_NoteStump_Mi:
             PlaySE(SE_NOTE_E);
             break;
         case METATILE_SecretBase_NoteMat_F:
+		case METATILE_ShadyForest_NoteStump_Fa:
             PlaySE(SE_NOTE_F);
             break;
         case METATILE_SecretBase_NoteMat_G:
+		case METATILE_ShadyForest_NoteStump_So:
             PlaySE(SE_NOTE_G);
             break;
         case METATILE_SecretBase_NoteMat_A:
+		case METATILE_ShadyForest_NoteStump_La:
             PlaySE(SE_NOTE_A);
             break;
         case METATILE_SecretBase_NoteMat_B:
+		case METATILE_ShadyForest_NoteStump_Ti:
             PlaySE(SE_NOTE_B);
             break;
         case METATILE_SecretBase_NoteMat_C_High:
+		case METATILE_ShadyForest_NoteStump_HighDo:
             PlaySE(SE_NOTE_C_HIGH);
             break;
         }

@@ -21,7 +21,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "OBJ_EVENT_GFX_RAYQUAZA_STILL",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(WEATHERBANE)",
       "x": 5,
       "y": 27,
       "elevation": 0,
@@ -136,6 +136,45 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "ObjEventVarTest",
       "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_AZUMARILL",
+      "x": 12,
+      "y": 20,
+      "elevation": 4,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EltheCity_EventScript_Keesight",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 21,
+      "y": 22,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_ESPERSHARD",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ESPERSHARD_GET"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 3,
+      "y": 25,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_UMBRASHARD",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_UMBRASHARD_GET"
     }
   ],
   "warp_events": [
@@ -226,6 +265,78 @@
       "var": "VAR_TEMP_0",
       "var_value": "0",
       "script": "EltheCity_Trigger_JumpOnBenchRight_BottomTile"
+    },
+    {
+      "type": "trigger",
+      "x": 5,
+      "y": 24,
+      "elevation": 0,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "EltheCity_Trigger_MusicStump1"
+    },
+    {
+      "type": "trigger",
+      "x": 7,
+      "y": 24,
+      "elevation": 0,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "EltheCity_Trigger_MusicStump2"
+    },
+    {
+      "type": "trigger",
+      "x": 9,
+      "y": 24,
+      "elevation": 0,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "EltheCity_Trigger_MusicStump3"
+    },
+    {
+      "type": "trigger",
+      "x": 11,
+      "y": 24,
+      "elevation": 0,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "EltheCity_Trigger_MusicStump4"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 24,
+      "elevation": 0,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "EltheCity_Trigger_MusicStump5"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 24,
+      "elevation": 0,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "EltheCity_Trigger_MusicStump6"
+    },
+    {
+      "type": "trigger",
+      "x": 17,
+      "y": 24,
+      "elevation": 0,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "EltheCity_Trigger_MusicStump7"
+    },
+    {
+      "type": "trigger",
+      "x": 19,
+      "y": 24,
+      "elevation": 0,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "EltheCity_Trigger_MusicStump8"
     }
   ],
   "bg_events": [

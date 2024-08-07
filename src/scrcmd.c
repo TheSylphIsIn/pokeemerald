@@ -108,7 +108,6 @@ bool8 ScrCmd_nop1(struct ScriptContext *ctx)
 
 bool8 ScrCmd_end(struct ScriptContext *ctx)
 {
-    FlagClear(FLAG_SAFE_FOLLOWER_MOVEMENT);
     StopScript(ctx);
     return FALSE;
 }
@@ -294,7 +293,6 @@ bool8 ScrCmd_returnram(struct ScriptContext *ctx)
 
 bool8 ScrCmd_endram(struct ScriptContext *ctx)
 {
-    FlagClear(FLAG_SAFE_FOLLOWER_MOVEMENT);
     ClearRamScript();
     StopScript(ctx);
     return TRUE;

@@ -184,8 +184,7 @@ script EltheRoad_Trigger_VinosTrigger
 		case 2:
 			speakername("Amelia", PORTRAIT_AMELIA_STRAINED)
 			msgbox("Demi-Vee, attack!", MSGBOX_AUTOCLOSE)
-			// setwildbattle() battle against vinos with no stat changes
-			
+			goto(EltheRoad_VinosDoBattle)			
 	}
 	
 	// Negotiation flow
@@ -203,7 +202,7 @@ script EltheRoad_Trigger_VinosTrigger
 // Does a random negotiation topic
 script EltheRoad_VinosNegotiationMain
 {
-	speakername("Vinos")
+	speakername("Vinos", PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
 	message("Alright, then…")
 	waitmessage
 	waitbuttonpress
@@ -230,9 +229,9 @@ script EltheRoad_VinosNegotiationMain
 						speakername("Amelia", PORTRAIT_AMELIA_SERIOUSLY)
 						msgbox("It's, uh…Grass. Yeah. I just love\n" "Grass type Pokémon…\p" "… … … … …")
 						speakername("Amelia", PORTRAIT_AMELIA_SHOCK)
-						msgbox("You know what, no, I can't even {CENSOR}fuck{UNCENSOR}ing\n" "joke about it. All the major\l"
-						"terrible events in my life were\l" "caused by Grass types.\l" "{CENSOR}Fuck{UNCENSOR} Grass types. I hate 'em.")
-						speakername("Vinos")
+						msgbox("You know what, no, I can't even f{CENSOR}uck{UNCENSOR}ing\n" "joke about it. All the major\l"
+						"terrible events in my life were\l" "caused by Grass types.\l" "F{CENSOR}uck{UNCENSOR} Grass types. I hate 'em.")
+						speakername("Vinos", PORTRAIT_VINOS_MAD, PORTRAIT_DEFAULT_LEFT)
 						msgbox("You'd disrespect me to my face…\n" "You have some nerve, human.", MSGBOX_AUTOCLOSE)
 						setflag(FLAG_NOT_PERFECT_CONVERSATION)
 						if (var(VAR_NEGOTIATION_SCORE) > 0)
@@ -243,11 +242,11 @@ script EltheRoad_VinosNegotiationMain
 					case 1:
 						speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
 						msgbox("Oh, Dark is the best, obviously!")
-						speakername("Vinos")
+						speakername("Vinos", PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
 						msgbox("Hmmhmm, yes, we are quite…\n" "Wait! You're just buttering me up!")
 						speakername("Amelia", PORTRAIT_AMELIA_SHOCK)
 						msgbox("No way! I'm being honest! Some of my\n" "best friends are Dark types!")
-						speakername("Vinos")
+						speakername("Vinos", PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
 						msgbox("…Well, alright. It's a good answer.", MSGBOX_AUTOCLOSE)
 						addvar(VAR_NEGOTIATION_SCORE, 1)
 					case 2:
@@ -255,7 +254,7 @@ script EltheRoad_VinosNegotiationMain
 						msgbox("Hmm…I think it must be Fire.\n" "It's just such a cool element.")
 						speakername("Amelia", PORTRAIT_AMELIA_WINK)
 						msgbox("Plus, I was a Fire type for a while,\n" "myself. Self love, yo!")
-						speakername("Vinos")
+						speakername("Vinos", PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
 						msgbox("You have some nerve, telling a Grass\n" "type that Fire is best…\p"
 								"But I appreciate your honesty.\n" "The time for tricks has passed.", MSGBOX_AUTOCLOSE)
 						addvar(VAR_NEGOTIATION_SCORE, 2)
@@ -278,7 +277,7 @@ script EltheRoad_VinosNegotiationMain
 						delay(90)
 						speakername("Demi-Vee", PORTRAIT_DEMIVEE_ANNOYED)
 						msgbox("Urp…")
-						speakername("Vinos")
+						speakername("Vinos", PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
 						msgbox("Ha! What an idiot! You didn't even\n" "fall for my camouflage, but you\l"
 								"still ate my paralyzing berries!\l" "You're mine!", MSGBOX_AUTOCLOSE)
 						call(EltheRoad_CleanUpNegotiationValues)
@@ -286,19 +285,19 @@ script EltheRoad_VinosNegotiationMain
 					case 1:
 						speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
 						msgbox("Berries? They grow on your body?\n" "And you…WANT us to eat them?")
-						speakername("Vinos")
+						speakername("Vinos", PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
 						msgbox("Well…yes. They're delicious.\n" "Or so I'm told.")
 						speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
 						msgbox("What about the ones that your eyes\n" "are on? Are they edible?")
-						speakername("Vinos")
+						speakername("Vinos", PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
 						msgbox("No, they're…my eyes. Not berries.")
 						speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
 						msgbox("Has anyone ever tried to pick your\n" "eyes instead of a berry?")
-						speakername("Vinos")
+						speakername("Vinos", PORTRAIT_VINOS_MAD, PORTRAIT_DEFAULT_LEFT)
 						msgbox("Look, are you gonna eat a berry\n" "or not!?")
 						speakername("Amelia", PORTRAIT_AMELIA_SMUG)
 						msgbox("Nope.")
-						speakername("Vinos")
+						speakername("Vinos", PORTRAIT_VINOS_MAD, PORTRAIT_DEFAULT_LEFT)
 						msgbox("… … … … … … … … … …\p" "Okay, forget it. Next question.", MSGBOX_AUTOCLOSE)
 						addvar(VAR_NEGOTIATION_SCORE, 1)
 					case 2:
@@ -308,7 +307,7 @@ script EltheRoad_VinosNegotiationMain
 						// callnative(DoAmeliaOverworldAnim)
 						speakername("Amelia", PORTRAIT_AMELIA_MUNCH)
 						msgbox("Trail mix!")
-						speakername("Vinos")
+						speakername("Vinos", PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
 						msgbox("… … … … …\p" "Your ways confuse me, human.\n" "I would like to stop talking to you.", MSGBOX_AUTOCLOSE)
 						addvar(VAR_NEGOTIATION_SCORE, 2)
 						playse(SE_SUCCESS)
@@ -327,11 +326,11 @@ script EltheRoad_VinosNegotiationMain
 					case 0:
 						speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
 						msgbox("I need to get my team back! We got\n" "separated by the flood.\p" "I'm their Trainer.\n" "We need each other.")
-						speakername("Vinos")
+						speakername("Vinos", PORTRAIT_VINOS_MAD, PORTRAIT_DEFAULT_LEFT)
 						msgbox("Why is that my problem?\n" "I'm hungry.")
 						speakername("Amelia", PORTRAIT_AMELIA_SHOCK)
 						msgbox("Hungr- were you planning to eat me!?")
-						speakername("Vinos")
+						speakername("Vinos", PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
 						msgbox("No. I was just giving an example of\n" "something that's not your problem.", MSGBOX_AUTOCLOSE)
 						setflag(FLAG_NOT_PERFECT_CONVERSATION)
 						if (var(VAR_NEGOTIATION_SCORE) > 0)
@@ -344,7 +343,7 @@ script EltheRoad_VinosNegotiationMain
 						msgbox("There's no reason for us to fight.\n" "Look at this place, it's a mess.\p"
 								"Just let me move on to take care of\n" "my business, and you can get back\l"
 								"to finding a new tree, or whatever\l" "it is you're doing.")
-						speakername("Vinos")
+						speakername("Vinos", PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
 						msgbox("Pokémon don't need a reason to\n" "fight…but now that you mention it,\l"
 								"it does sound like a waste\l" "of time right now…", MSGBOX_AUTOCLOSE)
 						addvar(VAR_NEGOTIATION_SCORE, 1)
@@ -353,7 +352,7 @@ script EltheRoad_VinosNegotiationMain
 						msgbox("I bet you fight every Trainer who\n" "comes through here, right?\p"
 								"Wouldn't it be a thrill to let\n" "one pass through, just this once?\l"
 								"Get a little crazy with it.")
-						speakername("Vinos")
+						speakername("Vinos", PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
 						msgbox("Hmm…perhaps under the circumstances,\n" "it would serve me better…", MSGBOX_AUTOCLOSE)
 						addvar(VAR_NEGOTIATION_SCORE, 2)
 						playse(SE_SUCCESS)
@@ -371,7 +370,7 @@ script EltheRoad_VinosNegotiationMain
 					case 0:
 						speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
 						msgbox("Hmm, well me and Demi-Vee just met,\n" "so I guess I just started.")
-						speakername("Vinos")
+						speakername("Vinos", PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
 						msgbox("No wonder you tried talking. You\n" "have no idea what you're doing.", MSGBOX_AUTOCLOSE)
 						setflag(FLAG_NOT_PERFECT_CONVERSATION)
 						if (var(VAR_NEGOTIATION_SCORE) > 0)
@@ -384,7 +383,7 @@ script EltheRoad_VinosNegotiationMain
 						msgbox("Let me think…Python's last birthday\n" "was, uh…\p"
 								"Hmm, I can't remember exactly, but\n" "I think I started in the year…\p"
 								"So, it must have been at least\n" "thirty years.")
-						speakername("Vinos")
+						speakername("Vinos", PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
 						msgbox("You expect me to believe that?\n" "You don't even look like you're\l"
 								"thirty years old. You're just\l" "trying to intimidate me.")
 						speakername("Amelia", PORTRAIT_AMELIA_SERIOUSLY)
@@ -393,7 +392,7 @@ script EltheRoad_VinosNegotiationMain
 					case 2:
 						speakername("Amelia", PORTRAIT_AMELIA_SMUG)
 						msgbox("Long enough.")
-						speakername("Vinos")
+						speakername("Vinos", PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
 						msgbox("…!", MSGBOX_AUTOCLOSE)
 						addvar(VAR_NEGOTIATION_SCORE, 2)
 						playse(SE_SUCCESS)
@@ -411,7 +410,7 @@ script EltheRoad_VinosNegotiationMain
 		}
 		elif(var(VAR_NEGOTIATION_SCORE) == 0)
 		{
-			speakername("Vinos")
+			speakername("Vinos", PORTRAIT_VINOS_MAD, PORTRAIT_DEFAULT_LEFT)
 			msgbox("You're getting on my nerves…\p" "Enough talk! I should have done this\n" "from the beginning!", MSGBOX_AUTOCLOSE)
 			goto(EltheRoad_VinosDoBattle)
 		}
@@ -425,11 +424,11 @@ script EltheRoad_VinosNegotiationMain
 script EltheRoad_VinosNegotiationMidSuccess
 {
 	call(EltheRoad_CleanUpNegotiationValues)
-	speakername("Vinos")
+	speakername("Vinos", PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
 	msgbox("…well, I suppose you're not wholly\n" "unpleasant. And I don't feel like\l"
 			"jumping you anymore anyway.\l" "You can pass.\p"
 			"And here, take this. I have no\n" "use for it anyway.", MSGBOX_AUTOCLOSE)
-	giveitem(ITEM_RARE_CANDY, 1)
+	giveitem(ITEM_EXP_CANDY_L, 2)
 	// vinos leaves
 }
 
@@ -442,8 +441,29 @@ script EltheRoad_VinosDoBattle
 {
 	setwildbattle(SPECIES_BELLSPROUT, 35, ITEM_NONE)
 	dowildbattle
-	waitstate
 	call(EltheRoad_CleanUpNegotiationValues)
+	turnobject(LOCALID_VINOS, DIR_SOUTH)
+	speakername("Vinos", PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
+	msgbox("… … … … …\p" "…well? Aren't you going to\n" "finish me off?")
+	speakername("Amelia", PORTRAIT_AMELIA_SERIOUSLY)
+	msgbox("What? No. I only wanted to get\n" "through here.")
+	speakername("Vinos", PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
+	msgbox("…Oh.", MSGBOX_AUTOCLOSE)
+	delay(60)
+	applymovement(LOCALID_VINOS, Common_Movement_FaceLeft)
+	delay(120)
+	applymovement(LOCALID_VINOS, Common_Movement_FaceRight)
+	delay(120)
+	applymovement(LOCALID_VINOS, Common_Movement_FaceDown)
+	speakername("Vinos", PORTRAIT_VINOS_MAD, PORTRAIT_DEFAULT_LEFT)
+	msgbox("Well, go along then! And if it\n" "will get you to leave me alone,\l" "then take this!", MSGBOX_AUTOCLOSE)
+	giveitem(ITEM_EXP_CANDY_L)
+	speakername("Demi-Vee", PORTRAIT_DEMIVEE_YAY)
+	msgbox("Ooh! A crystal! Yummy!")
+	speakername("Vinos", PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
+	msgbox("Those things are all over the\n" "place here. I think I saw another\l" "type of crystal next to that stump\l" "behind me.\p" "Run along, then.", MSGBOX_AUTOCLOSE)
+	setvar(VAR_MAIN_GAME_STATE, 3)
+	setflag(FLAG_TEMP_9) // Vinos's dialogue changes if you leave and come back
 }
 
 script EltheRoad_CleanUpNegotiationValues
@@ -454,12 +474,25 @@ script EltheRoad_CleanUpNegotiationValues
 	clearflag(FLAG_TEMP_2)
 	clearflag(FLAG_TEMP_3)
 	clearflag(FLAG_NOT_PERFECT_CONVERSATION)
+	return
 }
 
-script EltheRoad_EventScript_SpiderRoadblock
+script EltheRoad_EventScript_VinosIdle
 {
-	speakername("Amelia", PORTRAIT_AMELIA_SERIOUSLY)
-	msgbox("Guess we can't go this way.\n" "…not that I wanted to anyway.\p" "I won't complain about avoiding\n" "a spider nest.", MSGBOX_AUTOCLOSE)
+	if(flag(FLAG_TEMP_9))
+	{
+		speakername("Vinos", PORTRAIT_VINOS_MAD, PORTRAIT_DEFAULT_LEFT)
+		msgbox("If you truly just wanted to pass\n" "by, then hurry up already!\p"
+				"I don't want to see your face\n" "right now. Begone.", MSGBOX_NPC)
+	}
+	else
+	{
+		speakername("Vinos", PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
+		msgbox("Normally, I try to disguise myself\n" "as a grapevine.\p"
+				"If anyone is foolish enough to eat\n" "of my fruit, they'll be paralyzed\l" "soon enough to become my prey.\p"
+				"It's just poor fortune that I've\n" "been left high and dry, so to speak,\l" "by this unbearable downpour.\p"
+				"I can't even recall where my\n" "usual lurking spot is.", MSGBOX_NPC)
+	}
 }
 
 movement EltheRoad_Movement_AmeliaJumpUp

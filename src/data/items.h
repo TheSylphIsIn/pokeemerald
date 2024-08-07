@@ -1983,14 +1983,14 @@ const struct Item gItemsInfo[] =
 
     [ITEM_EXP_CANDY_L] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("Exp.Candy L", "Exp. Candy L"),
-        .pluralName = HANDLE_EXPANDED_ITEM_NAME("Exp.Candies L", "Exp. Candies L"),
+        .name = HANDLE_EXPANDED_ITEM_NAME("Rock Candy", "Rock Candy"),
+        .pluralName = HANDLE_EXPANDED_ITEM_NAME("Rock Candies", "Rock Candies"),
         .price = 3000,
         .holdEffectParam = EXP_10000,
         .description = COMPOUND_STRING(
-            "Gives a large\n"
-            "amount of Exp. to\n"
-            "a single Pokémon."),
+            "Feed it to the\n"
+            "Demi-Vee to gain a\n"
+            "lot of Exp. Points."),
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_RareCandy,
@@ -2002,14 +2002,14 @@ const struct Item gItemsInfo[] =
 
     [ITEM_EXP_CANDY_XL] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("Exp.Candy XL", "Exp. Candy XL"),
-        .pluralName = HANDLE_EXPANDED_ITEM_NAME("Exp.Candies XL", "Exp. Candies XL"),
+        .name = HANDLE_EXPANDED_ITEM_NAME("Big Rock Candy", "Big Rock Candy"),
+        .pluralName = HANDLE_EXPANDED_ITEM_NAME("Big Rock Candies", "Big Rock Candies"),
         .price = 10000,
         .holdEffectParam = EXP_30000,
         .description = COMPOUND_STRING(
-            "Gives a very large\n"
-            "amount of Exp. to\n"
-            "a single Pokémon."),
+            "From the mountains.\n"
+            "Gives Demi-Vee a\n"
+            "ton of Exp. Points."),
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_RareCandy,
@@ -13512,8 +13512,8 @@ const struct Item gItemsInfo[] =
         .price = 0,
         .description = COMPOUND_STRING(
             "Demi-Vee likes this.\n"
-			"Move 1: Hydro Pump\n"
-			"Move 2: Heal Bell"),
+			"Mv.1: Hydro Pump\n"
+			"Mv.2: Heal Bell"),
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -13528,8 +13528,8 @@ const struct Item gItemsInfo[] =
         .price = 0,
         .description = COMPOUND_STRING(
             "Demi-Vee likes this.\n"
-			"Move 1: Thunder\n"
-			"Move 2: Light Screen"),
+			"Mv.1: Thunder\n"
+			"Mv.2: Light Screen"),
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -13544,8 +13544,8 @@ const struct Item gItemsInfo[] =
         .price = 0,
         .description = COMPOUND_STRING(
             "Demi-Vee likes this.\n"
-			"Move 1: Flare Blitz\n"
-			"Move 2: Rest"),
+			"Mv.1: Flare Blitz\n"
+			"Mv.2: Rest"),
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -13560,8 +13560,8 @@ const struct Item gItemsInfo[] =
         .price = 0,
         .description = COMPOUND_STRING(
             "Demi-Vee likes this.\n"
-			"Move 1: Psychic\n"
-			"Move 2: Reflect"),
+			"Mv.1: Psychic\n"
+			"Mv.2: Reflect"),
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -13576,8 +13576,8 @@ const struct Item gItemsInfo[] =
         .price = 0,
         .description = COMPOUND_STRING(
             "Demi-Vee likes this.\n"
-			"Move 1: Toxic\n"
-			"Move 2: Parting Shot"),
+			"Mv.1: Toxic\n"
+			"Mv.2: Parting Shot"),
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -13592,8 +13592,8 @@ const struct Item gItemsInfo[] =
         .price = 0,
         .description = COMPOUND_STRING(
             "Demi-Vee likes this.\n"
-			"Move 1: Leaf Blade\n"
-			"Move 2: Leech Seed"),
+			"Mv.1: Leaf Blade\n"
+			"Mv.2: Leech Seed"),
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -13608,8 +13608,8 @@ const struct Item gItemsInfo[] =
         .price = 0,
         .description = COMPOUND_STRING(
             "Demi-Vee likes this.\n"
-			"Move 1: Ice Beam\n"
-			"Move 2: Aurora Veil"),
+			"Mv.1: Ice Beam\n"
+			"Mv.2: Aurora Veil"),
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -13624,8 +13624,8 @@ const struct Item gItemsInfo[] =
         .price = 0,
         .description = COMPOUND_STRING(
             "Demi-Vee likes this.\n"
-			"Move 1: Moonblast\n"
-			"Move 2: Wish"),
+			"Mv.1: Moonblast\n"
+			"Mv.2: Wish"),
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,

@@ -15251,7 +15251,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .teachableLearnset = sEeveeTeachableLearnset,		\
         .eggMoveLearnset = sEeveeEggMoveLearnset,			\
         .formSpeciesIdTable = sEeveeFormSpeciesIdTable,		\
-        .formChangeTable = sEeveeFormChangeTable,			\		
+        .formChangeTable = sEeveeFormChangeTable,			\
 
 #if P_FAMILY_EEVEE
     [SPECIES_EEVEE] =

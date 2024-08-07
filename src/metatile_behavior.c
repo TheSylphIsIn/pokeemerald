@@ -712,7 +712,8 @@ bool8 MetatileBehavior_HasRipples(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_POND_WATER
      || metatileBehavior == MB_PUDDLE
-     || metatileBehavior == MB_SOOTOPOLIS_DEEP_WATER)
+     || metatileBehavior == MB_SOOTOPOLIS_DEEP_WATER
+	 || metatileBehavior == MB_SECRET_BASE_SOUND_MAT)
         return TRUE;
     else
         return FALSE;

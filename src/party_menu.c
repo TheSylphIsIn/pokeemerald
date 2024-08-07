@@ -5539,7 +5539,7 @@ void ItemUseCB_RareCandy(u8 taskId, TaskFunc task)
     u8 holdEffectParam = ItemId_GetHoldEffectParam(*itemPtr);
 
     sInitialLevel = GetMonData(mon, MON_DATA_LEVEL);
-    if (!(B_RARE_CANDY_CAP && sInitialLevel >= GetCurrentLevelCap()))
+    if (!(B_RARE_CANDY_CAP && sInitialLevel >= GetCurrentLevelCap()) && GET_BASE_SPECIES_ID(GetMonData(mon, MON_DATA_SPECIES)) == SPECIES_EEVEE)
     {
         BufferMonStatsToTaskData(mon, arrayPtr);
         cannotUseEffect = ExecuteTableBasedItemEffect(mon, *itemPtr, gPartyMenu.slotId, 0);
@@ -5580,7 +5580,24 @@ void ItemUseCB_RareCandy(u8 taskId, TaskFunc task)
         else
         {
             gPartyMenuUseExitCallback = FALSE;
-            DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
+			switch(GetMonData(mon, MON_DATA_SPECIES))
+			{
+				case SPECIES_KINGLER:
+					DisplayPartyMenuMessage(gText_MarcelRefuseCandyMessage, TRUE);	
+					break;
+				case SPECIES_FLYGON:
+					DisplayPartyMenuMessage(gText_ViceRefuseCandyMessage, TRUE);	
+					break;
+				case SPECIES_NIDOKING:
+					DisplayPartyMenuMessage(gText_BradleyRefuseCandyMessage, TRUE);	
+					break;
+				case SPECIES_ZOROARK:
+					DisplayPartyMenuMessage(gText_PythonRefuseCandyMessage, TRUE);	
+					break;
+				default:
+					DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);				
+					break;
+			}
             ScheduleBgCopyTilemapToVram(2);
             gTasks[taskId].func = task;
         }

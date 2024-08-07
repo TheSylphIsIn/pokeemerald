@@ -1220,16 +1220,16 @@
 
 #define FLAG_HIDE_DEMIVEE_CUTSCENE                                           0x493 // Unused Flag
 #define FLAG_NOT_PERFECT_CONVERSATION                                           0x494 // Unused Flag
-#define FLAG_UNUSED_0x495                                           0x495 // Unused Flag
-#define FLAG_UNUSED_0x496                                           0x496 // Unused Flag
-#define FLAG_UNUSED_0x497                                           0x497 // Unused Flag
-#define FLAG_UNUSED_0x498                                           0x498 // Unused Flag
-#define FLAG_UNUSED_0x499                                           0x499 // Unused Flag
-#define FLAG_UNUSED_0x49A                                           0x49A // Unused Flag
-#define FLAG_UNUSED_0x49B                                           0x49B // Unused Flag
-#define FLAG_UNUSED_0x49C                                           0x49C // Unused Flag
-#define FLAG_UNUSED_0x49D                                           0x49D // Unused Flag
-#define FLAG_UNUSED_0x49E                                           0x49E // Unused Flag
+#define FLAG_SCALE_ASCENDING_DONE                                           0x495 // Unused Flag
+#define FLAG_SCALE_DESCENDING_DONE                                           0x496 // Unused Flag
+#define FLAG_VAPORSHARD_GET                                           0x497 // Unused Flag
+#define FLAG_JOLTSHARD_GET                                           0x498 // Unused Flag
+#define FLAG_FLARESHARD_GET                                           0x499 // Unused Flag
+#define FLAG_ESPERSHARD_GET                                           0x49A // Unused Flag
+#define FLAG_UMBRASHARD_GET                                           0x49B // Unused Flag
+#define FLAG_LEAFSHARD_GET                                           0x49C // Unused Flag
+#define FLAG_GLACIALSHARD_GET                                           0x49D // Unused Flag
+#define FLAG_SYLVANSHARD_GET                                           0x49E // Unused Flag
 #define FLAG_UNUSED_0x49F                                           0x49F // Unused Flag
 #define FLAG_UNUSED_0x4A0                                           0x4A0 // Unused Flag
 #define FLAG_UNUSED_0x4A1                                           0x4A1 // Unused Flag
@@ -1505,7 +1505,7 @@
 #define FLAG_SPAWN_INVISIBLE                           (SYSTEM_FLAGS + 0x85) // Unused Flag
 #define FLAG_REMOVE_WARP_FADE                            (SYSTEM_FLAGS + 0x86) // Unused Flag
 #define FLAG_NO_MUSIC_ON_WARP                           (SYSTEM_FLAGS + 0x87) // Unused Flag
-#define FLAG_UNUSED_0x8E8                           (SYSTEM_FLAGS + 0x88) // Unused Flag
+#define FLAG_SAFE_FOLLOWER_MOVEMENT                           (SYSTEM_FLAGS + 0x88) // Moved here so that its state persists in the save. I plan to have this set for the whole game.
 #define FLAG_UNUSED_0x8E9                           (SYSTEM_FLAGS + 0x89) // Unused Flag
 #define FLAG_UNUSED_0x8EA                           (SYSTEM_FLAGS + 0x8A) // Unused Flag
 #define FLAG_UNUSED_0x8EB                           (SYSTEM_FLAGS + 0x8B) // Unused Flag
@@ -1643,7 +1643,7 @@
 #define FLAG_ENABLE_MULTI_CORRIDOR_DOOR         (SPECIAL_FLAGS_START + 0x2)
 #define FLAG_SPECIAL_FLAG_UNUSED_0x4003         (SPECIAL_FLAGS_START + 0x3) // Unused Flag
 #define FLAG_STORING_ITEMS_IN_PYRAMID_BAG       (SPECIAL_FLAGS_START + 0x4)
-#define FLAG_SAFE_FOLLOWER_MOVEMENT             (SPECIAL_FLAGS_START + 0x5) // When set, applymovement does not put the follower inside a pokeball
+#define FLAG_FORMER_SAFE_FOLLOWER_MOVEMENT             (SPECIAL_FLAGS_START + 0x5) // When set, applymovement does not put the follower inside a pokeball
 // FLAG_SPECIAL_FLAG_0x4005 - 0x407F also exist and are unused
 #define SPECIAL_FLAGS_END                       (SPECIAL_FLAGS_START + 0x7F)
 #define NUM_SPECIAL_FLAGS                       (SPECIAL_FLAGS_END - SPECIAL_FLAGS_START + 1)
