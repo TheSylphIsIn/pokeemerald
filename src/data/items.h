@@ -13511,10 +13511,10 @@ const struct Item gItemsInfo[] =
         .name = _("Vaporshard"),
         .price = 0,
         .description = COMPOUND_STRING(
-            "Demi-Vee likes this.\n"
-			"Mv.1: Hydro Pump\n"
-			"Mv.2: Heal Bell"),
-        .pocket = POCKET_ITEMS,
+            "A shard of a\n"
+			"Water Stone with\n"
+			"defensive powers."),
+        .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 60,
@@ -13527,10 +13527,10 @@ const struct Item gItemsInfo[] =
         .name = _("Joltshard"),
         .price = 0,
         .description = COMPOUND_STRING(
-            "Demi-Vee likes this.\n"
-			"Mv.1: Thunder\n"
-			"Mv.2: Light Screen"),
-        .pocket = POCKET_ITEMS,
+            "A shard of a\n"
+			"Thunder Stone with\n"
+			"speedy powers."),
+        .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 60,
@@ -13543,10 +13543,10 @@ const struct Item gItemsInfo[] =
         .name = _("Flareshard"),
         .price = 0,
         .description = COMPOUND_STRING(
-            "Demi-Vee likes this.\n"
-			"Mv.1: Flare Blitz\n"
-			"Mv.2: Rest"),
-        .pocket = POCKET_ITEMS,
+            "A shard of a\n"
+			"Fire Stone with\n"
+			"Physical powers."),
+        .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 60,
@@ -13559,10 +13559,10 @@ const struct Item gItemsInfo[] =
         .name = _("Espershard"),
         .price = 0,
         .description = COMPOUND_STRING(
-            "Demi-Vee likes this.\n"
-			"Mv.1: Psychic\n"
-			"Mv.2: Reflect"),
-        .pocket = POCKET_ITEMS,
+            "A shard of a\n"
+			"Shiny Stone with\n"
+			"Special powers."),
+        .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 60,
@@ -13575,10 +13575,10 @@ const struct Item gItemsInfo[] =
         .name = _("Umbrashard"),
         .price = 0,
         .description = COMPOUND_STRING(
-            "Demi-Vee likes this.\n"
-			"Mv.1: Toxic\n"
-			"Mv.2: Parting Shot"),
-        .pocket = POCKET_ITEMS,
+            "A shard of a\n"
+			"Dusk Stone with\n"
+			"stat-change powers."),
+        .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 60,
@@ -13591,10 +13591,10 @@ const struct Item gItemsInfo[] =
         .name = _("Leafshard"),
         .price = 0,
         .description = COMPOUND_STRING(
-            "Demi-Vee likes this.\n"
-			"Mv.1: Leaf Blade\n"
-			"Mv.2: Leech Seed"),
-        .pocket = POCKET_ITEMS,
+            "A shard of a\n"
+			"Leaf Stone with\n"
+			"mixed Phys powers."),
+        .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 60,
@@ -13607,10 +13607,10 @@ const struct Item gItemsInfo[] =
         .name = _("Glacialshard"),
         .price = 0,
         .description = COMPOUND_STRING(
-            "Demi-Vee likes this.\n"
-			"Mv.1: Ice Beam\n"
-			"Mv.2: Aurora Veil"),
-        .pocket = POCKET_ITEMS,
+            "A shard of an\n"
+			"Ice Stone with\n"
+			"mixed Spec powers."),
+        .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 60,
@@ -13623,10 +13623,10 @@ const struct Item gItemsInfo[] =
         .name = _("Sylvanshard"),
         .price = 0,
         .description = COMPOUND_STRING(
-            "Demi-Vee likes this.\n"
-			"Mv.1: Moonblast\n"
-			"Mv.2: Wish"),
-        .pocket = POCKET_ITEMS,
+            "A shard of a\n"
+			"Dawn Stone with\n"
+			"amazing powers."),
+        .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 60,

@@ -3070,5 +3070,7 @@ extern const u8 gText_MarcelRefuseCandyMessage[];
 extern const u8 gText_ViceRefuseCandyMessage[];
 extern const u8 gText_BradleyRefuseCandyMessage[];
 extern const u8 gText_PythonRefuseCandyMessage[];
+extern const u8 gText_DemiveeAbilityChange[];
+extern const u8 gText_DemiveeAbilityChangeConfirmed[];
 
 #endif // GUARD_STRINGS_H

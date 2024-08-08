@@ -61,6 +61,21 @@ static const struct ContestWinner sContestWinnerPicDummy =
     .trainerName = _("")
 };
 
+static void ResetDemiveeData()
+{
+	gSaveBlock2Ptr->demiveeData.waterShard = 0;
+	gSaveBlock2Ptr->demiveeData.fireShard = 0;
+	gSaveBlock2Ptr->demiveeData.elecShard = 0;
+	gSaveBlock2Ptr->demiveeData.psyShard = 0;
+	gSaveBlock2Ptr->demiveeData.darkShard = 0;
+	gSaveBlock2Ptr->demiveeData.grassShard = 0;
+	gSaveBlock2Ptr->demiveeData.iceShard = 0;
+	gSaveBlock2Ptr->demiveeData.fairyShard = 0;
+	gSaveBlock2Ptr->demiveeData.statPoints = 0;
+	gSaveBlock2Ptr->demiveeData.currentShard = 5; // Grass
+	gSaveBlock2Ptr->demiveeData.abilityOverride = 15; // no ability override
+}
+
 void SetTrainerId(u32 trainerId, u8 *dst)
 {
     dst[0] = trainerId;
@@ -204,6 +219,7 @@ void NewGameInitData(void)
     WipeTrainerNameRecords();
     ResetTrainerHillResults();
     ResetContestLinkResults();
+	ResetDemiveeData();
 }
 
 static void ResetMiniGamesRecords(void)

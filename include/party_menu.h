@@ -103,4 +103,6 @@ void BufferMoveDeleterNicknameAndMove(void);
 void GetNumMovesSelectedMonHas(void);
 void MoveDeleterChooseMoveToForget(void);
 
+extern const u16 sDemiveeFormChangeData[8][7];
+
 #endif // GUARD_PARTY_MENU_H

@@ -113,6 +113,7 @@ EventScript_ResetAllBerries::
 	return
 
 EventScript_ResetAllMapFlags::
+	setflag FLAG_LEAFSHARD_GET
 	setflag FLAG_SPAWN_INVISIBLE
 	setflag FLAG_SAFE_FOLLOWER_MOVEMENT
 	setflag FLAG_HIDE_CONTEST_POKE_BALL

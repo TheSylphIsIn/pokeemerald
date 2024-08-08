@@ -65,6 +65,7 @@
 #include "trade.h"
 #include "union_room.h"
 #include "window.h"
+#include "constants/abilities.h"
 #include "constants/battle.h"
 #include "constants/battle_frontier.h"
 #include "constants/field_effects.h"
@@ -509,6 +510,10 @@ static bool8 SetUpFieldMove_Dive(void);
 void TryItemHoldFormChange(struct Pokemon *mon);
 static void ShowMoveSelectWindow(u8 slot);
 static void Task_HandleWhichMoveInput(u8 taskId);
+
+static void DisplayMonNeedsToReplaceAbility(u8 taskId);
+static void Task_ReplaceAbilityYesNo(u8 taskId);
+static void Task_HandleReplaceAbilityYesNoInput(u8 taskId);
 
 // static const data
 #include "data/party_menu.h"
@@ -2798,7 +2803,8 @@ static void SetPartyMonFieldSelectionActions(struct Pokemon *mons, u8 slotId)
 
     sPartyMenuInternal->numActions = 0;
     AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, MENU_SUMMARY);
-    AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, MENU_STAT_EDIT);
+	if (GET_BASE_SPECIES_ID(GetMonData(&mons[slotId], MON_DATA_SPECIES)) == SPECIES_EEVEE)
+		AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, MENU_STAT_EDIT);
 
     // Add field moves to action list
     for (i = 0; i < MAX_MON_MOVES; i++)
@@ -5360,8 +5366,6 @@ static void Task_LearnedMove(u8 taskId)
     if (move[1] == 0)
     {
         AdjustFriendship(mon, FRIENDSHIP_EVENT_LEARN_TMHM);
-        if (!ItemId_GetImportance(item))
-            RemoveBagItem(item, 1);
     }
     GetMonNickname(mon, gStringVar1);
     StringCopy(gStringVar2, GetMoveName(move[0]));
@@ -5633,6 +5637,7 @@ void ItemUseCB_RareCandy(u8 taskId, TaskFunc task)
         if (sFinalLevel > sInitialLevel)
         {
             PlayFanfareByFanfareNum(FANFARE_LEVEL_UP);
+			gSaveBlock2Ptr->demiveeData.statPoints += (sFinalLevel - sInitialLevel) * 4; // total possible BST: 435 + (x * 30) = 555
             if (holdEffectParam == 0) // Rare Candy
             {
                 ConvertIntToDecimalStringN(gStringVar2, sFinalLevel, STR_CONV_MODE_LEFT_ALIGN, 3);
@@ -5715,6 +5720,8 @@ static void DisplayLevelUpStatsPg2(u8 taskId)
     ScheduleBgCopyTilemapToVram(2);
 }
 
+#define shardMastery *(&gSaveBlock2Ptr->demiveeData.waterShard + gSaveBlock2Ptr->demiveeData.currentShard)
+
 static void Task_TryLearnNewMoves(u8 taskId)
 {
     u16 learnMove;
@@ -5722,30 +5729,48 @@ static void Task_TryLearnNewMoves(u8 taskId)
     if (WaitFanfare(FALSE) && ((JOY_NEW(A_BUTTON)) || (JOY_NEW(B_BUTTON))))
     {
         RemoveLevelUpStatsWindow();
-        for (; sInitialLevel <= sFinalLevel; sInitialLevel++)
-        {
-            SetMonData(&gPlayerParty[gPartyMenu.slotId], MON_DATA_LEVEL, &sInitialLevel);
-            learnMove = MonTryLearningNewMove(&gPlayerParty[gPartyMenu.slotId], TRUE);
-            gPartyMenu.learnMoveState = 1;
-            switch (learnMove)
-            {
-            case 0: // No moves to learn
-                if (sInitialLevel >= sFinalLevel)
-                    PartyMenuTryEvolution(taskId);
-                break;
-            case MON_HAS_MAX_MOVES:
+		if (GET_BASE_SPECIES_ID(GetMonData(&gPlayerParty[gPartyMenu.slotId], MON_DATA_SPECIES)) == SPECIES_EEVEE)
+		{
+			if (shardMastery < 10) // arbitrary stopping point to not overflow. Things to get stop at 3.
+				shardMastery += 1;
+			if (shardMastery == 1 || shardMastery == 2)
+			{
+				gMoveToLearn = sDemiveeFormChangeData[gSaveBlock2Ptr->demiveeData.currentShard][3 + shardMastery];
                 DisplayMonNeedsToReplaceMove(taskId);
-                break;
-            case MON_ALREADY_KNOWS_MOVE:
-                gTasks[taskId].func = Task_TryLearningNextMove;
-                break;
-            default:
-                DisplayMonLearnedMove(taskId, learnMove);
-                break;
-            }
-            if (learnMove)
-                break;
-        }
+			}
+			else if (shardMastery == 3)
+			{
+				DisplayMonNeedsToReplaceAbility(taskId);
+				// try to replace ability
+			}
+			
+		}
+		else {
+			for (; sInitialLevel <= sFinalLevel; sInitialLevel++)
+			{
+				SetMonData(&gPlayerParty[gPartyMenu.slotId], MON_DATA_LEVEL, &sInitialLevel);
+				learnMove = MonTryLearningNewMove(&gPlayerParty[gPartyMenu.slotId], TRUE);
+				gPartyMenu.learnMoveState = 1;
+				switch (learnMove)
+				{
+				case 0: // No moves to learn
+					if (sInitialLevel >= sFinalLevel)
+						PartyMenuTryEvolution(taskId);
+					break;
+				case MON_HAS_MAX_MOVES:
+					DisplayMonNeedsToReplaceMove(taskId);
+					break;
+				case MON_ALREADY_KNOWS_MOVE:
+					gTasks[taskId].func = Task_TryLearningNextMove;
+					break;
+				default:
+					DisplayMonLearnedMove(taskId, learnMove);
+					break;
+				}
+				if (learnMove)
+					break;
+			}
+		}
     }
 }
 
@@ -6615,7 +6640,6 @@ static void CursorCb_ChangeAbility(u8 taskId)
 
 void TryItemHoldFormChange(struct Pokemon *mon)
 {
-	u32 currentSpecies = GetMonData(mon, MON_DATA_SPECIES);
     u16 targetSpecies = GetFormChangeTargetSpecies(mon, FORM_CHANGE_ITEM_HOLD, 0);
     if (targetSpecies != SPECIES_NONE)
     {
@@ -6626,22 +6650,6 @@ void TryItemHoldFormChange(struct Pokemon *mon)
         CalculateMonStats(mon);
         UpdatePartyMonHeldItemSprite(mon, &sPartyMenuBoxes[gPartyMenu.slotId]);
         UpdateMonDisplayInfoAfterRareCandy(gPartyMenu.slotId, mon);
-		if (GET_BASE_SPECIES_ID(targetSpecies) == SPECIES_EEVEE)
-		{ // Replaces demivee moves with the corresponding move from the form it's changing to
-			u32 i, j;
-			
-			for (i = 0; i < MAX_MON_MOVES; i++)
-			{
-				for (j = 0; j < 9; j++)
-				{
-					if (GetMonData(mon, MON_DATA_MOVE1 + i) == sDemiveeFormChangeMoves[currentSpecies - SPECIES_EEVEE][j])
-					{
-						RemoveMonPPBonus(mon, i);
-						SetMonMoveSlot(mon, sDemiveeFormChangeMoves[targetSpecies - SPECIES_EEVEE][j], i);
-					}
-				}
-			}
-		}
     }
 }
 
@@ -7819,5 +7827,48 @@ void IsLastMonThatKnowsSurf(void)
         }
         if (AnyStorageMonWithMove(move) != TRUE)
             gSpecialVar_Result = TRUE;
+    }
+}
+
+static void DisplayMonNeedsToReplaceAbility(u8 taskId)
+{
+    GetMonNickname(&gPlayerParty[gPartyMenu.slotId], gStringVar1);
+    StringCopy(gStringVar2, gAbilitiesInfo[sDemiveeFormChangeData[gSaveBlock2Ptr->demiveeData.currentShard][6]].name);
+    StringExpandPlaceholders(gStringVar4, gText_DemiveeAbilityChange);
+    DisplayPartyMenuMessage(gStringVar4, TRUE);
+    ScheduleBgCopyTilemapToVram(2);
+    gPartyMenu.data1 = gMoveToLearn;
+    gTasks[taskId].func = Task_ReplaceAbilityYesNo;
+}
+
+static void Task_ReplaceAbilityYesNo(u8 taskId)
+{
+    if (IsPartyMenuTextPrinterActive() != TRUE)
+    {
+        PartyMenuDisplayYesNoMenu();
+        gTasks[taskId].func = Task_HandleReplaceAbilityYesNoInput;
+    }
+}
+
+static void Task_HandleReplaceAbilityYesNoInput(u8 taskId)
+{
+    switch (Menu_ProcessInputNoWrapClearOnChoose())
+    {
+    case 0:
+		struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
+		GetMonNickname(mon, gStringVar1);
+		StringCopy(gStringVar2, gAbilitiesInfo[sDemiveeFormChangeData[gSaveBlock2Ptr->demiveeData.currentShard][6]].name);
+		StringExpandPlaceholders(gStringVar4, gText_DemiveeAbilityChangeConfirmed);
+		DisplayPartyMenuMessage(gStringVar4, TRUE);
+		gSaveBlock2Ptr->demiveeData.abilityOverride = gSaveBlock2Ptr->demiveeData.currentShard;
+		ScheduleBgCopyTilemapToVram(2);
+		gTasks[taskId].func = Task_DoLearnedMoveFanfareAfterText;
+        break;
+    case MENU_B_PRESSED:
+        PlaySE(SE_SELECT);
+        // fallthrough
+    case 1:
+        gTasks[taskId].func = Task_ClosePartyMenuAfterText;
+        break;
     }
 }

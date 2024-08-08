@@ -78,6 +78,7 @@ mapscripts EltheRoad_MapScripts
 			waitmovement(0)
 			removeobject(LOCALID_DEMIVEE)
 			playfanfare(MUS_CAUGHT)
+			additem(ITEM_LEAFSHARD)
 			message("Eevee joined your party!")
 			waitmessage
 			waitfanfare

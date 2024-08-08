@@ -490,6 +490,22 @@ struct RankingHall2P
     //u8 padding;
 };
 
+struct DemiveeData
+{
+	u8 waterShard; // mastery; goes up by 1 on leveling up.
+	u8 fireShard; // 0 -> 1 : learn move 1
+	u8 elecShard; // 1 -> 2 : learn move 2
+	u8 psyShard; //  2 -> 3 : option to permanently change ability.
+	u8 darkShard;
+	u8 grassShard;
+	u8 iceShard;
+	u8 fairyShard;
+	u8 statPoints;
+	u8 currentShard:4; // index of Demivee's current shard. the base is Water.
+	u8 abilityOverride:4; // index of Demivee's permanent ability slot; uses real ability if this is 0
+	u16 padding;
+};
+
 struct SaveBlock2
 {
     /*0x00*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
@@ -518,6 +534,7 @@ struct SaveBlock2
     /*0xB0*/ struct PlayersApprentice playerApprentice;
     /*0xDC*/ struct Apprentice apprentices[APPRENTICE_COUNT];
     /*0x1EC*/ struct BerryCrush berryCrush;
+			 struct DemiveeData demiveeData;
 #if FREE_POKEMON_JUMP == FALSE
     /*0x1FC*/ struct PokemonJumpRecords pokeJump;
 #endif //FREE_POKEMON_JUMP
