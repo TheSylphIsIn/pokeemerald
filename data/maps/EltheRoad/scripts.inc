@@ -128,7 +128,7 @@ EltheRoad_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0:
 # 67 "data/maps/EltheRoad/scripts.pory"
 	msgbox EltheRoad_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_12, MSGBOX_AUTOCLOSE
 # 68 "data/maps/EltheRoad/scripts.pory"
-	playse SE_BIKE_HOP
+	playse SE_LEDGE
 # 69 "data/maps/EltheRoad/scripts.pory"
 	applymovement 1, EltheRoad_Movement_DemiveeFollow
 # 70 "data/maps/EltheRoad/scripts.pory"
@@ -154,798 +154,1138 @@ EltheRoad_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0:
 # 80 "data/maps/EltheRoad/scripts.pory"
 	playfanfare MUS_CAUGHT
 # 81 "data/maps/EltheRoad/scripts.pory"
-	message EltheRoad_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_16
+	additem ITEM_LEAFSHARD
 # 82 "data/maps/EltheRoad/scripts.pory"
-	waitmessage
+	message EltheRoad_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_16
 # 83 "data/maps/EltheRoad/scripts.pory"
-	waitfanfare
+	waitmessage
 # 84 "data/maps/EltheRoad/scripts.pory"
-	waitbuttonpress
+	waitfanfare
 # 85 "data/maps/EltheRoad/scripts.pory"
-	closemessage
+	waitbuttonpress
 # 86 "data/maps/EltheRoad/scripts.pory"
-	fadedefaultbgm
+	closemessage
 # 87 "data/maps/EltheRoad/scripts.pory"
+	fadedefaultbgm
+# 88 "data/maps/EltheRoad/scripts.pory"
 	setvar VAR_MAIN_GAME_STATE, 1
 	return
 
 
 EltheRoad_EventScript_FirstTrigger::
-# 94 "data/maps/EltheRoad/scripts.pory"
-	lock
 # 95 "data/maps/EltheRoad/scripts.pory"
-	delay 30
+	lock
 # 96 "data/maps/EltheRoad/scripts.pory"
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft
+	delay 30
 # 97 "data/maps/EltheRoad/scripts.pory"
-	applymovement OBJ_EVENT_ID_FOLLOWER, Common_Movement_FaceRight
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft
 # 98 "data/maps/EltheRoad/scripts.pory"
-	speakername EltheRoad_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_2, PORTRAIT_AMELIA_NEUTRAL
+	applymovement OBJ_EVENT_ID_FOLLOWER, Common_Movement_FaceRight
 # 99 "data/maps/EltheRoad/scripts.pory"
-	msgbox EltheRoad_EventScript_FirstTrigger_Text_0
+	speakername EltheRoad_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_2, PORTRAIT_AMELIA_NEUTRAL
 # 100 "data/maps/EltheRoad/scripts.pory"
-	speakername EltheRoad_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_4, PORTRAIT_DEMIVEE_NEUTRAL, PORTRAIT_DEFAULT_LEFT
+	msgbox EltheRoad_EventScript_FirstTrigger_Text_0
 # 101 "data/maps/EltheRoad/scripts.pory"
+	speakername EltheRoad_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_4, PORTRAIT_DEMIVEE_NEUTRAL, PORTRAIT_DEFAULT_LEFT
+# 102 "data/maps/EltheRoad/scripts.pory"
 	msgbox EltheRoad_EventScript_FirstTrigger_Text_1
-# 104 "data/maps/EltheRoad/scripts.pory"
-	speakername EltheRoad_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_2, PORTRAIT_AMELIA_SMUG
 # 105 "data/maps/EltheRoad/scripts.pory"
-	msgbox EltheRoad_EventScript_FirstTrigger_Text_2
+	speakername EltheRoad_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_2, PORTRAIT_AMELIA_SMUG
 # 106 "data/maps/EltheRoad/scripts.pory"
-	setpartymemberinfo 0
+	msgbox EltheRoad_EventScript_FirstTrigger_Text_2
 # 107 "data/maps/EltheRoad/scripts.pory"
-	speakername EltheRoad_EventScript_FirstTrigger_Text_3, PORTRAIT_DEMIVEE_HUH, PORTRAIT_DEFAULT_LEFT
+	setpartymemberinfo 0
 # 108 "data/maps/EltheRoad/scripts.pory"
-	msgbox EltheRoad_EventScript_FirstTrigger_Text_4
+	speakername EltheRoad_EventScript_FirstTrigger_Text_3, PORTRAIT_DEMIVEE_HUH, PORTRAIT_DEFAULT_LEFT
 # 109 "data/maps/EltheRoad/scripts.pory"
-	speakername EltheRoad_EventScript_FirstTrigger_Text_3, PORTRAIT_DEMIVEE_NEUTRAL, PORTRAIT_DEFAULT_LEFT
+	msgbox EltheRoad_EventScript_FirstTrigger_Text_4
 # 110 "data/maps/EltheRoad/scripts.pory"
+	speakername EltheRoad_EventScript_FirstTrigger_Text_3, PORTRAIT_DEMIVEE_NEUTRAL, PORTRAIT_DEFAULT_LEFT
+# 111 "data/maps/EltheRoad/scripts.pory"
 	msgbox EltheRoad_EventScript_FirstTrigger_Text_5
-# 112 "data/maps/EltheRoad/scripts.pory"
-	speakername NULL, 0
 # 113 "data/maps/EltheRoad/scripts.pory"
-	msgbox EltheRoad_EventScript_FirstTrigger_Text_6, MSGBOX_AUTOCLOSE
+	speakername NULL, 0
 # 114 "data/maps/EltheRoad/scripts.pory"
+	msgbox EltheRoad_EventScript_FirstTrigger_Text_6, MSGBOX_AUTOCLOSE
+# 115 "data/maps/EltheRoad/scripts.pory"
 	setvar VAR_MAIN_GAME_STATE, 2
 	return
 
 
+EltheRoad_EventScript_DemiveeTutorialSign::
+# 120 "data/maps/EltheRoad/scripts.pory"
+	lock
+# 121 "data/maps/EltheRoad/scripts.pory"
+	msgbox EltheRoad_EventScript_DemiveeTutorialSign_Text_0
+# 124 "data/maps/EltheRoad/scripts.pory"
+	goto EltheRoad_EventScript_DemiveeTutorialMultichoice
+	return
+
+
+EltheRoad_EventScript_DemiveeTutorialMultichoice::
+# 129 "data/maps/EltheRoad/scripts.pory"
+	message EltheRoad_EventScript_DemiveeTutorialMultichoice_Text_0
+# 130 "data/maps/EltheRoad/scripts.pory"
+	waitmessage
+# 131 "data/maps/EltheRoad/scripts.pory"
+	dynmultichoice 0, 0, FALSE, 6, 0, DYN_MULTICHOICE_CB_NONE, EltheRoad_EventScript_DemiveeTutorialMultichoice_Text_1, EltheRoad_EventScript_DemiveeTutorialMultichoice_Text_2, EltheRoad_EventScript_DemiveeTutorialMultichoice_Text_3, EltheRoad_EventScript_DemiveeTutorialMultichoice_Text_4, EltheRoad_EventScript_DemiveeTutorialMultichoice_Text_5, EltheRoad_EventScript_DemiveeTutorialMultichoice_Text_6
+# 132 "data/maps/EltheRoad/scripts.pory"
+	switch VAR_RESULT
+# 134 "data/maps/EltheRoad/scripts.pory"
+	case 0, EltheRoad_EventScript_DemiveeTutorialMultichoice_3
+# 140 "data/maps/EltheRoad/scripts.pory"
+	case 1, EltheRoad_EventScript_DemiveeTutorialMultichoice_4
+# 146 "data/maps/EltheRoad/scripts.pory"
+	case 2, EltheRoad_EventScript_DemiveeTutorialMultichoice_5
+# 151 "data/maps/EltheRoad/scripts.pory"
+	case 3, EltheRoad_EventScript_DemiveeTutorialMultichoice_6
+# 156 "data/maps/EltheRoad/scripts.pory"
+	case 4, EltheRoad_EventScript_DemiveeTutorialMultichoice_7
+# 162 "data/maps/EltheRoad/scripts.pory"
+	case 5, EltheRoad_EventScript_DemiveeTutorialMultichoice_8
+# 163 "data/maps/EltheRoad/scripts.pory"
+	case MULTI_B_PRESSED, EltheRoad_EventScript_DemiveeTutorialMultichoice_8
+EltheRoad_EventScript_DemiveeTutorialMultichoice_1:
+# 167 "data/maps/EltheRoad/scripts.pory"
+	goto EltheRoad_EventScript_DemiveeTutorialMultichoice
+	return
+
+EltheRoad_EventScript_DemiveeTutorialMultichoice_3:
+# 135 "data/maps/EltheRoad/scripts.pory"
+	msgbox EltheRoad_EventScript_DemiveeTutorialMultichoice_Text_7
+	goto EltheRoad_EventScript_DemiveeTutorialMultichoice_1
+
+EltheRoad_EventScript_DemiveeTutorialMultichoice_4:
+# 141 "data/maps/EltheRoad/scripts.pory"
+	msgbox EltheRoad_EventScript_DemiveeTutorialMultichoice_Text_8
+	goto EltheRoad_EventScript_DemiveeTutorialMultichoice_1
+
+EltheRoad_EventScript_DemiveeTutorialMultichoice_5:
+# 147 "data/maps/EltheRoad/scripts.pory"
+	msgbox EltheRoad_EventScript_DemiveeTutorialMultichoice_Text_9
+	goto EltheRoad_EventScript_DemiveeTutorialMultichoice_1
+
+EltheRoad_EventScript_DemiveeTutorialMultichoice_6:
+# 152 "data/maps/EltheRoad/scripts.pory"
+	msgbox EltheRoad_EventScript_DemiveeTutorialMultichoice_Text_10
+	goto EltheRoad_EventScript_DemiveeTutorialMultichoice_1
+
+EltheRoad_EventScript_DemiveeTutorialMultichoice_7:
+# 157 "data/maps/EltheRoad/scripts.pory"
+	msgbox EltheRoad_EventScript_DemiveeTutorialMultichoice_Text_11
+	goto EltheRoad_EventScript_DemiveeTutorialMultichoice_1
+
+EltheRoad_EventScript_DemiveeTutorialMultichoice_8:
+# 164 "data/maps/EltheRoad/scripts.pory"
+	release
+	end
+
+
 EltheRoad_EventScript_FirstSign::
-# 119 "data/maps/EltheRoad/scripts.pory"
+# 173 "data/maps/EltheRoad/scripts.pory"
 	msgbox EltheRoad_EventScript_FirstSign_Text_0, MSGBOX_SIGN
 	return
 
 
 EltheRoad_Trigger_VinosTrigger::
-# 124 "data/maps/EltheRoad/scripts.pory"
+# 178 "data/maps/EltheRoad/scripts.pory"
 	lock
-# 125 "data/maps/EltheRoad/scripts.pory"
-	speakername EltheRoad_Trigger_VinosTrigger_Text_0
-# 126 "data/maps/EltheRoad/scripts.pory"
+# 179 "data/maps/EltheRoad/scripts.pory"
+	speakername EltheRoad_Trigger_VinosTrigger_Text_0, PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT
+# 180 "data/maps/EltheRoad/scripts.pory"
 	msgbox EltheRoad_Trigger_VinosTrigger_Text_1
-# 127 "data/maps/EltheRoad/scripts.pory"
+# 181 "data/maps/EltheRoad/scripts.pory"
 	speakername NULL, 0
-# 128 "data/maps/EltheRoad/scripts.pory"
+# 182 "data/maps/EltheRoad/scripts.pory"
 	message EltheRoad_Trigger_VinosTrigger_Text_2
-# 129 "data/maps/EltheRoad/scripts.pory"
+# 183 "data/maps/EltheRoad/scripts.pory"
 	waitmessage
-# 130 "data/maps/EltheRoad/scripts.pory"
-	dynmultichoice 0, 0, TRUE, 6, 0, DYN_MULTICHOICE_CB_NONE, EltheRoad_Trigger_VinosTrigger_Text_3, EltheRoad_Trigger_VinosTrigger_Text_4, EltheRoad_Trigger_VinosTrigger_Text_5
-# 131 "data/maps/EltheRoad/scripts.pory"
-	closemessage
-# 132 "data/maps/EltheRoad/scripts.pory"
-	switch VAR_RESULT
-# 134 "data/maps/EltheRoad/scripts.pory"
-	case 0, EltheRoad_Trigger_VinosTrigger_2
-# 166 "data/maps/EltheRoad/scripts.pory"
-	case 1, EltheRoad_Trigger_VinosTrigger_3
 # 184 "data/maps/EltheRoad/scripts.pory"
-	case 2, EltheRoad_Trigger_VinosTrigger_4
+	dynmultichoice 0, 0, TRUE, 6, 0, DYN_MULTICHOICE_CB_NONE, EltheRoad_Trigger_VinosTrigger_Text_3, EltheRoad_Trigger_VinosTrigger_Text_4
+# 185 "data/maps/EltheRoad/scripts.pory"
+	switch VAR_RESULT
+# 187 "data/maps/EltheRoad/scripts.pory"
+	case 0, EltheRoad_Trigger_VinosTrigger_2
+# 216 "data/maps/EltheRoad/scripts.pory"
+	case 1, EltheRoad_Trigger_VinosTrigger_3
 	return
 
 EltheRoad_Trigger_VinosTrigger_2:
-# 135 "data/maps/EltheRoad/scripts.pory"
+# 188 "data/maps/EltheRoad/scripts.pory"
 	speakername EltheRoad_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_2, PORTRAIT_AMELIA_NEUTRAL
-# 136 "data/maps/EltheRoad/scripts.pory"
-	msgbox EltheRoad_Trigger_VinosTrigger_Text_6, MSGBOX_AUTOCLOSE
-# 137 "data/maps/EltheRoad/scripts.pory"
+# 189 "data/maps/EltheRoad/scripts.pory"
+	msgbox EltheRoad_Trigger_VinosTrigger_Text_5, MSGBOX_AUTOCLOSE
+# 190 "data/maps/EltheRoad/scripts.pory"
 	playse SE_PIN
-# 138 "data/maps/EltheRoad/scripts.pory"
+# 191 "data/maps/EltheRoad/scripts.pory"
 	applymovement 3, Common_Movement_FaceDown
-# 139 "data/maps/EltheRoad/scripts.pory"
+# 192 "data/maps/EltheRoad/scripts.pory"
 	waitmovement 0
-# 140 "data/maps/EltheRoad/scripts.pory"
+# 193 "data/maps/EltheRoad/scripts.pory"
 	applymovement 3, Common_Movement_ExclamationMark
-# 141 "data/maps/EltheRoad/scripts.pory"
+# 194 "data/maps/EltheRoad/scripts.pory"
 	waitmovement 0
-# 142 "data/maps/EltheRoad/scripts.pory"
+# 195 "data/maps/EltheRoad/scripts.pory"
 	delay 48
-# 143 "data/maps/EltheRoad/scripts.pory"
-	speakername EltheRoad_Trigger_VinosTrigger_Text_0
-# 144 "data/maps/EltheRoad/scripts.pory"
+# 196 "data/maps/EltheRoad/scripts.pory"
+	speakername EltheRoad_Trigger_VinosTrigger_Text_0, PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT
+# 197 "data/maps/EltheRoad/scripts.pory"
+	msgbox EltheRoad_Trigger_VinosTrigger_Text_6
+# 198 "data/maps/EltheRoad/scripts.pory"
+	speakername EltheRoad_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_2, PORTRAIT_AMELIA_NEUTRAL
+# 199 "data/maps/EltheRoad/scripts.pory"
 	msgbox EltheRoad_Trigger_VinosTrigger_Text_7, MSGBOX_AUTOCLOSE
-# 145 "data/maps/EltheRoad/scripts.pory"
-	applymovement 3, EltheRoad_Movement_VinosGetOnLog
-# 146 "data/maps/EltheRoad/scripts.pory"
+# 200 "data/maps/EltheRoad/scripts.pory"
+	playse SE_PIN
+# 201 "data/maps/EltheRoad/scripts.pory"
+	applymovement 3, Common_Movement_ExclamationMark
+# 202 "data/maps/EltheRoad/scripts.pory"
 	waitmovement 0
-# 147 "data/maps/EltheRoad/scripts.pory"
-	message EltheRoad_Trigger_VinosTrigger_Text_8
-# 148 "data/maps/EltheRoad/scripts.pory"
-	waitmessage
-# 149 "data/maps/EltheRoad/scripts.pory"
-	dynmultichoice 0, 0, TRUE, 6, 0, DYN_MULTICHOICE_CB_NONE, EltheRoad_Trigger_VinosTrigger_Text_9, EltheRoad_Trigger_VinosTrigger_Text_4, EltheRoad_Trigger_VinosTrigger_Text_5
-# 150 "data/maps/EltheRoad/scripts.pory"
-	closemessage
-# 151 "data/maps/EltheRoad/scripts.pory"
-	switch VAR_RESULT
-# 153 "data/maps/EltheRoad/scripts.pory"
-	case 0, EltheRoad_Trigger_VinosTrigger_6
+# 203 "data/maps/EltheRoad/scripts.pory"
+	delay 48
+# 204 "data/maps/EltheRoad/scripts.pory"
+	speakername EltheRoad_Trigger_VinosTrigger_Text_0, PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT
+# 205 "data/maps/EltheRoad/scripts.pory"
+	msgbox EltheRoad_Trigger_VinosTrigger_Text_8
+# 206 "data/maps/EltheRoad/scripts.pory"
+	speakername EltheRoad_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_2, PORTRAIT_AMELIA_NEUTRAL
+# 207 "data/maps/EltheRoad/scripts.pory"
+	msgbox EltheRoad_Trigger_VinosTrigger_Text_9
+# 208 "data/maps/EltheRoad/scripts.pory"
+	speakername EltheRoad_Trigger_VinosTrigger_Text_0, PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT
+# 209 "data/maps/EltheRoad/scripts.pory"
+	msgbox EltheRoad_Trigger_VinosTrigger_Text_10
+# 210 "data/maps/EltheRoad/scripts.pory"
+	speakername NULL, 0
+# 211 "data/maps/EltheRoad/scripts.pory"
+	msgbox EltheRoad_Trigger_VinosTrigger_Text_11, MSGBOX_AUTOCLOSE
+# 214 "data/maps/EltheRoad/scripts.pory"
+	delay 32
+# 215 "data/maps/EltheRoad/scripts.pory"
+	goto EltheRoad_VinosNegotiationMain
 	return
 
 EltheRoad_Trigger_VinosTrigger_3:
-# 167 "data/maps/EltheRoad/scripts.pory"
-	applymovement OBJ_EVENT_ID_FOLLOWER, Common_Movement_WalkUp
-# 168 "data/maps/EltheRoad/scripts.pory"
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkUp
-# 169 "data/maps/EltheRoad/scripts.pory"
-	waitmovement 0
-# 170 "data/maps/EltheRoad/scripts.pory"
-	delay 30
-# 171 "data/maps/EltheRoad/scripts.pory"
-	message EltheRoad_Trigger_VinosTrigger_Text_8
-# 172 "data/maps/EltheRoad/scripts.pory"
-	waitmessage
-# 173 "data/maps/EltheRoad/scripts.pory"
-	dynmultichoice 0, 0, TRUE, 6, 0, DYN_MULTICHOICE_CB_NONE, EltheRoad_Trigger_VinosTrigger_Text_3, EltheRoad_Trigger_VinosTrigger_Text_4, EltheRoad_Trigger_VinosTrigger_Text_5
-# 174 "data/maps/EltheRoad/scripts.pory"
-	closemessage
-	return
-
-EltheRoad_Trigger_VinosTrigger_4:
-# 185 "data/maps/EltheRoad/scripts.pory"
+# 217 "data/maps/EltheRoad/scripts.pory"
 	speakername EltheRoad_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_2, PORTRAIT_AMELIA_STRAINED
-# 186 "data/maps/EltheRoad/scripts.pory"
-	msgbox EltheRoad_Trigger_VinosTrigger_Text_11, MSGBOX_AUTOCLOSE
-# 187 "data/maps/EltheRoad/scripts.pory"
-	goto EltheRoad_VinosDoBattle
-	return
-
-EltheRoad_Trigger_VinosTrigger_6:
-# 154 "data/maps/EltheRoad/scripts.pory"
-	speakername EltheRoad_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_2, PORTRAIT_AMELIA_NEUTRAL
-# 155 "data/maps/EltheRoad/scripts.pory"
-	msgbox EltheRoad_Trigger_VinosTrigger_Text_10, MSGBOX_AUTOCLOSE
-# 156 "data/maps/EltheRoad/scripts.pory"
+# 218 "data/maps/EltheRoad/scripts.pory"
+	msgbox EltheRoad_Trigger_VinosTrigger_Text_12, MSGBOX_AUTOCLOSE
+# 219 "data/maps/EltheRoad/scripts.pory"
 	playse SE_PIN
-# 157 "data/maps/EltheRoad/scripts.pory"
-	applymovement 3, Common_Movement_ExclamationMark
-# 158 "data/maps/EltheRoad/scripts.pory"
+# 220 "data/maps/EltheRoad/scripts.pory"
+	applymovement 3, Common_Movement_FaceDown
+# 221 "data/maps/EltheRoad/scripts.pory"
 	waitmovement 0
-# 159 "data/maps/EltheRoad/scripts.pory"
-	delay 48
-# 160 "data/maps/EltheRoad/scripts.pory"
-	goto EltheRoad_VinosNegotiationMain
+# 222 "data/maps/EltheRoad/scripts.pory"
+	applymovement 3, Common_Movement_ExclamationMark
+# 223 "data/maps/EltheRoad/scripts.pory"
+	waitmovement 0
+# 224 "data/maps/EltheRoad/scripts.pory"
+	speakername EltheRoad_Trigger_VinosTrigger_Text_0, PORTRAIT_VINOS_MAD, PORTRAIT_DEFAULT_LEFT
+# 225 "data/maps/EltheRoad/scripts.pory"
+	msgbox EltheRoad_Trigger_VinosTrigger_Text_13, MSGBOX_AUTOCLOSE
+# 226 "data/maps/EltheRoad/scripts.pory"
+	goto EltheRoad_VinosDoBattle
 	return
 
 
 EltheRoad_VinosNegotiationMain::
-# 205 "data/maps/EltheRoad/scripts.pory"
-	speakername EltheRoad_VinosNegotiationMain_Text_0, PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT
-# 206 "data/maps/EltheRoad/scripts.pory"
+# 233 "data/maps/EltheRoad/scripts.pory"
+	speakername EltheRoad_VinosNegotiationMain_Text_0, PORTRAIT_VINOS_NEUTRAL
+# 234 "data/maps/EltheRoad/scripts.pory"
 	message EltheRoad_VinosNegotiationMain_Text_1
-# 207 "data/maps/EltheRoad/scripts.pory"
+# 235 "data/maps/EltheRoad/scripts.pory"
 	waitmessage
-# 208 "data/maps/EltheRoad/scripts.pory"
+# 236 "data/maps/EltheRoad/scripts.pory"
 	waitbuttonpress
-# 209 "data/maps/EltheRoad/scripts.pory"
-	setvar VAR_0x8008, 2
-# 210 "data/maps/EltheRoad/scripts.pory"
+# 237 "data/maps/EltheRoad/scripts.pory"
+	setvar VAR_0x8008, 4
+# 238 "data/maps/EltheRoad/scripts.pory"
 	special GetNegotiationTopic
-# 211 "data/maps/EltheRoad/scripts.pory"
+# 239 "data/maps/EltheRoad/scripts.pory"
 	compare VAR_RESULT, 0xFF
 	goto_if_eq EltheRoad_VinosNegotiationMain_1
-# 217 "data/maps/EltheRoad/scripts.pory"
+# 245 "data/maps/EltheRoad/scripts.pory"
 	switch VAR_RESULT
-# 219 "data/maps/EltheRoad/scripts.pory"
+# 247 "data/maps/EltheRoad/scripts.pory"
 	case 0, EltheRoad_VinosNegotiationMain_6
-# 263 "data/maps/EltheRoad/scripts.pory"
+# 291 "data/maps/EltheRoad/scripts.pory"
 	case 1, EltheRoad_VinosNegotiationMain_7
-# 316 "data/maps/EltheRoad/scripts.pory"
+# 341 "data/maps/EltheRoad/scripts.pory"
 	case 2, EltheRoad_VinosNegotiationMain_8
-# 360 "data/maps/EltheRoad/scripts.pory"
+# 385 "data/maps/EltheRoad/scripts.pory"
 	case 3, EltheRoad_VinosNegotiationMain_9
 EltheRoad_VinosNegotiationMain_4:
-# 402 "data/maps/EltheRoad/scripts.pory"
+# 427 "data/maps/EltheRoad/scripts.pory"
 	delay 16
-# 403 "data/maps/EltheRoad/scripts.pory"
-	compare VAR_NEGOTIATION_SCORE, 2
-	goto_if_gt EltheRoad_VinosNegotiationMain_10
-# 411 "data/maps/EltheRoad/scripts.pory"
+# 428 "data/maps/EltheRoad/scripts.pory"
+	compare VAR_NEGOTIATION_SCORE, 3
+	goto_if_ge EltheRoad_VinosNegotiationMain_10
+# 436 "data/maps/EltheRoad/scripts.pory"
 	compare VAR_NEGOTIATION_SCORE, 0
 	goto_if_eq EltheRoad_VinosNegotiationMain_11
-# 419 "data/maps/EltheRoad/scripts.pory"
+# 444 "data/maps/EltheRoad/scripts.pory"
 	goto EltheRoad_VinosNegotiationMain
 	return
 
 EltheRoad_VinosNegotiationMain_1:
-# 213 "data/maps/EltheRoad/scripts.pory"
+# 241 "data/maps/EltheRoad/scripts.pory"
 	goto EltheRoad_VinosNegotiationMidSuccess
 	return
 
 EltheRoad_VinosNegotiationMain_6:
-# 220 "data/maps/EltheRoad/scripts.pory"
+# 248 "data/maps/EltheRoad/scripts.pory"
 	dynmultipush EltheRoad_VinosNegotiationMain_Text_2, 1
-# 221 "data/maps/EltheRoad/scripts.pory"
+# 249 "data/maps/EltheRoad/scripts.pory"
 	dynmultipush EltheRoad_VinosNegotiationMain_Text_3, 0
-# 222 "data/maps/EltheRoad/scripts.pory"
+# 250 "data/maps/EltheRoad/scripts.pory"
 	dynmultipush EltheRoad_VinosNegotiationMain_Text_4, 2
-# 223 "data/maps/EltheRoad/scripts.pory"
+# 251 "data/maps/EltheRoad/scripts.pory"
 	message EltheRoad_VinosNegotiationMain_Text_5
-# 224 "data/maps/EltheRoad/scripts.pory"
-	waitmessage
-# 225 "data/maps/EltheRoad/scripts.pory"
-	dynmultistack 0, 0, FALSE, 6, TRUE, 0, DYN_MULTICHOICE_CB_NONE
-# 226 "data/maps/EltheRoad/scripts.pory"
-	switch VAR_RESULT
-# 228 "data/maps/EltheRoad/scripts.pory"
-	case 0, EltheRoad_VinosNegotiationMain_16
-# 242 "data/maps/EltheRoad/scripts.pory"
-	case 1, EltheRoad_VinosNegotiationMain_17
 # 252 "data/maps/EltheRoad/scripts.pory"
+	waitmessage
+# 253 "data/maps/EltheRoad/scripts.pory"
+	dynmultistack 0, 0, FALSE, 6, FALSE, 1, DYN_MULTICHOICE_CB_NONE
+# 254 "data/maps/EltheRoad/scripts.pory"
+	switch VAR_RESULT
+# 256 "data/maps/EltheRoad/scripts.pory"
+	case 0, EltheRoad_VinosNegotiationMain_16
+# 270 "data/maps/EltheRoad/scripts.pory"
+	case 1, EltheRoad_VinosNegotiationMain_17
+# 280 "data/maps/EltheRoad/scripts.pory"
 	case 2, EltheRoad_VinosNegotiationMain_18
 	goto EltheRoad_VinosNegotiationMain_4
 
 EltheRoad_VinosNegotiationMain_7:
-# 265 "data/maps/EltheRoad/scripts.pory"
+# 293 "data/maps/EltheRoad/scripts.pory"
 	dynmultipush EltheRoad_VinosNegotiationMain_Text_16, 1
-# 266 "data/maps/EltheRoad/scripts.pory"
+# 294 "data/maps/EltheRoad/scripts.pory"
 	dynmultipush EltheRoad_VinosNegotiationMain_Text_17, 2
-# 267 "data/maps/EltheRoad/scripts.pory"
+# 295 "data/maps/EltheRoad/scripts.pory"
 	dynmultipush EltheRoad_VinosNegotiationMain_Text_18, 0
-# 268 "data/maps/EltheRoad/scripts.pory"
+# 296 "data/maps/EltheRoad/scripts.pory"
 	message EltheRoad_VinosNegotiationMain_Text_19
-# 269 "data/maps/EltheRoad/scripts.pory"
+# 297 "data/maps/EltheRoad/scripts.pory"
 	waitmessage
-# 270 "data/maps/EltheRoad/scripts.pory"
-	dynmultistack 0, 0, FALSE, 6, TRUE, 0, DYN_MULTICHOICE_CB_NONE
-# 271 "data/maps/EltheRoad/scripts.pory"
+# 298 "data/maps/EltheRoad/scripts.pory"
+	dynmultistack 0, 0, FALSE, 6, FALSE, 1, DYN_MULTICHOICE_CB_NONE
+# 299 "data/maps/EltheRoad/scripts.pory"
 	switch VAR_RESULT
-# 273 "data/maps/EltheRoad/scripts.pory"
+# 301 "data/maps/EltheRoad/scripts.pory"
 	case 0, EltheRoad_VinosNegotiationMain_20
-# 285 "data/maps/EltheRoad/scripts.pory"
+# 312 "data/maps/EltheRoad/scripts.pory"
 	case 1, EltheRoad_VinosNegotiationMain_21
-# 303 "data/maps/EltheRoad/scripts.pory"
+# 330 "data/maps/EltheRoad/scripts.pory"
 	case 2, EltheRoad_VinosNegotiationMain_22
 	goto EltheRoad_VinosNegotiationMain_4
 
 EltheRoad_VinosNegotiationMain_8:
-# 318 "data/maps/EltheRoad/scripts.pory"
+# 343 "data/maps/EltheRoad/scripts.pory"
 	dynmultipush EltheRoad_VinosNegotiationMain_Text_34, 0
-# 319 "data/maps/EltheRoad/scripts.pory"
+# 344 "data/maps/EltheRoad/scripts.pory"
 	dynmultipush EltheRoad_VinosNegotiationMain_Text_35, 2
-# 320 "data/maps/EltheRoad/scripts.pory"
+# 345 "data/maps/EltheRoad/scripts.pory"
 	dynmultipush EltheRoad_VinosNegotiationMain_Text_36, 1
-# 321 "data/maps/EltheRoad/scripts.pory"
+# 346 "data/maps/EltheRoad/scripts.pory"
 	message EltheRoad_VinosNegotiationMain_Text_37
-# 322 "data/maps/EltheRoad/scripts.pory"
+# 347 "data/maps/EltheRoad/scripts.pory"
 	waitmessage
-# 323 "data/maps/EltheRoad/scripts.pory"
-	dynmultistack 0, 0, FALSE, 6, TRUE, 0, DYN_MULTICHOICE_CB_NONE
-# 324 "data/maps/EltheRoad/scripts.pory"
+# 348 "data/maps/EltheRoad/scripts.pory"
+	dynmultistack 0, 0, FALSE, 6, FALSE, 0, DYN_MULTICHOICE_CB_NONE
+# 349 "data/maps/EltheRoad/scripts.pory"
 	switch VAR_RESULT
-# 326 "data/maps/EltheRoad/scripts.pory"
+# 351 "data/maps/EltheRoad/scripts.pory"
 	case 0, EltheRoad_VinosNegotiationMain_24
-# 341 "data/maps/EltheRoad/scripts.pory"
+# 366 "data/maps/EltheRoad/scripts.pory"
 	case 1, EltheRoad_VinosNegotiationMain_25
-# 350 "data/maps/EltheRoad/scripts.pory"
+# 375 "data/maps/EltheRoad/scripts.pory"
 	case 2, EltheRoad_VinosNegotiationMain_26
 	goto EltheRoad_VinosNegotiationMain_4
 
 EltheRoad_VinosNegotiationMain_9:
-# 362 "data/maps/EltheRoad/scripts.pory"
+# 387 "data/maps/EltheRoad/scripts.pory"
 	dynmultipush EltheRoad_VinosNegotiationMain_Text_46, 1
-# 363 "data/maps/EltheRoad/scripts.pory"
+# 388 "data/maps/EltheRoad/scripts.pory"
 	dynmultipush EltheRoad_VinosNegotiationMain_Text_47, 2
-# 364 "data/maps/EltheRoad/scripts.pory"
+# 389 "data/maps/EltheRoad/scripts.pory"
 	dynmultipush EltheRoad_VinosNegotiationMain_Text_48, 0
-# 365 "data/maps/EltheRoad/scripts.pory"
+# 390 "data/maps/EltheRoad/scripts.pory"
 	message EltheRoad_VinosNegotiationMain_Text_49
-# 366 "data/maps/EltheRoad/scripts.pory"
+# 391 "data/maps/EltheRoad/scripts.pory"
 	waitmessage
-# 367 "data/maps/EltheRoad/scripts.pory"
-	dynmultistack 0, 0, FALSE, 6, TRUE, 0, DYN_MULTICHOICE_CB_NONE
-# 368 "data/maps/EltheRoad/scripts.pory"
-	switch VAR_RESULT
-# 370 "data/maps/EltheRoad/scripts.pory"
-	case 0, EltheRoad_VinosNegotiationMain_28
-# 381 "data/maps/EltheRoad/scripts.pory"
-	case 1, EltheRoad_VinosNegotiationMain_29
 # 392 "data/maps/EltheRoad/scripts.pory"
+	dynmultistack 0, 0, FALSE, 6, FALSE, 1, DYN_MULTICHOICE_CB_NONE
+# 393 "data/maps/EltheRoad/scripts.pory"
+	switch VAR_RESULT
+# 395 "data/maps/EltheRoad/scripts.pory"
+	case 0, EltheRoad_VinosNegotiationMain_28
+# 406 "data/maps/EltheRoad/scripts.pory"
+	case 1, EltheRoad_VinosNegotiationMain_29
+# 417 "data/maps/EltheRoad/scripts.pory"
 	case 2, EltheRoad_VinosNegotiationMain_30
 	goto EltheRoad_VinosNegotiationMain_4
 
 EltheRoad_VinosNegotiationMain_10:
-# 405 "data/maps/EltheRoad/scripts.pory"
+# 430 "data/maps/EltheRoad/scripts.pory"
 	goto_if_set FLAG_NOT_PERFECT_CONVERSATION, EltheRoad_VinosNegotiationMain_32
 EltheRoad_VinosNegotiationMain_31:
-# 409 "data/maps/EltheRoad/scripts.pory"
+# 434 "data/maps/EltheRoad/scripts.pory"
 	goto EltheRoad_VinosNegotiationCompleteSuccess
 	return
 
 EltheRoad_VinosNegotiationMain_11:
-# 413 "data/maps/EltheRoad/scripts.pory"
+# 438 "data/maps/EltheRoad/scripts.pory"
 	speakername EltheRoad_VinosNegotiationMain_Text_0, PORTRAIT_VINOS_MAD, PORTRAIT_DEFAULT_LEFT
-# 414 "data/maps/EltheRoad/scripts.pory"
+# 439 "data/maps/EltheRoad/scripts.pory"
 	msgbox EltheRoad_VinosNegotiationMain_Text_57, MSGBOX_AUTOCLOSE
-# 415 "data/maps/EltheRoad/scripts.pory"
+# 440 "data/maps/EltheRoad/scripts.pory"
 	goto EltheRoad_VinosDoBattle
 	return
 
 EltheRoad_VinosNegotiationMain_16:
-# 229 "data/maps/EltheRoad/scripts.pory"
+# 257 "data/maps/EltheRoad/scripts.pory"
 	speakername EltheRoad_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_2, PORTRAIT_AMELIA_SERIOUSLY
-# 230 "data/maps/EltheRoad/scripts.pory"
+# 258 "data/maps/EltheRoad/scripts.pory"
 	msgbox EltheRoad_VinosNegotiationMain_Text_6
-# 231 "data/maps/EltheRoad/scripts.pory"
+# 259 "data/maps/EltheRoad/scripts.pory"
 	speakername EltheRoad_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_2, PORTRAIT_AMELIA_SHOCK
-# 232 "data/maps/EltheRoad/scripts.pory"
+# 260 "data/maps/EltheRoad/scripts.pory"
 	msgbox EltheRoad_VinosNegotiationMain_Text_7
-# 234 "data/maps/EltheRoad/scripts.pory"
+# 262 "data/maps/EltheRoad/scripts.pory"
 	speakername EltheRoad_VinosNegotiationMain_Text_0, PORTRAIT_VINOS_MAD, PORTRAIT_DEFAULT_LEFT
-# 235 "data/maps/EltheRoad/scripts.pory"
+# 263 "data/maps/EltheRoad/scripts.pory"
 	msgbox EltheRoad_VinosNegotiationMain_Text_8, MSGBOX_AUTOCLOSE
-# 236 "data/maps/EltheRoad/scripts.pory"
+# 264 "data/maps/EltheRoad/scripts.pory"
 	setflag FLAG_NOT_PERFECT_CONVERSATION
-# 237 "data/maps/EltheRoad/scripts.pory"
+# 265 "data/maps/EltheRoad/scripts.pory"
 	compare VAR_NEGOTIATION_SCORE, 0
 	goto_if_gt EltheRoad_VinosNegotiationMain_35
 EltheRoad_VinosNegotiationMain_34:
-# 241 "data/maps/EltheRoad/scripts.pory"
+# 269 "data/maps/EltheRoad/scripts.pory"
 	playse SE_FAILURE
 	goto EltheRoad_VinosNegotiationMain_4
 
 EltheRoad_VinosNegotiationMain_17:
-# 243 "data/maps/EltheRoad/scripts.pory"
+# 271 "data/maps/EltheRoad/scripts.pory"
 	speakername EltheRoad_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_2, PORTRAIT_AMELIA_NEUTRAL
-# 244 "data/maps/EltheRoad/scripts.pory"
+# 272 "data/maps/EltheRoad/scripts.pory"
 	msgbox EltheRoad_VinosNegotiationMain_Text_9
-# 245 "data/maps/EltheRoad/scripts.pory"
+# 273 "data/maps/EltheRoad/scripts.pory"
 	speakername EltheRoad_VinosNegotiationMain_Text_0, PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT
-# 246 "data/maps/EltheRoad/scripts.pory"
+# 274 "data/maps/EltheRoad/scripts.pory"
 	msgbox EltheRoad_VinosNegotiationMain_Text_10
-# 247 "data/maps/EltheRoad/scripts.pory"
+# 275 "data/maps/EltheRoad/scripts.pory"
 	speakername EltheRoad_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_2, PORTRAIT_AMELIA_SHOCK
-# 248 "data/maps/EltheRoad/scripts.pory"
+# 276 "data/maps/EltheRoad/scripts.pory"
 	msgbox EltheRoad_VinosNegotiationMain_Text_11
-# 249 "data/maps/EltheRoad/scripts.pory"
+# 277 "data/maps/EltheRoad/scripts.pory"
 	speakername EltheRoad_VinosNegotiationMain_Text_0, PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT
-# 250 "data/maps/EltheRoad/scripts.pory"
+# 278 "data/maps/EltheRoad/scripts.pory"
 	msgbox EltheRoad_VinosNegotiationMain_Text_12, MSGBOX_AUTOCLOSE
-# 251 "data/maps/EltheRoad/scripts.pory"
+# 279 "data/maps/EltheRoad/scripts.pory"
 	addvar VAR_NEGOTIATION_SCORE, 1
 	goto EltheRoad_VinosNegotiationMain_4
 
 EltheRoad_VinosNegotiationMain_18:
-# 253 "data/maps/EltheRoad/scripts.pory"
+# 281 "data/maps/EltheRoad/scripts.pory"
 	speakername EltheRoad_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_2, PORTRAIT_AMELIA_NEUTRAL
-# 254 "data/maps/EltheRoad/scripts.pory"
+# 282 "data/maps/EltheRoad/scripts.pory"
 	msgbox EltheRoad_VinosNegotiationMain_Text_13
-# 255 "data/maps/EltheRoad/scripts.pory"
+# 283 "data/maps/EltheRoad/scripts.pory"
 	speakername EltheRoad_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_2, PORTRAIT_AMELIA_WINK
-# 256 "data/maps/EltheRoad/scripts.pory"
+# 284 "data/maps/EltheRoad/scripts.pory"
 	msgbox EltheRoad_VinosNegotiationMain_Text_14
-# 257 "data/maps/EltheRoad/scripts.pory"
+# 285 "data/maps/EltheRoad/scripts.pory"
 	speakername EltheRoad_VinosNegotiationMain_Text_0, PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT
-# 258 "data/maps/EltheRoad/scripts.pory"
+# 286 "data/maps/EltheRoad/scripts.pory"
 	msgbox EltheRoad_VinosNegotiationMain_Text_15, MSGBOX_AUTOCLOSE
-# 260 "data/maps/EltheRoad/scripts.pory"
+# 288 "data/maps/EltheRoad/scripts.pory"
 	addvar VAR_NEGOTIATION_SCORE, 2
-# 261 "data/maps/EltheRoad/scripts.pory"
+# 289 "data/maps/EltheRoad/scripts.pory"
 	playse SE_SUCCESS
 	goto EltheRoad_VinosNegotiationMain_4
 
 EltheRoad_VinosNegotiationMain_20:
-# 274 "data/maps/EltheRoad/scripts.pory"
+# 302 "data/maps/EltheRoad/scripts.pory"
 	callnative ParalyzeLead
-# 275 "data/maps/EltheRoad/scripts.pory"
+# 303 "data/maps/EltheRoad/scripts.pory"
 	speakername EltheRoad_EventScript_FirstTrigger_Text_3, PORTRAIT_DEMIVEE_NEUTRAL
-# 276 "data/maps/EltheRoad/scripts.pory"
+# 304 "data/maps/EltheRoad/scripts.pory"
 	msgbox EltheRoad_VinosNegotiationMain_Text_20, MSGBOX_AUTOCLOSE
-# 277 "data/maps/EltheRoad/scripts.pory"
+# 305 "data/maps/EltheRoad/scripts.pory"
 	delay 90
-# 278 "data/maps/EltheRoad/scripts.pory"
+# 306 "data/maps/EltheRoad/scripts.pory"
 	speakername EltheRoad_EventScript_FirstTrigger_Text_3, PORTRAIT_DEMIVEE_ANNOYED
-# 279 "data/maps/EltheRoad/scripts.pory"
+# 307 "data/maps/EltheRoad/scripts.pory"
 	msgbox EltheRoad_VinosNegotiationMain_Text_21
-# 280 "data/maps/EltheRoad/scripts.pory"
+# 308 "data/maps/EltheRoad/scripts.pory"
 	speakername EltheRoad_VinosNegotiationMain_Text_0, PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT
-# 281 "data/maps/EltheRoad/scripts.pory"
+# 309 "data/maps/EltheRoad/scripts.pory"
 	msgbox EltheRoad_VinosNegotiationMain_Text_22, MSGBOX_AUTOCLOSE
-# 283 "data/maps/EltheRoad/scripts.pory"
-	call EltheRoad_CleanUpNegotiationValues
-# 284 "data/maps/EltheRoad/scripts.pory"
+# 311 "data/maps/EltheRoad/scripts.pory"
 	goto EltheRoad_VinosDoBattle
 	goto EltheRoad_VinosNegotiationMain_4
 
 EltheRoad_VinosNegotiationMain_21:
-# 286 "data/maps/EltheRoad/scripts.pory"
+# 313 "data/maps/EltheRoad/scripts.pory"
 	speakername EltheRoad_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_2, PORTRAIT_AMELIA_NEUTRAL
-# 287 "data/maps/EltheRoad/scripts.pory"
+# 314 "data/maps/EltheRoad/scripts.pory"
 	msgbox EltheRoad_VinosNegotiationMain_Text_23
-# 288 "data/maps/EltheRoad/scripts.pory"
+# 315 "data/maps/EltheRoad/scripts.pory"
 	speakername EltheRoad_VinosNegotiationMain_Text_0, PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT
-# 289 "data/maps/EltheRoad/scripts.pory"
+# 316 "data/maps/EltheRoad/scripts.pory"
 	msgbox EltheRoad_VinosNegotiationMain_Text_24
-# 290 "data/maps/EltheRoad/scripts.pory"
+# 317 "data/maps/EltheRoad/scripts.pory"
 	speakername EltheRoad_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_2, PORTRAIT_AMELIA_NEUTRAL
-# 291 "data/maps/EltheRoad/scripts.pory"
+# 318 "data/maps/EltheRoad/scripts.pory"
 	msgbox EltheRoad_VinosNegotiationMain_Text_25
-# 292 "data/maps/EltheRoad/scripts.pory"
+# 319 "data/maps/EltheRoad/scripts.pory"
 	speakername EltheRoad_VinosNegotiationMain_Text_0, PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT
-# 293 "data/maps/EltheRoad/scripts.pory"
+# 320 "data/maps/EltheRoad/scripts.pory"
 	msgbox EltheRoad_VinosNegotiationMain_Text_26
-# 294 "data/maps/EltheRoad/scripts.pory"
+# 321 "data/maps/EltheRoad/scripts.pory"
 	speakername EltheRoad_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_2, PORTRAIT_AMELIA_NEUTRAL
-# 295 "data/maps/EltheRoad/scripts.pory"
+# 322 "data/maps/EltheRoad/scripts.pory"
 	msgbox EltheRoad_VinosNegotiationMain_Text_27
-# 296 "data/maps/EltheRoad/scripts.pory"
+# 323 "data/maps/EltheRoad/scripts.pory"
 	speakername EltheRoad_VinosNegotiationMain_Text_0, PORTRAIT_VINOS_MAD, PORTRAIT_DEFAULT_LEFT
-# 297 "data/maps/EltheRoad/scripts.pory"
+# 324 "data/maps/EltheRoad/scripts.pory"
 	msgbox EltheRoad_VinosNegotiationMain_Text_28
-# 298 "data/maps/EltheRoad/scripts.pory"
+# 325 "data/maps/EltheRoad/scripts.pory"
 	speakername EltheRoad_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_2, PORTRAIT_AMELIA_SMUG
-# 299 "data/maps/EltheRoad/scripts.pory"
+# 326 "data/maps/EltheRoad/scripts.pory"
 	msgbox EltheRoad_VinosNegotiationMain_Text_29
-# 300 "data/maps/EltheRoad/scripts.pory"
+# 327 "data/maps/EltheRoad/scripts.pory"
 	speakername EltheRoad_VinosNegotiationMain_Text_0, PORTRAIT_VINOS_MAD, PORTRAIT_DEFAULT_LEFT
-# 301 "data/maps/EltheRoad/scripts.pory"
+# 328 "data/maps/EltheRoad/scripts.pory"
 	msgbox EltheRoad_VinosNegotiationMain_Text_30, MSGBOX_AUTOCLOSE
-# 302 "data/maps/EltheRoad/scripts.pory"
+# 329 "data/maps/EltheRoad/scripts.pory"
 	addvar VAR_NEGOTIATION_SCORE, 1
 	goto EltheRoad_VinosNegotiationMain_4
 
 EltheRoad_VinosNegotiationMain_22:
-# 304 "data/maps/EltheRoad/scripts.pory"
+# 331 "data/maps/EltheRoad/scripts.pory"
 	speakername EltheRoad_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_2, PORTRAIT_AMELIA_NEUTRAL
-# 305 "data/maps/EltheRoad/scripts.pory"
-	msgbox EltheRoad_VinosNegotiationMain_Text_31, MSGBOX_AUTOCLOSE
-# 308 "data/maps/EltheRoad/scripts.pory"
+# 332 "data/maps/EltheRoad/scripts.pory"
+	msgbox EltheRoad_VinosNegotiationMain_Text_31
+# 333 "data/maps/EltheRoad/scripts.pory"
 	speakername EltheRoad_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_2, PORTRAIT_AMELIA_MUNCH
-# 309 "data/maps/EltheRoad/scripts.pory"
+# 334 "data/maps/EltheRoad/scripts.pory"
 	msgbox EltheRoad_VinosNegotiationMain_Text_32
-# 310 "data/maps/EltheRoad/scripts.pory"
+# 335 "data/maps/EltheRoad/scripts.pory"
 	speakername EltheRoad_VinosNegotiationMain_Text_0, PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT
-# 311 "data/maps/EltheRoad/scripts.pory"
+# 336 "data/maps/EltheRoad/scripts.pory"
 	msgbox EltheRoad_VinosNegotiationMain_Text_33, MSGBOX_AUTOCLOSE
-# 312 "data/maps/EltheRoad/scripts.pory"
+# 337 "data/maps/EltheRoad/scripts.pory"
 	addvar VAR_NEGOTIATION_SCORE, 2
-# 313 "data/maps/EltheRoad/scripts.pory"
+# 338 "data/maps/EltheRoad/scripts.pory"
 	playse SE_SUCCESS
 	goto EltheRoad_VinosNegotiationMain_4
 
 EltheRoad_VinosNegotiationMain_24:
-# 327 "data/maps/EltheRoad/scripts.pory"
+# 352 "data/maps/EltheRoad/scripts.pory"
 	speakername EltheRoad_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_2, PORTRAIT_AMELIA_NEUTRAL
-# 328 "data/maps/EltheRoad/scripts.pory"
+# 353 "data/maps/EltheRoad/scripts.pory"
 	msgbox EltheRoad_VinosNegotiationMain_Text_38
-# 329 "data/maps/EltheRoad/scripts.pory"
+# 354 "data/maps/EltheRoad/scripts.pory"
 	speakername EltheRoad_VinosNegotiationMain_Text_0, PORTRAIT_VINOS_MAD, PORTRAIT_DEFAULT_LEFT
-# 330 "data/maps/EltheRoad/scripts.pory"
+# 355 "data/maps/EltheRoad/scripts.pory"
 	msgbox EltheRoad_VinosNegotiationMain_Text_39
-# 331 "data/maps/EltheRoad/scripts.pory"
+# 356 "data/maps/EltheRoad/scripts.pory"
 	speakername EltheRoad_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_2, PORTRAIT_AMELIA_SHOCK
-# 332 "data/maps/EltheRoad/scripts.pory"
+# 357 "data/maps/EltheRoad/scripts.pory"
 	msgbox EltheRoad_VinosNegotiationMain_Text_40
-# 333 "data/maps/EltheRoad/scripts.pory"
+# 358 "data/maps/EltheRoad/scripts.pory"
 	speakername EltheRoad_VinosNegotiationMain_Text_0, PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT
-# 334 "data/maps/EltheRoad/scripts.pory"
+# 359 "data/maps/EltheRoad/scripts.pory"
 	msgbox EltheRoad_VinosNegotiationMain_Text_41, MSGBOX_AUTOCLOSE
-# 335 "data/maps/EltheRoad/scripts.pory"
+# 360 "data/maps/EltheRoad/scripts.pory"
 	setflag FLAG_NOT_PERFECT_CONVERSATION
-# 336 "data/maps/EltheRoad/scripts.pory"
+# 361 "data/maps/EltheRoad/scripts.pory"
 	compare VAR_NEGOTIATION_SCORE, 0
 	goto_if_gt EltheRoad_VinosNegotiationMain_38
 EltheRoad_VinosNegotiationMain_37:
-# 340 "data/maps/EltheRoad/scripts.pory"
+# 365 "data/maps/EltheRoad/scripts.pory"
 	playse SE_FAILURE
 	goto EltheRoad_VinosNegotiationMain_4
 
 EltheRoad_VinosNegotiationMain_25:
-# 342 "data/maps/EltheRoad/scripts.pory"
+# 367 "data/maps/EltheRoad/scripts.pory"
 	speakername EltheRoad_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_2, PORTRAIT_AMELIA_NEUTRAL
-# 343 "data/maps/EltheRoad/scripts.pory"
+# 368 "data/maps/EltheRoad/scripts.pory"
 	msgbox EltheRoad_VinosNegotiationMain_Text_42
-# 346 "data/maps/EltheRoad/scripts.pory"
+# 371 "data/maps/EltheRoad/scripts.pory"
 	speakername EltheRoad_VinosNegotiationMain_Text_0, PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT
-# 347 "data/maps/EltheRoad/scripts.pory"
+# 372 "data/maps/EltheRoad/scripts.pory"
 	msgbox EltheRoad_VinosNegotiationMain_Text_43, MSGBOX_AUTOCLOSE
-# 349 "data/maps/EltheRoad/scripts.pory"
+# 374 "data/maps/EltheRoad/scripts.pory"
 	addvar VAR_NEGOTIATION_SCORE, 1
 	goto EltheRoad_VinosNegotiationMain_4
 
 EltheRoad_VinosNegotiationMain_26:
-# 351 "data/maps/EltheRoad/scripts.pory"
+# 376 "data/maps/EltheRoad/scripts.pory"
 	speakername EltheRoad_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_2, PORTRAIT_AMELIA_SMUG
-# 352 "data/maps/EltheRoad/scripts.pory"
+# 377 "data/maps/EltheRoad/scripts.pory"
 	msgbox EltheRoad_VinosNegotiationMain_Text_44
-# 355 "data/maps/EltheRoad/scripts.pory"
+# 380 "data/maps/EltheRoad/scripts.pory"
 	speakername EltheRoad_VinosNegotiationMain_Text_0, PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT
-# 356 "data/maps/EltheRoad/scripts.pory"
+# 381 "data/maps/EltheRoad/scripts.pory"
 	msgbox EltheRoad_VinosNegotiationMain_Text_45, MSGBOX_AUTOCLOSE
-# 357 "data/maps/EltheRoad/scripts.pory"
+# 382 "data/maps/EltheRoad/scripts.pory"
 	addvar VAR_NEGOTIATION_SCORE, 2
-# 358 "data/maps/EltheRoad/scripts.pory"
+# 383 "data/maps/EltheRoad/scripts.pory"
 	playse SE_SUCCESS
 	goto EltheRoad_VinosNegotiationMain_4
 
 EltheRoad_VinosNegotiationMain_28:
-# 371 "data/maps/EltheRoad/scripts.pory"
+# 396 "data/maps/EltheRoad/scripts.pory"
 	speakername EltheRoad_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_2, PORTRAIT_AMELIA_NEUTRAL
-# 372 "data/maps/EltheRoad/scripts.pory"
+# 397 "data/maps/EltheRoad/scripts.pory"
 	msgbox EltheRoad_VinosNegotiationMain_Text_50
-# 373 "data/maps/EltheRoad/scripts.pory"
+# 398 "data/maps/EltheRoad/scripts.pory"
 	speakername EltheRoad_VinosNegotiationMain_Text_0, PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT
-# 374 "data/maps/EltheRoad/scripts.pory"
+# 399 "data/maps/EltheRoad/scripts.pory"
 	msgbox EltheRoad_VinosNegotiationMain_Text_51, MSGBOX_AUTOCLOSE
-# 375 "data/maps/EltheRoad/scripts.pory"
+# 400 "data/maps/EltheRoad/scripts.pory"
 	setflag FLAG_NOT_PERFECT_CONVERSATION
-# 376 "data/maps/EltheRoad/scripts.pory"
+# 401 "data/maps/EltheRoad/scripts.pory"
 	compare VAR_NEGOTIATION_SCORE, 0
 	goto_if_gt EltheRoad_VinosNegotiationMain_41
 EltheRoad_VinosNegotiationMain_40:
-# 380 "data/maps/EltheRoad/scripts.pory"
+# 405 "data/maps/EltheRoad/scripts.pory"
 	playse SE_FAILURE
 	goto EltheRoad_VinosNegotiationMain_4
 
 EltheRoad_VinosNegotiationMain_29:
-# 382 "data/maps/EltheRoad/scripts.pory"
+# 407 "data/maps/EltheRoad/scripts.pory"
 	speakername EltheRoad_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_2, PORTRAIT_AMELIA_NEUTRAL
-# 383 "data/maps/EltheRoad/scripts.pory"
+# 408 "data/maps/EltheRoad/scripts.pory"
 	msgbox EltheRoad_VinosNegotiationMain_Text_52
-# 386 "data/maps/EltheRoad/scripts.pory"
+# 411 "data/maps/EltheRoad/scripts.pory"
 	speakername EltheRoad_VinosNegotiationMain_Text_0, PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT
-# 387 "data/maps/EltheRoad/scripts.pory"
+# 412 "data/maps/EltheRoad/scripts.pory"
 	msgbox EltheRoad_VinosNegotiationMain_Text_53
-# 389 "data/maps/EltheRoad/scripts.pory"
+# 414 "data/maps/EltheRoad/scripts.pory"
 	speakername EltheRoad_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_2, PORTRAIT_AMELIA_SERIOUSLY
-# 390 "data/maps/EltheRoad/scripts.pory"
+# 415 "data/maps/EltheRoad/scripts.pory"
 	msgbox EltheRoad_VinosNegotiationMain_Text_54, MSGBOX_AUTOCLOSE
-# 391 "data/maps/EltheRoad/scripts.pory"
+# 416 "data/maps/EltheRoad/scripts.pory"
 	addvar VAR_NEGOTIATION_SCORE, 1
 	goto EltheRoad_VinosNegotiationMain_4
 
 EltheRoad_VinosNegotiationMain_30:
-# 393 "data/maps/EltheRoad/scripts.pory"
+# 418 "data/maps/EltheRoad/scripts.pory"
 	speakername EltheRoad_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_2, PORTRAIT_AMELIA_SMUG
-# 394 "data/maps/EltheRoad/scripts.pory"
+# 419 "data/maps/EltheRoad/scripts.pory"
 	msgbox EltheRoad_VinosNegotiationMain_Text_55
-# 395 "data/maps/EltheRoad/scripts.pory"
+# 420 "data/maps/EltheRoad/scripts.pory"
 	speakername EltheRoad_VinosNegotiationMain_Text_0, PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT
-# 396 "data/maps/EltheRoad/scripts.pory"
+# 421 "data/maps/EltheRoad/scripts.pory"
 	msgbox EltheRoad_VinosNegotiationMain_Text_56, MSGBOX_AUTOCLOSE
-# 397 "data/maps/EltheRoad/scripts.pory"
+# 422 "data/maps/EltheRoad/scripts.pory"
 	addvar VAR_NEGOTIATION_SCORE, 2
-# 398 "data/maps/EltheRoad/scripts.pory"
+# 423 "data/maps/EltheRoad/scripts.pory"
 	playse SE_SUCCESS
 	goto EltheRoad_VinosNegotiationMain_4
 
 EltheRoad_VinosNegotiationMain_32:
-# 407 "data/maps/EltheRoad/scripts.pory"
+# 432 "data/maps/EltheRoad/scripts.pory"
 	goto EltheRoad_VinosNegotiationMidSuccess
 	goto EltheRoad_VinosNegotiationMain_31
 
 EltheRoad_VinosNegotiationMain_35:
-# 239 "data/maps/EltheRoad/scripts.pory"
+# 267 "data/maps/EltheRoad/scripts.pory"
 	subvar VAR_NEGOTIATION_SCORE, 1
 	goto EltheRoad_VinosNegotiationMain_34
 
 EltheRoad_VinosNegotiationMain_38:
-# 338 "data/maps/EltheRoad/scripts.pory"
+# 363 "data/maps/EltheRoad/scripts.pory"
 	subvar VAR_NEGOTIATION_SCORE, 1
 	goto EltheRoad_VinosNegotiationMain_37
 
 EltheRoad_VinosNegotiationMain_41:
-# 378 "data/maps/EltheRoad/scripts.pory"
+# 403 "data/maps/EltheRoad/scripts.pory"
 	subvar VAR_NEGOTIATION_SCORE, 1
 	goto EltheRoad_VinosNegotiationMain_40
 
 
 EltheRoad_VinosNegotiationMidSuccess::
-# 426 "data/maps/EltheRoad/scripts.pory"
+# 451 "data/maps/EltheRoad/scripts.pory"
 	call EltheRoad_CleanUpNegotiationValues
-# 427 "data/maps/EltheRoad/scripts.pory"
+# 452 "data/maps/EltheRoad/scripts.pory"
 	speakername EltheRoad_VinosNegotiationMain_Text_0, PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT
-# 428 "data/maps/EltheRoad/scripts.pory"
+# 453 "data/maps/EltheRoad/scripts.pory"
 	msgbox EltheRoad_VinosNegotiationMidSuccess_Text_0, MSGBOX_AUTOCLOSE
-# 431 "data/maps/EltheRoad/scripts.pory"
+# 456 "data/maps/EltheRoad/scripts.pory"
 	giveitem ITEM_EXP_CANDY_L, 2
+# 457 "data/maps/EltheRoad/scripts.pory"
+	speakername EltheRoad_EventScript_FirstTrigger_Text_3, PORTRAIT_DEMIVEE_YAY
+# 458 "data/maps/EltheRoad/scripts.pory"
+	msgbox EltheRoad_VinosNegotiationMidSuccess_Text_1
+# 459 "data/maps/EltheRoad/scripts.pory"
+	speakername EltheRoad_VinosNegotiationMain_Text_0, PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT
+# 460 "data/maps/EltheRoad/scripts.pory"
+	msgbox EltheRoad_VinosNegotiationMidSuccess_Text_2
+# 461 "data/maps/EltheRoad/scripts.pory"
+	speakername EltheRoad_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_2, PORTRAIT_AMELIA_NEUTRAL
+# 462 "data/maps/EltheRoad/scripts.pory"
+	msgbox EltheRoad_VinosNegotiationMidSuccess_Text_3, MSGBOX_AUTOCLOSE
+# 463 "data/maps/EltheRoad/scripts.pory"
+	setvar VAR_MAIN_GAME_STATE, 3
+# 464 "data/maps/EltheRoad/scripts.pory"
+	setflag FLAG_TEMP_9
 	return
 
 
 EltheRoad_VinosNegotiationCompleteSuccess::
-# 437 "data/maps/EltheRoad/scripts.pory"
+# 469 "data/maps/EltheRoad/scripts.pory"
 	call EltheRoad_CleanUpNegotiationValues
+# 470 "data/maps/EltheRoad/scripts.pory"
+	speakername EltheRoad_VinosNegotiationMain_Text_0, PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT
+# 471 "data/maps/EltheRoad/scripts.pory"
+	msgbox EltheRoad_VinosNegotiationCompleteSuccess_Text_0, MSGBOX_AUTOCLOSE
+# 473 "data/maps/EltheRoad/scripts.pory"
+	giveitem ITEM_EXP_CANDY_XL, 1
+# 474 "data/maps/EltheRoad/scripts.pory"
+	speakername EltheRoad_EventScript_FirstTrigger_Text_3, PORTRAIT_DEMIVEE_YAY
+# 475 "data/maps/EltheRoad/scripts.pory"
+	msgbox EltheRoad_VinosNegotiationCompleteSuccess_Text_1
+# 476 "data/maps/EltheRoad/scripts.pory"
+	speakername EltheRoad_VinosNegotiationMain_Text_0, PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT
+# 477 "data/maps/EltheRoad/scripts.pory"
+	msgbox EltheRoad_VinosNegotiationCompleteSuccess_Text_2
+# 479 "data/maps/EltheRoad/scripts.pory"
+	speakername EltheRoad_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_2, PORTRAIT_AMELIA_NEUTRAL
+# 480 "data/maps/EltheRoad/scripts.pory"
+	msgbox EltheRoad_VinosNegotiationCompleteSuccess_Text_3, MSGBOX_AUTOCLOSE
+# 481 "data/maps/EltheRoad/scripts.pory"
+	setvar VAR_MAIN_GAME_STATE, 3
+# 482 "data/maps/EltheRoad/scripts.pory"
+	setflag FLAG_TEMP_8
 	return
 
 
 EltheRoad_VinosDoBattle::
-# 442 "data/maps/EltheRoad/scripts.pory"
+# 487 "data/maps/EltheRoad/scripts.pory"
 	setwildbattle SPECIES_BELLSPROUT, 35, ITEM_NONE
-# 443 "data/maps/EltheRoad/scripts.pory"
+# 488 "data/maps/EltheRoad/scripts.pory"
 	dowildbattle
-# 444 "data/maps/EltheRoad/scripts.pory"
+# 489 "data/maps/EltheRoad/scripts.pory"
 	call EltheRoad_CleanUpNegotiationValues
-# 445 "data/maps/EltheRoad/scripts.pory"
+# 490 "data/maps/EltheRoad/scripts.pory"
 	turnobject 3, DIR_SOUTH
-# 446 "data/maps/EltheRoad/scripts.pory"
+# 491 "data/maps/EltheRoad/scripts.pory"
 	speakername EltheRoad_VinosNegotiationMain_Text_0, PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT
-# 447 "data/maps/EltheRoad/scripts.pory"
+# 492 "data/maps/EltheRoad/scripts.pory"
 	msgbox EltheRoad_VinosDoBattle_Text_0
-# 448 "data/maps/EltheRoad/scripts.pory"
+# 493 "data/maps/EltheRoad/scripts.pory"
 	speakername EltheRoad_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_2, PORTRAIT_AMELIA_SERIOUSLY
-# 449 "data/maps/EltheRoad/scripts.pory"
+# 494 "data/maps/EltheRoad/scripts.pory"
 	msgbox EltheRoad_VinosDoBattle_Text_1
-# 450 "data/maps/EltheRoad/scripts.pory"
+# 495 "data/maps/EltheRoad/scripts.pory"
 	speakername EltheRoad_VinosNegotiationMain_Text_0, PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT
-# 451 "data/maps/EltheRoad/scripts.pory"
+# 496 "data/maps/EltheRoad/scripts.pory"
 	msgbox EltheRoad_VinosDoBattle_Text_2, MSGBOX_AUTOCLOSE
-# 452 "data/maps/EltheRoad/scripts.pory"
+# 497 "data/maps/EltheRoad/scripts.pory"
 	delay 60
-# 453 "data/maps/EltheRoad/scripts.pory"
+# 498 "data/maps/EltheRoad/scripts.pory"
 	applymovement 3, Common_Movement_FaceLeft
-# 454 "data/maps/EltheRoad/scripts.pory"
+# 499 "data/maps/EltheRoad/scripts.pory"
 	delay 120
-# 455 "data/maps/EltheRoad/scripts.pory"
+# 500 "data/maps/EltheRoad/scripts.pory"
 	applymovement 3, Common_Movement_FaceRight
-# 456 "data/maps/EltheRoad/scripts.pory"
+# 501 "data/maps/EltheRoad/scripts.pory"
 	delay 120
-# 457 "data/maps/EltheRoad/scripts.pory"
+# 502 "data/maps/EltheRoad/scripts.pory"
 	applymovement 3, Common_Movement_FaceDown
-# 458 "data/maps/EltheRoad/scripts.pory"
+# 503 "data/maps/EltheRoad/scripts.pory"
 	speakername EltheRoad_VinosNegotiationMain_Text_0, PORTRAIT_VINOS_MAD, PORTRAIT_DEFAULT_LEFT
-# 459 "data/maps/EltheRoad/scripts.pory"
+# 504 "data/maps/EltheRoad/scripts.pory"
 	msgbox EltheRoad_VinosDoBattle_Text_3, MSGBOX_AUTOCLOSE
-# 460 "data/maps/EltheRoad/scripts.pory"
+# 505 "data/maps/EltheRoad/scripts.pory"
 	giveitem ITEM_EXP_CANDY_L
-# 461 "data/maps/EltheRoad/scripts.pory"
+# 506 "data/maps/EltheRoad/scripts.pory"
 	speakername EltheRoad_EventScript_FirstTrigger_Text_3, PORTRAIT_DEMIVEE_YAY
-# 462 "data/maps/EltheRoad/scripts.pory"
-	msgbox EltheRoad_VinosDoBattle_Text_4
-# 463 "data/maps/EltheRoad/scripts.pory"
+# 507 "data/maps/EltheRoad/scripts.pory"
+	msgbox EltheRoad_VinosNegotiationMidSuccess_Text_1
+# 508 "data/maps/EltheRoad/scripts.pory"
 	speakername EltheRoad_VinosNegotiationMain_Text_0, PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT
-# 464 "data/maps/EltheRoad/scripts.pory"
-	msgbox EltheRoad_VinosDoBattle_Text_5, MSGBOX_AUTOCLOSE
-# 465 "data/maps/EltheRoad/scripts.pory"
+# 509 "data/maps/EltheRoad/scripts.pory"
+	msgbox EltheRoad_VinosDoBattle_Text_4, MSGBOX_AUTOCLOSE
+# 510 "data/maps/EltheRoad/scripts.pory"
 	setvar VAR_MAIN_GAME_STATE, 3
-# 466 "data/maps/EltheRoad/scripts.pory"
+# 511 "data/maps/EltheRoad/scripts.pory"
 	setflag FLAG_TEMP_9
 	return
 
 
 EltheRoad_CleanUpNegotiationValues::
-# 471 "data/maps/EltheRoad/scripts.pory"
+# 516 "data/maps/EltheRoad/scripts.pory"
 	setvar VAR_NEGOTIATION_SCORE, 0
-# 472 "data/maps/EltheRoad/scripts.pory"
+# 517 "data/maps/EltheRoad/scripts.pory"
 	clearflag FLAG_TEMP_4
-# 473 "data/maps/EltheRoad/scripts.pory"
+# 518 "data/maps/EltheRoad/scripts.pory"
 	clearflag FLAG_TEMP_1
-# 474 "data/maps/EltheRoad/scripts.pory"
+# 519 "data/maps/EltheRoad/scripts.pory"
 	clearflag FLAG_TEMP_2
-# 475 "data/maps/EltheRoad/scripts.pory"
+# 520 "data/maps/EltheRoad/scripts.pory"
 	clearflag FLAG_TEMP_3
-# 476 "data/maps/EltheRoad/scripts.pory"
+# 521 "data/maps/EltheRoad/scripts.pory"
 	clearflag FLAG_NOT_PERFECT_CONVERSATION
 	return
 
 
 EltheRoad_EventScript_VinosIdle::
-# 482 "data/maps/EltheRoad/scripts.pory"
-	goto_if_set FLAG_TEMP_9, EltheRoad_EventScript_VinosIdle_1
-# 490 "data/maps/EltheRoad/scripts.pory"
+# 527 "data/maps/EltheRoad/scripts.pory"
+	lock
+# 528 "data/maps/EltheRoad/scripts.pory"
+	faceplayer
+# 529 "data/maps/EltheRoad/scripts.pory"
+	goto_if_set FLAG_TEMP_9, EltheRoad_EventScript_VinosIdle_2
+# 535 "data/maps/EltheRoad/scripts.pory"
+	goto_if_unset FLAG_FLARESHARD_GET, EltheRoad_EventScript_VinosIdle_3
+# 594 "data/maps/EltheRoad/scripts.pory"
+	goto_if_set FLAG_TEMP_8, EltheRoad_EventScript_VinosIdle_4
+# 612 "data/maps/EltheRoad/scripts.pory"
 	speakername EltheRoad_VinosNegotiationMain_Text_0, PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT
-# 491 "data/maps/EltheRoad/scripts.pory"
-	msgbox EltheRoad_EventScript_VinosIdle_Text_1, MSGBOX_NPC
-	return
-
+# 613 "data/maps/EltheRoad/scripts.pory"
+	msgbox EltheRoad_EventScript_VinosIdle_Text_8, MSGBOX_NPC
 EltheRoad_EventScript_VinosIdle_1:
-# 484 "data/maps/EltheRoad/scripts.pory"
+# 618 "data/maps/EltheRoad/scripts.pory"
+	release
+	return
+
+EltheRoad_EventScript_VinosIdle_2:
+# 531 "data/maps/EltheRoad/scripts.pory"
 	speakername EltheRoad_VinosNegotiationMain_Text_0, PORTRAIT_VINOS_MAD, PORTRAIT_DEFAULT_LEFT
-# 485 "data/maps/EltheRoad/scripts.pory"
-	msgbox EltheRoad_EventScript_VinosIdle_Text_0, MSGBOX_NPC
+# 532 "data/maps/EltheRoad/scripts.pory"
+	msgbox EltheRoad_EventScript_VinosIdle_Text_0, MSGBOX_AUTOCLOSE
+	goto EltheRoad_EventScript_VinosIdle_1
+
+EltheRoad_EventScript_VinosIdle_3:
+# 537 "data/maps/EltheRoad/scripts.pory"
+	speakername EltheRoad_VinosNegotiationMain_Text_0, PORTRAIT_VINOS_NEUTRAL
+# 538 "data/maps/EltheRoad/scripts.pory"
+	message EltheRoad_EventScript_VinosIdle_Text_1
+# 539 "data/maps/EltheRoad/scripts.pory"
+	waitmessage
+# 540 "data/maps/EltheRoad/scripts.pory"
+	special SpawnCameraObject
+# 541 "data/maps/EltheRoad/scripts.pory"
+	specialvar VAR_RESULT, GetPlayerFacingDirection
+# 542 "data/maps/EltheRoad/scripts.pory"
+	switch VAR_RESULT
+# 544 "data/maps/EltheRoad/scripts.pory"
+	case DIR_EAST, EltheRoad_EventScript_VinosIdle_11
+# 549 "data/maps/EltheRoad/scripts.pory"
+	case DIR_NORTH, EltheRoad_EventScript_VinosIdle_12
+EltheRoad_EventScript_VinosIdle_9:
+# 553 "data/maps/EltheRoad/scripts.pory"
+	applymovement OBJ_EVENT_ID_CAMERA, EltheRoad_Movement_CameraShowItem
+# 554 "data/maps/EltheRoad/scripts.pory"
+	waitmovement 0
+# 555 "data/maps/EltheRoad/scripts.pory"
+	message EltheRoad_EventScript_VinosIdle_Text_2
+# 556 "data/maps/EltheRoad/scripts.pory"
+	setmetatile 26, 20, 0x247, FALSE
+# 557 "data/maps/EltheRoad/scripts.pory"
+	special DrawWholeMapView
+# 558 "data/maps/EltheRoad/scripts.pory"
+	delay 16
+# 559 "data/maps/EltheRoad/scripts.pory"
+	setmetatile 26, 20, 0x20C, FALSE
+# 560 "data/maps/EltheRoad/scripts.pory"
+	special DrawWholeMapView
+# 561 "data/maps/EltheRoad/scripts.pory"
+	delay 16
+# 562 "data/maps/EltheRoad/scripts.pory"
+	setmetatile 26, 20, 0x247, FALSE
+# 563 "data/maps/EltheRoad/scripts.pory"
+	special DrawWholeMapView
+# 564 "data/maps/EltheRoad/scripts.pory"
+	delay 16
+# 565 "data/maps/EltheRoad/scripts.pory"
+	setmetatile 26, 20, 0x20C, FALSE
+# 566 "data/maps/EltheRoad/scripts.pory"
+	special DrawWholeMapView
+# 567 "data/maps/EltheRoad/scripts.pory"
+	delay 16
+# 568 "data/maps/EltheRoad/scripts.pory"
+	setmetatile 26, 20, 0x247, FALSE
+# 569 "data/maps/EltheRoad/scripts.pory"
+	special DrawWholeMapView
+# 570 "data/maps/EltheRoad/scripts.pory"
+	delay 16
+# 571 "data/maps/EltheRoad/scripts.pory"
+	setmetatile 26, 20, 0x20C, FALSE
+# 572 "data/maps/EltheRoad/scripts.pory"
+	special DrawWholeMapView
+# 573 "data/maps/EltheRoad/scripts.pory"
+	delay 16
+# 574 "data/maps/EltheRoad/scripts.pory"
+	waitbuttonpress
+# 575 "data/maps/EltheRoad/scripts.pory"
+	closemessage
+# 576 "data/maps/EltheRoad/scripts.pory"
+	applymovement OBJ_EVENT_ID_CAMERA, EltheRoad_Movement_CameraReturn
+# 577 "data/maps/EltheRoad/scripts.pory"
+	waitmovement 0
+# 578 "data/maps/EltheRoad/scripts.pory"
+	specialvar VAR_RESULT, GetPlayerFacingDirection
+# 579 "data/maps/EltheRoad/scripts.pory"
+	switch VAR_RESULT
+# 581 "data/maps/EltheRoad/scripts.pory"
+	case DIR_EAST, EltheRoad_EventScript_VinosIdle_15
+# 586 "data/maps/EltheRoad/scripts.pory"
+	case DIR_NORTH, EltheRoad_EventScript_VinosIdle_16
+EltheRoad_EventScript_VinosIdle_13:
+# 592 "data/maps/EltheRoad/scripts.pory"
+	special RemoveCameraObject
+	goto EltheRoad_EventScript_VinosIdle_1
+
+EltheRoad_EventScript_VinosIdle_4:
+# 596 "data/maps/EltheRoad/scripts.pory"
+	speakername EltheRoad_VinosNegotiationMain_Text_0, PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT
+# 597 "data/maps/EltheRoad/scripts.pory"
+	msgbox EltheRoad_EventScript_VinosIdle_Text_3
+# 598 "data/maps/EltheRoad/scripts.pory"
+	speakername EltheRoad_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_2, PORTRAIT_AMELIA_SERIOUSLY
+# 599 "data/maps/EltheRoad/scripts.pory"
+	msgbox EltheRoad_EventScript_VinosIdle_Text_4
+# 603 "data/maps/EltheRoad/scripts.pory"
+	speakername EltheRoad_VinosNegotiationMain_Text_0, PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT
+# 604 "data/maps/EltheRoad/scripts.pory"
+	msgbox EltheRoad_EventScript_VinosIdle_Text_5
+# 605 "data/maps/EltheRoad/scripts.pory"
+	speakername EltheRoad_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_2, PORTRAIT_AMELIA_NEUTRAL
+# 606 "data/maps/EltheRoad/scripts.pory"
+	msgbox EltheRoad_EventScript_VinosIdle_Text_6
+# 607 "data/maps/EltheRoad/scripts.pory"
+	speakername EltheRoad_VinosNegotiationMain_Text_0, PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT
+# 608 "data/maps/EltheRoad/scripts.pory"
+	msgbox EltheRoad_EventScript_VinosIdle_Text_7, MSGBOX_AUTOCLOSE
+	goto EltheRoad_EventScript_VinosIdle_1
+
+EltheRoad_EventScript_VinosIdle_11:
+# 545 "data/maps/EltheRoad/scripts.pory"
+	applymovement OBJ_EVENT_ID_CAMERA, Common_Movement_WalkRight
+# 546 "data/maps/EltheRoad/scripts.pory"
+	waitmovement 0
+# 547 "data/maps/EltheRoad/scripts.pory"
+	applymovement OBJ_EVENT_ID_CAMERA, Common_Movement_WalkUp
+# 548 "data/maps/EltheRoad/scripts.pory"
+	waitmovement 0
+	goto EltheRoad_EventScript_VinosIdle_9
+
+EltheRoad_EventScript_VinosIdle_12:
+# 550 "data/maps/EltheRoad/scripts.pory"
+	applymovement OBJ_EVENT_ID_CAMERA, Common_Movement_WalkUp2
+# 551 "data/maps/EltheRoad/scripts.pory"
+	waitmovement 0
+	goto EltheRoad_EventScript_VinosIdle_9
+
+EltheRoad_EventScript_VinosIdle_15:
+# 582 "data/maps/EltheRoad/scripts.pory"
+	applymovement OBJ_EVENT_ID_CAMERA, Common_Movement_WalkDown
+# 583 "data/maps/EltheRoad/scripts.pory"
+	waitmovement 0
+# 584 "data/maps/EltheRoad/scripts.pory"
+	applymovement OBJ_EVENT_ID_CAMERA, Common_Movement_WalkLeft
+# 585 "data/maps/EltheRoad/scripts.pory"
+	waitmovement 0
+	goto EltheRoad_EventScript_VinosIdle_13
+
+EltheRoad_EventScript_VinosIdle_16:
+# 587 "data/maps/EltheRoad/scripts.pory"
+	applymovement OBJ_EVENT_ID_CAMERA, Common_Movement_WalkDown
+# 588 "data/maps/EltheRoad/scripts.pory"
+	waitmovement 0
+# 589 "data/maps/EltheRoad/scripts.pory"
+	applymovement OBJ_EVENT_ID_CAMERA, Common_Movement_WalkDown
+# 590 "data/maps/EltheRoad/scripts.pory"
+	waitmovement 0
+	goto EltheRoad_EventScript_VinosIdle_13
+
+
+EltheRoad_Trigger_VinosAltTrigger::
+# 623 "data/maps/EltheRoad/scripts.pory"
+	lock
+# 624 "data/maps/EltheRoad/scripts.pory"
+	playse SE_PIN
+# 625 "data/maps/EltheRoad/scripts.pory"
+	applymovement 3, Common_Movement_FaceLeft
+# 626 "data/maps/EltheRoad/scripts.pory"
+	waitmovement 0
+# 627 "data/maps/EltheRoad/scripts.pory"
+	applymovement 3, Common_Movement_ExclamationMark
+# 628 "data/maps/EltheRoad/scripts.pory"
+	waitmovement 0
+# 629 "data/maps/EltheRoad/scripts.pory"
+	delay 48
+# 630 "data/maps/EltheRoad/scripts.pory"
+	speakername EltheRoad_Trigger_VinosTrigger_Text_0, PORTRAIT_VINOS_MAD, PORTRAIT_DEFAULT_LEFT
+# 631 "data/maps/EltheRoad/scripts.pory"
+	msgbox EltheRoad_Trigger_VinosAltTrigger_Text_0
+# 632 "data/maps/EltheRoad/scripts.pory"
+	speakername EltheRoad_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_2, PORTRAIT_AMELIA_NEUTRAL
+# 633 "data/maps/EltheRoad/scripts.pory"
+	msgbox EltheRoad_Trigger_VinosAltTrigger_Text_1
+# 634 "data/maps/EltheRoad/scripts.pory"
+	speakername EltheRoad_Trigger_VinosTrigger_Text_0, PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT
+# 635 "data/maps/EltheRoad/scripts.pory"
+	msgbox EltheRoad_Trigger_VinosAltTrigger_Text_2
+# 636 "data/maps/EltheRoad/scripts.pory"
+	speakername EltheRoad_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_2, PORTRAIT_AMELIA_NEUTRAL
+# 637 "data/maps/EltheRoad/scripts.pory"
+	msgbox EltheRoad_Trigger_VinosAltTrigger_Text_3
+# 638 "data/maps/EltheRoad/scripts.pory"
+	speakername EltheRoad_VinosNegotiationMain_Text_0, PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT
+# 639 "data/maps/EltheRoad/scripts.pory"
+	msgbox EltheRoad_Trigger_VinosAltTrigger_Text_4
+# 641 "data/maps/EltheRoad/scripts.pory"
+	speakername EltheRoad_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_2, PORTRAIT_AMELIA_SMUG
+# 642 "data/maps/EltheRoad/scripts.pory"
+	msgbox EltheRoad_Trigger_VinosAltTrigger_Text_5
+# 643 "data/maps/EltheRoad/scripts.pory"
+	speakername EltheRoad_VinosNegotiationMain_Text_0, PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT
+# 644 "data/maps/EltheRoad/scripts.pory"
+	msgbox EltheRoad_Trigger_VinosAltTrigger_Text_6, MSGBOX_AUTOCLOSE
+# 645 "data/maps/EltheRoad/scripts.pory"
+	giveitem ITEM_EXP_CANDY_XL, 1
+# 646 "data/maps/EltheRoad/scripts.pory"
+	speakername EltheRoad_EventScript_FirstTrigger_Text_3, PORTRAIT_DEMIVEE_YAY
+# 647 "data/maps/EltheRoad/scripts.pory"
+	msgbox EltheRoad_VinosNegotiationCompleteSuccess_Text_1
+# 648 "data/maps/EltheRoad/scripts.pory"
+	speakername EltheRoad_VinosNegotiationMain_Text_0, PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT
+# 649 "data/maps/EltheRoad/scripts.pory"
+	msgbox EltheRoad_VinosNegotiationCompleteSuccess_Text_2
+# 651 "data/maps/EltheRoad/scripts.pory"
+	speakername EltheRoad_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_2, PORTRAIT_AMELIA_NEUTRAL
+# 652 "data/maps/EltheRoad/scripts.pory"
+	msgbox EltheRoad_VinosNegotiationCompleteSuccess_Text_3, MSGBOX_AUTOCLOSE
+# 653 "data/maps/EltheRoad/scripts.pory"
+	setvar VAR_MAIN_GAME_STATE, 3
+# 654 "data/maps/EltheRoad/scripts.pory"
+	setflag FLAG_TEMP_8
 	return
 
 
-# 498 "data/maps/EltheRoad/scripts.pory"
+# 657 "data/maps/EltheRoad/scripts.pory"
+EltheRoad_Movement_CameraShowItem:
+# 659 "data/maps/EltheRoad/scripts.pory"
+	walk_up
+# 659 "data/maps/EltheRoad/scripts.pory"
+	walk_up
+# 659 "data/maps/EltheRoad/scripts.pory"
+	walk_up
+# 660 "data/maps/EltheRoad/scripts.pory"
+	walk_right
+	step_end
+
+# 663 "data/maps/EltheRoad/scripts.pory"
+EltheRoad_Movement_CameraReturn:
+# 665 "data/maps/EltheRoad/scripts.pory"
+	walk_left
+# 666 "data/maps/EltheRoad/scripts.pory"
+	walk_down
+# 666 "data/maps/EltheRoad/scripts.pory"
+	walk_down
+# 666 "data/maps/EltheRoad/scripts.pory"
+	walk_down
+	step_end
+
+# 669 "data/maps/EltheRoad/scripts.pory"
 EltheRoad_Movement_AmeliaJumpUp:
-# 500 "data/maps/EltheRoad/scripts.pory"
+# 671 "data/maps/EltheRoad/scripts.pory"
 	set_visible
-# 501 "data/maps/EltheRoad/scripts.pory"
+# 672 "data/maps/EltheRoad/scripts.pory"
 	jump_in_place_left
 	step_end
 
-# 504 "data/maps/EltheRoad/scripts.pory"
+# 675 "data/maps/EltheRoad/scripts.pory"
 EltheRoad_Movement_AmeliaLookAround:
-# 506 "data/maps/EltheRoad/scripts.pory"
+# 677 "data/maps/EltheRoad/scripts.pory"
 	face_up
-# 507 "data/maps/EltheRoad/scripts.pory"
+# 678 "data/maps/EltheRoad/scripts.pory"
 	delay_16
-# 508 "data/maps/EltheRoad/scripts.pory"
+# 679 "data/maps/EltheRoad/scripts.pory"
 	face_down
-# 509 "data/maps/EltheRoad/scripts.pory"
+# 680 "data/maps/EltheRoad/scripts.pory"
 	delay_16
-# 510 "data/maps/EltheRoad/scripts.pory"
+# 681 "data/maps/EltheRoad/scripts.pory"
 	face_up
-# 511 "data/maps/EltheRoad/scripts.pory"
+# 682 "data/maps/EltheRoad/scripts.pory"
 	delay_16
-# 512 "data/maps/EltheRoad/scripts.pory"
+# 683 "data/maps/EltheRoad/scripts.pory"
 	face_down
-# 513 "data/maps/EltheRoad/scripts.pory"
+# 684 "data/maps/EltheRoad/scripts.pory"
 	delay_16
-# 514 "data/maps/EltheRoad/scripts.pory"
+# 685 "data/maps/EltheRoad/scripts.pory"
 	face_right
-# 515 "data/maps/EltheRoad/scripts.pory"
+# 686 "data/maps/EltheRoad/scripts.pory"
 	delay_16
-# 515 "data/maps/EltheRoad/scripts.pory"
+# 686 "data/maps/EltheRoad/scripts.pory"
 	delay_16
-# 515 "data/maps/EltheRoad/scripts.pory"
+# 686 "data/maps/EltheRoad/scripts.pory"
 	delay_16
-# 516 "data/maps/EltheRoad/scripts.pory"
+# 687 "data/maps/EltheRoad/scripts.pory"
 	face_left
-# 517 "data/maps/EltheRoad/scripts.pory"
+# 688 "data/maps/EltheRoad/scripts.pory"
 	delay_16
-# 517 "data/maps/EltheRoad/scripts.pory"
+# 688 "data/maps/EltheRoad/scripts.pory"
 	delay_16
-# 517 "data/maps/EltheRoad/scripts.pory"
+# 688 "data/maps/EltheRoad/scripts.pory"
 	delay_16
 	step_end
 
-# 520 "data/maps/EltheRoad/scripts.pory"
+# 691 "data/maps/EltheRoad/scripts.pory"
 EltheRoad_Movement_AmeliaStartLeaving:
-# 522 "data/maps/EltheRoad/scripts.pory"
+# 693 "data/maps/EltheRoad/scripts.pory"
 	walk_up
-# 522 "data/maps/EltheRoad/scripts.pory"
+# 693 "data/maps/EltheRoad/scripts.pory"
 	walk_up
-# 523 "data/maps/EltheRoad/scripts.pory"
+# 694 "data/maps/EltheRoad/scripts.pory"
 	walk_right
-# 523 "data/maps/EltheRoad/scripts.pory"
+# 694 "data/maps/EltheRoad/scripts.pory"
 	walk_right
-# 523 "data/maps/EltheRoad/scripts.pory"
+# 694 "data/maps/EltheRoad/scripts.pory"
 	walk_right
-# 524 "data/maps/EltheRoad/scripts.pory"
+# 695 "data/maps/EltheRoad/scripts.pory"
 	delay_16
-# 524 "data/maps/EltheRoad/scripts.pory"
+# 695 "data/maps/EltheRoad/scripts.pory"
 	delay_16
-# 525 "data/maps/EltheRoad/scripts.pory"
+# 696 "data/maps/EltheRoad/scripts.pory"
 	face_left
 	step_end
 
-# 528 "data/maps/EltheRoad/scripts.pory"
+# 699 "data/maps/EltheRoad/scripts.pory"
 EltheRoad_Movement_DemiveeFollow:
-# 530 "data/maps/EltheRoad/scripts.pory"
+# 701 "data/maps/EltheRoad/scripts.pory"
 	jump_up
-# 531 "data/maps/EltheRoad/scripts.pory"
+# 702 "data/maps/EltheRoad/scripts.pory"
 	walk_fast_up
-# 532 "data/maps/EltheRoad/scripts.pory"
+# 703 "data/maps/EltheRoad/scripts.pory"
 	walk_fast_right
-# 532 "data/maps/EltheRoad/scripts.pory"
+# 703 "data/maps/EltheRoad/scripts.pory"
 	walk_fast_right
 	step_end
 
-# 535 "data/maps/EltheRoad/scripts.pory"
+# 706 "data/maps/EltheRoad/scripts.pory"
 EltheRoad_Movement_DemiveeJoin:
-# 537 "data/maps/EltheRoad/scripts.pory"
+# 708 "data/maps/EltheRoad/scripts.pory"
 	walk_slow_right
-# 538 "data/maps/EltheRoad/scripts.pory"
+# 709 "data/maps/EltheRoad/scripts.pory"
 	enter_pokeball
 	step_end
 
-# 541 "data/maps/EltheRoad/scripts.pory"
+# 712 "data/maps/EltheRoad/scripts.pory"
 EltheRoad_Movement_VinosGetOnLog:
-# 543 "data/maps/EltheRoad/scripts.pory"
+# 714 "data/maps/EltheRoad/scripts.pory"
 	walk_fast_right
-# 544 "data/maps/EltheRoad/scripts.pory"
+# 715 "data/maps/EltheRoad/scripts.pory"
 	jump_right
-# 545 "data/maps/EltheRoad/scripts.pory"
+# 716 "data/maps/EltheRoad/scripts.pory"
 	face_down
 	step_end
 
@@ -1023,18 +1363,18 @@ EltheRoad_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_15:
 	.string "I won't say no. Welcome aboard!$"
 
 EltheRoad_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_16:
-# 81 "data/maps/EltheRoad/scripts.pory"
+# 82 "data/maps/EltheRoad/scripts.pory"
 	.string "Eevee joined your party!$"
 
 EltheRoad_EventScript_FirstTrigger_Text_0:
-# 99 "data/maps/EltheRoad/scripts.pory"
+# 100 "data/maps/EltheRoad/scripts.pory"
 	.string "I meant to ask earlier, but, uh,\n"
 	.string "what are you, exactly?\p"
 	.string "You look like an Eevee, but those\n"
 	.string "markings…are they natural?$"
 
 EltheRoad_EventScript_FirstTrigger_Text_1:
-# 101 "data/maps/EltheRoad/scripts.pory"
+# 102 "data/maps/EltheRoad/scripts.pory"
 	.string "Uh, I dunno! I used to be normal,\n"
 	.string "but I like to eat these crystals…\l"
 	.string "I think I got these markings after\l"
@@ -1045,19 +1385,19 @@ EltheRoad_EventScript_FirstTrigger_Text_1:
 	.string "And my moves.$"
 
 EltheRoad_EventScript_FirstTrigger_Text_2:
-# 105 "data/maps/EltheRoad/scripts.pory"
+# 106 "data/maps/EltheRoad/scripts.pory"
 	.string "So you're some kind of…Demi-Vee?$"
 
 EltheRoad_EventScript_FirstTrigger_Text_3:
-# 107 "data/maps/EltheRoad/scripts.pory"
+# 108 "data/maps/EltheRoad/scripts.pory"
 	.string "Demi-Vee$"
 
 EltheRoad_EventScript_FirstTrigger_Text_4:
-# 108 "data/maps/EltheRoad/scripts.pory"
+# 109 "data/maps/EltheRoad/scripts.pory"
 	.string "Huh?$"
 
 EltheRoad_EventScript_FirstTrigger_Text_5:
-# 110 "data/maps/EltheRoad/scripts.pory"
+# 111 "data/maps/EltheRoad/scripts.pory"
 	.string "Um, anyway! If you find any cool\n"
 	.string "crystals, give them to me!\l"
 	.string "They'll make me stronger in battle.\p"
@@ -1066,101 +1406,240 @@ EltheRoad_EventScript_FirstTrigger_Text_5:
 	.string "I know this place pretty well!$"
 
 EltheRoad_EventScript_FirstTrigger_Text_6:
-# 113 "data/maps/EltheRoad/scripts.pory"
+# 114 "data/maps/EltheRoad/scripts.pory"
 	.string "(Press R or talk to Demi-Vee while\n"
 	.string "he's following you to get advice!)\p"
 	.string "(He will talk about the person\n"
 	.string "you're facing, or give general hints\l"
 	.string "for how to progress.)$"
 
+EltheRoad_EventScript_DemiveeTutorialSign_Text_0:
+# 121 "data/maps/EltheRoad/scripts.pory"
+	.string "{EMPHASIS_RED}!! NON-DIEGETIC SIGN ALERT !!{EMPHASIS_OFF}\p"
+	.string "This sign does not really exist!\n"
+	.string "It is just here to help you, Player.\p"
+	.string "Your new companion is a very\n"
+	.string "unique Pokémon. He doesn't grow\l"
+	.string "in the way you're used to.\p"
+	.string "If you want to make the best of his\n"
+	.string "unique traits, read on.$"
+
+EltheRoad_EventScript_DemiveeTutorialMultichoice_Text_0:
+# 129 "data/maps/EltheRoad/scripts.pory"
+	.string "What would you like to read about?$"
+
+EltheRoad_EventScript_DemiveeTutorialMultichoice_Text_1:
+# 131 "data/maps/EltheRoad/scripts.pory"
+	.string "Forms$"
+
+EltheRoad_EventScript_DemiveeTutorialMultichoice_Text_2:
+# 131 "data/maps/EltheRoad/scripts.pory"
+	.string "Shards$"
+
+EltheRoad_EventScript_DemiveeTutorialMultichoice_Text_3:
+# 131 "data/maps/EltheRoad/scripts.pory"
+	.string "Leveling Up$"
+
+EltheRoad_EventScript_DemiveeTutorialMultichoice_Text_4:
+# 131 "data/maps/EltheRoad/scripts.pory"
+	.string "Stat Points$"
+
+EltheRoad_EventScript_DemiveeTutorialMultichoice_Text_5:
+# 131 "data/maps/EltheRoad/scripts.pory"
+	.string "Learning Skills$"
+
+EltheRoad_EventScript_DemiveeTutorialMultichoice_Text_6:
+# 131 "data/maps/EltheRoad/scripts.pory"
+	.string "Stop Reading$"
+
+EltheRoad_EventScript_DemiveeTutorialMultichoice_Text_7:
+# 135 "data/maps/EltheRoad/scripts.pory"
+	.string "Demi-Vee can't evolve, but he can\n"
+	.string "change forms using special Shards.\p"
+	.string "Each form matches the type of a\n"
+	.string "normal evolution and has similar\l"
+	.string "stats and moves.\p"
+	.string "The four moves he starts with also\n"
+	.string "change depending on his form.\p"
+	.string "For example, his first move will be\n"
+	.string "a mid-power move matching his Type.\p"
+	.string "Be careful, though; if you delete\n"
+	.string "one of these base moves, he will\l"
+	.string "lose access to it in all forms.\l"
+	.string "For example, if you delete Razor Leaf\l"
+	.string "while in Grass form, you will also\l"
+	.string "lose Shock Wave in Electric form.$"
+
+EltheRoad_EventScript_DemiveeTutorialMultichoice_Text_8:
+# 141 "data/maps/EltheRoad/scripts.pory"
+	.string "There are various Shards scattered\n"
+	.string "throughout this area.\p"
+	.string "They are pieces of Evolution Stones\n"
+	.string "which allow Demi-Vee to change form.\p"
+	.string "You may find them on the ground, or\n"
+	.string "get them as rewards for doing favors.\p"
+	.string "You can see your currently owned\n"
+	.string "shards in the Key Items pocket.\p"
+	.string "To change Demi-Vee's form, open the\n"
+	.string "POKéMON menu, select Demi-Vee, and\l"
+	.string "pick the SHARDS option. On this\l"
+	.string "screen, you can change forms using\l"
+	.string "the L and R buttons.$"
+
+EltheRoad_EventScript_DemiveeTutorialMultichoice_Text_9:
+# 147 "data/maps/EltheRoad/scripts.pory"
+	.string "Demi-Vee does not gain Exp. Points\n"
+	.string "from participating in battle.\p"
+	.string "He gains Exp. Points from eating\n"
+	.string "Rock Candy instead.\p"
+	.string "Like Shards, these can be found\n"
+	.string "around town or received as rewards.\p"
+	.string "It can be useful to save them if\n"
+	.string "you're not planning to fight soon,\l"
+	.string "as leveling up becomes more valuable\l"
+	.string "when you have more Shards.$"
+
+EltheRoad_EventScript_DemiveeTutorialMultichoice_Text_10:
+# 152 "data/maps/EltheRoad/scripts.pory"
+	.string "For each level the Demi-Vee gains,\n"
+	.string "he earns 4 Stat Points.\p"
+	.string "You can spend them in the Shards menu\n"
+	.string "to increase his Base Stats.\p"
+	.string "Press the A Button, then use the\n"
+	.string "Control Pad to assign the points,\l"
+	.string "and the A Button to save, or the\l"
+	.string "B Button to cancel.\p"
+	.string "You can't re-allocate points after\n"
+	.string "spending them, so choose carefully.$"
+
+EltheRoad_EventScript_DemiveeTutorialMultichoice_Text_11:
+# 157 "data/maps/EltheRoad/scripts.pory"
+	.string "When Demi-Vee levels up, he will\n"
+	.string "have an opportunity to learn a\l"
+	.string "skill from the Shard he is using.\p"
+	.string "The first two skills are Moves that\n"
+	.string "Demi-Vee can learn. Moves learned\l"
+	.string "in this way can be used no\l"
+	.string "matter what form he is in.\p"
+	.string "The third skill lets you choose to\n"
+	.string "permanently replace his Ability.\l"
+	.string "This, too, persists between forms.\p"
+	.string "You can see the skills each Shard\n"
+	.string "will teach in the bottom right\l"
+	.string "corner of the Shards menu.\l"
+	.string "Skills you have already learned\l"
+	.string "will be displayed with blue text.\p"
+	.string "Skills cannot be relearned if you\n"
+	.string "pass on them or delete them.\l"
+	.string "It may be wise to carefully consider\l"
+	.string "the skills each Shard can teach\l"
+	.string "before you use your Rock Candy.$"
+
 EltheRoad_EventScript_FirstSign_Text_0:
-# 119 "data/maps/EltheRoad/scripts.pory"
+# 173 "data/maps/EltheRoad/scripts.pory"
 	.string "{CLEAR_TO 60}{LEFT_ARROW} To Rehocan Town\n"
 	.string "{CLEAR_TO 76}To Elthe City {RIGHT_ARROW}$"
 
 EltheRoad_Trigger_VinosTrigger_Text_0:
-# 125 "data/maps/EltheRoad/scripts.pory"
+# 179 "data/maps/EltheRoad/scripts.pory"
 	.string "Vine Mon$"
 
 EltheRoad_Trigger_VinosTrigger_Text_1:
-# 126 "data/maps/EltheRoad/scripts.pory"
+# 180 "data/maps/EltheRoad/scripts.pory"
 	.string "Ugh…stupid flood.\n"
 	.string "Washed away a perfect lurking spot.$"
 
 EltheRoad_Trigger_VinosTrigger_Text_2:
-# 128 "data/maps/EltheRoad/scripts.pory"
+# 182 "data/maps/EltheRoad/scripts.pory"
 	.string "The Pokémon hasn't noticed you…\n"
 	.string "What will you do?$"
 
 EltheRoad_Trigger_VinosTrigger_Text_3:
-# 130 "data/maps/EltheRoad/scripts.pory"
-	.string "Call Out$"
-
-EltheRoad_Trigger_VinosTrigger_Text_4:
-# 130 "data/maps/EltheRoad/scripts.pory"
-	.string "Step Forward$"
-
-EltheRoad_Trigger_VinosTrigger_Text_5:
-# 130 "data/maps/EltheRoad/scripts.pory"
-	.string "Attack$"
-
-EltheRoad_Trigger_VinosTrigger_Text_6:
-# 136 "data/maps/EltheRoad/scripts.pory"
-	.string "Excuse me…$"
-
-EltheRoad_Trigger_VinosTrigger_Text_7:
-# 144 "data/maps/EltheRoad/scripts.pory"
-	.string "A human…! I need to get in position!$"
-
-EltheRoad_Trigger_VinosTrigger_Text_8:
-# 147 "data/maps/EltheRoad/scripts.pory"
-	.string "Now what?$"
-
-EltheRoad_Trigger_VinosTrigger_Text_9:
-# 149 "data/maps/EltheRoad/scripts.pory"
+# 184 "data/maps/EltheRoad/scripts.pory"
 	.string "Negotiate$"
 
-EltheRoad_Trigger_VinosTrigger_Text_10:
-# 155 "data/maps/EltheRoad/scripts.pory"
+EltheRoad_Trigger_VinosTrigger_Text_4:
+# 184 "data/maps/EltheRoad/scripts.pory"
+	.string "Attack$"
+
+EltheRoad_Trigger_VinosTrigger_Text_5:
+# 189 "data/maps/EltheRoad/scripts.pory"
+	.string "Excuse me…$"
+
+EltheRoad_Trigger_VinosTrigger_Text_6:
+# 197 "data/maps/EltheRoad/scripts.pory"
+	.string "What? A human speaks to me…$"
+
+EltheRoad_Trigger_VinosTrigger_Text_7:
+# 199 "data/maps/EltheRoad/scripts.pory"
 	.string "Do you mind if I pass through here?$"
 
+EltheRoad_Trigger_VinosTrigger_Text_8:
+# 205 "data/maps/EltheRoad/scripts.pory"
+	.string "You're asking my permission? As if you\n"
+	.string "can understand my speech?$"
+
+EltheRoad_Trigger_VinosTrigger_Text_9:
+# 207 "data/maps/EltheRoad/scripts.pory"
+	.string "Yeah, I can. It's kinda my thing.\n"
+	.string "Let's talk this out.$"
+
+EltheRoad_Trigger_VinosTrigger_Text_10:
+# 209 "data/maps/EltheRoad/scripts.pory"
+	.string "Fascinating…this may be an interesting\n"
+	.string "exercise. I am Vinos. Let us begin.$"
+
 EltheRoad_Trigger_VinosTrigger_Text_11:
-# 186 "data/maps/EltheRoad/scripts.pory"
+# 211 "data/maps/EltheRoad/scripts.pory"
+	.string "Try to make Vinos happy so it'll\n"
+	.string "you pass through! It will ask you\l"
+	.string "a series of questions.\p"
+	.string "If you make Vinos angry, it may\n"
+	.string "decide to attack you instead.\p"
+	.string "If it likes your answers, you may\n"
+	.string "get a gift as well.$"
+
+EltheRoad_Trigger_VinosTrigger_Text_12:
+# 218 "data/maps/EltheRoad/scripts.pory"
 	.string "Demi-Vee, attack!$"
 
+EltheRoad_Trigger_VinosTrigger_Text_13:
+# 225 "data/maps/EltheRoad/scripts.pory"
+	.string "What!? You -$"
+
 EltheRoad_VinosNegotiationMain_Text_0:
-# 205 "data/maps/EltheRoad/scripts.pory"
+# 233 "data/maps/EltheRoad/scripts.pory"
 	.string "Vinos$"
 
 EltheRoad_VinosNegotiationMain_Text_1:
-# 206 "data/maps/EltheRoad/scripts.pory"
+# 234 "data/maps/EltheRoad/scripts.pory"
 	.string "Alright, then…$"
 
 EltheRoad_VinosNegotiationMain_Text_2:
-# 220 "data/maps/EltheRoad/scripts.pory"
+# 248 "data/maps/EltheRoad/scripts.pory"
 	.string "Dark$"
 
 EltheRoad_VinosNegotiationMain_Text_3:
-# 221 "data/maps/EltheRoad/scripts.pory"
+# 249 "data/maps/EltheRoad/scripts.pory"
 	.string "Grass$"
 
 EltheRoad_VinosNegotiationMain_Text_4:
-# 222 "data/maps/EltheRoad/scripts.pory"
+# 250 "data/maps/EltheRoad/scripts.pory"
 	.string "Fire$"
 
 EltheRoad_VinosNegotiationMain_Text_5:
-# 223 "data/maps/EltheRoad/scripts.pory"
+# 251 "data/maps/EltheRoad/scripts.pory"
 	.string "Which Type of Pokémon is best,\n"
 	.string "in your opinion?$"
 
 EltheRoad_VinosNegotiationMain_Text_6:
-# 230 "data/maps/EltheRoad/scripts.pory"
+# 258 "data/maps/EltheRoad/scripts.pory"
 	.string "It's, uh…Grass. Yeah. I just love\n"
 	.string "Grass type Pokémon…\p"
 	.string "… … … … …$"
 
 EltheRoad_VinosNegotiationMain_Text_7:
-# 232 "data/maps/EltheRoad/scripts.pory"
+# 260 "data/maps/EltheRoad/scripts.pory"
 	.string "You know what, no, I can't even f{CENSOR}uck{UNCENSOR}ing\n"
 	.string "joke about it. All the major\l"
 	.string "terrible events in my life were\l"
@@ -1168,168 +1647,168 @@ EltheRoad_VinosNegotiationMain_Text_7:
 	.string "F{CENSOR}uck{UNCENSOR} Grass types. I hate 'em.$"
 
 EltheRoad_VinosNegotiationMain_Text_8:
-# 235 "data/maps/EltheRoad/scripts.pory"
+# 263 "data/maps/EltheRoad/scripts.pory"
 	.string "You'd disrespect me to my face…\n"
 	.string "You have some nerve, human.$"
 
 EltheRoad_VinosNegotiationMain_Text_9:
-# 244 "data/maps/EltheRoad/scripts.pory"
+# 272 "data/maps/EltheRoad/scripts.pory"
 	.string "Oh, Dark is the best, obviously!$"
 
 EltheRoad_VinosNegotiationMain_Text_10:
-# 246 "data/maps/EltheRoad/scripts.pory"
+# 274 "data/maps/EltheRoad/scripts.pory"
 	.string "Hmmhmm, yes, we are quite…\n"
 	.string "Wait! You're just buttering me up!$"
 
 EltheRoad_VinosNegotiationMain_Text_11:
-# 248 "data/maps/EltheRoad/scripts.pory"
+# 276 "data/maps/EltheRoad/scripts.pory"
 	.string "No way! I'm being honest! Some of my\n"
 	.string "best friends are Dark types!$"
 
 EltheRoad_VinosNegotiationMain_Text_12:
-# 250 "data/maps/EltheRoad/scripts.pory"
+# 278 "data/maps/EltheRoad/scripts.pory"
 	.string "…Well, alright. It's a good answer.$"
 
 EltheRoad_VinosNegotiationMain_Text_13:
-# 254 "data/maps/EltheRoad/scripts.pory"
+# 282 "data/maps/EltheRoad/scripts.pory"
 	.string "Hmm…I think it must be Fire.\n"
 	.string "It's just such a cool element.$"
 
 EltheRoad_VinosNegotiationMain_Text_14:
-# 256 "data/maps/EltheRoad/scripts.pory"
+# 284 "data/maps/EltheRoad/scripts.pory"
 	.string "Plus, I was a Fire type for a while,\n"
 	.string "myself. Self love, yo!$"
 
 EltheRoad_VinosNegotiationMain_Text_15:
-# 258 "data/maps/EltheRoad/scripts.pory"
+# 286 "data/maps/EltheRoad/scripts.pory"
 	.string "You have some nerve, telling a Grass\n"
 	.string "type that Fire is best…\p"
 	.string "But I appreciate your honesty.\n"
 	.string "The time for tricks has passed.$"
 
 EltheRoad_VinosNegotiationMain_Text_16:
-# 265 "data/maps/EltheRoad/scripts.pory"
+# 293 "data/maps/EltheRoad/scripts.pory"
 	.string "Your berries?$"
 
 EltheRoad_VinosNegotiationMain_Text_17:
-# 266 "data/maps/EltheRoad/scripts.pory"
+# 294 "data/maps/EltheRoad/scripts.pory"
 	.string "Eat trail mix$"
 
 EltheRoad_VinosNegotiationMain_Text_18:
-# 267 "data/maps/EltheRoad/scripts.pory"
+# 295 "data/maps/EltheRoad/scripts.pory"
 	.string "Just eat it$"
 
 EltheRoad_VinosNegotiationMain_Text_19:
-# 268 "data/maps/EltheRoad/scripts.pory"
+# 296 "data/maps/EltheRoad/scripts.pory"
 	.string "Would you like to eat\n"
 	.string "one of my berries?$"
 
 EltheRoad_VinosNegotiationMain_Text_20:
-# 276 "data/maps/EltheRoad/scripts.pory"
+# 304 "data/maps/EltheRoad/scripts.pory"
 	.string "Ooh, I'll take one!$"
 
 EltheRoad_VinosNegotiationMain_Text_21:
-# 279 "data/maps/EltheRoad/scripts.pory"
+# 307 "data/maps/EltheRoad/scripts.pory"
 	.string "Urp…$"
 
 EltheRoad_VinosNegotiationMain_Text_22:
-# 281 "data/maps/EltheRoad/scripts.pory"
+# 309 "data/maps/EltheRoad/scripts.pory"
 	.string "Ha! What an idiot! You didn't even\n"
 	.string "fall for my camouflage, but you\l"
 	.string "still ate my paralyzing berries!\l"
 	.string "You're mine!$"
 
 EltheRoad_VinosNegotiationMain_Text_23:
-# 287 "data/maps/EltheRoad/scripts.pory"
+# 314 "data/maps/EltheRoad/scripts.pory"
 	.string "Berries? They grow on your body?\n"
 	.string "And you…WANT us to eat them?$"
 
 EltheRoad_VinosNegotiationMain_Text_24:
-# 289 "data/maps/EltheRoad/scripts.pory"
+# 316 "data/maps/EltheRoad/scripts.pory"
 	.string "Well…yes. They're delicious.\n"
 	.string "Or so I'm told.$"
 
 EltheRoad_VinosNegotiationMain_Text_25:
-# 291 "data/maps/EltheRoad/scripts.pory"
+# 318 "data/maps/EltheRoad/scripts.pory"
 	.string "What about the ones that your eyes\n"
 	.string "are on? Are they edible?$"
 
 EltheRoad_VinosNegotiationMain_Text_26:
-# 293 "data/maps/EltheRoad/scripts.pory"
+# 320 "data/maps/EltheRoad/scripts.pory"
 	.string "No, they're…my eyes. Not berries.$"
 
 EltheRoad_VinosNegotiationMain_Text_27:
-# 295 "data/maps/EltheRoad/scripts.pory"
+# 322 "data/maps/EltheRoad/scripts.pory"
 	.string "Has anyone ever tried to pick your\n"
 	.string "eyes instead of a berry?$"
 
 EltheRoad_VinosNegotiationMain_Text_28:
-# 297 "data/maps/EltheRoad/scripts.pory"
+# 324 "data/maps/EltheRoad/scripts.pory"
 	.string "Look, are you gonna eat a berry\n"
 	.string "or not!?$"
 
 EltheRoad_VinosNegotiationMain_Text_29:
-# 299 "data/maps/EltheRoad/scripts.pory"
+# 326 "data/maps/EltheRoad/scripts.pory"
 	.string "Nope.$"
 
 EltheRoad_VinosNegotiationMain_Text_30:
-# 301 "data/maps/EltheRoad/scripts.pory"
+# 328 "data/maps/EltheRoad/scripts.pory"
 	.string "… … … … … … … … … …\p"
 	.string "Okay, forget it. Next question.$"
 
 EltheRoad_VinosNegotiationMain_Text_31:
-# 305 "data/maps/EltheRoad/scripts.pory"
+# 332 "data/maps/EltheRoad/scripts.pory"
 	.string "Oh, that reminds me I have…$"
 
 EltheRoad_VinosNegotiationMain_Text_32:
-# 309 "data/maps/EltheRoad/scripts.pory"
+# 334 "data/maps/EltheRoad/scripts.pory"
 	.string "Trail mix!$"
 
 EltheRoad_VinosNegotiationMain_Text_33:
-# 311 "data/maps/EltheRoad/scripts.pory"
+# 336 "data/maps/EltheRoad/scripts.pory"
 	.string "… … … … …\p"
 	.string "Your ways confuse me, human.\n"
 	.string "I would like to stop talking to you.$"
 
 EltheRoad_VinosNegotiationMain_Text_34:
-# 318 "data/maps/EltheRoad/scripts.pory"
+# 343 "data/maps/EltheRoad/scripts.pory"
 	.string "To get my team back$"
 
 EltheRoad_VinosNegotiationMain_Text_35:
-# 319 "data/maps/EltheRoad/scripts.pory"
+# 344 "data/maps/EltheRoad/scripts.pory"
 	.string "For thrills$"
 
 EltheRoad_VinosNegotiationMain_Text_36:
-# 320 "data/maps/EltheRoad/scripts.pory"
+# 345 "data/maps/EltheRoad/scripts.pory"
 	.string "I don't want to fight$"
 
 EltheRoad_VinosNegotiationMain_Text_37:
-# 321 "data/maps/EltheRoad/scripts.pory"
+# 346 "data/maps/EltheRoad/scripts.pory"
 	.string "Why should I let you through?$"
 
 EltheRoad_VinosNegotiationMain_Text_38:
-# 328 "data/maps/EltheRoad/scripts.pory"
+# 353 "data/maps/EltheRoad/scripts.pory"
 	.string "I need to get my team back! We got\n"
 	.string "separated by the flood.\p"
 	.string "I'm their Trainer.\n"
 	.string "We need each other.$"
 
 EltheRoad_VinosNegotiationMain_Text_39:
-# 330 "data/maps/EltheRoad/scripts.pory"
+# 355 "data/maps/EltheRoad/scripts.pory"
 	.string "Why is that my problem?\n"
 	.string "I'm hungry.$"
 
 EltheRoad_VinosNegotiationMain_Text_40:
-# 332 "data/maps/EltheRoad/scripts.pory"
+# 357 "data/maps/EltheRoad/scripts.pory"
 	.string "Hungr- were you planning to eat me!?$"
 
 EltheRoad_VinosNegotiationMain_Text_41:
-# 334 "data/maps/EltheRoad/scripts.pory"
+# 359 "data/maps/EltheRoad/scripts.pory"
 	.string "No. I was just giving an example of\n"
 	.string "something that's not your problem.$"
 
 EltheRoad_VinosNegotiationMain_Text_42:
-# 343 "data/maps/EltheRoad/scripts.pory"
+# 368 "data/maps/EltheRoad/scripts.pory"
 	.string "There's no reason for us to fight.\n"
 	.string "Look at this place, it's a mess.\p"
 	.string "Just let me move on to take care of\n"
@@ -1338,14 +1817,14 @@ EltheRoad_VinosNegotiationMain_Text_42:
 	.string "it is you're doing.$"
 
 EltheRoad_VinosNegotiationMain_Text_43:
-# 347 "data/maps/EltheRoad/scripts.pory"
+# 372 "data/maps/EltheRoad/scripts.pory"
 	.string "Pokémon don't need a reason to\n"
 	.string "fight…but now that you mention it,\l"
 	.string "it does sound like a waste\l"
 	.string "of time right now…$"
 
 EltheRoad_VinosNegotiationMain_Text_44:
-# 352 "data/maps/EltheRoad/scripts.pory"
+# 377 "data/maps/EltheRoad/scripts.pory"
 	.string "I bet you fight every Trainer who\n"
 	.string "comes through here, right?\p"
 	.string "Wouldn't it be a thrill to let\n"
@@ -1353,39 +1832,39 @@ EltheRoad_VinosNegotiationMain_Text_44:
 	.string "Get a little crazy with it.$"
 
 EltheRoad_VinosNegotiationMain_Text_45:
-# 356 "data/maps/EltheRoad/scripts.pory"
+# 381 "data/maps/EltheRoad/scripts.pory"
 	.string "Hmm…perhaps under the circumstances,\n"
 	.string "it would serve me better…$"
 
 EltheRoad_VinosNegotiationMain_Text_46:
-# 362 "data/maps/EltheRoad/scripts.pory"
+# 387 "data/maps/EltheRoad/scripts.pory"
 	.string "Thirty years$"
 
 EltheRoad_VinosNegotiationMain_Text_47:
-# 363 "data/maps/EltheRoad/scripts.pory"
+# 388 "data/maps/EltheRoad/scripts.pory"
 	.string "Long enough$"
 
 EltheRoad_VinosNegotiationMain_Text_48:
-# 364 "data/maps/EltheRoad/scripts.pory"
+# 389 "data/maps/EltheRoad/scripts.pory"
 	.string "Just started$"
 
 EltheRoad_VinosNegotiationMain_Text_49:
-# 365 "data/maps/EltheRoad/scripts.pory"
+# 390 "data/maps/EltheRoad/scripts.pory"
 	.string "How long has it been since you\n"
 	.string "started training Pokémon?$"
 
 EltheRoad_VinosNegotiationMain_Text_50:
-# 372 "data/maps/EltheRoad/scripts.pory"
+# 397 "data/maps/EltheRoad/scripts.pory"
 	.string "Hmm, well me and Demi-Vee just met,\n"
 	.string "so I guess I just started.$"
 
 EltheRoad_VinosNegotiationMain_Text_51:
-# 374 "data/maps/EltheRoad/scripts.pory"
+# 399 "data/maps/EltheRoad/scripts.pory"
 	.string "No wonder you tried talking. You\n"
 	.string "have no idea what you're doing.$"
 
 EltheRoad_VinosNegotiationMain_Text_52:
-# 383 "data/maps/EltheRoad/scripts.pory"
+# 408 "data/maps/EltheRoad/scripts.pory"
 	.string "Let me think…Python's last birthday\n"
 	.string "was, uh…\p"
 	.string "Hmm, I can't remember exactly, but\n"
@@ -1394,32 +1873,32 @@ EltheRoad_VinosNegotiationMain_Text_52:
 	.string "thirty years.$"
 
 EltheRoad_VinosNegotiationMain_Text_53:
-# 387 "data/maps/EltheRoad/scripts.pory"
+# 412 "data/maps/EltheRoad/scripts.pory"
 	.string "You expect me to believe that?\n"
 	.string "You don't even look like you're\l"
 	.string "thirty years old. You're just\l"
 	.string "trying to intimidate me.$"
 
 EltheRoad_VinosNegotiationMain_Text_54:
-# 390 "data/maps/EltheRoad/scripts.pory"
+# 415 "data/maps/EltheRoad/scripts.pory"
 	.string "It's true, though…$"
 
 EltheRoad_VinosNegotiationMain_Text_55:
-# 394 "data/maps/EltheRoad/scripts.pory"
+# 419 "data/maps/EltheRoad/scripts.pory"
 	.string "Long enough.$"
 
 EltheRoad_VinosNegotiationMain_Text_56:
-# 396 "data/maps/EltheRoad/scripts.pory"
+# 421 "data/maps/EltheRoad/scripts.pory"
 	.string "…!$"
 
 EltheRoad_VinosNegotiationMain_Text_57:
-# 414 "data/maps/EltheRoad/scripts.pory"
+# 439 "data/maps/EltheRoad/scripts.pory"
 	.string "You're getting on my nerves…\p"
 	.string "Enough talk! I should have done this\n"
 	.string "from the beginning!$"
 
 EltheRoad_VinosNegotiationMidSuccess_Text_0:
-# 428 "data/maps/EltheRoad/scripts.pory"
+# 453 "data/maps/EltheRoad/scripts.pory"
 	.string "…well, I suppose you're not wholly\n"
 	.string "unpleasant. And I don't feel like\l"
 	.string "jumping you anymore anyway.\l"
@@ -1427,33 +1906,68 @@ EltheRoad_VinosNegotiationMidSuccess_Text_0:
 	.string "And here, take this. I have no\n"
 	.string "use for it anyway.$"
 
+EltheRoad_VinosNegotiationMidSuccess_Text_1:
+# 458 "data/maps/EltheRoad/scripts.pory"
+	.string "Ooh! A crystal! Yummy!$"
+
+EltheRoad_VinosNegotiationMidSuccess_Text_2:
+# 460 "data/maps/EltheRoad/scripts.pory"
+	.string "Run along, now.$"
+
+EltheRoad_VinosNegotiationMidSuccess_Text_3:
+# 462 "data/maps/EltheRoad/scripts.pory"
+	.string "Okay, then. Thanks for your\n"
+	.string "patience. Buh-bye!$"
+
+EltheRoad_VinosNegotiationCompleteSuccess_Text_0:
+# 471 "data/maps/EltheRoad/scripts.pory"
+	.string "Hmm. That was a nice change of pace.\n"
+	.string "Rarely do I speak even to those of\l"
+	.string "my own kind. Even rarer to speak to\l"
+	.string "a human as an equal.\p"
+	.string "Here. Take this as a token\n"
+	.string "of my appreciation.$"
+
+EltheRoad_VinosNegotiationCompleteSuccess_Text_1:
+# 475 "data/maps/EltheRoad/scripts.pory"
+	.string "Ooh! A huge crystal! Yummy!\n"
+	.string "I'll save it for later!$"
+
+EltheRoad_VinosNegotiationCompleteSuccess_Text_2:
+# 477 "data/maps/EltheRoad/scripts.pory"
+	.string "I saw another such crystal a bit further\n"
+	.string "up the path, behind a tree. A red one.\p"
+	.string "Look for it if it interests you.\n"
+	.string "Keep yourself safe.$"
+
+EltheRoad_VinosNegotiationCompleteSuccess_Text_3:
+# 480 "data/maps/EltheRoad/scripts.pory"
+	.string "Okay, thanks for the tip!\n"
+	.string "See you around, Vinos!$"
+
 EltheRoad_VinosDoBattle_Text_0:
-# 447 "data/maps/EltheRoad/scripts.pory"
+# 492 "data/maps/EltheRoad/scripts.pory"
 	.string "… … … … …\p"
 	.string "…well? Aren't you going to\n"
 	.string "finish me off?$"
 
 EltheRoad_VinosDoBattle_Text_1:
-# 449 "data/maps/EltheRoad/scripts.pory"
+# 494 "data/maps/EltheRoad/scripts.pory"
 	.string "What? No. I only wanted to get\n"
 	.string "through here.$"
 
 EltheRoad_VinosDoBattle_Text_2:
-# 451 "data/maps/EltheRoad/scripts.pory"
+# 496 "data/maps/EltheRoad/scripts.pory"
 	.string "…Oh.$"
 
 EltheRoad_VinosDoBattle_Text_3:
-# 459 "data/maps/EltheRoad/scripts.pory"
+# 504 "data/maps/EltheRoad/scripts.pory"
 	.string "Well, go along then! And if it\n"
 	.string "will get you to leave me alone,\l"
 	.string "then take this!$"
 
 EltheRoad_VinosDoBattle_Text_4:
-# 462 "data/maps/EltheRoad/scripts.pory"
-	.string "Ooh! A crystal! Yummy!$"
-
-EltheRoad_VinosDoBattle_Text_5:
-# 464 "data/maps/EltheRoad/scripts.pory"
+# 509 "data/maps/EltheRoad/scripts.pory"
 	.string "Those things are all over the\n"
 	.string "place here. I think I saw another\l"
 	.string "type of crystal next to that stump\l"
@@ -1461,14 +1975,55 @@ EltheRoad_VinosDoBattle_Text_5:
 	.string "Run along, then.$"
 
 EltheRoad_EventScript_VinosIdle_Text_0:
-# 485 "data/maps/EltheRoad/scripts.pory"
+# 532 "data/maps/EltheRoad/scripts.pory"
 	.string "If you truly just wanted to pass\n"
 	.string "by, then hurry up already!\p"
 	.string "I don't want to see your face\n"
 	.string "right now. Begone.$"
 
 EltheRoad_EventScript_VinosIdle_Text_1:
-# 491 "data/maps/EltheRoad/scripts.pory"
+# 538 "data/maps/EltheRoad/scripts.pory"
+	.string "If you want more crystals, there's\n"
+	.string "one stuck in a tree…$"
+
+EltheRoad_EventScript_VinosIdle_Text_2:
+# 555 "data/maps/EltheRoad/scripts.pory"
+	.string "Right here.$"
+
+EltheRoad_EventScript_VinosIdle_Text_3:
+# 597 "data/maps/EltheRoad/scripts.pory"
+	.string "How exactly are you able to\n"
+	.string "understand my speech?$"
+
+EltheRoad_EventScript_VinosIdle_Text_4:
+# 599 "data/maps/EltheRoad/scripts.pory"
+	.string "Oh, it's a long story…\n"
+	.string "A long, deeply stupid story…\p"
+	.string "It starts with me kidnapping a\n"
+	.string "Totodile from a Pokémon Professor,\l"
+	.string "and ends with my arm falling off\l"
+	.string "and getting stuck in the body of a…\p"
+	.string "You know, I'd really rather not\n"
+	.string "get into it.\p"
+	.string "The short version is that it's a\n"
+	.string "highly unique circumstance.$"
+
+EltheRoad_EventScript_VinosIdle_Text_5:
+# 604 "data/maps/EltheRoad/scripts.pory"
+	.string "I see…so no other humans have\n"
+	.string "this ability?$"
+
+EltheRoad_EventScript_VinosIdle_Text_6:
+# 606 "data/maps/EltheRoad/scripts.pory"
+	.string "I think some do, but…not the same\n"
+	.string "kind as me.$"
+
+EltheRoad_EventScript_VinosIdle_Text_7:
+# 608 "data/maps/EltheRoad/scripts.pory"
+	.string "How curious.$"
+
+EltheRoad_EventScript_VinosIdle_Text_8:
+# 613 "data/maps/EltheRoad/scripts.pory"
 	.string "Normally, I try to disguise myself\n"
 	.string "as a grapevine.\p"
 	.string "If anyone is foolish enough to eat\n"
@@ -1479,3 +2034,40 @@ EltheRoad_EventScript_VinosIdle_Text_1:
 	.string "by this unbearable downpour.\p"
 	.string "I can't even recall where my\n"
 	.string "usual lurking spot is.$"
+
+EltheRoad_Trigger_VinosAltTrigger_Text_0:
+# 631 "data/maps/EltheRoad/scripts.pory"
+	.string "Ack! A trainer!?$"
+
+EltheRoad_Trigger_VinosAltTrigger_Text_1:
+# 633 "data/maps/EltheRoad/scripts.pory"
+	.string "Hi. I just wanted to sneak by you.\n"
+	.string "Do you mind?$"
+
+EltheRoad_Trigger_VinosAltTrigger_Text_2:
+# 635 "data/maps/EltheRoad/scripts.pory"
+	.string "You're…asking my permission? What?$"
+
+EltheRoad_Trigger_VinosAltTrigger_Text_3:
+# 637 "data/maps/EltheRoad/scripts.pory"
+	.string "Yeah. Don't wanna be rude.\n"
+	.string "What kind of Pokémon are you?\l"
+	.string "I've never seen this kind before.$"
+
+EltheRoad_Trigger_VinosAltTrigger_Text_4:
+# 639 "data/maps/EltheRoad/scripts.pory"
+	.string "…I am called Vinos.\n"
+	.string "…Apologies, I am very confused.\p"
+	.string "I have never seen a human interact\n"
+	.string "with a Pokémon in this way. Usually\l"
+	.string "they just attack. And I thought\l"
+	.string "humans couldn't hear our speech.$"
+
+EltheRoad_Trigger_VinosAltTrigger_Text_5:
+# 642 "data/maps/EltheRoad/scripts.pory"
+	.string "Well, most can't. But I can.$"
+
+EltheRoad_Trigger_VinosAltTrigger_Text_6:
+# 644 "data/maps/EltheRoad/scripts.pory"
+	.string "Fascinating. A gift, then, for one\n"
+	.string "who has shown me something new.$"

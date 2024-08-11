@@ -65,7 +65,7 @@ mapscripts EltheRoad_MapScripts
 			delay(30)
 			speakername("Eevee?", PORTRAIT_DEMIVEE_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
 			msgbox("Wait! You shouldn't go alone.", MSGBOX_AUTOCLOSE)
-			playse(SE_BIKE_HOP)
+			playse(SE_LEDGE)
 			applymovement(LOCALID_DEMIVEE, EltheRoad_Movement_DemiveeFollow)
 			waitmovement(0)
 			speakername("Eevee?", PORTRAIT_DEMIVEE_ANNOYED, PORTRAIT_DEFAULT_LEFT)
@@ -104,7 +104,7 @@ script EltheRoad_EventScript_FirstTrigger
 			"It changes my type, I think.\n" "And my moves.")
 	speakername("Amelia", PORTRAIT_AMELIA_SMUG)
 	msgbox("So you're some kind of…Demi-Vee?")
-	setpartymemberinfo(0) // Sets nickname, metloc, and Poke ball.
+	setpartymemberinfo(0) // Sets nickname, metloc, and Poké ball.
 	speakername("Demi-Vee", PORTRAIT_DEMIVEE_HUH, PORTRAIT_DEFAULT_LEFT)
 	msgbox("Huh?")
 	speakername("Demi-Vee", PORTRAIT_DEMIVEE_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
@@ -115,6 +115,59 @@ script EltheRoad_EventScript_FirstTrigger
 	setvar(VAR_MAIN_GAME_STATE, 2)
 }
 
+script EltheRoad_EventScript_DemiveeTutorialSign
+{
+	lock
+	msgbox("{EMPHASIS_RED}!! NON-DIEGETIC SIGN ALERT !!{EMPHASIS_OFF}\p" "This sign does not really exist!\n" "It is just here to help you, Player.\p"
+			"Your new companion is a very\n" "unique Pokémon. He doesn't grow\l" "in the way you're used to.\p"
+			"If you want to make the best of his\n" "unique traits, read on.")
+	goto(EltheRoad_EventScript_DemiveeTutorialMultichoice)
+}
+
+script EltheRoad_EventScript_DemiveeTutorialMultichoice
+{
+	message("What would you like to read about?")
+	waitmessage
+	dynmultichoice(0, 0, FALSE, 6, 0, DYN_MULTICHOICE_CB_NONE, "Forms", "Shards", "Leveling Up", "Stat Points", "Learning Skills", "Stop Reading")
+	switch(var(VAR_RESULT))
+	{
+		case 0:
+			msgbox("Demi-Vee can't evolve, but he can\n" "change forms using special Shards.\p"
+					"Each form matches the type of a\n" "normal evolution and has similar\l" "stats and moves.\p"
+					"The four moves he starts with also\n" "change depending on his form.\p"
+					"For example, his first move will be\n" "a mid-power move matching his Type.\p"
+					"Be careful, though; if you delete\n" "one of these base moves, he will\l" "lose access to it in all forms.\l" "For example, if you delete Razor Leaf\l" "while in Grass form, you will also\l" "lose Shock Wave in Electric form.")					
+		case 1:
+			msgbox("There are various Shards scattered\n" "throughout this area.\p"
+					"They are pieces of Evolution Stones\n" "which allow Demi-Vee to change form.\p"
+					"You may find them on the ground, or\n" "get them as rewards for doing favors.\p"
+					"You can see your currently owned\n" "shards in the Key Items pocket.\p"
+					"To change Demi-Vee's form, open the\n" "POKéMON menu, select Demi-Vee, and\l" "pick the SHARDS option. On this\l" "screen, you can change forms using\l" "the L and R buttons.")
+		case 2:
+			msgbox("Demi-Vee does not gain Exp. Points\n" "from participating in battle.\p"
+					"He gains Exp. Points from eating\n" "Rock Candy instead.\p"
+					"Like Shards, these can be found\n" "around town or received as rewards.\p"
+					"It can be useful to save them if\n" "you're not planning to fight soon,\l" "as leveling up becomes more valuable\l" "when you have more Shards.")
+		case 3:
+			msgbox("For each level the Demi-Vee gains,\n" "he earns 4 Stat Points.\p"
+					"You can spend them in the Shards menu\n" "to increase his Base Stats.\p"
+					"Press the A Button, then use the\n" "Control Pad to assign the points,\l" "and the A Button to save, or the\l" "B Button to cancel.\p"
+					"You can't re-allocate points after\n" "spending them, so choose carefully.")
+		case 4:
+			msgbox("When Demi-Vee levels up, he will\n" "have an opportunity to learn a\l" "skill from the Shard he is using.\p"
+					"The first two skills are Moves that\n" "Demi-Vee can learn. Moves learned\l" "in this way can be used no\l" "matter what form he is in.\p"
+					"The third skill lets you choose to\n" "permanently replace his Ability.\l" "This, too, persists between forms.\p"
+					"You can see the skills each Shard\n" "will teach in the bottom right\l" "corner of the Shards menu.\l" "Skills you have already learned\l" "will be displayed with blue text.\p"
+					"Skills cannot be relearned if you\n" "pass on them or delete them.\l" "It may be wise to carefully consider\l" "the skills each Shard can teach\l" "before you use your Rock Candy.")
+		case 5:
+		case MULTI_B_PRESSED:
+			release
+			end
+	}
+	goto(EltheRoad_EventScript_DemiveeTutorialMultichoice)
+	
+}
+
 script EltheRoad_EventScript_FirstSign
 {
 	msgbox("{CLEAR_TO 60}{LEFT_ARROW} To Rehocan Town\n" "{CLEAR_TO 76}To Elthe City {RIGHT_ARROW}", MSGBOX_SIGN)
@@ -123,13 +176,12 @@ script EltheRoad_EventScript_FirstSign
 script EltheRoad_Trigger_VinosTrigger 
 {
 	lock
-	speakername("Vine Mon")
+	speakername("Vine Mon", PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
 	msgbox("Ugh…stupid flood.\n" "Washed away a perfect lurking spot.")
 	speakername(NULL, 0)
 	message("The Pokémon hasn't noticed you…\n" "What will you do?")
 	waitmessage
-	dynmultichoice(0, 0, TRUE, 6, 0, DYN_MULTICHOICE_CB_NONE, "Call Out", "Step Forward", "Attack")
-	closemessage
+	dynmultichoice(0, 0, TRUE, 6, 0, DYN_MULTICHOICE_CB_NONE, "Negotiate", "Attack")
 	switch(var(VAR_RESULT))
 	{
 		case 0:
@@ -141,73 +193,48 @@ script EltheRoad_Trigger_VinosTrigger
 			applymovement(LOCALID_VINOS, Common_Movement_ExclamationMark)
 			waitmovement(0)
 			delay(48)
-			speakername("Vine Mon")
-			msgbox("A human…! I need to get in position!", MSGBOX_AUTOCLOSE)
-			applymovement(LOCALID_VINOS, EltheRoad_Movement_VinosGetOnLog)
+			speakername("Vine Mon", PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
+			msgbox("What? A human speaks to me…")
+			speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+			msgbox("Do you mind if I pass through here?", MSGBOX_AUTOCLOSE)
+			playse(SE_PIN)
+			applymovement(LOCALID_VINOS, Common_Movement_ExclamationMark)
 			waitmovement(0)
-			message("Now what?")
-			waitmessage
-			dynmultichoice(0, 0, TRUE, 6, 0, DYN_MULTICHOICE_CB_NONE, "Negotiate", "Step Forward", "Attack")
-			closemessage
-			switch(var(VAR_RESULT))
-			{
-				case 0:
-					speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
-					msgbox("Do you mind if I pass through here?", MSGBOX_AUTOCLOSE)
-					playse(SE_PIN)
-					applymovement(LOCALID_VINOS, Common_Movement_ExclamationMark)
-					waitmovement(0)
-					delay(48)
-					goto(EltheRoad_VinosNegotiationMain)
-				case 1:
-				// It jumps Amelia as soon as she steps forward. Do battle with +1 def/+2 speed on Vinos
-				case 2:
-				// She attacks and it springs forward. Do battle with +1 speed on vinos
-			}
+			delay(48)
+			speakername("Vine Mon", PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
+			msgbox("You're asking my permission? As if you\n" "can understand my speech?")
+			speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+			msgbox("Yeah, I can. It's kinda my thing.\n" "Let's talk this out.")
+			speakername("Vine Mon", PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
+			msgbox("Fascinating…this may be an interesting\n" "exercise. I am Vinos. Let us begin.")
+			speakername(NULL, 0)
+			msgbox("Try to make Vinos happy so it'll\n" "you pass through! It will ask you\l" "a series of questions.\p"
+					"If you make Vinos angry, it may\n" "decide to attack you instead.\p"
+					"If it likes your answers, you may\n" "get a gift as well.", MSGBOX_AUTOCLOSE)
+			delay(32)
+			goto(EltheRoad_VinosNegotiationMain)
 		case 1:
-			applymovement(OBJ_EVENT_ID_FOLLOWER, Common_Movement_WalkUp)
-			applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_WalkUp)
-			waitmovement(0)
-			delay(30)
-			message("Now what?")
-			waitmessage
-			dynmultichoice(0, 0, TRUE, 6, 0, DYN_MULTICHOICE_CB_NONE, "Call Out", "Step Forward", "Attack")
-			closemessage
-			switch(var(VAR_RESULT))
-			{
-				case 0:
-				// It realizes it's on the back foot and opens up for negotiations. Easy negotiation ensues. If you talk to it from the left, you start here 
-				case 1:
-				// It gets startled by you being right behind it and flees.
-				case 2:
-				// Do battle with +1 atk on Demi-Vee
-			}
-		case 2:
 			speakername("Amelia", PORTRAIT_AMELIA_STRAINED)
 			msgbox("Demi-Vee, attack!", MSGBOX_AUTOCLOSE)
+			playse(SE_PIN)
+			applymovement(LOCALID_VINOS, Common_Movement_FaceDown)
+			waitmovement(0)
+			applymovement(LOCALID_VINOS, Common_Movement_ExclamationMark)
+			waitmovement(0)
+			speakername("Vine Mon", PORTRAIT_VINOS_MAD, PORTRAIT_DEFAULT_LEFT)
+			msgbox("What!? You -", MSGBOX_AUTOCLOSE)
 			goto(EltheRoad_VinosDoBattle)			
 	}
-	
-	// Negotiation flow
-	//  - Give cheri berries: obtain 2 rock candy
-	//  - Successful negotiation: obtain 2 rock candy
-	//  - Passable negotiation: obtain 1 rock candy
-	//  - Failed negotiation: Battle Vinos with a disadvantage.
-	// - Negotiation flow: mid is +1 point. success is +2 points: fail is -1 point. You fail if you reach 0 points and pass if you reach 3.
-	//  -- exhausting the questions without reaching 3 counts as a passable negotiation, as does reaching 3 points after a fail.
-	//  -- some questions will be an instant failure state if you get them wrong.
-	// - Question: What's your favorite type of Pokemon? (Grass: instant Fail, Dark: Mid, Fire: Success)
-	// fuck grass types. i hate em. - amelia
 }
 
 // Does a random negotiation topic
 script EltheRoad_VinosNegotiationMain
 {
-	speakername("Vinos", PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
+	speakername("Vinos", PORTRAIT_VINOS_NEUTRAL)
 	message("Alright, then…")
 	waitmessage
 	waitbuttonpress
-	setvar(VAR_0x8008, 2)
+	setvar(VAR_0x8008, 4)
 	special(GetNegotiationTopic) // this sets temp flags
 	if (var(VAR_RESULT) == 0xFF) // all topics used up
 	{
@@ -223,7 +250,7 @@ script EltheRoad_VinosNegotiationMain
 				dynmultipush("Fire", 2)
 				message("Which Type of Pokémon is best,\n" "in your opinion?")
 				waitmessage
-				dynmultistack(0, 0, FALSE, 6, TRUE, 0, DYN_MULTICHOICE_CB_NONE)
+				dynmultistack(0, 0, FALSE, 6, FALSE, 1, DYN_MULTICHOICE_CB_NONE)
 				switch(var(VAR_RESULT))
 				{
 					case 0:
@@ -268,7 +295,7 @@ script EltheRoad_VinosNegotiationMain
 				dynmultipush("Just eat it", 0)
 				message("Would you like to eat\n" "one of my berries?")
 				waitmessage
-				dynmultistack(0, 0, FALSE, 6, TRUE, 0, DYN_MULTICHOICE_CB_NONE)
+				dynmultistack(0, 0, FALSE, 6, FALSE, 1, DYN_MULTICHOICE_CB_NONE)
 				switch(var(VAR_RESULT))
 				{
 					case 0:
@@ -281,7 +308,6 @@ script EltheRoad_VinosNegotiationMain
 						speakername("Vinos", PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
 						msgbox("Ha! What an idiot! You didn't even\n" "fall for my camouflage, but you\l"
 								"still ate my paralyzing berries!\l" "You're mine!", MSGBOX_AUTOCLOSE)
-						call(EltheRoad_CleanUpNegotiationValues)
 						goto(EltheRoad_VinosDoBattle)
 					case 1:
 						speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
@@ -303,9 +329,7 @@ script EltheRoad_VinosNegotiationMain
 						addvar(VAR_NEGOTIATION_SCORE, 1)
 					case 2:
 						speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
-						msgbox("Oh, that reminds me I have…", MSGBOX_AUTOCLOSE)
-						// setvar(VAR_0x8004, ANIM_REACH_IN_POCKET)
-						// callnative(DoAmeliaOverworldAnim)
+						msgbox("Oh, that reminds me I have…")
 						speakername("Amelia", PORTRAIT_AMELIA_MUNCH)
 						msgbox("Trail mix!")
 						speakername("Vinos", PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
@@ -321,7 +345,7 @@ script EltheRoad_VinosNegotiationMain
 				dynmultipush("I don't want to fight", 1)
 				message("Why should I let you through?")
 				waitmessage
-				dynmultistack(0, 0, FALSE, 6, TRUE, 0, DYN_MULTICHOICE_CB_NONE)
+				dynmultistack(0, 0, FALSE, 6, FALSE, 0, DYN_MULTICHOICE_CB_NONE)
 				switch(var(VAR_RESULT))
 				{
 					case 0:
@@ -359,13 +383,13 @@ script EltheRoad_VinosNegotiationMain
 						playse(SE_SUCCESS)
 				}
 			case 3:
-	// - Question: How long have you been training Pokemon? (30 years: mid, just started: fail, long enough: success)
+	// - Question: How long have you been training Pokémon? (30 years: mid, just started: fail, long enough: success)
 				dynmultipush("Thirty years", 1)
 				dynmultipush("Long enough", 2)
 				dynmultipush("Just started", 0)
 				message("How long has it been since you\n" "started training Pokémon?")
 				waitmessage
-				dynmultistack(0, 0, FALSE, 6, TRUE, 0, DYN_MULTICHOICE_CB_NONE)
+				dynmultistack(0, 0, FALSE, 6, FALSE, 1, DYN_MULTICHOICE_CB_NONE)
 				switch(var(VAR_RESULT))
 				{
 					case 0:
@@ -401,7 +425,7 @@ script EltheRoad_VinosNegotiationMain
 		}
 		
 		delay(16)
-		if (var(VAR_NEGOTIATION_SCORE) > 2)
+		if (var(VAR_NEGOTIATION_SCORE) >= 3)
 		{
 			if(flag(FLAG_NOT_PERFECT_CONVERSATION))
 			{
@@ -430,12 +454,32 @@ script EltheRoad_VinosNegotiationMidSuccess
 			"jumping you anymore anyway.\l" "You can pass.\p"
 			"And here, take this. I have no\n" "use for it anyway.", MSGBOX_AUTOCLOSE)
 	giveitem(ITEM_EXP_CANDY_L, 2)
-	// vinos leaves
+	speakername("Demi-Vee", PORTRAIT_DEMIVEE_YAY)
+	msgbox("Ooh! A crystal! Yummy!")
+	speakername("Vinos", PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
+	msgbox("Run along, now.")
+	speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+	msgbox("Okay, then. Thanks for your\n" "patience. Buh-bye!", MSGBOX_AUTOCLOSE)
+	setvar(VAR_MAIN_GAME_STATE, 3)
+	setflag(FLAG_TEMP_9) // Vinos's dialogue changes if you leave and come back
 }
 
 script EltheRoad_VinosNegotiationCompleteSuccess
 {
 	call(EltheRoad_CleanUpNegotiationValues)
+	speakername("Vinos", PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
+	msgbox("Hmm. That was a nice change of pace.\n" "Rarely do I speak even to those of\l" "my own kind. Even rarer to speak to\l" "a human as an equal.\p"
+			"Here. Take this as a token\n" "of my appreciation.", MSGBOX_AUTOCLOSE)
+	giveitem(ITEM_EXP_CANDY_XL, 1)
+	speakername("Demi-Vee", PORTRAIT_DEMIVEE_YAY)
+	msgbox("Ooh! A huge crystal! Yummy!\n" "I'll save it for later!")
+	speakername("Vinos", PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
+	msgbox("I saw another such crystal a bit further\n" "up the path, behind a tree. A red one.\p"
+			"Look for it if it interests you.\n" "Keep yourself safe.")
+	speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+	msgbox("Okay, thanks for the tip!\n" "See you around, Vinos!", MSGBOX_AUTOCLOSE)
+	setvar(VAR_MAIN_GAME_STATE, 3)
+	setflag(FLAG_TEMP_8)
 }
 
 script EltheRoad_VinosDoBattle
@@ -480,11 +524,88 @@ script EltheRoad_CleanUpNegotiationValues
 
 script EltheRoad_EventScript_VinosIdle
 {
+	lock
+	faceplayer
 	if(flag(FLAG_TEMP_9))
 	{
 		speakername("Vinos", PORTRAIT_VINOS_MAD, PORTRAIT_DEFAULT_LEFT)
 		msgbox("If you truly just wanted to pass\n" "by, then hurry up already!\p"
-				"I don't want to see your face\n" "right now. Begone.", MSGBOX_NPC)
+				"I don't want to see your face\n" "right now. Begone.", MSGBOX_AUTOCLOSE)
+	}
+	elif(!flag(FLAG_FLARESHARD_GET)) // if you don't negotiate perfectly, he won't say this unless you backtrack
+	{
+		speakername("Vinos", PORTRAIT_VINOS_NEUTRAL)
+		message("If you want more crystals, there's\n" "one stuck in a tree…")
+		waitmessage
+		special(SpawnCameraObject)
+		specialvar(VAR_RESULT, GetPlayerFacingDirection)
+		switch(var(VAR_RESULT))
+		{
+			case DIR_EAST:
+				applymovement(OBJ_EVENT_ID_CAMERA, Common_Movement_WalkRight)
+				waitmovement(0)
+				applymovement(OBJ_EVENT_ID_CAMERA, Common_Movement_WalkUp)
+				waitmovement(0)
+			case DIR_NORTH:
+				applymovement(OBJ_EVENT_ID_CAMERA, Common_Movement_WalkUp2)
+				waitmovement(0)
+		}
+		applymovement(OBJ_EVENT_ID_CAMERA, EltheRoad_Movement_CameraShowItem)
+		waitmovement(0)
+		message("Right here.")
+		setmetatile(26, 20, 0x247, FALSE)
+		special(DrawWholeMapView)
+		delay(16)
+		setmetatile(26, 20, 0x20C, FALSE)
+		special(DrawWholeMapView)
+		delay(16)
+		setmetatile(26, 20, 0x247, FALSE)
+		special(DrawWholeMapView)
+		delay(16)
+		setmetatile(26, 20, 0x20C, FALSE)
+		special(DrawWholeMapView)
+		delay(16)
+		setmetatile(26, 20, 0x247, FALSE)
+		special(DrawWholeMapView)
+		delay(16)
+		setmetatile(26, 20, 0x20C, FALSE)
+		special(DrawWholeMapView)
+		delay(16)
+		waitbuttonpress
+		closemessage
+		applymovement(OBJ_EVENT_ID_CAMERA, EltheRoad_Movement_CameraReturn)
+		waitmovement(0)
+		specialvar(VAR_RESULT, GetPlayerFacingDirection)
+		switch(var(VAR_RESULT))
+		{
+			case DIR_EAST:
+				applymovement(OBJ_EVENT_ID_CAMERA, Common_Movement_WalkDown)
+				waitmovement(0)
+				applymovement(OBJ_EVENT_ID_CAMERA, Common_Movement_WalkLeft)
+				waitmovement(0)
+			case DIR_NORTH:
+				applymovement(OBJ_EVENT_ID_CAMERA, Common_Movement_WalkDown)
+				waitmovement(0)
+				applymovement(OBJ_EVENT_ID_CAMERA, Common_Movement_WalkDown)
+				waitmovement(0)
+		}
+		special(RemoveCameraObject)		
+	}
+	elif(flag(FLAG_TEMP_8)) // only visible if you negotiate perfectly and haven't left the map yet 
+	{
+		speakername("Vinos", PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
+		msgbox("How exactly are you able to\n" "understand my speech?")
+		speakername("Amelia", PORTRAIT_AMELIA_SERIOUSLY)
+		msgbox("Oh, it's a long story…\n" "A long, deeply stupid story…\p"
+				"It starts with me kidnapping a\n" "Totodile from a Pokémon Professor,\l" "and ends with my arm falling off\l" "and getting stuck in the body of a…\p"
+				"You know, I'd really rather not\n" "get into it.\p"
+				"The short version is that it's a\n" "highly unique circumstance.")
+		speakername("Vinos", PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
+		msgbox("I see…so no other humans have\n" "this ability?")
+		speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+		msgbox("I think some do, but…not the same\n" "kind as me.")
+		speakername("Vinos", PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
+		msgbox("How curious.", MSGBOX_AUTOCLOSE)
 	}
 	else
 	{
@@ -494,6 +615,55 @@ script EltheRoad_EventScript_VinosIdle
 				"It's just poor fortune that I've\n" "been left high and dry, so to speak,\l" "by this unbearable downpour.\p"
 				"I can't even recall where my\n" "usual lurking spot is.", MSGBOX_NPC)
 	}
+	release
+}
+
+script EltheRoad_Trigger_VinosAltTrigger
+{
+	lock
+	playse(SE_PIN)
+	applymovement(LOCALID_VINOS, Common_Movement_FaceLeft)
+	waitmovement(0)
+	applymovement(LOCALID_VINOS, Common_Movement_ExclamationMark)
+	waitmovement(0)
+	delay(48)
+	speakername("Vine Mon", PORTRAIT_VINOS_MAD, PORTRAIT_DEFAULT_LEFT)
+	msgbox("Ack! A trainer!?")
+	speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+	msgbox("Hi. I just wanted to sneak by you.\n" "Do you mind?")
+	speakername("Vine Mon", PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
+	msgbox("You're…asking my permission? What?")
+	speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+	msgbox("Yeah. Don't wanna be rude.\n" "What kind of Pokémon are you?\l" "I've never seen this kind before.")
+	speakername("Vinos", PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
+	msgbox("…I am called Vinos.\n" "…Apologies, I am very confused.\p"
+			"I have never seen a human interact\n" "with a Pokémon in this way. Usually\l" "they just attack. And I thought\l" "humans couldn't hear our speech.")
+	speakername("Amelia", PORTRAIT_AMELIA_SMUG)
+	msgbox("Well, most can't. But I can.")
+	speakername("Vinos", PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
+	msgbox("Fascinating. A gift, then, for one\n" "who has shown me something new.", MSGBOX_AUTOCLOSE)
+	giveitem(ITEM_EXP_CANDY_XL, 1)
+	speakername("Demi-Vee", PORTRAIT_DEMIVEE_YAY)
+	msgbox("Ooh! A huge crystal! Yummy!\n" "I'll save it for later!")
+	speakername("Vinos", PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
+	msgbox("I saw another such crystal a bit further\n" "up the path, behind a tree. A red one.\p"
+			"Look for it if it interests you.\n" "Keep yourself safe.")
+	speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+	msgbox("Okay, thanks for the tip!\n" "See you around, Vinos!", MSGBOX_AUTOCLOSE)
+	setvar(VAR_MAIN_GAME_STATE, 3)
+	setflag(FLAG_TEMP_8)
+}
+
+movement EltheRoad_Movement_CameraShowItem
+{
+	walk_up * 3
+	walk_right
+}
+
+movement EltheRoad_Movement_CameraReturn
+{
+	walk_left
+	walk_down * 3
 }
 
 movement EltheRoad_Movement_AmeliaJumpUp
