@@ -1156,7 +1156,6 @@ static void Task_StatEditorMain(u8 taskId) // input control when first loaded in
     }
     if (JOY_NEW(B_BUTTON))
     {
-        PlaySE(SE_PC_OFF);
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
         gTasks[taskId].func = Task_StatEditorTurnOff;
     }

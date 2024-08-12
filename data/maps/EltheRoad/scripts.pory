@@ -176,9 +176,23 @@ script EltheRoad_EventScript_FirstSign
 script EltheRoad_Trigger_VinosTrigger 
 {
 	lock
+	delay(32)
+	special(SpawnCameraObject)
+	applymovement(OBJ_EVENT_ID_CAMERA, Common_Movement_WalkUp2)
+	waitmovement(0)
+	applymovement(OBJ_EVENT_ID_CAMERA, Common_Movement_WalkUp)
+	waitmovement(0)
+	delay(32)
 	speakername("Vine Mon", PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
-	msgbox("Ugh…stupid flood.\n" "Washed away a perfect lurking spot.")
-	speakername(NULL, 0)
+	msgbox("Ugh…stupid flood.\n" "Washed away a perfect lurking spot.", MSGBOX_AUTOCLOSE)
+	applymovement(OBJ_EVENT_ID_CAMERA, Common_Movement_WalkDown)
+	waitmovement(0)
+	applymovement(OBJ_EVENT_ID_CAMERA, Common_Movement_WalkDown)
+	waitmovement(0)
+	applymovement(OBJ_EVENT_ID_CAMERA, Common_Movement_WalkDown)
+	waitmovement(0)
+	special(RemoveCameraObject)
+	delay(32)
 	message("The Pokémon hasn't noticed you…\n" "What will you do?")
 	waitmessage
 	dynmultichoice(0, 0, TRUE, 6, 0, DYN_MULTICHOICE_CB_NONE, "Negotiate", "Attack")
@@ -484,7 +498,7 @@ script EltheRoad_VinosNegotiationCompleteSuccess
 
 script EltheRoad_VinosDoBattle
 {
-	setwildbattle(SPECIES_BELLSPROUT, 35, ITEM_NONE)
+	setwildbattle(SPECIES_VINOS, 35, ITEM_NONE)
 	dowildbattle
 	call(EltheRoad_CleanUpNegotiationValues)
 	turnobject(LOCALID_VINOS, DIR_SOUTH)
