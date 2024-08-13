@@ -1230,9 +1230,9 @@
 #define FLAG_LEAFSHARD_GET                                           0x49C // Unused Flag
 #define FLAG_GLACIALSHARD_GET                                           0x49D // Unused Flag
 #define FLAG_SYLVANSHARD_GET                                           0x49E // Unused Flag
-#define FLAG_UNUSED_0x49F                                           0x49F // Unused Flag
-#define FLAG_UNUSED_0x4A0                                           0x4A0 // Unused Flag
-#define FLAG_UNUSED_0x4A1                                           0x4A1 // Unused Flag
+#define FLAG_HIDE_MARCEL_CUTSCENE                                           0x49F // Unused Flag
+#define FLAG_ITEM_STARTING_ROCK_CANDY                                   0x4A0 // Unused Flag
+#define FLAG_ITEM_POND_ROCK_CANDY                                           0x4A1 // Unused Flag
 #define FLAG_UNUSED_0x4A2                                           0x4A2 // Unused Flag
 #define FLAG_UNUSED_0x4A3                                           0x4A3 // Unused Flag
 #define FLAG_UNUSED_0x4A4                                           0x4A4 // Unused Flag

@@ -1353,16 +1353,16 @@ struct PartyMemberInfo
 {
 	u8 nickname[POKEMON_NAME_LENGTH + 1];
 	u8 metLoc;
-	u8 ball;
+	u8 metLevel;
 };
 
 static const struct PartyMemberInfo sPartyMemberInfo[5] = 
 {
-	{.nickname = _("Demi-Vee"), .metLoc = MAPSEC_OLDALE_TOWN, .ball = ITEM_POKE_BALL},
-	{.nickname = _("Marcel"), .metLoc = MAPSEC_FALLARBOR_TOWN, .ball = ITEM_GREAT_BALL},
-	{.nickname = _("Vice"), .metLoc = MAPSEC_VERDANTURF_TOWN, .ball = ITEM_POKE_BALL},
-	{.nickname = _("Bradley"), .metLoc = MAPSEC_PACIFIDLOG_TOWN, .ball = ITEM_ULTRA_BALL},
-	{.nickname = _("Python"), .metLoc = MAPSEC_PETALBURG_CITY, .ball = ITEM_NEST_BALL},
+	{.nickname = _("Demi-Vee"), .metLoc = MAPSEC_OLDALE_TOWN, .metLevel = 30},
+	{.nickname = _("Marcel"), .metLoc = MAPSEC_FALLARBOR_TOWN, .metLevel = 24},
+	{.nickname = _("Vice"), .metLoc = MAPSEC_VERDANTURF_TOWN, .metLevel = 5},
+	{.nickname = _("Bradley"), .metLoc = MAPSEC_PACIFIDLOG_TOWN, .metLevel = 45},
+	{.nickname = _("Python"), .metLoc = MAPSEC_PETALBURG_CITY, .metLevel = 1},
 };
 
 bool8 ScrCmd_setpartymemberinfo(struct ScriptContext *ctx)
@@ -1371,7 +1371,7 @@ bool8 ScrCmd_setpartymemberinfo(struct ScriptContext *ctx)
 	
 	SetMonData(&gPlayerParty[partySlot], MON_DATA_NICKNAME, &sPartyMemberInfo[partySlot].nickname);
 	SetMonData(&gPlayerParty[partySlot], MON_DATA_MET_LOCATION, &sPartyMemberInfo[partySlot].metLoc);
-	SetMonData(&gPlayerParty[partySlot], MON_DATA_POKEBALL, &sPartyMemberInfo[partySlot].ball);	
+	SetMonData(&gPlayerParty[partySlot], MON_DATA_MET_LEVEL, &sPartyMemberInfo[partySlot].metLevel);	
 	
 	return FALSE;
 }

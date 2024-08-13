@@ -70,7 +70,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "ITEM_EXP_CANDY_L",
       "script": "Common_EventScript_FindItem",
-      "flag": "0"
+      "flag": "FLAG_ITEM_STARTING_ROCK_CANDY"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_SPECIES(KINGLER)",
@@ -83,7 +83,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
-      "flag": "0"
+      "flag": "FLAG_HIDE_MARCEL_CUTSCENE"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_CUTTABLE_TREE",
@@ -146,9 +146,9 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
-      "flag": "0"
+      "trainer_sight_or_berry_tree_id": "ITEM_EXP_CANDY_L",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ITEM_POND_ROCK_CANDY"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
@@ -277,7 +277,7 @@
       "elevation": 0,
       "var": "VAR_MAIN_GAME_STATE",
       "var_value": "3",
-      "script": "NULL"
+      "script": "EltheRoad_Trigger_Marcel_Left"
     },
     {
       "type": "trigger",
@@ -286,7 +286,7 @@
       "elevation": 0,
       "var": "VAR_MAIN_GAME_STATE",
       "var_value": "3",
-      "script": "NULL"
+      "script": "EltheRoad_Trigger_Marcel_Right"
     },
     {
       "type": "trigger",

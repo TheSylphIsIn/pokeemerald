@@ -1,6 +1,7 @@
 const LOCALID_DEMIVEE=1
 const LOCALID_AMELIA=2
 const LOCALID_VINOS=3
+const LOCALID_MARCEL=5
 
 mapscripts EltheRoad_MapScripts 
 {
@@ -77,7 +78,7 @@ mapscripts EltheRoad_MapScripts
 			applymovement(LOCALID_DEMIVEE, EltheRoad_Movement_DemiveeJoin)
 			waitmovement(0)
 			removeobject(LOCALID_DEMIVEE)
-			playfanfare(MUS_CAUGHT)
+			playfanfare(MUS_EVOLVED)
 			additem(ITEM_LEAFSHARD)
 			message("Eevee joined your party!")
 			waitmessage
@@ -104,7 +105,7 @@ script EltheRoad_EventScript_FirstTrigger
 			"It changes my type, I think.\n" "And my moves.")
 	speakername("Amelia", PORTRAIT_AMELIA_SMUG)
 	msgbox("So you're some kind of…Demi-Vee?")
-	setpartymemberinfo(0) // Sets nickname, metloc, and Poké ball.
+	setpartymemberinfo(0) // Sets nickname, metloc, and met level.
 	speakername("Demi-Vee", PORTRAIT_DEMIVEE_HUH, PORTRAIT_DEFAULT_LEFT)
 	msgbox("Huh?")
 	speakername("Demi-Vee", PORTRAIT_DEMIVEE_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
@@ -611,7 +612,7 @@ script EltheRoad_EventScript_VinosIdle
 		msgbox("How exactly are you able to\n" "understand my speech?")
 		speakername("Amelia", PORTRAIT_AMELIA_SERIOUSLY)
 		msgbox("Oh, it's a long story…\n" "A long, deeply stupid story…\p"
-				"It starts with me kidnapping a\n" "Totodile from a Pokémon Professor,\l" "and ends with my arm falling off\l" "and getting stuck in the body of a…\p"
+				"My head's a bit hazy on the details\n" "right now. I think it starts with me\l" "kidnapping a Pokémon from a Professor,\l" "and then at some point my arm fell\l" "off, and I got stuck in the body of a…\p"
 				"You know, I'd really rather not\n" "get into it.\p"
 				"The short version is that it's a\n" "highly unique circumstance.")
 		speakername("Vinos", PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
@@ -666,6 +667,135 @@ script EltheRoad_Trigger_VinosAltTrigger
 	msgbox("Okay, thanks for the tip!\n" "See you around, Vinos!", MSGBOX_AUTOCLOSE)
 	setvar(VAR_MAIN_GAME_STATE, 3)
 	setflag(FLAG_TEMP_8)
+}
+
+script EltheRoad_Trigger_Marcel_Right
+{
+	lock
+	applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_WalkLeft)
+	waitmovement(0)
+	applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp)
+	waitmovement(0)
+	playse(SE_PIN)
+	applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_ExclamationMark)
+	waitmovement(0)
+	delay(48)
+	speakername("Amelia", PORTRAIT_AMELIA_SHOCK)
+	msgbox("Hey! You! Kingler!", MSGBOX_AUTOCLOSE)
+	applymovement(OBJ_EVENT_ID_PLAYER, EltheRoad_Movement_AmeliaGoToMarcel)
+	applymovement(OBJ_EVENT_ID_FOLLOWER, EltheRoad_Movement_DemiveeGoToMarcel_Right)
+	applymovement(LOCALID_MARCEL, Common_Movement_QuestionMark)
+	waitmovement(LOCALID_MARCEL)
+	applymovement(LOCALID_MARCEL, Common_Movement_WalkInPlaceFasterRight)
+	waitmovement(LOCALID_MARCEL)
+	waitmovement(OBJ_EVENT_ID_PLAYER)
+	goto(EltheRoad_Trigger_MarcelMain)
+}
+
+script EltheRoad_Trigger_Marcel_Left
+{
+	lock
+	playse(SE_PIN)
+	applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_ExclamationMark)
+	waitmovement(0)
+	delay(48)
+	speakername("Amelia", PORTRAIT_AMELIA_SHOCK)
+	msgbox("Hey! You! Kingler!", MSGBOX_AUTOCLOSE)
+	applymovement(OBJ_EVENT_ID_PLAYER, EltheRoad_Movement_AmeliaGoToMarcel)
+	applymovement(OBJ_EVENT_ID_FOLLOWER, EltheRoad_Movement_DemiveeGoToMarcel_Left)
+	applymovement(LOCALID_MARCEL, Common_Movement_QuestionMark)
+	waitmovement(LOCALID_MARCEL)
+	applymovement(LOCALID_MARCEL, Common_Movement_WalkInPlaceFasterRight)
+	waitmovement(LOCALID_MARCEL)
+	waitmovement(OBJ_EVENT_ID_PLAYER)
+	goto(EltheRoad_Trigger_MarcelMain)
+}
+
+script EltheRoad_Trigger_MarcelMain
+{
+	speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+	msgbox("You're…you are…\n" "What's your name again?")
+	speakername("Marcel", PORTRAIT_KINGLER_NEUTRAL)
+	msgbox("I'm Marcel. I think I know you.\n" "Do you know me?")
+	speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+	msgbox("I guess so. I have a Poké Ball here\n" "with your name on it.")
+	speakername("Demi-Vee", PORTRAIT_DEMIVEE_HUH)
+	msgbox("Is this one of your team members?\n" "Why don't you, like, know each other?")
+	speakername("Amelia", PORTRAIT_AMELIA_STRAINED)
+	msgbox("I haven't been able to think straight\n" "ever since the flood…")
+	applymovement(LOCALID_MARCEL, Common_Movement_WalkRight)
+	speakername("Marcel", PORTRAIT_KINGLER_NEUTRAL)
+	msgbox("Oh, who's this cute little thing?")
+	speakername("Demi-Vee", PORTRAIT_DEMIVEE_NEUTRAL)
+	msgbox("I'm the Demi-Vee! I'm tagging along\n" "to keep Amelia out of trouble!")
+	speakername("Amelia", PORTRAIT_AMELIA_SHOCK)
+	msgbox("As if! Nobody keeps me out of trouble!")
+	speakername("Marcel", PORTRAIT_KINGLER_LAUGH)
+	msgbox("Heh heh heh! That sounds right to me!\n" "I remember Vice told me about that\l" "time when your ex-boyfriend…", MSGBOX_AUTOCLOSE)
+	playse(SE_PIN)
+	applymovement(LOCALID_MARCEL, Common_Movement_ExclamationMark)
+	waitmovement(0)
+	delay(48)
+	applymovement(LOCALID_MARCEL, EltheRoad_Movement_MarcelRunToAmelia)
+	waitmovement(0)
+	turnobject(OBJ_EVENT_ID_PLAYER, DIR_EAST)
+	applymovement(OBJ_EVENT_ID_FOLLOWER, EltheRoad_Movement_DemiveeRunFromMarcel)
+	playse(SE_LEDGE)
+	speakername("Marcel", PORTRAIT_KINGLER_NEUTRAL)
+	msgbox("Vice! That's it, Amelia! You need\n" "to help me find my girlfriend!")
+	speakername("Amelia", PORTRAIT_AMELIA_SHOCK)
+	msgbox("Of course! How could I forget about\n" "my favorite battle couple!")
+	speakername("Marcel", PORTRAIT_KINGLER_NEUTRAL)
+	msgbox("There's a town nearby. She hates\n" "rain, so she's probably holed up\l" "inside somewhere. Let's go!", MSGBOX_AUTOCLOSE)
+	// animation for amelia putting the mon in a poke ball?
+	removeitem(ITEM_GREAT_BALL, 1)
+	delay(32)
+	applymovement(LOCALID_MARCEL, EnterPokeballMovement)
+	waitmovement(0)
+	removeobject(LOCALID_MARCEL)
+	delay(16)
+	playfanfare(MUS_EVOLVED)
+	message("You recalled Marcel the Kingler!")
+	waitmessage
+	waitfanfare
+	waitbuttonpress
+	closemessage
+	givemon(SPECIES_KINGLER, 50, ITEM_SPLASH_PLATE, ITEM_GREAT_BALL, NATURE_QUIET, 1, MON_FEMALE, 0, 0, 0, 0, 0, 0, 31, 31, 31, 31, 31, 31, MOVE_LIQUIDATION, MOVE_BODY_SLAM, MOVE_GUILLOTINE, MOVE_HAMMER_ARM, FALSE, FALSE, TYPE_DRAGON)
+	setpartymemberinfo(1)
+	setvar(VAR_MAIN_GAME_STATE, 4)
+}
+
+movement EltheRoad_Movement_DemiveeRunFromMarcel
+{
+	lock_facing_direction
+	jump_down
+	unlock_facing_direction
+	delay_16 * 2
+	walk_fast_left * 2
+	walk_fast_up
+	face_right
+}
+
+movement EltheRoad_Movement_MarcelRunToAmelia
+{
+	walk_fast_down * 2
+}
+
+movement EltheRoad_Movement_AmeliaGoToMarcel
+{
+	walk_fast_up * 2
+}
+
+movement EltheRoad_Movement_DemiveeGoToMarcel_Left
+{
+	walk_slow_up * 2
+	walk_slow_right
+	walk_slow_up
+}
+
+movement EltheRoad_Movement_DemiveeGoToMarcel_Right
+{
+	walk_slow_up * 2
 }
 
 movement EltheRoad_Movement_CameraShowItem

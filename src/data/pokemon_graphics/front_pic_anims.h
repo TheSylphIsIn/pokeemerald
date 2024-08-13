@@ -10157,6 +10157,15 @@ static const union AnimCmd *const sAnims_##name[] = \
     sAnim_##name##_1,                               \
 }
 
+static const union AnimCmd sAnim_Vinos_1[] =
+{
+    ANIMCMD_FRAME(0, 30),
+    ANIMCMD_FRAME(1, 30),
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+SINGLE_ANIMATION(Vinos);
 
 SINGLE_ANIMATION(None);
 #if P_FAMILY_BULBASAUR
