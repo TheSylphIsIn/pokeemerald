@@ -8,6 +8,7 @@ const FLAG_AT_BOTTOM_OF_BENCH=FLAG_TEMP_F
 const LOCALID_KEESIGHT = 9
 const LOCALID_ESPERSHARD = 10
 const LOCALID_UMBRASHARD = 11
+const LOCALID_PYTHON = 2
 
 mapscripts EltheCity_MapScripts 
 {
@@ -20,6 +21,33 @@ mapscripts EltheCity_MapScripts
 		{
 			setobjectxyperm(LOCALID_ESPERSHARD, 13, 21)
 		}
+		
+		if(!flag(FLAG_GOT_PYTHON))
+		{
+			random(4)
+			copyvar(VAR_RESULT, VAR_TEMP_F)
+			switch(var(VAR_TEMP_F))
+			{
+				case 0:
+					setobjectxyperm(LOCALID_PYTHON, 34, 7)
+					setobjectmovementtype(LOCALID_PYTHON, MOVEMENT_TYPE_FACE_LEFT)
+					setvar(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_MAN_2)
+				case 1:
+					setobjectxyperm(LOCALID_PYTHON, 29, 34)
+					setobjectmovementtype(LOCALID_PYTHON, MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT)
+					setvar(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_MAN_5)
+				case 2:
+					setobjectxyperm(LOCALID_PYTHON, 6, 26)
+					setobjectmovementtype(LOCALID_PYTHON, MOVEMENT_TYPE_LOOK_AROUND)
+					setvar(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_SPECIES(POLIWHIRL))
+				case 3:
+					setobjectxyperm(LOCALID_PYTHON, 28, 15)
+					setobjectmovementtype(LOCALID_PYTHON, MOVEMENT_TYPE_WANDER_DOWN_AND_UP)
+					setvar(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_MAN_2)
+			}
+		}
+		
+		// set zoroark position and disguise
 	}
 }
 
@@ -444,6 +472,12 @@ script EltheCity_Trigger_MusicStump8
 	
 	release
 }
+
+// arguing couple
+
+// old man by barrel
+
+// nerd in barrel
 
 movement EltheCity_Movement_KeesightHops
 {

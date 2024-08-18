@@ -4480,6 +4480,16 @@
       "secondary_tileset": "gTileset_EltheIndoor",
       "border_filepath": "data/layouts/InnFloor1/border.bin",
       "blockdata_filepath": "data/layouts/InnFloor1/map.bin"
+    },
+    {
+      "id": "LAYOUT_BAKERY",
+      "name": "Bakery_Layout",
+      "width": 20,
+      "height": 20,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_EltheIndoor",
+      "border_filepath": "data/layouts/Bakery/border.bin",
+      "blockdata_filepath": "data/layouts/Bakery/map.bin"
     }
   ]
 }

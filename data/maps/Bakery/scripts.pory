@@ -1,0 +1,49 @@
+const LOCALID_GIRL = 7
+const LOCALID_BOY = 6
+const LOCALID_MOM = 5
+const LOCALID_VICE = 1
+
+mapscripts Bakery_MapScripts 
+{
+	MAP_SCRIPT_ON_FRAME_TABLE [
+		VAR_MAIN_GAME_STATE, 4 {
+			delay(120)
+			special(SpawnCameraObject)
+			applymovement(OBJ_EVENT_ID_CAMERA, Bakery_Movement_CameraScrollToVice)
+			waitmovement(0)
+			delay(16)
+			applymovement(LOCALID_GIRL, Common_Movement_WalkInPlaceUp)
+			speakername("Little girl")
+			msgbox("What's this Pokémon's name, mommy?")
+			applymovement(LOCALID_MOM, Common_Movement_WalkInPlaceDown)
+			speakername("Her mom")
+			msgbox("That's a Flygon, sweetie. That kind\n" "doesn't live around here.")
+			applymovement(LOCALID_BOY, Common_Movement_WalkInPlaceLeft)
+			speakername("Little boy")
+			msgbox("Where does it live?")
+			turnobject(LOCALID_VICE, DIR_SOUTH)
+			playmoncry(SPECIES_FLYGON, CRY_MODE_NORMAL)
+			speakername("Vice", PORTRAIT_FLYGON_ANNOYED)
+			msgbox("I'm not a jungle gym, little runts.\n" "If it wasn't raining so hard, I'd be\l" "far, far away from you.")
+			applymovement(LOCALID_GIRL, Common_Movement_WalkInPlaceUp)
+			speakername("Little girl")
+			msgbox("He made a funny noise!\n" "Ggnnnrrr!")
+			speakername("Vice", PORTRAIT_FLYGON_ANNOYED)
+			msgbox("Sigh…", MSGBOX_AUTOCLOSE)
+			applymovement(OBJ_EVENT_ID_CAMERA, Bakery_Movement_CameraScrollBack)
+			waitmovement(0)
+			special(RemoveCameraObject)
+			setvar(VAR_MAIN_GAME_STATE, 5)
+		}
+	]
+}
+
+movement Bakery_Movement_CameraScrollToVice
+{
+	walk_slow_diag_northeast * 6
+}
+
+movement Bakery_Movement_CameraScrollBack
+{
+	walk_slow_diag_southwest * 6
+}

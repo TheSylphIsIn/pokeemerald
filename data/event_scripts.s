@@ -1089,3 +1089,5 @@ EventScript_VsSeekerChargingDone::
 	.include "data/maps/JumpingMinigame_Main/scripts.inc"
 
 	.include "data/maps/InnFloor1/scripts.inc"
+
+	.include "data/maps/Bakery/scripts.inc"

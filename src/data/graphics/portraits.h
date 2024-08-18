@@ -9,6 +9,9 @@ const u32 sPortraitPal_KinglerLaugh[] = INCBIN_U32("graphics/portraits/kingler_l
 const u32 sPortraitPic_FlygonNeutral[] = INCBIN_U32("graphics/portraits/flygon_neutral.4bpp.lz");
 const u32 sPortraitPal_FlygonNeutral[] = INCBIN_U32("graphics/portraits/flygon_neutral.gbapal.lz");
 
+const u32 sPortraitPic_FlygonAnnoyed[] = INCBIN_U32("graphics/portraits/flygon_annoyed.4bpp.lz");
+const u32 sPortraitPal_FlygonAnnoyed[] = INCBIN_U32("graphics/portraits/flygon_annoyed.gbapal.lz");
+
 const u32 sPortraitPic_NidokingNeutral[] = INCBIN_U32("graphics/portraits/nidoking_neutral.4bpp.lz");
 const u32 sPortraitPal_NidokingNeutral[] = INCBIN_U32("graphics/portraits/nidoking_neutral.gbapal.lz");
 
@@ -86,4 +89,5 @@ const struct PortraitData gPortraits[PORTRAITS_COUNT] =
 	[PORTRAIT_DEMIVEE_YAY]			= INCLUDE_PORTRAIT(DemiveeYay),
 	[PORTRAIT_KEESIGHT]				= INCLUDE_PORTRAIT(Keesight),
 	[PORTRAIT_KINGLER_LAUGH]		= INCLUDE_PORTRAIT(KinglerLaugh),
+	[PORTRAIT_FLYGON_ANNOYED]		= INCLUDE_PORTRAIT(FlygonAnnoyed),
 };

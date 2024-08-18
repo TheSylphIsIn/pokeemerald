@@ -747,7 +747,7 @@ script EltheRoad_Trigger_MarcelMain
 	msgbox("Of course! How could I forget about\n" "my favorite battle couple!")
 	speakername("Marcel", PORTRAIT_KINGLER_NEUTRAL)
 	msgbox("There's a town nearby. She hates\n" "rain, so she's probably holed up\l" "inside somewhere. Let's go!", MSGBOX_AUTOCLOSE)
-	// animation for amelia putting the mon in a poke ball?
+	// animation for amelia putting the mon in a ball?
 	removeitem(ITEM_GREAT_BALL, 1)
 	delay(32)
 	applymovement(LOCALID_MARCEL, EnterPokeballMovement)
@@ -763,6 +763,25 @@ script EltheRoad_Trigger_MarcelMain
 	givemon(SPECIES_KINGLER, 50, ITEM_SPLASH_PLATE, ITEM_GREAT_BALL, NATURE_QUIET, 1, MON_FEMALE, 0, 0, 0, 0, 0, 0, 31, 31, 31, 31, 31, 31, MOVE_LIQUIDATION, MOVE_BODY_SLAM, MOVE_GUILLOTINE, MOVE_HAMMER_ARM, FALSE, FALSE, TYPE_DRAGON)
 	setpartymemberinfo(1)
 	setvar(VAR_MAIN_GAME_STATE, 4)
+}
+
+script EltheRoad_EventScript_TreeCleanupMan
+{
+	if (flag(FLAG_TREES_CLEARED))
+	{
+		speakername("Logan")
+		msgbox("There's something unsettling about\n" "the path behind these branches…\p" "Maybe I should just leave these\n" "where they are…", MSGBOX_NPC)
+	}
+	else
+	{
+		speakername("Logan")
+		msgbox("Hail, traveler! I'm working on\nclearing out all these branches.\p" "You should be able to make it to the\n" "city now. I'll get the road all clear\l" "as soon as I can.", MSGBOX_NPC)
+	}
+}
+
+script EltheRoad_EventScript_BerryFieldsSign
+{
+	msgbox("Elthe City Berry Fields\p" "Please see overseer before picking\n" "any berries!", MSGBOX_SIGN)
 }
 
 movement EltheRoad_Movement_DemiveeRunFromMarcel

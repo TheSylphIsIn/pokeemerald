@@ -45,7 +45,8 @@
     "EltheCity"
   ],
   "gMapGroup_TarcInteriors": [
-    "InnFloor1"
+    "InnFloor1",
+    "Bakery"
   ],
   "gMapGroup_TarcExtra": [
     "JumpingMinigame_Main"

@@ -12,6 +12,7 @@
 
 // gMapGroup_TarcInteriors
 #define MAP_INN_FLOOR1 (0 | (1 << 8))
+#define MAP_BAKERY     (1 | (1 << 8))
 
 // gMapGroup_TarcExtra
 #define MAP_JUMPING_MINIGAME_MAIN (0 | (2 << 8))

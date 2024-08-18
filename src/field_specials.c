@@ -4305,3 +4305,8 @@ void ParalyzeLead(void)
 	
 	SetMonData(&gPlayerParty[0], MON_DATA_STATUS, &status1);
 }
+
+void GetLeadMonSpecies(void)
+{
+	gSpecialVar_Result = GetMonData(&gPlayerParty[0], MON_DATA_SPECIES);
+}
