@@ -5,8 +5,19 @@ const LOCALID_VICE = 1
 
 mapscripts Bakery_MapScripts 
 {
+	MAP_SCRIPT_ON_TRANSITION 
+	{
+		if(flag(FLAG_GOT_VICE))
+		{
+			setobjectxyperm(LOCALID_BOY, 16, 13)
+			setobjectmovementtype(LOCALID_BOY, MOVEMENT_TYPE_FACE_DOWN)
+			setobjectxyperm(LOCALID_GIRL, 15, 14)
+			setobjectmovementtype(LOCALID_GIRL, MOVEMENT_TYPE_FACE_RIGHT)
+		}
+	}
 	MAP_SCRIPT_ON_FRAME_TABLE [
-		VAR_MAIN_GAME_STATE, 4 {
+		VAR_MAIN_GAME_STATE, 4
+		{
 			delay(120)
 			special(SpawnCameraObject)
 			applymovement(OBJ_EVENT_ID_CAMERA, Bakery_Movement_CameraScrollToVice)
@@ -38,6 +49,67 @@ mapscripts Bakery_MapScripts
 	]
 }
 
+script Bakery_ViceScript
+{
+	lock
+	if(flag(FLAG_TREES_CLEARED))
+	{
+		speakername("Vice", PORTRAIT_FLYGON_ANNOYED)
+		msgbox("Can you tell these kids that I'm\n" "not a boy? It's starting to get to me.")
+		speakername("Amelia", PORTRAIT_AMELIA_SERIOUSLY)
+		msgbox("No, I don't think I can. They probably\n" "think I'M a boy…\p" "Kids just sort of decide.", MSGBOX_AUTOCLOSE)
+	}
+	else
+	{
+		faceplayer
+		speakername("Vice", PORTRAIT_FLYGON_ANNOYED)
+		msgbox("What, another one? I'm about to…")
+		speakername("Vice", PORTRAIT_FLYGON_NEUTRAL)
+		msgbox("Hey, you're not a kid.")
+		speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+		msgbox("Vice! Glad I found you. Can you come\n" "help me find Python?")
+		speakername("Vice", PORTRAIT_FLYGON_NEUTRAL)
+		msgbox("Who? And what? And why?\n" "Why are you talking to me?")
+		speakername("Amelia", PORTRAIT_AMELIA_SERIOUSLY)
+		msgbox("Oh, come on. You're acting stupid too?\n" "Well, I guess it's nothing new…\p"
+				"Everyone's memories are fogged up.\n" "You don't remember me at all?")
+		speakername("Vice", PORTRAIT_FLYGON_NEUTRAL)
+		msgbox("I dunno, I think I've seen your face\n" "before. You're a good trainer, right?")
+		speakername("Amelia", PORTRAIT_AMELIA_SERIOUSLY)
+		msgbox("I'm YOUR trainer. Look, I have your\n" "Poké Ball right here.")
+		speakername("Vice", PORTRAIT_FLYGON_NEUTRAL)
+		msgbox("Okay, but like…I'm busy. I'm waiting\n" "until the end of the day so the\l" "baker will give me all the leftovers\l" "instead of throwing them away.")
+		special(GetLeadMonSpecies)
+		switch(var(VAR_RESULT))
+		{
+			case SPECIES_KINGLER:
+				speakername("Marcel", PORTRAIT_KINGLER_LAUGH)
+				msgbox("You'll come with use if we get you\n" "a spicy treat, won't you?\l" "Spicy is your favorite flavor.")
+				speakername("Vice", PORTRAIT_FLYGON_NEUTRAL)
+				msgbox("Woah…a spicy treat from a cutie…\n" "That does sound like a good deal…\p"
+						"Okay, then! I'll come with you if\n" "you bring me a spicy bakery treat.\l" "Otherwise you gotta wait till later.")
+				speakername("Marcel", PORTRAIT_KINGLER_NEUTRAL)
+				msgbox("It's settled! Come on, Amelia, let's\n" "ask the baker about special orders.", MSGBOX_AUTOCLOSE)
+				setflag(FLAG_KNOW_VICE_FLAVOR)
+			case SPECIES_EEVEE:
+				speakername("Demi-Vee", PORTRAIT_DEMIVEE_NEUTRAL)
+				msgbox("Is there anything we could do to\n" "get you to come with us NOW?")
+				speakername("Vice", PORTRAIT_FLYGON_NEUTRAL)
+				msgbox("Hmm…well, the reason I have to wait\n" "is I don't have any money…\p"
+						"If you could get me a treat, I'll\n" "go with you.\p"
+						"But it has to be a kind that I like!")
+				speakername("Demi-Vee", PORTRAIT_DEMIVEE_NEUTRAL)
+				msgbox("Okay, then…sounds like a plan.\n" "What kind do you like?")
+				speakername("Vice", PORTRAIT_FLYGON_NEUTRAL)
+				msgbox("I dunno!")
+				speakername("Demi-Vee", PORTRAIT_DEMIVEE_ANNOYED)
+				msgbox("… … … … …\p" "Okay, let's just go.", MSGBOX_AUTOCLOSE)
+		}
+		setflag(FLAG_TREES_CLEARED)
+	}
+	release
+}
+
 movement Bakery_Movement_CameraScrollToVice
 {
 	walk_slow_diag_northeast * 6
@@ -46,4 +118,129 @@ movement Bakery_Movement_CameraScrollToVice
 movement Bakery_Movement_CameraScrollBack
 {
 	walk_slow_diag_southwest * 6
+}
+
+// baker script: if you've gotten Vice's order, you ask for a special order from the baker.
+// you say you don't have money but can pay it by doing an odd job. he says to clear out his haunted kitchen.
+script Bakery_Cashier
+{
+	lock
+	faceplayer
+	if (flag(FLAG_TREES_CLEARED) && !flag(FLAG_GOT_VICE))
+	{
+		speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+		msgbox("'Scuse me, what's your policy on\n" "special orders? That Flygon over there\l" "is mine, but she wants a treat\l" "before we go.")
+		speakername("Cashier")
+		msgbox("Uh, I think we can do it. It\n" "depends, I guess. What did you want?")
+		if (flag(FLAG_KNOW_VICE_FLAVOR))
+		{
+			speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+			msgbox("Something spicy. Can you do spicy?")
+			speakername("Cashier")
+			msgbox("I'm not sure. Lemme ask the boss.", MSGBOX_AUTOCLOSE)
+			// moves up to talk to boss
+			// moves back down
+			speakername("Cashier")
+			msgbox("We don't have anything on hand.\n" "If you're committed enough to bring\l" "your own spicy berries, we could\l" "make something out of them.")
+			// check if the player already has them. if not, set a flag to skip to this part of the  script later.
+		}
+		else
+		{
+			speakername("Amelia", PORTRAIT_AMELIA_SERIOUSLY)
+			msgbox("…Um, good question…")
+			speakername("Cashier")
+			msgbox("… … … … …\n" "Well, we need something to work from.\l" "Could you figure out what flavor\l" "it likes, at least?", MSGBOX_AUTOCLOSE)
+		}
+	}
+	release
+}
+
+script Bakery_LittleBoy
+{
+	lock
+	faceplayer
+	if(flag(FLAG_TEMP_11))
+	{
+		speakername("Louis")
+	}
+	else
+	{
+		speakername("Little boy")
+	}
+	if(flag(FLAG_GOT_VICE))
+	{
+		
+		msgbox("How do you talk to Pokémon?")
+		speakername("Amelia", PORTRAIT_AMELIA_SERIOUSLY)
+		msgbox("I learned it at the school of\n" "hard knocks. You don't wanna go there…", MSGBOX_AUTOCLOSE)
+	}
+	else
+	{
+		msgbox("Go away! My Fygon!", MSGBOX_AUTOCLOSE)
+	}
+	release
+}
+
+script Bakery_LittleGirl
+{
+	lock
+	faceplayer
+	if(flag(FLAG_TEMP_11))
+	{
+		speakername("Leah")
+	}
+	else
+	{
+		speakername("Little girl")
+	}
+	if(flag(FLAG_GOT_VICE))
+	{
+		
+		msgbox("Donut!")
+	}
+	else
+	{
+		msgbox("Can he take off his glasses?", MSGBOX_AUTOCLOSE)
+	}
+	release
+}
+
+script Bakery_KidsMom
+{
+	lock
+	faceplayer
+	if(flag(FLAG_TEMP_11))
+	{
+		speakername("Lisa")
+		msgbox("Do you have any kids, Amelia?")
+		speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+		msgbox("Oh, no. My Pokémon are like my kids.")
+		speakername("Lisa")
+		msgbox("Ah, you're one of those…")
+		speakername("Amelia", PORTRAIT_AMELIA_SERIOUSLY)
+		msgbox("My circumstances are a bit…abnormal,\n" "to be fair…")
+		speakername("Lisa")
+		msgbox("Sorry, sorry! I didn't mean it like\n" "that! It's all alright.")
+		speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+		msgbox("Eh…whatever.", MSGBOX_AUTOCLOSE)
+	}
+	else
+	{
+		speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+		msgbox("I hope I don't ruin your day by\n" "taking back my Flygon.")
+		speakername("Kids' mom")
+		msgbox("Oh, the kids will be fine. Maybe\n" "it'll get them to actually eat.")
+		speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+		msgbox("Do you have any Pokémon of your own?")
+		speakername("Kids' mom")
+		msgbox("Not yet. When they're a little older,\n" "I'll get them each a Keesh.")
+		speakername("Amelia", PORTRAIT_AMELIA_SERIOUSLY)
+		msgbox("(A…quiche?)")
+		speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+		msgbox("Er, that's nice. When they're old\n" "enough to take responsibility, right?")
+		speakername("Lisa")
+		msgbox("Of course!\n" "By the way, I'm Lisa. And the kids\l" "are Louis and Leah.", MSGBOX_AUTOCLOSE) 
+		setflag(FLAG_TEMP_11)
+	}
+	release
 }

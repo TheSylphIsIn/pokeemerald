@@ -2274,7 +2274,7 @@ bool32 CheckMsgInfo(const struct FollowerMsgInfoExtended *info, struct Pokemon *
 // Call an applicable follower message script
 void GetFollowerAction(struct ScriptContext *ctx) // Essentially a big switch for follower messages
 {
-    u32 species;
+    u32 species; // maybe replace this entire thing to just call a script based on the current mon, map, and main state?
     s32 multi;
     struct SpecialEmote condEmotes[16] = {0};
     u32 condCount = 0;

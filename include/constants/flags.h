@@ -1240,9 +1240,9 @@
 #define FLAG_GOT_BRADLEY                                           0x4A6 // Unused Flag
 #define FLAG_GOT_PYTHON                                           0x4A7 // Unused Flag
 #define FLAG_ITEM_BERRY_FIELD_CORNER_CANDY                                           0x4A8 // Unused Flag
-#define FLAG_UNUSED_0x4A9                                           0x4A9 // Unused Flag
-#define FLAG_UNUSED_0x4AA                                           0x4AA // Unused Flag
-#define FLAG_UNUSED_0x4AB                                           0x4AB // Unused Flag
+#define FLAG_KNOW_VICE_FLAVOR                                           0x4A9 // Unused Flag
+#define FLAG_STARTED_WEATHERBANE_QUEST                                           0x4AA // Unused Flag
+#define FLAG_FINISHED_WEATHERBANE_QUEST                              0x4AB // Unused Flag
 #define FLAG_UNUSED_0x4AC                                           0x4AC // Unused Flag
 #define FLAG_UNUSED_0x4AD                                           0x4AD // Unused Flag
 #define FLAG_UNUSED_0x4AE                                           0x4AE // Unused Flag

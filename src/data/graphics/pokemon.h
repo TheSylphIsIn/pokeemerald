@@ -22021,3 +22021,11 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #if P_FOOTPRINTS
     const u8 gMonFootprint_vinos[] = INCBIN_U8("graphics/pokemon/vinos/footprint.1bpp");
 #endif
+
+    const u32 gMonFrontPic_weatherbane[] = INCBIN_U32("graphics/pokemon/weatherbane/anim_front.4bpp.lz");
+    const u32 gMonPalette_weatherbane[] = INCBIN_U32("graphics/pokemon/weatherbane/normal.gbapal.lz");
+#if P_FOOTPRINTS
+    const u8 gMonFootprint_weatherbane[] = INCBIN_U8("graphics/pokemon/weatherbane/footprint.1bpp");
+#endif //P_FOOTPRINTS
+    const u32 gObjectEventPic_weatherbane[] = INCBIN_COMP("graphics/pokemon/weatherbane/overworld.4bpp");
+    const u32 gOverworldPalette_weatherbane[] = INCBIN_U32("graphics/pokemon/weatherbane/overworld_normal.gbapal.lz");

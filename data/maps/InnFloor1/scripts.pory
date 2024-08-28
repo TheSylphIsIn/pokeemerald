@@ -1,1 +1,36 @@
 mapscripts InnFloor1_MapScripts {}
+
+script InnFloor1_Concierge
+{
+	lock
+	faceplayer
+	if (!flag(FLAG_STARTED_WEATHERBANE_QUEST))
+	{
+		speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+		msgbox("Hello, could I get a room here?\n" "Just for a short while.")
+		speakername("Innkeeper")
+		msgbox("Sure, sure. We have vacancies.\n" "The cost of one room is…")
+		speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+		msgbox("Well, you see, I'm a Pokémon Ranger.\n" "I don't carry money, but I do\l" "Pokémon-related odd jobs in exchange\l" "for favors, if that's alright?")
+		speakername("Innkeeper")
+		msgbox("Ah, yes. I've seen your people before.\p" "In that case, could you go up on\n" "the roof and take care of something?\p"
+				"The Weatherbane has been making noise\n" "something fierce lately.\l" "It's disturbing the guests.\p"
+				"Could you go up there and set it\n" "right? I'll put a ladder out…")
+		speakername("Amelia", PORTRAIT_AMELIA_SERIOUSLY)
+		msgbox("The weathervane? That's not exactly…")
+		speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+		msgbox("Okay, sure. I'll take care of it.")
+		speakername("Innkeeper")
+		msgbox("Thanks, dearie. I'm just too old to\n" "take care of that thing anymore.", MSGBOX_AUTOCLOSE)
+		setflag(FLAG_STARTED_WEATHERBANE_QUEST)
+	} // initiate quest
+	elif(flag(FLAG_FINISHED_WEATHERBANE_QUEST))
+	{} // idle chatter with the innkeeper
+	else
+	{
+		speakername("Innkeeper")
+		msgbox("Just go outside, up the ladder, and\n" "quiet that Weatherbane down.\p"
+				"I'll give you your room key when\n" "you're done.")
+	} // remind you about the quest
+	release
+}

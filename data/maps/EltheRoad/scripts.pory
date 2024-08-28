@@ -2,6 +2,7 @@ const LOCALID_DEMIVEE=1
 const LOCALID_AMELIA=2
 const LOCALID_VINOS=3
 const LOCALID_MARCEL=5
+const LOCALID_LOGAN=18
 
 mapscripts EltheRoad_MapScripts 
 {
@@ -89,6 +90,13 @@ mapscripts EltheRoad_MapScripts
 			setvar(VAR_MAIN_GAME_STATE, 1)
 		}
 	]
+	MAP_SCRIPT_ON_TRANSITION {
+		if(flag(FLAG_TREES_CLEARED))
+		{
+			setobjectxyperm(LOCALID_LOGAN, 8, 14)
+			setobjectmovementtype(LOCALID_LOGAN, MOVEMENT_TYPE_FACE_LEFT)
+		}
+	}
 }	
 
 script EltheRoad_EventScript_FirstTrigger
@@ -499,7 +507,7 @@ script EltheRoad_VinosNegotiationCompleteSuccess
 
 script EltheRoad_VinosDoBattle
 {
-	setwildbattle(SPECIES_VINOS, 35, ITEM_NONE)
+	createmon(1, 0, SPECIES_VINOS, 35, ITEM_NONE, 0, NATURE_IMPISH, 0, MON_MALE, 0, 0, 0, 0, 0, 0, 31, 31, 31, 31, 31, 31, MOVE_WRAP, MOVE_FEINT_ATTACK, MOVE_GLARE, MOVE_LEER, FALSE, 0, TYPE_WATER)
 	dowildbattle
 	call(EltheRoad_CleanUpNegotiationValues)
 	turnobject(LOCALID_VINOS, DIR_SOUTH)

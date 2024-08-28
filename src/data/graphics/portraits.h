@@ -66,6 +66,12 @@ const u32 sPortraitPal_VinosMad[] = INCBIN_U32("graphics/portraits/vinos_mad.gba
 const u32 sPortraitPic_Keesight[] = INCBIN_U32("graphics/portraits/keesight.4bpp.lz");
 const u32 sPortraitPal_Keesight[] = INCBIN_U32("graphics/portraits/keesight.gbapal.lz");
 
+const u32 sPortraitPic_WeatherbaneNeutral[] = INCBIN_U32("graphics/portraits/weatherbane_neutral.4bpp.lz");
+const u32 sPortraitPal_WeatherbaneNeutral[] = INCBIN_U32("graphics/portraits/weatherbane_neutral.gbapal.lz");
+
+const u32 sPortraitPic_WeatherbaneScream[] = INCBIN_U32("graphics/portraits/weatherbane_scream.4bpp.lz");
+const u32 sPortraitPal_WeatherbaneScream[] = INCBIN_U32("graphics/portraits/weatherbane_scream.gbapal.lz");
+
 const struct PortraitData gPortraits[PORTRAITS_COUNT] = 
 {
 	[PORTRAIT_KINGLER_NEUTRAL] = {.pic = sPortraitPic_KinglerNeutral, .palette = sPortraitPal_KinglerNeutral},
@@ -90,4 +96,6 @@ const struct PortraitData gPortraits[PORTRAITS_COUNT] =
 	[PORTRAIT_KEESIGHT]				= INCLUDE_PORTRAIT(Keesight),
 	[PORTRAIT_KINGLER_LAUGH]		= INCLUDE_PORTRAIT(KinglerLaugh),
 	[PORTRAIT_FLYGON_ANNOYED]		= INCLUDE_PORTRAIT(FlygonAnnoyed),
+	[PORTRAIT_WEATHERBANE_NEUTRAL]	= INCLUDE_PORTRAIT(WeatherbaneNeutral),
+	[PORTRAIT_WEATHERBANE_SCREAM]	= INCLUDE_PORTRAIT(WeatherbaneScream),
 };

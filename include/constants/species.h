@@ -1638,12 +1638,12 @@
 #define SPECIES_DEMIVEE_ICE                             1531
 #define SPECIES_DEMIVEE_FAIRY                           1532
 
-#define SPECIES_VINOS									1533
+#define SPECIES_WEATHERBANE								1533
 #define SPECIES_PANTOM									1534
 #define SPECIES_HYDROIL									1535
-#define SPECIES_WEATHERBANE								1536
+#define SPECIES_VINOS									1536
 
-#define SPECIES_EGG SPECIES_WEATHERBANE + 1
+#define SPECIES_EGG SPECIES_VINOS + 1
 
 #define NUM_SPECIES SPECIES_EGG
 

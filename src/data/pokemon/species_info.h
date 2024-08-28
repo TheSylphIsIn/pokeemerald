@@ -205,6 +205,75 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .levelUpLearnset = sVinosLevelUpLearnset,
         .teachableLearnset = sNoneTeachableLearnset,
     },
+	
+    [SPECIES_WEATHERBANE] =
+    {
+        .baseHP        = 64,
+        .baseAttack    = 64,
+        .baseDefense   = 128,
+        .baseSpeed     = 64,
+        .baseSpAttack  = 128,
+        .baseSpDefense = 96,
+        .types = MON_TYPES(TYPE_STEEL, TYPE_FLYING),
+        .catchRate = 45,
+    #if P_UPDATED_EXP_YIELDS >= GEN_8
+        .expYield = 300,
+    #elif P_UPDATED_EXP_YIELDS >= GEN_5
+        .expYield = 270,
+    #else
+        .expYield = 64,
+    #endif
+        .evYield_SpAttack = 2,
+        .genderRatio = MON_MALE,
+        .eggCycles = 120,
+        .friendship = 100,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED),
+        .abilities = { ABILITY_LIGHTNING_ROD, ABILITY_NONE, ABILITY_NONE },
+        .bodyColor = BODY_COLOR_GRAY,
+        .speciesName = _("Weatherbane"),
+        .cryId = CRY_SKARMORY,
+        .natDexNum = NATIONAL_DEX_MEW,
+        .categoryName = _("New Species"),
+        .height = 4,
+        .weight = 40,
+        .description = COMPOUND_STRING(
+            "A Mew is said to possess the genes of all\n"
+            "Pokémon. It is capable of making itself\n"
+            "invisible at will, so it entirely avoids\n"
+            "notice even if it approaches people."),
+        .pokemonScale = 457,
+        .pokemonOffset = -2,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+        .frontPic = gMonFrontPic_weatherbane,
+        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicYOffset = 9,
+        .frontAnimFrames = sAnims_Mew,
+        .frontAnimId = ANIM_H_SHAKE,
+        .enemyMonElevation = 11,
+        .backPic = gMonBackPic_Mew,
+        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicYOffset = 0,
+        .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
+        .palette = gMonPalette_weatherbane,
+        .shinyPalette = gMonShinyPalette_Mew,
+        .iconSprite = gMonIcon_Mew,
+        .iconPalIndex = 0,
+        FOOTPRINT(Mew)
+        OVERWORLD(
+            sPicTable_Weatherbane,
+            SIZE_32x32,
+            SHADOW_SIZE_M,
+            TRACKS_NONE,
+            gOverworldPalette_weatherbane,
+            gShinyOverworldPalette_Mew
+        )
+        .isMythical = TRUE,
+        .isFrontierBanned = TRUE,
+        .levelUpLearnset = sMewLevelUpLearnset,
+        .teachableLearnset = sMewTeachableLearnset,
+    },
 
     /*
     [SPECIES_NONE] =

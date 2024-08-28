@@ -4247,7 +4247,8 @@ static void Cmd_getexp(void)
     case 0: // check if should receive exp at all
         if (GetBattlerSide(gBattlerFainted) != B_SIDE_OPPONENT
             || IsAiVsAiBattle()
-            || !BattleTypeAllowsExp())
+            || !BattleTypeAllowsExp()
+			|| GET_BASE_SPECIES_ID(GetMonData(&gPlayerParty[*expMonId], MON_DATA_SPECIES)) == SPECIES_EEVEE) // Demi-Vee doesn't get exp or EVs
         {
             gBattleScripting.getexpState = 6; // goto last case
         }

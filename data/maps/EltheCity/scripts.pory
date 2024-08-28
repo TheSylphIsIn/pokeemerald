@@ -9,9 +9,20 @@ const LOCALID_KEESIGHT = 9
 const LOCALID_ESPERSHARD = 10
 const LOCALID_UMBRASHARD = 11
 const LOCALID_PYTHON = 2
+const LOCALID_WEATHERBANE = 1
 
 mapscripts EltheCity_MapScripts 
 {
+	MAP_SCRIPT_ON_LOAD
+	{
+		if(flag(FLAG_STARTED_WEATHERBANE_QUEST))
+		{
+			setmetatile(5, 31, 0x387, FALSE)
+			setmetatile(5, 30, 0x37F, FALSE)
+			setmetatile(5, 29, 0x377, FALSE)
+			setmetatile(5, 28, 0x36F, FALSE)
+		}
+	}
 	MAP_SCRIPT_ON_TRANSITION {
 		if(flag(FLAG_SCALE_DESCENDING_DONE))
 		{
@@ -44,10 +55,10 @@ mapscripts EltheCity_MapScripts
 					setobjectxyperm(LOCALID_PYTHON, 28, 15)
 					setobjectmovementtype(LOCALID_PYTHON, MOVEMENT_TYPE_WANDER_DOWN_AND_UP)
 					setvar(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_MAN_2)
+				
+				// could add more if I wanted
 			}
 		}
-		
-		// set zoroark position and disguise
 	}
 }
 
@@ -228,6 +239,109 @@ script EltheCity_EventScript_Keesight
 		speakername(NULL, 0)
 		msgbox("The Pokémon is staring intently\n" "at the pond…", MSGBOX_AUTOCLOSE)
 	}
+}
+
+script EltheCity_EventScript_Weatherbane
+{
+	if(!flag(FLAG_FINISHED_WEATHERBANE_QUEST))
+	{
+		speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+		msgbox("So this is the thing I'm supposed\n" "to fix? It's, what, squeaky?", MSGBOX_AUTOCLOSE)
+		applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceUp)
+		waitmovement(0)
+		applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceUp)
+		waitmovement(0)
+		delay(16)
+		addobjectspriteoffset(LOCALID_WEATHERBANE, 1, 0)
+		delay(8)
+		addobjectspriteoffset(LOCALID_WEATHERBANE, -2, 0)
+		delay(8)
+		applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_ExclamationMark)
+		playse(SE_PIN)
+		addobjectspriteoffset(LOCALID_WEATHERBANE, 2, 0)
+		delay(8)
+		addobjectspriteoffset(LOCALID_WEATHERBANE, -2, 0)
+		delay(8)
+		addobjectspriteoffset(LOCALID_WEATHERBANE, 2, 0)
+		delay(8)
+		addobjectspriteoffset(LOCALID_WEATHERBANE, -2, 0)
+		delay(8)
+		addobjectspriteoffset(LOCALID_WEATHERBANE, 2, 0)
+		delay(8)
+		addobjectspriteoffset(LOCALID_WEATHERBANE, -2, 0)
+		delay(8)
+		addobjectspriteoffset(LOCALID_WEATHERBANE, 0, 0)
+		delay(16)
+		applymovement(LOCALID_WEATHERBANE, EltheCity_Movement_WeatherbaneFlap)
+		speakername("Weatherbane", PORTRAIT_WEATHERBANE_SCREAM)
+		msgbox("Skrraaaaaaaaaaaw! Skrraaaaaaaaaaaw!")
+		waitmovement(LOCALID_WEATHERBANE)
+		speakername("Amelia", PORTRAIT_AMELIA_STRAINED)
+		msgbox("…Geez. It's a Pokémon?\n" "Well, it sure is noisy…")
+		applymovement(LOCALID_WEATHERBANE, EltheCity_Movement_WeatherbaneFlap)
+		speakername("Weatherbane", PORTRAIT_WEATHERBANE_SCREAM)
+		msgbox("Skrraaaaaaaaaaaw! Skrraaaaaaaaaaaw!")
+		waitmovement(LOCALID_WEATHERBANE)
+		speakername("Amelia", PORTRAIT_AMELIA_SHOCK)
+		msgbox("Hey! Shut the f{CENSOR}uck{UNCENSOR} up!")
+		speakername("Weatherbane", PORTRAIT_WEATHERBANE_NEUTRAL)
+		msgbox("… … … … …")
+		speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+		msgbox("Why are you yelling?")
+		speakername("Weatherbane", PORTRAIT_WEATHERBANE_NEUTRAL)
+		msgbox("The rain! The rain! I'm trying to\n" "make the rain go away!\p"
+				"My cries can chase away storms.\n" "But this rain just keeps coming back!\l" "Begone! Begone!")
+		speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+		msgbox("So it's not a natural rainstorm?\n" "Maybe a Pokémon is summoning it…")
+		speakername("Weatherbane", PORTRAIT_WEATHERBANE_SCREAM)
+		msgbox("Not natural! Not natural!\n" "Can't you feel it?\p"
+				"The rain washes away your darkness.\n" "Makes you a carefree person.\l" "A fake person.\l" "Must be stopped! Must be stopped!")
+		speakername("Amelia", PORTRAIT_AMELIA_STRAINED)
+		msgbox("Look, I know! Something's messing\n" "with my head. It could be the same\l" "thing that's causing the rain.\p"
+				"I'm working on it. But my job right\n" "now is to get you to quiet down.")
+		speakername("Weatherbane", PORTRAIT_WEATHERBANE_SCREAM)
+		msgbox("Can't shut up! Can't shut up!\p" "Begone! Begone!")
+		speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+		msgbox("What if I promise to clear up this\n" "rain? Will that shut you up?")
+		speakername("Weatherbane", PORTRAIT_WEATHERBANE_NEUTRAL)
+		applymovement(LOCALID_WEATHERBANE, EltheCity_Movement_WeatherbaneFlap)
+		msgbox("Maybe. Maybe.\p" "Show me you're strong enough!\n" "I think you're weak! Weak!")
+		waitmovement(LOCALID_WEATHERBANE)
+		closemessage
+		createmon(1, 0, SPECIES_WEATHERBANE, 40, ITEM_NONE, 0, NATURE_CALM, 0, MON_MALE, 0, 0, 0, 0, 0, 0, 31, 31, 31, 31, 31, 31, MOVE_STEEL_WING, MOVE_AIR_CUTTER, MOVE_SCREECH, MOVE_ROOST, FALSE, 0, TYPE_WATER)
+		dowildbattle
+		speakername("Weatherbane", PORTRAIT_WEATHERBANE_NEUTRAL)
+		msgbox("Okay! Okay! You're good! You're good!\p" "I trust you. You will stop the rain.\n" "Amelia, Sun-Bringer! Hail! Hail!")
+		speakername("Amelia", PORTRAIT_AMELIA_SERIOUSLY)
+		msgbox("Please don't call me that ever again.", MSGBOX_AUTOCLOSE)
+		delay(60)
+		setflag(FLAG_FINISHED_WEATHERBANE_QUEST)
+		playfanfare(MUS_CAUGHT)
+		message("Finished the Innkeeper's request!")
+		waitmessage
+		waitfanfare
+		waitbuttonpress
+		closemessage
+	}
+	else
+	{
+		speakername("Weatherbane", PORTRAIT_WEATHERBANE_NEUTRAL)
+		msgbox("I used to love the sun.\n" "Fire types feared me.\p"
+				"But now I'm too old! Too old!\n" "Can't take the heat like I used to.\p"
+				"But I'd still like to see the sun\n" "again. Too wet! Too wet!", MSGBOX_AUTOCLOSE)
+	}
+}
+
+movement EltheCity_Movement_WeatherbaneFlap
+{
+	face_up
+	delay_8
+	face_left
+	delay_8
+	face_down
+	delay_8
+	face_right
+	delay_8
 }
 
 script EltheCity_Trigger_MusicStump1
