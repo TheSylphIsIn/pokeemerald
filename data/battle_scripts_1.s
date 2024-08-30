@@ -5516,7 +5516,6 @@ BattleScript_HandleFaintedMon::
 	yesnobox
 	jumpifbyte CMP_EQUAL, gBattleCommunication + 1, 0, BattleScript_FaintedMonTryChoose
 @ Player said no, try to run
-	jumpifplayerran BattleScript_FaintedMonEnd
 	printstring STRINGID_CANTESCAPE2
 BattleScript_FaintedMonTryChoose:
 	openpartyscreen BS_FAINTED, BattleScript_FaintedMonEnd
