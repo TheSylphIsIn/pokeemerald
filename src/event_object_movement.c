@@ -2275,28 +2275,10 @@ bool32 CheckMsgInfo(const struct FollowerMsgInfoExtended *info, struct Pokemon *
 void GetFollowerAction(struct ScriptContext *ctx) // Essentially a big switch for follower messages
 {
     u32 species; // maybe replace this entire thing to just call a script based on the current mon, map, and main state?
-    s32 multi;
-    struct SpecialEmote condEmotes[16] = {0};
-    u32 condCount = 0;
-    u32 emotion;
     struct ObjectEvent *objEvent = GetFollowerObject();
     struct Pokemon *mon = GetFirstLiveMon();
-    u8 emotion_weight[FOLLOWER_EMOTION_LENGTH] =
-    {
-        [FOLLOWER_EMOTION_HAPPY] = 10,
-        [FOLLOWER_EMOTION_NEUTRAL] = 15,
-        [FOLLOWER_EMOTION_SAD] = 5,
-        [FOLLOWER_EMOTION_UPSET] = 15,
-        [FOLLOWER_EMOTION_ANGRY] = 15,
-        [FOLLOWER_EMOTION_PENSIVE] = 15,
-        [FOLLOWER_EMOTION_LOVE] = 0,
-        [FOLLOWER_EMOTION_SURPRISE] = 10,
-        [FOLLOWER_EMOTION_CURIOUS] = 10,
-        [FOLLOWER_EMOTION_MUSIC] = 15,
-        [FOLLOWER_EMOTION_POISONED] = 0,
-    };
     u32 i, j;
-    bool32 pickedCondition = FALSE;
+
     if (mon == NULL) // failsafe
     {
         ScriptCall(ctx, EventScript_FollowerLovesYou);
@@ -2305,146 +2287,27 @@ void GetFollowerAction(struct ScriptContext *ctx) // Essentially a big switch fo
     // Set the script to the very end; we'll be calling another script dynamically
     ScriptJump(ctx, EventScript_FollowerEnd);
     species = GetMonData(mon, MON_DATA_SPECIES);
-    multi = GetMonData(mon, MON_DATA_FRIENDSHIP);
-    if (multi > 80)
-    {
-        emotion_weight[FOLLOWER_EMOTION_HAPPY] = 20;
-        emotion_weight[FOLLOWER_EMOTION_UPSET] = 5;
-        emotion_weight[FOLLOWER_EMOTION_ANGRY] = 5;
-        emotion_weight[FOLLOWER_EMOTION_LOVE] = 20;
-        emotion_weight[FOLLOWER_EMOTION_MUSIC] = 20;
-    }
-    if (multi > 170)
-    {
-        emotion_weight[FOLLOWER_EMOTION_HAPPY] = 30;
-        emotion_weight[FOLLOWER_EMOTION_LOVE] = 30;
-    }
-    // Special C-based conditions follower
-    // Weather-related
-    if (GetCurrentWeather() == WEATHER_SUNNY_CLOUDS)
-        condEmotes[condCount++] = (struct SpecialEmote) {.emotion = FOLLOWER_EMOTION_HAPPY, .index = 31};
-    // Health & status-related
-    multi = SAFE_DIV(mon->hp * 100, mon->maxHP);
-    if (multi < 20)
-    {
-        emotion_weight[FOLLOWER_EMOTION_SAD] = 30;
-        condEmotes[condCount++] = (struct SpecialEmote) {.emotion = FOLLOWER_EMOTION_SAD, .index = 4};
-        condEmotes[condCount++] = (struct SpecialEmote) {.emotion = FOLLOWER_EMOTION_SAD, .index = 5};
-    }
-    if (multi < 50 || mon->status & STATUS1_PARALYSIS)
-    {
-        emotion_weight[FOLLOWER_EMOTION_SAD] = 30;
-        condEmotes[condCount++] = (struct SpecialEmote) {.emotion = FOLLOWER_EMOTION_SAD, .index = 6};
-    }
-    // Gym type advantage/disadvantage
-    if (GetCurrentMapMusic() == MUS_GYM || GetCurrentMapMusic() == MUS_RG_GYM)
-    {
-        switch (gMapHeader.regionMapSectionId)
-        {
-        case MAPSEC_RUSTBORO_CITY:
-        case MAPSEC_PEWTER_CITY:
-            multi = TYPE_ROCK;
-            break;
-        case MAPSEC_DEWFORD_TOWN:
-            multi = TYPE_FIGHTING;
-            break;
-        case MAPSEC_MAUVILLE_CITY:
-        case MAPSEC_VERMILION_CITY:
-            multi = TYPE_ELECTRIC;
-            break;
-        case MAPSEC_LAVARIDGE_TOWN:
-        case MAPSEC_CINNABAR_ISLAND:
-            multi = TYPE_FIRE;
-            break;
-        case MAPSEC_PETALBURG_CITY:
-            multi = TYPE_NORMAL;
-            break;
-        case MAPSEC_FORTREE_CITY:
-            multi = TYPE_FLYING;
-            break;
-        case MAPSEC_MOSSDEEP_CITY:
-        case MAPSEC_SAFFRON_CITY:
-            multi = TYPE_PSYCHIC;
-            break;
-        case MAPSEC_SOOTOPOLIS_CITY:
-        case MAPSEC_CERULEAN_CITY:
-            multi = TYPE_WATER;
-            break;
-        case MAPSEC_CELADON_CITY:
-            multi = TYPE_GRASS;
-            break;
-        case MAPSEC_FUCHSIA_CITY:
-            multi = TYPE_POISON;
-            break;
-        case MAPSEC_VIRIDIAN_CITY:
-            multi = TYPE_GROUND;
-            break;
-        default:
-            multi = NUMBER_OF_MON_TYPES;
-        }
-        if (multi < NUMBER_OF_MON_TYPES)
-        {
-            multi = GetTypeEffectiveness(mon, multi);
-            if (multi <= UQ_4_12(0.5))
-                condEmotes[condCount++] = (struct SpecialEmote) {.emotion = FOLLOWER_EMOTION_HAPPY, .index = 32};
-            else if (multi >= UQ_4_12(2.0))
-                condEmotes[condCount++] = (struct SpecialEmote) {.emotion = FOLLOWER_EMOTION_SAD, .index = 7};
-        }
-    }
-
-    emotion = RandomWeightedIndex(emotion_weight, FOLLOWER_EMOTION_LENGTH);
-    if ((mon->status & STATUS1_PSN_ANY) && GetMonAbility(mon) != ABILITY_POISON_HEAL)
-        emotion = FOLLOWER_EMOTION_POISONED;
-
-    // end special conditions
-
-    // roll for basic/unconditional message
-    multi = Random() % gFollowerBasicMessages[emotion].length;
-    // (50% chance) Select special condition using reservoir sampling
-    for (i = (Random() & 1) ? condCount : 0, j = 1; i < condCount; i++)
-    {
-        if (condEmotes[i].emotion == emotion && (Random() < 0x10000 / (j++)))  // Replace each item with 1/j chance
-            multi = condEmotes[i].index;
-    }
-    // (50% chance) Match *scripted* conditional messages, from follower_helper.c
-    for (i = (Random() & 1) ? COND_MSG_COUNT : 0, j = 1; i < COND_MSG_COUNT; i++)
-    {
-        const struct FollowerMsgInfoExtended *info = &gFollowerConditionalMessages[i];
-        if (!CheckMsgInfo(info, mon, species, objEvent))
-            continue;
-
-        // replace choice with weight/j chance
-        if (Random() < (0x10000 / (j++)) * (info->weight ? info->weight : 1))
-        {
-            multi = i;
-            pickedCondition = TRUE;
-        }
-    }
-    // condition message was chosen
-    if (pickedCondition)
-    {
-        emotion = gFollowerConditionalMessages[multi].emotion;
-        ObjectEventEmote(objEvent, emotion);
-        ctx->data[0] = (u32) gFollowerConditionalMessages[multi].text;
-        // text choices are spread across array; pick a random one
-        if (gFollowerConditionalMessages[multi].textSpread)
-        {
-            for (i = 0; i < 4; i++)
-            {
-                if (!((u32*)gFollowerConditionalMessages[multi].text)[i])
-                    break;
-            }
-            ctx->data[0] = i ? ((u32*)gFollowerConditionalMessages[multi].text)[Random() % i] : 0;
-        }
-        ScriptCall(ctx, gFollowerConditionalMessages[multi].script ? gFollowerConditionalMessages[multi].script : gFollowerBasicMessages[emotion].script);
-        return;
-    }
-    // otherwise, a basic or C-based message was picked
-    ObjectEventEmote(objEvent, emotion);
-    ctx->data[0] = (u32) gFollowerBasicMessages[emotion].messages[multi].text; // Load message text
-    ScriptCall(ctx, gFollowerBasicMessages[emotion].messages[multi].script ?
-                        gFollowerBasicMessages[emotion].messages[multi].script :
-                        gFollowerBasicMessages[emotion].script);
+	
+	gSpecialVar_Result = gMapHeader.regionMapSectionId;
+	
+	switch(GET_BASE_SPECIES_ID(species))
+	{
+		case SPECIES_EEVEE:
+			ScriptCall(ctx, FollowerScript_Demivee);
+			break;
+		case SPECIES_KINGLER:
+			ScriptCall(ctx, FollowerScript_Marcel);
+			break;
+		case SPECIES_FLYGON:
+			ScriptCall(ctx, FollowerScript_Vice);
+			break;
+		case SPECIES_NIDOKING:
+			ScriptCall(ctx, FollowerScript_Bradley);
+			break;
+		case SPECIES_ZOROARK:
+			ScriptCall(ctx, FollowerScript_Python);
+			break;
+	}
 }
 
 void TrySpawnObjectEvents(s16 cameraX, s16 cameraY)

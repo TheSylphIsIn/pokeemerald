@@ -16,7 +16,7 @@ mapscripts Bakery_MapScripts
 		}
 	}
 	MAP_SCRIPT_ON_FRAME_TABLE [
-		VAR_MAIN_GAME_STATE, 4
+		VAR_MAIN_GAME_STATE, 5
 		{
 			delay(120)
 			special(SpawnCameraObject)
@@ -44,7 +44,7 @@ mapscripts Bakery_MapScripts
 			applymovement(OBJ_EVENT_ID_CAMERA, Bakery_Movement_CameraScrollBack)
 			waitmovement(0)
 			special(RemoveCameraObject)
-			setvar(VAR_MAIN_GAME_STATE, 5)
+			setvar(VAR_MAIN_GAME_STATE, 6)
 		}
 	]
 }
@@ -91,6 +91,7 @@ script Bakery_ViceScript
 				speakername("Marcel", PORTRAIT_KINGLER_NEUTRAL)
 				msgbox("It's settled! Come on, Amelia, let's\n" "ask the baker about special orders.", MSGBOX_AUTOCLOSE)
 				setflag(FLAG_KNOW_VICE_FLAVOR)
+				setvar(VAR_MAIN_GAME_STATE, 8)
 			case SPECIES_EEVEE:
 				speakername("Demi-Vee", PORTRAIT_DEMIVEE_NEUTRAL)
 				msgbox("Is there anything we could do to\n" "get you to come with us NOW?")
@@ -104,6 +105,7 @@ script Bakery_ViceScript
 				msgbox("I dunno!")
 				speakername("Demi-Vee", PORTRAIT_DEMIVEE_ANNOYED)
 				msgbox("… … … … …\p" "Okay, let's just go.", MSGBOX_AUTOCLOSE)
+				setvar(VAR_MAIN_GAME_STATE, 7)
 		}
 		setflag(FLAG_TREES_CLEARED)
 	}
@@ -143,6 +145,16 @@ script Bakery_Cashier
 			speakername("Cashier")
 			msgbox("We don't have anything on hand.\n" "If you're committed enough to bring\l" "your own spicy berries, we could\l" "make something out of them.")
 			// check if the player already has them. if not, set a flag to skip to this part of the  script later.
+			checkitem(ITEM_SPELON_BERRY, 3)
+			if(var(VAR_RESULT) == TRUE)
+			{
+				
+			}
+			else
+			{
+				msgbox("We'll need at least 3 berries with\n" "high Spicy content. And if the other\l" "flavors are too strong, it won't work.\p"
+						"There's berry fields outside of town\n" "to the east. Maybe you can get them\l" "to give you what you need.")
+			}
 		}
 		else
 		{

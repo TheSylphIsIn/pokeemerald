@@ -24,8 +24,10 @@ script InnFloor1_Concierge
 		msgbox("Thanks, dearie. I'm just too old to\n" "take care of that thing anymore.", MSGBOX_AUTOCLOSE)
 		setflag(FLAG_STARTED_WEATHERBANE_QUEST)
 	} // initiate quest
-	elif(flag(FLAG_FINISHED_WEATHERBANE_QUEST))
-	{} // idle chatter with the innkeeper
+	elif(flag(FLAG_BEAT_WEATHERBANE))
+	{
+		
+	} // idle chatter with the innkeeper
 	else
 	{
 		speakername("Innkeeper")

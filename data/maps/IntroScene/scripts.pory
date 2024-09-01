@@ -96,3 +96,120 @@ movement IntroScene_Movement_BradleyInvestigate
 	face_right
 }
 
+// interaction scripts for followers. (Demi-Vee's can also be activated by pressing R at any time)
+// reference current map with VAR_RESULT
+
+script FollowerScript_Demivee
+{
+	lock
+	copyvar(VAR_TEMP_0, VAR_RESULT)
+	special(GetLeadMonSpecies)
+	if(var(VAR_RESULT) != SPECIES_EEVEE)
+	{
+		applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceDown)
+		waitmovement(0)
+		setvar(VAR_0x8004, ANIM_GET_OUT_POKEBALL_DOWN)
+		callnative(DoAmeliaOverworldAnim)
+		delay(32)
+	}
+	else
+	{
+		faceplayer
+	}
+	speakername("Demi-Vee", PORTRAIT_DEMIVEE_NEUTRAL)
+	
+	dynmultipush("What to do", 0) // gives hints based on VAR_MAIN_GAME_STATE
+	dynmultipush("Resting my team", 1) // tells you about the inn
+	dynmultipush("Tattle this area", 2)	// add other options here based on sidequest and/or map location
+
+	message("What did you want to ask about?")
+	waitmessage
+	dynmultistack(0, 0, FALSE, 6, FALSE, 0, DYN_MULTICHOICE_CB_NONE)
+	switch(var(VAR_RESULT))
+	{
+		case 0:
+			switch(var(VAR_MAIN_GAME_STATE))
+			{
+				case 1:
+					speakername("Demi-Vee", PORTRAIT_DEMIVEE_HUH)
+					msgbox("Hey, you're not supposed to know\n" "about this feature yet!")
+					speakername("Demi-Vee", PORTRAIT_DEMIVEE_NEUTRAL)
+					msgbox("Well, then, you can have a little\n" "secret info…\p"
+							"After I decide how you trigger\n" "the superboss, anyway.")
+				case 2:
+				case 3:
+					msgbox("Just keep moving forward! If your\n" "team members are still around this\l" "area, they'll probably gather in\l" "the city up ahead.")
+				case 4:
+					msgbox("Hey, we found one! That's a good\n" "sign that the others are here.\l" "Keep heading toward Elthe City.")
+				case 5:
+					msgbox("Marcel said Vice would hide from the\n" "rain, right? Let's check inside\l" "these buildings.")
+				case 6:
+					msgbox("So Vice was in the Bakery…but she\n" "seems a bit pissed off. I'm not sure\l" "she'll want to just come with us.")
+			}
+		case 1:
+			if (flag(FLAG_FINISHED_WEATHERBANE_QUEST))
+			{
+				msgbox("We can rest at the inn. Our room is\n" "on the right, up the stairs.")
+			}
+			elif(flag(FLAG_BEAT_WEATHERBANE))
+			{
+				msgbox("Now that we've cleared up the issue,\n" "we can get our room key from the\l" "front desk at the inn.")
+			}
+			elif(flag(FLAG_STARTED_WEATHERBANE_QUEST))
+			{
+				msgbox("We can get a room key if we quiet\n" "down the weathervane. Climb up the\l" "ladder on the outside of the inn.")
+			}
+			else
+			{
+				msgbox("There's an inn in town. If you need\n" "to rest, you could try to get a room.")
+			}
+		case 2:
+			switch(var(VAR_TEMP_0))
+			{
+				case MAPSEC_LITTLEROOT_TOWN:
+					speakername("Demi-Vee", PORTRAIT_DEMIVEE_HUH)
+					msgbox("Huh?? How'd you get back here?")
+				case MAPSEC_OLDALE_TOWN:
+					msgbox("This is the road to Elthe City.\n" "It normally looks a bit nicer than\l" "this, but the flood and constant rain\l" "made a mess of it.\p"
+							"On the east side of this road are\n" "the city's Berry fields. But they've\l" "been flooded, too. I guess we could\l" "try scavenging in the pools anyway.")
+				case MAPSEC_DEWFORD_TOWN:
+					msgbox("This is Elthe City.\p"
+							"It's been raining here for as long\n" "as anyone can remember.\p"
+							"In the southwest are the inn\n" "and the bakery.\p"
+							"The east side is a residential area.\n" "There's also a battle arena there.\p"
+							"In the northwest is an Arcean church.\n" "I never go there.\p"
+							"It's kind of gloomy around here…\n" "Maybe there's something we can do…\l" "What do you think, Amelia?")
+				
+			}
+	}
+	
+	release
+	special(GetLeadMonSpecies)
+	if(var(VAR_RESULT) != SPECIES_EEVEE)
+	{
+		setvar(VAR_0x8004, ANIM_PUT_AWAY_POKEBALL_DOWN)
+		callnative(DoAmeliaOverworldAnim)
+		delay(32)
+	}	
+}
+
+script FollowerScript_Marcel
+{
+	
+}
+
+script FollowerScript_Vice
+{
+	
+}
+
+script FollowerScript_Bradley
+{
+	
+}
+
+script FollowerScript_Python
+{
+	
+}
+

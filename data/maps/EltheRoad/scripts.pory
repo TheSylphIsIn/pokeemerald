@@ -2,7 +2,7 @@ const LOCALID_DEMIVEE=1
 const LOCALID_AMELIA=2
 const LOCALID_VINOS=3
 const LOCALID_MARCEL=5
-const LOCALID_LOGAN=18
+const LOCALID_LOGAN=13
 
 mapscripts EltheRoad_MapScripts 
 {
@@ -120,7 +120,7 @@ script EltheRoad_EventScript_FirstTrigger
 	msgbox("Um, anyway! If you find any cool\n" "crystals, give them to me!\l" "They'll make me stronger in battle.\p"
 			"And if you need any advice for\n" "getting around, just ask me!\l" "I know this place pretty well!")
 	speakername(NULL, 0)
-	msgbox("(Press R or talk to Demi-Vee while\n" "he's following you to get advice!)\p" "(He will talk about the person\n" "you're facing, or give general hints\l" "for how to progress.)", MSGBOX_AUTOCLOSE)
+	msgbox("(Press the Select button or talk to\n" "Demi-Vee to get advice!)\p" "(He can give you hints about how to\n" "progress through the game.)", MSGBOX_AUTOCLOSE)
 	setvar(VAR_MAIN_GAME_STATE, 2)
 }
 
@@ -790,6 +790,99 @@ script EltheRoad_EventScript_TreeCleanupMan
 script EltheRoad_EventScript_BerryFieldsSign
 {
 	msgbox("Elthe City Berry Fields\p" "Please see overseer before picking\n" "any berries!", MSGBOX_SIGN)
+}
+
+script EltheRoad_BerrySpot_WeakBerries
+{
+	lock
+	msgbox("Some berries are floating in the\n" "water…grab one?", MSGBOX_YESNO)
+	if(var(VAR_RESULT) == YES)
+	{
+		msgbox("You plunged your hand into the water…")
+		delay(32)
+		random(3)
+		switch(var(VAR_RESULT))
+		{
+			case 0:
+				giveitem(ITEM_ORAN_BERRY)
+			case 1:
+				giveitem(ITEM_CHERI_BERRY)
+			case 2:
+				giveitem(ITEM_PERSIM_BERRY)
+		}
+	}
+	release
+}
+
+script EltheRoad_BerrySpot_StrongBerries
+{
+	lock
+	msgbox("Some berries are floating in the\n" "water…grab one?", MSGBOX_YESNO)
+	if(var(VAR_RESULT) == YES)
+	{
+		msgbox("You plunged your hand into the water…")
+		delay(32)
+		random(3)
+		switch(var(VAR_RESULT))
+		{
+			case 0:
+				giveitem(ITEM_SITRUS_BERRY)
+			case 1:
+				giveitem(ITEM_LUM_BERRY)
+			case 2:
+				giveitem(ITEM_LEPPA_BERRY)
+		}
+	}
+	release
+
+}
+
+
+script EltheRoad_BerrySpot_PinchBerries
+{
+	lock
+	msgbox("Some berries are floating in the\n" "water…grab one?", MSGBOX_YESNO)
+	if(var(VAR_RESULT) == YES)
+	{
+		msgbox("You plunged your hand into the water…")
+		delay(32)
+		random(3)
+		switch(var(VAR_RESULT))
+		{
+			case 0:
+				giveitem(ITEM_LIECHI_BERRY)
+			case 1:
+				giveitem(ITEM_SALAC_BERRY)
+			case 2:
+				giveitem(ITEM_PETAYA_BERRY)
+		}
+	}
+	release
+
+}
+
+
+script EltheRoad_BerrySpot_PlotBerries
+{
+	lock
+	msgbox("Some berries are floating in the\n" "water…grab one?", MSGBOX_YESNO)
+	if(var(VAR_RESULT) == YES)
+	{
+		msgbox("You plunged your hand into the water…")
+		delay(32)
+		random(3)
+		switch(var(VAR_RESULT))
+		{
+			case 0:
+				giveitem(ITEM_SPELON_BERRY)
+			case 1:
+				giveitem(ITEM_WATMEL_BERRY)
+			case 2:
+				giveitem(ITEM_BELUE_BERRY)
+		}
+	}
+	release
+
 }
 
 movement EltheRoad_Movement_DemiveeRunFromMarcel

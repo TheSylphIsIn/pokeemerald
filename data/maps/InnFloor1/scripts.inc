@@ -10,13 +10,13 @@ InnFloor1_Concierge::
 # 7 "data/maps/InnFloor1/scripts.pory"
 	goto_if_unset FLAG_STARTED_WEATHERBANE_QUEST, InnFloor1_Concierge_2
 # 27 "data/maps/InnFloor1/scripts.pory"
-	goto_if_set FLAG_FINISHED_WEATHERBANE_QUEST, InnFloor1_Concierge_3
-# 31 "data/maps/InnFloor1/scripts.pory"
+	goto_if_set FLAG_BEAT_WEATHERBANE, InnFloor1_Concierge_3
+# 33 "data/maps/InnFloor1/scripts.pory"
 	speakername InnFloor1_Concierge_Text_2
-# 32 "data/maps/InnFloor1/scripts.pory"
+# 34 "data/maps/InnFloor1/scripts.pory"
 	msgbox InnFloor1_Concierge_Text_9
 InnFloor1_Concierge_1:
-# 35 "data/maps/InnFloor1/scripts.pory"
+# 37 "data/maps/InnFloor1/scripts.pory"
 	release
 	return
 
@@ -107,7 +107,7 @@ InnFloor1_Concierge_Text_8:
 	.string "take care of that thing anymore.$"
 
 InnFloor1_Concierge_Text_9:
-# 32 "data/maps/InnFloor1/scripts.pory"
+# 34 "data/maps/InnFloor1/scripts.pory"
 	.string "Just go outside, up the ladder, and\n"
 	.string "quiet that Weatherbane down.\p"
 	.string "I'll give you your room key when\n"

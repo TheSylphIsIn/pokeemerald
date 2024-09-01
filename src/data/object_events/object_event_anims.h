@@ -840,6 +840,18 @@ static const union AnimCmd sAnim_SitEast[] =
     ANIMCMD_JUMP(0),
 };
 
+static const union AnimCmd sAnim_GetOutPokeballDown[] =
+{
+    ANIMCMD_FRAME(28, 16),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sAnim_PutAwayPokeballDown[] =
+{
+	ANIMCMD_FRAME(0,  16),
+    ANIMCMD_JUMP(0),
+};
+
 static const union AnimCmd sAnim_FieldMove[] =
 {
     ANIMCMD_FRAME(0, 4),
@@ -1520,6 +1532,8 @@ static const union AnimCmd *const sAnimTable_BrendanMayNormal[] = {
     [ANIM_RUN_EAST] = sAnim_RunEast,
 	[ANIM_SIT_WEST] = sAnim_SitWest,
 	[ANIM_SIT_EAST] = sAnim_SitEast,
+	[ANIM_GET_OUT_POKEBALL_DOWN] = sAnim_GetOutPokeballDown,
+	[ANIM_PUT_AWAY_POKEBALL_DOWN] = sAnim_PutAwayPokeballDown,
 };
 
 static const union AnimCmd *const sAnimTable_AcroBike[] = {

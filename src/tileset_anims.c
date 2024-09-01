@@ -1186,3 +1186,91 @@ static void BlendAnimPalette_BattleDome_FloorLightsNoBlend(u16 timer)
             sSecondaryTilesetAnimCallback = NULL;
     }
 }
+
+const u16 gTilesetAnims_ShadyForest_Cheri_Frame0[] = INCBIN_U16("data/tilesets/secondary/shady_forest/anim/cheri/00.4bpp");
+const u16 gTilesetAnims_ShadyForest_Cheri_Frame1[] = INCBIN_U16("data/tilesets/secondary/shady_forest/anim/cheri/01.4bpp");
+
+const u16 gTilesetAnims_ShadyForest_Lum_Frame0[] = INCBIN_U16("data/tilesets/secondary/shady_forest/anim/lum/00.4bpp");
+const u16 gTilesetAnims_ShadyForest_Lum_Frame1[] = INCBIN_U16("data/tilesets/secondary/shady_forest/anim/lum/01.4bpp");
+
+const u16 gTilesetAnims_ShadyForest_Belue_Frame0[] = INCBIN_U16("data/tilesets/secondary/shady_forest/anim/belue/00.4bpp");
+const u16 gTilesetAnims_ShadyForest_Belue_Frame1[] = INCBIN_U16("data/tilesets/secondary/shady_forest/anim/belue/01.4bpp");
+
+const u16 gTilesetAnims_ShadyForest_GenericBerry_Frame0[] = INCBIN_U16("data/tilesets/secondary/shady_forest/anim/generic/00.4bpp");
+const u16 gTilesetAnims_ShadyForest_GenericBerry_Frame1[] = INCBIN_U16("data/tilesets/secondary/shady_forest/anim/generic/01.4bpp");
+
+const u16 *const gTilesetAnims_ShadyForest_Cheri[] =
+{
+	gTilesetAnims_ShadyForest_Cheri_Frame0,
+	gTilesetAnims_ShadyForest_Cheri_Frame1,
+};
+
+const u16 *const gTilesetAnims_ShadyForest_Lum[] =
+{
+	gTilesetAnims_ShadyForest_Lum_Frame0,
+	gTilesetAnims_ShadyForest_Lum_Frame1,
+};
+
+const u16 *const gTilesetAnims_ShadyForest_Belue[] =
+{
+	gTilesetAnims_ShadyForest_Belue_Frame0,
+	gTilesetAnims_ShadyForest_Belue_Frame1,
+};
+
+const u16 *const gTilesetAnims_ShadyForest_GenericBerry[] =
+{
+	gTilesetAnims_ShadyForest_GenericBerry_Frame0,
+	gTilesetAnims_ShadyForest_GenericBerry_Frame1,
+};
+
+static void QueueAnimTiles_ShadyForest_Belue(u16 timer)
+{
+	u16 i = timer % ARRAY_COUNT(gTilesetAnims_ShadyForest_Belue);
+	AppendTilesetAnimToBuffer(gTilesetAnims_ShadyForest_Belue[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY)), TILE_SIZE_4BPP);
+}
+
+static void QueueAnimTiles_ShadyForest_Cheri(u16 timer)
+{
+	u16 i = timer % ARRAY_COUNT(gTilesetAnims_ShadyForest_Cheri);
+	AppendTilesetAnimToBuffer(gTilesetAnims_ShadyForest_Cheri[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 1)), TILE_SIZE_4BPP);
+}
+
+static void QueueAnimTiles_ShadyForest_GenericBerry(u16 timer)
+{
+	u16 i = timer % ARRAY_COUNT(gTilesetAnims_ShadyForest_GenericBerry);
+	AppendTilesetAnimToBuffer(gTilesetAnims_ShadyForest_GenericBerry[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 2)), TILE_SIZE_4BPP);
+}
+
+static void QueueAnimTiles_ShadyForest_Lum(u16 timer)
+{
+	u16 i = timer % ARRAY_COUNT(gTilesetAnims_ShadyForest_Lum);
+	AppendTilesetAnimToBuffer(gTilesetAnims_ShadyForest_Lum[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 3)), TILE_SIZE_4BPP);
+}
+
+static void TilesetAnim_ShadyForest(u16 timer)
+{
+	DebugPrintf("trying to animate tiles: %d", timer);
+	if (timer % 32 == 0)
+	{
+		QueueAnimTiles_ShadyForest_Belue(timer / 32);
+	}
+	if (timer % 32 == 1)
+	{
+		QueueAnimTiles_ShadyForest_Cheri(timer / 32);
+	}
+	if (timer % 32 == 2)
+	{
+		QueueAnimTiles_ShadyForest_GenericBerry(timer / 32);
+	}
+	if (timer % 32 == 3)
+	{
+		QueueAnimTiles_ShadyForest_Lum(timer / 32);
+	}
+}
+
+void InitTilesetAnim_ShadyForest(void)
+{
+	sSecondaryTilesetAnimCounter = 0;
+	sSecondaryTilesetAnimCounterMax = 256;
+	sSecondaryTilesetAnimCallback = TilesetAnim_ShadyForest;	
+}

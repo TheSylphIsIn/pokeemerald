@@ -33,10 +33,15 @@ mapscripts EltheCity_MapScripts
 			setobjectxyperm(LOCALID_ESPERSHARD, 13, 21)
 		}
 		
+		if(var(VAR_MAIN_GAME_STATE) == 4) // changes demi-vee's hint when you get to town
+		{
+			setvar(VAR_MAIN_GAME_STATE, 5)
+		}
+		
 		if(!flag(FLAG_GOT_PYTHON))
 		{
 			random(4)
-			copyvar(VAR_RESULT, VAR_TEMP_F)
+			copyvar(VAR_TEMP_F, VAR_RESULT)
 			switch(var(VAR_TEMP_F))
 			{
 				case 0:
@@ -62,24 +67,110 @@ mapscripts EltheCity_MapScripts
 	}
 }
 
-script ObjEventVarTest
+script EltheCity_EventScript_Python
 {
-	setvar(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_BRENDAN_NORMAL)
-	removeobject(VAR_LAST_TALKED)
-	addobject(VAR_LAST_TALKED)
-	waitbuttonpress
-	setvar(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_MAY_NORMAL)
-	removeobject(VAR_LAST_TALKED)
-	addobject(VAR_LAST_TALKED)
-	waitbuttonpress
-	setvar(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_ANABEL)
-	removeobject(VAR_LAST_TALKED)
-	addobject(VAR_LAST_TALKED)
-	waitbuttonpress
-	setvar(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_SPECIES(ZOROARK))
-	removeobject(VAR_LAST_TALKED)
-	addobject(VAR_LAST_TALKED)
-	waitbuttonpress
+	msgbox("… … … … …", MSGBOX_NPC)
+	special(GetLeadMonSpecies)
+	if(var(VAR_RESULT) == SPECIES_NIDOKING)
+	{
+		lock
+		speakername("Bradley", PORTRAIT_NIDOKING_NEUTRAL)
+		msgbox("…The footsteps sound wrong.\n" "This is him.", MSGBOX_AUTOCLOSE)
+		playse(SE_PIN)
+		applymovement(LOCALID_PYTHON, Common_Movement_ExclamationMark)
+		delay(48)
+		applymovement(LOCALID_PYTHON, EltheCity_Movement_PythonSpinIn)
+		waitmovement(0)
+		setvar(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_SPECIES(ZOROARK))
+		removeobject(VAR_LAST_TALKED)
+		addobject(VAR_LAST_TALKED)
+		applymovement(LOCALID_PYTHON, EltheCity_Movement_PythonSpinOut)
+		waitmovement(0)
+		lock
+		faceplayer
+		speakername("Python", PORTRAIT_ZOROARK_NEUTRAL)
+		msgbox("Finally found me, eh, Amelia?\n" "Took you long enough.")
+		speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+		msgbox("Look, I've got a Poké Ball here\n" "that says…")
+		speakername("Amelia", PORTRAIT_AMELIA_SHOCK)
+		msgbox("Wait, you still remember me!?")
+		speakername("Python", PORTRAIT_ZOROARK_NEUTRAL)
+		msgbox("Of course! This memory charm is the\n" "work of a Psychic type Pokémon.\p"
+				"I'm a Dark type, so it doesn't affect\n" "me at all!\l" "I just chose to hide from you because\l" "watching you run around was fun.", MSGBOX_AUTOCLOSE)
+		applymovement(LOCALID_PYTHON, EltheCity_Movement_PythonSpinIn)
+		waitmovement(0)
+		setvar(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_MAY_NORMAL)
+		removeobject(VAR_LAST_TALKED)
+		addobject(VAR_LAST_TALKED)
+		applymovement(LOCALID_PYTHON, EltheCity_Movement_PythonSpinOut)
+		waitmovement(0)
+		lock
+		faceplayer
+		speakername("Python", PORTRAIT_AMELIA_SMUG)
+		msgbox("Excuse me, have you seen my dragon?\n" "Excuse me, can I get a room?\l" "Excuse me, can you renounce your god?\l" "Excuse me, have you seen my arm?\l" "You can't miss it, it's green!")
+		speakername("Python", PORTRAIT_AMELIA_WINK)
+		msgbox("Keheheheh!")
+		speakername("Amelia", PORTRAIT_AMELIA_SERIOUSLY)
+		msgbox("That seems a little uncalled for.\n" "I was worried about you, you know…")
+		speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+		message("Hey, wait, you said this is caused\n" "by a Psychic type Pokémon?\p"
+				"Do you think if we beat it, our\n" "memories will come back?")
+		applymovement(LOCALID_PYTHON, EltheCity_Movement_PythonSpinIn)
+		waitmovement(0)
+		setvar(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_SPECIES(ZOROARK))
+		removeobject(VAR_LAST_TALKED)
+		addobject(VAR_LAST_TALKED)
+		applymovement(LOCALID_PYTHON, EltheCity_Movement_PythonSpinOut)
+		waitmovement(0)
+		lock
+		faceplayer
+		waitmessage
+		waitbuttonpress
+		speakername("Python", PORTRAIT_ZOROARK_NEUTRAL)
+		msgbox("Eh. Probably. It's not erasing\n" "memories, just suppressing them, so\l" "they should come back if it stops.\p"
+				"It's hiding out in that shrine near\n" "the church. Let's go check it out.", MSGBOX_AUTOCLOSE)
+		delay(32)
+		applymovement(LOCALID_PYTHON, EnterPokeballMovement)
+		waitmovement(0)
+		removeobject(LOCALID_PYTHON)
+		delay(16)
+		playfanfare(MUS_EVOLVED)
+		message("You recalled Python the Zoroark!")
+		waitmessage
+		waitfanfare
+		waitbuttonpress
+		closemessage
+		givemon(SPECIES_ZOROARK, 48, ITEM_SILK_SCARF, ITEM_NEST_BALL, NATURE_CALM, 0, MON_MALE, 0, 0, 0, 0, 0, 0, 31, 31, 31, 31, 31, 31, MOVE_NIGHT_DAZE, MOVE_AGILITY, MOVE_FLAMETHROWER, MOVE_HYPER_BEAM, FALSE, FALSE, TYPE_NORMAL)
+		setpartymemberinfo(4)
+		setvar(VAR_MAIN_GAME_STATE, 30)
+	}
+}
+
+movement EltheCity_Movement_PythonSpinIn
+{
+	face_down
+	delay_4
+	face_left
+	delay_4
+	face_up
+	delay_2
+	face_right
+	delay_2
+}
+
+movement EltheCity_Movement_PythonSpinOut
+{
+	face_down
+	delay_2
+	face_left
+	delay_2
+	face_up
+	delay_4
+	face_right
+	delay_4
+	face_down
+	delay_4
+	face_player
 }
 
 script Test_ScriptGetInput
@@ -243,7 +334,7 @@ script EltheCity_EventScript_Keesight
 
 script EltheCity_EventScript_Weatherbane
 {
-	if(!flag(FLAG_FINISHED_WEATHERBANE_QUEST))
+	if(!flag(FLAG_BEAT_WEATHERBANE))
 	{
 		speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
 		msgbox("So this is the thing I'm supposed\n" "to fix? It's, what, squeaky?", MSGBOX_AUTOCLOSE)
@@ -315,7 +406,7 @@ script EltheCity_EventScript_Weatherbane
 		speakername("Amelia", PORTRAIT_AMELIA_SERIOUSLY)
 		msgbox("Please don't call me that ever again.", MSGBOX_AUTOCLOSE)
 		delay(60)
-		setflag(FLAG_FINISHED_WEATHERBANE_QUEST)
+		setflag(FLAG_BEAT_WEATHERBANE)
 		playfanfare(MUS_CAUGHT)
 		message("Finished the Innkeeper's request!")
 		waitmessage

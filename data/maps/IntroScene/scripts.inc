@@ -222,6 +222,192 @@ IntroScene_Movement_BradleyInvestigate:
 	face_right
 	step_end
 
+FollowerScript_Demivee::
+# 104 "data/maps/IntroScene/scripts.pory"
+	lock
+# 105 "data/maps/IntroScene/scripts.pory"
+	copyvar VAR_TEMP_0, VAR_RESULT
+# 106 "data/maps/IntroScene/scripts.pory"
+	special GetLeadMonSpecies
+# 107 "data/maps/IntroScene/scripts.pory"
+	compare VAR_RESULT, SPECIES_EEVEE
+	goto_if_ne FollowerScript_Demivee_2
+# 117 "data/maps/IntroScene/scripts.pory"
+	faceplayer
+FollowerScript_Demivee_1:
+# 119 "data/maps/IntroScene/scripts.pory"
+	speakername FollowerScript_Demivee_Text_0, PORTRAIT_DEMIVEE_NEUTRAL
+# 121 "data/maps/IntroScene/scripts.pory"
+	dynmultipush FollowerScript_Demivee_Text_1, 0
+# 122 "data/maps/IntroScene/scripts.pory"
+	dynmultipush FollowerScript_Demivee_Text_2, 1
+# 123 "data/maps/IntroScene/scripts.pory"
+	dynmultipush FollowerScript_Demivee_Text_3, 2
+# 125 "data/maps/IntroScene/scripts.pory"
+	message FollowerScript_Demivee_Text_4
+# 126 "data/maps/IntroScene/scripts.pory"
+	waitmessage
+# 127 "data/maps/IntroScene/scripts.pory"
+	dynmultistack 0, 0, FALSE, 6, FALSE, 0, DYN_MULTICHOICE_CB_NONE
+# 128 "data/maps/IntroScene/scripts.pory"
+	switch VAR_RESULT
+# 130 "data/maps/IntroScene/scripts.pory"
+	case 0, FollowerScript_Demivee_7
+# 149 "data/maps/IntroScene/scripts.pory"
+	case 1, FollowerScript_Demivee_8
+# 166 "data/maps/IntroScene/scripts.pory"
+	case 2, FollowerScript_Demivee_9
+FollowerScript_Demivee_5:
+# 186 "data/maps/IntroScene/scripts.pory"
+	release
+# 187 "data/maps/IntroScene/scripts.pory"
+	special GetLeadMonSpecies
+# 188 "data/maps/IntroScene/scripts.pory"
+	compare VAR_RESULT, SPECIES_EEVEE
+	goto_if_ne FollowerScript_Demivee_10
+	return
+
+FollowerScript_Demivee_2:
+# 109 "data/maps/IntroScene/scripts.pory"
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceDown
+# 110 "data/maps/IntroScene/scripts.pory"
+	waitmovement 0
+# 111 "data/maps/IntroScene/scripts.pory"
+	setvar VAR_0x8004, ANIM_GET_OUT_POKEBALL_DOWN
+# 112 "data/maps/IntroScene/scripts.pory"
+	callnative DoAmeliaOverworldAnim
+# 113 "data/maps/IntroScene/scripts.pory"
+	delay 32
+	goto FollowerScript_Demivee_1
+
+FollowerScript_Demivee_7:
+# 131 "data/maps/IntroScene/scripts.pory"
+	switch VAR_MAIN_GAME_STATE
+# 133 "data/maps/IntroScene/scripts.pory"
+	case 1, FollowerScript_Demivee_13
+# 139 "data/maps/IntroScene/scripts.pory"
+	case 2, FollowerScript_Demivee_14
+# 140 "data/maps/IntroScene/scripts.pory"
+	case 3, FollowerScript_Demivee_14
+# 142 "data/maps/IntroScene/scripts.pory"
+	case 4, FollowerScript_Demivee_15
+# 144 "data/maps/IntroScene/scripts.pory"
+	case 5, FollowerScript_Demivee_16
+# 146 "data/maps/IntroScene/scripts.pory"
+	case 6, FollowerScript_Demivee_17
+	goto FollowerScript_Demivee_5
+
+FollowerScript_Demivee_8:
+# 150 "data/maps/IntroScene/scripts.pory"
+	goto_if_set FLAG_FINISHED_WEATHERBANE_QUEST, FollowerScript_Demivee_18
+# 154 "data/maps/IntroScene/scripts.pory"
+	goto_if_set FLAG_BEAT_WEATHERBANE, FollowerScript_Demivee_19
+# 158 "data/maps/IntroScene/scripts.pory"
+	goto_if_set FLAG_STARTED_WEATHERBANE_QUEST, FollowerScript_Demivee_20
+# 164 "data/maps/IntroScene/scripts.pory"
+	msgbox FollowerScript_Demivee_Text_14
+	goto FollowerScript_Demivee_5
+
+FollowerScript_Demivee_9:
+# 167 "data/maps/IntroScene/scripts.pory"
+	switch VAR_TEMP_0
+# 169 "data/maps/IntroScene/scripts.pory"
+	case MAPSEC_LITTLEROOT_TOWN, FollowerScript_Demivee_26
+# 172 "data/maps/IntroScene/scripts.pory"
+	case MAPSEC_OLDALE_TOWN, FollowerScript_Demivee_27
+# 175 "data/maps/IntroScene/scripts.pory"
+	case MAPSEC_DEWFORD_TOWN, FollowerScript_Demivee_28
+	goto FollowerScript_Demivee_5
+
+FollowerScript_Demivee_10:
+# 190 "data/maps/IntroScene/scripts.pory"
+	setvar VAR_0x8004, ANIM_PUT_AWAY_POKEBALL_DOWN
+# 191 "data/maps/IntroScene/scripts.pory"
+	callnative DoAmeliaOverworldAnim
+# 192 "data/maps/IntroScene/scripts.pory"
+	delay 32
+	return
+
+FollowerScript_Demivee_13:
+# 134 "data/maps/IntroScene/scripts.pory"
+	speakername FollowerScript_Demivee_Text_0, PORTRAIT_DEMIVEE_HUH
+# 135 "data/maps/IntroScene/scripts.pory"
+	msgbox FollowerScript_Demivee_Text_5
+# 136 "data/maps/IntroScene/scripts.pory"
+	speakername FollowerScript_Demivee_Text_0, PORTRAIT_DEMIVEE_NEUTRAL
+# 137 "data/maps/IntroScene/scripts.pory"
+	msgbox FollowerScript_Demivee_Text_6
+	goto FollowerScript_Demivee_5
+
+FollowerScript_Demivee_14:
+# 141 "data/maps/IntroScene/scripts.pory"
+	msgbox FollowerScript_Demivee_Text_7
+	goto FollowerScript_Demivee_5
+
+FollowerScript_Demivee_15:
+# 143 "data/maps/IntroScene/scripts.pory"
+	msgbox FollowerScript_Demivee_Text_8
+	goto FollowerScript_Demivee_5
+
+FollowerScript_Demivee_16:
+# 145 "data/maps/IntroScene/scripts.pory"
+	msgbox FollowerScript_Demivee_Text_9
+	goto FollowerScript_Demivee_5
+
+FollowerScript_Demivee_17:
+# 147 "data/maps/IntroScene/scripts.pory"
+	msgbox FollowerScript_Demivee_Text_10
+	goto FollowerScript_Demivee_5
+
+FollowerScript_Demivee_18:
+# 152 "data/maps/IntroScene/scripts.pory"
+	msgbox FollowerScript_Demivee_Text_11
+	goto FollowerScript_Demivee_5
+
+FollowerScript_Demivee_19:
+# 156 "data/maps/IntroScene/scripts.pory"
+	msgbox FollowerScript_Demivee_Text_12
+	goto FollowerScript_Demivee_5
+
+FollowerScript_Demivee_20:
+# 160 "data/maps/IntroScene/scripts.pory"
+	msgbox FollowerScript_Demivee_Text_13
+	goto FollowerScript_Demivee_5
+
+FollowerScript_Demivee_26:
+# 170 "data/maps/IntroScene/scripts.pory"
+	speakername FollowerScript_Demivee_Text_0, PORTRAIT_DEMIVEE_HUH
+# 171 "data/maps/IntroScene/scripts.pory"
+	msgbox FollowerScript_Demivee_Text_15
+	goto FollowerScript_Demivee_5
+
+FollowerScript_Demivee_27:
+# 173 "data/maps/IntroScene/scripts.pory"
+	msgbox FollowerScript_Demivee_Text_16
+	goto FollowerScript_Demivee_5
+
+FollowerScript_Demivee_28:
+# 176 "data/maps/IntroScene/scripts.pory"
+	msgbox FollowerScript_Demivee_Text_17
+	goto FollowerScript_Demivee_5
+
+
+FollowerScript_Marcel::
+	return
+
+
+FollowerScript_Vice::
+	return
+
+
+FollowerScript_Bradley::
+	return
+
+
+FollowerScript_Python::
+	return
+
+
 IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_0:
 # 15 "data/maps/IntroScene/scripts.pory"
 	.string "Nidoking$"
@@ -297,3 +483,112 @@ Test_Portrait_Text_5:
 # 61 "data/maps/IntroScene/scripts.pory"
 	.string "Portrait and name can be controlled\n"
 	.string "separately too.$"
+
+FollowerScript_Demivee_Text_0:
+# 119 "data/maps/IntroScene/scripts.pory"
+	.string "Demi-Vee$"
+
+FollowerScript_Demivee_Text_1:
+# 121 "data/maps/IntroScene/scripts.pory"
+	.string "What to do$"
+
+FollowerScript_Demivee_Text_2:
+# 122 "data/maps/IntroScene/scripts.pory"
+	.string "Resting my team$"
+
+FollowerScript_Demivee_Text_3:
+# 123 "data/maps/IntroScene/scripts.pory"
+	.string "Tattle this area$"
+
+FollowerScript_Demivee_Text_4:
+# 125 "data/maps/IntroScene/scripts.pory"
+	.string "What did you want to ask about?$"
+
+FollowerScript_Demivee_Text_5:
+# 135 "data/maps/IntroScene/scripts.pory"
+	.string "Hey, you're not supposed to know\n"
+	.string "about this feature yet!$"
+
+FollowerScript_Demivee_Text_6:
+# 137 "data/maps/IntroScene/scripts.pory"
+	.string "Well, then, you can have a little\n"
+	.string "secret info…\p"
+	.string "After I decide how you trigger\n"
+	.string "the superboss, anyway.$"
+
+FollowerScript_Demivee_Text_7:
+# 141 "data/maps/IntroScene/scripts.pory"
+	.string "Just keep moving forward! If your\n"
+	.string "team members are still around this\l"
+	.string "area, they'll probably gather in\l"
+	.string "the city up ahead.$"
+
+FollowerScript_Demivee_Text_8:
+# 143 "data/maps/IntroScene/scripts.pory"
+	.string "Hey, we found one! That's a good\n"
+	.string "sign that the others are here.\l"
+	.string "Keep heading toward Elthe City.$"
+
+FollowerScript_Demivee_Text_9:
+# 145 "data/maps/IntroScene/scripts.pory"
+	.string "Marcel said Vice would hide from the\n"
+	.string "rain, right? Let's check inside\l"
+	.string "these buildings.$"
+
+FollowerScript_Demivee_Text_10:
+# 147 "data/maps/IntroScene/scripts.pory"
+	.string "So Vice was in the Bakery…but she\n"
+	.string "seems a bit pissed off. I'm not sure\l"
+	.string "she'll want to just come with us.$"
+
+FollowerScript_Demivee_Text_11:
+# 152 "data/maps/IntroScene/scripts.pory"
+	.string "We can rest at the inn. Our room is\n"
+	.string "on the right, up the stairs.$"
+
+FollowerScript_Demivee_Text_12:
+# 156 "data/maps/IntroScene/scripts.pory"
+	.string "Now that we've cleared up the issue,\n"
+	.string "we can get our room key from the\l"
+	.string "front desk at the inn.$"
+
+FollowerScript_Demivee_Text_13:
+# 160 "data/maps/IntroScene/scripts.pory"
+	.string "We can get a room key if we quiet\n"
+	.string "down the weathervane. Climb up the\l"
+	.string "ladder on the outside of the inn.$"
+
+FollowerScript_Demivee_Text_14:
+# 164 "data/maps/IntroScene/scripts.pory"
+	.string "There's an inn in town. If you need\n"
+	.string "to rest, you could try to get a room.$"
+
+FollowerScript_Demivee_Text_15:
+# 171 "data/maps/IntroScene/scripts.pory"
+	.string "Huh?? How'd you get back here?$"
+
+FollowerScript_Demivee_Text_16:
+# 173 "data/maps/IntroScene/scripts.pory"
+	.string "This is the road to Elthe City.\n"
+	.string "It normally looks a bit nicer than\l"
+	.string "this, but the flood and constant rain\l"
+	.string "made a mess of it.\p"
+	.string "On the east side of this road are\n"
+	.string "the city's Berry fields. But they've\l"
+	.string "been flooded, too. I guess we could\l"
+	.string "try scavenging in the pools anyway.$"
+
+FollowerScript_Demivee_Text_17:
+# 176 "data/maps/IntroScene/scripts.pory"
+	.string "This is Elthe City.\p"
+	.string "It's been raining here for as long\n"
+	.string "as anyone can remember.\p"
+	.string "In the southwest are the inn\n"
+	.string "and the bakery.\p"
+	.string "The east side is a residential area.\n"
+	.string "There's also a battle arena there.\p"
+	.string "In the northwest is an Arcean church.\n"
+	.string "I never go there.\p"
+	.string "It's kind of gloomy around here…\n"
+	.string "Maybe there's something we can do…\l"
+	.string "What do you think, Amelia?$"

@@ -647,4 +647,10 @@ extern const u8 EventScript_VsSeekerChargingDone[];
 extern const u8 Common_Movement_FollowerSafeStart[];
 extern const u8 Common_Movement_FollowerSafeEnd[];
 
+extern const u8 FollowerScript_Demivee[];
+extern const u8 FollowerScript_Marcel[];
+extern const u8 FollowerScript_Vice[];
+extern const u8 FollowerScript_Bradley[];
+extern const u8 FollowerScript_Python[];
+
 #endif // GUARD_EVENT_SCRIPTS_H

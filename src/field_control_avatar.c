@@ -198,8 +198,12 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
         ShowStartMenu();
         return TRUE;
     }
-    if (input->pressedSelectButton && UseRegisteredKeyItemOnField() == TRUE)
+    if (input->pressedSelectButton)
+	{
+		gSpecialVar_Result = gMapHeader.regionMapSectionId;
+		ScriptContext_SetupScript(FollowerScript_Demivee);
         return TRUE;
+	}
 
 #if DEBUG_OVERWORLD_MENU == TRUE && DEBUG_OVERWORLD_IN_MENU == FALSE
     if (input->input_field_1_2)

@@ -12,9 +12,9 @@ EltheRoad_MapScripts_MAP_SCRIPT_ON_TRANSITION:
 
 EltheRoad_MapScripts_MAP_SCRIPT_ON_TRANSITION_1:
 # 96 "data/maps/EltheRoad/scripts.pory"
-	setobjectxyperm 18, 8, 14
+	setobjectxyperm 13, 8, 14
 # 97 "data/maps/EltheRoad/scripts.pory"
-	setobjectmovementtype 18, MOVEMENT_TYPE_FACE_LEFT
+	setobjectmovementtype 13, MOVEMENT_TYPE_FACE_LEFT
 	return
 
 EltheRoad_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE:
@@ -1414,179 +1414,363 @@ EltheRoad_EventScript_BerryFieldsSign::
 	return
 
 
-# 795 "data/maps/EltheRoad/scripts.pory"
-EltheRoad_Movement_DemiveeRunFromMarcel:
+EltheRoad_BerrySpot_WeakBerries::
 # 797 "data/maps/EltheRoad/scripts.pory"
-	lock_facing_direction
+	lock
 # 798 "data/maps/EltheRoad/scripts.pory"
-	jump_down
+	msgbox EltheRoad_BerrySpot_WeakBerries_Text_0, MSGBOX_YESNO
 # 799 "data/maps/EltheRoad/scripts.pory"
-	unlock_facing_direction
-# 800 "data/maps/EltheRoad/scripts.pory"
-	delay_16
-# 800 "data/maps/EltheRoad/scripts.pory"
-	delay_16
+	compare VAR_RESULT, YES
+	goto_if_eq EltheRoad_BerrySpot_WeakBerries_2
+EltheRoad_BerrySpot_WeakBerries_1:
+# 814 "data/maps/EltheRoad/scripts.pory"
+	release
+	return
+
+EltheRoad_BerrySpot_WeakBerries_2:
 # 801 "data/maps/EltheRoad/scripts.pory"
-	walk_fast_left
-# 801 "data/maps/EltheRoad/scripts.pory"
-	walk_fast_left
+	msgbox EltheRoad_BerrySpot_WeakBerries_Text_1
 # 802 "data/maps/EltheRoad/scripts.pory"
-	walk_fast_up
+	delay 32
 # 803 "data/maps/EltheRoad/scripts.pory"
+	random 3
+# 804 "data/maps/EltheRoad/scripts.pory"
+	switch VAR_RESULT
+# 806 "data/maps/EltheRoad/scripts.pory"
+	case 0, EltheRoad_BerrySpot_WeakBerries_5
+# 808 "data/maps/EltheRoad/scripts.pory"
+	case 1, EltheRoad_BerrySpot_WeakBerries_6
+# 810 "data/maps/EltheRoad/scripts.pory"
+	case 2, EltheRoad_BerrySpot_WeakBerries_7
+	goto EltheRoad_BerrySpot_WeakBerries_1
+
+EltheRoad_BerrySpot_WeakBerries_5:
+# 807 "data/maps/EltheRoad/scripts.pory"
+	giveitem ITEM_ORAN_BERRY
+	goto EltheRoad_BerrySpot_WeakBerries_1
+
+EltheRoad_BerrySpot_WeakBerries_6:
+# 809 "data/maps/EltheRoad/scripts.pory"
+	giveitem ITEM_CHERI_BERRY
+	goto EltheRoad_BerrySpot_WeakBerries_1
+
+EltheRoad_BerrySpot_WeakBerries_7:
+# 811 "data/maps/EltheRoad/scripts.pory"
+	giveitem ITEM_PERSIM_BERRY
+	goto EltheRoad_BerrySpot_WeakBerries_1
+
+
+EltheRoad_BerrySpot_StrongBerries::
+# 819 "data/maps/EltheRoad/scripts.pory"
+	lock
+# 820 "data/maps/EltheRoad/scripts.pory"
+	msgbox EltheRoad_BerrySpot_WeakBerries_Text_0, MSGBOX_YESNO
+# 821 "data/maps/EltheRoad/scripts.pory"
+	compare VAR_RESULT, YES
+	goto_if_eq EltheRoad_BerrySpot_StrongBerries_2
+EltheRoad_BerrySpot_StrongBerries_1:
+# 836 "data/maps/EltheRoad/scripts.pory"
+	release
+	return
+
+EltheRoad_BerrySpot_StrongBerries_2:
+# 823 "data/maps/EltheRoad/scripts.pory"
+	msgbox EltheRoad_BerrySpot_WeakBerries_Text_1
+# 824 "data/maps/EltheRoad/scripts.pory"
+	delay 32
+# 825 "data/maps/EltheRoad/scripts.pory"
+	random 3
+# 826 "data/maps/EltheRoad/scripts.pory"
+	switch VAR_RESULT
+# 828 "data/maps/EltheRoad/scripts.pory"
+	case 0, EltheRoad_BerrySpot_StrongBerries_5
+# 830 "data/maps/EltheRoad/scripts.pory"
+	case 1, EltheRoad_BerrySpot_StrongBerries_6
+# 832 "data/maps/EltheRoad/scripts.pory"
+	case 2, EltheRoad_BerrySpot_StrongBerries_7
+	goto EltheRoad_BerrySpot_StrongBerries_1
+
+EltheRoad_BerrySpot_StrongBerries_5:
+# 829 "data/maps/EltheRoad/scripts.pory"
+	giveitem ITEM_SITRUS_BERRY
+	goto EltheRoad_BerrySpot_StrongBerries_1
+
+EltheRoad_BerrySpot_StrongBerries_6:
+# 831 "data/maps/EltheRoad/scripts.pory"
+	giveitem ITEM_LUM_BERRY
+	goto EltheRoad_BerrySpot_StrongBerries_1
+
+EltheRoad_BerrySpot_StrongBerries_7:
+# 833 "data/maps/EltheRoad/scripts.pory"
+	giveitem ITEM_LEPPA_BERRY
+	goto EltheRoad_BerrySpot_StrongBerries_1
+
+
+EltheRoad_BerrySpot_PinchBerries::
+# 843 "data/maps/EltheRoad/scripts.pory"
+	lock
+# 844 "data/maps/EltheRoad/scripts.pory"
+	msgbox EltheRoad_BerrySpot_WeakBerries_Text_0, MSGBOX_YESNO
+# 845 "data/maps/EltheRoad/scripts.pory"
+	compare VAR_RESULT, YES
+	goto_if_eq EltheRoad_BerrySpot_PinchBerries_2
+EltheRoad_BerrySpot_PinchBerries_1:
+# 860 "data/maps/EltheRoad/scripts.pory"
+	release
+	return
+
+EltheRoad_BerrySpot_PinchBerries_2:
+# 847 "data/maps/EltheRoad/scripts.pory"
+	msgbox EltheRoad_BerrySpot_WeakBerries_Text_1
+# 848 "data/maps/EltheRoad/scripts.pory"
+	delay 32
+# 849 "data/maps/EltheRoad/scripts.pory"
+	random 3
+# 850 "data/maps/EltheRoad/scripts.pory"
+	switch VAR_RESULT
+# 852 "data/maps/EltheRoad/scripts.pory"
+	case 0, EltheRoad_BerrySpot_PinchBerries_5
+# 854 "data/maps/EltheRoad/scripts.pory"
+	case 1, EltheRoad_BerrySpot_PinchBerries_6
+# 856 "data/maps/EltheRoad/scripts.pory"
+	case 2, EltheRoad_BerrySpot_PinchBerries_7
+	goto EltheRoad_BerrySpot_PinchBerries_1
+
+EltheRoad_BerrySpot_PinchBerries_5:
+# 853 "data/maps/EltheRoad/scripts.pory"
+	giveitem ITEM_LIECHI_BERRY
+	goto EltheRoad_BerrySpot_PinchBerries_1
+
+EltheRoad_BerrySpot_PinchBerries_6:
+# 855 "data/maps/EltheRoad/scripts.pory"
+	giveitem ITEM_SALAC_BERRY
+	goto EltheRoad_BerrySpot_PinchBerries_1
+
+EltheRoad_BerrySpot_PinchBerries_7:
+# 857 "data/maps/EltheRoad/scripts.pory"
+	giveitem ITEM_PETAYA_BERRY
+	goto EltheRoad_BerrySpot_PinchBerries_1
+
+
+EltheRoad_BerrySpot_PlotBerries::
+# 867 "data/maps/EltheRoad/scripts.pory"
+	lock
+# 868 "data/maps/EltheRoad/scripts.pory"
+	msgbox EltheRoad_BerrySpot_WeakBerries_Text_0, MSGBOX_YESNO
+# 869 "data/maps/EltheRoad/scripts.pory"
+	compare VAR_RESULT, YES
+	goto_if_eq EltheRoad_BerrySpot_PlotBerries_2
+EltheRoad_BerrySpot_PlotBerries_1:
+# 884 "data/maps/EltheRoad/scripts.pory"
+	release
+	return
+
+EltheRoad_BerrySpot_PlotBerries_2:
+# 871 "data/maps/EltheRoad/scripts.pory"
+	msgbox EltheRoad_BerrySpot_WeakBerries_Text_1
+# 872 "data/maps/EltheRoad/scripts.pory"
+	delay 32
+# 873 "data/maps/EltheRoad/scripts.pory"
+	random 3
+# 874 "data/maps/EltheRoad/scripts.pory"
+	switch VAR_RESULT
+# 876 "data/maps/EltheRoad/scripts.pory"
+	case 0, EltheRoad_BerrySpot_PlotBerries_5
+# 878 "data/maps/EltheRoad/scripts.pory"
+	case 1, EltheRoad_BerrySpot_PlotBerries_6
+# 880 "data/maps/EltheRoad/scripts.pory"
+	case 2, EltheRoad_BerrySpot_PlotBerries_7
+	goto EltheRoad_BerrySpot_PlotBerries_1
+
+EltheRoad_BerrySpot_PlotBerries_5:
+# 877 "data/maps/EltheRoad/scripts.pory"
+	giveitem ITEM_SPELON_BERRY
+	goto EltheRoad_BerrySpot_PlotBerries_1
+
+EltheRoad_BerrySpot_PlotBerries_6:
+# 879 "data/maps/EltheRoad/scripts.pory"
+	giveitem ITEM_WATMEL_BERRY
+	goto EltheRoad_BerrySpot_PlotBerries_1
+
+EltheRoad_BerrySpot_PlotBerries_7:
+# 881 "data/maps/EltheRoad/scripts.pory"
+	giveitem ITEM_BELUE_BERRY
+	goto EltheRoad_BerrySpot_PlotBerries_1
+
+
+# 888 "data/maps/EltheRoad/scripts.pory"
+EltheRoad_Movement_DemiveeRunFromMarcel:
+# 890 "data/maps/EltheRoad/scripts.pory"
+	lock_facing_direction
+# 891 "data/maps/EltheRoad/scripts.pory"
+	jump_down
+# 892 "data/maps/EltheRoad/scripts.pory"
+	unlock_facing_direction
+# 893 "data/maps/EltheRoad/scripts.pory"
+	delay_16
+# 893 "data/maps/EltheRoad/scripts.pory"
+	delay_16
+# 894 "data/maps/EltheRoad/scripts.pory"
+	walk_fast_left
+# 894 "data/maps/EltheRoad/scripts.pory"
+	walk_fast_left
+# 895 "data/maps/EltheRoad/scripts.pory"
+	walk_fast_up
+# 896 "data/maps/EltheRoad/scripts.pory"
 	face_right
 	step_end
 
-# 806 "data/maps/EltheRoad/scripts.pory"
+# 899 "data/maps/EltheRoad/scripts.pory"
 EltheRoad_Movement_MarcelRunToAmelia:
-# 808 "data/maps/EltheRoad/scripts.pory"
+# 901 "data/maps/EltheRoad/scripts.pory"
 	walk_fast_down
-# 808 "data/maps/EltheRoad/scripts.pory"
+# 901 "data/maps/EltheRoad/scripts.pory"
 	walk_fast_down
 	step_end
 
-# 811 "data/maps/EltheRoad/scripts.pory"
+# 904 "data/maps/EltheRoad/scripts.pory"
 EltheRoad_Movement_AmeliaGoToMarcel:
-# 813 "data/maps/EltheRoad/scripts.pory"
+# 906 "data/maps/EltheRoad/scripts.pory"
 	walk_fast_up
-# 813 "data/maps/EltheRoad/scripts.pory"
+# 906 "data/maps/EltheRoad/scripts.pory"
 	walk_fast_up
 	step_end
 
-# 816 "data/maps/EltheRoad/scripts.pory"
+# 909 "data/maps/EltheRoad/scripts.pory"
 EltheRoad_Movement_DemiveeGoToMarcel_Left:
-# 818 "data/maps/EltheRoad/scripts.pory"
+# 911 "data/maps/EltheRoad/scripts.pory"
 	walk_slow_up
-# 818 "data/maps/EltheRoad/scripts.pory"
+# 911 "data/maps/EltheRoad/scripts.pory"
 	walk_slow_up
-# 819 "data/maps/EltheRoad/scripts.pory"
+# 912 "data/maps/EltheRoad/scripts.pory"
 	walk_slow_right
-# 820 "data/maps/EltheRoad/scripts.pory"
+# 913 "data/maps/EltheRoad/scripts.pory"
 	walk_slow_up
 	step_end
 
-# 823 "data/maps/EltheRoad/scripts.pory"
+# 916 "data/maps/EltheRoad/scripts.pory"
 EltheRoad_Movement_DemiveeGoToMarcel_Right:
-# 825 "data/maps/EltheRoad/scripts.pory"
+# 918 "data/maps/EltheRoad/scripts.pory"
 	walk_slow_up
-# 825 "data/maps/EltheRoad/scripts.pory"
+# 918 "data/maps/EltheRoad/scripts.pory"
 	walk_slow_up
 	step_end
 
-# 828 "data/maps/EltheRoad/scripts.pory"
+# 921 "data/maps/EltheRoad/scripts.pory"
 EltheRoad_Movement_CameraShowItem:
-# 830 "data/maps/EltheRoad/scripts.pory"
+# 923 "data/maps/EltheRoad/scripts.pory"
 	walk_up
-# 830 "data/maps/EltheRoad/scripts.pory"
+# 923 "data/maps/EltheRoad/scripts.pory"
 	walk_up
-# 830 "data/maps/EltheRoad/scripts.pory"
+# 923 "data/maps/EltheRoad/scripts.pory"
 	walk_up
-# 831 "data/maps/EltheRoad/scripts.pory"
+# 924 "data/maps/EltheRoad/scripts.pory"
 	walk_right
 	step_end
 
-# 834 "data/maps/EltheRoad/scripts.pory"
+# 927 "data/maps/EltheRoad/scripts.pory"
 EltheRoad_Movement_CameraReturn:
-# 836 "data/maps/EltheRoad/scripts.pory"
+# 929 "data/maps/EltheRoad/scripts.pory"
 	walk_left
-# 837 "data/maps/EltheRoad/scripts.pory"
+# 930 "data/maps/EltheRoad/scripts.pory"
 	walk_down
-# 837 "data/maps/EltheRoad/scripts.pory"
+# 930 "data/maps/EltheRoad/scripts.pory"
 	walk_down
-# 837 "data/maps/EltheRoad/scripts.pory"
+# 930 "data/maps/EltheRoad/scripts.pory"
 	walk_down
 	step_end
 
-# 840 "data/maps/EltheRoad/scripts.pory"
+# 933 "data/maps/EltheRoad/scripts.pory"
 EltheRoad_Movement_AmeliaJumpUp:
-# 842 "data/maps/EltheRoad/scripts.pory"
+# 935 "data/maps/EltheRoad/scripts.pory"
 	set_visible
-# 843 "data/maps/EltheRoad/scripts.pory"
+# 936 "data/maps/EltheRoad/scripts.pory"
 	jump_in_place_left
 	step_end
 
-# 846 "data/maps/EltheRoad/scripts.pory"
+# 939 "data/maps/EltheRoad/scripts.pory"
 EltheRoad_Movement_AmeliaLookAround:
-# 848 "data/maps/EltheRoad/scripts.pory"
+# 941 "data/maps/EltheRoad/scripts.pory"
 	face_up
-# 849 "data/maps/EltheRoad/scripts.pory"
+# 942 "data/maps/EltheRoad/scripts.pory"
 	delay_16
-# 850 "data/maps/EltheRoad/scripts.pory"
+# 943 "data/maps/EltheRoad/scripts.pory"
 	face_down
-# 851 "data/maps/EltheRoad/scripts.pory"
+# 944 "data/maps/EltheRoad/scripts.pory"
 	delay_16
-# 852 "data/maps/EltheRoad/scripts.pory"
+# 945 "data/maps/EltheRoad/scripts.pory"
 	face_up
-# 853 "data/maps/EltheRoad/scripts.pory"
+# 946 "data/maps/EltheRoad/scripts.pory"
 	delay_16
-# 854 "data/maps/EltheRoad/scripts.pory"
+# 947 "data/maps/EltheRoad/scripts.pory"
 	face_down
-# 855 "data/maps/EltheRoad/scripts.pory"
+# 948 "data/maps/EltheRoad/scripts.pory"
 	delay_16
-# 856 "data/maps/EltheRoad/scripts.pory"
+# 949 "data/maps/EltheRoad/scripts.pory"
 	face_right
-# 857 "data/maps/EltheRoad/scripts.pory"
+# 950 "data/maps/EltheRoad/scripts.pory"
 	delay_16
-# 857 "data/maps/EltheRoad/scripts.pory"
+# 950 "data/maps/EltheRoad/scripts.pory"
 	delay_16
-# 857 "data/maps/EltheRoad/scripts.pory"
+# 950 "data/maps/EltheRoad/scripts.pory"
 	delay_16
-# 858 "data/maps/EltheRoad/scripts.pory"
+# 951 "data/maps/EltheRoad/scripts.pory"
 	face_left
-# 859 "data/maps/EltheRoad/scripts.pory"
+# 952 "data/maps/EltheRoad/scripts.pory"
 	delay_16
-# 859 "data/maps/EltheRoad/scripts.pory"
+# 952 "data/maps/EltheRoad/scripts.pory"
 	delay_16
-# 859 "data/maps/EltheRoad/scripts.pory"
+# 952 "data/maps/EltheRoad/scripts.pory"
 	delay_16
 	step_end
 
-# 862 "data/maps/EltheRoad/scripts.pory"
+# 955 "data/maps/EltheRoad/scripts.pory"
 EltheRoad_Movement_AmeliaStartLeaving:
-# 864 "data/maps/EltheRoad/scripts.pory"
+# 957 "data/maps/EltheRoad/scripts.pory"
 	walk_up
-# 864 "data/maps/EltheRoad/scripts.pory"
+# 957 "data/maps/EltheRoad/scripts.pory"
 	walk_up
-# 865 "data/maps/EltheRoad/scripts.pory"
+# 958 "data/maps/EltheRoad/scripts.pory"
 	walk_right
-# 865 "data/maps/EltheRoad/scripts.pory"
+# 958 "data/maps/EltheRoad/scripts.pory"
 	walk_right
-# 865 "data/maps/EltheRoad/scripts.pory"
+# 958 "data/maps/EltheRoad/scripts.pory"
 	walk_right
-# 866 "data/maps/EltheRoad/scripts.pory"
+# 959 "data/maps/EltheRoad/scripts.pory"
 	delay_16
-# 866 "data/maps/EltheRoad/scripts.pory"
+# 959 "data/maps/EltheRoad/scripts.pory"
 	delay_16
-# 867 "data/maps/EltheRoad/scripts.pory"
+# 960 "data/maps/EltheRoad/scripts.pory"
 	face_left
 	step_end
 
-# 870 "data/maps/EltheRoad/scripts.pory"
+# 963 "data/maps/EltheRoad/scripts.pory"
 EltheRoad_Movement_DemiveeFollow:
-# 872 "data/maps/EltheRoad/scripts.pory"
+# 965 "data/maps/EltheRoad/scripts.pory"
 	jump_up
-# 873 "data/maps/EltheRoad/scripts.pory"
+# 966 "data/maps/EltheRoad/scripts.pory"
 	walk_fast_up
-# 874 "data/maps/EltheRoad/scripts.pory"
+# 967 "data/maps/EltheRoad/scripts.pory"
 	walk_fast_right
-# 874 "data/maps/EltheRoad/scripts.pory"
+# 967 "data/maps/EltheRoad/scripts.pory"
 	walk_fast_right
 	step_end
 
-# 877 "data/maps/EltheRoad/scripts.pory"
+# 970 "data/maps/EltheRoad/scripts.pory"
 EltheRoad_Movement_DemiveeJoin:
-# 879 "data/maps/EltheRoad/scripts.pory"
+# 972 "data/maps/EltheRoad/scripts.pory"
 	walk_slow_right
-# 880 "data/maps/EltheRoad/scripts.pory"
+# 973 "data/maps/EltheRoad/scripts.pory"
 	enter_pokeball
 	step_end
 
-# 883 "data/maps/EltheRoad/scripts.pory"
+# 976 "data/maps/EltheRoad/scripts.pory"
 EltheRoad_Movement_VinosGetOnLog:
-# 885 "data/maps/EltheRoad/scripts.pory"
+# 978 "data/maps/EltheRoad/scripts.pory"
 	walk_fast_right
-# 886 "data/maps/EltheRoad/scripts.pory"
+# 979 "data/maps/EltheRoad/scripts.pory"
 	jump_right
-# 887 "data/maps/EltheRoad/scripts.pory"
+# 980 "data/maps/EltheRoad/scripts.pory"
 	face_down
 	step_end
 
@@ -1708,11 +1892,10 @@ EltheRoad_EventScript_FirstTrigger_Text_5:
 
 EltheRoad_EventScript_FirstTrigger_Text_6:
 # 123 "data/maps/EltheRoad/scripts.pory"
-	.string "(Press R or talk to Demi-Vee while\n"
-	.string "he's following you to get advice!)\p"
-	.string "(He will talk about the person\n"
-	.string "you're facing, or give general hints\l"
-	.string "for how to progress.)$"
+	.string "(Press the Select button or talk to\n"
+	.string "Demi-Vee to get advice!)\p"
+	.string "(He can give you hints about how to\n"
+	.string "progress through the game.)$"
 
 EltheRoad_EventScript_DemiveeTutorialSign_Text_0:
 # 130 "data/maps/EltheRoad/scripts.pory"
@@ -2469,3 +2652,12 @@ EltheRoad_EventScript_BerryFieldsSign_Text_0:
 	.string "Elthe City Berry Fields\p"
 	.string "Please see overseer before picking\n"
 	.string "any berries!$"
+
+EltheRoad_BerrySpot_WeakBerries_Text_0:
+# 798 "data/maps/EltheRoad/scripts.pory"
+	.string "Some berries are floating in the\n"
+	.string "water…grab one?$"
+
+EltheRoad_BerrySpot_WeakBerries_Text_1:
+# 801 "data/maps/EltheRoad/scripts.pory"
+	.string "You plunged your hand into the water…$"

@@ -834,7 +834,7 @@ const struct Tileset gTileset_ShadyForest =
     .palettes = gTilesetPalettes_ShadyForest,
     .metatiles = gMetatiles_ShadyForest,
     .metatileAttributes = gMetatileAttributes_ShadyForest,
-    .callback = NULL,
+    .callback = InitTilesetAnim_ShadyForest,
 };
 
 const struct Tileset gTileset_SpiderForest =
