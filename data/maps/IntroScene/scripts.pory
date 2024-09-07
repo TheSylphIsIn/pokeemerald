@@ -145,6 +145,14 @@ script FollowerScript_Demivee
 					msgbox("Marcel said Vice would hide from the\n" "rain, right? Let's check inside\l" "these buildings.")
 				case 6:
 					msgbox("So Vice was in the Bakery…but she\n" "seems a bit pissed off. I'm not sure\l" "she'll want to just come with us.")
+				case 7:
+					msgbox("We need to know what kind of treat\n" "Vice likes so we can get her one.\p" "Do you think maybe Marcel would know?\n" "She said Vice was her girlfriend.\l" "I wouldn't be surprised if she forgot,\l" "but it's worth a shot, isn't it?")
+				case 8:
+					msgbox("Alright, let's ask the bakers to\n" "make us a spicy treat for Vice.")
+				case 9: 
+					msgbox("So we need to go back to Road to Elthe\n" "and head east. I think I saw some\l" "stumps we could jump across, near\l" "where we met Marcel.")
+				case 10:
+					msgbox("We need to find 3 of a berry that's\n" "high in Spicy and low in other flavors.\p" "Don't forget to check the berry tag!")
 			}
 		case 1:
 			if (flag(FLAG_FINISHED_WEATHERBANE_QUEST))
@@ -195,7 +203,20 @@ script FollowerScript_Demivee
 
 script FollowerScript_Marcel
 {
+	if(var(VAR_MAIN_GAME_STATE) > 6 && !flag(FLAG_KNOW_VICE_FLAVOR))
+	{
+		speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+		msgbox("Hey, Marcel, do you know what Vice's\n" "favorite flavor is?")
+		speakername("Marcel", PORTRAIT_KINGLER_NEUTRAL)
+		msgbox("Yeah, she loves spicy things. She\n" "would always eat the Spelon Berries\l" "off of the plant before you could\l" "even pick them.")
+		speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+		msgbox("Oh. Cool. That was easy.", MSGBOX_AUTOCLOSE)
+		setflag(FLAG_KNOW_VICE_FLAVOR)
+	}
+	else
+	{
 	
+	}
 }
 
 script FollowerScript_Vice

@@ -22029,3 +22029,6 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #endif //P_FOOTPRINTS
     const u32 gObjectEventPic_weatherbane[] = INCBIN_COMP("graphics/pokemon/weatherbane/overworld.4bpp");
     const u32 gOverworldPalette_weatherbane[] = INCBIN_U32("graphics/pokemon/weatherbane/overworld_normal.gbapal.lz");
+
+    const u32 gMonFrontPic_hydroil[] = INCBIN_U32("graphics/pokemon/hydroil/anim_front.4bpp.lz");
+    const u32 gMonPalette_hydroil[] = INCBIN_U32("graphics/pokemon/hydroil/normal.gbapal.lz");

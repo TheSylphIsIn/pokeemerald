@@ -1244,8 +1244,8 @@
 #define FLAG_STARTED_WEATHERBANE_QUEST                                           0x4AA // Unused Flag
 #define FLAG_BEAT_WEATHERBANE                              0x4AB // Unused Flag
 #define FLAG_FINISHED_WEATHERBANE_QUEST                                           0x4AC // Unused Flag
-#define FLAG_UNUSED_0x4AD                                           0x4AD // Unused Flag
-#define FLAG_UNUSED_0x4AE                                           0x4AE // Unused Flag
+#define FLAG_WILD_AI_ON                                           0x4AD // Unused Flag
+#define FLAG_CAN_FIND_PYTHON                                           0x4AE // Unused Flag
 #define FLAG_UNUSED_0x4AF                                           0x4AF // Unused Flag
 #define FLAG_UNUSED_0x4B0                                           0x4B0 // Unused Flag
 #define FLAG_UNUSED_0x4B1                                           0x4B1 // Unused Flag

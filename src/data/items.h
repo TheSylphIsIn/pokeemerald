@@ -132,9 +132,9 @@ static const u8 sFigyBerryDesc[]      = _("A hold item that\n"
 
 static const u8 sQuestionMarksDesc[]  = _("?????");
 
-static const u8 sKeyToRoomDesc[]      = _("A key that opens a\n"
-                                          "door inside the\n"
-                                          "Abandoned Ship.");
+static const u8 sKeyToRoomDesc[]      = _("A key that opens\n"
+                                          "Room 4 at the\n"
+                                          "Elysi Inn.");
 
 static const u8 sTeraShardDesc[]      = _("These shards may\n"
                                           "form when a Tera\n"
@@ -12688,7 +12688,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_KEY_TO_ROOM_1] =
     {
-        .name = _("Key to Room 1"),
+        .name = _("Room Key"),
         .pluralName = _("Keys to Room 1"),
         .price = 0,
         .description = sKeyToRoomDesc,

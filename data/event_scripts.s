@@ -1092,3 +1092,5 @@ EventScript_VsSeekerChargingDone::
 	.include "data/maps/InnFloor1/scripts.inc"
 
 	.include "data/maps/Bakery/scripts.inc"
+
+	.include "data/maps/InnRoomAmelia/scripts.inc"

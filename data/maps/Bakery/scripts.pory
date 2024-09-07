@@ -2,6 +2,8 @@ const LOCALID_GIRL = 7
 const LOCALID_BOY = 6
 const LOCALID_MOM = 5
 const LOCALID_VICE = 1
+const LOCALID_DUBSNAKE = 2
+const LOCALID_BAKER = 9
 
 mapscripts Bakery_MapScripts 
 {
@@ -10,9 +12,10 @@ mapscripts Bakery_MapScripts
 		if(flag(FLAG_GOT_VICE))
 		{
 			setobjectxyperm(LOCALID_BOY, 16, 13)
-			setobjectmovementtype(LOCALID_BOY, MOVEMENT_TYPE_FACE_DOWN)
-			setobjectxyperm(LOCALID_GIRL, 15, 14)
-			setobjectmovementtype(LOCALID_GIRL, MOVEMENT_TYPE_FACE_RIGHT)
+			setobjectmovementtype(LOCALID_BOY, MOVEMENT_TYPE_FACE_RIGHT)
+			setobjectxyperm(LOCALID_GIRL, 17, 14)
+			setobjectmovementtype(LOCALID_GIRL, MOVEMENT_TYPE_FACE_UP)
+			setobjectmovementtype(LOCALID_DUBSNAKE, MOVEMENT_TYPE_FACE_UP)
 		}
 	}
 	MAP_SCRIPT_ON_FRAME_TABLE [
@@ -122,6 +125,11 @@ movement Bakery_Movement_CameraScrollBack
 	walk_slow_diag_southwest * 6
 }
 
+script Bakery_Baker
+{
+	msgbox("He's taking inventory. Probably best\n" "not to bother him now.", MSGBOX_AUTOCLOSE)
+}
+
 // baker script: if you've gotten Vice's order, you ask for a special order from the baker.
 // you say you don't have money but can pay it by doing an odd job. he says to clear out his haunted kitchen.
 script Bakery_Cashier
@@ -140,20 +148,33 @@ script Bakery_Cashier
 			msgbox("Something spicy. Can you do spicy?")
 			speakername("Cashier")
 			msgbox("I'm not sure. Lemme ask the boss.", MSGBOX_AUTOCLOSE)
-			// moves up to talk to boss
-			// moves back down
+			applymovement(VAR_LAST_TALKED, Common_Movement_WalkInPlaceUp)
+			waitmovement(0)
+			delay(16)
+			applymovement(LOCALID_BAKER, Common_Movement_WalkInPlaceDown)
+			waitmovement(0)
+			applymovement(LOCALID_BAKER, Common_Movement_WalkInPlaceDown)
+			waitmovement(0)
+			delay(32)
+			faceplayer
 			speakername("Cashier")
 			msgbox("We don't have anything on hand.\n" "If you're committed enough to bring\l" "your own spicy berries, we could\l" "make something out of them.")
-			// check if the player already has them. if not, set a flag to skip to this part of the  script later.
 			checkitem(ITEM_SPELON_BERRY, 3)
 			if(var(VAR_RESULT) == TRUE)
 			{
-				
+				msgbox("Ah, you've got them! Okay, just\n" "one moment…", MSGBOX_AUTOCLOSE)
+				removeitem(ITEM_SPELON_BERRY, 3)
+				fadescreen(FADE_TO_BLACK)
+				goto(Bakery_ViceRecruitCutscene)
 			}
 			else
 			{
 				msgbox("We'll need at least 3 berries with\n" "high Spicy content. And if the other\l" "flavors are too strong, it won't work.\p"
 						"There's berry fields outside of town\n" "to the east. Maybe you can get them\l" "to give you what you need.")
+				if (var(VAR_MAIN_GAME_STATE) < 9) // sets your hint state if you haven't been to the berry fields yet
+				{
+					setvar(VAR_MAIN_GAME_STATE, 9)
+				}
 			}
 		}
 		else
@@ -164,7 +185,179 @@ script Bakery_Cashier
 			msgbox("… … … … …\n" "Well, we need something to work from.\l" "Could you figure out what flavor\l" "it likes, at least?", MSGBOX_AUTOCLOSE)
 		}
 	}
+	elif(flag(FLAG_GOT_VICE))
+	{
+		speakername("Cashier")
+		msgbox("Sorry about the mess. I did not see\n" "that coming. If that thing went wild,\l" "it could have burned down the\l" "whole place…\p"
+				"Well, you prevented that, so we'll\n" "consider that your payment for\l" "the special order. So don't worry\l" "about paying.")
+		speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+		msgbox("(I kinda thought they wouldn't make\n" "me pay anyway since I brought in\l" "my own ingredients. But oh well,\l" "I guess it worked out.)")
+	}
+	else
+	{
+		speakername("Cashier")
+		msgbox("Welcome to Pomona Bread!\n" "Let me know if you need anything.")
+	}
 	release
+}
+
+script Bakery_ViceRecruitCutscene
+{
+	setmetatile(10, 13, 0x2AF, FALSE)
+	setmetatile(10, 14, 0x2B7, FALSE)
+	setobjectxy(OBJ_EVENT_ID_PLAYER, 12, 13)
+	turnobject(OBJ_EVENT_ID_PLAYER, DIR_WEST)
+	setobjectxy(OBJ_EVENT_ID_FOLLOWER, 13, 14)
+	turnobject(OBJ_EVENT_ID_FOLLOWER, DIR_NORTH)
+	setobjectxyperm(LOCALID_BAKER, 10, 13)
+	setobjectmovementtype(LOCALID_BAKER, MOVEMENT_TYPE_FACE_DOWN)
+	removeobject(LOCALID_BAKER)
+	addobject(LOCALID_BAKER)
+	setvar(VAR_0x8000, 12)
+	setvar(VAR_0x8001, 13)
+	special(TeleportCamera)
+	delay(32)
+	fadescreen(FADE_FROM_BLACK)
+	delay(64)
+	speakername("Baker")
+	msgbox("Since you so graciously provided me\n" "with these wonderful Spelon Berries,\l" "I'll whip up some Spicy Poffins\l" "for you and your Flygon.\p"
+			"You'll have to bear with me here.\n" "It takes some careful mixing to\l" "get the dough to settle right.", MSGBOX_AUTOCLOSE)
+	delay(32)
+	special(SpawnCameraObject)
+	applymovement(OBJ_EVENT_ID_CAMERA, Bakery_Movement_CameraMoveLeft)
+	waitmovement(0)
+	special(RemoveCameraObject)
+	applymovement(LOCALID_DUBSNAKE, Bakery_Movement_DubsnakeGoInFire)
+	waitmovement(0)
+	playse(SE_M_SELF_DESTRUCT)
+	fadescreen(FADE_TO_WHITE)
+	applymovement(LOCALID_BAKER, Common_Movement_WalkUp)
+	playse(SE_M_SELF_DESTRUCT)
+	delay(8)
+	playse(SE_M_SELF_DESTRUCT)
+	delay(8)
+	playse(SE_M_SELF_DESTRUCT)
+	delay(8)
+	playse(SE_M_EXPLOSION)
+	waitse
+	delay(60)
+	turnobject(LOCALID_DUBSNAKE, DIR_NORTH)
+	setobjectxy(OBJ_EVENT_ID_FOLLOWER, 9, 16)
+	turnobject(OBJ_EVENT_ID_FOLLOWER, DIR_NORTH)
+	setobjectxy(OBJ_EVENT_ID_PLAYER, 10, 16)
+	turnobject(OBJ_EVENT_ID_PLAYER, DIR_NORTH)
+	setmetatile(10, 13, 0x2AE, FALSE)
+	setmetatile(10, 14, 0x2B6, FALSE)
+	special(DrawWholeMapView)
+	fadescreen(FADE_FROM_WHITE)
+	delay(16)
+	playmoncry(SPECIES_HYDROIL, CRY_MODE_NORMAL)
+	applymovement(LOCALID_DUBSNAKE, Bakery_Movement_HydroilRoar)
+	waitmovement(0)
+	speakername("Amelia", PORTRAIT_AMELIA_SHOCK)
+	msgbox("This thing looks pissed…\n" "Vice, we could use your help!", MSGBOX_AUTOCLOSE)
+	playse(SE_PIN)
+	applymovement(LOCALID_VICE, Common_Movement_ExclamationMark)
+	delay(48)
+	applymovement(LOCALID_VICE, Bakery_Movement_ViceSwoopIn)
+	givemon(SPECIES_FLYGON, 50, ITEM_DRAGON_FANG, ITEM_POKE_BALL, NATURE_BRAVE, 0, MON_FEMALE, 0, 0, 0, 0, 0, 0, 31, 31, 31, 31, 31, 31, MOVE_OUTRAGE, MOVE_DRAGON_CLAW, MOVE_BONE_CLUB, MOVE_AERIAL_ACE, FALSE, FALSE, TYPE_WATER)
+	setpartymemberinfo(2)
+	speakername("Vice", PORTRAIT_FLYGON_NEUTRAL)
+	msgbox("Hey, hey! That spicy goodness is mine!\n" "Back up off!", MSGBOX_AUTOCLOSE)
+	playmoncry(SPECIES_HYDROIL, CRY_MODE_NORMAL)
+	applymovement(LOCALID_DUBSNAKE, Bakery_Movement_HydroilRoar)
+	waitmovement(0)
+	delay(32)
+	createmon(1, 0, SPECIES_HYDROIL, 52, ITEM_NONE, 0, NATURE_RASH, 0, MON_MALE, 0, 0, 0, 0, 0, 0, 31, 31, 31, 31, 31, 31, MOVE_FLAME_BURST, MOVE_WATER_PULSE, MOVE_DRAGON_PULSE, MOVE_GLARE, FALSE, 0, TYPE_WATER)
+	dowildbattle
+	delay(64)
+	speakername("Hydroil", PORTRAIT_HYDROIL_WATER)
+	msgbox("… … … … …\n" "SORRY.")
+	speakername("Hydroil", PORTRAIT_HYDROIL_FIRE)
+	msgbox("WE GOT SUCH A RUSH FROM EVOLVING.\n" "WE HAD TO TEST OUR STRENGTH.")
+	applymovement(LOCALID_VICE, Common_Movement_FaceDown)
+	waitmovement(0)
+	speakername("Vice", PORTRAIT_FLYGON_NEUTRAL)
+	msgbox("Oh well! All's well that ends well!")
+	speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+	msgbox("…Well, if that's over, you can\n" "finally have your treat.")
+	speakername("Vice", PORTRAIT_FLYGON_NEUTRAL)
+	msgbox("Oh, I already ate it.")
+	speakername("Amelia", PORTRAIT_AMELIA_SHOCK)
+	msgbox("What!? But it was boiling hot, and\n" "not even fully cooked…!")
+	speakername("Vice", PORTRAIT_FLYGON_NEUTRAL)
+	msgbox("Yup! Just the way I like it.")
+	speakername("Amelia", PORTRAIT_AMELIA_SERIOUSLY)
+	msgbox("…It's good to have you back, Vice.")
+	if(flag(FLAG_GOT_BRADLEY))
+	{
+		speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+		msgbox("Now, the last one left is Python.\n" "He's a Zoroark, an illusionist…\l" "How are we supposed to find him?")
+		speakername("Vice", PORTRAIT_FLYGON_NEUTRAL)
+		msgbox("Ooh, maybe Bradley can help!\n" "Those big ol' ears of his must be\l" "useful for something.\p"
+				"Zoroark only make visual illusions.\n" "Maybe he can hear the difference.")
+		speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+		msgbox("I don't know if that's actually true…\n" "But it's worth a shot.\p"
+				"So if I bring Bradley out, he can\n" "help me single out the impostor.\p"
+				"Thanks for the idea, Vice!\n" "Now let's get going.")
+		setflag(FLAG_CAN_FIND_PYTHON)
+	}
+	closemessage
+	removeitem(ITEM_POKE_BALL, 1)
+	delay(32)
+	applymovement(LOCALID_VICE, EnterPokeballMovement)
+	waitmovement(0)
+	removeobject(LOCALID_VICE)
+	delay(16)
+	playfanfare(MUS_EVOLVED)
+	message("You recalled Vice the Flygon!")
+	waitmessage
+	waitfanfare
+	waitbuttonpress
+	closemessage
+	fadescreen(FADE_TO_BLACK)
+	setobjectxy(LOCALID_DUBSNAKE, 9, 12)
+	setobjectxyperm(LOCALID_BAKER, 6, 13)
+	setobjectmovementtype(LOCALID_BAKER, MOVEMENT_TYPE_WANDER_UP_AND_DOWN)
+	removeobject(LOCALID_BAKER)
+	addobject(LOCALID_BAKER)
+	setvar(VAR_MAIN_GAME_STATE, 15)
+	setmetatile(10, 13, 0x20C, FALSE)
+	setmetatile(10, 14, 0x20C, FALSE)
+	setvar(VAR_0x8000, 10)
+	setvar(VAR_0x8001, 16)
+	special(TeleportCamera)
+	fadescreen(FADE_FROM_BLACK)
+	release
+}
+
+movement Bakery_Movement_ViceSwoopIn
+{
+	walk_fast_left * 3
+	walk_fast_down * 3
+	walk_fast_left * 3
+	face_up
+}
+
+movement Bakery_Movement_HydroilRoar
+{
+	walk_in_place_up * 4
+}
+movement Bakery_Movement_CameraMoveLeft
+{
+	walk_slow_left
+	walk_slow_left
+	walk_slow_diag_southwest
+}
+
+movement Bakery_Movement_DubsnakeGoInFire
+{
+	delay_16
+	walk_slow_down
+	delay_16 * 2
+	walk_slow_down
+	delay_16 * 4
+	walk_in_place_right * 2
 }
 
 script Bakery_LittleBoy
@@ -255,4 +448,119 @@ script Bakery_KidsMom
 		setflag(FLAG_TEMP_11)
 	}
 	release
+}
+
+script Bakery_Sign_Bread
+{
+	msgbox("A fresh-baked loaf of bread. It looks\n" "so hearty, it could raise your HP.", MSGBOX_SIGN)
+}
+
+script Bakery_Sign_Cookies
+{
+	msgbox("Chocolate chip cookies. The chips are\n" "still melty.", MSGBOX_SIGN)
+}
+
+script Bakery_Sign_Pretzels
+{
+	msgbox("Soft pretzels. You feel like you need\n" "a drink just from looking at them.", MSGBOX_SIGN)
+}
+
+script Bakery_Sign_Baguettes
+{
+	msgbox("French bread. Or is it Italian?\n" "Sorry, you mean Kalosian.", MSGBOX_SIGN)
+}
+
+script Bakery_Sign_MenuLeft
+{
+	msgbox("Food menu. They serve baked goods\n" "and sandwiches here.", MSGBOX_SIGN)
+}
+
+script Bakery_Sign_MenuRight
+{
+	msgbox("Drink menu. You're at a loss trying\n" "to figure out these drink names.", MSGBOX_SIGN)
+}
+
+script Bakery_Sign_PantomPicture
+{
+	msgbox("A picture commemorating an incident\n" "where a Pokémon called Pantom\l" "haunted the kitchen.", MSGBOX_SIGN)
+}
+
+script Bakery_Sign_MountainPicture
+{
+	msgbox("“Morning over Lake Elthe”, painting\n" "by L. D. Vinki.", MSGBOX_SIGN)
+}
+
+script Bakery_DubsnakeHydroil
+{
+	lock
+	if (flag(FLAG_GOT_VICE))
+	{
+		specialvar(VAR_RESULT, GetPlayerFacingDirection)
+		switch(var(VAR_RESULT))
+		{
+			case DIR_EAST: // ice head
+				speakername("Hydroil", PORTRAIT_HYDROIL_WATER)
+				msgbox("SORRY ABOUT THE MESS. ONE OF US HAS\n" "NO SELF-CONTROL.")
+			case DIR_WEST: // oil head
+				speakername("Hydroil", PORTRAIT_HYDROIL_FIRE)
+				msgbox("YOU SHOULD STICK YOUR HEAD IN A FIRE.\n" "I HIGHLY RECOMMEND THE EXPERIENCE.")				
+			case DIR_NORTH: // middle
+				speakername("Hydroil", PORTRAIT_HYDROIL_FIRE)
+				msgbox("YOU'RE REALLY STRONG. IN ANOTHER\n" "TIME, WE WOULD BE GREAT FRIENDS.")
+				speakername("Hydroil", PORTRAIT_HYDROIL_WATER)
+				msgbox("BUT I MUST STAY HERE. I AM LOYAL\n" "TO THIS BAKERY.")
+				speakername("Amelia", PORTRAIT_AMELIA_SERIOUSLY)
+				msgbox("(I wasn't planning to ask them to\n" "come with me, but whatever.)")
+				speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+				msgbox("Okay. Take care of yourself, Hydroil.")				
+		}
+	}
+	else
+	{
+		specialvar(VAR_RESULT, GetPlayerFacingDirection)
+		switch(var(VAR_RESULT))
+		{
+			case DIR_EAST: // ice head
+				speakername("Dubsnake", PORTRAIT_DUBSNAKE_ICE)
+				msgbox("You get a discount on cold drinks if\n" "you're brave enough to let them make\l" "it with the ice from my head.")
+			case DIR_WEST: // oil head
+				speakername("Dubsnake", PORTRAIT_DUBSNAKE_OIL)
+				msgbox("I think I'm ready to evolve. I just\n" "need a heat source to start it.")				
+			case DIR_NORTH: // middle
+				speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+				msgbox("What kind of Pokémon are you?")
+				speakername("Dubsnake", PORTRAIT_DUBSNAKE_ICE)
+				msgbox("We're called Dubsnake!")
+				speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+				msgbox("Cool. I've never seen one of you\n" "before. Which head is the main one?")
+				speakername("Dubsnake", PORTRAIT_DUBSNAKE_ICE)
+				msgbox("I am!")
+				speakername("Dubsnake", PORTRAIT_DUBSNAKE_OIL)
+				msgbox("I am!")
+				speakername("Amelia", PORTRAIT_AMELIA_SMUG)
+				msgbox("Got it, got it. Great. Thanks.")
+				
+		}
+	}
+	release
+}
+
+script Bakery_ComputerGuy
+{
+	speakername("Linus")
+	msgbox("The wi-fi in my house has been out\n" "because of the storm, so I have to\l" "come here to get my work done.", MSGBOX_NPC)
+}
+
+script Bakery_LeftGuy
+{
+	speakername("Peter")
+	msgbox("Could you move along? I'm trying to\n" "have a date, here…", MSGBOX_NPC)
+	applymovement(VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection)
+	waitmovement(0)	
+}
+
+script Bakery_RightGuy
+{
+	speakername("Dave")
+	msgbox("I always tell myself I'll try other\n" "items on the menu, but then I just\l" "end up getting the crepes again, haha.", MSGBOX_AUTOCLOSE)
 }

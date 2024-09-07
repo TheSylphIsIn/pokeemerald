@@ -1,1204 +1,1549 @@
 EltheCity_MapScripts::
-# 16 "data/maps/EltheCity/scripts.pory"
+# 17 "data/maps/EltheCity/scripts.pory"
 	map_script MAP_SCRIPT_ON_LOAD, EltheCity_MapScripts_MAP_SCRIPT_ON_LOAD
-# 26 "data/maps/EltheCity/scripts.pory"
+# 28 "data/maps/EltheCity/scripts.pory"
 	map_script MAP_SCRIPT_ON_TRANSITION, EltheCity_MapScripts_MAP_SCRIPT_ON_TRANSITION
 	.byte 0
 
 EltheCity_MapScripts_MAP_SCRIPT_ON_LOAD:
-# 18 "data/maps/EltheCity/scripts.pory"
+# 19 "data/maps/EltheCity/scripts.pory"
+	setrespawn HEAL_LOCATION_ELTHE_CITY
+# 20 "data/maps/EltheCity/scripts.pory"
 	goto_if_set FLAG_STARTED_WEATHERBANE_QUEST, EltheCity_MapScripts_MAP_SCRIPT_ON_LOAD_1
 	return
 
 EltheCity_MapScripts_MAP_SCRIPT_ON_LOAD_1:
-# 20 "data/maps/EltheCity/scripts.pory"
-	setmetatile 5, 31, 0x387, FALSE
-# 21 "data/maps/EltheCity/scripts.pory"
-	setmetatile 5, 30, 0x37F, FALSE
 # 22 "data/maps/EltheCity/scripts.pory"
-	setmetatile 5, 29, 0x377, FALSE
+	setmetatile 5, 31, 0x387, FALSE
 # 23 "data/maps/EltheCity/scripts.pory"
+	setmetatile 5, 30, 0x37F, FALSE
+# 24 "data/maps/EltheCity/scripts.pory"
+	setmetatile 5, 29, 0x377, FALSE
+# 25 "data/maps/EltheCity/scripts.pory"
 	setmetatile 5, 28, 0x36F, FALSE
 	return
 
 EltheCity_MapScripts_MAP_SCRIPT_ON_TRANSITION:
-# 27 "data/maps/EltheCity/scripts.pory"
+# 29 "data/maps/EltheCity/scripts.pory"
 	goto_if_set FLAG_SCALE_DESCENDING_DONE, EltheCity_MapScripts_MAP_SCRIPT_ON_TRANSITION_2
 EltheCity_MapScripts_MAP_SCRIPT_ON_TRANSITION_1:
-# 31 "data/maps/EltheCity/scripts.pory"
+# 33 "data/maps/EltheCity/scripts.pory"
 	goto_if_set FLAG_SCALE_ASCENDING_DONE, EltheCity_MapScripts_MAP_SCRIPT_ON_TRANSITION_5
 EltheCity_MapScripts_MAP_SCRIPT_ON_TRANSITION_4:
-# 36 "data/maps/EltheCity/scripts.pory"
+# 38 "data/maps/EltheCity/scripts.pory"
 	compare VAR_MAIN_GAME_STATE, 4
 	goto_if_eq EltheCity_MapScripts_MAP_SCRIPT_ON_TRANSITION_8
 EltheCity_MapScripts_MAP_SCRIPT_ON_TRANSITION_7:
-# 41 "data/maps/EltheCity/scripts.pory"
+# 43 "data/maps/EltheCity/scripts.pory"
 	goto_if_unset FLAG_GOT_PYTHON, EltheCity_MapScripts_MAP_SCRIPT_ON_TRANSITION_10
 	return
 
 EltheCity_MapScripts_MAP_SCRIPT_ON_TRANSITION_2:
-# 29 "data/maps/EltheCity/scripts.pory"
+# 31 "data/maps/EltheCity/scripts.pory"
 	setobjectxyperm 11, 11, 21
 	goto EltheCity_MapScripts_MAP_SCRIPT_ON_TRANSITION_1
 
 EltheCity_MapScripts_MAP_SCRIPT_ON_TRANSITION_5:
-# 33 "data/maps/EltheCity/scripts.pory"
+# 35 "data/maps/EltheCity/scripts.pory"
 	setobjectxyperm 10, 13, 21
 	goto EltheCity_MapScripts_MAP_SCRIPT_ON_TRANSITION_4
 
 EltheCity_MapScripts_MAP_SCRIPT_ON_TRANSITION_8:
-# 38 "data/maps/EltheCity/scripts.pory"
+# 40 "data/maps/EltheCity/scripts.pory"
 	setvar VAR_MAIN_GAME_STATE, 5
 	goto EltheCity_MapScripts_MAP_SCRIPT_ON_TRANSITION_7
 
 EltheCity_MapScripts_MAP_SCRIPT_ON_TRANSITION_10:
-# 43 "data/maps/EltheCity/scripts.pory"
-	random 4
-# 44 "data/maps/EltheCity/scripts.pory"
-	copyvar VAR_TEMP_F, VAR_RESULT
 # 45 "data/maps/EltheCity/scripts.pory"
-	switch VAR_TEMP_F
+	random 4
+# 46 "data/maps/EltheCity/scripts.pory"
+	copyvar VAR_TEMP_F, VAR_RESULT
 # 47 "data/maps/EltheCity/scripts.pory"
+	switch VAR_TEMP_F
+# 49 "data/maps/EltheCity/scripts.pory"
 	case 0, EltheCity_MapScripts_MAP_SCRIPT_ON_TRANSITION_13
-# 51 "data/maps/EltheCity/scripts.pory"
+# 53 "data/maps/EltheCity/scripts.pory"
 	case 1, EltheCity_MapScripts_MAP_SCRIPT_ON_TRANSITION_14
-# 55 "data/maps/EltheCity/scripts.pory"
+# 57 "data/maps/EltheCity/scripts.pory"
 	case 2, EltheCity_MapScripts_MAP_SCRIPT_ON_TRANSITION_15
-# 59 "data/maps/EltheCity/scripts.pory"
+# 61 "data/maps/EltheCity/scripts.pory"
 	case 3, EltheCity_MapScripts_MAP_SCRIPT_ON_TRANSITION_16
 	return
 
 EltheCity_MapScripts_MAP_SCRIPT_ON_TRANSITION_13:
-# 48 "data/maps/EltheCity/scripts.pory"
-	setobjectxyperm 2, 34, 7
-# 49 "data/maps/EltheCity/scripts.pory"
-	setobjectmovementtype 2, MOVEMENT_TYPE_FACE_LEFT
 # 50 "data/maps/EltheCity/scripts.pory"
+	setobjectxyperm 2, 34, 7
+# 51 "data/maps/EltheCity/scripts.pory"
+	setobjectmovementtype 2, MOVEMENT_TYPE_FACE_LEFT
+# 52 "data/maps/EltheCity/scripts.pory"
 	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_MAN_2
 	return
 
 EltheCity_MapScripts_MAP_SCRIPT_ON_TRANSITION_14:
-# 52 "data/maps/EltheCity/scripts.pory"
-	setobjectxyperm 2, 29, 34
-# 53 "data/maps/EltheCity/scripts.pory"
-	setobjectmovementtype 2, MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT
 # 54 "data/maps/EltheCity/scripts.pory"
+	setobjectxyperm 2, 29, 34
+# 55 "data/maps/EltheCity/scripts.pory"
+	setobjectmovementtype 2, MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT
+# 56 "data/maps/EltheCity/scripts.pory"
 	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_MAN_5
 	return
 
 EltheCity_MapScripts_MAP_SCRIPT_ON_TRANSITION_15:
-# 56 "data/maps/EltheCity/scripts.pory"
-	setobjectxyperm 2, 6, 26
-# 57 "data/maps/EltheCity/scripts.pory"
-	setobjectmovementtype 2, MOVEMENT_TYPE_LOOK_AROUND
 # 58 "data/maps/EltheCity/scripts.pory"
+	setobjectxyperm 2, 6, 26
+# 59 "data/maps/EltheCity/scripts.pory"
+	setobjectmovementtype 2, MOVEMENT_TYPE_LOOK_AROUND
+# 60 "data/maps/EltheCity/scripts.pory"
 	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_SPECIES ( POLIWHIRL )
 	return
 
 EltheCity_MapScripts_MAP_SCRIPT_ON_TRANSITION_16:
-# 60 "data/maps/EltheCity/scripts.pory"
-	setobjectxyperm 2, 28, 15
-# 61 "data/maps/EltheCity/scripts.pory"
-	setobjectmovementtype 2, MOVEMENT_TYPE_WANDER_DOWN_AND_UP
 # 62 "data/maps/EltheCity/scripts.pory"
+	setobjectxyperm 2, 28, 15
+# 63 "data/maps/EltheCity/scripts.pory"
+	setobjectmovementtype 2, MOVEMENT_TYPE_WANDER_DOWN_AND_UP
+# 64 "data/maps/EltheCity/scripts.pory"
 	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_MAN_2
 	return
 
 
 EltheCity_EventScript_Python::
-# 72 "data/maps/EltheCity/scripts.pory"
-	msgbox EltheCity_EventScript_Python_Text_0, MSGBOX_NPC
-# 73 "data/maps/EltheCity/scripts.pory"
-	special GetLeadMonSpecies
 # 74 "data/maps/EltheCity/scripts.pory"
+	msgbox EltheCity_EventScript_Python_Text_0, MSGBOX_NPC
+# 75 "data/maps/EltheCity/scripts.pory"
+	special GetLeadMonSpecies
+# 76 "data/maps/EltheCity/scripts.pory"
 	compare VAR_RESULT, SPECIES_NIDOKING
-	goto_if_eq EltheCity_EventScript_Python_1
+	goto_if_eq EltheCity_EventScript_Python_2
 	return
 
 EltheCity_EventScript_Python_1:
-# 76 "data/maps/EltheCity/scripts.pory"
-	lock
-# 77 "data/maps/EltheCity/scripts.pory"
-	speakername EltheCity_EventScript_Python_Text_1, PORTRAIT_NIDOKING_NEUTRAL
 # 78 "data/maps/EltheCity/scripts.pory"
-	msgbox EltheCity_EventScript_Python_Text_2, MSGBOX_AUTOCLOSE
+	lock
 # 79 "data/maps/EltheCity/scripts.pory"
-	playse SE_PIN
+	speakername EltheCity_EventScript_Python_Text_1, PORTRAIT_NIDOKING_NEUTRAL
 # 80 "data/maps/EltheCity/scripts.pory"
-	applymovement 2, Common_Movement_ExclamationMark
+	msgbox EltheCity_EventScript_Python_Text_2, MSGBOX_AUTOCLOSE
 # 81 "data/maps/EltheCity/scripts.pory"
-	delay 48
+	playse SE_PIN
 # 82 "data/maps/EltheCity/scripts.pory"
-	applymovement 2, EltheCity_Movement_PythonSpinIn
+	applymovement 2, Common_Movement_ExclamationMark
 # 83 "data/maps/EltheCity/scripts.pory"
-	waitmovement 0
+	delay 48
 # 84 "data/maps/EltheCity/scripts.pory"
-	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_SPECIES ( ZOROARK )
+	applymovement 2, EltheCity_Movement_PythonSpinIn
 # 85 "data/maps/EltheCity/scripts.pory"
-	removeobject VAR_LAST_TALKED
+	waitmovement 0
 # 86 "data/maps/EltheCity/scripts.pory"
-	addobject VAR_LAST_TALKED
-# 87 "data/maps/EltheCity/scripts.pory"
-	applymovement 2, EltheCity_Movement_PythonSpinOut
-# 88 "data/maps/EltheCity/scripts.pory"
-	waitmovement 0
-# 89 "data/maps/EltheCity/scripts.pory"
-	lock
-# 90 "data/maps/EltheCity/scripts.pory"
-	faceplayer
-# 91 "data/maps/EltheCity/scripts.pory"
-	speakername EltheCity_EventScript_Python_Text_3, PORTRAIT_ZOROARK_NEUTRAL
-# 92 "data/maps/EltheCity/scripts.pory"
-	msgbox EltheCity_EventScript_Python_Text_4
-# 93 "data/maps/EltheCity/scripts.pory"
-	speakername EltheCity_EventScript_Python_Text_5, PORTRAIT_AMELIA_NEUTRAL
-# 94 "data/maps/EltheCity/scripts.pory"
-	msgbox EltheCity_EventScript_Python_Text_6
-# 95 "data/maps/EltheCity/scripts.pory"
-	speakername EltheCity_EventScript_Python_Text_5, PORTRAIT_AMELIA_SHOCK
-# 96 "data/maps/EltheCity/scripts.pory"
-	msgbox EltheCity_EventScript_Python_Text_7
-# 97 "data/maps/EltheCity/scripts.pory"
-	speakername EltheCity_EventScript_Python_Text_3, PORTRAIT_ZOROARK_NEUTRAL
-# 98 "data/maps/EltheCity/scripts.pory"
-	msgbox EltheCity_EventScript_Python_Text_8, MSGBOX_AUTOCLOSE
-# 100 "data/maps/EltheCity/scripts.pory"
-	applymovement 2, EltheCity_Movement_PythonSpinIn
-# 101 "data/maps/EltheCity/scripts.pory"
-	waitmovement 0
-# 102 "data/maps/EltheCity/scripts.pory"
-	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_MAY_NORMAL
-# 103 "data/maps/EltheCity/scripts.pory"
-	removeobject VAR_LAST_TALKED
-# 104 "data/maps/EltheCity/scripts.pory"
-	addobject VAR_LAST_TALKED
-# 105 "data/maps/EltheCity/scripts.pory"
-	applymovement 2, EltheCity_Movement_PythonSpinOut
-# 106 "data/maps/EltheCity/scripts.pory"
-	waitmovement 0
-# 107 "data/maps/EltheCity/scripts.pory"
-	lock
-# 108 "data/maps/EltheCity/scripts.pory"
-	faceplayer
-# 109 "data/maps/EltheCity/scripts.pory"
-	speakername EltheCity_EventScript_Python_Text_3, PORTRAIT_AMELIA_SMUG
-# 110 "data/maps/EltheCity/scripts.pory"
-	msgbox EltheCity_EventScript_Python_Text_9
-# 111 "data/maps/EltheCity/scripts.pory"
-	speakername EltheCity_EventScript_Python_Text_3, PORTRAIT_AMELIA_WINK
-# 112 "data/maps/EltheCity/scripts.pory"
-	msgbox EltheCity_EventScript_Python_Text_10
-# 113 "data/maps/EltheCity/scripts.pory"
-	speakername EltheCity_EventScript_Python_Text_5, PORTRAIT_AMELIA_SERIOUSLY
-# 114 "data/maps/EltheCity/scripts.pory"
-	msgbox EltheCity_EventScript_Python_Text_11
-# 115 "data/maps/EltheCity/scripts.pory"
-	speakername EltheCity_EventScript_Python_Text_5, PORTRAIT_AMELIA_NEUTRAL
-# 116 "data/maps/EltheCity/scripts.pory"
-	message EltheCity_EventScript_Python_Text_12
-# 118 "data/maps/EltheCity/scripts.pory"
-	applymovement 2, EltheCity_Movement_PythonSpinIn
-# 119 "data/maps/EltheCity/scripts.pory"
-	waitmovement 0
-# 120 "data/maps/EltheCity/scripts.pory"
 	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_SPECIES ( ZOROARK )
-# 121 "data/maps/EltheCity/scripts.pory"
+# 87 "data/maps/EltheCity/scripts.pory"
 	removeobject VAR_LAST_TALKED
-# 122 "data/maps/EltheCity/scripts.pory"
+# 88 "data/maps/EltheCity/scripts.pory"
 	addobject VAR_LAST_TALKED
-# 123 "data/maps/EltheCity/scripts.pory"
+# 89 "data/maps/EltheCity/scripts.pory"
 	applymovement 2, EltheCity_Movement_PythonSpinOut
-# 124 "data/maps/EltheCity/scripts.pory"
+# 90 "data/maps/EltheCity/scripts.pory"
 	waitmovement 0
-# 125 "data/maps/EltheCity/scripts.pory"
+# 91 "data/maps/EltheCity/scripts.pory"
 	lock
-# 126 "data/maps/EltheCity/scripts.pory"
+# 92 "data/maps/EltheCity/scripts.pory"
 	faceplayer
-# 127 "data/maps/EltheCity/scripts.pory"
-	waitmessage
-# 128 "data/maps/EltheCity/scripts.pory"
-	waitbuttonpress
-# 129 "data/maps/EltheCity/scripts.pory"
+# 93 "data/maps/EltheCity/scripts.pory"
 	speakername EltheCity_EventScript_Python_Text_3, PORTRAIT_ZOROARK_NEUTRAL
-# 130 "data/maps/EltheCity/scripts.pory"
-	msgbox EltheCity_EventScript_Python_Text_13, MSGBOX_AUTOCLOSE
-# 132 "data/maps/EltheCity/scripts.pory"
-	delay 32
-# 133 "data/maps/EltheCity/scripts.pory"
-	applymovement 2, EnterPokeballMovement
-# 134 "data/maps/EltheCity/scripts.pory"
+# 94 "data/maps/EltheCity/scripts.pory"
+	msgbox EltheCity_EventScript_Python_Text_4
+# 95 "data/maps/EltheCity/scripts.pory"
+	speakername EltheCity_EventScript_Python_Text_5, PORTRAIT_AMELIA_NEUTRAL
+# 96 "data/maps/EltheCity/scripts.pory"
+	msgbox EltheCity_EventScript_Python_Text_6
+# 97 "data/maps/EltheCity/scripts.pory"
+	speakername EltheCity_EventScript_Python_Text_5, PORTRAIT_AMELIA_SHOCK
+# 98 "data/maps/EltheCity/scripts.pory"
+	msgbox EltheCity_EventScript_Python_Text_7
+# 99 "data/maps/EltheCity/scripts.pory"
+	speakername EltheCity_EventScript_Python_Text_3, PORTRAIT_ZOROARK_NEUTRAL
+# 100 "data/maps/EltheCity/scripts.pory"
+	msgbox EltheCity_EventScript_Python_Text_8, MSGBOX_AUTOCLOSE
+# 102 "data/maps/EltheCity/scripts.pory"
+	applymovement 2, EltheCity_Movement_PythonSpinIn
+# 103 "data/maps/EltheCity/scripts.pory"
 	waitmovement 0
-# 135 "data/maps/EltheCity/scripts.pory"
-	removeobject 2
-# 136 "data/maps/EltheCity/scripts.pory"
-	delay 16
-# 137 "data/maps/EltheCity/scripts.pory"
-	playfanfare MUS_EVOLVED
-# 138 "data/maps/EltheCity/scripts.pory"
-	message EltheCity_EventScript_Python_Text_14
-# 139 "data/maps/EltheCity/scripts.pory"
+# 104 "data/maps/EltheCity/scripts.pory"
+	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_MAY_NORMAL
+# 105 "data/maps/EltheCity/scripts.pory"
+	removeobject VAR_LAST_TALKED
+# 106 "data/maps/EltheCity/scripts.pory"
+	addobject VAR_LAST_TALKED
+# 107 "data/maps/EltheCity/scripts.pory"
+	applymovement 2, EltheCity_Movement_PythonSpinOut
+# 108 "data/maps/EltheCity/scripts.pory"
+	waitmovement 0
+# 109 "data/maps/EltheCity/scripts.pory"
+	lock
+# 110 "data/maps/EltheCity/scripts.pory"
+	faceplayer
+# 111 "data/maps/EltheCity/scripts.pory"
+	speakername EltheCity_EventScript_Python_Text_3, PORTRAIT_AMELIA_SMUG
+# 112 "data/maps/EltheCity/scripts.pory"
+	msgbox EltheCity_EventScript_Python_Text_9
+# 113 "data/maps/EltheCity/scripts.pory"
+	speakername EltheCity_EventScript_Python_Text_3, PORTRAIT_AMELIA_WINK
+# 114 "data/maps/EltheCity/scripts.pory"
+	msgbox EltheCity_EventScript_Python_Text_10
+# 115 "data/maps/EltheCity/scripts.pory"
+	speakername EltheCity_EventScript_Python_Text_5, PORTRAIT_AMELIA_SERIOUSLY
+# 116 "data/maps/EltheCity/scripts.pory"
+	msgbox EltheCity_EventScript_Python_Text_11
+# 117 "data/maps/EltheCity/scripts.pory"
+	speakername EltheCity_EventScript_Python_Text_5, PORTRAIT_AMELIA_NEUTRAL
+# 118 "data/maps/EltheCity/scripts.pory"
+	message EltheCity_EventScript_Python_Text_12
+# 120 "data/maps/EltheCity/scripts.pory"
+	applymovement 2, EltheCity_Movement_PythonSpinIn
+# 121 "data/maps/EltheCity/scripts.pory"
+	waitmovement 0
+# 122 "data/maps/EltheCity/scripts.pory"
+	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_SPECIES ( ZOROARK )
+# 123 "data/maps/EltheCity/scripts.pory"
+	removeobject VAR_LAST_TALKED
+# 124 "data/maps/EltheCity/scripts.pory"
+	addobject VAR_LAST_TALKED
+# 125 "data/maps/EltheCity/scripts.pory"
+	applymovement 2, EltheCity_Movement_PythonSpinOut
+# 126 "data/maps/EltheCity/scripts.pory"
+	waitmovement 0
+# 127 "data/maps/EltheCity/scripts.pory"
+	lock
+# 128 "data/maps/EltheCity/scripts.pory"
+	faceplayer
+# 129 "data/maps/EltheCity/scripts.pory"
 	waitmessage
-# 140 "data/maps/EltheCity/scripts.pory"
-	waitfanfare
-# 141 "data/maps/EltheCity/scripts.pory"
+# 130 "data/maps/EltheCity/scripts.pory"
 	waitbuttonpress
+# 131 "data/maps/EltheCity/scripts.pory"
+	speakername EltheCity_EventScript_Python_Text_3, PORTRAIT_ZOROARK_NEUTRAL
+# 132 "data/maps/EltheCity/scripts.pory"
+	msgbox EltheCity_EventScript_Python_Text_13, MSGBOX_AUTOCLOSE
+# 134 "data/maps/EltheCity/scripts.pory"
+	delay 32
+# 135 "data/maps/EltheCity/scripts.pory"
+	applymovement 2, EnterPokeballMovement
+# 136 "data/maps/EltheCity/scripts.pory"
+	waitmovement 0
+# 137 "data/maps/EltheCity/scripts.pory"
+	removeobject 2
+# 138 "data/maps/EltheCity/scripts.pory"
+	delay 16
+# 139 "data/maps/EltheCity/scripts.pory"
+	removeitem ITEM_NEST_BALL, 1
+# 140 "data/maps/EltheCity/scripts.pory"
+	playfanfare MUS_EVOLVED
+# 141 "data/maps/EltheCity/scripts.pory"
+	message EltheCity_EventScript_Python_Text_14
 # 142 "data/maps/EltheCity/scripts.pory"
-	closemessage
+	waitmessage
 # 143 "data/maps/EltheCity/scripts.pory"
-	givemon SPECIES_ZOROARK, 48, ITEM_SILK_SCARF, ITEM_NEST_BALL, NATURE_CALM, 0, MON_MALE, 0, 0, 0, 0, 0, 0, 31, 31, 31, 31, 31, 31, MOVE_NIGHT_DAZE, MOVE_AGILITY, MOVE_FLAMETHROWER, MOVE_HYPER_BEAM, FALSE, FALSE, TYPE_NORMAL
+	waitfanfare
 # 144 "data/maps/EltheCity/scripts.pory"
-	setpartymemberinfo 4
+	waitbuttonpress
 # 145 "data/maps/EltheCity/scripts.pory"
+	closemessage
+# 146 "data/maps/EltheCity/scripts.pory"
+	givemon SPECIES_ZOROARK, 48, ITEM_SILK_SCARF, ITEM_NEST_BALL, NATURE_CALM, 0, MON_MALE, 0, 0, 0, 0, 0, 0, 31, 31, 31, 31, 31, 31, MOVE_NIGHT_DAZE, MOVE_AGILITY, MOVE_FLAMETHROWER, MOVE_HYPER_BEAM, FALSE, FALSE, TYPE_NORMAL
+# 147 "data/maps/EltheCity/scripts.pory"
+	setpartymemberinfo 4
+# 148 "data/maps/EltheCity/scripts.pory"
 	setvar VAR_MAIN_GAME_STATE, 30
 	return
 
+EltheCity_EventScript_Python_2:
+# 76 "data/maps/EltheCity/scripts.pory"
+	goto_if_set FLAG_CAN_FIND_PYTHON, EltheCity_EventScript_Python_1
+	return
 
-# 149 "data/maps/EltheCity/scripts.pory"
-EltheCity_Movement_PythonSpinIn:
-# 151 "data/maps/EltheCity/scripts.pory"
-	face_down
+
 # 152 "data/maps/EltheCity/scripts.pory"
-	delay_4
-# 153 "data/maps/EltheCity/scripts.pory"
-	face_left
+EltheCity_Movement_PythonSpinIn:
 # 154 "data/maps/EltheCity/scripts.pory"
-	delay_4
+	face_down
 # 155 "data/maps/EltheCity/scripts.pory"
-	face_up
+	delay_4
 # 156 "data/maps/EltheCity/scripts.pory"
-	delay_2
+	face_left
 # 157 "data/maps/EltheCity/scripts.pory"
-	face_right
+	delay_4
 # 158 "data/maps/EltheCity/scripts.pory"
+	face_up
+# 159 "data/maps/EltheCity/scripts.pory"
+	delay_2
+# 160 "data/maps/EltheCity/scripts.pory"
+	face_right
+# 161 "data/maps/EltheCity/scripts.pory"
 	delay_2
 	step_end
 
-# 161 "data/maps/EltheCity/scripts.pory"
-EltheCity_Movement_PythonSpinOut:
-# 163 "data/maps/EltheCity/scripts.pory"
-	face_down
 # 164 "data/maps/EltheCity/scripts.pory"
-	delay_2
-# 165 "data/maps/EltheCity/scripts.pory"
-	face_left
+EltheCity_Movement_PythonSpinOut:
 # 166 "data/maps/EltheCity/scripts.pory"
-	delay_2
-# 167 "data/maps/EltheCity/scripts.pory"
-	face_up
-# 168 "data/maps/EltheCity/scripts.pory"
-	delay_4
-# 169 "data/maps/EltheCity/scripts.pory"
-	face_right
-# 170 "data/maps/EltheCity/scripts.pory"
-	delay_4
-# 171 "data/maps/EltheCity/scripts.pory"
 	face_down
-# 172 "data/maps/EltheCity/scripts.pory"
+# 167 "data/maps/EltheCity/scripts.pory"
+	delay_2
+# 168 "data/maps/EltheCity/scripts.pory"
+	face_left
+# 169 "data/maps/EltheCity/scripts.pory"
+	delay_2
+# 170 "data/maps/EltheCity/scripts.pory"
+	face_up
+# 171 "data/maps/EltheCity/scripts.pory"
 	delay_4
+# 172 "data/maps/EltheCity/scripts.pory"
+	face_right
 # 173 "data/maps/EltheCity/scripts.pory"
+	delay_4
+# 174 "data/maps/EltheCity/scripts.pory"
+	face_down
+# 175 "data/maps/EltheCity/scripts.pory"
+	delay_4
+# 176 "data/maps/EltheCity/scripts.pory"
 	face_player
 	step_end
 
-Test_ScriptGetInput::
-# 178 "data/maps/EltheCity/scripts.pory"
-	lock
-# 179 "data/maps/EltheCity/scripts.pory"
-	message Test_ScriptGetInput_Text_0
-# 180 "data/maps/EltheCity/scripts.pory"
-	waitmessage
-Test_ScriptGetInput_2:
-# 182 "data/maps/EltheCity/scripts.pory"
-	waitforscriptinput
-# 183 "data/maps/EltheCity/scripts.pory"
-	switch VAR_RESULT
-# 185 "data/maps/EltheCity/scripts.pory"
-	case 0x0020, Test_ScriptGetInput_5
-# 188 "data/maps/EltheCity/scripts.pory"
-	case 0x0010, Test_ScriptGetInput_6
-# 191 "data/maps/EltheCity/scripts.pory"
-	case 0x0080, Test_ScriptGetInput_7
-# 194 "data/maps/EltheCity/scripts.pory"
-	case 0x0040, Test_ScriptGetInput_8
-	goto Test_ScriptGetInput_2
-
-# 199 "data/maps/EltheCity/scripts.pory"
-	release
-	return
-
-Test_ScriptGetInput_5:
-# 186 "data/maps/EltheCity/scripts.pory"
-	applymovement OBJ_EVENT_ID_PLAYER, StepLeft
-# 187 "data/maps/EltheCity/scripts.pory"
-	waitmovement 0
-	goto Test_ScriptGetInput_2
-
-Test_ScriptGetInput_6:
-# 189 "data/maps/EltheCity/scripts.pory"
-	applymovement OBJ_EVENT_ID_PLAYER, StepRight
-# 190 "data/maps/EltheCity/scripts.pory"
-	waitmovement 0
-	goto Test_ScriptGetInput_2
-
-Test_ScriptGetInput_7:
-# 192 "data/maps/EltheCity/scripts.pory"
-	applymovement OBJ_EVENT_ID_PLAYER, StepDown
-# 193 "data/maps/EltheCity/scripts.pory"
-	waitmovement 0
-	goto Test_ScriptGetInput_2
-
-Test_ScriptGetInput_8:
-# 195 "data/maps/EltheCity/scripts.pory"
-	applymovement OBJ_EVENT_ID_PLAYER, StepUp
-# 196 "data/maps/EltheCity/scripts.pory"
-	waitmovement 0
-	goto Test_ScriptGetInput_2
-
-
 EltheCity_Sign_InnLeft::
-# 204 "data/maps/EltheCity/scripts.pory"
+# 181 "data/maps/EltheCity/scripts.pory"
 	msgbox EltheCity_Sign_InnLeft_Text_0, MSGBOX_SIGN
 	return
 
 
 EltheCity_Sign_InnRight::
-# 209 "data/maps/EltheCity/scripts.pory"
+# 186 "data/maps/EltheCity/scripts.pory"
 	speakername EltheCity_EventScript_Python_Text_5, PORTRAIT_AMELIA_SERIOUSLY
-# 210 "data/maps/EltheCity/scripts.pory"
+# 187 "data/maps/EltheCity/scripts.pory"
 	msgbox EltheCity_Sign_InnRight_Text_0, MSGBOX_SIGN
 	return
 
 
-# 213 "data/maps/EltheCity/scripts.pory"
-StepDown:
-# 215 "data/maps/EltheCity/scripts.pory"
-	walk_down
-	step_end
-
-# 218 "data/maps/EltheCity/scripts.pory"
-StepUp:
-# 220 "data/maps/EltheCity/scripts.pory"
-	walk_up
-	step_end
-
-# 223 "data/maps/EltheCity/scripts.pory"
-StepLeft:
-# 225 "data/maps/EltheCity/scripts.pory"
-	walk_left
-	step_end
-
-# 228 "data/maps/EltheCity/scripts.pory"
-StepRight:
-# 230 "data/maps/EltheCity/scripts.pory"
-	walk_right
-	step_end
-
 EltheCity_Trigger_JumpOnBenchLeft_TopTile::
-# 235 "data/maps/EltheCity/scripts.pory"
+# 192 "data/maps/EltheCity/scripts.pory"
+	clearflag FLAG_SAFE_FOLLOWER_MOVEMENT
+# 193 "data/maps/EltheCity/scripts.pory"
 	setvar VAR_0x8004, ANIM_SIT_WEST
-# 236 "data/maps/EltheCity/scripts.pory"
+# 194 "data/maps/EltheCity/scripts.pory"
 	callnative DoAmeliaOverworldAnim
-# 237 "data/maps/EltheCity/scripts.pory"
+# 195 "data/maps/EltheCity/scripts.pory"
 	playse SE_BIKE_HOP
-# 238 "data/maps/EltheCity/scripts.pory"
+# 196 "data/maps/EltheCity/scripts.pory"
 	applymovement OBJ_EVENT_ID_PLAYER, EltheCity_Movement_JumpOnBenchLeft
-# 239 "data/maps/EltheCity/scripts.pory"
+# 197 "data/maps/EltheCity/scripts.pory"
 	waitmovement 0
-# 240 "data/maps/EltheCity/scripts.pory"
+# 198 "data/maps/EltheCity/scripts.pory"
 	addobjectspriteoffset OBJ_EVENT_ID_PLAYER, 0, -6
 EltheCity_Trigger_JumpOnBenchLeft_TopTile_3:
-# 242 "data/maps/EltheCity/scripts.pory"
+# 200 "data/maps/EltheCity/scripts.pory"
 	waitforscriptinput
-# 243 "data/maps/EltheCity/scripts.pory"
+# 201 "data/maps/EltheCity/scripts.pory"
 	switch VAR_RESULT
-# 245 "data/maps/EltheCity/scripts.pory"
+# 203 "data/maps/EltheCity/scripts.pory"
 	case 0x0020, EltheCity_Trigger_JumpOnBenchLeft_TopTile_10
-# 246 "data/maps/EltheCity/scripts.pory"
+# 204 "data/maps/EltheCity/scripts.pory"
 	case 0x0001, EltheCity_Trigger_JumpOnBenchLeft_TopTile_10
-# 247 "data/maps/EltheCity/scripts.pory"
+# 205 "data/maps/EltheCity/scripts.pory"
 	case 0x0002, EltheCity_Trigger_JumpOnBenchLeft_TopTile_10
 EltheCity_Trigger_JumpOnBenchLeft_TopTile_2:
-# 267 "data/maps/EltheCity/scripts.pory"
+# 225 "data/maps/EltheCity/scripts.pory"
 	compare VAR_RESULT, 0x0020
 	goto_if_ne EltheCity_Trigger_JumpOnBenchLeft_TopTile_5
 EltheCity_Trigger_JumpOnBenchLeft_TopTile_1:
-# 268 "data/maps/EltheCity/scripts.pory"
+# 226 "data/maps/EltheCity/scripts.pory"
+	setflag FLAG_SAFE_FOLLOWER_MOVEMENT
+# 227 "data/maps/EltheCity/scripts.pory"
 	release
 	return
 
 EltheCity_Trigger_JumpOnBenchLeft_TopTile_4:
-# 267 "data/maps/EltheCity/scripts.pory"
+# 225 "data/maps/EltheCity/scripts.pory"
 	compare VAR_RESULT, 0x0002
 	goto_if_ne EltheCity_Trigger_JumpOnBenchLeft_TopTile_3
 	goto EltheCity_Trigger_JumpOnBenchLeft_TopTile_1
 
 EltheCity_Trigger_JumpOnBenchLeft_TopTile_5:
-# 267 "data/maps/EltheCity/scripts.pory"
+# 225 "data/maps/EltheCity/scripts.pory"
 	compare VAR_RESULT, 0x0001
 	goto_if_ne EltheCity_Trigger_JumpOnBenchLeft_TopTile_4
 	goto EltheCity_Trigger_JumpOnBenchLeft_TopTile_1
 
 EltheCity_Trigger_JumpOnBenchLeft_TopTile_10:
-# 248 "data/maps/EltheCity/scripts.pory"
+# 206 "data/maps/EltheCity/scripts.pory"
 	resetobjectspriteoffset OBJ_EVENT_ID_PLAYER
-# 249 "data/maps/EltheCity/scripts.pory"
+# 207 "data/maps/EltheCity/scripts.pory"
 	applymovement OBJ_EVENT_ID_PLAYER, EltheCity_Movement_GetOffBenchLeft
-# 250 "data/maps/EltheCity/scripts.pory"
+# 208 "data/maps/EltheCity/scripts.pory"
 	waitmovement 0
 	goto EltheCity_Trigger_JumpOnBenchLeft_TopTile_2
 
 
 EltheCity_Trigger_JumpOnBenchLeft_BottomTile::
-# 273 "data/maps/EltheCity/scripts.pory"
+# 232 "data/maps/EltheCity/scripts.pory"
 	goto EltheCity_Trigger_JumpOnBenchLeft_TopTile
 	return
 
 
 EltheCity_Trigger_JumpOnBenchRight_TopTile::
-# 278 "data/maps/EltheCity/scripts.pory"
+# 237 "data/maps/EltheCity/scripts.pory"
+	clearflag FLAG_SAFE_FOLLOWER_MOVEMENT
+# 238 "data/maps/EltheCity/scripts.pory"
 	setvar VAR_0x8004, ANIM_SIT_EAST
-# 279 "data/maps/EltheCity/scripts.pory"
+# 239 "data/maps/EltheCity/scripts.pory"
 	callnative DoAmeliaOverworldAnim
-# 280 "data/maps/EltheCity/scripts.pory"
+# 240 "data/maps/EltheCity/scripts.pory"
 	playse SE_BIKE_HOP
-# 281 "data/maps/EltheCity/scripts.pory"
+# 241 "data/maps/EltheCity/scripts.pory"
 	applymovement OBJ_EVENT_ID_PLAYER, EltheCity_Movement_JumpOnBenchRight
-# 282 "data/maps/EltheCity/scripts.pory"
+# 242 "data/maps/EltheCity/scripts.pory"
 	waitmovement 0
-# 283 "data/maps/EltheCity/scripts.pory"
+# 243 "data/maps/EltheCity/scripts.pory"
 	addobjectspriteoffset OBJ_EVENT_ID_PLAYER, 0, -6
 EltheCity_Trigger_JumpOnBenchRight_TopTile_3:
-# 285 "data/maps/EltheCity/scripts.pory"
+# 245 "data/maps/EltheCity/scripts.pory"
 	waitforscriptinput
-# 286 "data/maps/EltheCity/scripts.pory"
+# 246 "data/maps/EltheCity/scripts.pory"
 	switch VAR_RESULT
-# 288 "data/maps/EltheCity/scripts.pory"
+# 248 "data/maps/EltheCity/scripts.pory"
 	case 0x0010, EltheCity_Trigger_JumpOnBenchRight_TopTile_10
-# 289 "data/maps/EltheCity/scripts.pory"
+# 249 "data/maps/EltheCity/scripts.pory"
 	case 0x0001, EltheCity_Trigger_JumpOnBenchRight_TopTile_10
-# 290 "data/maps/EltheCity/scripts.pory"
+# 250 "data/maps/EltheCity/scripts.pory"
 	case 0x0002, EltheCity_Trigger_JumpOnBenchRight_TopTile_10
 EltheCity_Trigger_JumpOnBenchRight_TopTile_2:
-# 310 "data/maps/EltheCity/scripts.pory"
+# 270 "data/maps/EltheCity/scripts.pory"
 	compare VAR_RESULT, 0x0010
 	goto_if_ne EltheCity_Trigger_JumpOnBenchRight_TopTile_5
 EltheCity_Trigger_JumpOnBenchRight_TopTile_1:
-# 311 "data/maps/EltheCity/scripts.pory"
+# 271 "data/maps/EltheCity/scripts.pory"
+	setflag FLAG_SAFE_FOLLOWER_MOVEMENT
+# 272 "data/maps/EltheCity/scripts.pory"
 	release
 	return
 
 EltheCity_Trigger_JumpOnBenchRight_TopTile_4:
-# 310 "data/maps/EltheCity/scripts.pory"
+# 270 "data/maps/EltheCity/scripts.pory"
 	compare VAR_RESULT, 0x0002
 	goto_if_ne EltheCity_Trigger_JumpOnBenchRight_TopTile_3
 	goto EltheCity_Trigger_JumpOnBenchRight_TopTile_1
 
 EltheCity_Trigger_JumpOnBenchRight_TopTile_5:
-# 310 "data/maps/EltheCity/scripts.pory"
+# 270 "data/maps/EltheCity/scripts.pory"
 	compare VAR_RESULT, 0x0001
 	goto_if_ne EltheCity_Trigger_JumpOnBenchRight_TopTile_4
 	goto EltheCity_Trigger_JumpOnBenchRight_TopTile_1
 
 EltheCity_Trigger_JumpOnBenchRight_TopTile_10:
-# 291 "data/maps/EltheCity/scripts.pory"
+# 251 "data/maps/EltheCity/scripts.pory"
 	resetobjectspriteoffset OBJ_EVENT_ID_PLAYER
-# 292 "data/maps/EltheCity/scripts.pory"
+# 252 "data/maps/EltheCity/scripts.pory"
 	applymovement OBJ_EVENT_ID_PLAYER, EltheCity_Movement_GetOffBenchRight
-# 293 "data/maps/EltheCity/scripts.pory"
+# 253 "data/maps/EltheCity/scripts.pory"
 	waitmovement 0
 	goto EltheCity_Trigger_JumpOnBenchRight_TopTile_2
 
 
 EltheCity_Trigger_JumpOnBenchRight_BottomTile::
-# 316 "data/maps/EltheCity/scripts.pory"
+# 277 "data/maps/EltheCity/scripts.pory"
 	goto EltheCity_Trigger_JumpOnBenchRight_TopTile
 	return
 
 
 EltheCity_EventScript_Keesight::
-# 321 "data/maps/EltheCity/scripts.pory"
+# 282 "data/maps/EltheCity/scripts.pory"
 	goto_if_set FLAG_SCALE_ASCENDING_DONE, EltheCity_EventScript_Keesight_3
 EltheCity_EventScript_Keesight_2:
-# 328 "data/maps/EltheCity/scripts.pory"
+# 289 "data/maps/EltheCity/scripts.pory"
 	speakername EltheCity_EventScript_Keesight_Text_2, PORTRAIT_KEESIGHT
-# 329 "data/maps/EltheCity/scripts.pory"
+# 290 "data/maps/EltheCity/scripts.pory"
 	msgbox EltheCity_EventScript_Keesight_Text_3
-# 330 "data/maps/EltheCity/scripts.pory"
+# 291 "data/maps/EltheCity/scripts.pory"
 	speakername NULL, 0
-# 331 "data/maps/EltheCity/scripts.pory"
+# 292 "data/maps/EltheCity/scripts.pory"
 	msgbox EltheCity_EventScript_Keesight_Text_4, MSGBOX_AUTOCLOSE
 	return
 
 EltheCity_EventScript_Keesight_1:
-# 323 "data/maps/EltheCity/scripts.pory"
+# 284 "data/maps/EltheCity/scripts.pory"
 	speakername EltheCity_EventScript_Keesight_Text_0, PORTRAIT_KEESIGHT
-# 324 "data/maps/EltheCity/scripts.pory"
+# 285 "data/maps/EltheCity/scripts.pory"
 	msgbox EltheCity_EventScript_Keesight_Text_1, MSGBOX_NPC
 	return
 
 EltheCity_EventScript_Keesight_3:
-# 321 "data/maps/EltheCity/scripts.pory"
+# 282 "data/maps/EltheCity/scripts.pory"
 	goto_if_set FLAG_SCALE_DESCENDING_DONE, EltheCity_EventScript_Keesight_1
 	goto EltheCity_EventScript_Keesight_2
 
 
 EltheCity_EventScript_Weatherbane::
-# 337 "data/maps/EltheCity/scripts.pory"
+# 298 "data/maps/EltheCity/scripts.pory"
 	goto_if_unset FLAG_BEAT_WEATHERBANE, EltheCity_EventScript_Weatherbane_1
-# 419 "data/maps/EltheCity/scripts.pory"
+# 380 "data/maps/EltheCity/scripts.pory"
 	speakername EltheCity_EventScript_Weatherbane_Text_1, PORTRAIT_WEATHERBANE_NEUTRAL
-# 420 "data/maps/EltheCity/scripts.pory"
+# 381 "data/maps/EltheCity/scripts.pory"
 	msgbox EltheCity_EventScript_Weatherbane_Text_16, MSGBOX_AUTOCLOSE
 	return
 
 EltheCity_EventScript_Weatherbane_1:
-# 339 "data/maps/EltheCity/scripts.pory"
+# 300 "data/maps/EltheCity/scripts.pory"
 	speakername EltheCity_EventScript_Python_Text_5, PORTRAIT_AMELIA_NEUTRAL
-# 340 "data/maps/EltheCity/scripts.pory"
+# 301 "data/maps/EltheCity/scripts.pory"
 	msgbox EltheCity_EventScript_Weatherbane_Text_0, MSGBOX_AUTOCLOSE
-# 341 "data/maps/EltheCity/scripts.pory"
+# 302 "data/maps/EltheCity/scripts.pory"
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceUp
-# 342 "data/maps/EltheCity/scripts.pory"
+# 303 "data/maps/EltheCity/scripts.pory"
 	waitmovement 0
-# 343 "data/maps/EltheCity/scripts.pory"
+# 304 "data/maps/EltheCity/scripts.pory"
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceUp
-# 344 "data/maps/EltheCity/scripts.pory"
+# 305 "data/maps/EltheCity/scripts.pory"
 	waitmovement 0
-# 345 "data/maps/EltheCity/scripts.pory"
+# 306 "data/maps/EltheCity/scripts.pory"
 	delay 16
-# 346 "data/maps/EltheCity/scripts.pory"
+# 307 "data/maps/EltheCity/scripts.pory"
 	addobjectspriteoffset 1, 1, 0
-# 347 "data/maps/EltheCity/scripts.pory"
+# 308 "data/maps/EltheCity/scripts.pory"
 	delay 8
-# 348 "data/maps/EltheCity/scripts.pory"
+# 309 "data/maps/EltheCity/scripts.pory"
 	addobjectspriteoffset 1, -2, 0
-# 349 "data/maps/EltheCity/scripts.pory"
+# 310 "data/maps/EltheCity/scripts.pory"
 	delay 8
-# 350 "data/maps/EltheCity/scripts.pory"
+# 311 "data/maps/EltheCity/scripts.pory"
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_ExclamationMark
-# 351 "data/maps/EltheCity/scripts.pory"
+# 312 "data/maps/EltheCity/scripts.pory"
 	playse SE_PIN
-# 352 "data/maps/EltheCity/scripts.pory"
+# 313 "data/maps/EltheCity/scripts.pory"
 	addobjectspriteoffset 1, 2, 0
-# 353 "data/maps/EltheCity/scripts.pory"
+# 314 "data/maps/EltheCity/scripts.pory"
 	delay 8
-# 354 "data/maps/EltheCity/scripts.pory"
+# 315 "data/maps/EltheCity/scripts.pory"
 	addobjectspriteoffset 1, -2, 0
-# 355 "data/maps/EltheCity/scripts.pory"
+# 316 "data/maps/EltheCity/scripts.pory"
 	delay 8
-# 356 "data/maps/EltheCity/scripts.pory"
+# 317 "data/maps/EltheCity/scripts.pory"
 	addobjectspriteoffset 1, 2, 0
-# 357 "data/maps/EltheCity/scripts.pory"
+# 318 "data/maps/EltheCity/scripts.pory"
 	delay 8
-# 358 "data/maps/EltheCity/scripts.pory"
+# 319 "data/maps/EltheCity/scripts.pory"
 	addobjectspriteoffset 1, -2, 0
-# 359 "data/maps/EltheCity/scripts.pory"
+# 320 "data/maps/EltheCity/scripts.pory"
 	delay 8
-# 360 "data/maps/EltheCity/scripts.pory"
+# 321 "data/maps/EltheCity/scripts.pory"
 	addobjectspriteoffset 1, 2, 0
-# 361 "data/maps/EltheCity/scripts.pory"
+# 322 "data/maps/EltheCity/scripts.pory"
 	delay 8
-# 362 "data/maps/EltheCity/scripts.pory"
+# 323 "data/maps/EltheCity/scripts.pory"
 	addobjectspriteoffset 1, -2, 0
-# 363 "data/maps/EltheCity/scripts.pory"
+# 324 "data/maps/EltheCity/scripts.pory"
 	delay 8
-# 364 "data/maps/EltheCity/scripts.pory"
+# 325 "data/maps/EltheCity/scripts.pory"
 	addobjectspriteoffset 1, 0, 0
-# 365 "data/maps/EltheCity/scripts.pory"
+# 326 "data/maps/EltheCity/scripts.pory"
 	delay 16
-# 366 "data/maps/EltheCity/scripts.pory"
+# 327 "data/maps/EltheCity/scripts.pory"
 	applymovement 1, EltheCity_Movement_WeatherbaneFlap
-# 367 "data/maps/EltheCity/scripts.pory"
+# 328 "data/maps/EltheCity/scripts.pory"
 	speakername EltheCity_EventScript_Weatherbane_Text_1, PORTRAIT_WEATHERBANE_SCREAM
-# 368 "data/maps/EltheCity/scripts.pory"
+# 329 "data/maps/EltheCity/scripts.pory"
 	msgbox EltheCity_EventScript_Weatherbane_Text_2
-# 369 "data/maps/EltheCity/scripts.pory"
+# 330 "data/maps/EltheCity/scripts.pory"
 	waitmovement 1
-# 370 "data/maps/EltheCity/scripts.pory"
+# 331 "data/maps/EltheCity/scripts.pory"
 	speakername EltheCity_EventScript_Python_Text_5, PORTRAIT_AMELIA_STRAINED
-# 371 "data/maps/EltheCity/scripts.pory"
+# 332 "data/maps/EltheCity/scripts.pory"
 	msgbox EltheCity_EventScript_Weatherbane_Text_3
-# 372 "data/maps/EltheCity/scripts.pory"
+# 333 "data/maps/EltheCity/scripts.pory"
 	applymovement 1, EltheCity_Movement_WeatherbaneFlap
-# 373 "data/maps/EltheCity/scripts.pory"
+# 334 "data/maps/EltheCity/scripts.pory"
 	speakername EltheCity_EventScript_Weatherbane_Text_1, PORTRAIT_WEATHERBANE_SCREAM
-# 374 "data/maps/EltheCity/scripts.pory"
+# 335 "data/maps/EltheCity/scripts.pory"
 	msgbox EltheCity_EventScript_Weatherbane_Text_2
-# 375 "data/maps/EltheCity/scripts.pory"
+# 336 "data/maps/EltheCity/scripts.pory"
 	waitmovement 1
-# 376 "data/maps/EltheCity/scripts.pory"
+# 337 "data/maps/EltheCity/scripts.pory"
 	speakername EltheCity_EventScript_Python_Text_5, PORTRAIT_AMELIA_SHOCK
-# 377 "data/maps/EltheCity/scripts.pory"
+# 338 "data/maps/EltheCity/scripts.pory"
 	msgbox EltheCity_EventScript_Weatherbane_Text_4
-# 378 "data/maps/EltheCity/scripts.pory"
+# 339 "data/maps/EltheCity/scripts.pory"
 	speakername EltheCity_EventScript_Weatherbane_Text_1, PORTRAIT_WEATHERBANE_NEUTRAL
-# 379 "data/maps/EltheCity/scripts.pory"
+# 340 "data/maps/EltheCity/scripts.pory"
 	msgbox EltheCity_EventScript_Python_Text_0
-# 380 "data/maps/EltheCity/scripts.pory"
+# 341 "data/maps/EltheCity/scripts.pory"
 	speakername EltheCity_EventScript_Python_Text_5, PORTRAIT_AMELIA_NEUTRAL
-# 381 "data/maps/EltheCity/scripts.pory"
+# 342 "data/maps/EltheCity/scripts.pory"
 	msgbox EltheCity_EventScript_Weatherbane_Text_5
-# 382 "data/maps/EltheCity/scripts.pory"
+# 343 "data/maps/EltheCity/scripts.pory"
 	speakername EltheCity_EventScript_Weatherbane_Text_1, PORTRAIT_WEATHERBANE_NEUTRAL
-# 383 "data/maps/EltheCity/scripts.pory"
+# 344 "data/maps/EltheCity/scripts.pory"
 	msgbox EltheCity_EventScript_Weatherbane_Text_6
-# 385 "data/maps/EltheCity/scripts.pory"
+# 346 "data/maps/EltheCity/scripts.pory"
 	speakername EltheCity_EventScript_Python_Text_5, PORTRAIT_AMELIA_NEUTRAL
-# 386 "data/maps/EltheCity/scripts.pory"
+# 347 "data/maps/EltheCity/scripts.pory"
 	msgbox EltheCity_EventScript_Weatherbane_Text_7
-# 387 "data/maps/EltheCity/scripts.pory"
+# 348 "data/maps/EltheCity/scripts.pory"
 	speakername EltheCity_EventScript_Weatherbane_Text_1, PORTRAIT_WEATHERBANE_SCREAM
-# 388 "data/maps/EltheCity/scripts.pory"
+# 349 "data/maps/EltheCity/scripts.pory"
 	msgbox EltheCity_EventScript_Weatherbane_Text_8
-# 390 "data/maps/EltheCity/scripts.pory"
+# 351 "data/maps/EltheCity/scripts.pory"
 	speakername EltheCity_EventScript_Python_Text_5, PORTRAIT_AMELIA_STRAINED
-# 391 "data/maps/EltheCity/scripts.pory"
+# 352 "data/maps/EltheCity/scripts.pory"
 	msgbox EltheCity_EventScript_Weatherbane_Text_9
-# 393 "data/maps/EltheCity/scripts.pory"
+# 354 "data/maps/EltheCity/scripts.pory"
 	speakername EltheCity_EventScript_Weatherbane_Text_1, PORTRAIT_WEATHERBANE_SCREAM
-# 394 "data/maps/EltheCity/scripts.pory"
+# 355 "data/maps/EltheCity/scripts.pory"
 	msgbox EltheCity_EventScript_Weatherbane_Text_10
-# 395 "data/maps/EltheCity/scripts.pory"
+# 356 "data/maps/EltheCity/scripts.pory"
 	speakername EltheCity_EventScript_Python_Text_5, PORTRAIT_AMELIA_NEUTRAL
-# 396 "data/maps/EltheCity/scripts.pory"
+# 357 "data/maps/EltheCity/scripts.pory"
 	msgbox EltheCity_EventScript_Weatherbane_Text_11
-# 397 "data/maps/EltheCity/scripts.pory"
+# 358 "data/maps/EltheCity/scripts.pory"
 	speakername EltheCity_EventScript_Weatherbane_Text_1, PORTRAIT_WEATHERBANE_NEUTRAL
-# 398 "data/maps/EltheCity/scripts.pory"
+# 359 "data/maps/EltheCity/scripts.pory"
 	applymovement 1, EltheCity_Movement_WeatherbaneFlap
-# 399 "data/maps/EltheCity/scripts.pory"
+# 360 "data/maps/EltheCity/scripts.pory"
 	msgbox EltheCity_EventScript_Weatherbane_Text_12
-# 400 "data/maps/EltheCity/scripts.pory"
+# 361 "data/maps/EltheCity/scripts.pory"
 	waitmovement 1
-# 401 "data/maps/EltheCity/scripts.pory"
+# 362 "data/maps/EltheCity/scripts.pory"
 	closemessage
-# 402 "data/maps/EltheCity/scripts.pory"
+# 363 "data/maps/EltheCity/scripts.pory"
 	createmon 1, 0, SPECIES_WEATHERBANE, 40, ITEM_NONE, 0, NATURE_CALM, 0, MON_MALE, 0, 0, 0, 0, 0, 0, 31, 31, 31, 31, 31, 31, MOVE_STEEL_WING, MOVE_AIR_CUTTER, MOVE_SCREECH, MOVE_ROOST, FALSE, 0, TYPE_WATER
-# 403 "data/maps/EltheCity/scripts.pory"
+# 364 "data/maps/EltheCity/scripts.pory"
 	dowildbattle
-# 404 "data/maps/EltheCity/scripts.pory"
+# 365 "data/maps/EltheCity/scripts.pory"
 	speakername EltheCity_EventScript_Weatherbane_Text_1, PORTRAIT_WEATHERBANE_NEUTRAL
-# 405 "data/maps/EltheCity/scripts.pory"
+# 366 "data/maps/EltheCity/scripts.pory"
 	msgbox EltheCity_EventScript_Weatherbane_Text_13
-# 406 "data/maps/EltheCity/scripts.pory"
+# 367 "data/maps/EltheCity/scripts.pory"
 	speakername EltheCity_EventScript_Python_Text_5, PORTRAIT_AMELIA_SERIOUSLY
-# 407 "data/maps/EltheCity/scripts.pory"
+# 368 "data/maps/EltheCity/scripts.pory"
 	msgbox EltheCity_EventScript_Weatherbane_Text_14, MSGBOX_AUTOCLOSE
-# 408 "data/maps/EltheCity/scripts.pory"
+# 369 "data/maps/EltheCity/scripts.pory"
 	delay 60
-# 409 "data/maps/EltheCity/scripts.pory"
+# 370 "data/maps/EltheCity/scripts.pory"
 	setflag FLAG_BEAT_WEATHERBANE
-# 410 "data/maps/EltheCity/scripts.pory"
+# 371 "data/maps/EltheCity/scripts.pory"
 	playfanfare MUS_CAUGHT
-# 411 "data/maps/EltheCity/scripts.pory"
+# 372 "data/maps/EltheCity/scripts.pory"
 	message EltheCity_EventScript_Weatherbane_Text_15
-# 412 "data/maps/EltheCity/scripts.pory"
+# 373 "data/maps/EltheCity/scripts.pory"
 	waitmessage
-# 413 "data/maps/EltheCity/scripts.pory"
+# 374 "data/maps/EltheCity/scripts.pory"
 	waitfanfare
-# 414 "data/maps/EltheCity/scripts.pory"
+# 375 "data/maps/EltheCity/scripts.pory"
 	waitbuttonpress
-# 415 "data/maps/EltheCity/scripts.pory"
+# 376 "data/maps/EltheCity/scripts.pory"
 	closemessage
 	return
 
 
-# 426 "data/maps/EltheCity/scripts.pory"
+# 387 "data/maps/EltheCity/scripts.pory"
 EltheCity_Movement_WeatherbaneFlap:
-# 428 "data/maps/EltheCity/scripts.pory"
+# 389 "data/maps/EltheCity/scripts.pory"
 	face_up
-# 429 "data/maps/EltheCity/scripts.pory"
+# 390 "data/maps/EltheCity/scripts.pory"
 	delay_8
-# 430 "data/maps/EltheCity/scripts.pory"
+# 391 "data/maps/EltheCity/scripts.pory"
 	face_left
-# 431 "data/maps/EltheCity/scripts.pory"
+# 392 "data/maps/EltheCity/scripts.pory"
 	delay_8
-# 432 "data/maps/EltheCity/scripts.pory"
+# 393 "data/maps/EltheCity/scripts.pory"
 	face_down
-# 433 "data/maps/EltheCity/scripts.pory"
+# 394 "data/maps/EltheCity/scripts.pory"
 	delay_8
-# 434 "data/maps/EltheCity/scripts.pory"
+# 395 "data/maps/EltheCity/scripts.pory"
 	face_right
-# 435 "data/maps/EltheCity/scripts.pory"
+# 396 "data/maps/EltheCity/scripts.pory"
 	delay_8
 	step_end
 
-EltheCity_Trigger_MusicStump1::
+EltheCity_EventScript_BarrelGuy::
+# 401 "data/maps/EltheCity/scripts.pory"
+	speakername EltheCity_EventScript_BarrelGuy_Text_0
+# 402 "data/maps/EltheCity/scripts.pory"
+	msgbox EltheCity_EventScript_BarrelGuy_Text_1, MSGBOX_NPC
+	return
+
+
+EltheCity_BakeryWindow::
+# 408 "data/maps/EltheCity/scripts.pory"
+	msgbox EltheCity_BakeryWindow_Text_0, MSGBOX_SIGN
+	return
+
+
+EltheCity_CitySign::
+# 413 "data/maps/EltheCity/scripts.pory"
+	msgbox EltheCity_CitySign_Text_0, MSGBOX_SIGN
+	return
+
+
+EltheCity_Girlfriend::
+# 418 "data/maps/EltheCity/scripts.pory"
+	speakername EltheCity_Girlfriend_Text_0
+# 419 "data/maps/EltheCity/scripts.pory"
+	msgbox EltheCity_Girlfriend_Text_1, MSGBOX_SIGN
+	return
+
+
+EltheCity_Boyfriend::
+# 424 "data/maps/EltheCity/scripts.pory"
+	speakername EltheCity_Boyfriend_Text_0
+# 425 "data/maps/EltheCity/scripts.pory"
+	msgbox EltheCity_Boyfriend_Text_1, MSGBOX_SIGN
+	return
+
+
+EltheCity_OldGuyBarrel::
+# 430 "data/maps/EltheCity/scripts.pory"
+	speakername EltheCity_OldGuyBarrel_Text_0
+# 431 "data/maps/EltheCity/scripts.pory"
+	msgbox EltheCity_OldGuyBarrel_Text_1, MSGBOX_NPC
+	return
+
+
+EltheCity_Slowbro::
+# 437 "data/maps/EltheCity/scripts.pory"
+	speakername EltheCity_Slowbro_Text_0
+# 438 "data/maps/EltheCity/scripts.pory"
+	msgbox EltheCity_Slowbro_Text_1
 # 440 "data/maps/EltheCity/scripts.pory"
-	playse SE_NOTE_C
+	speakername EltheCity_EventScript_Python_Text_5, PORTRAIT_AMELIA_STRAINED
 # 441 "data/maps/EltheCity/scripts.pory"
-	turnobject 9, DIR_WEST
+	msgbox EltheCity_Slowbro_Text_2
+# 442 "data/maps/EltheCity/scripts.pory"
+	faceplayer
+# 443 "data/maps/EltheCity/scripts.pory"
+	speakername EltheCity_Slowbro_Text_0
 # 444 "data/maps/EltheCity/scripts.pory"
+	msgbox EltheCity_Slowbro_Text_3
+# 445 "data/maps/EltheCity/scripts.pory"
+	speakername EltheCity_EventScript_Python_Text_5, PORTRAIT_AMELIA_STRAINED
+# 446 "data/maps/EltheCity/scripts.pory"
+	msgbox EltheCity_Slowbro_Text_4, MSGBOX_AUTOCLOSE
+	return
+
+
+EltheCity_Lombre::
+# 451 "data/maps/EltheCity/scripts.pory"
+	speakername EltheCity_Lombre_Text_0
+# 452 "data/maps/EltheCity/scripts.pory"
+	msgbox EltheCity_Lombre_Text_1, MSGBOX_NPC
+	return
+
+
+EltheCity_BradleyScript::
+# 457 "data/maps/EltheCity/scripts.pory"
+	lock
+# 458 "data/maps/EltheCity/scripts.pory"
+	faceplayer
+# 459 "data/maps/EltheCity/scripts.pory"
+	speakername EltheCity_EventScript_Python_Text_1, PORTRAIT_NIDOKING_GRIN, PORTRAIT_DEFAULT_LEFT
+# 460 "data/maps/EltheCity/scripts.pory"
+	msgbox EltheCity_BradleyScript_Text_0
+# 461 "data/maps/EltheCity/scripts.pory"
+	speakername EltheCity_EventScript_Python_Text_5, PORTRAIT_AMELIA_NEUTRAL
+# 462 "data/maps/EltheCity/scripts.pory"
+	msgbox EltheCity_BradleyScript_Text_1
+# 463 "data/maps/EltheCity/scripts.pory"
+	speakername EltheCity_EventScript_Python_Text_1, PORTRAIT_NIDOKING_NEUTRAL, PORTRAIT_DEFAULT_LEFT
+# 464 "data/maps/EltheCity/scripts.pory"
+	msgbox EltheCity_BradleyScript_Text_2
+# 465 "data/maps/EltheCity/scripts.pory"
+	speakername EltheCity_EventScript_Python_Text_5, PORTRAIT_AMELIA_STRAINED
+# 466 "data/maps/EltheCity/scripts.pory"
+	msgbox EltheCity_BradleyScript_Text_3
+# 468 "data/maps/EltheCity/scripts.pory"
+	speakername EltheCity_EventScript_Python_Text_1, PORTRAIT_NIDOKING_NEUTRAL, PORTRAIT_DEFAULT_LEFT
+# 469 "data/maps/EltheCity/scripts.pory"
+	playmoncry SPECIES_NIDOKING, CRY_MODE_NORMAL
+# 470 "data/maps/EltheCity/scripts.pory"
+	msgbox EltheCity_BradleyScript_Text_4
+# 471 "data/maps/EltheCity/scripts.pory"
+	speakername EltheCity_EventScript_Python_Text_5, PORTRAIT_AMELIA_NEUTRAL
+# 472 "data/maps/EltheCity/scripts.pory"
+	msgbox EltheCity_BradleyScript_Text_5
+# 473 "data/maps/EltheCity/scripts.pory"
+	speakername EltheCity_EventScript_Python_Text_1, PORTRAIT_NIDOKING_GRIN, PORTRAIT_DEFAULT_LEFT
+# 474 "data/maps/EltheCity/scripts.pory"
+	msgbox EltheCity_BradleyScript_Text_6
+# 475 "data/maps/EltheCity/scripts.pory"
+	speakername EltheCity_EventScript_Python_Text_5, PORTRAIT_AMELIA_SERIOUSLY
+# 476 "data/maps/EltheCity/scripts.pory"
+	msgbox EltheCity_BradleyScript_Text_7
+# 477 "data/maps/EltheCity/scripts.pory"
+	speakername EltheCity_EventScript_Python_Text_1, PORTRAIT_NIDOKING_NEUTRAL, PORTRAIT_DEFAULT_LEFT
+# 478 "data/maps/EltheCity/scripts.pory"
+	msgbox EltheCity_BradleyScript_Text_8, MSGBOX_YESNO
+# 479 "data/maps/EltheCity/scripts.pory"
+	compare VAR_RESULT, NO
+	goto_if_eq EltheCity_BradleyScript_2
+# 486 "data/maps/EltheCity/scripts.pory"
+	speakername EltheCity_EventScript_Python_Text_5, PORTRAIT_AMELIA_SMUG
+# 487 "data/maps/EltheCity/scripts.pory"
+	msgbox EltheCity_BradleyScript_Text_10
+# 488 "data/maps/EltheCity/scripts.pory"
+	speakername EltheCity_EventScript_Python_Text_1, PORTRAIT_NIDOKING_GRIN, PORTRAIT_DEFAULT_LEFT
+# 489 "data/maps/EltheCity/scripts.pory"
+	msgbox EltheCity_BradleyScript_Text_11, MSGBOX_AUTOCLOSE
+# 490 "data/maps/EltheCity/scripts.pory"
+	clearflag FLAG_SAFE_FOLLOWER_MOVEMENT
+# 491 "data/maps/EltheCity/scripts.pory"
+	applymovement 4, Common_Movement_WalkInPlaceDown
+# 492 "data/maps/EltheCity/scripts.pory"
+	specialvar VAR_RESULT, GetPlayerFacingDirection
+# 493 "data/maps/EltheCity/scripts.pory"
+	switch VAR_RESULT
+# 495 "data/maps/EltheCity/scripts.pory"
+	case DIR_SOUTH, EltheCity_BradleyScript_7
+# 497 "data/maps/EltheCity/scripts.pory"
+	case DIR_EAST, EltheCity_BradleyScript_8
+# 499 "data/maps/EltheCity/scripts.pory"
+	case DIR_WEST, EltheCity_BradleyScript_9
+# 501 "data/maps/EltheCity/scripts.pory"
+	case DIR_NORTH, EltheCity_BradleyScript_10
+EltheCity_BradleyScript_5:
+# 504 "data/maps/EltheCity/scripts.pory"
+	setflag FLAG_SAFE_FOLLOWER_MOVEMENT
+# 505 "data/maps/EltheCity/scripts.pory"
+	playmoncry SPECIES_NIDOKING, CRY_MODE_NORMAL
+# 506 "data/maps/EltheCity/scripts.pory"
+	speakername EltheCity_EventScript_Python_Text_1, PORTRAIT_NIDOKING_GRIN, PORTRAIT_DEFAULT_LEFT
+# 507 "data/maps/EltheCity/scripts.pory"
+	msgbox EltheCity_BradleyScript_Text_12, MSGBOX_AUTOCLOSE
+# 508 "data/maps/EltheCity/scripts.pory"
+	waitmoncry
+# 509 "data/maps/EltheCity/scripts.pory"
+	setflag FLAG_WILD_AI_ON
+# 510 "data/maps/EltheCity/scripts.pory"
+	createmon 1, 0, SPECIES_NIDOKING, 56, ITEM_QUICK_CLAW, ITEM_ULTRA_BALL, NATURE_LONELY, 2, MON_MALE, 0, 10, 0, 0, 10, 0, 31, 31, 31, 31, 31, 31, MOVE_POISON_JAB, MOVE_EARTHQUAKE, MOVE_MEGAHORN, MOVE_SLUDGE_BOMB, FALSE, FALSE, TYPE_GROUND
+# 511 "data/maps/EltheCity/scripts.pory"
+	dowildbattle
+# 512 "data/maps/EltheCity/scripts.pory"
+	delay 32
+# 513 "data/maps/EltheCity/scripts.pory"
+	speakername EltheCity_EventScript_Python_Text_1, PORTRAIT_NIDOKING_NERVOUS, PORTRAIT_DEFAULT_LEFT
+# 514 "data/maps/EltheCity/scripts.pory"
+	msgbox EltheCity_BradleyScript_Text_13
+# 515 "data/maps/EltheCity/scripts.pory"
+	applymovement 4, EltheCity_Movement_BradleyApproach
+# 516 "data/maps/EltheCity/scripts.pory"
+	speakername EltheCity_EventScript_Python_Text_1, PORTRAIT_NIDOKING_NEUTRAL, PORTRAIT_DEFAULT_LEFT
+# 517 "data/maps/EltheCity/scripts.pory"
+	msgbox EltheCity_BradleyScript_Text_14
+# 520 "data/maps/EltheCity/scripts.pory"
+	speakername EltheCity_EventScript_Python_Text_5, PORTRAIT_AMELIA_SERIOUSLY
+# 521 "data/maps/EltheCity/scripts.pory"
+	msgbox EltheCity_BradleyScript_Text_15
+# 523 "data/maps/EltheCity/scripts.pory"
+	speakername EltheCity_EventScript_Python_Text_1, PORTRAIT_NIDOKING_NEUTRAL
+# 524 "data/maps/EltheCity/scripts.pory"
+	msgbox EltheCity_BradleyScript_Text_16
+# 525 "data/maps/EltheCity/scripts.pory"
+	speakername EltheCity_EventScript_Python_Text_5, PORTRAIT_AMELIA_SHOCK
+# 526 "data/maps/EltheCity/scripts.pory"
+	msgbox EltheCity_BradleyScript_Text_17
+# 527 "data/maps/EltheCity/scripts.pory"
+	goto_if_set FLAG_GOT_VICE, EltheCity_BradleyScript_11
+# 556 "data/maps/EltheCity/scripts.pory"
+	speakername EltheCity_EventScript_Python_Text_5, PORTRAIT_AMELIA_NEUTRAL
+# 557 "data/maps/EltheCity/scripts.pory"
+	msgbox EltheCity_BradleyScript_Text_22
+# 558 "data/maps/EltheCity/scripts.pory"
+	speakername EltheCity_EventScript_Python_Text_1, PORTRAIT_NIDOKING_NEUTRAL, PORTRAIT_DEFAULT_LEFT
+# 559 "data/maps/EltheCity/scripts.pory"
+	msgbox EltheCity_BradleyScript_Text_23, MSGBOX_AUTOCLOSE
+# 560 "data/maps/EltheCity/scripts.pory"
+	delay 32
+# 561 "data/maps/EltheCity/scripts.pory"
+	applymovement 4, EnterPokeballMovement
+# 562 "data/maps/EltheCity/scripts.pory"
+	waitmovement 0
+# 563 "data/maps/EltheCity/scripts.pory"
+	removeobject 4
+# 564 "data/maps/EltheCity/scripts.pory"
+	delay 16
+# 565 "data/maps/EltheCity/scripts.pory"
+	removeitem ITEM_ULTRA_BALL, 1
+# 566 "data/maps/EltheCity/scripts.pory"
+	playfanfare MUS_EVOLVED
+# 567 "data/maps/EltheCity/scripts.pory"
+	message EltheCity_BradleyScript_Text_21
+# 568 "data/maps/EltheCity/scripts.pory"
+	waitmessage
+# 569 "data/maps/EltheCity/scripts.pory"
+	waitfanfare
+# 570 "data/maps/EltheCity/scripts.pory"
+	waitbuttonpress
+# 571 "data/maps/EltheCity/scripts.pory"
+	closemessage
+# 572 "data/maps/EltheCity/scripts.pory"
+	givemon SPECIES_NIDOKING, 56, ITEM_QUICK_CLAW, ITEM_ULTRA_BALL, NATURE_LONELY, 2, MON_MALE, 0, 0, 0, 0, 0, 0, 31, 31, 31, 31, 31, 31, MOVE_POISON_JAB, MOVE_EARTHQUAKE, MOVE_ICE_BEAM, MOVE_THUNDERBOLT, FALSE, FALSE, TYPE_GROUND
+# 573 "data/maps/EltheCity/scripts.pory"
+	setpartymemberinfo 3
+EltheCity_BradleyScript_1:
+# 576 "data/maps/EltheCity/scripts.pory"
+	release
+	return
+
+EltheCity_BradleyScript_2:
+# 481 "data/maps/EltheCity/scripts.pory"
+	speakername EltheCity_EventScript_Python_Text_1, PORTRAIT_NIDOKING_GRIN, PORTRAIT_DEFAULT_LEFT
+# 482 "data/maps/EltheCity/scripts.pory"
+	msgbox EltheCity_BradleyScript_Text_9
+	goto EltheCity_BradleyScript_1
+
+EltheCity_BradleyScript_7:
+# 496 "data/maps/EltheCity/scripts.pory"
+	call EltheCity_WalkToBradleyBattle_North
+	goto EltheCity_BradleyScript_5
+
+EltheCity_BradleyScript_8:
+# 498 "data/maps/EltheCity/scripts.pory"
+	call EltheCity_WalkToBradleyBattle_West
+	goto EltheCity_BradleyScript_5
+
+EltheCity_BradleyScript_9:
+# 500 "data/maps/EltheCity/scripts.pory"
+	call EltheCity_WalkToBradleyBattle_East
+	goto EltheCity_BradleyScript_5
+
+EltheCity_BradleyScript_10:
+# 502 "data/maps/EltheCity/scripts.pory"
+	call EltheCity_WalkToBradleyBattle_South
+	goto EltheCity_BradleyScript_5
+
+EltheCity_BradleyScript_11:
+# 529 "data/maps/EltheCity/scripts.pory"
+	speakername EltheCity_EventScript_Python_Text_5, PORTRAIT_AMELIA_NEUTRAL
+# 530 "data/maps/EltheCity/scripts.pory"
+	msgbox EltheCity_BradleyScript_Text_18
+# 531 "data/maps/EltheCity/scripts.pory"
+	speakername EltheCity_EventScript_Python_Text_1, PORTRAIT_NIDOKING_NEUTRAL, PORTRAIT_DEFAULT_LEFT
+# 532 "data/maps/EltheCity/scripts.pory"
+	msgbox EltheCity_BradleyScript_Text_19
+# 535 "data/maps/EltheCity/scripts.pory"
+	speakername EltheCity_EventScript_Python_Text_5, PORTRAIT_AMELIA_WINK
+# 536 "data/maps/EltheCity/scripts.pory"
+	msgbox EltheCity_BradleyScript_Text_20, MSGBOX_AUTOCLOSE
+# 537 "data/maps/EltheCity/scripts.pory"
+	delay 32
+# 538 "data/maps/EltheCity/scripts.pory"
+	applymovement 4, EnterPokeballMovement
+# 539 "data/maps/EltheCity/scripts.pory"
+	waitmovement 0
+# 540 "data/maps/EltheCity/scripts.pory"
+	removeobject 4
+# 541 "data/maps/EltheCity/scripts.pory"
+	delay 16
+# 542 "data/maps/EltheCity/scripts.pory"
+	removeitem ITEM_ULTRA_BALL, 1
+# 543 "data/maps/EltheCity/scripts.pory"
+	playfanfare MUS_EVOLVED
+# 544 "data/maps/EltheCity/scripts.pory"
+	message EltheCity_BradleyScript_Text_21
+# 545 "data/maps/EltheCity/scripts.pory"
+	waitmessage
+# 546 "data/maps/EltheCity/scripts.pory"
+	waitfanfare
+# 547 "data/maps/EltheCity/scripts.pory"
+	waitbuttonpress
+# 548 "data/maps/EltheCity/scripts.pory"
+	closemessage
+# 549 "data/maps/EltheCity/scripts.pory"
+	givemon SPECIES_NIDOKING, 56, ITEM_QUICK_CLAW, ITEM_ULTRA_BALL, NATURE_LONELY, 2, MON_MALE, 0, 0, 0, 0, 0, 0, 31, 31, 31, 31, 31, 31, MOVE_POISON_JAB, MOVE_EARTHQUAKE, MOVE_MEGAHORN, MOVE_SLUDGE_BOMB, FALSE, FALSE, TYPE_GROUND
+# 550 "data/maps/EltheCity/scripts.pory"
+	setpartymemberinfo 3
+# 551 "data/maps/EltheCity/scripts.pory"
+	setflag FLAG_CAN_FIND_PYTHON
+# 552 "data/maps/EltheCity/scripts.pory"
+	setvar VAR_MAIN_GAME_STATE, 20
+	goto EltheCity_BradleyScript_1
+
+
+# 579 "data/maps/EltheCity/scripts.pory"
+EltheCity_Movement_BradleyApproach:
+# 581 "data/maps/EltheCity/scripts.pory"
+	walk_slow_down
+# 581 "data/maps/EltheCity/scripts.pory"
+	walk_slow_down
+# 581 "data/maps/EltheCity/scripts.pory"
+	walk_slow_down
+	step_end
+
+EltheCity_WalkToBradleyBattle_North::
+# 586 "data/maps/EltheCity/scripts.pory"
+	applymovement OBJ_EVENT_ID_PLAYER, EltheCity_Movement_BradleyBattleNorth
+# 587 "data/maps/EltheCity/scripts.pory"
+	waitmovement 0
+# 588 "data/maps/EltheCity/scripts.pory"
+	applymovement OBJ_EVENT_ID_PLAYER, EltheCity_Movement_BradleyBattleWest
+# 589 "data/maps/EltheCity/scripts.pory"
+	waitmovement 0
+	return
+
+
+EltheCity_WalkToBradleyBattle_South::
+# 595 "data/maps/EltheCity/scripts.pory"
+	applymovement OBJ_EVENT_ID_PLAYER, EltheCity_Movement_BradleyBattleSouth
+# 596 "data/maps/EltheCity/scripts.pory"
+	waitmovement 0
+	return
+
+
+EltheCity_WalkToBradleyBattle_East::
+# 602 "data/maps/EltheCity/scripts.pory"
+	applymovement OBJ_EVENT_ID_PLAYER, EltheCity_Movement_BradleyBattleEast
+# 603 "data/maps/EltheCity/scripts.pory"
+	waitmovement 0
+	return
+
+
+EltheCity_WalkToBradleyBattle_West::
+# 609 "data/maps/EltheCity/scripts.pory"
+	applymovement OBJ_EVENT_ID_PLAYER, EltheCity_Movement_BradleyBattleWest
+# 610 "data/maps/EltheCity/scripts.pory"
+	waitmovement 0
+	return
+
+
+# 614 "data/maps/EltheCity/scripts.pory"
+EltheCity_Movement_BradleyBattleNorth:
+# 616 "data/maps/EltheCity/scripts.pory"
+	walk_left
+# 617 "data/maps/EltheCity/scripts.pory"
+	walk_down
+	step_end
+
+# 620 "data/maps/EltheCity/scripts.pory"
+EltheCity_Movement_BradleyBattleWest:
+# 622 "data/maps/EltheCity/scripts.pory"
+	walk_down
+# 622 "data/maps/EltheCity/scripts.pory"
+	walk_down
+# 622 "data/maps/EltheCity/scripts.pory"
+	walk_down
+# 622 "data/maps/EltheCity/scripts.pory"
+	walk_down
+# 623 "data/maps/EltheCity/scripts.pory"
+	walk_right
+# 624 "data/maps/EltheCity/scripts.pory"
+	face_up
+# 625 "data/maps/EltheCity/scripts.pory"
+	delay_16
+	step_end
+
+# 628 "data/maps/EltheCity/scripts.pory"
+EltheCity_Movement_BradleyBattleEast:
+# 630 "data/maps/EltheCity/scripts.pory"
+	walk_down
+# 630 "data/maps/EltheCity/scripts.pory"
+	walk_down
+# 630 "data/maps/EltheCity/scripts.pory"
+	walk_down
+# 630 "data/maps/EltheCity/scripts.pory"
+	walk_down
+# 631 "data/maps/EltheCity/scripts.pory"
+	walk_left
+# 632 "data/maps/EltheCity/scripts.pory"
+	face_up
+# 633 "data/maps/EltheCity/scripts.pory"
+	delay_16
+	step_end
+
+# 636 "data/maps/EltheCity/scripts.pory"
+EltheCity_Movement_BradleyBattleSouth:
+# 638 "data/maps/EltheCity/scripts.pory"
+	walk_down
+# 638 "data/maps/EltheCity/scripts.pory"
+	walk_down
+# 638 "data/maps/EltheCity/scripts.pory"
+	walk_down
+# 639 "data/maps/EltheCity/scripts.pory"
+	face_up
+# 640 "data/maps/EltheCity/scripts.pory"
+	delay_16
+	step_end
+
+EltheCity_Trigger_MusicStump1::
+# 645 "data/maps/EltheCity/scripts.pory"
+	playse SE_NOTE_C
+# 646 "data/maps/EltheCity/scripts.pory"
+	turnobject 9, DIR_WEST
+# 649 "data/maps/EltheCity/scripts.pory"
 	compare VAR_TEMP_2, 7
 	goto_if_eq EltheCity_Trigger_MusicStump1_4
 EltheCity_Trigger_MusicStump1_3:
-# 468 "data/maps/EltheCity/scripts.pory"
+# 673 "data/maps/EltheCity/scripts.pory"
 	setvar VAR_TEMP_2, 0
-# 469 "data/maps/EltheCity/scripts.pory"
+# 674 "data/maps/EltheCity/scripts.pory"
 	setvar VAR_TEMP_1, 1
 EltheCity_Trigger_MusicStump1_1:
-# 472 "data/maps/EltheCity/scripts.pory"
+# 677 "data/maps/EltheCity/scripts.pory"
 	release
 	return
 
 EltheCity_Trigger_MusicStump1_2:
-# 446 "data/maps/EltheCity/scripts.pory"
+# 651 "data/maps/EltheCity/scripts.pory"
 	delay 60
-# 447 "data/maps/EltheCity/scripts.pory"
+# 652 "data/maps/EltheCity/scripts.pory"
 	applymovement 9, EltheCity_Movement_KeesightHops
-# 448 "data/maps/EltheCity/scripts.pory"
+# 653 "data/maps/EltheCity/scripts.pory"
 	playse SE_BIKE_HOP
-# 449 "data/maps/EltheCity/scripts.pory"
+# 654 "data/maps/EltheCity/scripts.pory"
 	delay 16
-# 450 "data/maps/EltheCity/scripts.pory"
+# 655 "data/maps/EltheCity/scripts.pory"
 	playse SE_BIKE_HOP
-# 451 "data/maps/EltheCity/scripts.pory"
+# 656 "data/maps/EltheCity/scripts.pory"
 	delay 32
-# 452 "data/maps/EltheCity/scripts.pory"
+# 657 "data/maps/EltheCity/scripts.pory"
 	playmoncry SPECIES_WOOBAT, CRY_MODE_NORMAL
-# 453 "data/maps/EltheCity/scripts.pory"
+# 658 "data/maps/EltheCity/scripts.pory"
 	waitmoncry
-# 454 "data/maps/EltheCity/scripts.pory"
+# 659 "data/maps/EltheCity/scripts.pory"
 	delay 30
-# 455 "data/maps/EltheCity/scripts.pory"
+# 660 "data/maps/EltheCity/scripts.pory"
 	applymovement 9, Common_Movement_FaceUp
-# 456 "data/maps/EltheCity/scripts.pory"
+# 661 "data/maps/EltheCity/scripts.pory"
 	waitmovement 0
-# 457 "data/maps/EltheCity/scripts.pory"
+# 662 "data/maps/EltheCity/scripts.pory"
 	delay 16
-# 458 "data/maps/EltheCity/scripts.pory"
+# 663 "data/maps/EltheCity/scripts.pory"
 	playse SE_M_SUPERSONIC
-# 459 "data/maps/EltheCity/scripts.pory"
+# 664 "data/maps/EltheCity/scripts.pory"
 	applymovement 11, EltheCity_Movement_MoveUmbrashard
-# 460 "data/maps/EltheCity/scripts.pory"
+# 665 "data/maps/EltheCity/scripts.pory"
 	waitmovement 0
-# 461 "data/maps/EltheCity/scripts.pory"
+# 666 "data/maps/EltheCity/scripts.pory"
 	applymovement 9, Common_Movement_FaceDown
-# 462 "data/maps/EltheCity/scripts.pory"
+# 667 "data/maps/EltheCity/scripts.pory"
 	waitmovement 0
-# 463 "data/maps/EltheCity/scripts.pory"
+# 668 "data/maps/EltheCity/scripts.pory"
 	setobjectxyperm 11, 11, 21
-# 464 "data/maps/EltheCity/scripts.pory"
+# 669 "data/maps/EltheCity/scripts.pory"
 	setflag FLAG_SCALE_DESCENDING_DONE
 	goto EltheCity_Trigger_MusicStump1_1
 
 EltheCity_Trigger_MusicStump1_4:
-# 444 "data/maps/EltheCity/scripts.pory"
+# 649 "data/maps/EltheCity/scripts.pory"
 	goto_if_unset FLAG_SCALE_DESCENDING_DONE, EltheCity_Trigger_MusicStump1_2
 	goto EltheCity_Trigger_MusicStump1_3
 
 
 EltheCity_Trigger_MusicStump2::
-# 477 "data/maps/EltheCity/scripts.pory"
+# 682 "data/maps/EltheCity/scripts.pory"
 	playse SE_NOTE_D
-# 478 "data/maps/EltheCity/scripts.pory"
+# 683 "data/maps/EltheCity/scripts.pory"
 	turnobject 9, DIR_WEST
-# 481 "data/maps/EltheCity/scripts.pory"
+# 686 "data/maps/EltheCity/scripts.pory"
 	compare VAR_TEMP_1, 1
 	goto_if_eq EltheCity_Trigger_MusicStump2_2
-# 487 "data/maps/EltheCity/scripts.pory"
+# 692 "data/maps/EltheCity/scripts.pory"
 	setvar VAR_TEMP_1, 0
 EltheCity_Trigger_MusicStump2_1:
-# 491 "data/maps/EltheCity/scripts.pory"
+# 696 "data/maps/EltheCity/scripts.pory"
 	compare VAR_TEMP_2, 6
 	goto_if_eq EltheCity_Trigger_MusicStump2_6
-# 497 "data/maps/EltheCity/scripts.pory"
+# 702 "data/maps/EltheCity/scripts.pory"
 	setvar VAR_TEMP_2, 0
 EltheCity_Trigger_MusicStump2_5:
-# 500 "data/maps/EltheCity/scripts.pory"
+# 705 "data/maps/EltheCity/scripts.pory"
 	release
 	return
 
 EltheCity_Trigger_MusicStump2_2:
-# 483 "data/maps/EltheCity/scripts.pory"
+# 688 "data/maps/EltheCity/scripts.pory"
 	addvar VAR_TEMP_1, 1
 	goto EltheCity_Trigger_MusicStump2_1
 
 EltheCity_Trigger_MusicStump2_6:
-# 493 "data/maps/EltheCity/scripts.pory"
+# 698 "data/maps/EltheCity/scripts.pory"
 	addvar VAR_TEMP_2, 1
 	goto EltheCity_Trigger_MusicStump2_5
 
 
 EltheCity_Trigger_MusicStump3::
-# 505 "data/maps/EltheCity/scripts.pory"
+# 710 "data/maps/EltheCity/scripts.pory"
 	playse SE_NOTE_E
-# 506 "data/maps/EltheCity/scripts.pory"
+# 711 "data/maps/EltheCity/scripts.pory"
 	turnobject 9, DIR_WEST
-# 509 "data/maps/EltheCity/scripts.pory"
+# 714 "data/maps/EltheCity/scripts.pory"
 	compare VAR_TEMP_1, 2
 	goto_if_eq EltheCity_Trigger_MusicStump3_2
-# 515 "data/maps/EltheCity/scripts.pory"
+# 720 "data/maps/EltheCity/scripts.pory"
 	setvar VAR_TEMP_1, 0
 EltheCity_Trigger_MusicStump3_1:
-# 519 "data/maps/EltheCity/scripts.pory"
+# 724 "data/maps/EltheCity/scripts.pory"
 	compare VAR_TEMP_2, 5
 	goto_if_eq EltheCity_Trigger_MusicStump3_6
-# 525 "data/maps/EltheCity/scripts.pory"
+# 730 "data/maps/EltheCity/scripts.pory"
 	setvar VAR_TEMP_2, 0
 EltheCity_Trigger_MusicStump3_5:
-# 528 "data/maps/EltheCity/scripts.pory"
+# 733 "data/maps/EltheCity/scripts.pory"
 	release
 	return
 
 EltheCity_Trigger_MusicStump3_2:
-# 511 "data/maps/EltheCity/scripts.pory"
+# 716 "data/maps/EltheCity/scripts.pory"
 	addvar VAR_TEMP_1, 1
 	goto EltheCity_Trigger_MusicStump3_1
 
 EltheCity_Trigger_MusicStump3_6:
-# 521 "data/maps/EltheCity/scripts.pory"
+# 726 "data/maps/EltheCity/scripts.pory"
 	addvar VAR_TEMP_2, 1
 	goto EltheCity_Trigger_MusicStump3_5
 
 
 EltheCity_Trigger_MusicStump4::
-# 533 "data/maps/EltheCity/scripts.pory"
+# 738 "data/maps/EltheCity/scripts.pory"
 	playse SE_NOTE_F
-# 534 "data/maps/EltheCity/scripts.pory"
+# 739 "data/maps/EltheCity/scripts.pory"
 	turnobject 9, DIR_SOUTH
-# 537 "data/maps/EltheCity/scripts.pory"
+# 742 "data/maps/EltheCity/scripts.pory"
 	compare VAR_TEMP_1, 3
 	goto_if_eq EltheCity_Trigger_MusicStump4_2
-# 543 "data/maps/EltheCity/scripts.pory"
+# 748 "data/maps/EltheCity/scripts.pory"
 	setvar VAR_TEMP_1, 0
 EltheCity_Trigger_MusicStump4_1:
-# 547 "data/maps/EltheCity/scripts.pory"
+# 752 "data/maps/EltheCity/scripts.pory"
 	compare VAR_TEMP_2, 4
 	goto_if_eq EltheCity_Trigger_MusicStump4_6
-# 553 "data/maps/EltheCity/scripts.pory"
+# 758 "data/maps/EltheCity/scripts.pory"
 	setvar VAR_TEMP_2, 0
 EltheCity_Trigger_MusicStump4_5:
-# 556 "data/maps/EltheCity/scripts.pory"
+# 761 "data/maps/EltheCity/scripts.pory"
 	release
 	return
 
 EltheCity_Trigger_MusicStump4_2:
-# 539 "data/maps/EltheCity/scripts.pory"
+# 744 "data/maps/EltheCity/scripts.pory"
 	addvar VAR_TEMP_1, 1
 	goto EltheCity_Trigger_MusicStump4_1
 
 EltheCity_Trigger_MusicStump4_6:
-# 549 "data/maps/EltheCity/scripts.pory"
+# 754 "data/maps/EltheCity/scripts.pory"
 	addvar VAR_TEMP_2, 1
 	goto EltheCity_Trigger_MusicStump4_5
 
 
 EltheCity_Trigger_MusicStump5::
-# 561 "data/maps/EltheCity/scripts.pory"
+# 766 "data/maps/EltheCity/scripts.pory"
 	playse SE_NOTE_G
-# 562 "data/maps/EltheCity/scripts.pory"
+# 767 "data/maps/EltheCity/scripts.pory"
 	turnobject 9, DIR_SOUTH
-# 565 "data/maps/EltheCity/scripts.pory"
+# 770 "data/maps/EltheCity/scripts.pory"
 	compare VAR_TEMP_1, 4
 	goto_if_eq EltheCity_Trigger_MusicStump5_2
-# 571 "data/maps/EltheCity/scripts.pory"
+# 776 "data/maps/EltheCity/scripts.pory"
 	setvar VAR_TEMP_1, 0
 EltheCity_Trigger_MusicStump5_1:
-# 575 "data/maps/EltheCity/scripts.pory"
+# 780 "data/maps/EltheCity/scripts.pory"
 	compare VAR_TEMP_2, 3
 	goto_if_eq EltheCity_Trigger_MusicStump5_6
-# 581 "data/maps/EltheCity/scripts.pory"
+# 786 "data/maps/EltheCity/scripts.pory"
 	setvar VAR_TEMP_2, 0
 EltheCity_Trigger_MusicStump5_5:
-# 584 "data/maps/EltheCity/scripts.pory"
+# 789 "data/maps/EltheCity/scripts.pory"
 	release
 	return
 
 EltheCity_Trigger_MusicStump5_2:
-# 567 "data/maps/EltheCity/scripts.pory"
+# 772 "data/maps/EltheCity/scripts.pory"
 	addvar VAR_TEMP_1, 1
 	goto EltheCity_Trigger_MusicStump5_1
 
 EltheCity_Trigger_MusicStump5_6:
-# 577 "data/maps/EltheCity/scripts.pory"
+# 782 "data/maps/EltheCity/scripts.pory"
 	addvar VAR_TEMP_2, 1
 	goto EltheCity_Trigger_MusicStump5_5
 
 
 EltheCity_Trigger_MusicStump6::
-# 589 "data/maps/EltheCity/scripts.pory"
+# 794 "data/maps/EltheCity/scripts.pory"
 	playse SE_NOTE_A
-# 590 "data/maps/EltheCity/scripts.pory"
+# 795 "data/maps/EltheCity/scripts.pory"
 	turnobject 9, DIR_EAST
-# 593 "data/maps/EltheCity/scripts.pory"
+# 798 "data/maps/EltheCity/scripts.pory"
 	compare VAR_TEMP_1, 5
 	goto_if_eq EltheCity_Trigger_MusicStump6_2
-# 599 "data/maps/EltheCity/scripts.pory"
+# 804 "data/maps/EltheCity/scripts.pory"
 	setvar VAR_TEMP_1, 0
 EltheCity_Trigger_MusicStump6_1:
-# 603 "data/maps/EltheCity/scripts.pory"
+# 808 "data/maps/EltheCity/scripts.pory"
 	compare VAR_TEMP_2, 2
 	goto_if_eq EltheCity_Trigger_MusicStump6_6
-# 609 "data/maps/EltheCity/scripts.pory"
+# 814 "data/maps/EltheCity/scripts.pory"
 	setvar VAR_TEMP_2, 0
 EltheCity_Trigger_MusicStump6_5:
-# 612 "data/maps/EltheCity/scripts.pory"
+# 817 "data/maps/EltheCity/scripts.pory"
 	release
 	return
 
 EltheCity_Trigger_MusicStump6_2:
-# 595 "data/maps/EltheCity/scripts.pory"
+# 800 "data/maps/EltheCity/scripts.pory"
 	addvar VAR_TEMP_1, 1
 	goto EltheCity_Trigger_MusicStump6_1
 
 EltheCity_Trigger_MusicStump6_6:
-# 605 "data/maps/EltheCity/scripts.pory"
+# 810 "data/maps/EltheCity/scripts.pory"
 	addvar VAR_TEMP_2, 1
 	goto EltheCity_Trigger_MusicStump6_5
 
 
 EltheCity_Trigger_MusicStump7::
-# 617 "data/maps/EltheCity/scripts.pory"
+# 822 "data/maps/EltheCity/scripts.pory"
 	playse SE_NOTE_B
-# 618 "data/maps/EltheCity/scripts.pory"
+# 823 "data/maps/EltheCity/scripts.pory"
 	turnobject 9, DIR_EAST
-# 621 "data/maps/EltheCity/scripts.pory"
+# 826 "data/maps/EltheCity/scripts.pory"
 	compare VAR_TEMP_1, 6
 	goto_if_eq EltheCity_Trigger_MusicStump7_2
-# 627 "data/maps/EltheCity/scripts.pory"
+# 832 "data/maps/EltheCity/scripts.pory"
 	setvar VAR_TEMP_1, 0
 EltheCity_Trigger_MusicStump7_1:
-# 631 "data/maps/EltheCity/scripts.pory"
+# 836 "data/maps/EltheCity/scripts.pory"
 	compare VAR_TEMP_2, 1
 	goto_if_eq EltheCity_Trigger_MusicStump7_6
-# 637 "data/maps/EltheCity/scripts.pory"
+# 842 "data/maps/EltheCity/scripts.pory"
 	setvar VAR_TEMP_2, 0
 EltheCity_Trigger_MusicStump7_5:
-# 640 "data/maps/EltheCity/scripts.pory"
+# 845 "data/maps/EltheCity/scripts.pory"
 	release
 	return
 
 EltheCity_Trigger_MusicStump7_2:
-# 623 "data/maps/EltheCity/scripts.pory"
+# 828 "data/maps/EltheCity/scripts.pory"
 	addvar VAR_TEMP_1, 1
 	goto EltheCity_Trigger_MusicStump7_1
 
 EltheCity_Trigger_MusicStump7_6:
-# 633 "data/maps/EltheCity/scripts.pory"
+# 838 "data/maps/EltheCity/scripts.pory"
 	addvar VAR_TEMP_2, 1
 	goto EltheCity_Trigger_MusicStump7_5
 
 
 EltheCity_Trigger_MusicStump8::
-# 645 "data/maps/EltheCity/scripts.pory"
+# 850 "data/maps/EltheCity/scripts.pory"
 	playse SE_NOTE_C_HIGH
-# 646 "data/maps/EltheCity/scripts.pory"
+# 851 "data/maps/EltheCity/scripts.pory"
 	turnobject 9, DIR_EAST
-# 650 "data/maps/EltheCity/scripts.pory"
+# 855 "data/maps/EltheCity/scripts.pory"
 	compare VAR_TEMP_1, 7
 	goto_if_eq EltheCity_Trigger_MusicStump8_4
 EltheCity_Trigger_MusicStump8_3:
-# 674 "data/maps/EltheCity/scripts.pory"
+# 879 "data/maps/EltheCity/scripts.pory"
 	setvar VAR_TEMP_1, 0
-# 675 "data/maps/EltheCity/scripts.pory"
+# 880 "data/maps/EltheCity/scripts.pory"
 	setvar VAR_TEMP_2, 1
 EltheCity_Trigger_MusicStump8_1:
-# 678 "data/maps/EltheCity/scripts.pory"
+# 883 "data/maps/EltheCity/scripts.pory"
 	release
 	return
 
 EltheCity_Trigger_MusicStump8_2:
-# 652 "data/maps/EltheCity/scripts.pory"
+# 857 "data/maps/EltheCity/scripts.pory"
 	delay 60
-# 653 "data/maps/EltheCity/scripts.pory"
+# 858 "data/maps/EltheCity/scripts.pory"
 	applymovement 9, EltheCity_Movement_KeesightHops
-# 654 "data/maps/EltheCity/scripts.pory"
+# 859 "data/maps/EltheCity/scripts.pory"
 	playse SE_BIKE_HOP
-# 655 "data/maps/EltheCity/scripts.pory"
+# 860 "data/maps/EltheCity/scripts.pory"
 	delay 16
-# 656 "data/maps/EltheCity/scripts.pory"
+# 861 "data/maps/EltheCity/scripts.pory"
 	playse SE_BIKE_HOP
-# 657 "data/maps/EltheCity/scripts.pory"
+# 862 "data/maps/EltheCity/scripts.pory"
 	delay 32
-# 658 "data/maps/EltheCity/scripts.pory"
+# 863 "data/maps/EltheCity/scripts.pory"
 	playmoncry SPECIES_WOOBAT, CRY_MODE_NORMAL
-# 659 "data/maps/EltheCity/scripts.pory"
+# 864 "data/maps/EltheCity/scripts.pory"
 	waitmoncry
-# 660 "data/maps/EltheCity/scripts.pory"
+# 865 "data/maps/EltheCity/scripts.pory"
 	delay 30
-# 661 "data/maps/EltheCity/scripts.pory"
+# 866 "data/maps/EltheCity/scripts.pory"
 	applymovement 9, Common_Movement_FaceUp
-# 662 "data/maps/EltheCity/scripts.pory"
+# 867 "data/maps/EltheCity/scripts.pory"
 	waitmovement 0
-# 663 "data/maps/EltheCity/scripts.pory"
+# 868 "data/maps/EltheCity/scripts.pory"
 	delay 16
-# 664 "data/maps/EltheCity/scripts.pory"
+# 869 "data/maps/EltheCity/scripts.pory"
 	playse SE_M_SUPERSONIC
-# 665 "data/maps/EltheCity/scripts.pory"
+# 870 "data/maps/EltheCity/scripts.pory"
 	applymovement 10, EltheCity_Movement_MoveEspershard
-# 666 "data/maps/EltheCity/scripts.pory"
+# 871 "data/maps/EltheCity/scripts.pory"
 	waitmovement 0
-# 667 "data/maps/EltheCity/scripts.pory"
+# 872 "data/maps/EltheCity/scripts.pory"
 	applymovement 9, Common_Movement_FaceDown
-# 668 "data/maps/EltheCity/scripts.pory"
+# 873 "data/maps/EltheCity/scripts.pory"
 	waitmovement 0
-# 669 "data/maps/EltheCity/scripts.pory"
+# 874 "data/maps/EltheCity/scripts.pory"
 	setobjectxyperm 10, 13, 21
-# 670 "data/maps/EltheCity/scripts.pory"
+# 875 "data/maps/EltheCity/scripts.pory"
 	setflag FLAG_SCALE_ASCENDING_DONE
 	goto EltheCity_Trigger_MusicStump8_1
 
 EltheCity_Trigger_MusicStump8_4:
-# 650 "data/maps/EltheCity/scripts.pory"
+# 855 "data/maps/EltheCity/scripts.pory"
 	goto_if_unset FLAG_SCALE_ASCENDING_DONE, EltheCity_Trigger_MusicStump8_2
 	goto EltheCity_Trigger_MusicStump8_3
 
 
-# 687 "data/maps/EltheCity/scripts.pory"
+# 886 "data/maps/EltheCity/scripts.pory"
 EltheCity_Movement_KeesightHops:
-# 689 "data/maps/EltheCity/scripts.pory"
+# 888 "data/maps/EltheCity/scripts.pory"
 	jump_in_place_down
-# 689 "data/maps/EltheCity/scripts.pory"
+# 888 "data/maps/EltheCity/scripts.pory"
 	jump_in_place_down
 	step_end
 
-# 692 "data/maps/EltheCity/scripts.pory"
+# 891 "data/maps/EltheCity/scripts.pory"
 EltheCity_Movement_MoveUmbrashard:
-# 694 "data/maps/EltheCity/scripts.pory"
+# 893 "data/maps/EltheCity/scripts.pory"
 	levitate
-# 695 "data/maps/EltheCity/scripts.pory"
+# 894 "data/maps/EltheCity/scripts.pory"
 	delay_16
-# 696 "data/maps/EltheCity/scripts.pory"
+# 895 "data/maps/EltheCity/scripts.pory"
 	walk_up
-# 696 "data/maps/EltheCity/scripts.pory"
+# 895 "data/maps/EltheCity/scripts.pory"
 	walk_up
-# 696 "data/maps/EltheCity/scripts.pory"
+# 895 "data/maps/EltheCity/scripts.pory"
 	walk_up
-# 697 "data/maps/EltheCity/scripts.pory"
+# 896 "data/maps/EltheCity/scripts.pory"
 	walk_right
-# 697 "data/maps/EltheCity/scripts.pory"
+# 896 "data/maps/EltheCity/scripts.pory"
 	walk_right
-# 697 "data/maps/EltheCity/scripts.pory"
+# 896 "data/maps/EltheCity/scripts.pory"
 	walk_right
-# 697 "data/maps/EltheCity/scripts.pory"
+# 896 "data/maps/EltheCity/scripts.pory"
 	walk_right
-# 697 "data/maps/EltheCity/scripts.pory"
+# 896 "data/maps/EltheCity/scripts.pory"
 	walk_right
-# 697 "data/maps/EltheCity/scripts.pory"
+# 896 "data/maps/EltheCity/scripts.pory"
 	walk_right
-# 697 "data/maps/EltheCity/scripts.pory"
+# 896 "data/maps/EltheCity/scripts.pory"
 	walk_right
-# 697 "data/maps/EltheCity/scripts.pory"
+# 896 "data/maps/EltheCity/scripts.pory"
 	walk_right
-# 698 "data/maps/EltheCity/scripts.pory"
+# 897 "data/maps/EltheCity/scripts.pory"
 	walk_up
-# 699 "data/maps/EltheCity/scripts.pory"
+# 898 "data/maps/EltheCity/scripts.pory"
 	delay_16
-# 700 "data/maps/EltheCity/scripts.pory"
+# 899 "data/maps/EltheCity/scripts.pory"
 	stop_levitate
 	step_end
 
-# 703 "data/maps/EltheCity/scripts.pory"
+# 902 "data/maps/EltheCity/scripts.pory"
 EltheCity_Movement_MoveEspershard:
-# 705 "data/maps/EltheCity/scripts.pory"
+# 904 "data/maps/EltheCity/scripts.pory"
 	levitate
-# 706 "data/maps/EltheCity/scripts.pory"
+# 905 "data/maps/EltheCity/scripts.pory"
 	delay_16
-# 707 "data/maps/EltheCity/scripts.pory"
+# 906 "data/maps/EltheCity/scripts.pory"
 	walk_left
-# 707 "data/maps/EltheCity/scripts.pory"
+# 906 "data/maps/EltheCity/scripts.pory"
 	walk_left
-# 707 "data/maps/EltheCity/scripts.pory"
+# 906 "data/maps/EltheCity/scripts.pory"
 	walk_left
-# 707 "data/maps/EltheCity/scripts.pory"
+# 906 "data/maps/EltheCity/scripts.pory"
 	walk_left
-# 707 "data/maps/EltheCity/scripts.pory"
+# 906 "data/maps/EltheCity/scripts.pory"
 	walk_left
-# 707 "data/maps/EltheCity/scripts.pory"
+# 906 "data/maps/EltheCity/scripts.pory"
 	walk_left
-# 707 "data/maps/EltheCity/scripts.pory"
+# 906 "data/maps/EltheCity/scripts.pory"
 	walk_left
-# 707 "data/maps/EltheCity/scripts.pory"
+# 906 "data/maps/EltheCity/scripts.pory"
 	walk_left
-# 708 "data/maps/EltheCity/scripts.pory"
+# 907 "data/maps/EltheCity/scripts.pory"
 	walk_up
-# 709 "data/maps/EltheCity/scripts.pory"
+# 908 "data/maps/EltheCity/scripts.pory"
 	delay_16
-# 710 "data/maps/EltheCity/scripts.pory"
+# 909 "data/maps/EltheCity/scripts.pory"
 	stop_levitate
 	step_end
 
-# 713 "data/maps/EltheCity/scripts.pory"
+# 912 "data/maps/EltheCity/scripts.pory"
 EltheCity_Movement_JumpOnBenchLeft:
-# 715 "data/maps/EltheCity/scripts.pory"
+# 914 "data/maps/EltheCity/scripts.pory"
 	lock_anim
-# 716 "data/maps/EltheCity/scripts.pory"
+# 915 "data/maps/EltheCity/scripts.pory"
 	jump_in_place_left
 	step_end
 
-# 719 "data/maps/EltheCity/scripts.pory"
+# 918 "data/maps/EltheCity/scripts.pory"
 EltheCity_Movement_GetOffBenchLeft:
-# 721 "data/maps/EltheCity/scripts.pory"
+# 920 "data/maps/EltheCity/scripts.pory"
 	unlock_anim
-# 722 "data/maps/EltheCity/scripts.pory"
+# 921 "data/maps/EltheCity/scripts.pory"
 	walk_slow_left
 	step_end
 
-# 725 "data/maps/EltheCity/scripts.pory"
+# 924 "data/maps/EltheCity/scripts.pory"
 EltheCity_Movement_JumpOnBenchRight:
-# 727 "data/maps/EltheCity/scripts.pory"
+# 926 "data/maps/EltheCity/scripts.pory"
 	lock_anim
-# 728 "data/maps/EltheCity/scripts.pory"
+# 927 "data/maps/EltheCity/scripts.pory"
 	jump_in_place_right
 	step_end
 
-# 731 "data/maps/EltheCity/scripts.pory"
+# 930 "data/maps/EltheCity/scripts.pory"
 EltheCity_Movement_GetOffBenchRight:
-# 733 "data/maps/EltheCity/scripts.pory"
+# 932 "data/maps/EltheCity/scripts.pory"
 	unlock_anim
-# 734 "data/maps/EltheCity/scripts.pory"
+# 933 "data/maps/EltheCity/scripts.pory"
 	walk_slow_right
 	step_end
 
-# 737 "data/maps/EltheCity/scripts.pory"
+# 936 "data/maps/EltheCity/scripts.pory"
 EltheCity_Movement_MoveDownBench:
-# 739 "data/maps/EltheCity/scripts.pory"
+# 938 "data/maps/EltheCity/scripts.pory"
 	walk_slow_down
 	step_end
 
-# 742 "data/maps/EltheCity/scripts.pory"
+# 941 "data/maps/EltheCity/scripts.pory"
 EltheCity_Movement_MoveUpBench:
-# 744 "data/maps/EltheCity/scripts.pory"
+# 943 "data/maps/EltheCity/scripts.pory"
 	walk_slow_up
 	step_end
 
 EltheCity_EventScript_Python_Text_0:
-# 72 "data/maps/EltheCity/scripts.pory"
+# 74 "data/maps/EltheCity/scripts.pory"
 	.string "… … … … …$"
 
 EltheCity_EventScript_Python_Text_1:
-# 77 "data/maps/EltheCity/scripts.pory"
+# 79 "data/maps/EltheCity/scripts.pory"
 	.string "Bradley$"
 
 EltheCity_EventScript_Python_Text_2:
-# 78 "data/maps/EltheCity/scripts.pory"
+# 80 "data/maps/EltheCity/scripts.pory"
 	.string "…The footsteps sound wrong.\n"
 	.string "This is him.$"
 
 EltheCity_EventScript_Python_Text_3:
-# 91 "data/maps/EltheCity/scripts.pory"
+# 93 "data/maps/EltheCity/scripts.pory"
 	.string "Python$"
 
 EltheCity_EventScript_Python_Text_4:
-# 92 "data/maps/EltheCity/scripts.pory"
+# 94 "data/maps/EltheCity/scripts.pory"
 	.string "Finally found me, eh, Amelia?\n"
 	.string "Took you long enough.$"
 
 EltheCity_EventScript_Python_Text_5:
-# 93 "data/maps/EltheCity/scripts.pory"
+# 95 "data/maps/EltheCity/scripts.pory"
 	.string "Amelia$"
 
 EltheCity_EventScript_Python_Text_6:
-# 94 "data/maps/EltheCity/scripts.pory"
+# 96 "data/maps/EltheCity/scripts.pory"
 	.string "Look, I've got a Poké Ball here\n"
 	.string "that says…$"
 
 EltheCity_EventScript_Python_Text_7:
-# 96 "data/maps/EltheCity/scripts.pory"
+# 98 "data/maps/EltheCity/scripts.pory"
 	.string "Wait, you still remember me!?$"
 
 EltheCity_EventScript_Python_Text_8:
-# 98 "data/maps/EltheCity/scripts.pory"
+# 100 "data/maps/EltheCity/scripts.pory"
 	.string "Of course! This memory charm is the\n"
 	.string "work of a Psychic type Pokémon.\p"
 	.string "I'm a Dark type, so it doesn't affect\n"
@@ -1207,7 +1552,7 @@ EltheCity_EventScript_Python_Text_8:
 	.string "watching you run around was fun.$"
 
 EltheCity_EventScript_Python_Text_9:
-# 110 "data/maps/EltheCity/scripts.pory"
+# 112 "data/maps/EltheCity/scripts.pory"
 	.string "Excuse me, have you seen my dragon?\n"
 	.string "Excuse me, can I get a room?\l"
 	.string "Excuse me, can you renounce your god?\l"
@@ -1215,23 +1560,23 @@ EltheCity_EventScript_Python_Text_9:
 	.string "You can't miss it, it's green!$"
 
 EltheCity_EventScript_Python_Text_10:
-# 112 "data/maps/EltheCity/scripts.pory"
+# 114 "data/maps/EltheCity/scripts.pory"
 	.string "Keheheheh!$"
 
 EltheCity_EventScript_Python_Text_11:
-# 114 "data/maps/EltheCity/scripts.pory"
+# 116 "data/maps/EltheCity/scripts.pory"
 	.string "That seems a little uncalled for.\n"
 	.string "I was worried about you, you know…$"
 
 EltheCity_EventScript_Python_Text_12:
-# 116 "data/maps/EltheCity/scripts.pory"
+# 118 "data/maps/EltheCity/scripts.pory"
 	.string "Hey, wait, you said this is caused\n"
 	.string "by a Psychic type Pokémon?\p"
 	.string "Do you think if we beat it, our\n"
 	.string "memories will come back?$"
 
 EltheCity_EventScript_Python_Text_13:
-# 130 "data/maps/EltheCity/scripts.pory"
+# 132 "data/maps/EltheCity/scripts.pory"
 	.string "Eh. Probably. It's not erasing\n"
 	.string "memories, just suppressing them, so\l"
 	.string "they should come back if it stops.\p"
@@ -1239,74 +1584,70 @@ EltheCity_EventScript_Python_Text_13:
 	.string "the church. Let's go check it out.$"
 
 EltheCity_EventScript_Python_Text_14:
-# 138 "data/maps/EltheCity/scripts.pory"
+# 141 "data/maps/EltheCity/scripts.pory"
 	.string "You recalled Python the Zoroark!$"
 
-Test_ScriptGetInput_Text_0:
-# 179 "data/maps/EltheCity/scripts.pory"
-	.string "Which button will you press?$"
-
 EltheCity_Sign_InnLeft_Text_0:
-# 204 "data/maps/EltheCity/scripts.pory"
+# 181 "data/maps/EltheCity/scripts.pory"
 	.string "Elysi Inn$"
 
 EltheCity_Sign_InnRight_Text_0:
-# 210 "data/maps/EltheCity/scripts.pory"
+# 187 "data/maps/EltheCity/scripts.pory"
 	.string "Phew, these room prices…I'm glad\n"
 	.string "Pokémon Centers were free…\p"
 	.string "Then again, not like I have any\n"
 	.string "money anyway…$"
 
 EltheCity_EventScript_Keesight_Text_0:
-# 323 "data/maps/EltheCity/scripts.pory"
+# 284 "data/maps/EltheCity/scripts.pory"
 	.string "Keesight$"
 
 EltheCity_EventScript_Keesight_Text_1:
-# 324 "data/maps/EltheCity/scripts.pory"
+# 285 "data/maps/EltheCity/scripts.pory"
 	.string "… … … … …\n"
 	.string "Thanks for the song.$"
 
 EltheCity_EventScript_Keesight_Text_2:
-# 328 "data/maps/EltheCity/scripts.pory"
+# 289 "data/maps/EltheCity/scripts.pory"
 	.string "Batmon$"
 
 EltheCity_EventScript_Keesight_Text_3:
-# 329 "data/maps/EltheCity/scripts.pory"
+# 290 "data/maps/EltheCity/scripts.pory"
 	.string "… … … … … … … … … …$"
 
 EltheCity_EventScript_Keesight_Text_4:
-# 331 "data/maps/EltheCity/scripts.pory"
+# 292 "data/maps/EltheCity/scripts.pory"
 	.string "The Pokémon is staring intently\n"
 	.string "at the pond…$"
 
 EltheCity_EventScript_Weatherbane_Text_0:
-# 340 "data/maps/EltheCity/scripts.pory"
+# 301 "data/maps/EltheCity/scripts.pory"
 	.string "So this is the thing I'm supposed\n"
 	.string "to fix? It's, what, squeaky?$"
 
 EltheCity_EventScript_Weatherbane_Text_1:
-# 367 "data/maps/EltheCity/scripts.pory"
+# 328 "data/maps/EltheCity/scripts.pory"
 	.string "Weatherbane$"
 
 EltheCity_EventScript_Weatherbane_Text_2:
-# 368 "data/maps/EltheCity/scripts.pory"
+# 329 "data/maps/EltheCity/scripts.pory"
 	.string "Skrraaaaaaaaaaaw! Skrraaaaaaaaaaaw!$"
 
 EltheCity_EventScript_Weatherbane_Text_3:
-# 371 "data/maps/EltheCity/scripts.pory"
+# 332 "data/maps/EltheCity/scripts.pory"
 	.string "…Geez. It's a Pokémon?\n"
 	.string "Well, it sure is noisy…$"
 
 EltheCity_EventScript_Weatherbane_Text_4:
-# 377 "data/maps/EltheCity/scripts.pory"
+# 338 "data/maps/EltheCity/scripts.pory"
 	.string "Hey! Shut the f{CENSOR}uck{UNCENSOR} up!$"
 
 EltheCity_EventScript_Weatherbane_Text_5:
-# 381 "data/maps/EltheCity/scripts.pory"
+# 342 "data/maps/EltheCity/scripts.pory"
 	.string "Why are you yelling?$"
 
 EltheCity_EventScript_Weatherbane_Text_6:
-# 383 "data/maps/EltheCity/scripts.pory"
+# 344 "data/maps/EltheCity/scripts.pory"
 	.string "The rain! The rain! I'm trying to\n"
 	.string "make the rain go away!\p"
 	.string "My cries can chase away storms.\n"
@@ -1314,12 +1655,12 @@ EltheCity_EventScript_Weatherbane_Text_6:
 	.string "Begone! Begone!$"
 
 EltheCity_EventScript_Weatherbane_Text_7:
-# 386 "data/maps/EltheCity/scripts.pory"
+# 347 "data/maps/EltheCity/scripts.pory"
 	.string "So it's not a natural rainstorm?\n"
 	.string "Maybe a Pokémon is summoning it…$"
 
 EltheCity_EventScript_Weatherbane_Text_8:
-# 388 "data/maps/EltheCity/scripts.pory"
+# 349 "data/maps/EltheCity/scripts.pory"
 	.string "Not natural! Not natural!\n"
 	.string "Can't you feel it?\p"
 	.string "The rain washes away your darkness.\n"
@@ -1328,7 +1669,7 @@ EltheCity_EventScript_Weatherbane_Text_8:
 	.string "Must be stopped! Must be stopped!$"
 
 EltheCity_EventScript_Weatherbane_Text_9:
-# 391 "data/maps/EltheCity/scripts.pory"
+# 352 "data/maps/EltheCity/scripts.pory"
 	.string "Look, I know! Something's messing\n"
 	.string "with my head. It could be the same\l"
 	.string "thing that's causing the rain.\p"
@@ -1336,40 +1677,268 @@ EltheCity_EventScript_Weatherbane_Text_9:
 	.string "now is to get you to quiet down.$"
 
 EltheCity_EventScript_Weatherbane_Text_10:
-# 394 "data/maps/EltheCity/scripts.pory"
+# 355 "data/maps/EltheCity/scripts.pory"
 	.string "Can't shut up! Can't shut up!\p"
 	.string "Begone! Begone!$"
 
 EltheCity_EventScript_Weatherbane_Text_11:
-# 396 "data/maps/EltheCity/scripts.pory"
+# 357 "data/maps/EltheCity/scripts.pory"
 	.string "What if I promise to clear up this\n"
 	.string "rain? Will that shut you up?$"
 
 EltheCity_EventScript_Weatherbane_Text_12:
-# 399 "data/maps/EltheCity/scripts.pory"
+# 360 "data/maps/EltheCity/scripts.pory"
 	.string "Maybe. Maybe.\p"
 	.string "Show me you're strong enough!\n"
 	.string "I think you're weak! Weak!$"
 
 EltheCity_EventScript_Weatherbane_Text_13:
-# 405 "data/maps/EltheCity/scripts.pory"
+# 366 "data/maps/EltheCity/scripts.pory"
 	.string "Okay! Okay! You're good! You're good!\p"
 	.string "I trust you. You will stop the rain.\n"
 	.string "Amelia, Sun-Bringer! Hail! Hail!$"
 
 EltheCity_EventScript_Weatherbane_Text_14:
-# 407 "data/maps/EltheCity/scripts.pory"
+# 368 "data/maps/EltheCity/scripts.pory"
 	.string "Please don't call me that ever again.$"
 
 EltheCity_EventScript_Weatherbane_Text_15:
-# 411 "data/maps/EltheCity/scripts.pory"
+# 372 "data/maps/EltheCity/scripts.pory"
 	.string "Finished the Innkeeper's request!$"
 
 EltheCity_EventScript_Weatherbane_Text_16:
-# 420 "data/maps/EltheCity/scripts.pory"
+# 381 "data/maps/EltheCity/scripts.pory"
 	.string "I used to love the sun.\n"
 	.string "Fire types feared me.\p"
 	.string "But now I'm too old! Too old!\n"
 	.string "Can't take the heat like I used to.\p"
 	.string "But I'd still like to see the sun\n"
 	.string "again. Too wet! Too wet!$"
+
+EltheCity_EventScript_BarrelGuy_Text_0:
+# 401 "data/maps/EltheCity/scripts.pory"
+	.string "Stephen$"
+
+EltheCity_EventScript_BarrelGuy_Text_1:
+# 402 "data/maps/EltheCity/scripts.pory"
+	.string "I tried to challenge that Nidoking…\p"
+	.string "But he just took one look at my\n"
+	.string "Pokémon, picked me up, and stuffed me\l"
+	.string "into this barrel…\p"
+	.string "Maybe Pokémon training isn't for me.$"
+
+EltheCity_BakeryWindow_Text_0:
+# 408 "data/maps/EltheCity/scripts.pory"
+	.string "The food on display looks delicious.\n"
+	.string "Too bad you don't have spare money.$"
+
+EltheCity_CitySign_Text_0:
+# 413 "data/maps/EltheCity/scripts.pory"
+	.string "Elthe City\n"
+	.string "“The forgotten highway of life.”$"
+
+EltheCity_Girlfriend_Text_0:
+# 418 "data/maps/EltheCity/scripts.pory"
+	.string "Sarah$"
+
+EltheCity_Girlfriend_Text_1:
+# 419 "data/maps/EltheCity/scripts.pory"
+	.string "When was the last time it wasn't\n"
+	.string "raining, huh? And the place doesn't\l"
+	.string "even have outside seating anyway!$"
+
+EltheCity_Boyfriend_Text_0:
+# 424 "data/maps/EltheCity/scripts.pory"
+	.string "Nathan$"
+
+EltheCity_Boyfriend_Text_1:
+# 425 "data/maps/EltheCity/scripts.pory"
+	.string "I forgot to check the weather, okay?\n"
+	.string "How was I supposed to know…$"
+
+EltheCity_OldGuyBarrel_Text_0:
+# 430 "data/maps/EltheCity/scripts.pory"
+	.string "Boris$"
+
+EltheCity_OldGuyBarrel_Text_1:
+# 431 "data/maps/EltheCity/scripts.pory"
+	.string "Something about this rainwater just\n"
+	.string "doesn't seem right to me.\p"
+	.string "It's not good to drink.$"
+
+EltheCity_Slowbro_Text_0:
+# 437 "data/maps/EltheCity/scripts.pory"
+	.string "Slowbro$"
+
+EltheCity_Slowbro_Text_1:
+# 438 "data/maps/EltheCity/scripts.pory"
+	.string "Some people are almost as forgetful\n"
+	.string "as me these days.\p"
+	.string "Just go with the flow, I say.\n"
+	.string "Isn't it fun?$"
+
+EltheCity_Slowbro_Text_2:
+# 441 "data/maps/EltheCity/scripts.pory"
+	.string "No, I hate knowing that I forgot\n"
+	.string "something and not being able to figure\l"
+	.string "out what it was. If I forget my old\l"
+	.string "departed friends, I might lose it.$"
+
+EltheCity_Slowbro_Text_3:
+# 444 "data/maps/EltheCity/scripts.pory"
+	.string "Huh? Who are you?$"
+
+EltheCity_Slowbro_Text_4:
+# 446 "data/maps/EltheCity/scripts.pory"
+	.string "Oh, forget it.\p"
+	.string "Urk. Phrasing.$"
+
+EltheCity_Lombre_Text_0:
+# 451 "data/maps/EltheCity/scripts.pory"
+	.string "Lilypad Kappa$"
+
+EltheCity_Lombre_Text_1:
+# 452 "data/maps/EltheCity/scripts.pory"
+	.string "I don't know what everyone's\n"
+	.string "complaining about. I hope this rain\l"
+	.string "never ends!$"
+
+EltheCity_BradleyScript_Text_0:
+# 460 "data/maps/EltheCity/scripts.pory"
+	.string "Grah hah hah! Another puny trainer\n"
+	.string "has come to challenge me, eh?$"
+
+EltheCity_BradleyScript_Text_1:
+# 462 "data/maps/EltheCity/scripts.pory"
+	.string "Bradley, it's me, Amelia.\n"
+	.string "What are you doing out here?$"
+
+EltheCity_BradleyScript_Text_2:
+# 464 "data/maps/EltheCity/scripts.pory"
+	.string "I want to fight!\p"
+	.string "You've been holding me back for years!\n"
+	.string "It's time to let loose!$"
+
+EltheCity_BradleyScript_Text_3:
+# 466 "data/maps/EltheCity/scripts.pory"
+	.string "Oh, you've forgotten about our talks,\n"
+	.string "haven't you…\p"
+	.string "Bradley, learning to control your\n"
+	.string "bloodlust was YOUR idea. And it's been\l"
+	.string "great for you! Chillax.$"
+
+EltheCity_BradleyScript_Text_4:
+# 470 "data/maps/EltheCity/scripts.pory"
+	.string "I don't care! I want to fight.\n"
+	.string "I'm enjoying this too much.$"
+
+EltheCity_BradleyScript_Text_5:
+# 472 "data/maps/EltheCity/scripts.pory"
+	.string "Fine, we'll have a little spar, and\n"
+	.string "then we get going, okay?$"
+
+EltheCity_BradleyScript_Text_6:
+# 474 "data/maps/EltheCity/scripts.pory"
+	.string "I don't want to fight your Pokémon.\n"
+	.string "I've beaten them before already.\l"
+	.string "I want to fight YOU, Amelia. You\l"
+	.string "hold back too much.$"
+
+EltheCity_BradleyScript_Text_7:
+# 476 "data/maps/EltheCity/scripts.pory"
+	.string "Well, too bad. I can't do that in\n"
+	.string "public. I still have work to do here,\l"
+	.string "I can't go getting kicked out.$"
+
+EltheCity_BradleyScript_Text_8:
+# 478 "data/maps/EltheCity/scripts.pory"
+	.string "Hrmph! Fine, then. I'll fight your\n"
+	.string "team, if you're really serious.$"
+
+EltheCity_BradleyScript_Text_9:
+# 482 "data/maps/EltheCity/scripts.pory"
+	.string "Come back when you're ready to give\n"
+	.string "me a real challenge!$"
+
+EltheCity_BradleyScript_Text_10:
+# 487 "data/maps/EltheCity/scripts.pory"
+	.string "With pleasure! I have a new Pokémon.\n"
+	.string "You're going to love him.$"
+
+EltheCity_BradleyScript_Text_11:
+# 489 "data/maps/EltheCity/scripts.pory"
+	.string "Oh? I'm intrigued. Maybe this will\n"
+	.string "be worth my time after all.$"
+
+EltheCity_BradleyScript_Text_12:
+# 507 "data/maps/EltheCity/scripts.pory"
+	.string "Come at me!$"
+
+EltheCity_BradleyScript_Text_13:
+# 514 "data/maps/EltheCity/scripts.pory"
+	.string "Huff…I've been beaten.\p"
+	.string "You were right, you know.\n"
+	.string "This isn't my true calling. I'm just\l"
+	.string "throwing a tantrum.$"
+
+EltheCity_BradleyScript_Text_14:
+# 517 "data/maps/EltheCity/scripts.pory"
+	.string "Amelia, I can hardly think straight,\n"
+	.string "but one thing I do know for sure…\p"
+	.string "You've changed my life. I wasn't sure\n"
+	.string "it was for the better, at first,\l"
+	.string "but what I did in my youth…\l"
+	.string "How that man…used me…\p"
+	.string "I thought I couldn't recover from it,\n"
+	.string "but you and your team helped me…$"
+
+EltheCity_BradleyScript_Text_15:
+# 521 "data/maps/EltheCity/scripts.pory"
+	.string "I know, Bradley. It's alright.\n"
+	.string "We all act stupid sometimes.\p"
+	.string "You don't have to turn on the\n"
+	.string "waterworks, it's already raining.$"
+
+EltheCity_BradleyScript_Text_16:
+# 524 "data/maps/EltheCity/scripts.pory"
+	.string "It's a terrible day for rain.$"
+
+EltheCity_BradleyScript_Text_17:
+# 526 "data/maps/EltheCity/scripts.pory"
+	.string "Oh! Speaking of which. I think we\n"
+	.string "need to do something about this rain.\l"
+	.string "Can you help me get the rest of the\l"
+	.string "team back together so we can get\l"
+	.string "started on that?$"
+
+EltheCity_BradleyScript_Text_18:
+# 530 "data/maps/EltheCity/scripts.pory"
+	.string "Python must be around here somewhere,\n"
+	.string "but I haven't seen any sign of him.$"
+
+EltheCity_BradleyScript_Text_19:
+# 532 "data/maps/EltheCity/scripts.pory"
+	.string "Of course you haven't “seen” him.\n"
+	.string "He must be in disguise.\p"
+	.string "With my superior hearing, I can\n"
+	.string "usually discern his illusions.\p"
+	.string "If you let me look around, I can\n"
+	.string "probably pick him out.$"
+
+EltheCity_BradleyScript_Text_20:
+# 536 "data/maps/EltheCity/scripts.pory"
+	.string "Okay! Sounds like a plan!$"
+
+EltheCity_BradleyScript_Text_21:
+# 544 "data/maps/EltheCity/scripts.pory"
+	.string "You recalled Bradley the Nidoking!$"
+
+EltheCity_BradleyScript_Text_22:
+# 557 "data/maps/EltheCity/scripts.pory"
+	.string "Vice is hanging around in one of\n"
+	.string "these buildings, I think.\l"
+	.string "Let's go find her.$"
+
+EltheCity_BradleyScript_Text_23:
+# 559 "data/maps/EltheCity/scripts.pory"
+	.string "Yes, ma'am.$"

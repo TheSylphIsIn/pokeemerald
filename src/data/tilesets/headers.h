@@ -856,5 +856,5 @@ const struct Tileset gTileset_EltheIndoor =
     .palettes = gTilesetPalettes_EltheIndoor,
     .metatiles = gMetatiles_EltheIndoor,
     .metatileAttributes = gMetatileAttributes_EltheIndoor,
-    .callback = NULL,
+    .callback = InitTilesetAnim_EltheIndoor,
 };

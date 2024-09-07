@@ -1367,11 +1367,44 @@ static const struct PartyMemberInfo sPartyMemberInfo[5] =
 
 bool8 ScrCmd_setpartymemberinfo(struct ScriptContext *ctx)
 {
-	u8 partySlot = ScriptReadByte(ctx);
+	u8 partyMember = ScriptReadByte(ctx);
+	u32 partySlot = 0xFF;
+	u16 targetSpecies = SPECIES_NONE;
+	u32 i;
 	
-	SetMonData(&gPlayerParty[partySlot], MON_DATA_NICKNAME, &sPartyMemberInfo[partySlot].nickname);
-	SetMonData(&gPlayerParty[partySlot], MON_DATA_MET_LOCATION, &sPartyMemberInfo[partySlot].metLoc);
-	SetMonData(&gPlayerParty[partySlot], MON_DATA_MET_LEVEL, &sPartyMemberInfo[partySlot].metLevel);	
+	switch(partyMember) // added so you can get party members out of order.
+	{
+		case 0:
+			targetSpecies = SPECIES_EEVEE;
+			break;
+		case 1:
+			targetSpecies = SPECIES_KINGLER;
+			break;
+		case 2:
+			targetSpecies = SPECIES_FLYGON;
+			break;
+		case 3:
+			targetSpecies = SPECIES_NIDOKING;
+			break;
+		case 4:
+			targetSpecies = SPECIES_ZOROARK;
+			break;
+	}
+	
+	for (i = 0; i < PARTY_SIZE; i++)
+	{
+		if (GET_BASE_SPECIES_ID(GetMonData(&gPlayerParty[i], MON_DATA_SPECIES)) == targetSpecies)
+		{
+			partySlot = i;
+			break;
+		}
+	}
+	if (partySlot != 0xFF)
+	{
+		SetMonData(&gPlayerParty[partySlot], MON_DATA_NICKNAME, &sPartyMemberInfo[partyMember].nickname);
+		SetMonData(&gPlayerParty[partySlot], MON_DATA_MET_LOCATION, &sPartyMemberInfo[partyMember].metLoc);
+		SetMonData(&gPlayerParty[partySlot], MON_DATA_MET_LEVEL, &sPartyMemberInfo[partyMember].metLevel);	
+	}
 	
 	return FALSE;
 }

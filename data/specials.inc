@@ -556,3 +556,4 @@ gSpecials::
 	def_special Script_GetChosenMonDefensiveIVs
 	def_special GetNegotiationTopic
 	def_special GetLeadMonSpecies
+	def_special TeleportCamera

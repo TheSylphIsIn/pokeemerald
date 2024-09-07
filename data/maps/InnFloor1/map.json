@@ -2,7 +2,7 @@
   "id": "MAP_INN_FLOOR1",
   "name": "InnFloor1",
   "layout": "LAYOUT_INN_FLOOR1",
-  "music": "MUS_DUMMY",
+  "music": "MUS_FALLARBOR",
   "region_map_section": "MAPSEC_ROUTE_101",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -37,7 +37,33 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
+      "script": "InnFloor1_WanderingGuy",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_MAN_2",
+      "x": 4,
+      "y": 8,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "InnFloor1_Stark",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_WOMAN_5",
+      "x": 16,
+      "y": 9,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT",
+      "movement_range_x": 2,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "InnFloor1_WanderingGirl",
       "flag": "0"
     }
   ],
@@ -67,7 +93,7 @@
       "x": 15,
       "y": 2,
       "elevation": 0,
-      "dest_map": "MAP_INN_FLOOR1",
+      "dest_map": "MAP_INN_ROOM_AMELIA",
       "dest_warp_id": "0"
     },
     {

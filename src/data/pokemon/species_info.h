@@ -248,10 +248,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_weatherbane,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
-        .frontPicYOffset = 9,
+        .frontPicYOffset = 0,
         .frontAnimFrames = sAnims_Mew,
         .frontAnimId = ANIM_H_SHAKE,
-        .enemyMonElevation = 11,
+        .enemyMonElevation = 0,
         .backPic = gMonBackPic_Mew,
         .backPicSize = MON_COORDS_SIZE(64, 64),
         .backPicYOffset = 0,
@@ -269,6 +269,68 @@ const struct SpeciesInfo gSpeciesInfo[] =
             gOverworldPalette_weatherbane,
             gShinyOverworldPalette_Mew
         )
+        .isMythical = TRUE,
+        .isFrontierBanned = TRUE,
+        .levelUpLearnset = sMewLevelUpLearnset,
+        .teachableLearnset = sMewTeachableLearnset,
+    },
+	
+    [SPECIES_HYDROIL] =
+    {
+        .baseHP        = 92,
+        .baseAttack    = 82,
+        .baseDefense   = 92,
+        .baseSpeed     = 62,
+        .baseSpAttack  = 122,
+        .baseSpDefense = 72,
+        .types = MON_TYPES(TYPE_WATER, TYPE_FIRE),
+        .catchRate = 45,
+    #if P_UPDATED_EXP_YIELDS >= GEN_8
+        .expYield = 300,
+    #elif P_UPDATED_EXP_YIELDS >= GEN_5
+        .expYield = 270,
+    #else
+        .expYield = 64,
+    #endif
+        .evYield_Defense = 1,
+        .evYield_SpAttack = 1,
+        .genderRatio = MON_MALE,
+        .eggCycles = 120,
+        .friendship = 100,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED),
+        .abilities = { ABILITY_COMPETITIVE, ABILITY_NONE, ABILITY_NONE },
+        .bodyColor = BODY_COLOR_GRAY,
+        .speciesName = _("Hydroil"),
+        .cryId = CRY_HYDROIL,
+        .natDexNum = NATIONAL_DEX_MEW,
+        .categoryName = _("New Species"),
+        .height = 4,
+        .weight = 40,
+        .description = COMPOUND_STRING(
+            "A Mew is said to possess the genes of all\n"
+            "Pokémon. It is capable of making itself\n"
+            "invisible at will, so it entirely avoids\n"
+            "notice even if it approaches people."),
+        .pokemonScale = 457,
+        .pokemonOffset = -2,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+        .frontPic = gMonFrontPic_hydroil,
+        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicYOffset = 0,
+        .frontAnimFrames = sAnims_Mew,
+        .frontAnimId = ANIM_GROW_VIBRATE,
+        .enemyMonElevation = 0,
+        .backPic = gMonBackPic_Mew,
+        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicYOffset = 0,
+        .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
+        .palette = gMonPalette_hydroil,
+        .shinyPalette = gMonShinyPalette_Mew,
+        .iconSprite = gMonIcon_Mew,
+        .iconPalIndex = 0,
+        FOOTPRINT(Mew)
         .isMythical = TRUE,
         .isFrontierBanned = TRUE,
         .levelUpLearnset = sMewLevelUpLearnset,

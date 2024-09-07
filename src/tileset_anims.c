@@ -1249,7 +1249,6 @@ static void QueueAnimTiles_ShadyForest_Lum(u16 timer)
 
 static void TilesetAnim_ShadyForest(u16 timer)
 {
-	DebugPrintf("trying to animate tiles: %d", timer);
 	if (timer % 32 == 0)
 	{
 		QueueAnimTiles_ShadyForest_Belue(timer / 32);
@@ -1273,4 +1272,36 @@ void InitTilesetAnim_ShadyForest(void)
 	sSecondaryTilesetAnimCounter = 0;
 	sSecondaryTilesetAnimCounterMax = 256;
 	sSecondaryTilesetAnimCallback = TilesetAnim_ShadyForest;	
+}
+
+const u16 gTilesetAnims_EltheIndoor_Fire_Frame0[] = INCBIN_U16("data/tilesets/secondary/elthe_indoor/anim/fire/00.4bpp");
+const u16 gTilesetAnims_EltheIndoor_Fire_Frame1[] = INCBIN_U16("data/tilesets/secondary/elthe_indoor/anim/fire/01.4bpp");
+const u16 gTilesetAnims_EltheIndoor_Fire_Frame2[] = INCBIN_U16("data/tilesets/secondary/elthe_indoor/anim/fire/02.4bpp");
+
+const u16 *const gTilesetAnims_EltheIndoor_Fire[] =
+{
+	gTilesetAnims_EltheIndoor_Fire_Frame0,
+	gTilesetAnims_EltheIndoor_Fire_Frame1,
+	gTilesetAnims_EltheIndoor_Fire_Frame2,
+};
+
+static void QueueAnimTiles_EltheIndoor_Fire(u16 timer)
+{
+	u16 i = timer % ARRAY_COUNT(gTilesetAnims_EltheIndoor_Fire);
+	AppendTilesetAnimToBuffer(gTilesetAnims_EltheIndoor_Fire[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY)), 4 * TILE_SIZE_4BPP);
+}
+
+static void TilesetAnim_EltheIndoor(u16 timer)
+{
+	if (timer % 16 == 0)
+	{
+		QueueAnimTiles_EltheIndoor_Fire(timer / 16);
+	}
+}
+
+void InitTilesetAnim_EltheIndoor(void)
+{
+	sSecondaryTilesetAnimCounter = 0;
+	sSecondaryTilesetAnimCounterMax = 256;
+	sSecondaryTilesetAnimCallback = TilesetAnim_EltheIndoor;	
 }

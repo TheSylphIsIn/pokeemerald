@@ -18,6 +18,9 @@ const u32 sPortraitPal_NidokingNeutral[] = INCBIN_U32("graphics/portraits/nidoki
 const u32 sPortraitPic_NidokingNervous[] = INCBIN_U32("graphics/portraits/nidoking_nervous.4bpp.lz");
 const u32 sPortraitPal_NidokingNervous[] = INCBIN_U32("graphics/portraits/nidoking_nervous.gbapal.lz");
 
+const u32 sPortraitPic_NidokingGrin[] = INCBIN_U32("graphics/portraits/nidoking_grin.4bpp.lz");
+const u32 sPortraitPal_NidokingGrin[] = INCBIN_U32("graphics/portraits/nidoking_grin.gbapal.lz");
+
 const u32 sPortraitPic_ZoroarkNeutral[] = INCBIN_U32("graphics/portraits/zoroark_neutral.4bpp.lz");
 const u32 sPortraitPal_ZoroarkNeutral[] = INCBIN_U32("graphics/portraits/zoroark_neutral.gbapal.lz");
 
@@ -72,6 +75,19 @@ const u32 sPortraitPal_WeatherbaneNeutral[] = INCBIN_U32("graphics/portraits/wea
 const u32 sPortraitPic_WeatherbaneScream[] = INCBIN_U32("graphics/portraits/weatherbane_scream.4bpp.lz");
 const u32 sPortraitPal_WeatherbaneScream[] = INCBIN_U32("graphics/portraits/weatherbane_scream.gbapal.lz");
 
+const u32 sPortraitPic_DubsnakeIce[] = INCBIN_U32("graphics/portraits/dubsnake_ice.4bpp.lz");
+const u32 sPortraitPal_DubsnakeIce[] = INCBIN_U32("graphics/portraits/dubsnake_ice.gbapal.lz");
+
+const u32 sPortraitPic_DubsnakeOil[] = INCBIN_U32("graphics/portraits/dubsnake_oil.4bpp.lz");
+const u32 sPortraitPal_DubsnakeOil[] = INCBIN_U32("graphics/portraits/dubsnake_oil.gbapal.lz");
+
+const u32 sPortraitPic_HydroilWater[] = INCBIN_U32("graphics/portraits/hydroil_water.4bpp.lz");
+const u32 sPortraitPal_HydroilWater[] = INCBIN_U32("graphics/portraits/hydroil_water.gbapal.lz");
+
+const u32 sPortraitPic_HydroilFire[] = INCBIN_U32("graphics/portraits/hydroil_fire.4bpp.lz");
+const u32 sPortraitPal_HydroilFire[] = INCBIN_U32("graphics/portraits/hydroil_fire.gbapal.lz");
+
+
 const struct PortraitData gPortraits[PORTRAITS_COUNT] = 
 {
 	[PORTRAIT_KINGLER_NEUTRAL] = {.pic = sPortraitPic_KinglerNeutral, .palette = sPortraitPal_KinglerNeutral},
@@ -98,4 +114,9 @@ const struct PortraitData gPortraits[PORTRAITS_COUNT] =
 	[PORTRAIT_FLYGON_ANNOYED]		= INCLUDE_PORTRAIT(FlygonAnnoyed),
 	[PORTRAIT_WEATHERBANE_NEUTRAL]	= INCLUDE_PORTRAIT(WeatherbaneNeutral),
 	[PORTRAIT_WEATHERBANE_SCREAM]	= INCLUDE_PORTRAIT(WeatherbaneScream),
+	[PORTRAIT_DUBSNAKE_ICE]			= INCLUDE_PORTRAIT(DubsnakeIce),
+	[PORTRAIT_DUBSNAKE_OIL]			= INCLUDE_PORTRAIT(DubsnakeOil),
+	[PORTRAIT_HYDROIL_WATER]		= INCLUDE_PORTRAIT(HydroilWater),
+	[PORTRAIT_HYDROIL_FIRE]			= INCLUDE_PORTRAIT(HydroilFire),
+	[PORTRAIT_NIDOKING_GRIN]		= INCLUDE_PORTRAIT(NidokingGrin),
 };

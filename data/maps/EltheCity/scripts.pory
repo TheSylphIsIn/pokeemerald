@@ -10,11 +10,13 @@ const LOCALID_ESPERSHARD = 10
 const LOCALID_UMBRASHARD = 11
 const LOCALID_PYTHON = 2
 const LOCALID_WEATHERBANE = 1
+const LOCALID_BRADLEY = 4
 
 mapscripts EltheCity_MapScripts 
 {
 	MAP_SCRIPT_ON_LOAD
 	{
+		setrespawn(HEAL_LOCATION_ELTHE_CITY)
 		if(flag(FLAG_STARTED_WEATHERBANE_QUEST))
 		{
 			setmetatile(5, 31, 0x387, FALSE)
@@ -71,7 +73,7 @@ script EltheCity_EventScript_Python
 {
 	msgbox("… … … … …", MSGBOX_NPC)
 	special(GetLeadMonSpecies)
-	if(var(VAR_RESULT) == SPECIES_NIDOKING)
+	if(var(VAR_RESULT) == SPECIES_NIDOKING && flag(FLAG_CAN_FIND_PYTHON))
 	{
 		lock
 		speakername("Bradley", PORTRAIT_NIDOKING_NEUTRAL)
@@ -134,6 +136,7 @@ script EltheCity_EventScript_Python
 		waitmovement(0)
 		removeobject(LOCALID_PYTHON)
 		delay(16)
+		removeitem(ITEM_NEST_BALL, 1)
 		playfanfare(MUS_EVOLVED)
 		message("You recalled Python the Zoroark!")
 		waitmessage
@@ -173,32 +176,6 @@ movement EltheCity_Movement_PythonSpinOut
 	face_player
 }
 
-script Test_ScriptGetInput
-{
-	lock
-	message("Which button will you press?")
-	waitmessage
-	while {
-		waitforscriptinput
-		switch(var(VAR_RESULT))
-		{
-			case DPAD_LEFT:
-				applymovement(OBJ_EVENT_ID_PLAYER, StepLeft)
-				waitmovement(0)
-			case DPAD_RIGHT:
-				applymovement(OBJ_EVENT_ID_PLAYER, StepRight)
-				waitmovement(0)
-			case DPAD_DOWN:
-				applymovement(OBJ_EVENT_ID_PLAYER, StepDown)
-				waitmovement(0)
-			case DPAD_UP:
-				applymovement(OBJ_EVENT_ID_PLAYER, StepUp)
-				waitmovement(0)
-		}
-	}
-	release
-}
-
 script EltheCity_Sign_InnLeft
 {
 	msgbox("Elysi Inn", MSGBOX_SIGN)
@@ -210,28 +187,9 @@ script EltheCity_Sign_InnRight
 	msgbox("Phew, these room prices…I'm glad\n" "Pokémon Centers were free…\p" "Then again, not like I have any\n" "money anyway…", MSGBOX_SIGN)
 }
 
-movement StepDown
-{
-	walk_down
-}
-
-movement StepUp
-{
-	walk_up
-}
-
-movement StepLeft
-{
-	walk_left
-}
-
-movement StepRight
-{
-	walk_right
-}
-
 script EltheCity_Trigger_JumpOnBenchLeft_TopTile
 {
+	clearflag(FLAG_SAFE_FOLLOWER_MOVEMENT)
 	setvar(VAR_0x8004, ANIM_SIT_WEST)
 	callnative(DoAmeliaOverworldAnim)
 	playse(SE_BIKE_HOP)
@@ -265,6 +223,7 @@ script EltheCity_Trigger_JumpOnBenchLeft_TopTile
 			
 		}
 	} while (var(VAR_RESULT) != DPAD_LEFT && var(VAR_RESULT) != A_BUTTON && var(VAR_RESULT) != B_BUTTON)
+	setflag(FLAG_SAFE_FOLLOWER_MOVEMENT)
 	release
 }
 
@@ -275,6 +234,7 @@ script EltheCity_Trigger_JumpOnBenchLeft_BottomTile
 
 script EltheCity_Trigger_JumpOnBenchRight_TopTile
 {
+	clearflag(FLAG_SAFE_FOLLOWER_MOVEMENT)
 	setvar(VAR_0x8004, ANIM_SIT_EAST)
 	callnative(DoAmeliaOverworldAnim)
 	playse(SE_BIKE_HOP)
@@ -308,6 +268,7 @@ script EltheCity_Trigger_JumpOnBenchRight_TopTile
 			
 		}
 	} while (var(VAR_RESULT) != DPAD_RIGHT && var(VAR_RESULT) != A_BUTTON && var(VAR_RESULT) != B_BUTTON)
+	setflag(FLAG_SAFE_FOLLOWER_MOVEMENT)
 	release
 }
 
@@ -433,6 +394,309 @@ movement EltheCity_Movement_WeatherbaneFlap
 	delay_8
 	face_right
 	delay_8
+}
+
+script EltheCity_EventScript_BarrelGuy
+{
+	speakername("Stephen")
+	msgbox("I tried to challenge that Nidoking…\p" "But he just took one look at my\n" "Pokémon, picked me up, and stuffed me\l" "into this barrel…\p"
+			"Maybe Pokémon training isn't for me.", MSGBOX_NPC)
+}
+
+script EltheCity_BakeryWindow
+{
+	msgbox("The food on display looks delicious.\n" "Too bad you don't have spare money.", MSGBOX_SIGN)
+}
+
+script EltheCity_CitySign
+{
+	msgbox("Elthe City\n" "“The forgotten highway of life.”", MSGBOX_SIGN)
+}
+
+script EltheCity_Girlfriend
+{
+	speakername("Sarah")
+	msgbox("When was the last time it wasn't\n" "raining, huh? And the place doesn't\l" "even have outside seating anyway!", MSGBOX_SIGN)
+}
+
+script EltheCity_Boyfriend
+{
+	speakername("Nathan")
+	msgbox("I forgot to check the weather, okay?\n" "How was I supposed to know…", MSGBOX_SIGN)
+}
+
+script EltheCity_OldGuyBarrel
+{
+	speakername("Boris")
+	msgbox("Something about this rainwater just\n" "doesn't seem right to me.\p"
+			"It's not good to drink.", MSGBOX_NPC)
+}
+
+script EltheCity_Slowbro
+{
+	lock
+	speakername("Slowbro")
+	msgbox("Some people are almost as forgetful\n" "as me these days.\p"
+			"Just go with the flow, I say.\n" "Isn't it fun?")
+	speakername("Amelia", PORTRAIT_AMELIA_STRAINED)
+	msgbox("No, I hate knowing that I forgot\n" "something and not being able to figure\l" "out what it was. If I forget my old\l" "departed friends, I might lose it.")
+	faceplayer
+	speakername("Slowbro")
+	msgbox("…Huh? Who are you?")
+	speakername("Amelia", PORTRAIT_AMELIA_STRAINED)
+	msgbox("Oh, forget it.\p" "Urk. Phrasing.", MSGBOX_AUTOCLOSE)
+	release
+}
+
+script EltheCity_Lombre
+{
+	speakername("Lilypad Kappa")
+	msgbox("I don't know what everyone's\n" "complaining about. I hope this rain\l" "never ends!", MSGBOX_NPC)
+}
+
+script EltheCity_Hiker
+{
+	speakername("Nob")
+	if(!flag(FLAG_GOT_BRADLEY))
+	{
+		msgbox("I thought my Magcargo could block\n" "that Nidoking's Poison attacks, but\l" "he knows Earthquake too…\l" "Where did he learn that?", MSGBOX_NPC)
+	}
+	else
+	{
+		lock
+		faceplayer
+		msgbox("So you taught him those moves?\n" "Pretty impressive.")
+		speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+		msgbox("I can't take all the credit. He was\n" "trained by a gym leader before I\l" "found him.")
+		speakername("Nob")
+		msgbox("Trained by a what?")
+		release
+	}
+}
+
+script EltheCity_Gentleman
+{
+	speakername("Regis")
+	if(!flag(FLAG_GOT_BRADLEY))
+	{
+		msgbox("My poor Gothitelle didn't stand a\n" "chance against that Nidoking.\p" "I should've known that horn wasn't\n" "just for show.", MSGBOX_NPC)
+	}
+	else
+	{
+		msgbox("That was some fine work under pressure.\n" "The world needs more Rangers like you.", MSGBOX_NPC)
+	}
+}
+
+script EltheCity_Lass
+{
+	speakername("Aurora")
+	if(!flag(FLAG_GOT_BRADLEY))
+	{
+		msgbox("I thought I could win with my\n" "Harminnote's physical defense, but\l" "he pulled out a tricky Sludge Bomb…\l" "What a cheap shot!", MSGBOX_NPC)
+	}
+	else
+	{
+		msgbox("Grandpa says it was a waste to use\n" "all my Poké Balls to catch Minnote,\l" "but it's pretty strong now that\l" "it's evolved.", MSGBOX_NPC)
+	}
+}
+
+script EltheCity_Mom
+{
+	speakername("Andrea")
+	msgbox("I thought I would try to distract\n" "Sarah with some battles, but it\l" "looks like the arena is being held.\l" "That Nidoking must be at least as\l" "strong as a Dragonite.", MSGBOX_SIGN)
+}
+
+script EltheCity_ArenaSign
+{
+	msgbox("Battle Park\n" "“King of the hill”-style allowed!", MSGBOX_SIGN)
+}
+
+script EltheCity_BradleyScript
+{
+	lock
+	faceplayer
+	speakername("Bradley", PORTRAIT_NIDOKING_GRIN, PORTRAIT_DEFAULT_LEFT)
+	msgbox("Grah hah hah! Another puny trainer\n" "has come to challenge me, eh?")
+	speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+	msgbox("Bradley, it's me, Amelia.\n" "What are you doing out here?")
+	speakername("Bradley", PORTRAIT_NIDOKING_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
+	msgbox("I want to fight!\p" "You've been holding me back for years!\n" "It's time to let loose!")
+	speakername("Amelia", PORTRAIT_AMELIA_STRAINED)
+	msgbox("Oh, you've forgotten about our talks,\n" "haven't you…\p"
+			"Bradley, learning to control your\n" "bloodlust was YOUR idea. And it's been\l" "great for you! Chillax.")
+	speakername("Bradley", PORTRAIT_NIDOKING_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
+	playmoncry(SPECIES_NIDOKING, CRY_MODE_NORMAL)
+	msgbox("I don't care! I want to fight.\n" "I'm enjoying this too much.")
+	speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+	msgbox("Fine, we'll have a little spar, and\n" "then we get going, okay?")
+	speakername("Bradley", PORTRAIT_NIDOKING_GRIN, PORTRAIT_DEFAULT_LEFT)
+	msgbox("I don't want to fight your Pokémon.\n" "I've beaten them before already.\l" "I want to fight YOU, Amelia. You\l" "hold back too much.")
+	speakername("Amelia", PORTRAIT_AMELIA_SERIOUSLY)
+	msgbox("Well, too bad. I can't do that in\n" "public. I still have work to do here,\l" "I can't go getting kicked out.")
+	speakername("Bradley", PORTRAIT_NIDOKING_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
+	msgbox("Hrmph! Fine, then. I'll fight your\n" "team, if you're really serious.", MSGBOX_YESNO)
+	if (var(VAR_RESULT) == NO)
+	{
+		speakername("Bradley", PORTRAIT_NIDOKING_GRIN, PORTRAIT_DEFAULT_LEFT)
+		msgbox("Come back when you're ready to give\n" "me a real challenge!")
+	}
+	else
+	{
+		speakername("Amelia", PORTRAIT_AMELIA_SMUG)
+		msgbox("With pleasure! I have a new Pokémon.\n" "You're going to love him.")
+		speakername("Bradley", PORTRAIT_NIDOKING_GRIN, PORTRAIT_DEFAULT_LEFT)
+		msgbox("Oh? I'm intrigued. Maybe this will\n" "be worth my time after all.", MSGBOX_AUTOCLOSE)
+		clearflag(FLAG_SAFE_FOLLOWER_MOVEMENT)
+		applymovement(LOCALID_BRADLEY, Common_Movement_WalkInPlaceDown)
+		specialvar(VAR_RESULT, GetPlayerFacingDirection)
+		switch(var(VAR_RESULT))
+		{
+			case DIR_SOUTH:
+				call(EltheCity_WalkToBradleyBattle_North)
+			case DIR_EAST:
+				call(EltheCity_WalkToBradleyBattle_West)
+			case DIR_WEST:
+				call(EltheCity_WalkToBradleyBattle_East)
+			case DIR_NORTH:
+				call(EltheCity_WalkToBradleyBattle_South)
+		}
+		setflag(FLAG_SAFE_FOLLOWER_MOVEMENT)
+		playmoncry(SPECIES_NIDOKING, CRY_MODE_NORMAL)
+		speakername("Bradley", PORTRAIT_NIDOKING_GRIN, PORTRAIT_DEFAULT_LEFT)
+		msgbox("Come at me!", MSGBOX_AUTOCLOSE)
+		waitmoncry
+		setflag(FLAG_WILD_AI_ON)
+		createmon(1, 0, SPECIES_NIDOKING, 56, ITEM_QUICK_CLAW, ITEM_ULTRA_BALL, NATURE_LONELY, 2, MON_MALE, 0, 10, 0, 0, 10, 0, 31, 31, 31, 31, 31, 31, MOVE_POISON_JAB, MOVE_EARTHQUAKE, MOVE_MEGAHORN, MOVE_SLUDGE_BOMB, FALSE, FALSE, TYPE_GROUND)
+		dowildbattle
+		delay(32)
+		speakername("Bradley", PORTRAIT_NIDOKING_NERVOUS, PORTRAIT_DEFAULT_LEFT)
+		msgbox("Huff…I've been beaten.\p" "You were right, you know.\n" "This isn't my true calling. I'm just\l" "throwing a tantrum.")
+		applymovement(LOCALID_BRADLEY, EltheCity_Movement_BradleyApproach)
+		speakername("Bradley", PORTRAIT_NIDOKING_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
+		msgbox("Amelia, I can hardly think straight,\n" "but one thing I do know for sure…\p"
+				"You've changed my life. I wasn't sure\n" "it was for the better, at first,\l" "but what I did in my youth…\l" "How that man…used me…\p"
+				"I thought I couldn't recover from it,\n" "but you and your team helped me…")
+		speakername("Amelia", PORTRAIT_AMELIA_SERIOUSLY)
+		msgbox("I know, Bradley. It's alright.\n" "We all act stupid sometimes.\p"
+				"You don't have to turn on the\n" "waterworks, it's already raining.")
+		speakername("Bradley", PORTRAIT_NIDOKING_NEUTRAL)
+		msgbox("It's a terrible day for rain.")
+		speakername("Amelia", PORTRAIT_AMELIA_SHOCK)
+		msgbox("Oh! Speaking of which. I think we\n" "need to do something about this rain.\l" "Can you help me get the rest of the\l" "team back together so we can get\l" "started on that?")
+		if(flag(FLAG_GOT_VICE))
+		{
+			speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+			msgbox("Python must be around here somewhere,\n" "but I haven't seen any sign of him.")
+			speakername("Bradley", PORTRAIT_NIDOKING_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
+			msgbox("Of course you haven't “seen” him.\n" "He must be in disguise.\p"
+					"With my superior hearing, I can\n" "usually discern his illusions.\p"
+					"If you let me look around, I can\n" "probably pick him out.")
+			speakername("Amelia", PORTRAIT_AMELIA_WINK)
+			msgbox("Okay! Sounds like a plan!", MSGBOX_AUTOCLOSE)
+			delay(32)
+			applymovement(LOCALID_BRADLEY, EnterPokeballMovement)
+			waitmovement(0)
+			removeobject(LOCALID_BRADLEY)
+			delay(16)
+			removeitem(ITEM_ULTRA_BALL, 1)
+			playfanfare(MUS_EVOLVED)
+			message("You recalled Bradley the Nidoking!")
+			waitmessage
+			waitfanfare
+			waitbuttonpress
+			closemessage
+			givemon(SPECIES_NIDOKING, 56, ITEM_QUICK_CLAW, ITEM_ULTRA_BALL, NATURE_LONELY, 2, MON_MALE, 0, 0, 0, 0, 0, 0, 31, 31, 31, 31, 31, 31, MOVE_POISON_JAB, MOVE_EARTHQUAKE, MOVE_MEGAHORN, MOVE_SLUDGE_BOMB, FALSE, FALSE, TYPE_GROUND)
+			setpartymemberinfo(3)
+			setflag(FLAG_CAN_FIND_PYTHON)
+			setvar(VAR_MAIN_GAME_STATE, 20)
+		}
+		else
+		{
+			speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+			msgbox("Vice is hanging around in one of\n" "these buildings, I think.\l" "Let's go find her.")
+			speakername("Bradley", PORTRAIT_NIDOKING_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
+			msgbox("Yes, ma'am.", MSGBOX_AUTOCLOSE)
+			delay(32)
+			applymovement(LOCALID_BRADLEY, EnterPokeballMovement)
+			waitmovement(0)
+			removeobject(LOCALID_BRADLEY)
+			delay(16)
+			removeitem(ITEM_ULTRA_BALL, 1)
+			playfanfare(MUS_EVOLVED)
+			message("You recalled Bradley the Nidoking!")
+			waitmessage
+			waitfanfare
+			waitbuttonpress
+			closemessage
+			givemon(SPECIES_NIDOKING, 56, ITEM_QUICK_CLAW, ITEM_ULTRA_BALL, NATURE_LONELY, 2, MON_MALE, 0, 0, 0, 0, 0, 0, 31, 31, 31, 31, 31, 31, MOVE_POISON_JAB, MOVE_EARTHQUAKE, MOVE_ICE_BEAM, MOVE_THUNDERBOLT, FALSE, FALSE, TYPE_GROUND)
+			setpartymemberinfo(3)
+		}
+	}
+	release
+}
+
+movement EltheCity_Movement_BradleyApproach
+{
+	walk_slow_down * 3
+}
+
+script EltheCity_WalkToBradleyBattle_North
+{
+	applymovement(OBJ_EVENT_ID_PLAYER, EltheCity_Movement_BradleyBattleNorth)
+	waitmovement(0)
+	applymovement(OBJ_EVENT_ID_PLAYER, EltheCity_Movement_BradleyBattleWest)
+	waitmovement(0)
+	return
+}
+
+script EltheCity_WalkToBradleyBattle_South
+{
+	applymovement(OBJ_EVENT_ID_PLAYER, EltheCity_Movement_BradleyBattleSouth)
+	waitmovement(0)
+	return
+}
+
+script EltheCity_WalkToBradleyBattle_East
+{
+	applymovement(OBJ_EVENT_ID_PLAYER, EltheCity_Movement_BradleyBattleEast)
+	waitmovement(0)
+	return
+}
+
+script EltheCity_WalkToBradleyBattle_West
+{
+	applymovement(OBJ_EVENT_ID_PLAYER, EltheCity_Movement_BradleyBattleWest)
+	waitmovement(0)
+	return
+}
+
+movement EltheCity_Movement_BradleyBattleNorth
+{
+	walk_left
+	walk_down
+}
+
+movement EltheCity_Movement_BradleyBattleWest
+{
+	walk_down * 4
+	walk_right
+	face_up
+	delay_16
+}
+
+movement EltheCity_Movement_BradleyBattleEast
+{
+	walk_down * 4
+	walk_left
+	face_up
+	delay_16
+}
+
+movement EltheCity_Movement_BradleyBattleSouth
+{
+	walk_down * 3
+	face_up
+	delay_16
 }
 
 script EltheCity_Trigger_MusicStump1
@@ -677,12 +941,6 @@ script EltheCity_Trigger_MusicStump8
 	
 	release
 }
-
-// arguing couple
-
-// old man by barrel
-
-// nerd in barrel
 
 movement EltheCity_Movement_KeesightHops
 {

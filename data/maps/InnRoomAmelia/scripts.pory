@@ -1,0 +1,32 @@
+mapscripts InnRoomAmelia_MapScripts {}
+
+script InnTrigger_HealParty
+{
+	clearflag(FLAG_SAFE_FOLLOWER_MOVEMENT)
+	applymovement(OBJ_EVENT_ID_PLAYER, Movement_UnsafeTurn)
+	waitmovement(0)
+	delay(16)
+	msgbox("Take a rest…", MSGBOX_AUTOCLOSE)
+	call(Common_EventScript_OutOfCenterPartyHeal)
+	setflag(FLAG_SAFE_FOLLOWER_MOVEMENT)
+}
+
+movement Movement_UnsafeTurn
+{
+	face_down
+}
+
+script Inn_CounterScript1
+{
+	msgbox("There's a microwave set in the wall.\n" "But it's useless to you.", MSGBOX_SIGN)
+}
+
+script Inn_CounterScript2
+{
+	msgbox("There's a TV set in the wall.\n" "Seems like an inconvenient place.", MSGBOX_SIGN)
+}
+
+script Inn_BathroomDoor
+{
+	msgbox("There's a bathroom through here,\n" "but you don't trust it.", MSGBOX_SIGN)
+}

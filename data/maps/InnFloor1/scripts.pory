@@ -1,4 +1,13 @@
-mapscripts InnFloor1_MapScripts {}
+mapscripts InnFloor1_MapScripts {
+	MAP_SCRIPT_ON_LOAD
+	{
+		checkitem(ITEM_KEY_TO_ROOM_1)
+		if(var(VAR_RESULT) == TRUE)
+		{
+			setmetatile(15, 2, 0x245, TRUE)
+		}
+	}
+}
 
 script InnFloor1_Concierge
 {
@@ -24,9 +33,26 @@ script InnFloor1_Concierge
 		msgbox("Thanks, dearie. I'm just too old to\n" "take care of that thing anymore.", MSGBOX_AUTOCLOSE)
 		setflag(FLAG_STARTED_WEATHERBANE_QUEST)
 	} // initiate quest
+	elif(flag(FLAG_FINISHED_WEATHERBANE_QUEST))
+	{
+		speakername("Innkeeper")
+		msgbox("Thanks for taking care of the\n" "Weatherbane, dearie.\p" "I used to calm him down by winning\n" "shouting matches with him, but my\l" "voice isn't strong enough for that\l" "these days.")
+	}
 	elif(flag(FLAG_BEAT_WEATHERBANE))
 	{
-		
+		setflag(FLAG_FINISHED_WEATHERBANE_QUEST)
+		speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+		msgbox("It's done. He said there's something\n" "in town bothering him, so I promised\l" "to take care of it. He might get\l" "loud again if I fail, but I don't\l" "usually do that.\p"
+				"Can I have my room key now?")
+		speakername("Innkeeper")
+		msgbox("Of course, dear. Here you are.", MSGBOX_AUTOCLOSE)
+		giveitem(ITEM_KEY_TO_ROOM_1)
+		setmetatile(15, 2, 0x245, TRUE)
+		special(DrawWholeMapView)
+		speakername("Innkeeper")
+		msgbox("Your room is up the stairs on\n" "the right. Just be sure to give\l" "the key back before you leave town.")
+		speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+		msgbox("Thank you very much.", MSGBOX_AUTOCLOSE)
 	} // idle chatter with the innkeeper
 	else
 	{
@@ -35,4 +61,28 @@ script InnFloor1_Concierge
 				"I'll give you your room key when\n" "you're done.")
 	} // remind you about the quest
 	release
+}
+
+script InnFloor1_Stark
+{
+	speakername("Stark")
+	msgbox("Please open the door! I'll let you pick\n" "out something from the bakery if you\l" "just tell me what I did…!", MSGBOX_AUTOCLOSE)
+}
+
+script InnFloor1_WanderingGuy
+{
+	lock
+	faceplayer
+	speakername("Dorcas")
+	msgbox("People come and go around here so\n" "often, I never remember their faces.\p"
+			"But I have a feeling I'll\n" "remember yours.")
+	speakername("Amelia", PORTRAIT_AMELIA_SERIOUSLY)
+	msgbox("… … … … …")
+	release
+}
+
+script InnFloor1_WanderingGirl
+{
+	speakername("Haley")
+	msgbox("You can use the stairs if you want\n" "to go up a level.", MSGBOX_NPC)
 }
