@@ -153,6 +153,9 @@
 #define METATILE_EliteFour_OpenDoor_Opening          0x345
 #define METATILE_EliteFour_RightSpotlightOff         0x2DE
 
+// gTileset_EltheIndoor
+#define METATILE_EltheIndoor_EltheIndoor_AnimDoor  0x245
+
 // gTileset_EverGrande
 #define METATILE_EverGrande_Door_PokemonLeague  0x21D
 
@@ -708,14 +711,15 @@
 #define METATILE_SecretBase_YellowBrick_Top             0x226
 
 // gTileset_ShadyForest
-#define METATILE_ShadyForest_NoteStump_Fa      0x363
-#define METATILE_ShadyForest_NoteStump_HighDo  0x367
-#define METATILE_ShadyForest_NoteStump_La      0x365
-#define METATILE_ShadyForest_NoteStump_LowDo   0x360
-#define METATILE_ShadyForest_NoteStump_Mi      0x362
-#define METATILE_ShadyForest_NoteStump_Re      0x361
-#define METATILE_ShadyForest_NoteStump_So      0x364
-#define METATILE_ShadyForest_NoteStump_Ti      0x366
+#define METATILE_ShadyForest_EltheCity_AnimDoor  0x264
+#define METATILE_ShadyForest_NoteStump_Fa        0x363
+#define METATILE_ShadyForest_NoteStump_HighDo    0x367
+#define METATILE_ShadyForest_NoteStump_La        0x365
+#define METATILE_ShadyForest_NoteStump_LowDo     0x360
+#define METATILE_ShadyForest_NoteStump_Mi        0x362
+#define METATILE_ShadyForest_NoteStump_Re        0x361
+#define METATILE_ShadyForest_NoteStump_So        0x364
+#define METATILE_ShadyForest_NoteStump_Ti        0x366
 
 // gTileset_Shop
 #define METATILE_Shop_Door_Elevator   0x285

@@ -29,6 +29,9 @@ struct DoorAnimFrame
 
 static bool8 ShouldUseMultiCorridorDoor(void);
 
+static const u8 sDoorAnimTiles_EltheExt[] = INCBIN_U8("graphics/door_anims/elthe_city.4bpp");
+static const u8 sDoorAnimTiles_EltheInt[] = INCBIN_U8("graphics/door_anims/elthe_inside.4bpp");
+
 static const u8 sDoorAnimTiles_Littleroot[] = INCBIN_U8("graphics/door_anims/littleroot.4bpp");
 static const u16 sDoorNullPalette1[16] = {};
 static const u8 sDoorAnimTiles_BirchsLab[] = INCBIN_U8("graphics/door_anims/birchs_lab.4bpp");
@@ -219,6 +222,8 @@ static const u8 sDoorAnimPalettes_BattleDomePreBattleRoom[] = {9, 9, 7, 7, 7, 7,
 static const u8 sDoorAnimPalettes_BattleTentInterior[] = {9, 9, 9, 9, 9, 9, 9, 9};
 static const u8 sDoorAnimPalettes_TrainerHillLobbyElevator[] = {7, 7, 7, 7, 7, 7, 7, 7};
 static const u8 sDoorAnimPalettes_TrainerHillRoofElevator[] = {9, 9, 7, 7, 7, 7, 7, 7};
+static const u8 sDoorAnimPalettes_EltheExt[] = {12, 12, 12, 12, 12, 12, 12, 12};
+static const u8 sDoorAnimPalettes_EltheInt[] = {6, 6, 8, 8, 8, 8, 8, 8};
 
 static const struct DoorGraphics sDoorAnimGraphicsTable[] =
 {
@@ -249,7 +254,6 @@ static const struct DoorGraphics sDoorAnimGraphicsTable[] =
     {METATILE_Lilycove_Door_DeptStore,                      DOOR_SOUND_SLIDING, 1, sDoorAnimTiles_LilycoveDeptStore, sDoorAnimPalettes_LilycoveDeptStore},
     {METATILE_Lilycove_Door_SafariZone,                     DOOR_SOUND_SLIDING, 1, sDoorAnimTiles_SafariZone, sDoorAnimPalettes_SafariZone},
     {METATILE_Mossdeep_Door_SpaceCenter,                    DOOR_SOUND_SLIDING, 1, sDoorAnimTiles_MossdeepSpaceCenter, sDoorAnimPalettes_MossdeepSpaceCenter},
-    {METATILE_PokemonCenter_Door_CableClub,                 DOOR_SOUND_SLIDING, 1, sDoorAnimTiles_CableClub, sDoorAnimPalettes_CableClub},
     {METATILE_InsideShip_IntactDoor_Bottom_Unlocked,        DOOR_SOUND_NORMAL,  1, sDoorAnimTiles_AbandonedShip, sDoorAnimPalettes_AbandonedShip},
     {METATILE_Fallarbor_Door_DarkRoof,                      DOOR_SOUND_NORMAL,  1, sDoorAnimTiles_FallarborDarkRoof, sDoorAnimPalettes_FallarborDarkRoof},
     {METATILE_InsideShip_IntactDoor_Bottom_Interior,        DOOR_SOUND_NORMAL,  1, sDoorAnimTiles_AbandonedShipRoom, sDoorAnimPalettes_AbandonedShipRoom},
@@ -277,6 +281,8 @@ static const struct DoorGraphics sDoorAnimGraphicsTable[] =
     {METATILE_BattleTent_Door,                              DOOR_SOUND_SLIDING, 1, sDoorAnimTiles_BattleTentInterior, sDoorAnimPalettes_BattleTentInterior},
     {METATILE_TrainerHill_Door_Elevator_Lobby,              DOOR_SOUND_SLIDING, 1, sDoorAnimTiles_TrainerHillLobbyElevator, sDoorAnimPalettes_TrainerHillLobbyElevator},
     {METATILE_TrainerHill_Door_Elevator_Roof,               DOOR_SOUND_SLIDING, 1, sDoorAnimTiles_TrainerHillRoofElevator, sDoorAnimPalettes_TrainerHillRoofElevator},
+    {METATILE_ShadyForest_EltheCity_AnimDoor,	DOOR_SOUND_NORMAL, 1, sDoorAnimTiles_EltheExt, sDoorAnimPalettes_EltheExt},
+    {METATILE_EltheIndoor_EltheIndoor_AnimDoor, DOOR_SOUND_NORMAL, 1, sDoorAnimTiles_EltheInt, sDoorAnimPalettes_EltheInt},
     {},
 };
 

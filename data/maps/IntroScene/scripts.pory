@@ -134,8 +134,7 @@ script FollowerScript_Demivee
 					speakername("Demi-Vee", PORTRAIT_DEMIVEE_HUH)
 					msgbox("Hey, you're not supposed to know\n" "about this feature yet!")
 					speakername("Demi-Vee", PORTRAIT_DEMIVEE_NEUTRAL)
-					msgbox("Well, then, you can have a little\n" "secret info…\p"
-							"After I decide how you trigger\n" "the superboss, anyway.")
+					msgbox("I would have given you a hint on\n" "how to find the superboss, but he\l" "got cut for time. Sorry!")
 				case 2:
 				case 3:
 					msgbox("Just keep moving forward! If your\n" "team members are still around this\l" "area, they'll probably gather in\l" "the city up ahead.")
@@ -214,6 +213,9 @@ script FollowerScript_Demivee
 					msgbox("This is Pomona Bread, the bakery.\n" "They make all sorts of baked goods.\p"
 							"I started eating crystals after the\n" "people here caught me stealing from\l" "the displays, haha. But the joke's\l" "on them, because I was controlling the\l" "Pantom population. Now their kitchen\l" "gets haunted once in a while.\p"
 							"But if you ask me, there's nothing\n" "wrong with haunted bread.")
+				case MAPSEC_ROUTE_103:
+					msgbox("This is an Arcean Church.\n" "They derive their philosophy from\l" "the Legendary Pokémon Arceus.\p"
+							"They don't exactly worship Arceus, but\n" "they take it as a model for the\l" "perfect being. …Which kind of sounds\l" "like worship now that I say it out loud.")
 				default:
 					msgbox("Sorry, I forgot to write an entry\n" "for this area, ahaha...")
 			}
@@ -231,6 +233,8 @@ script FollowerScript_Demivee
 
 script FollowerScript_Marcel
 {
+	lock
+	faceplayer
 	if(var(VAR_MAIN_GAME_STATE) > 6 && !flag(FLAG_KNOW_VICE_FLAVOR))
 	{
 		speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
@@ -256,16 +260,22 @@ script FollowerScript_Marcel
 				speakername("Amelia", PORTRAIT_AMELIA_SERIOUSLY)
 				msgbox("…That came out wrong.", MSGBOX_AUTOCLOSE)
 			case 1:
-				
+				speakername("Marcel", PORTRAIT_KINGLER_NEUTRAL)
+				msgbox("Normally rain makes me feel good,\n" "'cuz I'm a Water type and all,\l" "but something about this rain just\l" "isn't right. It feels slimy.", MSGBOX_AUTOCLOSE)
 			case 2:
+				speakername("Marcel", PORTRAIT_KINGLER_NEUTRAL)
+				msgbox("I bet with my Guillotine, I could\n" "chop up those branches.\l" "But I don't really feel like it.", MSGBOX_AUTOCLOSE)
 		}
 	
 	}
+	release
 }
 
 script FollowerScript_Vice
 {
-	random(3)
+	lock
+	faceplayer
+	random(2)
 	switch(var(VAR_RESULT))
 	{
 		case 0:
@@ -284,12 +294,22 @@ script FollowerScript_Vice
 			speakername("Vice", PORTRAIT_FLYGON_NEUTRAL)
 			msgbox("Don't! I'll bite you!", MSGBOX_AUTOCLOSE)
 		case 1:
-		case 2:
+			speakername("Vice", PORTRAIT_FLYGON_NEUTRAL)
+			msgbox("Did you ever visit that church?\n" "They're Arceans up there.")
+			speakername("Amelia", PORTRAIT_AMELIA_STRAINED)
+			msgbox("Bleck. You remember Arceans are the\n" "reason we got into that whole mess\l" "in Sinnoh, don't you?")
+			speakername("Vice", PORTRAIT_FLYGON_NEUTRAL)
+			msgbox("So? You're the reason I got involved\n" "in that mess, but I still like you.")
+			speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+			msgbox("…Touché.", MSGBOX_AUTOCLOSE)
 	}
+	release
 }
 
 script FollowerScript_Bradley
 {
+	lock
+	faceplayer
 	random(3)
 	switch(var(VAR_RESULT))
 	{
@@ -337,10 +357,13 @@ script FollowerScript_Bradley
 			speakername("Bradley", PORTRAIT_NIDOKING_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
 			msgbox("…", MSGBOX_AUTOCLOSE)
 	}
+	release
 }
 
 script FollowerScript_Python
 {
+	lock
+	faceplayer
 	random(3)
 	switch(var(VAR_RESULT))
 	{
@@ -391,5 +414,6 @@ script FollowerScript_Python
 			speakername("Python", PORTRAIT_ZOROARK_NEUTRAL)
 			msgbox("…Damn.", MSGBOX_AUTOCLOSE)
 	}
+	release
 }
 

@@ -253,16 +253,16 @@ FollowerScript_Demivee_1:
 	switch VAR_RESULT
 # 130 "data/maps/IntroScene/scripts.pory"
 	case 0, FollowerScript_Demivee_7
-# 177 "data/maps/IntroScene/scripts.pory"
+# 176 "data/maps/IntroScene/scripts.pory"
 	case 1, FollowerScript_Demivee_8
-# 194 "data/maps/IntroScene/scripts.pory"
+# 193 "data/maps/IntroScene/scripts.pory"
 	case 2, FollowerScript_Demivee_9
 FollowerScript_Demivee_5:
-# 222 "data/maps/IntroScene/scripts.pory"
-	release
-# 223 "data/maps/IntroScene/scripts.pory"
-	special GetLeadMonSpecies
 # 224 "data/maps/IntroScene/scripts.pory"
+	release
+# 225 "data/maps/IntroScene/scripts.pory"
+	special GetLeadMonSpecies
+# 226 "data/maps/IntroScene/scripts.pory"
 	compare VAR_RESULT, SPECIES_EEVEE
 	goto_if_ne FollowerScript_Demivee_10
 	return
@@ -285,66 +285,68 @@ FollowerScript_Demivee_7:
 	switch VAR_MAIN_GAME_STATE
 # 133 "data/maps/IntroScene/scripts.pory"
 	case 1, FollowerScript_Demivee_13
-# 139 "data/maps/IntroScene/scripts.pory"
+# 138 "data/maps/IntroScene/scripts.pory"
 	case 2, FollowerScript_Demivee_14
-# 140 "data/maps/IntroScene/scripts.pory"
+# 139 "data/maps/IntroScene/scripts.pory"
 	case 3, FollowerScript_Demivee_14
-# 142 "data/maps/IntroScene/scripts.pory"
+# 141 "data/maps/IntroScene/scripts.pory"
 	case 4, FollowerScript_Demivee_15
-# 144 "data/maps/IntroScene/scripts.pory"
+# 143 "data/maps/IntroScene/scripts.pory"
 	case 5, FollowerScript_Demivee_16
-# 146 "data/maps/IntroScene/scripts.pory"
+# 145 "data/maps/IntroScene/scripts.pory"
 	case 6, FollowerScript_Demivee_17
-# 148 "data/maps/IntroScene/scripts.pory"
+# 147 "data/maps/IntroScene/scripts.pory"
 	case 7, FollowerScript_Demivee_18
-# 150 "data/maps/IntroScene/scripts.pory"
+# 149 "data/maps/IntroScene/scripts.pory"
 	case 8, FollowerScript_Demivee_19
-# 152 "data/maps/IntroScene/scripts.pory"
+# 151 "data/maps/IntroScene/scripts.pory"
 	case 9, FollowerScript_Demivee_20
-# 154 "data/maps/IntroScene/scripts.pory"
+# 153 "data/maps/IntroScene/scripts.pory"
 	case 10, FollowerScript_Demivee_21
-# 156 "data/maps/IntroScene/scripts.pory"
+# 155 "data/maps/IntroScene/scripts.pory"
 	case 15, FollowerScript_Demivee_22
-# 171 "data/maps/IntroScene/scripts.pory"
+# 170 "data/maps/IntroScene/scripts.pory"
 	case 30, FollowerScript_Demivee_23
-# 175 "data/maps/IntroScene/scripts.pory"
+# 174 "data/maps/IntroScene/scripts.pory"
 	msgbox FollowerScript_Demivee_Text_19
 	goto FollowerScript_Demivee_5
 
 FollowerScript_Demivee_8:
-# 178 "data/maps/IntroScene/scripts.pory"
+# 177 "data/maps/IntroScene/scripts.pory"
 	goto_if_set FLAG_FINISHED_WEATHERBANE_QUEST, FollowerScript_Demivee_25
-# 182 "data/maps/IntroScene/scripts.pory"
+# 181 "data/maps/IntroScene/scripts.pory"
 	goto_if_set FLAG_BEAT_WEATHERBANE, FollowerScript_Demivee_26
-# 186 "data/maps/IntroScene/scripts.pory"
+# 185 "data/maps/IntroScene/scripts.pory"
 	goto_if_set FLAG_STARTED_WEATHERBANE_QUEST, FollowerScript_Demivee_27
-# 192 "data/maps/IntroScene/scripts.pory"
+# 191 "data/maps/IntroScene/scripts.pory"
 	msgbox FollowerScript_Demivee_Text_23
 	goto FollowerScript_Demivee_5
 
 FollowerScript_Demivee_9:
-# 195 "data/maps/IntroScene/scripts.pory"
+# 194 "data/maps/IntroScene/scripts.pory"
 	switch VAR_TEMP_0
-# 197 "data/maps/IntroScene/scripts.pory"
+# 196 "data/maps/IntroScene/scripts.pory"
 	case MAPSEC_LITTLEROOT_TOWN, FollowerScript_Demivee_33
-# 200 "data/maps/IntroScene/scripts.pory"
+# 199 "data/maps/IntroScene/scripts.pory"
 	case MAPSEC_OLDALE_TOWN, FollowerScript_Demivee_34
-# 203 "data/maps/IntroScene/scripts.pory"
+# 202 "data/maps/IntroScene/scripts.pory"
 	case MAPSEC_DEWFORD_TOWN, FollowerScript_Demivee_35
-# 210 "data/maps/IntroScene/scripts.pory"
+# 209 "data/maps/IntroScene/scripts.pory"
 	case MAPSEC_ROUTE_101, FollowerScript_Demivee_36
-# 213 "data/maps/IntroScene/scripts.pory"
+# 212 "data/maps/IntroScene/scripts.pory"
 	case MAPSEC_ROUTE_102, FollowerScript_Demivee_37
-# 218 "data/maps/IntroScene/scripts.pory"
-	msgbox FollowerScript_Demivee_Text_29
+# 216 "data/maps/IntroScene/scripts.pory"
+	case MAPSEC_ROUTE_103, FollowerScript_Demivee_38
+# 220 "data/maps/IntroScene/scripts.pory"
+	msgbox FollowerScript_Demivee_Text_30
 	goto FollowerScript_Demivee_5
 
 FollowerScript_Demivee_10:
-# 226 "data/maps/IntroScene/scripts.pory"
-	setvar VAR_0x8004, ANIM_PUT_AWAY_POKEBALL_DOWN
-# 227 "data/maps/IntroScene/scripts.pory"
-	callnative DoAmeliaOverworldAnim
 # 228 "data/maps/IntroScene/scripts.pory"
+	setvar VAR_0x8004, ANIM_PUT_AWAY_POKEBALL_DOWN
+# 229 "data/maps/IntroScene/scripts.pory"
+	callnative DoAmeliaOverworldAnim
+# 230 "data/maps/IntroScene/scripts.pory"
 	delay 32
 	return
 
@@ -360,400 +362,472 @@ FollowerScript_Demivee_13:
 	goto FollowerScript_Demivee_5
 
 FollowerScript_Demivee_14:
-# 141 "data/maps/IntroScene/scripts.pory"
+# 140 "data/maps/IntroScene/scripts.pory"
 	msgbox FollowerScript_Demivee_Text_7
 	goto FollowerScript_Demivee_5
 
 FollowerScript_Demivee_15:
-# 143 "data/maps/IntroScene/scripts.pory"
+# 142 "data/maps/IntroScene/scripts.pory"
 	msgbox FollowerScript_Demivee_Text_8
 	goto FollowerScript_Demivee_5
 
 FollowerScript_Demivee_16:
-# 145 "data/maps/IntroScene/scripts.pory"
+# 144 "data/maps/IntroScene/scripts.pory"
 	msgbox FollowerScript_Demivee_Text_9
 	goto FollowerScript_Demivee_5
 
 FollowerScript_Demivee_17:
-# 147 "data/maps/IntroScene/scripts.pory"
+# 146 "data/maps/IntroScene/scripts.pory"
 	msgbox FollowerScript_Demivee_Text_10
 	goto FollowerScript_Demivee_5
 
 FollowerScript_Demivee_18:
-# 149 "data/maps/IntroScene/scripts.pory"
+# 148 "data/maps/IntroScene/scripts.pory"
 	msgbox FollowerScript_Demivee_Text_11
 	goto FollowerScript_Demivee_5
 
 FollowerScript_Demivee_19:
-# 151 "data/maps/IntroScene/scripts.pory"
+# 150 "data/maps/IntroScene/scripts.pory"
 	msgbox FollowerScript_Demivee_Text_12
 	goto FollowerScript_Demivee_5
 
 FollowerScript_Demivee_20:
-# 153 "data/maps/IntroScene/scripts.pory"
+# 152 "data/maps/IntroScene/scripts.pory"
 	msgbox FollowerScript_Demivee_Text_13
 	goto FollowerScript_Demivee_5
 
 FollowerScript_Demivee_21:
-# 155 "data/maps/IntroScene/scripts.pory"
+# 154 "data/maps/IntroScene/scripts.pory"
 	msgbox FollowerScript_Demivee_Text_14
 	goto FollowerScript_Demivee_5
 
 FollowerScript_Demivee_22:
-# 157 "data/maps/IntroScene/scripts.pory"
-	goto_if_unset FLAG_GOT_VICE, FollowerScript_Demivee_39
-# 161 "data/maps/IntroScene/scripts.pory"
-	goto_if_unset FLAG_GOT_BRADLEY, FollowerScript_Demivee_40
-# 168 "data/maps/IntroScene/scripts.pory"
+# 156 "data/maps/IntroScene/scripts.pory"
+	goto_if_unset FLAG_GOT_VICE, FollowerScript_Demivee_40
+# 160 "data/maps/IntroScene/scripts.pory"
+	goto_if_unset FLAG_GOT_BRADLEY, FollowerScript_Demivee_41
+# 167 "data/maps/IntroScene/scripts.pory"
 	msgbox FollowerScript_Demivee_Text_17
 	goto FollowerScript_Demivee_5
 
 FollowerScript_Demivee_23:
-# 172 "data/maps/IntroScene/scripts.pory"
+# 171 "data/maps/IntroScene/scripts.pory"
 	msgbox FollowerScript_Demivee_Text_18
 	goto FollowerScript_Demivee_5
 
 FollowerScript_Demivee_25:
-# 180 "data/maps/IntroScene/scripts.pory"
+# 179 "data/maps/IntroScene/scripts.pory"
 	msgbox FollowerScript_Demivee_Text_20
 	goto FollowerScript_Demivee_5
 
 FollowerScript_Demivee_26:
-# 184 "data/maps/IntroScene/scripts.pory"
+# 183 "data/maps/IntroScene/scripts.pory"
 	msgbox FollowerScript_Demivee_Text_21
 	goto FollowerScript_Demivee_5
 
 FollowerScript_Demivee_27:
-# 188 "data/maps/IntroScene/scripts.pory"
+# 187 "data/maps/IntroScene/scripts.pory"
 	msgbox FollowerScript_Demivee_Text_22
 	goto FollowerScript_Demivee_5
 
 FollowerScript_Demivee_33:
-# 198 "data/maps/IntroScene/scripts.pory"
+# 197 "data/maps/IntroScene/scripts.pory"
 	speakername FollowerScript_Demivee_Text_0, PORTRAIT_DEMIVEE_HUH
-# 199 "data/maps/IntroScene/scripts.pory"
+# 198 "data/maps/IntroScene/scripts.pory"
 	msgbox FollowerScript_Demivee_Text_24
 	goto FollowerScript_Demivee_5
 
 FollowerScript_Demivee_34:
-# 201 "data/maps/IntroScene/scripts.pory"
+# 200 "data/maps/IntroScene/scripts.pory"
 	msgbox FollowerScript_Demivee_Text_25
 	goto FollowerScript_Demivee_5
 
 FollowerScript_Demivee_35:
-# 204 "data/maps/IntroScene/scripts.pory"
+# 203 "data/maps/IntroScene/scripts.pory"
 	msgbox FollowerScript_Demivee_Text_26
 	goto FollowerScript_Demivee_5
 
 FollowerScript_Demivee_36:
-# 211 "data/maps/IntroScene/scripts.pory"
+# 210 "data/maps/IntroScene/scripts.pory"
 	msgbox FollowerScript_Demivee_Text_27
 	goto FollowerScript_Demivee_5
 
 FollowerScript_Demivee_37:
-# 214 "data/maps/IntroScene/scripts.pory"
+# 213 "data/maps/IntroScene/scripts.pory"
 	msgbox FollowerScript_Demivee_Text_28
 	goto FollowerScript_Demivee_5
 
-FollowerScript_Demivee_39:
-# 159 "data/maps/IntroScene/scripts.pory"
-	msgbox FollowerScript_Demivee_Text_15
+FollowerScript_Demivee_38:
+# 217 "data/maps/IntroScene/scripts.pory"
+	msgbox FollowerScript_Demivee_Text_29
 	goto FollowerScript_Demivee_5
 
 FollowerScript_Demivee_40:
-# 163 "data/maps/IntroScene/scripts.pory"
+# 158 "data/maps/IntroScene/scripts.pory"
+	msgbox FollowerScript_Demivee_Text_15
+	goto FollowerScript_Demivee_5
+
+FollowerScript_Demivee_41:
+# 162 "data/maps/IntroScene/scripts.pory"
 	msgbox FollowerScript_Demivee_Text_16
 	goto FollowerScript_Demivee_5
 
 
 FollowerScript_Marcel::
-# 234 "data/maps/IntroScene/scripts.pory"
+# 236 "data/maps/IntroScene/scripts.pory"
+	lock
+# 237 "data/maps/IntroScene/scripts.pory"
+	faceplayer
+# 238 "data/maps/IntroScene/scripts.pory"
 	compare VAR_MAIN_GAME_STATE, 6
-	goto_if_gt FollowerScript_Marcel_3
-FollowerScript_Marcel_2:
-# 246 "data/maps/IntroScene/scripts.pory"
+	goto_if_gt FollowerScript_Marcel_4
+FollowerScript_Marcel_3:
+# 250 "data/maps/IntroScene/scripts.pory"
 	random 3
-# 247 "data/maps/IntroScene/scripts.pory"
+# 251 "data/maps/IntroScene/scripts.pory"
 	switch VAR_RESULT
-# 249 "data/maps/IntroScene/scripts.pory"
-	case 0, FollowerScript_Marcel_7
+# 253 "data/maps/IntroScene/scripts.pory"
+	case 0, FollowerScript_Marcel_8
+# 262 "data/maps/IntroScene/scripts.pory"
+	case 1, FollowerScript_Marcel_9
+# 265 "data/maps/IntroScene/scripts.pory"
+	case 2, FollowerScript_Marcel_10
+FollowerScript_Marcel_1:
+# 271 "data/maps/IntroScene/scripts.pory"
+	release
 	return
 
-FollowerScript_Marcel_1:
-# 236 "data/maps/IntroScene/scripts.pory"
-	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_3, PORTRAIT_AMELIA_NEUTRAL
-# 237 "data/maps/IntroScene/scripts.pory"
-	msgbox FollowerScript_Marcel_Text_0
-# 238 "data/maps/IntroScene/scripts.pory"
-	speakername FollowerScript_Marcel_Text_1, PORTRAIT_KINGLER_NEUTRAL
-# 239 "data/maps/IntroScene/scripts.pory"
-	msgbox FollowerScript_Marcel_Text_2
+FollowerScript_Marcel_2:
 # 240 "data/maps/IntroScene/scripts.pory"
 	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_3, PORTRAIT_AMELIA_NEUTRAL
 # 241 "data/maps/IntroScene/scripts.pory"
-	msgbox FollowerScript_Marcel_Text_3, MSGBOX_AUTOCLOSE
+	msgbox FollowerScript_Marcel_Text_0
 # 242 "data/maps/IntroScene/scripts.pory"
-	setflag FLAG_KNOW_VICE_FLAVOR
-	return
-
-FollowerScript_Marcel_3:
-# 234 "data/maps/IntroScene/scripts.pory"
-	goto_if_unset FLAG_KNOW_VICE_FLAVOR, FollowerScript_Marcel_1
-	goto FollowerScript_Marcel_2
-
-FollowerScript_Marcel_7:
-# 250 "data/maps/IntroScene/scripts.pory"
-	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_3, PORTRAIT_AMELIA_NEUTRAL
-# 251 "data/maps/IntroScene/scripts.pory"
-	msgbox FollowerScript_Marcel_Text_4
-# 252 "data/maps/IntroScene/scripts.pory"
 	speakername FollowerScript_Marcel_Text_1, PORTRAIT_KINGLER_NEUTRAL
-# 253 "data/maps/IntroScene/scripts.pory"
-	msgbox FollowerScript_Marcel_Text_5
+# 243 "data/maps/IntroScene/scripts.pory"
+	msgbox FollowerScript_Marcel_Text_2
+# 244 "data/maps/IntroScene/scripts.pory"
+	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_3, PORTRAIT_AMELIA_NEUTRAL
+# 245 "data/maps/IntroScene/scripts.pory"
+	msgbox FollowerScript_Marcel_Text_3, MSGBOX_AUTOCLOSE
+# 246 "data/maps/IntroScene/scripts.pory"
+	setflag FLAG_KNOW_VICE_FLAVOR
+	goto FollowerScript_Marcel_1
+
+FollowerScript_Marcel_4:
+# 238 "data/maps/IntroScene/scripts.pory"
+	goto_if_unset FLAG_KNOW_VICE_FLAVOR, FollowerScript_Marcel_2
+	goto FollowerScript_Marcel_3
+
+FollowerScript_Marcel_8:
 # 254 "data/maps/IntroScene/scripts.pory"
-	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_3, PORTRAIT_AMELIA_SMUG
+	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_3, PORTRAIT_AMELIA_NEUTRAL
 # 255 "data/maps/IntroScene/scripts.pory"
-	msgbox FollowerScript_Marcel_Text_6
+	msgbox FollowerScript_Marcel_Text_4
 # 256 "data/maps/IntroScene/scripts.pory"
-	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_3, PORTRAIT_AMELIA_SERIOUSLY
+	speakername FollowerScript_Marcel_Text_1, PORTRAIT_KINGLER_NEUTRAL
 # 257 "data/maps/IntroScene/scripts.pory"
+	msgbox FollowerScript_Marcel_Text_5
+# 258 "data/maps/IntroScene/scripts.pory"
+	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_3, PORTRAIT_AMELIA_SMUG
+# 259 "data/maps/IntroScene/scripts.pory"
+	msgbox FollowerScript_Marcel_Text_6
+# 260 "data/maps/IntroScene/scripts.pory"
+	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_3, PORTRAIT_AMELIA_SERIOUSLY
+# 261 "data/maps/IntroScene/scripts.pory"
 	msgbox FollowerScript_Marcel_Text_7, MSGBOX_AUTOCLOSE
-	return
+	goto FollowerScript_Marcel_1
+
+FollowerScript_Marcel_9:
+# 263 "data/maps/IntroScene/scripts.pory"
+	speakername FollowerScript_Marcel_Text_1, PORTRAIT_KINGLER_NEUTRAL
+# 264 "data/maps/IntroScene/scripts.pory"
+	msgbox FollowerScript_Marcel_Text_8, MSGBOX_AUTOCLOSE
+	goto FollowerScript_Marcel_1
+
+FollowerScript_Marcel_10:
+# 266 "data/maps/IntroScene/scripts.pory"
+	speakername FollowerScript_Marcel_Text_1, PORTRAIT_KINGLER_NEUTRAL
+# 267 "data/maps/IntroScene/scripts.pory"
+	msgbox FollowerScript_Marcel_Text_9, MSGBOX_AUTOCLOSE
+	goto FollowerScript_Marcel_1
 
 
 FollowerScript_Vice::
-# 268 "data/maps/IntroScene/scripts.pory"
-	random 3
-# 269 "data/maps/IntroScene/scripts.pory"
+# 276 "data/maps/IntroScene/scripts.pory"
+	lock
+# 277 "data/maps/IntroScene/scripts.pory"
+	faceplayer
+# 278 "data/maps/IntroScene/scripts.pory"
+	random 2
+# 279 "data/maps/IntroScene/scripts.pory"
 	switch VAR_RESULT
-# 271 "data/maps/IntroScene/scripts.pory"
-	case 0, FollowerScript_Vice_2
+# 281 "data/maps/IntroScene/scripts.pory"
+	case 0, FollowerScript_Vice_3
+# 296 "data/maps/IntroScene/scripts.pory"
+	case 1, FollowerScript_Vice_4
+FollowerScript_Vice_1:
+# 306 "data/maps/IntroScene/scripts.pory"
+	release
 	return
 
-FollowerScript_Vice_2:
-# 272 "data/maps/IntroScene/scripts.pory"
-	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_3, PORTRAIT_AMELIA_NEUTRAL
-# 273 "data/maps/IntroScene/scripts.pory"
-	msgbox FollowerScript_Vice_Text_0
-# 274 "data/maps/IntroScene/scripts.pory"
-	speakername FollowerScript_Vice_Text_1, PORTRAIT_FLYGON_NEUTRAL
-# 275 "data/maps/IntroScene/scripts.pory"
-	msgbox FollowerScript_Vice_Text_2
-# 276 "data/maps/IntroScene/scripts.pory"
-	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_3, PORTRAIT_AMELIA_STRAINED
-# 277 "data/maps/IntroScene/scripts.pory"
-	msgbox FollowerScript_Vice_Text_3
-# 279 "data/maps/IntroScene/scripts.pory"
-	speakername FollowerScript_Vice_Text_1, PORTRAIT_FLYGON_NEUTRAL
-# 280 "data/maps/IntroScene/scripts.pory"
-	msgbox FollowerScript_Vice_Text_4
+FollowerScript_Vice_3:
 # 282 "data/maps/IntroScene/scripts.pory"
-	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_3, PORTRAIT_AMELIA_STRAINED
+	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_3, PORTRAIT_AMELIA_NEUTRAL
 # 283 "data/maps/IntroScene/scripts.pory"
-	msgbox FollowerScript_Vice_Text_5
+	msgbox FollowerScript_Vice_Text_0
 # 284 "data/maps/IntroScene/scripts.pory"
 	speakername FollowerScript_Vice_Text_1, PORTRAIT_FLYGON_NEUTRAL
 # 285 "data/maps/IntroScene/scripts.pory"
+	msgbox FollowerScript_Vice_Text_2
+# 286 "data/maps/IntroScene/scripts.pory"
+	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_3, PORTRAIT_AMELIA_STRAINED
+# 287 "data/maps/IntroScene/scripts.pory"
+	msgbox FollowerScript_Vice_Text_3
+# 289 "data/maps/IntroScene/scripts.pory"
+	speakername FollowerScript_Vice_Text_1, PORTRAIT_FLYGON_NEUTRAL
+# 290 "data/maps/IntroScene/scripts.pory"
+	msgbox FollowerScript_Vice_Text_4
+# 292 "data/maps/IntroScene/scripts.pory"
+	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_3, PORTRAIT_AMELIA_STRAINED
+# 293 "data/maps/IntroScene/scripts.pory"
+	msgbox FollowerScript_Vice_Text_5
+# 294 "data/maps/IntroScene/scripts.pory"
+	speakername FollowerScript_Vice_Text_1, PORTRAIT_FLYGON_NEUTRAL
+# 295 "data/maps/IntroScene/scripts.pory"
 	msgbox FollowerScript_Vice_Text_6, MSGBOX_AUTOCLOSE
-	return
+	goto FollowerScript_Vice_1
+
+FollowerScript_Vice_4:
+# 297 "data/maps/IntroScene/scripts.pory"
+	speakername FollowerScript_Vice_Text_1, PORTRAIT_FLYGON_NEUTRAL
+# 298 "data/maps/IntroScene/scripts.pory"
+	msgbox FollowerScript_Vice_Text_7
+# 299 "data/maps/IntroScene/scripts.pory"
+	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_3, PORTRAIT_AMELIA_STRAINED
+# 300 "data/maps/IntroScene/scripts.pory"
+	msgbox FollowerScript_Vice_Text_8
+# 301 "data/maps/IntroScene/scripts.pory"
+	speakername FollowerScript_Vice_Text_1, PORTRAIT_FLYGON_NEUTRAL
+# 302 "data/maps/IntroScene/scripts.pory"
+	msgbox FollowerScript_Vice_Text_9
+# 303 "data/maps/IntroScene/scripts.pory"
+	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_3, PORTRAIT_AMELIA_NEUTRAL
+# 304 "data/maps/IntroScene/scripts.pory"
+	msgbox FollowerScript_Vice_Text_10, MSGBOX_AUTOCLOSE
+	goto FollowerScript_Vice_1
 
 
 FollowerScript_Bradley::
-# 293 "data/maps/IntroScene/scripts.pory"
-	random 3
-# 294 "data/maps/IntroScene/scripts.pory"
-	switch VAR_RESULT
-# 296 "data/maps/IntroScene/scripts.pory"
-	case 0, FollowerScript_Bradley_2
-# 315 "data/maps/IntroScene/scripts.pory"
-	case 1, FollowerScript_Bradley_3
-# 325 "data/maps/IntroScene/scripts.pory"
-	case 2, FollowerScript_Bradley_4
-	return
-
-FollowerScript_Bradley_2:
-# 297 "data/maps/IntroScene/scripts.pory"
-	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_5, PORTRAIT_NIDOKING_NEUTRAL, PORTRAIT_DEFAULT_LEFT
-# 298 "data/maps/IntroScene/scripts.pory"
-	msgbox FollowerScript_Bradley_Text_0
-# 299 "data/maps/IntroScene/scripts.pory"
-	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_3, PORTRAIT_AMELIA_NEUTRAL
-# 300 "data/maps/IntroScene/scripts.pory"
-	msgbox FollowerScript_Bradley_Text_1
-# 301 "data/maps/IntroScene/scripts.pory"
-	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_5, PORTRAIT_NIDOKING_NEUTRAL, PORTRAIT_DEFAULT_LEFT
-# 302 "data/maps/IntroScene/scripts.pory"
-	msgbox FollowerScript_Bradley_Text_2
-# 304 "data/maps/IntroScene/scripts.pory"
-	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_3, PORTRAIT_AMELIA_NEUTRAL
-# 305 "data/maps/IntroScene/scripts.pory"
-	msgbox FollowerScript_Bradley_Text_3
-# 306 "data/maps/IntroScene/scripts.pory"
-	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_3, PORTRAIT_AMELIA_SERIOUSLY
-# 307 "data/maps/IntroScene/scripts.pory"
-	msgbox FollowerScript_Bradley_Text_4
-# 308 "data/maps/IntroScene/scripts.pory"
-	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_3, PORTRAIT_AMELIA_NEUTRAL
-# 309 "data/maps/IntroScene/scripts.pory"
-	msgbox FollowerScript_Bradley_Text_5
-# 310 "data/maps/IntroScene/scripts.pory"
-	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_5, PORTRAIT_NIDOKING_NEUTRAL, PORTRAIT_DEFAULT_LEFT
 # 311 "data/maps/IntroScene/scripts.pory"
-	msgbox FollowerScript_Bradley_Text_6
+	lock
+# 312 "data/maps/IntroScene/scripts.pory"
+	faceplayer
 # 313 "data/maps/IntroScene/scripts.pory"
-	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_3, PORTRAIT_AMELIA_SERIOUSLY
+	random 3
 # 314 "data/maps/IntroScene/scripts.pory"
-	msgbox FollowerScript_Bradley_Text_7, MSGBOX_AUTOCLOSE
+	switch VAR_RESULT
+# 316 "data/maps/IntroScene/scripts.pory"
+	case 0, FollowerScript_Bradley_3
+# 335 "data/maps/IntroScene/scripts.pory"
+	case 1, FollowerScript_Bradley_4
+# 345 "data/maps/IntroScene/scripts.pory"
+	case 2, FollowerScript_Bradley_5
+FollowerScript_Bradley_1:
+# 360 "data/maps/IntroScene/scripts.pory"
+	release
 	return
 
 FollowerScript_Bradley_3:
-# 316 "data/maps/IntroScene/scripts.pory"
-	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_3, PORTRAIT_AMELIA_NEUTRAL
 # 317 "data/maps/IntroScene/scripts.pory"
-	msgbox FollowerScript_Bradley_Text_8
-# 318 "data/maps/IntroScene/scripts.pory"
 	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_5, PORTRAIT_NIDOKING_NEUTRAL, PORTRAIT_DEFAULT_LEFT
+# 318 "data/maps/IntroScene/scripts.pory"
+	msgbox FollowerScript_Bradley_Text_0
 # 319 "data/maps/IntroScene/scripts.pory"
-	msgbox FollowerScript_Bradley_Text_9
-# 320 "data/maps/IntroScene/scripts.pory"
 	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_3, PORTRAIT_AMELIA_NEUTRAL
+# 320 "data/maps/IntroScene/scripts.pory"
+	msgbox FollowerScript_Bradley_Text_1
 # 321 "data/maps/IntroScene/scripts.pory"
-	msgbox FollowerScript_Bradley_Text_10
-# 323 "data/maps/IntroScene/scripts.pory"
-	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_5, PORTRAIT_NIDOKING_NERVOUS, PORTRAIT_DEFAULT_LEFT
+	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_5, PORTRAIT_NIDOKING_NEUTRAL, PORTRAIT_DEFAULT_LEFT
+# 322 "data/maps/IntroScene/scripts.pory"
+	msgbox FollowerScript_Bradley_Text_2
 # 324 "data/maps/IntroScene/scripts.pory"
-	msgbox FollowerScript_Bradley_Text_11, MSGBOX_AUTOCLOSE
-	return
+	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_3, PORTRAIT_AMELIA_NEUTRAL
+# 325 "data/maps/IntroScene/scripts.pory"
+	msgbox FollowerScript_Bradley_Text_3
+# 326 "data/maps/IntroScene/scripts.pory"
+	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_3, PORTRAIT_AMELIA_SERIOUSLY
+# 327 "data/maps/IntroScene/scripts.pory"
+	msgbox FollowerScript_Bradley_Text_4
+# 328 "data/maps/IntroScene/scripts.pory"
+	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_3, PORTRAIT_AMELIA_NEUTRAL
+# 329 "data/maps/IntroScene/scripts.pory"
+	msgbox FollowerScript_Bradley_Text_5
+# 330 "data/maps/IntroScene/scripts.pory"
+	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_5, PORTRAIT_NIDOKING_NEUTRAL, PORTRAIT_DEFAULT_LEFT
+# 331 "data/maps/IntroScene/scripts.pory"
+	msgbox FollowerScript_Bradley_Text_6
+# 333 "data/maps/IntroScene/scripts.pory"
+	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_3, PORTRAIT_AMELIA_SERIOUSLY
+# 334 "data/maps/IntroScene/scripts.pory"
+	msgbox FollowerScript_Bradley_Text_7, MSGBOX_AUTOCLOSE
+	goto FollowerScript_Bradley_1
 
 FollowerScript_Bradley_4:
-# 326 "data/maps/IntroScene/scripts.pory"
-	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_5, PORTRAIT_NIDOKING_NEUTRAL, PORTRAIT_DEFAULT_LEFT
-# 327 "data/maps/IntroScene/scripts.pory"
-	msgbox FollowerScript_Bradley_Text_12
-# 329 "data/maps/IntroScene/scripts.pory"
-	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_3, PORTRAIT_AMELIA_NEUTRAL
-# 330 "data/maps/IntroScene/scripts.pory"
-	msgbox FollowerScript_Bradley_Text_13
-# 331 "data/maps/IntroScene/scripts.pory"
-	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_5, PORTRAIT_NIDOKING_NEUTRAL, PORTRAIT_DEFAULT_LEFT
-# 332 "data/maps/IntroScene/scripts.pory"
-	msgbox FollowerScript_Bradley_Text_14
-# 335 "data/maps/IntroScene/scripts.pory"
-	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_3, PORTRAIT_AMELIA_SHOCK
 # 336 "data/maps/IntroScene/scripts.pory"
-	msgbox FollowerScript_Bradley_Text_15
+	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_3, PORTRAIT_AMELIA_NEUTRAL
 # 337 "data/maps/IntroScene/scripts.pory"
-	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_5, PORTRAIT_NIDOKING_NEUTRAL, PORTRAIT_DEFAULT_LEFT
+	msgbox FollowerScript_Bradley_Text_8
 # 338 "data/maps/IntroScene/scripts.pory"
+	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_5, PORTRAIT_NIDOKING_NEUTRAL, PORTRAIT_DEFAULT_LEFT
+# 339 "data/maps/IntroScene/scripts.pory"
+	msgbox FollowerScript_Bradley_Text_9
+# 340 "data/maps/IntroScene/scripts.pory"
+	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_3, PORTRAIT_AMELIA_NEUTRAL
+# 341 "data/maps/IntroScene/scripts.pory"
+	msgbox FollowerScript_Bradley_Text_10
+# 343 "data/maps/IntroScene/scripts.pory"
+	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_5, PORTRAIT_NIDOKING_NERVOUS, PORTRAIT_DEFAULT_LEFT
+# 344 "data/maps/IntroScene/scripts.pory"
+	msgbox FollowerScript_Bradley_Text_11, MSGBOX_AUTOCLOSE
+	goto FollowerScript_Bradley_1
+
+FollowerScript_Bradley_5:
+# 346 "data/maps/IntroScene/scripts.pory"
+	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_5, PORTRAIT_NIDOKING_NEUTRAL, PORTRAIT_DEFAULT_LEFT
+# 347 "data/maps/IntroScene/scripts.pory"
+	msgbox FollowerScript_Bradley_Text_12
+# 349 "data/maps/IntroScene/scripts.pory"
+	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_3, PORTRAIT_AMELIA_NEUTRAL
+# 350 "data/maps/IntroScene/scripts.pory"
+	msgbox FollowerScript_Bradley_Text_13
+# 351 "data/maps/IntroScene/scripts.pory"
+	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_5, PORTRAIT_NIDOKING_NEUTRAL, PORTRAIT_DEFAULT_LEFT
+# 352 "data/maps/IntroScene/scripts.pory"
+	msgbox FollowerScript_Bradley_Text_14
+# 355 "data/maps/IntroScene/scripts.pory"
+	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_3, PORTRAIT_AMELIA_SHOCK
+# 356 "data/maps/IntroScene/scripts.pory"
+	msgbox FollowerScript_Bradley_Text_15
+# 357 "data/maps/IntroScene/scripts.pory"
+	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_5, PORTRAIT_NIDOKING_NEUTRAL, PORTRAIT_DEFAULT_LEFT
+# 358 "data/maps/IntroScene/scripts.pory"
 	msgbox FollowerScript_Bradley_Text_16, MSGBOX_AUTOCLOSE
-	return
+	goto FollowerScript_Bradley_1
 
 
 FollowerScript_Python::
-# 344 "data/maps/IntroScene/scripts.pory"
+# 365 "data/maps/IntroScene/scripts.pory"
+	lock
+# 366 "data/maps/IntroScene/scripts.pory"
+	faceplayer
+# 367 "data/maps/IntroScene/scripts.pory"
 	random 3
-# 345 "data/maps/IntroScene/scripts.pory"
+# 368 "data/maps/IntroScene/scripts.pory"
 	switch VAR_RESULT
-# 347 "data/maps/IntroScene/scripts.pory"
-	case 0, FollowerScript_Python_2
-# 362 "data/maps/IntroScene/scripts.pory"
-	case 1, FollowerScript_Python_3
-# 382 "data/maps/IntroScene/scripts.pory"
-	case 2, FollowerScript_Python_4
-	return
-
-FollowerScript_Python_2:
-# 348 "data/maps/IntroScene/scripts.pory"
-	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_3, PORTRAIT_AMELIA_NEUTRAL
-# 349 "data/maps/IntroScene/scripts.pory"
-	msgbox FollowerScript_Python_Text_0
-# 350 "data/maps/IntroScene/scripts.pory"
-	speakername FollowerScript_Python_Text_1, PORTRAIT_ZOROARK_NEUTRAL
-# 351 "data/maps/IntroScene/scripts.pory"
-	msgbox FollowerScript_Python_Text_2
-# 352 "data/maps/IntroScene/scripts.pory"
-	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_3, PORTRAIT_AMELIA_SMUG
-# 353 "data/maps/IntroScene/scripts.pory"
-	msgbox FollowerScript_Python_Text_3
-# 354 "data/maps/IntroScene/scripts.pory"
-	speakername FollowerScript_Python_Text_1, PORTRAIT_ZOROARK_NERVOUS
-# 355 "data/maps/IntroScene/scripts.pory"
-	msgbox FollowerScript_Python_Text_4
-# 356 "data/maps/IntroScene/scripts.pory"
-	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_3, PORTRAIT_AMELIA_SMUG
-# 357 "data/maps/IntroScene/scripts.pory"
-	msgbox FollowerScript_Python_Text_5
-# 358 "data/maps/IntroScene/scripts.pory"
-	speakername FollowerScript_Python_Text_1, PORTRAIT_ZOROARK_NERVOUS
-# 359 "data/maps/IntroScene/scripts.pory"
-	msgbox FollowerScript_Python_Text_6
-# 360 "data/maps/IntroScene/scripts.pory"
-	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_3, PORTRAIT_AMELIA_SMUG
-# 361 "data/maps/IntroScene/scripts.pory"
-	msgbox FollowerScript_Python_Text_7, MSGBOX_AUTOCLOSE
+# 370 "data/maps/IntroScene/scripts.pory"
+	case 0, FollowerScript_Python_3
+# 385 "data/maps/IntroScene/scripts.pory"
+	case 1, FollowerScript_Python_4
+# 405 "data/maps/IntroScene/scripts.pory"
+	case 2, FollowerScript_Python_5
+FollowerScript_Python_1:
+# 417 "data/maps/IntroScene/scripts.pory"
+	release
 	return
 
 FollowerScript_Python_3:
-# 363 "data/maps/IntroScene/scripts.pory"
-	speakername FollowerScript_Python_Text_1, PORTRAIT_ZOROARK_NEUTRAL
-# 364 "data/maps/IntroScene/scripts.pory"
-	msgbox FollowerScript_Python_Text_8
-# 365 "data/maps/IntroScene/scripts.pory"
-	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_3, PORTRAIT_AMELIA_NEUTRAL
-# 366 "data/maps/IntroScene/scripts.pory"
-	msgbox FollowerScript_Python_Text_9
-# 368 "data/maps/IntroScene/scripts.pory"
-	speakername FollowerScript_Python_Text_1, PORTRAIT_ZOROARK_NEUTRAL
-# 369 "data/maps/IntroScene/scripts.pory"
-	msgbox FollowerScript_Python_Text_10
-# 370 "data/maps/IntroScene/scripts.pory"
-	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_3, PORTRAIT_AMELIA_NEUTRAL
 # 371 "data/maps/IntroScene/scripts.pory"
-	msgbox FollowerScript_Python_Text_11
-# 372 "data/maps/IntroScene/scripts.pory"
-	speakername FollowerScript_Python_Text_1, PORTRAIT_ZOROARK_NEUTRAL
-# 373 "data/maps/IntroScene/scripts.pory"
-	msgbox FollowerScript_Python_Text_12
-# 374 "data/maps/IntroScene/scripts.pory"
 	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_3, PORTRAIT_AMELIA_NEUTRAL
-# 375 "data/maps/IntroScene/scripts.pory"
-	msgbox FollowerScript_Python_Text_13
-# 376 "data/maps/IntroScene/scripts.pory"
+# 372 "data/maps/IntroScene/scripts.pory"
+	msgbox FollowerScript_Python_Text_0
+# 373 "data/maps/IntroScene/scripts.pory"
 	speakername FollowerScript_Python_Text_1, PORTRAIT_ZOROARK_NEUTRAL
+# 374 "data/maps/IntroScene/scripts.pory"
+	msgbox FollowerScript_Python_Text_2
+# 375 "data/maps/IntroScene/scripts.pory"
+	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_3, PORTRAIT_AMELIA_SMUG
+# 376 "data/maps/IntroScene/scripts.pory"
+	msgbox FollowerScript_Python_Text_3
 # 377 "data/maps/IntroScene/scripts.pory"
-	msgbox FollowerScript_Python_Text_14
+	speakername FollowerScript_Python_Text_1, PORTRAIT_ZOROARK_NERVOUS
 # 378 "data/maps/IntroScene/scripts.pory"
-	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_3, PORTRAIT_AMELIA_SERIOUSLY
+	msgbox FollowerScript_Python_Text_4
 # 379 "data/maps/IntroScene/scripts.pory"
-	msgbox FollowerScript_Python_Text_15
+	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_3, PORTRAIT_AMELIA_SMUG
 # 380 "data/maps/IntroScene/scripts.pory"
-	speakername FollowerScript_Python_Text_1, PORTRAIT_ZOROARK_LAUGH
+	msgbox FollowerScript_Python_Text_5
 # 381 "data/maps/IntroScene/scripts.pory"
-	msgbox FollowerScript_Python_Text_16, MSGBOX_AUTOCLOSE
-	return
+	speakername FollowerScript_Python_Text_1, PORTRAIT_ZOROARK_NERVOUS
+# 382 "data/maps/IntroScene/scripts.pory"
+	msgbox FollowerScript_Python_Text_6
+# 383 "data/maps/IntroScene/scripts.pory"
+	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_3, PORTRAIT_AMELIA_SMUG
+# 384 "data/maps/IntroScene/scripts.pory"
+	msgbox FollowerScript_Python_Text_7, MSGBOX_AUTOCLOSE
+	goto FollowerScript_Python_1
 
 FollowerScript_Python_4:
-# 383 "data/maps/IntroScene/scripts.pory"
-	speakername FollowerScript_Python_Text_1, PORTRAIT_ZOROARK_LAUGH
-# 384 "data/maps/IntroScene/scripts.pory"
-	msgbox FollowerScript_Python_Text_17
-# 385 "data/maps/IntroScene/scripts.pory"
-	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_3, PORTRAIT_AMELIA_SERIOUSLY
 # 386 "data/maps/IntroScene/scripts.pory"
-	msgbox FollowerScript_Python_Text_18
+	speakername FollowerScript_Python_Text_1, PORTRAIT_ZOROARK_NEUTRAL
 # 387 "data/maps/IntroScene/scripts.pory"
-	speakername FollowerScript_Python_Text_1, PORTRAIT_ZOROARK_LAUGH
+	msgbox FollowerScript_Python_Text_8
 # 388 "data/maps/IntroScene/scripts.pory"
-	msgbox FollowerScript_Python_Text_19
+	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_3, PORTRAIT_AMELIA_NEUTRAL
 # 389 "data/maps/IntroScene/scripts.pory"
-	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_3, PORTRAIT_AMELIA_SERIOUSLY
-# 390 "data/maps/IntroScene/scripts.pory"
-	msgbox FollowerScript_Python_Text_20
+	msgbox FollowerScript_Python_Text_9
 # 391 "data/maps/IntroScene/scripts.pory"
 	speakername FollowerScript_Python_Text_1, PORTRAIT_ZOROARK_NEUTRAL
 # 392 "data/maps/IntroScene/scripts.pory"
+	msgbox FollowerScript_Python_Text_10
+# 393 "data/maps/IntroScene/scripts.pory"
+	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_3, PORTRAIT_AMELIA_NEUTRAL
+# 394 "data/maps/IntroScene/scripts.pory"
+	msgbox FollowerScript_Python_Text_11
+# 395 "data/maps/IntroScene/scripts.pory"
+	speakername FollowerScript_Python_Text_1, PORTRAIT_ZOROARK_NEUTRAL
+# 396 "data/maps/IntroScene/scripts.pory"
+	msgbox FollowerScript_Python_Text_12
+# 397 "data/maps/IntroScene/scripts.pory"
+	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_3, PORTRAIT_AMELIA_NEUTRAL
+# 398 "data/maps/IntroScene/scripts.pory"
+	msgbox FollowerScript_Python_Text_13
+# 399 "data/maps/IntroScene/scripts.pory"
+	speakername FollowerScript_Python_Text_1, PORTRAIT_ZOROARK_NEUTRAL
+# 400 "data/maps/IntroScene/scripts.pory"
+	msgbox FollowerScript_Python_Text_14
+# 401 "data/maps/IntroScene/scripts.pory"
+	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_3, PORTRAIT_AMELIA_SERIOUSLY
+# 402 "data/maps/IntroScene/scripts.pory"
+	msgbox FollowerScript_Python_Text_15
+# 403 "data/maps/IntroScene/scripts.pory"
+	speakername FollowerScript_Python_Text_1, PORTRAIT_ZOROARK_LAUGH
+# 404 "data/maps/IntroScene/scripts.pory"
+	msgbox FollowerScript_Python_Text_16, MSGBOX_AUTOCLOSE
+	goto FollowerScript_Python_1
+
+FollowerScript_Python_5:
+# 406 "data/maps/IntroScene/scripts.pory"
+	speakername FollowerScript_Python_Text_1, PORTRAIT_ZOROARK_LAUGH
+# 407 "data/maps/IntroScene/scripts.pory"
+	msgbox FollowerScript_Python_Text_17
+# 408 "data/maps/IntroScene/scripts.pory"
+	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_3, PORTRAIT_AMELIA_SERIOUSLY
+# 409 "data/maps/IntroScene/scripts.pory"
+	msgbox FollowerScript_Python_Text_18
+# 410 "data/maps/IntroScene/scripts.pory"
+	speakername FollowerScript_Python_Text_1, PORTRAIT_ZOROARK_LAUGH
+# 411 "data/maps/IntroScene/scripts.pory"
+	msgbox FollowerScript_Python_Text_19
+# 412 "data/maps/IntroScene/scripts.pory"
+	speakername IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_3, PORTRAIT_AMELIA_SERIOUSLY
+# 413 "data/maps/IntroScene/scripts.pory"
+	msgbox FollowerScript_Python_Text_20
+# 414 "data/maps/IntroScene/scripts.pory"
+	speakername FollowerScript_Python_Text_1, PORTRAIT_ZOROARK_NEUTRAL
+# 415 "data/maps/IntroScene/scripts.pory"
 	msgbox FollowerScript_Python_Text_21, MSGBOX_AUTOCLOSE
-	return
+	goto FollowerScript_Python_1
 
 
 IntroScene_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_0:
@@ -859,38 +933,37 @@ FollowerScript_Demivee_Text_5:
 
 FollowerScript_Demivee_Text_6:
 # 137 "data/maps/IntroScene/scripts.pory"
-	.string "Well, then, you can have a little\n"
-	.string "secret info…\p"
-	.string "After I decide how you trigger\n"
-	.string "the superboss, anyway.$"
+	.string "I would have given you a hint on\n"
+	.string "how to find the superboss, but he\l"
+	.string "got cut for time. Sorry!$"
 
 FollowerScript_Demivee_Text_7:
-# 141 "data/maps/IntroScene/scripts.pory"
+# 140 "data/maps/IntroScene/scripts.pory"
 	.string "Just keep moving forward! If your\n"
 	.string "team members are still around this\l"
 	.string "area, they'll probably gather in\l"
 	.string "the city up ahead.$"
 
 FollowerScript_Demivee_Text_8:
-# 143 "data/maps/IntroScene/scripts.pory"
+# 142 "data/maps/IntroScene/scripts.pory"
 	.string "Hey, we found one! That's a good\n"
 	.string "sign that the others are here.\l"
 	.string "Keep heading toward Elthe City.$"
 
 FollowerScript_Demivee_Text_9:
-# 145 "data/maps/IntroScene/scripts.pory"
+# 144 "data/maps/IntroScene/scripts.pory"
 	.string "Marcel said Vice would hide from the\n"
 	.string "rain, right? Let's check inside\l"
 	.string "these buildings.$"
 
 FollowerScript_Demivee_Text_10:
-# 147 "data/maps/IntroScene/scripts.pory"
+# 146 "data/maps/IntroScene/scripts.pory"
 	.string "So Vice was in the Bakery…but she\n"
 	.string "seems a bit pissed off. I'm not sure\l"
 	.string "she'll want to just come with us.$"
 
 FollowerScript_Demivee_Text_11:
-# 149 "data/maps/IntroScene/scripts.pory"
+# 148 "data/maps/IntroScene/scripts.pory"
 	.string "We need to know what kind of treat\n"
 	.string "Vice likes so we can get her one.\p"
 	.string "Do you think maybe Marcel would know?\n"
@@ -899,31 +972,31 @@ FollowerScript_Demivee_Text_11:
 	.string "but it's worth a shot, isn't it?$"
 
 FollowerScript_Demivee_Text_12:
-# 151 "data/maps/IntroScene/scripts.pory"
+# 150 "data/maps/IntroScene/scripts.pory"
 	.string "Alright, let's ask the bakers to\n"
 	.string "make us a spicy treat for Vice.$"
 
 FollowerScript_Demivee_Text_13:
-# 153 "data/maps/IntroScene/scripts.pory"
+# 152 "data/maps/IntroScene/scripts.pory"
 	.string "So we need to go back to Road to Elthe\n"
 	.string "and head east. I think I saw some\l"
 	.string "stumps we could jump across, near\l"
 	.string "where we met Marcel.$"
 
 FollowerScript_Demivee_Text_14:
-# 155 "data/maps/IntroScene/scripts.pory"
+# 154 "data/maps/IntroScene/scripts.pory"
 	.string "We need to find 3 of a berry that's\n"
 	.string "high in Spicy and low in other flavors.\p"
 	.string "Don't forget to check the berry tag!$"
 
 FollowerScript_Demivee_Text_15:
-# 159 "data/maps/IntroScene/scripts.pory"
+# 158 "data/maps/IntroScene/scripts.pory"
 	.string "Have you checked the businesses near\n"
 	.string "the entrance to town? Vice might have\l"
 	.string "taken shelter as soon as she could.$"
 
 FollowerScript_Demivee_Text_16:
-# 163 "data/maps/IntroScene/scripts.pory"
+# 162 "data/maps/IntroScene/scripts.pory"
 	.string "Did you try fighting in the arena\n"
 	.string "at the north end of town?\p"
 	.string "If you're having trouble winning, try\n"
@@ -932,7 +1005,7 @@ FollowerScript_Demivee_Text_16:
 	.string "foes will use.$"
 
 FollowerScript_Demivee_Text_17:
-# 168 "data/maps/IntroScene/scripts.pory"
+# 167 "data/maps/IntroScene/scripts.pory"
 	.string "Your last missing friend is in\n"
 	.string "disguise somewhere in town.\p"
 	.string "Have Bradley follow you and try to\n"
@@ -940,7 +1013,7 @@ FollowerScript_Demivee_Text_17:
 	.string "normally there.$"
 
 FollowerScript_Demivee_Text_18:
-# 172 "data/maps/IntroScene/scripts.pory"
+# 171 "data/maps/IntroScene/scripts.pory"
 	.string "You've got your team back together,\n"
 	.string "but you still need to help the town.\p"
 	.string "Python said you could clear up the\n"
@@ -949,38 +1022,38 @@ FollowerScript_Demivee_Text_18:
 	.string "end of town.$"
 
 FollowerScript_Demivee_Text_19:
-# 175 "data/maps/IntroScene/scripts.pory"
+# 174 "data/maps/IntroScene/scripts.pory"
 	.string "Huh? I didn't know you could reach\n"
 	.string "this game state! My mistake!$"
 
 FollowerScript_Demivee_Text_20:
-# 180 "data/maps/IntroScene/scripts.pory"
+# 179 "data/maps/IntroScene/scripts.pory"
 	.string "We can rest at the inn. Our room is\n"
 	.string "on the right, up the stairs.$"
 
 FollowerScript_Demivee_Text_21:
-# 184 "data/maps/IntroScene/scripts.pory"
+# 183 "data/maps/IntroScene/scripts.pory"
 	.string "Now that we've cleared up the issue,\n"
 	.string "we can get our room key from the\l"
 	.string "front desk at the inn.$"
 
 FollowerScript_Demivee_Text_22:
-# 188 "data/maps/IntroScene/scripts.pory"
+# 187 "data/maps/IntroScene/scripts.pory"
 	.string "We can get a room key if we quiet\n"
 	.string "down the weathervane. Climb up the\l"
 	.string "ladder on the outside of the inn.$"
 
 FollowerScript_Demivee_Text_23:
-# 192 "data/maps/IntroScene/scripts.pory"
+# 191 "data/maps/IntroScene/scripts.pory"
 	.string "There's an inn in town. If you need\n"
 	.string "to rest, you could try to get a room.$"
 
 FollowerScript_Demivee_Text_24:
-# 199 "data/maps/IntroScene/scripts.pory"
+# 198 "data/maps/IntroScene/scripts.pory"
 	.string "Huh?? How'd you get back here?$"
 
 FollowerScript_Demivee_Text_25:
-# 201 "data/maps/IntroScene/scripts.pory"
+# 200 "data/maps/IntroScene/scripts.pory"
 	.string "This is the road to Elthe City.\n"
 	.string "It normally looks a bit nicer than\l"
 	.string "this, but the flood and constant rain\l"
@@ -991,7 +1064,7 @@ FollowerScript_Demivee_Text_25:
 	.string "try scavenging in the pools anyway.$"
 
 FollowerScript_Demivee_Text_26:
-# 204 "data/maps/IntroScene/scripts.pory"
+# 203 "data/maps/IntroScene/scripts.pory"
 	.string "This is Elthe City.\p"
 	.string "It's been raining here for as long\n"
 	.string "as anyone can remember.\p"
@@ -1006,14 +1079,14 @@ FollowerScript_Demivee_Text_26:
 	.string "What do you think, Amelia?$"
 
 FollowerScript_Demivee_Text_27:
-# 211 "data/maps/IntroScene/scripts.pory"
+# 210 "data/maps/IntroScene/scripts.pory"
 	.string "This is the Elysi Inn. It's a motel\n"
 	.string "for people passing through here.\p"
 	.string "If you need to heal us after battle,\n"
 	.string "you could ask for a room here.$"
 
 FollowerScript_Demivee_Text_28:
-# 214 "data/maps/IntroScene/scripts.pory"
+# 213 "data/maps/IntroScene/scripts.pory"
 	.string "This is Pomona Bread, the bakery.\n"
 	.string "They make all sorts of baked goods.\p"
 	.string "I started eating crystals after the\n"
@@ -1026,64 +1099,87 @@ FollowerScript_Demivee_Text_28:
 	.string "wrong with haunted bread.$"
 
 FollowerScript_Demivee_Text_29:
-# 218 "data/maps/IntroScene/scripts.pory"
+# 217 "data/maps/IntroScene/scripts.pory"
+	.string "This is an Arcean Church.\n"
+	.string "They derive their philosophy from\l"
+	.string "the Legendary Pokémon Arceus.\p"
+	.string "They don't exactly worship Arceus, but\n"
+	.string "they take it as a model for the\l"
+	.string "perfect being. …Which kind of sounds\l"
+	.string "like worship now that I say it out loud.$"
+
+FollowerScript_Demivee_Text_30:
+# 220 "data/maps/IntroScene/scripts.pory"
 	.string "Sorry, I forgot to write an entry\n"
 	.string "for this area, ahaha...$"
 
 FollowerScript_Marcel_Text_0:
-# 237 "data/maps/IntroScene/scripts.pory"
+# 241 "data/maps/IntroScene/scripts.pory"
 	.string "Hey, Marcel, do you know what Vice's\n"
 	.string "favorite flavor is?$"
 
 FollowerScript_Marcel_Text_1:
-# 238 "data/maps/IntroScene/scripts.pory"
+# 242 "data/maps/IntroScene/scripts.pory"
 	.string "Marcel$"
 
 FollowerScript_Marcel_Text_2:
-# 239 "data/maps/IntroScene/scripts.pory"
+# 243 "data/maps/IntroScene/scripts.pory"
 	.string "Yeah, she loves spicy things. She\n"
 	.string "would always eat the Spelon Berries\l"
 	.string "off of the plant before you could\l"
 	.string "even pick them.$"
 
 FollowerScript_Marcel_Text_3:
-# 241 "data/maps/IntroScene/scripts.pory"
+# 245 "data/maps/IntroScene/scripts.pory"
 	.string "Oh. Cool. That was easy.$"
 
 FollowerScript_Marcel_Text_4:
-# 251 "data/maps/IntroScene/scripts.pory"
+# 255 "data/maps/IntroScene/scripts.pory"
 	.string "How did you and Vice get together?$"
 
 FollowerScript_Marcel_Text_5:
-# 253 "data/maps/IntroScene/scripts.pory"
+# 257 "data/maps/IntroScene/scripts.pory"
 	.string "I knew Guillotine…\n"
 	.string "She knew Outrage…\l"
 	.string "Can I make it any more obvious?$"
 
 FollowerScript_Marcel_Text_6:
-# 255 "data/maps/IntroScene/scripts.pory"
+# 259 "data/maps/IntroScene/scripts.pory"
 	.string "Ah, yes, incredible violence. The\n"
 	.string "foundation of any good relationship.$"
 
 FollowerScript_Marcel_Text_7:
-# 257 "data/maps/IntroScene/scripts.pory"
+# 261 "data/maps/IntroScene/scripts.pory"
 	.string "…That came out wrong.$"
 
+FollowerScript_Marcel_Text_8:
+# 264 "data/maps/IntroScene/scripts.pory"
+	.string "Normally rain makes me feel good,\n"
+	.string "'cuz I'm a Water type and all,\l"
+	.string "but something about this rain just\l"
+	.string "isn't right. It feels slimy.$"
+
+FollowerScript_Marcel_Text_9:
+# 267 "data/maps/IntroScene/scripts.pory"
+	.string "I bet with my Guillotine, I could\n"
+	.string "chop up those branches.\l"
+	.string "But I don't really feel like it.$"
+
 FollowerScript_Vice_Text_0:
-# 273 "data/maps/IntroScene/scripts.pory"
+# 283 "data/maps/IntroScene/scripts.pory"
 	.string "Vice, do you remember Valora?$"
 
 FollowerScript_Vice_Text_1:
-# 274 "data/maps/IntroScene/scripts.pory"
+# 284 "data/maps/IntroScene/scripts.pory"
 	.string "Vice$"
 
 FollowerScript_Vice_Text_2:
-# 275 "data/maps/IntroScene/scripts.pory"
+# 285 "data/maps/IntroScene/scripts.pory"
 	.string "Valora, Valora, Valora…hmm, was she\n"
 	.string "a Bellsprout?$"
 
 FollowerScript_Vice_Text_3:
-# 277 "data/maps/IntroScene/scripts.pory"
+# 287 "data/maps/IntroScene/scripts.pory"
 	.string "Yeah, I think so. I'm having trouble\n"
 	.string "remembering anything else about her.\p"
 	.string "And since I know this memory thing\n"
@@ -1091,7 +1187,7 @@ FollowerScript_Vice_Text_3:
 	.string "something bad happened to her.$"
 
 FollowerScript_Vice_Text_4:
-# 280 "data/maps/IntroScene/scripts.pory"
+# 290 "data/maps/IntroScene/scripts.pory"
 	.string "I see…\p"
 	.string "I don't think you should worry about\n"
 	.string "it, Amelia. It's not like you're\l"
@@ -1099,25 +1195,45 @@ FollowerScript_Vice_Text_4:
 	.string "ACTIVELY hurting your memory.$"
 
 FollowerScript_Vice_Text_5:
-# 283 "data/maps/IntroScene/scripts.pory"
+# 293 "data/maps/IntroScene/scripts.pory"
 	.string "I guess you're right…I still feel\n"
 	.string "guilty, though.$"
 
 FollowerScript_Vice_Text_6:
-# 285 "data/maps/IntroScene/scripts.pory"
+# 295 "data/maps/IntroScene/scripts.pory"
 	.string "Don't! I'll bite you!$"
 
-FollowerScript_Bradley_Text_0:
+FollowerScript_Vice_Text_7:
 # 298 "data/maps/IntroScene/scripts.pory"
+	.string "Did you ever visit that church?\n"
+	.string "They're Arceans up there.$"
+
+FollowerScript_Vice_Text_8:
+# 300 "data/maps/IntroScene/scripts.pory"
+	.string "Bleck. You remember Arceans are the\n"
+	.string "reason we got into that whole mess\l"
+	.string "in Sinnoh, don't you?$"
+
+FollowerScript_Vice_Text_9:
+# 302 "data/maps/IntroScene/scripts.pory"
+	.string "So? You're the reason I got involved\n"
+	.string "in that mess, but I still like you.$"
+
+FollowerScript_Vice_Text_10:
+# 304 "data/maps/IntroScene/scripts.pory"
+	.string "…Touché.$"
+
+FollowerScript_Bradley_Text_0:
+# 318 "data/maps/IntroScene/scripts.pory"
 	.string "Do you remember our first real battle?$"
 
 FollowerScript_Bradley_Text_1:
-# 300 "data/maps/IntroScene/scripts.pory"
+# 320 "data/maps/IntroScene/scripts.pory"
 	.string "Hmm…it wasn't in Alola, was it?\n"
 	.string "Alola is a blur to me.$"
 
 FollowerScript_Bradley_Text_2:
-# 302 "data/maps/IntroScene/scripts.pory"
+# 322 "data/maps/IntroScene/scripts.pory"
 	.string "No, it was in Johto. Back then, you\n"
 	.string "visited my hiding place by chance,\l"
 	.string "and your Dunsparce convinced me to\l"
@@ -1127,25 +1243,25 @@ FollowerScript_Bradley_Text_2:
 	.string "find out why it targeted us?$"
 
 FollowerScript_Bradley_Text_3:
-# 305 "data/maps/IntroScene/scripts.pory"
+# 325 "data/maps/IntroScene/scripts.pory"
 	.string "Hm? Oh, yes, I remember. That was\n"
 	.string "the night that…$"
 
 FollowerScript_Bradley_Text_4:
-# 307 "data/maps/IntroScene/scripts.pory"
+# 327 "data/maps/IntroScene/scripts.pory"
 	.string "The night that I…\p"
 	.string "Yeah, I think that was my fault.\n"
 	.string "I, uh, attracted it somehow.$"
 
 FollowerScript_Bradley_Text_5:
-# 309 "data/maps/IntroScene/scripts.pory"
+# 329 "data/maps/IntroScene/scripts.pory"
 	.string "You know, that thing turned out to be\n"
 	.string "the guy that Sundown was looking for\l"
 	.string "the whole time? Crazy coincidence that\l"
 	.string "it attacked us before we even knew.$"
 
 FollowerScript_Bradley_Text_6:
-# 311 "data/maps/IntroScene/scripts.pory"
+# 331 "data/maps/IntroScene/scripts.pory"
 	.string "Indeed. But I just wanted to say, the\n"
 	.string "leadership you showed in that fight is\l"
 	.string "the reason that I accepted your offer\l"
@@ -1154,24 +1270,24 @@ FollowerScript_Bradley_Text_6:
 	.string "situation and kept everyone safe.$"
 
 FollowerScript_Bradley_Text_7:
-# 314 "data/maps/IntroScene/scripts.pory"
+# 334 "data/maps/IntroScene/scripts.pory"
 	.string "It was sheer luck that my plan even\n"
 	.string "worked…but thanks, Bradley.$"
 
 FollowerScript_Bradley_Text_8:
-# 317 "data/maps/IntroScene/scripts.pory"
+# 337 "data/maps/IntroScene/scripts.pory"
 	.string "Do you know what happened to your\n"
 	.string "old trainer?$"
 
 FollowerScript_Bradley_Text_9:
-# 319 "data/maps/IntroScene/scripts.pory"
+# 339 "data/maps/IntroScene/scripts.pory"
 	.string "No. And I do not care.\p"
 	.string "He said he would reform his ways.\n"
 	.string "I commend him if he truly does, but\l"
 	.string "I still won't ever forgive him.$"
 
 FollowerScript_Bradley_Text_10:
-# 321 "data/maps/IntroScene/scripts.pory"
+# 341 "data/maps/IntroScene/scripts.pory"
 	.string "I see. …I have someone like that, too.\n"
 	.string "I mean, it's a little different…\l"
 	.string "I was his trainer instead of him\l"
@@ -1181,24 +1297,24 @@ FollowerScript_Bradley_Text_10:
 	.string "stand him, so it must have been bad.$"
 
 FollowerScript_Bradley_Text_11:
-# 324 "data/maps/IntroScene/scripts.pory"
+# 344 "data/maps/IntroScene/scripts.pory"
 	.string "… … … … …\n"
 	.string "Of course.$"
 
 FollowerScript_Bradley_Text_12:
-# 327 "data/maps/IntroScene/scripts.pory"
+# 347 "data/maps/IntroScene/scripts.pory"
 	.string "I'm sorry again for causing trouble.\p"
 	.string "I felt like I was back in my younger\n"
 	.string "days, and I just wanted to rampage.\p"
 	.string "It felt good, but it's not…helpful.$"
 
 FollowerScript_Bradley_Text_13:
-# 330 "data/maps/IntroScene/scripts.pory"
+# 350 "data/maps/IntroScene/scripts.pory"
 	.string "It's okay. It's fine to let yourself\n"
 	.string "have fun once in a while.$"
 
 FollowerScript_Bradley_Text_14:
-# 332 "data/maps/IntroScene/scripts.pory"
+# 352 "data/maps/IntroScene/scripts.pory"
 	.string "It's not just that. I lowered my\n"
 	.string "standards…\p"
 	.string "You know, when I first started with\n"
@@ -1208,62 +1324,62 @@ FollowerScript_Bradley_Text_14:
 	.string "Because of me, more Pokémon suffered…$"
 
 FollowerScript_Bradley_Text_15:
-# 336 "data/maps/IntroScene/scripts.pory"
+# 356 "data/maps/IntroScene/scripts.pory"
 	.string "Hey, don't blame yourself for that\n"
 	.string "piece of s{CENSOR}hit{UNCENSOR}'s business.\p"
 	.string "It's in the past, alright?$"
 
 FollowerScript_Bradley_Text_16:
-# 338 "data/maps/IntroScene/scripts.pory"
+# 358 "data/maps/IntroScene/scripts.pory"
 	.string "…$"
 
 FollowerScript_Python_Text_0:
-# 349 "data/maps/IntroScene/scripts.pory"
+# 372 "data/maps/IntroScene/scripts.pory"
 	.string "So you still remember everything?$"
 
 FollowerScript_Python_Text_1:
-# 350 "data/maps/IntroScene/scripts.pory"
+# 373 "data/maps/IntroScene/scripts.pory"
 	.string "Python$"
 
 FollowerScript_Python_Text_2:
-# 351 "data/maps/IntroScene/scripts.pory"
+# 374 "data/maps/IntroScene/scripts.pory"
 	.string "Yup! I'm a Dark type illusionist.\n"
 	.string "No Psychic type would be able to\l"
 	.string "put the mind whammy on me!$"
 
 FollowerScript_Python_Text_3:
-# 353 "data/maps/IntroScene/scripts.pory"
+# 376 "data/maps/IntroScene/scripts.pory"
 	.string "Okay, so refresh my memory. When that\n"
 	.string "Hatterene got the jump on us that\l"
 	.string "time in the woods, you were…?$"
 
 FollowerScript_Python_Text_4:
-# 355 "data/maps/IntroScene/scripts.pory"
+# 378 "data/maps/IntroScene/scripts.pory"
 	.string "…Holding back of my own free will!\n"
 	.string "I thought we could deescelate the\l"
 	.string "situation, you see, if we only\l"
 	.string "identified ourselves.$"
 
 FollowerScript_Python_Text_5:
-# 357 "data/maps/IntroScene/scripts.pory"
+# 380 "data/maps/IntroScene/scripts.pory"
 	.string "And you disguised yourself as a\n"
 	.string "Grimmsnarl because…$"
 
 FollowerScript_Python_Text_6:
-# 359 "data/maps/IntroScene/scripts.pory"
+# 382 "data/maps/IntroScene/scripts.pory"
 	.string "A diplomatic move, of course.\n"
 	.string "(How do you remember this??)$"
 
 FollowerScript_Python_Text_7:
-# 361 "data/maps/IntroScene/scripts.pory"
+# 384 "data/maps/IntroScene/scripts.pory"
 	.string "Uh huh. Of course. Got it.$"
 
 FollowerScript_Python_Text_8:
-# 364 "data/maps/IntroScene/scripts.pory"
+# 387 "data/maps/IntroScene/scripts.pory"
 	.string "So how much do you remember?$"
 
 FollowerScript_Python_Text_9:
-# 366 "data/maps/IntroScene/scripts.pory"
+# 389 "data/maps/IntroScene/scripts.pory"
 	.string "I still have a general idea of how\n"
 	.string "we got here and everything, but when\l"
 	.string "I try to remember specific events,\l"
@@ -1272,63 +1388,63 @@ FollowerScript_Python_Text_9:
 	.string "than bad ones.$"
 
 FollowerScript_Python_Text_10:
-# 369 "data/maps/IntroScene/scripts.pory"
+# 392 "data/maps/IntroScene/scripts.pory"
 	.string "Mmhmm. So you still remember how\n"
 	.string "you caught me?$"
 
 FollowerScript_Python_Text_11:
-# 371 "data/maps/IntroScene/scripts.pory"
+# 394 "data/maps/IntroScene/scripts.pory"
 	.string "Yup, you were practically fresh out\n"
 	.string "of the egg.$"
 
 FollowerScript_Python_Text_12:
-# 373 "data/maps/IntroScene/scripts.pory"
+# 396 "data/maps/IntroScene/scripts.pory"
 	.string "How about meeting back up with\n"
 	.string "your dad?$"
 
 FollowerScript_Python_Text_13:
-# 375 "data/maps/IntroScene/scripts.pory"
+# 398 "data/maps/IntroScene/scripts.pory"
 	.string "It was great once I figured out he\n"
 	.string "wasn't serious about being hired\l"
 	.string "to kill me. …Only inconvenience me.$"
 
 FollowerScript_Python_Text_14:
-# 377 "data/maps/IntroScene/scripts.pory"
+# 400 "data/maps/IntroScene/scripts.pory"
 	.string "And how {CENSOR}you lost your virginity{UNCENSOR}?$"
 
 FollowerScript_Python_Text_15:
-# 379 "data/maps/IntroScene/scripts.pory"
+# 402 "data/maps/IntroScene/scripts.pory"
 	.string "…You're too young to be asking that.$"
 
 FollowerScript_Python_Text_16:
-# 381 "data/maps/IntroScene/scripts.pory"
+# 404 "data/maps/IntroScene/scripts.pory"
 	.string "Soooorryyy! I just wanted to see\n"
 	.string "if you'd slip up.$"
 
 FollowerScript_Python_Text_17:
-# 384 "data/maps/IntroScene/scripts.pory"
+# 407 "data/maps/IntroScene/scripts.pory"
 	.string "The people in this town are kinda\n"
 	.string "funny. They just wander back and forth\l"
 	.string "between the same places all day.$"
 
 FollowerScript_Python_Text_18:
-# 386 "data/maps/IntroScene/scripts.pory"
+# 409 "data/maps/IntroScene/scripts.pory"
 	.string "It's not funny, it's sad. They're\n"
 	.string "basically hypnotized. That's why\l"
 	.string "we're trying to fix it.$"
 
 FollowerScript_Python_Text_19:
-# 388 "data/maps/IntroScene/scripts.pory"
+# 411 "data/maps/IntroScene/scripts.pory"
 	.string "It's kinda funny. Imagine doing the\n"
 	.string "same thing on loop every day and\l"
 	.string "never questioning it.$"
 
 FollowerScript_Python_Text_20:
-# 390 "data/maps/IntroScene/scripts.pory"
+# 413 "data/maps/IntroScene/scripts.pory"
 	.string "I don't wanna imagine it, that's why\n"
 	.string "I became a Pokémon Trainer instead\l"
 	.string "of going to college.$"
 
 FollowerScript_Python_Text_21:
-# 392 "data/maps/IntroScene/scripts.pory"
+# 415 "data/maps/IntroScene/scripts.pory"
 	.string "…Damn.$"
