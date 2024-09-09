@@ -12,6 +12,12 @@ const LOCALID_PYTHON = 2
 const LOCALID_WEATHERBANE = 1
 const LOCALID_BRADLEY = 4
 
+const LOCALID_ED_MARCEL = 24
+const LOCALID_ED_VICE = 25
+const LOCALID_ED_DEMIVEE = 26
+const LOCALID_ED_BRADLEY = 27
+const LOCALID_ED_PYTHON = 28
+
 mapscripts EltheCity_MapScripts 
 {
 	MAP_SCRIPT_ON_LOAD
@@ -52,7 +58,7 @@ mapscripts EltheCity_MapScripts
 					setvar(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_MAN_2)
 				case 1:
 					setobjectxyperm(LOCALID_PYTHON, 29, 34)
-					setobjectmovementtype(LOCALID_PYTHON, MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT)
+					setobjectmovementtype(LOCALID_PYTHON, MOVEMENT_TYPE_LOOK_AROUND)
 					setvar(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_MAN_5)
 				case 2:
 					setobjectxyperm(LOCALID_PYTHON, 6, 26)
@@ -60,7 +66,7 @@ mapscripts EltheCity_MapScripts
 					setvar(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_SPECIES(POLIWHIRL))
 				case 3:
 					setobjectxyperm(LOCALID_PYTHON, 28, 15)
-					setobjectmovementtype(LOCALID_PYTHON, MOVEMENT_TYPE_WANDER_DOWN_AND_UP)
+					setobjectmovementtype(LOCALID_PYTHON, MOVEMENT_TYPE_LOOK_AROUND)
 					setvar(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_MAN_2)
 				
 				// could add more if I wanted
@@ -143,7 +149,7 @@ script EltheCity_EventScript_Python
 		waitfanfare
 		waitbuttonpress
 		closemessage
-		givemon(SPECIES_ZOROARK, 48, ITEM_SILK_SCARF, ITEM_NEST_BALL, NATURE_CALM, 0, MON_MALE, 0, 0, 0, 0, 0, 0, 31, 31, 31, 31, 31, 31, MOVE_NIGHT_DAZE, MOVE_AGILITY, MOVE_FLAMETHROWER, MOVE_HYPER_BEAM, FALSE, FALSE, TYPE_NORMAL)
+		givemon(SPECIES_ZOROARK, 54, ITEM_SILK_SCARF, ITEM_NEST_BALL, NATURE_CALM, 0, MON_MALE, 0, 0, 0, 0, 0, 0, 31, 31, 31, 31, 31, 31, MOVE_NIGHT_DAZE, MOVE_AGILITY, MOVE_FLAMETHROWER, MOVE_HYPER_BEAM, FALSE, FALSE, TYPE_NORMAL)
 		setpartymemberinfo(4)
 		setvar(VAR_MAIN_GAME_STATE, 30)
 	}
@@ -365,7 +371,11 @@ script EltheCity_EventScript_Weatherbane
 		speakername("Weatherbane", PORTRAIT_WEATHERBANE_NEUTRAL)
 		msgbox("Okay! Okay! You're good! You're good!\p" "I trust you. You will stop the rain.\n" "Amelia, Sun-Bringer! Hail! Hail!")
 		speakername("Amelia", PORTRAIT_AMELIA_SERIOUSLY)
-		msgbox("Please don't call me that ever again.", MSGBOX_AUTOCLOSE)
+		msgbox("Please don't call me that ever again.")
+		speakername("Weatherbane", PORTRAIT_WEATHERBANE_NEUTRAL)
+		msgbox("And take this! Take this!\n" "Shiny! Shiny!", MSGBOX_AUTOCLOSE)
+		delay(8)
+		giveitem(ITEM_EXP_CANDY_L)
 		delay(60)
 		setflag(FLAG_BEAT_WEATHERBANE)
 		playfanfare(MUS_CAUGHT)
@@ -415,7 +425,7 @@ script EltheCity_CitySign
 
 script EltheCity_Girlfriend
 {
-	speakername("Sarah")
+	speakername("Marisa")
 	msgbox("When was the last time it wasn't\n" "raining, huh? And the place doesn't\l" "even have outside seating anyway!", MSGBOX_SIGN)
 }
 
@@ -511,6 +521,91 @@ script EltheCity_ArenaSign
 	msgbox("Battle Park\n" "“King of the hill”-style allowed!", MSGBOX_SIGN)
 }
 
+script EltheCity_CemeterySign
+{
+	msgbox("The sign is too faded to read.", MSGBOX_SIGN)
+}
+
+script EltheCity_Phantump
+{
+	if(!flag(FLAG_MET_PHANTUMP))
+	{
+		lock
+		faceplayer
+		speakername("Stump Ghost")
+		msgbox("… … … … …\n" "You can see me?")
+		speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+		msgbox("Yes. Hello. Are you a Pokémon?")
+		speakername("Phantump")
+		msgbox("I am now. I am called Phantump.\n" "Could you help me?\p"
+				"My spirit is troubled. I need an\n" "outsider's help.")
+		speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+		msgbox("Let me guess…it's got something to\n" "do with the heavy rainfall?")
+		speakername("Phantump")
+		msgbox("Yes…")
+		applymovement(VAR_LAST_TALKED, EltheCity_Movement_PhantumpLookAround)
+		msgbox("The rain washes away the sorrows\n" "of the people. They forget what\l" "they've lost. But it leaves a void.")
+		waitmovement(0)
+		applymovement(VAR_LAST_TALKED, EltheCity_Movement_PhantumpReturn)
+		msgbox("As you can see, they've neglected my\n" "resting place, too.")
+		speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+		msgbox("What do you want me to do?")
+		speakername("Phantump")
+		msgbox("… … … … … … … … … …\p"
+				"There was once a happy family of four\n" "in this village. A father, a mother,\l" "a sweet girl, and an energetic boy.\p"
+				"But the boy was lost to illness\n" "suddenly one day. The family was\l" "stricken by grief. For a time, they\l" "were inconsolable.\p"
+				"One day the rain came and washed away\n" "their memories of the boy. The pain\l" "left them, but they still had a\l" "hole in their hearts.\p"
+				"The father seeks divine fulfillment.\n" "The mother raises little Pokémon.\l" "The sister seeks out other boys.\l" "But they cannot truly move on because\l" "they do not know what they've lost.\l" "The boy's spirit was disturbed, for\l" "he could not bear to see his family\l" "paralyzed by his loss.\p"
+				"All that is to say…please dispel the\n" "rain and free this wallowing town.\l" "Let the family remember m-… … …\l" "remember their son, so that his\l" "spirit can find rest in their peace.")
+		speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+		msgbox("…I understand. I'll do what I can.")
+		speakername("Phantump")
+		msgbox("Thank you, kind soul.\p" "I believe the one who does not forget\n" "is with you, so please take this\l" "if it will help.")
+		speakername(NULL)
+		giveitem(ITEM_GLACIALSHARD)
+		setflag(FLAG_GLACIALSHARD_GET)
+		setflag(FLAG_MET_PHANTUMP)
+		speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+		msgbox("I'll get this brain fog cleared out\n" "for everyone's sake. (Including mine.)")
+		release
+	}
+	else
+	{
+		lock
+		faceplayer
+		speakername("Phantump")
+		msgbox("The rain doesn't affect me because\n" "I'm incorporeal. I was suffering in\l" "silence until you came along.")
+		speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+		msgbox("How did you know I could help?")
+		speakername("Phantump")
+		msgbox("Your spirit is different. You have…\n" "a unique aura.")
+		speakername("Amelia", PORTRAIT_AMELIA_SERIOUSLY)
+		msgbox("Well, you got that right…\n" "I can't even get into it.")
+		speakername("Phantump")
+		msgbox("Have you died before?")
+		speakername("Amelia", PORTRAIT_AMELIA_SERIOUSLY)
+		msgbox("Maybe a little…? I'm still having\n" "trouble remembering things, you know.")
+		release
+	}
+}
+
+movement EltheCity_Movement_PhantumpLookAround
+{
+	walk_slow_up
+	delay_16 * 3
+	face_right
+	delay_16 * 3
+	face_left 
+	delay_16 * 3
+	face_down
+}
+
+movement EltheCity_Movement_PhantumpReturn
+{
+	walk_down
+	face_player
+}
+
 script EltheCity_BradleyScript
 {
 	lock
@@ -579,7 +674,7 @@ script EltheCity_BradleyScript
 		speakername("Amelia", PORTRAIT_AMELIA_SERIOUSLY)
 		msgbox("I know, Bradley. It's alright.\n" "We all act stupid sometimes.\p"
 				"You don't have to turn on the\n" "waterworks, it's already raining.")
-		speakername("Bradley", PORTRAIT_NIDOKING_NEUTRAL)
+		speakername("Bradley", PORTRAIT_NIDOKING_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
 		msgbox("It's a terrible day for rain.")
 		speakername("Amelia", PORTRAIT_AMELIA_SHOCK)
 		msgbox("Oh! Speaking of which. I think we\n" "need to do something about this rain.\l" "Can you help me get the rest of the\l" "team back together so we can get\l" "started on that?")
@@ -608,7 +703,7 @@ script EltheCity_BradleyScript
 			givemon(SPECIES_NIDOKING, 56, ITEM_QUICK_CLAW, ITEM_ULTRA_BALL, NATURE_LONELY, 2, MON_MALE, 0, 0, 0, 0, 0, 0, 31, 31, 31, 31, 31, 31, MOVE_POISON_JAB, MOVE_EARTHQUAKE, MOVE_MEGAHORN, MOVE_SLUDGE_BOMB, FALSE, FALSE, TYPE_GROUND)
 			setpartymemberinfo(3)
 			setflag(FLAG_CAN_FIND_PYTHON)
-			setvar(VAR_MAIN_GAME_STATE, 20)
+			setvar(VAR_MAIN_GAME_STATE, 15)
 		}
 		else
 		{
@@ -697,6 +792,27 @@ movement EltheCity_Movement_BradleyBattleSouth
 	walk_down * 3
 	face_up
 	delay_16
+}
+
+script EltheCity_EventScript_FatGuy
+{
+	speakername("Eli")
+	msgbox("More towns should have arenas, if you\n" "ask me. Watching Pokémon battles is\l" "fun, but it's a bit barbaric to do\l" "them in the middle of the street.", MSGBOX_NPC)
+}
+
+script EltheCity_Sign_TrashBarrel
+{
+	msgbox("The barrel is full of garbage.", MSGBOX_SIGN)
+}
+
+script EltheCity_Sign_RainBarrel
+{
+	msgbox("The barrel is full of rainwater.\n" "It shimmers faintly.", MSGBOX_SIGN)
+}
+
+script EltheCity_Sign_NestBarrel
+{
+	msgbox("Some eggshell pieces are in the\n" "bottom of the barrel.", MSGBOX_SIGN)
 }
 
 script EltheCity_Trigger_MusicStump1
@@ -1000,4 +1116,220 @@ movement EltheCity_Movement_MoveDownBench
 movement EltheCity_Movement_MoveUpBench
 {
 	walk_slow_up
+}
+
+script EltheCity_Sign_BlockedHouse
+{
+	msgbox("This is private property!\n" "No trespassing!", MSGBOX_SIGN)
+}
+
+script EltheCity_Trigger_FinalBoss
+{
+	fadescreen(FADE_TO_BLACK)
+	delay(16)
+	setflag(FLAG_TEMP_HIDE_FOLLOWER)
+	applymovement(OBJ_EVENT_ID_PLAYER, Movement_UnsafeUp)
+	addobject(LOCALID_ED_BRADLEY)
+	addobject(LOCALID_ED_DEMIVEE)
+	addobject(LOCALID_ED_MARCEL)
+	addobject(LOCALID_ED_PYTHON)
+	addobject(LOCALID_ED_VICE)
+	removeobject(OBJ_EVENT_ID_FOLLOWER)
+	delay(32)
+	setobjectxy(OBJ_EVENT_ID_PLAYER, 18, 15)
+	setvar(VAR_0x8000, 18)
+	setvar(VAR_0x8001, 15)
+	special(TeleportCamera)
+	fadescreen(FADE_FROM_BLACK)
+	delay(16)
+	speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+	msgbox("So this is the source?\n" "What do we…?")
+	speakername("Demi-Vee", PORTRAIT_DEMIVEE_NEUTRAL)
+	message("Wakey wakey! It's time to turn off\n" "the shower!")
+	playse(SE_M_HEADBUTT)
+	applymovement(LOCALID_ED_DEMIVEE, Ending_Movement_DemiveeJump)
+	delay(8)
+	playse(SE_M_VITAL_THROW2)
+	waitmovement(0)
+	waitmessage
+	waitbuttonpress
+	closemessage
+	delay(32)
+	speakername("?????")
+	message("Who comes bearing my crystals?")
+	delay(16)
+	playse(SE_PIN)
+	applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_ExclamationMark)
+	applymovement(LOCALID_ED_BRADLEY, Common_Movement_ExclamationMark)
+	applymovement(LOCALID_ED_MARCEL, Common_Movement_ExclamationMark)
+	applymovement(LOCALID_ED_PYTHON, Common_Movement_ExclamationMark)
+	applymovement(LOCALID_ED_VICE, Common_Movement_ExclamationMark)
+	waitmessage
+	waitbuttonpress
+	speakername("Demi-Vee", PORTRAIT_DEMIVEE_NEUTRAL)
+	msgbox("Me! You're messing with this town,\n" "and we're here to stop you!")
+	speakername("?????")
+	msgbox("I am saving this town.\n" "I am Elthemori, the guardian spirit.\p"
+			"I could not bear to see my wards\n" "in so much mental anguish, so I have\l" "brought forth healing water to ease\l" "their troubles.")
+	speakername("Python", PORTRAIT_ZOROARK_LAUGH)
+	msgbox("Their troubles aren't gone, they just\n" "forget them and wander around\l" "like zombies! Get real!")
+	speakername("Marcel", PORTRAIT_KINGLER_NEUTRAL)
+	msgbox("They didn't agree to this! You're\n" "doing more harm than good.")
+	speakername("Vice", PORTRAIT_FLYGON_ANNOYED)
+	msgbox("And to make it worse, you've dragged\n" "us into your lame scheme!\p" "We could've forgotten who we were and\n" "got trapped in your Bidoof Day town!")
+	speakername("Bradley", PORTRAIT_NIDOKING_NEUTRAL, PORTRAIT_DEFAULT_X, PORTRAIT_DEFAULT_Y, TRUE)
+	msgbox("If you don't stop, we'll make you\n" "stop. That's a promise.", MSGBOX_AUTOCLOSE)
+	delay(32)
+	speakername("Amelia", PORTRAIT_AMELIA_SMUG)
+	msgbox("So what do you think, huh?", MSGBOX_AUTOCLOSE)
+	special(Script_FadeOutMapMusic)
+	waitstate
+	speakername("Elthemori")
+	msgbox("Foolish.", MSGBOX_AUTOCLOSE)
+	setvar(VAR_RESULT, 1)
+	playse(SE_M_DETECT)
+	dofieldeffectsparkle(17, 13, 0)
+	waitfieldeffect(FLDEFF_SPARKLE)
+	setvar(VAR_RESULT, 1)
+	playse(SE_ORB)
+	special(DoOrbEffect)
+	delay(150)
+	delay(60)
+	special(FadeOutOrbEffect)
+	waitstate
+	setwilddoubleflag
+	setflag(FLAG_WILD_AI_ON)
+	createmon(1, 0, SPECIES_KYOGRE, 65, ITEM_NONE, 0, NATURE_CALM, 0, MON_GENDERLESS, 0, 0, 0, 0, 0, 0, 31, 31, 31, 31, 31, 31, MOVE_WATER_PULSE, MOVE_ICY_WIND, MOVE_AQUA_RING, MOVE_PSYBEAM, FALSE, 0, TYPE_WATER)
+	dowildbattle
+	speakername("Elthemori")
+	msgbox("… … … … …\n" "I see…\p"
+			"You think my people are strong enough\n" "to move past their pain.\p"
+			"And yet, they needed you to face me\n" "instead of doing it themselves.")
+	speakername("Amelia", PORTRAIT_AMELIA_SMUG)
+	msgbox("Get real. You made them forget about\n" "yourself, too.\p"
+			"This long storm is turning into just\n" "another trauma that they'll have to\l" "work through. But when they do, maybe\l" "they'll come to appreciate you again.")
+	speakername("Elthemori")
+	msgbox("Very well, then. You win, outsider.\p" "I will listen to the people's will.")
+	closemessage
+	setweather(WEATHER_NONE)
+	doweather
+	applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_WalkDown)
+	waitmovement(0)
+	applymovement(LOCALID_ED_DEMIVEE, Common_Movement_FaceDown)
+	applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_WalkDown)
+	waitmovement(0)
+	applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp)
+	applymovement(LOCALID_ED_MARCEL, Common_Movement_FaceDown)
+	delay(4)
+	applymovement(LOCALID_ED_VICE, Common_Movement_FaceRight)
+	delay(8)
+	applymovement(LOCALID_ED_BRADLEY, Common_Movement_FaceLeft)
+	special(WaitWeather)
+	waitstate
+	delay(64)
+	special(SpawnCameraObject)
+	speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+	msgbox("Well, team, we did it. We found each\n" "other again and freed a town from\l" "an endless dream.\p" "All in a day's work! Now let's go\n" "walk off this memory loss hangover.", MSGBOX_AUTOCLOSE)
+	applymovement(OBJ_EVENT_ID_PLAYER, AmeliaStartLeaving)
+	delay(16)
+	applymovement(LOCALID_ED_DEMIVEE, EltheCity_Movement_DemiveeChaseAme)
+	speakername("Demi-Vee", PORTRAIT_DEMIVEE_HUH)
+	msgbox("Hey, wait!\p" "C-can I come with you? I've never had\n" "battles like that before…it was cool!\l" "I wanna do it more!")
+	speakername("Amelia", PORTRAIT_AMELIA_WINK)
+	msgbox("Of course! Just follow me!\p" "Let's go!", MSGBOX_AUTOCLOSE)
+	applymovement(OBJ_EVENT_ID_PLAYER, Ending_AmeLeave)
+	applymovement(LOCALID_ED_BRADLEY, Ending_BradleyLeave)
+	applymovement(LOCALID_ED_MARCEL, Ending_MarcelLeave)
+	applymovement(LOCALID_ED_PYTHON, Ending_PythonLeave)
+	applymovement(LOCALID_ED_VICE, Ending_ViceLeave)
+	applymovement(LOCALID_ED_DEMIVEE, Ending_DemiveeLeave)
+	waitmovement(LOCALID_ED_VICE)
+	fadescreenspeed(FADE_TO_BLACK, 8)
+	msgbox("Thank you for playing\n" "Recollection Quest!", MSGBOX_AUTOCLOSE)
+	special(Script_FadeOutMapMusic)
+	waitstate
+	delay(60)
+	callnative(StartCredits)
+}
+
+movement Ending_Movement_DemiveeJump
+{
+	jump_up
+	lock_facing_direction
+	walk_fast_down
+	unlock_facing_direction
+}
+
+movement Movement_UnsafeUp
+{
+	walk_in_place_up
+}
+
+movement AmeliaStartLeaving
+{
+	walk_right * 2
+	delay_16 * 2
+	face_left
+}
+
+movement EltheCity_Movement_DemiveeChaseAme
+{
+	walk_fast_down * 3
+	face_right
+}
+
+movement Ending_AmeLeave
+{
+	walk_right * 10
+}
+
+movement Ending_BradleyLeave
+{
+	delay_16 * 3
+	walk_right * 3
+	delay_16
+	face_left
+	delay_16 * 2
+	walk_right * 6
+}
+
+movement Ending_DemiveeLeave
+{
+	walk_fast_right
+	walk_right * 9
+}
+
+movement Ending_MarcelLeave
+{
+	delay_16 * 5
+	face_right
+	delay_16 * 2
+	walk_right * 12
+}
+
+movement Ending_ViceLeave
+{
+	walk_down * 2
+	walk_right
+	face_up
+	delay_16 * 3
+	walk_right * 12
+}
+
+movement Ending_PythonLeave
+{
+	delay_16
+	walk_fast_right * 4
+	delay_16
+	face_left
+	delay_16
+	face_right
+	delay_16
+	face_left
+	delay_16
+	face_right
+	delay_16
+	face_left
+	delay_16
+	walk_fast_right * 4
 }

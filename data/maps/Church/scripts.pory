@@ -1,0 +1,84 @@
+mapscripts Church_MapScripts {}
+
+script Church_Sign_Painting
+{
+	msgbox("This painting depicts the view of\n" "Mt. Coronet from Lake Acuity.", MSGBOX_SIGN)
+}
+
+script Church_EventScript_Pastor
+{
+	lock
+	faceplayer
+	if(!flag(FLAG_SYLVANSHARD_GET))
+	{
+		speakername("Mido")
+		msgbox("Hello, I don't think I've seen you\n" "around before. My name is Mido.\l" "I'm the minister here at this church.\p"
+				"We don't have a service today.\n" "What brings you here?")
+		speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+		msgbox("Hi, I'm Amelia. I'm a Pokémon Ranger.\n" "I came here to deal with the flood.")
+		speakername("Mido")
+		msgbox("Bless your heart. I was hoping that\n" "someone like you would come along.\p"
+				"A strong outsider who could tame the\n" "Crystal Eevee and use his power to\l" "clear the pall that hangs over us.")
+		special(GetLeadMonSpecies)
+		if(var(VAR_RESULT) == SPECIES_EEVEE)
+		{
+			speakername("Demi-Vee", PORTRAIT_DEMIVEE_HUH)
+			msgbox("I'm supposed to do that?\n" "Why didn't anyone ever tell me?")
+		}
+		speakername("Mido")
+		msgbox("I've been keeping this for him.\n" "It should help you on your quest.")
+		speakername(NULL)
+		giveitem(ITEM_SYLVANSHARD)
+		setflag(FLAG_SYLVANSHARD_GET)
+		speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+		msgbox("Oh, thank you…are you sure?\n" "I'm a stranger, you know…")
+		speakername("Mido")
+		msgbox("I have been praying for peace…\n" "I believe it will come when the rain\l" "finally passes over us. And I believe\l" "you will make that happen.")
+		speakername("Amelia", PORTRAIT_AMELIA_SERIOUSLY)
+		msgbox("(No pressure or anything…)")
+		speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+		msgbox("I'll do everything I can. Thank you.")
+	}
+	else
+	{
+		speakername("Mido")
+		msgbox("Are you familiar with the Arcane\n" "teachings, Amelia?")
+		speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+		msgbox("Not formally. I've heard a bit, but…")
+		speakername("Mido")
+		msgbox("We believe that the Plates of Creation\n" "each represent an aspect of divinity.\p"
+				"Fulfillment is achieved when these\n" "aspects are in balance within you.\p"
+				"For example, Fire is the aspect of\n" "passion. It's not good to be controlled\l" "by rage, but complete directionlessness\l" "is no good either. Balance is needed.\p"
+				"Do you understand what I'm saying?")
+		speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+		msgbox("Where are you going with this?\n" "Not to be rude, but…")
+		speakername("Mido")
+		msgbox("Yes, sorry. My point was, this constant\n" "downpour is a clear overabundance of\l" "the element of Water. That is why\l" "I believe it is vital to resolve.")
+		speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+		msgbox("Understood. I'll do my best here.\p" "…Does this conversation end with you\n" "asking me to come back so you can\l" "evaluate my type balances and sign up\l" "for a Grass study?")
+		speakername("Mido")
+		msgbox("Well, we do have a guest reception\n" "every--")
+		speakername("Amelia", PORTRAIT_AMELIA_SERIOUSLY)
+		msgbox("Not interested, sorry. See ya.")
+	}
+	release
+}
+
+script Church_EventScript_Minior
+{
+	speakername("Minior")
+	msgbox("Some people think my core is a sign\n" "from Arceus about type balance.\p"
+			"Some people say if that were true, it\n" "would change color over time.\p"
+			"I think I'm just a space rock.", MSGBOX_NPC)
+}
+
+script Church_EventScript_BaldGuy
+{
+	speakername("Kris")
+	msgbox("My wife told me I need more Fairy type\n" "energy at home. I came to ask\l" "Minister Mido what that could mean.", MSGBOX_NPC)
+}
+
+script Church_Sign_Backstage
+{
+	msgbox("You shouldn't go backstage. More to\n" "the point, you don't want to.", MSGBOX_SIGN)
+}

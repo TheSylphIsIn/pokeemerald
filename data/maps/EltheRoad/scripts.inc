@@ -1598,179 +1598,285 @@ EltheRoad_BerrySpot_PlotBerries_7:
 	goto EltheRoad_BerrySpot_PlotBerries_1
 
 
-# 888 "data/maps/EltheRoad/scripts.pory"
-EltheRoad_Movement_DemiveeRunFromMarcel:
+EltheRoad_EventScript_ExpertTrainer::
 # 890 "data/maps/EltheRoad/scripts.pory"
-	lock_facing_direction
+	trainerbattle_single TRAINER_EDWARD, EltheRoad_EventScript_ExpertTrainer_Text_0, EltheRoad_EventScript_ExpertTrainer_Text_1
 # 891 "data/maps/EltheRoad/scripts.pory"
-	jump_down
-# 892 "data/maps/EltheRoad/scripts.pory"
-	unlock_facing_direction
-# 893 "data/maps/EltheRoad/scripts.pory"
-	delay_16
-# 893 "data/maps/EltheRoad/scripts.pory"
-	delay_16
-# 894 "data/maps/EltheRoad/scripts.pory"
-	walk_fast_left
-# 894 "data/maps/EltheRoad/scripts.pory"
-	walk_fast_left
-# 895 "data/maps/EltheRoad/scripts.pory"
-	walk_fast_up
+	msgbox EltheRoad_EventScript_ExpertTrainer_Text_2, MSGBOX_AUTOCLOSE
+	return
+
+
+EltheRoad_Trigger_AromaLadyTrainer::
 # 896 "data/maps/EltheRoad/scripts.pory"
-	face_right
-	step_end
-
+	lock
+# 897 "data/maps/EltheRoad/scripts.pory"
+	setflag FLAG_SAFE_FOLLOWER_MOVEMENT
+# 898 "data/maps/EltheRoad/scripts.pory"
+	applymovement OBJ_EVENT_ID_PLAYER, EltheRoad_Movement_AmeliaGoToAromaLady
 # 899 "data/maps/EltheRoad/scripts.pory"
-EltheRoad_Movement_MarcelRunToAmelia:
+	applymovement OBJ_EVENT_ID_FOLLOWER, EltheRoad_Movement_FollowerFollowBerry
+# 900 "data/maps/EltheRoad/scripts.pory"
+	waitmovement OBJ_EVENT_ID_PLAYER
 # 901 "data/maps/EltheRoad/scripts.pory"
-	walk_fast_down
-# 901 "data/maps/EltheRoad/scripts.pory"
-	walk_fast_down
-	step_end
-
+	speakername EltheRoad_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_2, PORTRAIT_AMELIA_NEUTRAL
+# 902 "data/maps/EltheRoad/scripts.pory"
+	msgbox EltheRoad_Trigger_AromaLadyTrainer_Text_0
+# 903 "data/maps/EltheRoad/scripts.pory"
+	applymovement 12, Common_Movement_FaceLeft
 # 904 "data/maps/EltheRoad/scripts.pory"
-EltheRoad_Movement_AmeliaGoToMarcel:
+	speakername EltheRoad_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_2
+# 905 "data/maps/EltheRoad/scripts.pory"
+	msgbox EltheRoad_Trigger_AromaLadyTrainer_Text_1
 # 906 "data/maps/EltheRoad/scripts.pory"
-	walk_fast_up
-# 906 "data/maps/EltheRoad/scripts.pory"
-	walk_fast_up
-	step_end
-
+	speakername EltheRoad_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_2, PORTRAIT_AMELIA_NEUTRAL
+# 907 "data/maps/EltheRoad/scripts.pory"
+	msgbox EltheRoad_Trigger_AromaLadyTrainer_Text_2
+# 908 "data/maps/EltheRoad/scripts.pory"
+	speakername EltheRoad_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_2
 # 909 "data/maps/EltheRoad/scripts.pory"
-EltheRoad_Movement_DemiveeGoToMarcel_Left:
+	msgbox EltheRoad_Trigger_AromaLadyTrainer_Text_3
 # 911 "data/maps/EltheRoad/scripts.pory"
-	walk_slow_up
-# 911 "data/maps/EltheRoad/scripts.pory"
-	walk_slow_up
+	speakername EltheRoad_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_2, PORTRAIT_AMELIA_NEUTRAL
 # 912 "data/maps/EltheRoad/scripts.pory"
-	walk_slow_right
+	msgbox EltheRoad_Trigger_AromaLadyTrainer_Text_4, MSGBOX_AUTOCLOSE
 # 913 "data/maps/EltheRoad/scripts.pory"
-	walk_slow_up
-	step_end
-
-# 916 "data/maps/EltheRoad/scripts.pory"
-EltheRoad_Movement_DemiveeGoToMarcel_Right:
+	trainerbattle_no_intro TRAINER_CELINA, EltheRoad_Trigger_AromaLadyTrainer_Text_5
+# 914 "data/maps/EltheRoad/scripts.pory"
+	speakername EltheRoad_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_2
+# 915 "data/maps/EltheRoad/scripts.pory"
+	msgbox EltheRoad_Trigger_AromaLadyTrainer_Text_6
+# 917 "data/maps/EltheRoad/scripts.pory"
+	speakername NULL
 # 918 "data/maps/EltheRoad/scripts.pory"
-	walk_slow_up
-# 918 "data/maps/EltheRoad/scripts.pory"
-	walk_slow_up
-	step_end
-
+	giveitem ITEM_VAPORSHARD
+# 919 "data/maps/EltheRoad/scripts.pory"
+	setflag FLAG_VAPORSHARD_GET
+# 920 "data/maps/EltheRoad/scripts.pory"
+	speakername EltheRoad_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_2
 # 921 "data/maps/EltheRoad/scripts.pory"
-EltheRoad_Movement_CameraShowItem:
+	msgbox EltheRoad_Trigger_AromaLadyTrainer_Text_7
+# 922 "data/maps/EltheRoad/scripts.pory"
+	speakername EltheRoad_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_2, PORTRAIT_AMELIA_NEUTRAL
 # 923 "data/maps/EltheRoad/scripts.pory"
-	walk_up
-# 923 "data/maps/EltheRoad/scripts.pory"
-	walk_up
-# 923 "data/maps/EltheRoad/scripts.pory"
-	walk_up
+	msgbox EltheRoad_Trigger_AromaLadyTrainer_Text_8
 # 924 "data/maps/EltheRoad/scripts.pory"
+	setvar VAR_BERRY_FIELD_STATE, 1
+# 925 "data/maps/EltheRoad/scripts.pory"
+	release
+	return
+
+
+EltheRoad_EventScript_AromaLady::
+# 930 "data/maps/EltheRoad/scripts.pory"
+	speakername EltheRoad_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_2
+# 931 "data/maps/EltheRoad/scripts.pory"
+	msgbox EltheRoad_EventScript_AromaLady_Text_0, MSGBOX_NPC
+	return
+
+
+EltheRoad_EventScript_BerryMan::
+# 936 "data/maps/EltheRoad/scripts.pory"
+	speakername EltheRoad_EventScript_BerryMan_Text_0
+# 937 "data/maps/EltheRoad/scripts.pory"
+	msgbox EltheRoad_EventScript_BerryMan_Text_1, MSGBOX_NPC
+	return
+
+
+# 941 "data/maps/EltheRoad/scripts.pory"
+EltheRoad_Movement_AmeliaGoToAromaLady:
+# 943 "data/maps/EltheRoad/scripts.pory"
+	walk_down
+# 943 "data/maps/EltheRoad/scripts.pory"
+	walk_down
+# 944 "data/maps/EltheRoad/scripts.pory"
 	walk_right
 	step_end
 
-# 927 "data/maps/EltheRoad/scripts.pory"
+# 947 "data/maps/EltheRoad/scripts.pory"
+EltheRoad_Movement_FollowerFollowBerry:
+# 949 "data/maps/EltheRoad/scripts.pory"
+	walk_down
+# 949 "data/maps/EltheRoad/scripts.pory"
+	walk_down
+# 949 "data/maps/EltheRoad/scripts.pory"
+	walk_down
+# 950 "data/maps/EltheRoad/scripts.pory"
+	face_right
+	step_end
+
+# 953 "data/maps/EltheRoad/scripts.pory"
+EltheRoad_Movement_DemiveeRunFromMarcel:
+# 955 "data/maps/EltheRoad/scripts.pory"
+	lock_facing_direction
+# 956 "data/maps/EltheRoad/scripts.pory"
+	jump_down
+# 957 "data/maps/EltheRoad/scripts.pory"
+	unlock_facing_direction
+# 958 "data/maps/EltheRoad/scripts.pory"
+	delay_16
+# 958 "data/maps/EltheRoad/scripts.pory"
+	delay_16
+# 959 "data/maps/EltheRoad/scripts.pory"
+	walk_fast_left
+# 959 "data/maps/EltheRoad/scripts.pory"
+	walk_fast_left
+# 960 "data/maps/EltheRoad/scripts.pory"
+	walk_fast_up
+# 961 "data/maps/EltheRoad/scripts.pory"
+	face_right
+	step_end
+
+# 964 "data/maps/EltheRoad/scripts.pory"
+EltheRoad_Movement_MarcelRunToAmelia:
+# 966 "data/maps/EltheRoad/scripts.pory"
+	walk_fast_down
+# 966 "data/maps/EltheRoad/scripts.pory"
+	walk_fast_down
+	step_end
+
+# 969 "data/maps/EltheRoad/scripts.pory"
+EltheRoad_Movement_AmeliaGoToMarcel:
+# 971 "data/maps/EltheRoad/scripts.pory"
+	walk_fast_up
+# 971 "data/maps/EltheRoad/scripts.pory"
+	walk_fast_up
+	step_end
+
+# 974 "data/maps/EltheRoad/scripts.pory"
+EltheRoad_Movement_DemiveeGoToMarcel_Left:
+# 976 "data/maps/EltheRoad/scripts.pory"
+	walk_slow_up
+# 976 "data/maps/EltheRoad/scripts.pory"
+	walk_slow_up
+# 977 "data/maps/EltheRoad/scripts.pory"
+	walk_slow_right
+# 978 "data/maps/EltheRoad/scripts.pory"
+	walk_slow_up
+	step_end
+
+# 981 "data/maps/EltheRoad/scripts.pory"
+EltheRoad_Movement_DemiveeGoToMarcel_Right:
+# 983 "data/maps/EltheRoad/scripts.pory"
+	walk_slow_up
+# 983 "data/maps/EltheRoad/scripts.pory"
+	walk_slow_up
+	step_end
+
+# 986 "data/maps/EltheRoad/scripts.pory"
+EltheRoad_Movement_CameraShowItem:
+# 988 "data/maps/EltheRoad/scripts.pory"
+	walk_up
+# 988 "data/maps/EltheRoad/scripts.pory"
+	walk_up
+# 988 "data/maps/EltheRoad/scripts.pory"
+	walk_up
+# 989 "data/maps/EltheRoad/scripts.pory"
+	walk_right
+	step_end
+
+# 992 "data/maps/EltheRoad/scripts.pory"
 EltheRoad_Movement_CameraReturn:
-# 929 "data/maps/EltheRoad/scripts.pory"
+# 994 "data/maps/EltheRoad/scripts.pory"
 	walk_left
-# 930 "data/maps/EltheRoad/scripts.pory"
+# 995 "data/maps/EltheRoad/scripts.pory"
 	walk_down
-# 930 "data/maps/EltheRoad/scripts.pory"
+# 995 "data/maps/EltheRoad/scripts.pory"
 	walk_down
-# 930 "data/maps/EltheRoad/scripts.pory"
+# 995 "data/maps/EltheRoad/scripts.pory"
 	walk_down
 	step_end
 
-# 933 "data/maps/EltheRoad/scripts.pory"
+# 998 "data/maps/EltheRoad/scripts.pory"
 EltheRoad_Movement_AmeliaJumpUp:
-# 935 "data/maps/EltheRoad/scripts.pory"
+# 1000 "data/maps/EltheRoad/scripts.pory"
 	set_visible
-# 936 "data/maps/EltheRoad/scripts.pory"
+# 1001 "data/maps/EltheRoad/scripts.pory"
 	jump_in_place_left
 	step_end
 
-# 939 "data/maps/EltheRoad/scripts.pory"
+# 1004 "data/maps/EltheRoad/scripts.pory"
 EltheRoad_Movement_AmeliaLookAround:
-# 941 "data/maps/EltheRoad/scripts.pory"
+# 1006 "data/maps/EltheRoad/scripts.pory"
 	face_up
-# 942 "data/maps/EltheRoad/scripts.pory"
+# 1007 "data/maps/EltheRoad/scripts.pory"
 	delay_16
-# 943 "data/maps/EltheRoad/scripts.pory"
+# 1008 "data/maps/EltheRoad/scripts.pory"
 	face_down
-# 944 "data/maps/EltheRoad/scripts.pory"
+# 1009 "data/maps/EltheRoad/scripts.pory"
 	delay_16
-# 945 "data/maps/EltheRoad/scripts.pory"
+# 1010 "data/maps/EltheRoad/scripts.pory"
 	face_up
-# 946 "data/maps/EltheRoad/scripts.pory"
+# 1011 "data/maps/EltheRoad/scripts.pory"
 	delay_16
-# 947 "data/maps/EltheRoad/scripts.pory"
+# 1012 "data/maps/EltheRoad/scripts.pory"
 	face_down
-# 948 "data/maps/EltheRoad/scripts.pory"
+# 1013 "data/maps/EltheRoad/scripts.pory"
 	delay_16
-# 949 "data/maps/EltheRoad/scripts.pory"
+# 1014 "data/maps/EltheRoad/scripts.pory"
 	face_right
-# 950 "data/maps/EltheRoad/scripts.pory"
+# 1015 "data/maps/EltheRoad/scripts.pory"
 	delay_16
-# 950 "data/maps/EltheRoad/scripts.pory"
+# 1015 "data/maps/EltheRoad/scripts.pory"
 	delay_16
-# 950 "data/maps/EltheRoad/scripts.pory"
+# 1015 "data/maps/EltheRoad/scripts.pory"
 	delay_16
-# 951 "data/maps/EltheRoad/scripts.pory"
+# 1016 "data/maps/EltheRoad/scripts.pory"
 	face_left
-# 952 "data/maps/EltheRoad/scripts.pory"
+# 1017 "data/maps/EltheRoad/scripts.pory"
 	delay_16
-# 952 "data/maps/EltheRoad/scripts.pory"
+# 1017 "data/maps/EltheRoad/scripts.pory"
 	delay_16
-# 952 "data/maps/EltheRoad/scripts.pory"
+# 1017 "data/maps/EltheRoad/scripts.pory"
 	delay_16
 	step_end
 
-# 955 "data/maps/EltheRoad/scripts.pory"
+# 1020 "data/maps/EltheRoad/scripts.pory"
 EltheRoad_Movement_AmeliaStartLeaving:
-# 957 "data/maps/EltheRoad/scripts.pory"
+# 1022 "data/maps/EltheRoad/scripts.pory"
 	walk_up
-# 957 "data/maps/EltheRoad/scripts.pory"
+# 1022 "data/maps/EltheRoad/scripts.pory"
 	walk_up
-# 958 "data/maps/EltheRoad/scripts.pory"
+# 1023 "data/maps/EltheRoad/scripts.pory"
 	walk_right
-# 958 "data/maps/EltheRoad/scripts.pory"
+# 1023 "data/maps/EltheRoad/scripts.pory"
 	walk_right
-# 958 "data/maps/EltheRoad/scripts.pory"
+# 1023 "data/maps/EltheRoad/scripts.pory"
 	walk_right
-# 959 "data/maps/EltheRoad/scripts.pory"
+# 1024 "data/maps/EltheRoad/scripts.pory"
 	delay_16
-# 959 "data/maps/EltheRoad/scripts.pory"
+# 1024 "data/maps/EltheRoad/scripts.pory"
 	delay_16
-# 960 "data/maps/EltheRoad/scripts.pory"
+# 1025 "data/maps/EltheRoad/scripts.pory"
 	face_left
 	step_end
 
-# 963 "data/maps/EltheRoad/scripts.pory"
+# 1028 "data/maps/EltheRoad/scripts.pory"
 EltheRoad_Movement_DemiveeFollow:
-# 965 "data/maps/EltheRoad/scripts.pory"
+# 1030 "data/maps/EltheRoad/scripts.pory"
 	jump_up
-# 966 "data/maps/EltheRoad/scripts.pory"
+# 1031 "data/maps/EltheRoad/scripts.pory"
 	walk_fast_up
-# 967 "data/maps/EltheRoad/scripts.pory"
+# 1032 "data/maps/EltheRoad/scripts.pory"
 	walk_fast_right
-# 967 "data/maps/EltheRoad/scripts.pory"
+# 1032 "data/maps/EltheRoad/scripts.pory"
 	walk_fast_right
 	step_end
 
-# 970 "data/maps/EltheRoad/scripts.pory"
+# 1035 "data/maps/EltheRoad/scripts.pory"
 EltheRoad_Movement_DemiveeJoin:
-# 972 "data/maps/EltheRoad/scripts.pory"
+# 1037 "data/maps/EltheRoad/scripts.pory"
 	walk_slow_right
-# 973 "data/maps/EltheRoad/scripts.pory"
+# 1038 "data/maps/EltheRoad/scripts.pory"
 	enter_pokeball
 	step_end
 
-# 976 "data/maps/EltheRoad/scripts.pory"
+# 1041 "data/maps/EltheRoad/scripts.pory"
 EltheRoad_Movement_VinosGetOnLog:
-# 978 "data/maps/EltheRoad/scripts.pory"
+# 1043 "data/maps/EltheRoad/scripts.pory"
 	walk_fast_right
-# 979 "data/maps/EltheRoad/scripts.pory"
+# 1044 "data/maps/EltheRoad/scripts.pory"
 	jump_right
-# 980 "data/maps/EltheRoad/scripts.pory"
+# 1045 "data/maps/EltheRoad/scripts.pory"
 	face_down
 	step_end
 
@@ -2661,3 +2767,89 @@ EltheRoad_BerrySpot_WeakBerries_Text_0:
 EltheRoad_BerrySpot_WeakBerries_Text_1:
 # 801 "data/maps/EltheRoad/scripts.pory"
 	.string "You plunged your hand into the water…$"
+
+EltheRoad_EventScript_ExpertTrainer_Text_0:
+# 890 "data/maps/EltheRoad/scripts.pory"
+	.string "Excuse me, dear, could I trouble you\n"
+	.string "for a Pokémon battle?$"
+
+EltheRoad_EventScript_ExpertTrainer_Text_1:
+# 890 "data/maps/EltheRoad/scripts.pory"
+	.string "Ohoho, that's nice.$"
+
+EltheRoad_EventScript_ExpertTrainer_Text_2:
+# 891 "data/maps/EltheRoad/scripts.pory"
+	.string "Leavanny gets antsy if she doesn't\n"
+	.string "battle often enough. If she gets too\l"
+	.string "stressed, she eats the berries.$"
+
+EltheRoad_Trigger_AromaLadyTrainer_Text_0:
+# 902 "data/maps/EltheRoad/scripts.pory"
+	.string "Excuse me, do you mind if I take\n"
+	.string "some of these berries?$"
+
+EltheRoad_Trigger_AromaLadyTrainer_Text_1:
+# 905 "data/maps/EltheRoad/scripts.pory"
+	.string "Hello, who are you?$"
+
+EltheRoad_Trigger_AromaLadyTrainer_Text_2:
+# 907 "data/maps/EltheRoad/scripts.pory"
+	.string "My name's Amelia. I'm a Pokémon Ranger.\n"
+	.string "I got a little lost, and I need some\l"
+	.string "berries to get my team back together.\l"
+	.string "We were separated by the flood.$"
+
+EltheRoad_Trigger_AromaLadyTrainer_Text_3:
+# 909 "data/maps/EltheRoad/scripts.pory"
+	.string "Wow! My name's also Amelia!\n"
+	.string "I'm a gardener.\p"
+	.string "You can take some of these berries.\n"
+	.string "But would you mind having a battle\l"
+	.string "with me first?$"
+
+EltheRoad_Trigger_AromaLadyTrainer_Text_4:
+# 912 "data/maps/EltheRoad/scripts.pory"
+	.string "Oh, sure. No problem.$"
+
+EltheRoad_Trigger_AromaLadyTrainer_Text_5:
+# 913 "data/maps/EltheRoad/scripts.pory"
+	.string "I guess you're the stronger Amelia!$"
+
+EltheRoad_Trigger_AromaLadyTrainer_Text_6:
+# 915 "data/maps/EltheRoad/scripts.pory"
+	.string "Alright, thanks, Amelia! That was\n"
+	.string "fun. I won't bother you anymore.\p"
+	.string "Actually, I want to give you a gift.\n"
+	.string "Here, take this.$"
+
+EltheRoad_Trigger_AromaLadyTrainer_Text_7:
+# 921 "data/maps/EltheRoad/scripts.pory"
+	.string "I don't know what it's for, but it's\n"
+	.string "pretty, right?$"
+
+EltheRoad_Trigger_AromaLadyTrainer_Text_8:
+# 923 "data/maps/EltheRoad/scripts.pory"
+	.string "Yeah. Thanks, this will be useful.\n"
+	.string "See you around.$"
+
+EltheRoad_EventScript_AromaLady_Text_0:
+# 931 "data/maps/EltheRoad/scripts.pory"
+	.string "Berries are hardy enough that I\n"
+	.string "think we'll be able to just replant\l"
+	.string "them once the flooding clears up.\l"
+	.string "But still, it's a bother.$"
+
+EltheRoad_EventScript_BerryMan_Text_0:
+# 936 "data/maps/EltheRoad/scripts.pory"
+	.string "Barry$"
+
+EltheRoad_EventScript_BerryMan_Text_1:
+# 937 "data/maps/EltheRoad/scripts.pory"
+	.string "The flood's completely demolished\n"
+	.string "our berry fields. We'll have to\l"
+	.string "replant whatever we can salvage once\l"
+	.string "this dries up.\p"
+	.string "If you want to try dredging up some\n"
+	.string "berries for yourself, you should ask\l"
+	.string "Amelia about it. She's down by the\l"
+	.string "other end of this plot.$"

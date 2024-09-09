@@ -5743,6 +5743,10 @@ static void Task_TryLearnNewMoves(u8 taskId)
 				DisplayMonNeedsToReplaceAbility(taskId);
 				// try to replace ability
 			}
+			else
+			{
+				PartyMenuTryEvolution(taskId);
+			}
 			
 		}
 		else {

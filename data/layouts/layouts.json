@@ -4500,6 +4500,16 @@
       "secondary_tileset": "gTileset_EltheIndoor",
       "border_filepath": "data/layouts/InnRoomAmelia/border.bin",
       "blockdata_filepath": "data/layouts/InnRoomAmelia/map.bin"
+    },
+    {
+      "id": "LAYOUT_CHURCH",
+      "name": "Church_Layout",
+      "width": 20,
+      "height": 20,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_EltheIndoor",
+      "border_filepath": "data/layouts/Church/border.bin",
+      "blockdata_filepath": "data/layouts/Church/map.bin"
     }
   ]
 }

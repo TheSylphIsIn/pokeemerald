@@ -47,7 +47,8 @@
   "gMapGroup_TarcInteriors": [
     "InnFloor1",
     "Bakery",
-    "InnRoomAmelia"
+    "InnRoomAmelia",
+    "Church"
   ],
   "gMapGroup_TarcExtra": [
     "JumpingMinigame_Main"

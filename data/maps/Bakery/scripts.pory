@@ -109,6 +109,15 @@ script Bakery_ViceScript
 				speakername("Demi-Vee", PORTRAIT_DEMIVEE_ANNOYED)
 				msgbox("… … … … …\p" "Okay, let's just go.", MSGBOX_AUTOCLOSE)
 				setvar(VAR_MAIN_GAME_STATE, 7)
+			case SPECIES_NIDOKING:
+				speakername("Bradley", PORTRAIT_NIDOKING_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
+				msgbox("Why not just ask for something NOW?")
+				speakername("Vice", PORTRAIT_FLYGON_NEUTRAL)
+				msgbox("Huh? I never thought of that.\n" "But I don't know what I want!")
+				speakername("Bradley", PORTRAIT_NIDOKING_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
+				msgbox("Of course you didn't…\p"
+						"Let's just ask Marcel what Vice would\n" "like and then get it for her.", MSGBOX_AUTOCLOSE)
+				setvar(VAR_MAIN_GAME_STATE, 7)				
 		}
 		setflag(FLAG_TREES_CLEARED)
 	}
@@ -521,10 +530,10 @@ script Bakery_DubsnakeHydroil
 		switch(var(VAR_RESULT))
 		{
 			case DIR_EAST: // ice head
-				speakername("Dubsnake", PORTRAIT_DUBSNAKE_ICE)
+				speakername("Ice Snake", PORTRAIT_DUBSNAKE_ICE)
 				msgbox("You get a discount on cold drinks if\n" "you're brave enough to let them make\l" "it with the ice from my head.")
 			case DIR_WEST: // oil head
-				speakername("Dubsnake", PORTRAIT_DUBSNAKE_OIL)
+				speakername("Oil Snake", PORTRAIT_DUBSNAKE_OIL)
 				msgbox("I think I'm ready to evolve. I just\n" "need a heat source to start it.")				
 			case DIR_NORTH: // middle
 				speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
@@ -548,7 +557,17 @@ script Bakery_DubsnakeHydroil
 script Bakery_ComputerGuy
 {
 	speakername("Linus")
-	msgbox("The wi-fi in my house has been out\n" "because of the storm, so I have to\l" "come here to get my work done.", MSGBOX_NPC)
+	if(flag(FLAG_GOT_VICE) && !flag(FLAG_ITEM_BAKERY_CANDY))
+	{
+		msgbox("Thanks for taking care of that\n" "Pokémon. It would've sucked if I had\l" "to evacuate right now. Take this.")
+		speakername(NULL)
+		giveitem(ITEM_EXP_CANDY_L)
+		setflag(FLAG_ITEM_BAKERY_CANDY)
+	}
+	else
+	{
+		msgbox("The wi-fi in my house has been out\n" "because of the storm, so I have to\l" "come here to get my work done.", MSGBOX_NPC)
+	}
 }
 
 script Bakery_LeftGuy

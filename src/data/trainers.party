@@ -4024,18 +4024,21 @@ Level: 38
 IVs: 4 HP / 4 Atk / 4 Def / 4 SpA / 4 SpD / 4 Spe
 
 === TRAINER_EDWARD ===
-Name: EDWARD
-Class: Psychic
-Pic: Psychic M
-Gender: Male
+Name: Elise
+Class: Expert
+Pic: Expert F
+Gender: Female
 Music: Intense
 Double Battle: No
-AI: Check Bad Move
+AI: Check Bad Move / Try To Faint / Check Viability
 
-Abra
-Level: 15
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
-- Hidden Power
+Leavanny (F) @ Sitrus Berry  
+Ability: Swarm  
+Level: 45  
+- Slash  
+- Razor Leaf  
+- Struggle Bug  
+- String Shot
 
 === TRAINER_PRESTON ===
 Name: PRESTON
@@ -13022,17 +13025,29 @@ Level: 19
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_CELINA ===
-Name: CELINA
+Name: Amelia
 Class: Aroma Lady
 Pic: Aroma Lady
 Gender: Female
 Music: Female
 Double Battle: No
-AI: Check Bad Move
+AI: Check Bad Move / Try To Faint / Check Viability
 
-Roselia
-Level: 18
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+Tangrowth (F) @ Salac Berry  
+Ability: Chlorophyll  
+Level: 44  
+- Giga Drain  
+- Tickle  
+- Slam  
+- Knock Off  
+
+Mudsdale (M) @  Passho Berry
+Ability: Stamina  
+Level: 46
+- Rototiller  
+- Double Kick  
+- Heavy Slam  
+- Bulldoze  
 
 === TRAINER_BIANCA ===
 Name: BIANCA

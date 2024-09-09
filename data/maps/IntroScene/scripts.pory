@@ -153,6 +153,26 @@ script FollowerScript_Demivee
 					msgbox("So we need to go back to Road to Elthe\n" "and head east. I think I saw some\l" "stumps we could jump across, near\l" "where we met Marcel.")
 				case 10:
 					msgbox("We need to find 3 of a berry that's\n" "high in Spicy and low in other flavors.\p" "Don't forget to check the berry tag!")
+				case 15: // has vice, bradley, or both
+					if(!flag(FLAG_GOT_VICE))
+					{
+						msgbox("Have you checked the businesses near\n" "the entrance to town? Vice might have\l" "taken shelter as soon as she could.")
+					}
+					elif(!flag(FLAG_GOT_BRADLEY))
+					{
+						msgbox("Did you try fighting in the arena\n" "at the north end of town?\p"
+								"If you're having trouble winning, try\n" "exploring to find more Rock Candy\l" "to power me up and counter what the\l" "foes will use.")
+					}
+					else
+					{
+						msgbox("Your last missing friend is in\n" "disguise somewhere in town.\p"
+								"Have Bradley follow you and try to\n" "pick out the person who isn't\l" "normally there.")
+					}
+				case 30: // has python
+					msgbox("You've got your team back together,\n" "but you still need to help the town.\p"
+							"Python said you could clear up the\n" "rain if you confront whatever is\l" "lurking in the shrine on the north\l" "end of town.")
+				default:
+					msgbox("Huh? I didn't know you could reach\n" "this game state! My mistake!")
 			}
 		case 1:
 			if (flag(FLAG_FINISHED_WEATHERBANE_QUEST))
@@ -187,7 +207,15 @@ script FollowerScript_Demivee
 							"The east side is a residential area.\n" "There's also a battle arena there.\p"
 							"In the northwest is an Arcean church.\n" "I never go there.\p"
 							"It's kind of gloomy around here…\n" "Maybe there's something we can do…\l" "What do you think, Amelia?")
-				
+				case MAPSEC_ROUTE_101:
+					msgbox("This is the Elysi Inn. It's a motel\n" "for people passing through here.\p"
+							"If you need to heal us after battle,\n" "you could ask for a room here.")
+				case MAPSEC_ROUTE_102:
+					msgbox("This is Pomona Bread, the bakery.\n" "They make all sorts of baked goods.\p"
+							"I started eating crystals after the\n" "people here caught me stealing from\l" "the displays, haha. But the joke's\l" "on them, because I was controlling the\l" "Pantom population. Now their kitchen\l" "gets haunted once in a while.\p"
+							"But if you ask me, there's nothing\n" "wrong with haunted bread.")
+				default:
+					msgbox("Sorry, I forgot to write an entry\n" "for this area, ahaha...")
 			}
 	}
 	
@@ -215,22 +243,153 @@ script FollowerScript_Marcel
 	}
 	else
 	{
+		random(3)
+		switch(var(VAR_RESULT))
+		{
+			case 0:
+				speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+				msgbox("How did you and Vice get together?")
+				speakername("Marcel", PORTRAIT_KINGLER_NEUTRAL)
+				msgbox("I knew Guillotine…\n" "She knew Outrage…\l" "Can I make it any more obvious?")
+				speakername("Amelia", PORTRAIT_AMELIA_SMUG)
+				msgbox("Ah, yes, incredible violence. The\n" "foundation of any good relationship.")
+				speakername("Amelia", PORTRAIT_AMELIA_SERIOUSLY)
+				msgbox("…That came out wrong.", MSGBOX_AUTOCLOSE)
+			case 1:
+				
+			case 2:
+		}
 	
 	}
 }
 
 script FollowerScript_Vice
 {
-	
+	random(3)
+	switch(var(VAR_RESULT))
+	{
+		case 0:
+			speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+			msgbox("Vice, do you remember Valora?")
+			speakername("Vice", PORTRAIT_FLYGON_NEUTRAL)
+			msgbox("Valora, Valora, Valora…hmm, was she\n" "a Bellsprout?")
+			speakername("Amelia", PORTRAIT_AMELIA_STRAINED)
+			msgbox("Yeah, I think so. I'm having trouble\n" "remembering anything else about her.\p"
+					"And since I know this memory thing\n" "suppresses bad memories…I wonder if\l" "something bad happened to her.")
+			speakername("Vice", PORTRAIT_FLYGON_NEUTRAL)
+			msgbox("I see…\p"
+					"I don't think you should worry about\n" "it, Amelia. It's not like you're\l" "getting careless. Somebody is\l" "ACTIVELY hurting your memory.")
+			speakername("Amelia", PORTRAIT_AMELIA_STRAINED)
+			msgbox("I guess you're right…I still feel\n" "guilty, though.")
+			speakername("Vice", PORTRAIT_FLYGON_NEUTRAL)
+			msgbox("Don't! I'll bite you!", MSGBOX_AUTOCLOSE)
+		case 1:
+		case 2:
+	}
 }
 
 script FollowerScript_Bradley
 {
-	
+	random(3)
+	switch(var(VAR_RESULT))
+	{
+		case 0:
+			speakername("Bradley", PORTRAIT_NIDOKING_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
+			msgbox("Do you remember our first real battle?")
+			speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+			msgbox("Hmm…it wasn't in Alola, was it?\n" "Alola is a blur to me.")
+			speakername("Bradley", PORTRAIT_NIDOKING_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
+			msgbox("No, it was in Johto. Back then, you\n" "visited my hiding place by chance,\l" "and your Dunsparce convinced me to\l" "act as a sparring partner.\p"
+					"Then we were attacked in the night\n" "by a strange creature. Did you ever\l" "find out why it targeted us?")
+			speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+			msgbox("Hm? Oh, yes, I remember. That was\n" "the night that…")
+			speakername("Amelia", PORTRAIT_AMELIA_SERIOUSLY)
+			msgbox("The night that I…\p" "Yeah, I think that was my fault.\n" "I, uh, attracted it somehow.")
+			speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+			msgbox("You know, that thing turned out to be\n" "the guy that Sundown was looking for\l" "the whole time? Crazy coincidence that\l" "it attacked us before we even knew.")
+			speakername("Bradley", PORTRAIT_NIDOKING_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
+			msgbox("Indeed. But I just wanted to say, the\n" "leadership you showed in that fight is\l" "the reason that I accepted your offer\l" "to train me.\p"
+					"You kept your head in a dangerous\n" "situation and kept everyone safe.")
+			speakername("Amelia", PORTRAIT_AMELIA_SERIOUSLY)
+			msgbox("It was sheer luck that my plan even\n" "worked…but thanks, Bradley.", MSGBOX_AUTOCLOSE)
+		case 1:
+			speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+			msgbox("Do you know what happened to your\n" "old trainer?")
+			speakername("Bradley", PORTRAIT_NIDOKING_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
+			msgbox("No. And I do not care.\p" "He said he would reform his ways.\n" "I commend him if he truly does, but\l" "I still won't ever forgive him.")
+			speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+			msgbox("I see. …I have someone like that, too.\n" "I mean, it's a little different…\l" "I was his trainer instead of him\l" "being mine, but it's like…\p"
+					"Well right now I can't remember\n" "exactly what he did, but I still can't\l" "stand him, so it must have been bad.")
+			speakername("Bradley", PORTRAIT_NIDOKING_NERVOUS, PORTRAIT_DEFAULT_LEFT)
+			msgbox("… … … … …\n" "Of course.", MSGBOX_AUTOCLOSE)
+		case 2:
+			speakername("Bradley", PORTRAIT_NIDOKING_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
+			msgbox("I'm sorry again for causing trouble.\p" "I felt like I was back in my younger\n" "days, and I just wanted to rampage.\p"
+					"It felt good, but it's not…helpful.")
+			speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+			msgbox("It's okay. It's fine to let yourself\n" "have fun once in a while.")
+			speakername("Bradley", PORTRAIT_NIDOKING_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
+			msgbox("It's not just that. I lowered my\n" "standards…\p"
+					"You know, when I first started with\n" "my old trainer, I did whatever he\l" "told me to. I knew it was wrong, but\l" "it felt good to be a beast.\p"
+					"Because of me, more Pokémon suffered…")
+			speakername("Amelia", PORTRAIT_AMELIA_SHOCK)
+			msgbox("Hey, don't blame yourself for that\n" "piece of s{CENSOR}hit{UNCENSOR}'s business.\p" "It's in the past, alright?")
+			speakername("Bradley", PORTRAIT_NIDOKING_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
+			msgbox("…", MSGBOX_AUTOCLOSE)
+	}
 }
 
 script FollowerScript_Python
 {
-	
+	random(3)
+	switch(var(VAR_RESULT))
+	{
+		case 0:
+			speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+			msgbox("So you still remember everything?")
+			speakername("Python", PORTRAIT_ZOROARK_NEUTRAL)
+			msgbox("Yup! I'm a Dark type illusionist.\n" "No Psychic type would be able to\l" "put the mind whammy on me!")
+			speakername("Amelia", PORTRAIT_AMELIA_SMUG)
+			msgbox("Okay, so refresh my memory. When that\n" "Hatterene got the jump on us that\l" "time in the woods, you were…?")
+			speakername("Python", PORTRAIT_ZOROARK_NERVOUS)
+			msgbox("…Holding back of my own free will!\n" "I thought we could deescelate the\l" "situation, you see, if we only\l" "identified ourselves.")
+			speakername("Amelia", PORTRAIT_AMELIA_SMUG)
+			msgbox("And you disguised yourself as a\n" "Grimmsnarl because…")
+			speakername("Python", PORTRAIT_ZOROARK_NERVOUS)
+			msgbox("A diplomatic move, of course.\n" "(How do you remember this??)")
+			speakername("Amelia", PORTRAIT_AMELIA_SMUG)
+			msgbox("Uh huh. Of course. Got it.", MSGBOX_AUTOCLOSE)
+		case 1:
+			speakername("Python", PORTRAIT_ZOROARK_NEUTRAL)
+			msgbox("So how much do you remember?")
+			speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+			msgbox("I still have a general idea of how\n" "we got here and everything, but when\l" "I try to remember specific events,\l" "it makes my head hurt.\p"
+					"It's easier to recall good memories\n" "than bad ones.")
+			speakername("Python", PORTRAIT_ZOROARK_NEUTRAL)
+			msgbox("Mmhmm. So you still remember how\n" "you caught me?")
+			speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+			msgbox("Yup, you were practically fresh out\n" "of the egg.")
+			speakername("Python", PORTRAIT_ZOROARK_NEUTRAL)
+			msgbox("How about meeting back up with\n" "your dad?")
+			speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+			msgbox("It was great once I figured out he\n" "wasn't serious about being hired\l" "to kill me. …Only inconvenience me.")
+			speakername("Python", PORTRAIT_ZOROARK_NEUTRAL)
+			msgbox("And how {CENSOR}you lost your virginity{UNCENSOR}?")
+			speakername("Amelia", PORTRAIT_AMELIA_SERIOUSLY)
+			msgbox("…You're too young to be asking that.")
+			speakername("Python", PORTRAIT_ZOROARK_LAUGH)
+			msgbox("Soooorryyy! I just wanted to see\n" "if you'd slip up.", MSGBOX_AUTOCLOSE)
+		case 2:
+			speakername("Python", PORTRAIT_ZOROARK_LAUGH)
+			msgbox("The people in this town are kinda\n" "funny. They just wander back and forth\l" "between the same places all day.")
+			speakername("Amelia", PORTRAIT_AMELIA_SERIOUSLY)
+			msgbox("It's not funny, it's sad. They're\n" "basically hypnotized. That's why\l" "we're trying to fix it.")
+			speakername("Python", PORTRAIT_ZOROARK_LAUGH)
+			msgbox("It's kinda funny. Imagine doing the\n" "same thing on loop every day and\l" "never questioning it.")
+			speakername("Amelia", PORTRAIT_AMELIA_SERIOUSLY)
+			msgbox("I don't wanna imagine it, that's why\n" "I became a Pokémon Trainer instead\l" "of going to college.")
+			speakername("Python", PORTRAIT_ZOROARK_NEUTRAL)
+			msgbox("…Damn.", MSGBOX_AUTOCLOSE)
+	}
 }
 

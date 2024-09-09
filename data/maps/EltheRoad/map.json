@@ -158,9 +158,9 @@
       "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "1",
+      "script": "EltheRoad_EventScript_ExpertTrainer",
       "flag": "0"
     },
     {
@@ -173,7 +173,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
+      "script": "EltheRoad_EventScript_AromaLady",
       "flag": "0"
     },
     {
@@ -266,6 +266,19 @@
       "trainer_sight_or_berry_tree_id": "ITEM_EXP_CANDY_L",
       "script": "Common_EventScript_FindItem",
       "flag": "FLAG_ITEM_BERRY_FIELD_CORNER_CANDY"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_MAN_4",
+      "x": 38,
+      "y": 5,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT",
+      "movement_range_x": 1,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EltheRoad_EventScript_BerryMan",
+      "flag": "0"
     }
   ],
   "warp_events": [
@@ -367,6 +380,15 @@
       "var": "VAR_MAIN_GAME_STATE",
       "var_value": "2",
       "script": "EltheRoad_Trigger_VinosAltTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 34,
+      "y": 15,
+      "elevation": 0,
+      "var": "VAR_BERRY_FIELD_STATE",
+      "var_value": "0",
+      "script": "EltheRoad_Trigger_AromaLadyTrainer"
     }
   ],
   "bg_events": [

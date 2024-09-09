@@ -4247,8 +4247,7 @@ static void Cmd_getexp(void)
     case 0: // check if should receive exp at all
         if (GetBattlerSide(gBattlerFainted) != B_SIDE_OPPONENT
             || IsAiVsAiBattle()
-            || !BattleTypeAllowsExp()
-			|| GET_BASE_SPECIES_ID(GetMonData(&gPlayerParty[*expMonId], MON_DATA_SPECIES)) == SPECIES_EEVEE) // Demi-Vee doesn't get exp or EVs
+            || !BattleTypeAllowsExp()) // Demi-Vee doesn't get exp or EVs
         {
             gBattleScripting.getexpState = 6; // goto last case
         }
@@ -4352,12 +4351,11 @@ static void Cmd_getexp(void)
                 gBattleMoveDamage = 0; // used for exp
             }
             else if ((gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER && *expMonId >= 3)
-                  || GetMonData(&gPlayerParty[*expMonId], MON_DATA_LEVEL) == MAX_LEVEL)
+                  || GetMonData(&gPlayerParty[*expMonId], MON_DATA_LEVEL) == MAX_LEVEL
+					|| GET_BASE_SPECIES_ID(GetMonData(&gPlayerParty[*expMonId], MON_DATA_SPECIES)) == SPECIES_EEVEE)
             {
                 gBattleScripting.getexpState = 5;
                 gBattleMoveDamage = 0; // used for exp
-                if (B_MAX_LEVEL_EV_GAINS >= GEN_5)
-                    MonGainEVs(&gPlayerParty[*expMonId], gBattleMons[gBattlerFainted].species);
             }
             else
             {

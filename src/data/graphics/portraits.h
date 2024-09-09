@@ -24,6 +24,12 @@ const u32 sPortraitPal_NidokingGrin[] = INCBIN_U32("graphics/portraits/nidoking_
 const u32 sPortraitPic_ZoroarkNeutral[] = INCBIN_U32("graphics/portraits/zoroark_neutral.4bpp.lz");
 const u32 sPortraitPal_ZoroarkNeutral[] = INCBIN_U32("graphics/portraits/zoroark_neutral.gbapal.lz");
 
+const u32 sPortraitPic_ZoroarkLaugh[] = INCBIN_U32("graphics/portraits/zoroark_laugh.4bpp.lz");
+const u32 sPortraitPal_ZoroarkLaugh[] = INCBIN_U32("graphics/portraits/zoroark_laugh.gbapal.lz");
+
+const u32 sPortraitPic_ZoroarkNervous[] = INCBIN_U32("graphics/portraits/zoroark_nervous.4bpp.lz");
+const u32 sPortraitPal_ZoroarkNervous[] = INCBIN_U32("graphics/portraits/zoroark_nervous.gbapal.lz");
+
 const u32 sPortraitPic_AmeliaNeutral[] = INCBIN_U32("graphics/portraits/amelia_neutral.4bpp.lz");
 const u32 sPortraitPal_AmeliaNeutral[] = INCBIN_U32("graphics/portraits/amelia_neutral.gbapal.lz");
 
@@ -119,4 +125,6 @@ const struct PortraitData gPortraits[PORTRAITS_COUNT] =
 	[PORTRAIT_HYDROIL_WATER]		= INCLUDE_PORTRAIT(HydroilWater),
 	[PORTRAIT_HYDROIL_FIRE]			= INCLUDE_PORTRAIT(HydroilFire),
 	[PORTRAIT_NIDOKING_GRIN]		= INCLUDE_PORTRAIT(NidokingGrin),
+	[PORTRAIT_ZOROARK_NERVOUS]		= INCLUDE_PORTRAIT(ZoroarkNervous),
+	[PORTRAIT_ZOROARK_LAUGH]		= INCLUDE_PORTRAIT(ZoroarkLaugh),
 };

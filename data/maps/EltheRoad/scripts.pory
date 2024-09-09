@@ -885,6 +885,71 @@ script EltheRoad_BerrySpot_PlotBerries
 
 }
 
+script EltheRoad_EventScript_ExpertTrainer
+{
+	trainerbattle_single(TRAINER_EDWARD, "Excuse me, dear, could I trouble you\n" "for a Pokémon battle?", "Ohoho, that's nice.")
+	msgbox("Leavanny gets antsy if she doesn't\n" "battle often enough. If she gets too\l" "stressed, she eats the berries.", MSGBOX_AUTOCLOSE)
+}
+
+script EltheRoad_Trigger_AromaLadyTrainer
+{
+	lock
+	setflag(FLAG_SAFE_FOLLOWER_MOVEMENT)
+	applymovement(OBJ_EVENT_ID_PLAYER, EltheRoad_Movement_AmeliaGoToAromaLady)
+	applymovement(OBJ_EVENT_ID_FOLLOWER, EltheRoad_Movement_FollowerFollowBerry)
+	waitmovement(OBJ_EVENT_ID_PLAYER)
+	speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+	msgbox("Excuse me, do you mind if I take\n" "some of these berries?")
+	applymovement(12, Common_Movement_FaceLeft)
+	speakername("Amelia")
+	msgbox("Hello, who are you?")
+	speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+	msgbox("My name's Amelia. I'm a Pokémon Ranger.\n" "I got a little lost, and I need some\l" "berries to get my team back together.\l" "We were separated by the flood.")
+	speakername("Amelia")
+	msgbox("Wow! My name's also Amelia!\n" "I'm a gardener.\p"
+			"You can take some of these berries.\n" "But would you mind having a battle\l" "with me first?")
+	speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+	msgbox("Oh, sure. No problem.", MSGBOX_AUTOCLOSE)
+	trainerbattle_no_intro(TRAINER_CELINA, "I guess you're the stronger Amelia!")
+	speakername("Amelia")
+	msgbox("Alright, thanks, Amelia! That was\n" "fun. I won't bother you anymore.\p"
+			"Actually, I want to give you a gift.\n" "Here, take this.")
+	speakername(NULL)
+	giveitem(ITEM_VAPORSHARD)
+	setflag(FLAG_VAPORSHARD_GET)
+	speakername("Amelia")
+	msgbox("I don't know what it's for, but it's\n" "pretty, right?")
+	speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+	msgbox("Yeah. Thanks, this will be useful.\n" "See you around.")
+	setvar(VAR_BERRY_FIELD_STATE, 1)
+	release
+}
+
+script EltheRoad_EventScript_AromaLady
+{
+	speakername("Amelia")
+	msgbox("Berries are hardy enough that I\n" "think we'll be able to just replant\l" "them once the flooding clears up.\l" "But still, it's a bother.", MSGBOX_NPC)
+}
+
+script EltheRoad_EventScript_BerryMan
+{
+	speakername("Barry")
+	msgbox("The flood's completely demolished\n" "our berry fields. We'll have to\l" "replant whatever we can salvage once\l" "this dries up.\p"
+			"If you want to try dredging up some\n" "berries for yourself, you should ask\l" "Amelia about it. She's down by the\l" "other end of this plot.", MSGBOX_NPC)
+}
+
+movement EltheRoad_Movement_AmeliaGoToAromaLady
+{
+	walk_down * 2
+	walk_right
+}
+
+movement EltheRoad_Movement_FollowerFollowBerry
+{
+	walk_down * 3
+	face_right
+}
+
 movement EltheRoad_Movement_DemiveeRunFromMarcel
 {
 	lock_facing_direction
