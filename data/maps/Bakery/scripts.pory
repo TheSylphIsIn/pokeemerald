@@ -19,42 +19,55 @@ mapscripts Bakery_MapScripts
 		}
 	}
 	MAP_SCRIPT_ON_FRAME_TABLE [
-		VAR_MAIN_GAME_STATE, 5
+		VAR_MAIN_GAME_STATE, 5: Bakery_ShowViceMapScript
+		VAR_MAIN_GAME_STATE, 15
 		{
-			delay(120)
-			special(SpawnCameraObject)
-			applymovement(OBJ_EVENT_ID_CAMERA, Bakery_Movement_CameraScrollToVice)
-			waitmovement(0)
-			delay(16)
-			applymovement(LOCALID_GIRL, Common_Movement_WalkInPlaceUp)
-			speakername("Little girl")
-			msgbox("What's this Pokémon's name, mommy?")
-			applymovement(LOCALID_MOM, Common_Movement_WalkInPlaceDown)
-			speakername("Her mom")
-			msgbox("That's a Flygon, sweetie. That kind\n" "doesn't live around here.")
-			applymovement(LOCALID_BOY, Common_Movement_WalkInPlaceLeft)
-			speakername("Little boy")
-			msgbox("Where does it live?")
-			turnobject(LOCALID_VICE, DIR_SOUTH)
-			playmoncry(SPECIES_FLYGON, CRY_MODE_NORMAL)
-			speakername("Vice", PORTRAIT_FLYGON_ANNOYED)
-			msgbox("I'm not a jungle gym, little runts.\n" "If it wasn't raining so hard, I'd be\l" "far, far away from you.")
-			applymovement(LOCALID_GIRL, Common_Movement_WalkInPlaceUp)
-			speakername("Little girl")
-			msgbox("He made a funny noise!\n" "Ggnnnrrr!")
-			speakername("Vice", PORTRAIT_FLYGON_ANNOYED)
-			msgbox("Sigh…", MSGBOX_AUTOCLOSE)
-			applymovement(OBJ_EVENT_ID_CAMERA, Bakery_Movement_CameraScrollBack)
-			waitmovement(0)
-			special(RemoveCameraObject)
 			setvar(VAR_MAIN_GAME_STATE, 6)
+			if (!flag(FLAG_SAW_VICE_CUTSCENE))
+			{
+				goto(Bakery_ShowViceMapScript)
+			}
 		}
+
 	]
+}
+
+script Bakery_ShowViceMapScript
+{
+	delay(120)
+	special(SpawnCameraObject)
+	applymovement(OBJ_EVENT_ID_CAMERA, Bakery_Movement_CameraScrollToVice)
+	waitmovement(0)
+	delay(16)
+	applymovement(LOCALID_GIRL, Common_Movement_WalkInPlaceUp)
+	speakername("Little girl")
+	msgbox("What's this Pokémon's name, mommy?")
+	applymovement(LOCALID_MOM, Common_Movement_WalkInPlaceDown)
+	speakername("Her mom")
+	msgbox("That's a Flygon, sweetie. That kind\n" "doesn't live around here.")
+	applymovement(LOCALID_BOY, Common_Movement_WalkInPlaceLeft)
+	speakername("Little boy")
+	msgbox("Where does it live?")
+	turnobject(LOCALID_VICE, DIR_SOUTH)
+	playmoncry(SPECIES_FLYGON, CRY_MODE_NORMAL)
+	speakername("Vice", PORTRAIT_FLYGON_ANNOYED)
+	msgbox("I'm not a jungle gym, little runts.\n" "If it wasn't raining so hard, I'd be\l" "far, far away from you.")
+	applymovement(LOCALID_GIRL, Common_Movement_WalkInPlaceUp)
+	speakername("Little girl")
+	msgbox("He made a funny noise!\n" "Ggnnnrrr!")
+	speakername("Vice", PORTRAIT_FLYGON_ANNOYED)
+	msgbox("Sigh…", MSGBOX_AUTOCLOSE)
+	applymovement(OBJ_EVENT_ID_CAMERA, Bakery_Movement_CameraScrollBack)
+	waitmovement(0)
+	special(RemoveCameraObject)
+	setvar(VAR_MAIN_GAME_STATE, 6)
+	setflag(FLAG_SAW_VICE_CUTSCENE)
 }
 
 script Bakery_ViceScript
 {
 	lock
+	faceplayer
 	if(flag(FLAG_TREES_CLEARED))
 	{
 		speakername("Vice", PORTRAIT_FLYGON_ANNOYED)
@@ -147,27 +160,10 @@ script Bakery_Cashier
 	faceplayer
 	if (flag(FLAG_TREES_CLEARED) && !flag(FLAG_GOT_VICE))
 	{
-		speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
-		msgbox("'Scuse me, what's your policy on\n" "special orders? That Flygon over there\l" "is mine, but she wants a treat\l" "before we go.")
-		speakername("Cashier")
-		msgbox("Uh, I think we can do it. It\n" "depends, I guess. What did you want?")
-		if (flag(FLAG_KNOW_VICE_FLAVOR))
+		if(flag(FLAG_SKIP_BAKER_CONVO))
 		{
-			speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
-			msgbox("Something spicy. Can you do spicy?")
 			speakername("Cashier")
-			msgbox("I'm not sure. Lemme ask the boss.", MSGBOX_AUTOCLOSE)
-			applymovement(VAR_LAST_TALKED, Common_Movement_WalkInPlaceUp)
-			waitmovement(0)
-			delay(16)
-			applymovement(LOCALID_BAKER, Common_Movement_WalkInPlaceDown)
-			waitmovement(0)
-			applymovement(LOCALID_BAKER, Common_Movement_WalkInPlaceDown)
-			waitmovement(0)
-			delay(32)
-			faceplayer
-			speakername("Cashier")
-			msgbox("We don't have anything on hand.\n" "If you're committed enough to bring\l" "your own spicy berries, we could\l" "make something out of them.")
+			msgbox("Do you have the spicy berries?")
 			checkitem(ITEM_SPELON_BERRY, 3)
 			if(var(VAR_RESULT) == TRUE)
 			{
@@ -178,8 +174,7 @@ script Bakery_Cashier
 			}
 			else
 			{
-				msgbox("We'll need at least 3 berries with\n" "high Spicy content. And if the other\l" "flavors are too strong, it won't work.\p"
-						"There's berry fields outside of town\n" "to the east. Maybe you can get them\l" "to give you what you need.")
+				msgbox("The berry fields are on the right\n" "side of the Road to Elthe.\p" "I think the good {POKEBLOCK} berries are\n" "toward the far end of the field.")
 				if (var(VAR_MAIN_GAME_STATE) < 9) // sets your hint state if you haven't been to the berry fields yet
 				{
 					setvar(VAR_MAIN_GAME_STATE, 9)
@@ -188,10 +183,53 @@ script Bakery_Cashier
 		}
 		else
 		{
-			speakername("Amelia", PORTRAIT_AMELIA_SERIOUSLY)
-			msgbox("…Um, good question…")
+			speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+			msgbox("'Scuse me, what's your policy on\n" "special orders? That Flygon over there\l" "is mine, but she wants a treat\l" "before we go.")
 			speakername("Cashier")
-			msgbox("… … … … …\n" "Well, we need something to work from.\l" "Could you figure out what flavor\l" "it likes, at least?", MSGBOX_AUTOCLOSE)
+			msgbox("Uh, I think we can do it. It\n" "depends, I guess. What did you want?")
+			if (flag(FLAG_KNOW_VICE_FLAVOR))
+			{
+				setflag(FLAG_SKIP_BAKER_CONVO)
+				speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+				msgbox("Something spicy. Can you do spicy?")
+				speakername("Cashier")
+				msgbox("I'm not sure. Lemme ask the boss.", MSGBOX_AUTOCLOSE)
+				applymovement(VAR_LAST_TALKED, Common_Movement_WalkInPlaceUp)
+				waitmovement(0)
+				delay(16)
+				applymovement(LOCALID_BAKER, Common_Movement_WalkInPlaceDown)
+				waitmovement(0)
+				applymovement(LOCALID_BAKER, Common_Movement_WalkInPlaceDown)
+				waitmovement(0)
+				delay(32)
+				faceplayer
+				speakername("Cashier")
+				msgbox("We don't have anything on hand.\n" "If you're committed enough to bring\l" "your own spicy berries, we could\l" "make something out of them.")
+				checkitem(ITEM_SPELON_BERRY, 3)
+				if(var(VAR_RESULT) == TRUE)
+				{
+					msgbox("Ah, you've got them! Okay, just\n" "one moment…", MSGBOX_AUTOCLOSE)
+					removeitem(ITEM_SPELON_BERRY, 3)
+					fadescreen(FADE_TO_BLACK)
+					goto(Bakery_ViceRecruitCutscene)
+				}
+				else
+				{
+					msgbox("We'll need at least 3 berries with\n" "high Spicy content. Probably the kind\l" "people use for {POKEBLOCK}s.\p"
+							"There's berry fields south of town\n" "to the east. Maybe you can get them\l" "to give you what you need.")
+					if (var(VAR_MAIN_GAME_STATE) < 9) // sets your hint state if you haven't been to the berry fields yet
+					{
+						setvar(VAR_MAIN_GAME_STATE, 9)
+					}
+				}
+			}
+			else
+			{
+				speakername("Amelia", PORTRAIT_AMELIA_SERIOUSLY)
+				msgbox("…Um, good question…")
+				speakername("Cashier")
+				msgbox("… … … … …\n" "Well, we need something to work from.\l" "Could you figure out what flavor\l" "it likes, at least?", MSGBOX_AUTOCLOSE)
+			}
 		}
 	}
 	elif(flag(FLAG_GOT_VICE))
@@ -272,7 +310,11 @@ script Bakery_ViceRecruitCutscene
 	givemon(SPECIES_FLYGON, 50, ITEM_DRAGON_FANG, ITEM_POKE_BALL, NATURE_BRAVE, 0, MON_FEMALE, 0, 0, 0, 0, 0, 0, 31, 31, 31, 31, 31, 31, MOVE_OUTRAGE, MOVE_DRAGON_CLAW, MOVE_BONE_CLUB, MOVE_AERIAL_ACE, FALSE, FALSE, TYPE_WATER)
 	setpartymemberinfo(2)
 	speakername("Vice", PORTRAIT_FLYGON_NEUTRAL)
-	msgbox("Hey, hey! That spicy goodness is mine!\n" "Back up off!", MSGBOX_AUTOCLOSE)
+	message("Hey, hey! That spicy goodness is mine!\n" "Back up off!")
+	waitmovement(LOCALID_VICE)
+	waitmessage
+	waitbuttonpress
+	closemessage
 	playmoncry(SPECIES_HYDROIL, CRY_MODE_NORMAL)
 	applymovement(LOCALID_DUBSNAKE, Bakery_Movement_HydroilRoar)
 	waitmovement(0)
@@ -330,7 +372,7 @@ script Bakery_ViceRecruitCutscene
 	setobjectmovementtype(LOCALID_BAKER, MOVEMENT_TYPE_WANDER_UP_AND_DOWN)
 	removeobject(LOCALID_BAKER)
 	addobject(LOCALID_BAKER)
-	setvar(VAR_MAIN_GAME_STATE, 15)
+	setvar(VAR_MAIN_GAME_STATE, 16)
 	setmetatile(10, 13, 0x20C, FALSE)
 	setmetatile(10, 14, 0x20C, FALSE)
 	setvar(VAR_0x8000, 10)

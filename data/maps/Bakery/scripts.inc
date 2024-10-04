@@ -25,1121 +25,1185 @@ Bakery_MapScripts_MAP_SCRIPT_ON_TRANSITION_1:
 
 Bakery_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE:
 # 22 "data/maps/Bakery/scripts.pory"
-	map_script_2 VAR_MAIN_GAME_STATE, 5, Bakery_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0
+	map_script_2 VAR_MAIN_GAME_STATE, 5, Bakery_ShowViceMapScript
+# 23 "data/maps/Bakery/scripts.pory"
+	map_script_2 VAR_MAIN_GAME_STATE, 15, Bakery_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_1
 	.2byte 0
 
-Bakery_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0:
-# 24 "data/maps/Bakery/scripts.pory"
-	delay 120
+Bakery_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_1:
 # 25 "data/maps/Bakery/scripts.pory"
-	special SpawnCameraObject
+	setvar VAR_MAIN_GAME_STATE, 6
 # 26 "data/maps/Bakery/scripts.pory"
-	applymovement OBJ_EVENT_ID_CAMERA, Bakery_Movement_CameraScrollToVice
-# 27 "data/maps/Bakery/scripts.pory"
-	waitmovement 0
+	goto_if_unset FLAG_SAW_VICE_CUTSCENE, Bakery_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_1_1
+	return
+
+Bakery_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_1_1:
 # 28 "data/maps/Bakery/scripts.pory"
-	delay 16
-# 29 "data/maps/Bakery/scripts.pory"
-	applymovement 7, Common_Movement_WalkInPlaceUp
-# 30 "data/maps/Bakery/scripts.pory"
-	speakername Bakery_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_0
-# 31 "data/maps/Bakery/scripts.pory"
-	msgbox Bakery_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_1
-# 32 "data/maps/Bakery/scripts.pory"
-	applymovement 5, Common_Movement_WalkInPlaceDown
-# 33 "data/maps/Bakery/scripts.pory"
-	speakername Bakery_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_2
-# 34 "data/maps/Bakery/scripts.pory"
-	msgbox Bakery_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_3
-# 35 "data/maps/Bakery/scripts.pory"
-	applymovement 6, Common_Movement_WalkInPlaceLeft
-# 36 "data/maps/Bakery/scripts.pory"
-	speakername Bakery_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_4
+	goto Bakery_ShowViceMapScript
+	return
+
+
+Bakery_ShowViceMapScript::
 # 37 "data/maps/Bakery/scripts.pory"
-	msgbox Bakery_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_5
+	delay 120
 # 38 "data/maps/Bakery/scripts.pory"
-	turnobject 1, DIR_SOUTH
+	special SpawnCameraObject
 # 39 "data/maps/Bakery/scripts.pory"
-	playmoncry SPECIES_FLYGON, CRY_MODE_NORMAL
+	applymovement OBJ_EVENT_ID_CAMERA, Bakery_Movement_CameraScrollToVice
 # 40 "data/maps/Bakery/scripts.pory"
-	speakername Bakery_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_6, PORTRAIT_FLYGON_ANNOYED
+	waitmovement 0
 # 41 "data/maps/Bakery/scripts.pory"
-	msgbox Bakery_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_7
+	delay 16
 # 42 "data/maps/Bakery/scripts.pory"
 	applymovement 7, Common_Movement_WalkInPlaceUp
 # 43 "data/maps/Bakery/scripts.pory"
-	speakername Bakery_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_0
+	speakername Bakery_ShowViceMapScript_Text_0
 # 44 "data/maps/Bakery/scripts.pory"
-	msgbox Bakery_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_8
+	msgbox Bakery_ShowViceMapScript_Text_1
 # 45 "data/maps/Bakery/scripts.pory"
-	speakername Bakery_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_6, PORTRAIT_FLYGON_ANNOYED
+	applymovement 5, Common_Movement_WalkInPlaceDown
 # 46 "data/maps/Bakery/scripts.pory"
-	msgbox Bakery_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_9, MSGBOX_AUTOCLOSE
+	speakername Bakery_ShowViceMapScript_Text_2
 # 47 "data/maps/Bakery/scripts.pory"
-	applymovement OBJ_EVENT_ID_CAMERA, Bakery_Movement_CameraScrollBack
+	msgbox Bakery_ShowViceMapScript_Text_3
 # 48 "data/maps/Bakery/scripts.pory"
-	waitmovement 0
+	applymovement 6, Common_Movement_WalkInPlaceLeft
 # 49 "data/maps/Bakery/scripts.pory"
-	special RemoveCameraObject
+	speakername Bakery_ShowViceMapScript_Text_4
 # 50 "data/maps/Bakery/scripts.pory"
+	msgbox Bakery_ShowViceMapScript_Text_5
+# 51 "data/maps/Bakery/scripts.pory"
+	turnobject 1, DIR_SOUTH
+# 52 "data/maps/Bakery/scripts.pory"
+	playmoncry SPECIES_FLYGON, CRY_MODE_NORMAL
+# 53 "data/maps/Bakery/scripts.pory"
+	speakername Bakery_ShowViceMapScript_Text_6, PORTRAIT_FLYGON_ANNOYED
+# 54 "data/maps/Bakery/scripts.pory"
+	msgbox Bakery_ShowViceMapScript_Text_7
+# 55 "data/maps/Bakery/scripts.pory"
+	applymovement 7, Common_Movement_WalkInPlaceUp
+# 56 "data/maps/Bakery/scripts.pory"
+	speakername Bakery_ShowViceMapScript_Text_0
+# 57 "data/maps/Bakery/scripts.pory"
+	msgbox Bakery_ShowViceMapScript_Text_8
+# 58 "data/maps/Bakery/scripts.pory"
+	speakername Bakery_ShowViceMapScript_Text_6, PORTRAIT_FLYGON_ANNOYED
+# 59 "data/maps/Bakery/scripts.pory"
+	msgbox Bakery_ShowViceMapScript_Text_9, MSGBOX_AUTOCLOSE
+# 60 "data/maps/Bakery/scripts.pory"
+	applymovement OBJ_EVENT_ID_CAMERA, Bakery_Movement_CameraScrollBack
+# 61 "data/maps/Bakery/scripts.pory"
+	waitmovement 0
+# 62 "data/maps/Bakery/scripts.pory"
+	special RemoveCameraObject
+# 63 "data/maps/Bakery/scripts.pory"
 	setvar VAR_MAIN_GAME_STATE, 6
+# 64 "data/maps/Bakery/scripts.pory"
+	setflag FLAG_SAW_VICE_CUTSCENE
 	return
 
 
 Bakery_ViceScript::
-# 57 "data/maps/Bakery/scripts.pory"
-	lock
-# 58 "data/maps/Bakery/scripts.pory"
-	goto_if_set FLAG_TREES_CLEARED, Bakery_ViceScript_2
-# 67 "data/maps/Bakery/scripts.pory"
-	faceplayer
-# 68 "data/maps/Bakery/scripts.pory"
-	speakername Bakery_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_6, PORTRAIT_FLYGON_ANNOYED
 # 69 "data/maps/Bakery/scripts.pory"
-	msgbox Bakery_ViceScript_Text_3
+	lock
 # 70 "data/maps/Bakery/scripts.pory"
-	speakername Bakery_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_6, PORTRAIT_FLYGON_NEUTRAL
+	faceplayer
 # 71 "data/maps/Bakery/scripts.pory"
-	msgbox Bakery_ViceScript_Text_4
-# 72 "data/maps/Bakery/scripts.pory"
-	speakername Bakery_ViceScript_Text_1, PORTRAIT_AMELIA_NEUTRAL
-# 73 "data/maps/Bakery/scripts.pory"
-	msgbox Bakery_ViceScript_Text_5
-# 74 "data/maps/Bakery/scripts.pory"
-	speakername Bakery_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_6, PORTRAIT_FLYGON_NEUTRAL
-# 75 "data/maps/Bakery/scripts.pory"
-	msgbox Bakery_ViceScript_Text_6
-# 76 "data/maps/Bakery/scripts.pory"
-	speakername Bakery_ViceScript_Text_1, PORTRAIT_AMELIA_SERIOUSLY
-# 77 "data/maps/Bakery/scripts.pory"
-	msgbox Bakery_ViceScript_Text_7
-# 79 "data/maps/Bakery/scripts.pory"
-	speakername Bakery_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_6, PORTRAIT_FLYGON_NEUTRAL
+	goto_if_set FLAG_TREES_CLEARED, Bakery_ViceScript_2
 # 80 "data/maps/Bakery/scripts.pory"
-	msgbox Bakery_ViceScript_Text_8
+	faceplayer
 # 81 "data/maps/Bakery/scripts.pory"
-	speakername Bakery_ViceScript_Text_1, PORTRAIT_AMELIA_SERIOUSLY
+	speakername Bakery_ShowViceMapScript_Text_6, PORTRAIT_FLYGON_ANNOYED
 # 82 "data/maps/Bakery/scripts.pory"
-	msgbox Bakery_ViceScript_Text_9
+	msgbox Bakery_ViceScript_Text_3
 # 83 "data/maps/Bakery/scripts.pory"
-	speakername Bakery_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_6, PORTRAIT_FLYGON_NEUTRAL
+	speakername Bakery_ShowViceMapScript_Text_6, PORTRAIT_FLYGON_NEUTRAL
 # 84 "data/maps/Bakery/scripts.pory"
-	msgbox Bakery_ViceScript_Text_10
+	msgbox Bakery_ViceScript_Text_4
 # 85 "data/maps/Bakery/scripts.pory"
-	special GetLeadMonSpecies
+	speakername Bakery_ViceScript_Text_1, PORTRAIT_AMELIA_NEUTRAL
 # 86 "data/maps/Bakery/scripts.pory"
-	switch VAR_RESULT
+	msgbox Bakery_ViceScript_Text_5
+# 87 "data/maps/Bakery/scripts.pory"
+	speakername Bakery_ShowViceMapScript_Text_6, PORTRAIT_FLYGON_NEUTRAL
 # 88 "data/maps/Bakery/scripts.pory"
-	case SPECIES_KINGLER, Bakery_ViceScript_7
+	msgbox Bakery_ViceScript_Text_6
+# 89 "data/maps/Bakery/scripts.pory"
+	speakername Bakery_ViceScript_Text_1, PORTRAIT_AMELIA_SERIOUSLY
+# 90 "data/maps/Bakery/scripts.pory"
+	msgbox Bakery_ViceScript_Text_7
+# 92 "data/maps/Bakery/scripts.pory"
+	speakername Bakery_ShowViceMapScript_Text_6, PORTRAIT_FLYGON_NEUTRAL
+# 93 "data/maps/Bakery/scripts.pory"
+	msgbox Bakery_ViceScript_Text_8
+# 94 "data/maps/Bakery/scripts.pory"
+	speakername Bakery_ViceScript_Text_1, PORTRAIT_AMELIA_SERIOUSLY
+# 95 "data/maps/Bakery/scripts.pory"
+	msgbox Bakery_ViceScript_Text_9
+# 96 "data/maps/Bakery/scripts.pory"
+	speakername Bakery_ShowViceMapScript_Text_6, PORTRAIT_FLYGON_NEUTRAL
+# 97 "data/maps/Bakery/scripts.pory"
+	msgbox Bakery_ViceScript_Text_10
 # 98 "data/maps/Bakery/scripts.pory"
+	special GetLeadMonSpecies
+# 99 "data/maps/Bakery/scripts.pory"
+	switch VAR_RESULT
+# 101 "data/maps/Bakery/scripts.pory"
+	case SPECIES_KINGLER, Bakery_ViceScript_7
+# 111 "data/maps/Bakery/scripts.pory"
 	case SPECIES_EEVEE, Bakery_ViceScript_8
-# 112 "data/maps/Bakery/scripts.pory"
+# 125 "data/maps/Bakery/scripts.pory"
 	case SPECIES_NIDOKING, Bakery_ViceScript_9
 Bakery_ViceScript_5:
-# 122 "data/maps/Bakery/scripts.pory"
+# 135 "data/maps/Bakery/scripts.pory"
 	setflag FLAG_TREES_CLEARED
 Bakery_ViceScript_1:
-# 124 "data/maps/Bakery/scripts.pory"
+# 137 "data/maps/Bakery/scripts.pory"
 	release
 	return
 
 Bakery_ViceScript_2:
-# 60 "data/maps/Bakery/scripts.pory"
-	speakername Bakery_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_6, PORTRAIT_FLYGON_ANNOYED
-# 61 "data/maps/Bakery/scripts.pory"
+# 73 "data/maps/Bakery/scripts.pory"
+	speakername Bakery_ShowViceMapScript_Text_6, PORTRAIT_FLYGON_ANNOYED
+# 74 "data/maps/Bakery/scripts.pory"
 	msgbox Bakery_ViceScript_Text_0
-# 62 "data/maps/Bakery/scripts.pory"
+# 75 "data/maps/Bakery/scripts.pory"
 	speakername Bakery_ViceScript_Text_1, PORTRAIT_AMELIA_SERIOUSLY
-# 63 "data/maps/Bakery/scripts.pory"
+# 76 "data/maps/Bakery/scripts.pory"
 	msgbox Bakery_ViceScript_Text_2, MSGBOX_AUTOCLOSE
 	goto Bakery_ViceScript_1
 
 Bakery_ViceScript_7:
-# 89 "data/maps/Bakery/scripts.pory"
+# 102 "data/maps/Bakery/scripts.pory"
 	speakername Bakery_ViceScript_Text_11, PORTRAIT_KINGLER_LAUGH
-# 90 "data/maps/Bakery/scripts.pory"
+# 103 "data/maps/Bakery/scripts.pory"
 	msgbox Bakery_ViceScript_Text_12
-# 91 "data/maps/Bakery/scripts.pory"
-	speakername Bakery_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_6, PORTRAIT_FLYGON_NEUTRAL
-# 92 "data/maps/Bakery/scripts.pory"
+# 104 "data/maps/Bakery/scripts.pory"
+	speakername Bakery_ShowViceMapScript_Text_6, PORTRAIT_FLYGON_NEUTRAL
+# 105 "data/maps/Bakery/scripts.pory"
 	msgbox Bakery_ViceScript_Text_13
-# 94 "data/maps/Bakery/scripts.pory"
+# 107 "data/maps/Bakery/scripts.pory"
 	speakername Bakery_ViceScript_Text_11, PORTRAIT_KINGLER_NEUTRAL
-# 95 "data/maps/Bakery/scripts.pory"
+# 108 "data/maps/Bakery/scripts.pory"
 	msgbox Bakery_ViceScript_Text_14, MSGBOX_AUTOCLOSE
-# 96 "data/maps/Bakery/scripts.pory"
+# 109 "data/maps/Bakery/scripts.pory"
 	setflag FLAG_KNOW_VICE_FLAVOR
-# 97 "data/maps/Bakery/scripts.pory"
+# 110 "data/maps/Bakery/scripts.pory"
 	setvar VAR_MAIN_GAME_STATE, 8
 	goto Bakery_ViceScript_5
 
 Bakery_ViceScript_8:
-# 99 "data/maps/Bakery/scripts.pory"
+# 112 "data/maps/Bakery/scripts.pory"
 	speakername Bakery_ViceScript_Text_15, PORTRAIT_DEMIVEE_NEUTRAL
-# 100 "data/maps/Bakery/scripts.pory"
+# 113 "data/maps/Bakery/scripts.pory"
 	msgbox Bakery_ViceScript_Text_16
-# 101 "data/maps/Bakery/scripts.pory"
-	speakername Bakery_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_6, PORTRAIT_FLYGON_NEUTRAL
-# 102 "data/maps/Bakery/scripts.pory"
+# 114 "data/maps/Bakery/scripts.pory"
+	speakername Bakery_ShowViceMapScript_Text_6, PORTRAIT_FLYGON_NEUTRAL
+# 115 "data/maps/Bakery/scripts.pory"
 	msgbox Bakery_ViceScript_Text_17
-# 105 "data/maps/Bakery/scripts.pory"
+# 118 "data/maps/Bakery/scripts.pory"
 	speakername Bakery_ViceScript_Text_15, PORTRAIT_DEMIVEE_NEUTRAL
-# 106 "data/maps/Bakery/scripts.pory"
+# 119 "data/maps/Bakery/scripts.pory"
 	msgbox Bakery_ViceScript_Text_18
-# 107 "data/maps/Bakery/scripts.pory"
-	speakername Bakery_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_6, PORTRAIT_FLYGON_NEUTRAL
-# 108 "data/maps/Bakery/scripts.pory"
+# 120 "data/maps/Bakery/scripts.pory"
+	speakername Bakery_ShowViceMapScript_Text_6, PORTRAIT_FLYGON_NEUTRAL
+# 121 "data/maps/Bakery/scripts.pory"
 	msgbox Bakery_ViceScript_Text_19
-# 109 "data/maps/Bakery/scripts.pory"
+# 122 "data/maps/Bakery/scripts.pory"
 	speakername Bakery_ViceScript_Text_15, PORTRAIT_DEMIVEE_ANNOYED
-# 110 "data/maps/Bakery/scripts.pory"
+# 123 "data/maps/Bakery/scripts.pory"
 	msgbox Bakery_ViceScript_Text_20, MSGBOX_AUTOCLOSE
-# 111 "data/maps/Bakery/scripts.pory"
+# 124 "data/maps/Bakery/scripts.pory"
 	setvar VAR_MAIN_GAME_STATE, 7
 	goto Bakery_ViceScript_5
 
 Bakery_ViceScript_9:
-# 113 "data/maps/Bakery/scripts.pory"
+# 126 "data/maps/Bakery/scripts.pory"
 	speakername Bakery_ViceScript_Text_21, PORTRAIT_NIDOKING_NEUTRAL, PORTRAIT_DEFAULT_LEFT
-# 114 "data/maps/Bakery/scripts.pory"
+# 127 "data/maps/Bakery/scripts.pory"
 	msgbox Bakery_ViceScript_Text_22
-# 115 "data/maps/Bakery/scripts.pory"
-	speakername Bakery_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_6, PORTRAIT_FLYGON_NEUTRAL
-# 116 "data/maps/Bakery/scripts.pory"
+# 128 "data/maps/Bakery/scripts.pory"
+	speakername Bakery_ShowViceMapScript_Text_6, PORTRAIT_FLYGON_NEUTRAL
+# 129 "data/maps/Bakery/scripts.pory"
 	msgbox Bakery_ViceScript_Text_23
-# 117 "data/maps/Bakery/scripts.pory"
+# 130 "data/maps/Bakery/scripts.pory"
 	speakername Bakery_ViceScript_Text_21, PORTRAIT_NIDOKING_NEUTRAL, PORTRAIT_DEFAULT_LEFT
-# 118 "data/maps/Bakery/scripts.pory"
+# 131 "data/maps/Bakery/scripts.pory"
 	msgbox Bakery_ViceScript_Text_24, MSGBOX_AUTOCLOSE
-# 120 "data/maps/Bakery/scripts.pory"
+# 133 "data/maps/Bakery/scripts.pory"
 	setvar VAR_MAIN_GAME_STATE, 7
 	goto Bakery_ViceScript_5
 
 
-# 127 "data/maps/Bakery/scripts.pory"
+# 140 "data/maps/Bakery/scripts.pory"
 Bakery_Movement_CameraScrollToVice:
-# 129 "data/maps/Bakery/scripts.pory"
+# 142 "data/maps/Bakery/scripts.pory"
 	walk_slow_diag_northeast
-# 129 "data/maps/Bakery/scripts.pory"
+# 142 "data/maps/Bakery/scripts.pory"
 	walk_slow_diag_northeast
-# 129 "data/maps/Bakery/scripts.pory"
+# 142 "data/maps/Bakery/scripts.pory"
 	walk_slow_diag_northeast
-# 129 "data/maps/Bakery/scripts.pory"
+# 142 "data/maps/Bakery/scripts.pory"
 	walk_slow_diag_northeast
-# 129 "data/maps/Bakery/scripts.pory"
+# 142 "data/maps/Bakery/scripts.pory"
 	walk_slow_diag_northeast
-# 129 "data/maps/Bakery/scripts.pory"
+# 142 "data/maps/Bakery/scripts.pory"
 	walk_slow_diag_northeast
 	step_end
 
-# 132 "data/maps/Bakery/scripts.pory"
+# 145 "data/maps/Bakery/scripts.pory"
 Bakery_Movement_CameraScrollBack:
-# 134 "data/maps/Bakery/scripts.pory"
+# 147 "data/maps/Bakery/scripts.pory"
 	walk_slow_diag_southwest
-# 134 "data/maps/Bakery/scripts.pory"
+# 147 "data/maps/Bakery/scripts.pory"
 	walk_slow_diag_southwest
-# 134 "data/maps/Bakery/scripts.pory"
+# 147 "data/maps/Bakery/scripts.pory"
 	walk_slow_diag_southwest
-# 134 "data/maps/Bakery/scripts.pory"
+# 147 "data/maps/Bakery/scripts.pory"
 	walk_slow_diag_southwest
-# 134 "data/maps/Bakery/scripts.pory"
+# 147 "data/maps/Bakery/scripts.pory"
 	walk_slow_diag_southwest
-# 134 "data/maps/Bakery/scripts.pory"
+# 147 "data/maps/Bakery/scripts.pory"
 	walk_slow_diag_southwest
 	step_end
 
 Bakery_Baker::
-# 139 "data/maps/Bakery/scripts.pory"
+# 152 "data/maps/Bakery/scripts.pory"
 	msgbox Bakery_Baker_Text_0, MSGBOX_AUTOCLOSE
 	return
 
 
 Bakery_Cashier::
-# 146 "data/maps/Bakery/scripts.pory"
+# 159 "data/maps/Bakery/scripts.pory"
 	lock
-# 147 "data/maps/Bakery/scripts.pory"
+# 160 "data/maps/Bakery/scripts.pory"
 	faceplayer
-# 148 "data/maps/Bakery/scripts.pory"
+# 161 "data/maps/Bakery/scripts.pory"
 	goto_if_set FLAG_TREES_CLEARED, Bakery_Cashier_6
 Bakery_Cashier_5:
-# 197 "data/maps/Bakery/scripts.pory"
+# 235 "data/maps/Bakery/scripts.pory"
 	goto_if_set FLAG_GOT_VICE, Bakery_Cashier_3
-# 207 "data/maps/Bakery/scripts.pory"
-	speakername Bakery_Cashier_Text_1
-# 208 "data/maps/Bakery/scripts.pory"
-	msgbox Bakery_Cashier_Text_12
+# 245 "data/maps/Bakery/scripts.pory"
+	speakername Bakery_Cashier_Text_0
+# 246 "data/maps/Bakery/scripts.pory"
+	msgbox Bakery_Cashier_Text_14
 Bakery_Cashier_1:
-# 210 "data/maps/Bakery/scripts.pory"
+# 248 "data/maps/Bakery/scripts.pory"
 	release
 	return
 
 Bakery_Cashier_2:
-# 150 "data/maps/Bakery/scripts.pory"
+# 163 "data/maps/Bakery/scripts.pory"
+	goto_if_set FLAG_SKIP_BAKER_CONVO, Bakery_Cashier_9
+# 186 "data/maps/Bakery/scripts.pory"
 	speakername Bakery_ViceScript_Text_1, PORTRAIT_AMELIA_NEUTRAL
-# 151 "data/maps/Bakery/scripts.pory"
-	msgbox Bakery_Cashier_Text_0
-# 152 "data/maps/Bakery/scripts.pory"
-	speakername Bakery_Cashier_Text_1
-# 153 "data/maps/Bakery/scripts.pory"
-	msgbox Bakery_Cashier_Text_2
-# 154 "data/maps/Bakery/scripts.pory"
-	goto_if_set FLAG_KNOW_VICE_FLAVOR, Bakery_Cashier_9
-# 191 "data/maps/Bakery/scripts.pory"
+# 187 "data/maps/Bakery/scripts.pory"
+	msgbox Bakery_Cashier_Text_4
+# 188 "data/maps/Bakery/scripts.pory"
+	speakername Bakery_Cashier_Text_0
+# 189 "data/maps/Bakery/scripts.pory"
+	msgbox Bakery_Cashier_Text_5
+# 190 "data/maps/Bakery/scripts.pory"
+	goto_if_set FLAG_KNOW_VICE_FLAVOR, Bakery_Cashier_15
+# 228 "data/maps/Bakery/scripts.pory"
 	speakername Bakery_ViceScript_Text_1, PORTRAIT_AMELIA_SERIOUSLY
-# 192 "data/maps/Bakery/scripts.pory"
-	msgbox Bakery_Cashier_Text_8
-# 193 "data/maps/Bakery/scripts.pory"
-	speakername Bakery_Cashier_Text_1
-# 194 "data/maps/Bakery/scripts.pory"
-	msgbox Bakery_Cashier_Text_9, MSGBOX_AUTOCLOSE
+# 229 "data/maps/Bakery/scripts.pory"
+	msgbox Bakery_Cashier_Text_10
+# 230 "data/maps/Bakery/scripts.pory"
+	speakername Bakery_Cashier_Text_0
+# 231 "data/maps/Bakery/scripts.pory"
+	msgbox Bakery_Cashier_Text_11, MSGBOX_AUTOCLOSE
 	goto Bakery_Cashier_1
 
 Bakery_Cashier_3:
-# 199 "data/maps/Bakery/scripts.pory"
-	speakername Bakery_Cashier_Text_1
-# 200 "data/maps/Bakery/scripts.pory"
-	msgbox Bakery_Cashier_Text_10
-# 202 "data/maps/Bakery/scripts.pory"
+# 237 "data/maps/Bakery/scripts.pory"
+	speakername Bakery_Cashier_Text_0
+# 238 "data/maps/Bakery/scripts.pory"
+	msgbox Bakery_Cashier_Text_12
+# 240 "data/maps/Bakery/scripts.pory"
 	speakername Bakery_ViceScript_Text_1, PORTRAIT_AMELIA_NEUTRAL
-# 203 "data/maps/Bakery/scripts.pory"
-	msgbox Bakery_Cashier_Text_11
+# 241 "data/maps/Bakery/scripts.pory"
+	msgbox Bakery_Cashier_Text_13
 	goto Bakery_Cashier_1
 
 Bakery_Cashier_6:
-# 148 "data/maps/Bakery/scripts.pory"
+# 161 "data/maps/Bakery/scripts.pory"
 	goto_if_unset FLAG_GOT_VICE, Bakery_Cashier_2
 	goto Bakery_Cashier_5
 
 Bakery_Cashier_9:
-# 156 "data/maps/Bakery/scripts.pory"
-	speakername Bakery_ViceScript_Text_1, PORTRAIT_AMELIA_NEUTRAL
-# 157 "data/maps/Bakery/scripts.pory"
-	msgbox Bakery_Cashier_Text_3
-# 158 "data/maps/Bakery/scripts.pory"
-	speakername Bakery_Cashier_Text_1
-# 159 "data/maps/Bakery/scripts.pory"
-	msgbox Bakery_Cashier_Text_4, MSGBOX_AUTOCLOSE
-# 160 "data/maps/Bakery/scripts.pory"
-	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceUp
-# 161 "data/maps/Bakery/scripts.pory"
-	waitmovement 0
-# 162 "data/maps/Bakery/scripts.pory"
-	delay 16
-# 163 "data/maps/Bakery/scripts.pory"
-	applymovement 9, Common_Movement_WalkInPlaceDown
-# 164 "data/maps/Bakery/scripts.pory"
-	waitmovement 0
 # 165 "data/maps/Bakery/scripts.pory"
-	applymovement 9, Common_Movement_WalkInPlaceDown
+	speakername Bakery_Cashier_Text_0
 # 166 "data/maps/Bakery/scripts.pory"
-	waitmovement 0
+	msgbox Bakery_Cashier_Text_1
 # 167 "data/maps/Bakery/scripts.pory"
-	delay 32
-# 168 "data/maps/Bakery/scripts.pory"
-	faceplayer
-# 169 "data/maps/Bakery/scripts.pory"
-	speakername Bakery_Cashier_Text_1
-# 170 "data/maps/Bakery/scripts.pory"
-	msgbox Bakery_Cashier_Text_5
-# 171 "data/maps/Bakery/scripts.pory"
 	checkitem ITEM_SPELON_BERRY, 3
-# 172 "data/maps/Bakery/scripts.pory"
+# 168 "data/maps/Bakery/scripts.pory"
 	compare VAR_RESULT, TRUE
 	goto_if_eq Bakery_Cashier_12
-# 181 "data/maps/Bakery/scripts.pory"
-	msgbox Bakery_Cashier_Text_7
-# 183 "data/maps/Bakery/scripts.pory"
+# 177 "data/maps/Bakery/scripts.pory"
+	msgbox Bakery_Cashier_Text_3
+# 178 "data/maps/Bakery/scripts.pory"
 	compare VAR_MAIN_GAME_STATE, 9
-	goto_if_lt Bakery_Cashier_15
+	goto_if_lt Bakery_Cashier_18
 	goto Bakery_Cashier_1
 
 Bakery_Cashier_12:
-# 174 "data/maps/Bakery/scripts.pory"
-	msgbox Bakery_Cashier_Text_6, MSGBOX_AUTOCLOSE
-# 175 "data/maps/Bakery/scripts.pory"
+# 170 "data/maps/Bakery/scripts.pory"
+	msgbox Bakery_Cashier_Text_2, MSGBOX_AUTOCLOSE
+# 171 "data/maps/Bakery/scripts.pory"
 	removeitem ITEM_SPELON_BERRY, 3
-# 176 "data/maps/Bakery/scripts.pory"
+# 172 "data/maps/Bakery/scripts.pory"
 	fadescreen FADE_TO_BLACK
-# 177 "data/maps/Bakery/scripts.pory"
+# 173 "data/maps/Bakery/scripts.pory"
 	goto Bakery_ViceRecruitCutscene
 	goto Bakery_Cashier_1
 
 Bakery_Cashier_15:
-# 185 "data/maps/Bakery/scripts.pory"
+# 192 "data/maps/Bakery/scripts.pory"
+	setflag FLAG_SKIP_BAKER_CONVO
+# 193 "data/maps/Bakery/scripts.pory"
+	speakername Bakery_ViceScript_Text_1, PORTRAIT_AMELIA_NEUTRAL
+# 194 "data/maps/Bakery/scripts.pory"
+	msgbox Bakery_Cashier_Text_6
+# 195 "data/maps/Bakery/scripts.pory"
+	speakername Bakery_Cashier_Text_0
+# 196 "data/maps/Bakery/scripts.pory"
+	msgbox Bakery_Cashier_Text_7, MSGBOX_AUTOCLOSE
+# 197 "data/maps/Bakery/scripts.pory"
+	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceUp
+# 198 "data/maps/Bakery/scripts.pory"
+	waitmovement 0
+# 199 "data/maps/Bakery/scripts.pory"
+	delay 16
+# 200 "data/maps/Bakery/scripts.pory"
+	applymovement 9, Common_Movement_WalkInPlaceDown
+# 201 "data/maps/Bakery/scripts.pory"
+	waitmovement 0
+# 202 "data/maps/Bakery/scripts.pory"
+	applymovement 9, Common_Movement_WalkInPlaceDown
+# 203 "data/maps/Bakery/scripts.pory"
+	waitmovement 0
+# 204 "data/maps/Bakery/scripts.pory"
+	delay 32
+# 205 "data/maps/Bakery/scripts.pory"
+	faceplayer
+# 206 "data/maps/Bakery/scripts.pory"
+	speakername Bakery_Cashier_Text_0
+# 207 "data/maps/Bakery/scripts.pory"
+	msgbox Bakery_Cashier_Text_8
+# 208 "data/maps/Bakery/scripts.pory"
+	checkitem ITEM_SPELON_BERRY, 3
+# 209 "data/maps/Bakery/scripts.pory"
+	compare VAR_RESULT, TRUE
+	goto_if_eq Bakery_Cashier_20
+# 218 "data/maps/Bakery/scripts.pory"
+	msgbox Bakery_Cashier_Text_9
+# 220 "data/maps/Bakery/scripts.pory"
+	compare VAR_MAIN_GAME_STATE, 9
+	goto_if_lt Bakery_Cashier_23
+	goto Bakery_Cashier_1
+
+Bakery_Cashier_18:
+# 180 "data/maps/Bakery/scripts.pory"
+	setvar VAR_MAIN_GAME_STATE, 9
+	goto Bakery_Cashier_1
+
+Bakery_Cashier_20:
+# 211 "data/maps/Bakery/scripts.pory"
+	msgbox Bakery_Cashier_Text_2, MSGBOX_AUTOCLOSE
+# 212 "data/maps/Bakery/scripts.pory"
+	removeitem ITEM_SPELON_BERRY, 3
+# 213 "data/maps/Bakery/scripts.pory"
+	fadescreen FADE_TO_BLACK
+# 214 "data/maps/Bakery/scripts.pory"
+	goto Bakery_ViceRecruitCutscene
+	goto Bakery_Cashier_1
+
+Bakery_Cashier_23:
+# 222 "data/maps/Bakery/scripts.pory"
 	setvar VAR_MAIN_GAME_STATE, 9
 	goto Bakery_Cashier_1
 
 
 Bakery_ViceRecruitCutscene::
-# 215 "data/maps/Bakery/scripts.pory"
-	setmetatile 10, 13, 0x2AF, FALSE
-# 216 "data/maps/Bakery/scripts.pory"
-	setmetatile 10, 14, 0x2B7, FALSE
-# 217 "data/maps/Bakery/scripts.pory"
-	setobjectxy OBJ_EVENT_ID_PLAYER, 12, 13
-# 218 "data/maps/Bakery/scripts.pory"
-	turnobject OBJ_EVENT_ID_PLAYER, DIR_WEST
-# 219 "data/maps/Bakery/scripts.pory"
-	setobjectxy OBJ_EVENT_ID_FOLLOWER, 13, 14
-# 220 "data/maps/Bakery/scripts.pory"
-	turnobject OBJ_EVENT_ID_FOLLOWER, DIR_NORTH
-# 221 "data/maps/Bakery/scripts.pory"
-	setobjectxyperm 9, 10, 13
-# 222 "data/maps/Bakery/scripts.pory"
-	setobjectmovementtype 9, MOVEMENT_TYPE_FACE_DOWN
-# 223 "data/maps/Bakery/scripts.pory"
-	removeobject 9
-# 224 "data/maps/Bakery/scripts.pory"
-	addobject 9
-# 225 "data/maps/Bakery/scripts.pory"
-	setvar VAR_0x8000, 12
-# 226 "data/maps/Bakery/scripts.pory"
-	setvar VAR_0x8001, 13
-# 227 "data/maps/Bakery/scripts.pory"
-	special TeleportCamera
-# 228 "data/maps/Bakery/scripts.pory"
-	delay 32
-# 229 "data/maps/Bakery/scripts.pory"
-	fadescreen FADE_FROM_BLACK
-# 230 "data/maps/Bakery/scripts.pory"
-	delay 64
-# 231 "data/maps/Bakery/scripts.pory"
-	speakername Bakery_ViceRecruitCutscene_Text_0
-# 232 "data/maps/Bakery/scripts.pory"
-	msgbox Bakery_ViceRecruitCutscene_Text_1, MSGBOX_AUTOCLOSE
-# 234 "data/maps/Bakery/scripts.pory"
-	delay 32
-# 235 "data/maps/Bakery/scripts.pory"
-	special SpawnCameraObject
-# 236 "data/maps/Bakery/scripts.pory"
-	applymovement OBJ_EVENT_ID_CAMERA, Bakery_Movement_CameraMoveLeft
-# 237 "data/maps/Bakery/scripts.pory"
-	waitmovement 0
-# 238 "data/maps/Bakery/scripts.pory"
-	special RemoveCameraObject
-# 239 "data/maps/Bakery/scripts.pory"
-	applymovement 2, Bakery_Movement_DubsnakeGoInFire
-# 240 "data/maps/Bakery/scripts.pory"
-	waitmovement 0
-# 241 "data/maps/Bakery/scripts.pory"
-	playse SE_M_SELF_DESTRUCT
-# 242 "data/maps/Bakery/scripts.pory"
-	fadescreen FADE_TO_WHITE
-# 243 "data/maps/Bakery/scripts.pory"
-	applymovement 9, Common_Movement_WalkUp
-# 244 "data/maps/Bakery/scripts.pory"
-	playse SE_M_SELF_DESTRUCT
-# 245 "data/maps/Bakery/scripts.pory"
-	delay 8
-# 246 "data/maps/Bakery/scripts.pory"
-	playse SE_M_SELF_DESTRUCT
-# 247 "data/maps/Bakery/scripts.pory"
-	delay 8
-# 248 "data/maps/Bakery/scripts.pory"
-	playse SE_M_SELF_DESTRUCT
-# 249 "data/maps/Bakery/scripts.pory"
-	delay 8
-# 250 "data/maps/Bakery/scripts.pory"
-	playse SE_M_EXPLOSION
-# 251 "data/maps/Bakery/scripts.pory"
-	waitse
-# 252 "data/maps/Bakery/scripts.pory"
-	delay 60
 # 253 "data/maps/Bakery/scripts.pory"
-	turnobject 2, DIR_NORTH
+	setmetatile 10, 13, 0x2AF, FALSE
 # 254 "data/maps/Bakery/scripts.pory"
-	setobjectxy OBJ_EVENT_ID_FOLLOWER, 9, 16
+	setmetatile 10, 14, 0x2B7, FALSE
 # 255 "data/maps/Bakery/scripts.pory"
-	turnobject OBJ_EVENT_ID_FOLLOWER, DIR_NORTH
+	setobjectxy OBJ_EVENT_ID_PLAYER, 12, 13
 # 256 "data/maps/Bakery/scripts.pory"
-	setobjectxy OBJ_EVENT_ID_PLAYER, 10, 16
+	turnobject OBJ_EVENT_ID_PLAYER, DIR_WEST
 # 257 "data/maps/Bakery/scripts.pory"
-	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
+	setobjectxy OBJ_EVENT_ID_FOLLOWER, 13, 14
 # 258 "data/maps/Bakery/scripts.pory"
-	setmetatile 10, 13, 0x2AE, FALSE
+	turnobject OBJ_EVENT_ID_FOLLOWER, DIR_NORTH
 # 259 "data/maps/Bakery/scripts.pory"
-	setmetatile 10, 14, 0x2B6, FALSE
+	setobjectxyperm 9, 10, 13
 # 260 "data/maps/Bakery/scripts.pory"
-	special DrawWholeMapView
+	setobjectmovementtype 9, MOVEMENT_TYPE_FACE_DOWN
 # 261 "data/maps/Bakery/scripts.pory"
-	fadescreen FADE_FROM_WHITE
+	removeobject 9
 # 262 "data/maps/Bakery/scripts.pory"
-	delay 16
+	addobject 9
 # 263 "data/maps/Bakery/scripts.pory"
-	playmoncry SPECIES_HYDROIL, CRY_MODE_NORMAL
+	setvar VAR_0x8000, 12
 # 264 "data/maps/Bakery/scripts.pory"
-	applymovement 2, Bakery_Movement_HydroilRoar
+	setvar VAR_0x8001, 13
 # 265 "data/maps/Bakery/scripts.pory"
-	waitmovement 0
+	special TeleportCamera
 # 266 "data/maps/Bakery/scripts.pory"
-	speakername Bakery_ViceScript_Text_1, PORTRAIT_AMELIA_SHOCK
+	delay 32
 # 267 "data/maps/Bakery/scripts.pory"
-	msgbox Bakery_ViceRecruitCutscene_Text_2, MSGBOX_AUTOCLOSE
+	fadescreen FADE_FROM_BLACK
 # 268 "data/maps/Bakery/scripts.pory"
-	playse SE_PIN
+	delay 64
 # 269 "data/maps/Bakery/scripts.pory"
-	applymovement 1, Common_Movement_ExclamationMark
+	speakername Bakery_ViceRecruitCutscene_Text_0
 # 270 "data/maps/Bakery/scripts.pory"
-	delay 48
-# 271 "data/maps/Bakery/scripts.pory"
-	applymovement 1, Bakery_Movement_ViceSwoopIn
+	msgbox Bakery_ViceRecruitCutscene_Text_1, MSGBOX_AUTOCLOSE
 # 272 "data/maps/Bakery/scripts.pory"
-	givemon SPECIES_FLYGON, 50, ITEM_DRAGON_FANG, ITEM_POKE_BALL, NATURE_BRAVE, 0, MON_FEMALE, 0, 0, 0, 0, 0, 0, 31, 31, 31, 31, 31, 31, MOVE_OUTRAGE, MOVE_DRAGON_CLAW, MOVE_BONE_CLUB, MOVE_AERIAL_ACE, FALSE, FALSE, TYPE_WATER
+	delay 32
 # 273 "data/maps/Bakery/scripts.pory"
-	setpartymemberinfo 2
+	special SpawnCameraObject
 # 274 "data/maps/Bakery/scripts.pory"
-	speakername Bakery_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_6, PORTRAIT_FLYGON_NEUTRAL
+	applymovement OBJ_EVENT_ID_CAMERA, Bakery_Movement_CameraMoveLeft
 # 275 "data/maps/Bakery/scripts.pory"
-	msgbox Bakery_ViceRecruitCutscene_Text_3, MSGBOX_AUTOCLOSE
+	waitmovement 0
 # 276 "data/maps/Bakery/scripts.pory"
-	playmoncry SPECIES_HYDROIL, CRY_MODE_NORMAL
+	special RemoveCameraObject
 # 277 "data/maps/Bakery/scripts.pory"
-	applymovement 2, Bakery_Movement_HydroilRoar
+	applymovement 2, Bakery_Movement_DubsnakeGoInFire
 # 278 "data/maps/Bakery/scripts.pory"
 	waitmovement 0
 # 279 "data/maps/Bakery/scripts.pory"
-	delay 32
+	playse SE_M_SELF_DESTRUCT
 # 280 "data/maps/Bakery/scripts.pory"
-	createmon 1, 0, SPECIES_HYDROIL, 52, ITEM_NONE, 0, NATURE_RASH, 0, MON_MALE, 0, 0, 0, 0, 0, 0, 31, 31, 31, 31, 31, 31, MOVE_FLAME_BURST, MOVE_WATER_PULSE, MOVE_DRAGON_PULSE, MOVE_GLARE, FALSE, 0, TYPE_WATER
+	fadescreen FADE_TO_WHITE
 # 281 "data/maps/Bakery/scripts.pory"
-	dowildbattle
+	applymovement 9, Common_Movement_WalkUp
 # 282 "data/maps/Bakery/scripts.pory"
-	delay 64
+	playse SE_M_SELF_DESTRUCT
 # 283 "data/maps/Bakery/scripts.pory"
-	speakername Bakery_ViceRecruitCutscene_Text_4, PORTRAIT_HYDROIL_WATER
+	delay 8
 # 284 "data/maps/Bakery/scripts.pory"
-	msgbox Bakery_ViceRecruitCutscene_Text_5
+	playse SE_M_SELF_DESTRUCT
 # 285 "data/maps/Bakery/scripts.pory"
-	speakername Bakery_ViceRecruitCutscene_Text_4, PORTRAIT_HYDROIL_FIRE
+	delay 8
 # 286 "data/maps/Bakery/scripts.pory"
-	msgbox Bakery_ViceRecruitCutscene_Text_6
+	playse SE_M_SELF_DESTRUCT
 # 287 "data/maps/Bakery/scripts.pory"
-	applymovement 1, Common_Movement_FaceDown
+	delay 8
 # 288 "data/maps/Bakery/scripts.pory"
-	waitmovement 0
+	playse SE_M_EXPLOSION
 # 289 "data/maps/Bakery/scripts.pory"
-	speakername Bakery_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_6, PORTRAIT_FLYGON_NEUTRAL
+	waitse
 # 290 "data/maps/Bakery/scripts.pory"
-	msgbox Bakery_ViceRecruitCutscene_Text_7
+	delay 60
 # 291 "data/maps/Bakery/scripts.pory"
-	speakername Bakery_ViceScript_Text_1, PORTRAIT_AMELIA_NEUTRAL
+	turnobject 2, DIR_NORTH
 # 292 "data/maps/Bakery/scripts.pory"
-	msgbox Bakery_ViceRecruitCutscene_Text_8
+	setobjectxy OBJ_EVENT_ID_FOLLOWER, 9, 16
 # 293 "data/maps/Bakery/scripts.pory"
-	speakername Bakery_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_6, PORTRAIT_FLYGON_NEUTRAL
+	turnobject OBJ_EVENT_ID_FOLLOWER, DIR_NORTH
 # 294 "data/maps/Bakery/scripts.pory"
-	msgbox Bakery_ViceRecruitCutscene_Text_9
+	setobjectxy OBJ_EVENT_ID_PLAYER, 10, 16
 # 295 "data/maps/Bakery/scripts.pory"
-	speakername Bakery_ViceScript_Text_1, PORTRAIT_AMELIA_SHOCK
+	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 # 296 "data/maps/Bakery/scripts.pory"
-	msgbox Bakery_ViceRecruitCutscene_Text_10
+	setmetatile 10, 13, 0x2AE, FALSE
 # 297 "data/maps/Bakery/scripts.pory"
-	speakername Bakery_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_6, PORTRAIT_FLYGON_NEUTRAL
+	setmetatile 10, 14, 0x2B6, FALSE
 # 298 "data/maps/Bakery/scripts.pory"
-	msgbox Bakery_ViceRecruitCutscene_Text_11
+	special DrawWholeMapView
 # 299 "data/maps/Bakery/scripts.pory"
-	speakername Bakery_ViceScript_Text_1, PORTRAIT_AMELIA_SERIOUSLY
+	fadescreen FADE_FROM_WHITE
 # 300 "data/maps/Bakery/scripts.pory"
-	msgbox Bakery_ViceRecruitCutscene_Text_12
+	delay 16
 # 301 "data/maps/Bakery/scripts.pory"
+	playmoncry SPECIES_HYDROIL, CRY_MODE_NORMAL
+# 302 "data/maps/Bakery/scripts.pory"
+	applymovement 2, Bakery_Movement_HydroilRoar
+# 303 "data/maps/Bakery/scripts.pory"
+	waitmovement 0
+# 304 "data/maps/Bakery/scripts.pory"
+	speakername Bakery_ViceScript_Text_1, PORTRAIT_AMELIA_SHOCK
+# 305 "data/maps/Bakery/scripts.pory"
+	msgbox Bakery_ViceRecruitCutscene_Text_2, MSGBOX_AUTOCLOSE
+# 306 "data/maps/Bakery/scripts.pory"
+	playse SE_PIN
+# 307 "data/maps/Bakery/scripts.pory"
+	applymovement 1, Common_Movement_ExclamationMark
+# 308 "data/maps/Bakery/scripts.pory"
+	delay 48
+# 309 "data/maps/Bakery/scripts.pory"
+	applymovement 1, Bakery_Movement_ViceSwoopIn
+# 310 "data/maps/Bakery/scripts.pory"
+	givemon SPECIES_FLYGON, 50, ITEM_DRAGON_FANG, ITEM_POKE_BALL, NATURE_BRAVE, 0, MON_FEMALE, 0, 0, 0, 0, 0, 0, 31, 31, 31, 31, 31, 31, MOVE_OUTRAGE, MOVE_DRAGON_CLAW, MOVE_BONE_CLUB, MOVE_AERIAL_ACE, FALSE, FALSE, TYPE_WATER
+# 311 "data/maps/Bakery/scripts.pory"
+	setpartymemberinfo 2
+# 312 "data/maps/Bakery/scripts.pory"
+	speakername Bakery_ShowViceMapScript_Text_6, PORTRAIT_FLYGON_NEUTRAL
+# 313 "data/maps/Bakery/scripts.pory"
+	message Bakery_ViceRecruitCutscene_Text_3
+# 314 "data/maps/Bakery/scripts.pory"
+	waitmovement 1
+# 315 "data/maps/Bakery/scripts.pory"
+	waitmessage
+# 316 "data/maps/Bakery/scripts.pory"
+	waitbuttonpress
+# 317 "data/maps/Bakery/scripts.pory"
+	closemessage
+# 318 "data/maps/Bakery/scripts.pory"
+	playmoncry SPECIES_HYDROIL, CRY_MODE_NORMAL
+# 319 "data/maps/Bakery/scripts.pory"
+	applymovement 2, Bakery_Movement_HydroilRoar
+# 320 "data/maps/Bakery/scripts.pory"
+	waitmovement 0
+# 321 "data/maps/Bakery/scripts.pory"
+	delay 32
+# 322 "data/maps/Bakery/scripts.pory"
+	createmon 1, 0, SPECIES_HYDROIL, 52, ITEM_NONE, 0, NATURE_RASH, 0, MON_MALE, 0, 0, 0, 0, 0, 0, 31, 31, 31, 31, 31, 31, MOVE_FLAME_BURST, MOVE_WATER_PULSE, MOVE_DRAGON_PULSE, MOVE_GLARE, FALSE, 0, TYPE_WATER
+# 323 "data/maps/Bakery/scripts.pory"
+	dowildbattle
+# 324 "data/maps/Bakery/scripts.pory"
+	delay 64
+# 325 "data/maps/Bakery/scripts.pory"
+	speakername Bakery_ViceRecruitCutscene_Text_4, PORTRAIT_HYDROIL_WATER
+# 326 "data/maps/Bakery/scripts.pory"
+	msgbox Bakery_ViceRecruitCutscene_Text_5
+# 327 "data/maps/Bakery/scripts.pory"
+	speakername Bakery_ViceRecruitCutscene_Text_4, PORTRAIT_HYDROIL_FIRE
+# 328 "data/maps/Bakery/scripts.pory"
+	msgbox Bakery_ViceRecruitCutscene_Text_6
+# 329 "data/maps/Bakery/scripts.pory"
+	applymovement 1, Common_Movement_FaceDown
+# 330 "data/maps/Bakery/scripts.pory"
+	waitmovement 0
+# 331 "data/maps/Bakery/scripts.pory"
+	speakername Bakery_ShowViceMapScript_Text_6, PORTRAIT_FLYGON_NEUTRAL
+# 332 "data/maps/Bakery/scripts.pory"
+	msgbox Bakery_ViceRecruitCutscene_Text_7
+# 333 "data/maps/Bakery/scripts.pory"
+	speakername Bakery_ViceScript_Text_1, PORTRAIT_AMELIA_NEUTRAL
+# 334 "data/maps/Bakery/scripts.pory"
+	msgbox Bakery_ViceRecruitCutscene_Text_8
+# 335 "data/maps/Bakery/scripts.pory"
+	speakername Bakery_ShowViceMapScript_Text_6, PORTRAIT_FLYGON_NEUTRAL
+# 336 "data/maps/Bakery/scripts.pory"
+	msgbox Bakery_ViceRecruitCutscene_Text_9
+# 337 "data/maps/Bakery/scripts.pory"
+	speakername Bakery_ViceScript_Text_1, PORTRAIT_AMELIA_SHOCK
+# 338 "data/maps/Bakery/scripts.pory"
+	msgbox Bakery_ViceRecruitCutscene_Text_10
+# 339 "data/maps/Bakery/scripts.pory"
+	speakername Bakery_ShowViceMapScript_Text_6, PORTRAIT_FLYGON_NEUTRAL
+# 340 "data/maps/Bakery/scripts.pory"
+	msgbox Bakery_ViceRecruitCutscene_Text_11
+# 341 "data/maps/Bakery/scripts.pory"
+	speakername Bakery_ViceScript_Text_1, PORTRAIT_AMELIA_SERIOUSLY
+# 342 "data/maps/Bakery/scripts.pory"
+	msgbox Bakery_ViceRecruitCutscene_Text_12
+# 343 "data/maps/Bakery/scripts.pory"
 	goto_if_set FLAG_GOT_BRADLEY, Bakery_ViceRecruitCutscene_2
 Bakery_ViceRecruitCutscene_1:
-# 314 "data/maps/Bakery/scripts.pory"
+# 356 "data/maps/Bakery/scripts.pory"
 	closemessage
-# 315 "data/maps/Bakery/scripts.pory"
+# 357 "data/maps/Bakery/scripts.pory"
 	removeitem ITEM_POKE_BALL, 1
-# 316 "data/maps/Bakery/scripts.pory"
+# 358 "data/maps/Bakery/scripts.pory"
 	delay 32
-# 317 "data/maps/Bakery/scripts.pory"
+# 359 "data/maps/Bakery/scripts.pory"
 	applymovement 1, EnterPokeballMovement
-# 318 "data/maps/Bakery/scripts.pory"
+# 360 "data/maps/Bakery/scripts.pory"
 	waitmovement 0
-# 319 "data/maps/Bakery/scripts.pory"
+# 361 "data/maps/Bakery/scripts.pory"
 	removeobject 1
-# 320 "data/maps/Bakery/scripts.pory"
+# 362 "data/maps/Bakery/scripts.pory"
 	delay 16
-# 321 "data/maps/Bakery/scripts.pory"
+# 363 "data/maps/Bakery/scripts.pory"
 	playfanfare MUS_EVOLVED
-# 322 "data/maps/Bakery/scripts.pory"
+# 364 "data/maps/Bakery/scripts.pory"
 	message Bakery_ViceRecruitCutscene_Text_16
-# 323 "data/maps/Bakery/scripts.pory"
+# 365 "data/maps/Bakery/scripts.pory"
 	waitmessage
-# 324 "data/maps/Bakery/scripts.pory"
+# 366 "data/maps/Bakery/scripts.pory"
 	waitfanfare
-# 325 "data/maps/Bakery/scripts.pory"
+# 367 "data/maps/Bakery/scripts.pory"
 	waitbuttonpress
-# 326 "data/maps/Bakery/scripts.pory"
+# 368 "data/maps/Bakery/scripts.pory"
 	closemessage
-# 327 "data/maps/Bakery/scripts.pory"
+# 369 "data/maps/Bakery/scripts.pory"
 	fadescreen FADE_TO_BLACK
-# 328 "data/maps/Bakery/scripts.pory"
+# 370 "data/maps/Bakery/scripts.pory"
 	setobjectxy 2, 9, 12
-# 329 "data/maps/Bakery/scripts.pory"
+# 371 "data/maps/Bakery/scripts.pory"
 	setobjectxyperm 9, 6, 13
-# 330 "data/maps/Bakery/scripts.pory"
+# 372 "data/maps/Bakery/scripts.pory"
 	setobjectmovementtype 9, MOVEMENT_TYPE_WANDER_UP_AND_DOWN
-# 331 "data/maps/Bakery/scripts.pory"
+# 373 "data/maps/Bakery/scripts.pory"
 	removeobject 9
-# 332 "data/maps/Bakery/scripts.pory"
+# 374 "data/maps/Bakery/scripts.pory"
 	addobject 9
-# 333 "data/maps/Bakery/scripts.pory"
-	setvar VAR_MAIN_GAME_STATE, 15
-# 334 "data/maps/Bakery/scripts.pory"
+# 375 "data/maps/Bakery/scripts.pory"
+	setvar VAR_MAIN_GAME_STATE, 16
+# 376 "data/maps/Bakery/scripts.pory"
 	setmetatile 10, 13, 0x20C, FALSE
-# 335 "data/maps/Bakery/scripts.pory"
+# 377 "data/maps/Bakery/scripts.pory"
 	setmetatile 10, 14, 0x20C, FALSE
-# 336 "data/maps/Bakery/scripts.pory"
+# 378 "data/maps/Bakery/scripts.pory"
 	setvar VAR_0x8000, 10
-# 337 "data/maps/Bakery/scripts.pory"
+# 379 "data/maps/Bakery/scripts.pory"
 	setvar VAR_0x8001, 16
-# 338 "data/maps/Bakery/scripts.pory"
+# 380 "data/maps/Bakery/scripts.pory"
 	special TeleportCamera
-# 339 "data/maps/Bakery/scripts.pory"
+# 381 "data/maps/Bakery/scripts.pory"
 	fadescreen FADE_FROM_BLACK
-# 340 "data/maps/Bakery/scripts.pory"
+# 382 "data/maps/Bakery/scripts.pory"
 	release
 	return
 
 Bakery_ViceRecruitCutscene_2:
-# 303 "data/maps/Bakery/scripts.pory"
+# 345 "data/maps/Bakery/scripts.pory"
 	speakername Bakery_ViceScript_Text_1, PORTRAIT_AMELIA_NEUTRAL
-# 304 "data/maps/Bakery/scripts.pory"
+# 346 "data/maps/Bakery/scripts.pory"
 	msgbox Bakery_ViceRecruitCutscene_Text_13
-# 305 "data/maps/Bakery/scripts.pory"
-	speakername Bakery_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_6, PORTRAIT_FLYGON_NEUTRAL
-# 306 "data/maps/Bakery/scripts.pory"
+# 347 "data/maps/Bakery/scripts.pory"
+	speakername Bakery_ShowViceMapScript_Text_6, PORTRAIT_FLYGON_NEUTRAL
+# 348 "data/maps/Bakery/scripts.pory"
 	msgbox Bakery_ViceRecruitCutscene_Text_14
-# 308 "data/maps/Bakery/scripts.pory"
+# 350 "data/maps/Bakery/scripts.pory"
 	speakername Bakery_ViceScript_Text_1, PORTRAIT_AMELIA_NEUTRAL
-# 309 "data/maps/Bakery/scripts.pory"
+# 351 "data/maps/Bakery/scripts.pory"
 	msgbox Bakery_ViceRecruitCutscene_Text_15
-# 312 "data/maps/Bakery/scripts.pory"
+# 354 "data/maps/Bakery/scripts.pory"
 	setflag FLAG_CAN_FIND_PYTHON
 	goto Bakery_ViceRecruitCutscene_1
 
 
-# 343 "data/maps/Bakery/scripts.pory"
+# 385 "data/maps/Bakery/scripts.pory"
 Bakery_Movement_ViceSwoopIn:
-# 345 "data/maps/Bakery/scripts.pory"
+# 387 "data/maps/Bakery/scripts.pory"
 	walk_fast_left
-# 345 "data/maps/Bakery/scripts.pory"
+# 387 "data/maps/Bakery/scripts.pory"
 	walk_fast_left
-# 345 "data/maps/Bakery/scripts.pory"
+# 387 "data/maps/Bakery/scripts.pory"
 	walk_fast_left
-# 346 "data/maps/Bakery/scripts.pory"
+# 388 "data/maps/Bakery/scripts.pory"
 	walk_fast_down
-# 346 "data/maps/Bakery/scripts.pory"
+# 388 "data/maps/Bakery/scripts.pory"
 	walk_fast_down
-# 346 "data/maps/Bakery/scripts.pory"
+# 388 "data/maps/Bakery/scripts.pory"
 	walk_fast_down
-# 347 "data/maps/Bakery/scripts.pory"
+# 389 "data/maps/Bakery/scripts.pory"
 	walk_fast_left
-# 347 "data/maps/Bakery/scripts.pory"
+# 389 "data/maps/Bakery/scripts.pory"
 	walk_fast_left
-# 347 "data/maps/Bakery/scripts.pory"
+# 389 "data/maps/Bakery/scripts.pory"
 	walk_fast_left
-# 348 "data/maps/Bakery/scripts.pory"
+# 390 "data/maps/Bakery/scripts.pory"
 	face_up
 	step_end
 
-# 351 "data/maps/Bakery/scripts.pory"
+# 393 "data/maps/Bakery/scripts.pory"
 Bakery_Movement_HydroilRoar:
-# 353 "data/maps/Bakery/scripts.pory"
+# 395 "data/maps/Bakery/scripts.pory"
 	walk_in_place_up
-# 353 "data/maps/Bakery/scripts.pory"
+# 395 "data/maps/Bakery/scripts.pory"
 	walk_in_place_up
-# 353 "data/maps/Bakery/scripts.pory"
+# 395 "data/maps/Bakery/scripts.pory"
 	walk_in_place_up
-# 353 "data/maps/Bakery/scripts.pory"
+# 395 "data/maps/Bakery/scripts.pory"
 	walk_in_place_up
 	step_end
 
-# 355 "data/maps/Bakery/scripts.pory"
+# 397 "data/maps/Bakery/scripts.pory"
 Bakery_Movement_CameraMoveLeft:
-# 357 "data/maps/Bakery/scripts.pory"
+# 399 "data/maps/Bakery/scripts.pory"
 	walk_slow_left
-# 358 "data/maps/Bakery/scripts.pory"
+# 400 "data/maps/Bakery/scripts.pory"
 	walk_slow_left
-# 359 "data/maps/Bakery/scripts.pory"
+# 401 "data/maps/Bakery/scripts.pory"
 	walk_slow_diag_southwest
 	step_end
 
-# 362 "data/maps/Bakery/scripts.pory"
+# 404 "data/maps/Bakery/scripts.pory"
 Bakery_Movement_DubsnakeGoInFire:
-# 364 "data/maps/Bakery/scripts.pory"
+# 406 "data/maps/Bakery/scripts.pory"
 	delay_16
-# 365 "data/maps/Bakery/scripts.pory"
+# 407 "data/maps/Bakery/scripts.pory"
 	walk_slow_down
-# 366 "data/maps/Bakery/scripts.pory"
+# 408 "data/maps/Bakery/scripts.pory"
 	delay_16
-# 366 "data/maps/Bakery/scripts.pory"
+# 408 "data/maps/Bakery/scripts.pory"
 	delay_16
-# 367 "data/maps/Bakery/scripts.pory"
+# 409 "data/maps/Bakery/scripts.pory"
 	walk_slow_down
-# 368 "data/maps/Bakery/scripts.pory"
+# 410 "data/maps/Bakery/scripts.pory"
 	delay_16
-# 368 "data/maps/Bakery/scripts.pory"
+# 410 "data/maps/Bakery/scripts.pory"
 	delay_16
-# 368 "data/maps/Bakery/scripts.pory"
+# 410 "data/maps/Bakery/scripts.pory"
 	delay_16
-# 368 "data/maps/Bakery/scripts.pory"
+# 410 "data/maps/Bakery/scripts.pory"
 	delay_16
-# 369 "data/maps/Bakery/scripts.pory"
+# 411 "data/maps/Bakery/scripts.pory"
 	walk_in_place_right
-# 369 "data/maps/Bakery/scripts.pory"
+# 411 "data/maps/Bakery/scripts.pory"
 	walk_in_place_right
 	step_end
 
 Bakery_LittleBoy::
-# 374 "data/maps/Bakery/scripts.pory"
+# 416 "data/maps/Bakery/scripts.pory"
 	lock
-# 375 "data/maps/Bakery/scripts.pory"
+# 417 "data/maps/Bakery/scripts.pory"
 	faceplayer
-# 376 "data/maps/Bakery/scripts.pory"
+# 418 "data/maps/Bakery/scripts.pory"
 	goto_if_set FLAG_TEMP_11, Bakery_LittleBoy_2
-# 382 "data/maps/Bakery/scripts.pory"
-	speakername Bakery_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_4
+# 424 "data/maps/Bakery/scripts.pory"
+	speakername Bakery_ShowViceMapScript_Text_4
 Bakery_LittleBoy_1:
-# 384 "data/maps/Bakery/scripts.pory"
+# 426 "data/maps/Bakery/scripts.pory"
 	goto_if_set FLAG_GOT_VICE, Bakery_LittleBoy_6
-# 393 "data/maps/Bakery/scripts.pory"
+# 435 "data/maps/Bakery/scripts.pory"
 	msgbox Bakery_LittleBoy_Text_3, MSGBOX_AUTOCLOSE
 Bakery_LittleBoy_5:
-# 395 "data/maps/Bakery/scripts.pory"
+# 437 "data/maps/Bakery/scripts.pory"
 	release
 	return
 
 Bakery_LittleBoy_2:
-# 378 "data/maps/Bakery/scripts.pory"
+# 420 "data/maps/Bakery/scripts.pory"
 	speakername Bakery_LittleBoy_Text_0
 	goto Bakery_LittleBoy_1
 
 Bakery_LittleBoy_6:
-# 387 "data/maps/Bakery/scripts.pory"
+# 429 "data/maps/Bakery/scripts.pory"
 	msgbox Bakery_LittleBoy_Text_1
-# 388 "data/maps/Bakery/scripts.pory"
+# 430 "data/maps/Bakery/scripts.pory"
 	speakername Bakery_ViceScript_Text_1, PORTRAIT_AMELIA_SERIOUSLY
-# 389 "data/maps/Bakery/scripts.pory"
+# 431 "data/maps/Bakery/scripts.pory"
 	msgbox Bakery_LittleBoy_Text_2, MSGBOX_AUTOCLOSE
 	goto Bakery_LittleBoy_5
 
 
 Bakery_LittleGirl::
-# 400 "data/maps/Bakery/scripts.pory"
+# 442 "data/maps/Bakery/scripts.pory"
 	lock
-# 401 "data/maps/Bakery/scripts.pory"
+# 443 "data/maps/Bakery/scripts.pory"
 	faceplayer
-# 402 "data/maps/Bakery/scripts.pory"
+# 444 "data/maps/Bakery/scripts.pory"
 	goto_if_set FLAG_TEMP_11, Bakery_LittleGirl_2
-# 408 "data/maps/Bakery/scripts.pory"
-	speakername Bakery_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_0
+# 450 "data/maps/Bakery/scripts.pory"
+	speakername Bakery_ShowViceMapScript_Text_0
 Bakery_LittleGirl_1:
-# 410 "data/maps/Bakery/scripts.pory"
+# 452 "data/maps/Bakery/scripts.pory"
 	goto_if_set FLAG_GOT_VICE, Bakery_LittleGirl_6
-# 417 "data/maps/Bakery/scripts.pory"
+# 459 "data/maps/Bakery/scripts.pory"
 	msgbox Bakery_LittleGirl_Text_2, MSGBOX_AUTOCLOSE
 Bakery_LittleGirl_5:
-# 419 "data/maps/Bakery/scripts.pory"
+# 461 "data/maps/Bakery/scripts.pory"
 	release
 	return
 
 Bakery_LittleGirl_2:
-# 404 "data/maps/Bakery/scripts.pory"
+# 446 "data/maps/Bakery/scripts.pory"
 	speakername Bakery_LittleGirl_Text_0
 	goto Bakery_LittleGirl_1
 
 Bakery_LittleGirl_6:
-# 413 "data/maps/Bakery/scripts.pory"
+# 455 "data/maps/Bakery/scripts.pory"
 	msgbox Bakery_LittleGirl_Text_1
 	goto Bakery_LittleGirl_5
 
 
 Bakery_KidsMom::
-# 424 "data/maps/Bakery/scripts.pory"
+# 466 "data/maps/Bakery/scripts.pory"
 	lock
-# 425 "data/maps/Bakery/scripts.pory"
+# 467 "data/maps/Bakery/scripts.pory"
 	faceplayer
-# 426 "data/maps/Bakery/scripts.pory"
+# 468 "data/maps/Bakery/scripts.pory"
 	goto_if_set FLAG_TEMP_11, Bakery_KidsMom_2
-# 443 "data/maps/Bakery/scripts.pory"
+# 485 "data/maps/Bakery/scripts.pory"
 	speakername Bakery_ViceScript_Text_1, PORTRAIT_AMELIA_NEUTRAL
-# 444 "data/maps/Bakery/scripts.pory"
+# 486 "data/maps/Bakery/scripts.pory"
 	msgbox Bakery_KidsMom_Text_7
-# 445 "data/maps/Bakery/scripts.pory"
+# 487 "data/maps/Bakery/scripts.pory"
 	speakername Bakery_KidsMom_Text_8
-# 446 "data/maps/Bakery/scripts.pory"
+# 488 "data/maps/Bakery/scripts.pory"
 	msgbox Bakery_KidsMom_Text_9
-# 447 "data/maps/Bakery/scripts.pory"
+# 489 "data/maps/Bakery/scripts.pory"
 	speakername Bakery_ViceScript_Text_1, PORTRAIT_AMELIA_NEUTRAL
-# 448 "data/maps/Bakery/scripts.pory"
+# 490 "data/maps/Bakery/scripts.pory"
 	msgbox Bakery_KidsMom_Text_10
-# 449 "data/maps/Bakery/scripts.pory"
+# 491 "data/maps/Bakery/scripts.pory"
 	speakername Bakery_KidsMom_Text_8
-# 450 "data/maps/Bakery/scripts.pory"
+# 492 "data/maps/Bakery/scripts.pory"
 	msgbox Bakery_KidsMom_Text_11
-# 451 "data/maps/Bakery/scripts.pory"
+# 493 "data/maps/Bakery/scripts.pory"
 	speakername Bakery_ViceScript_Text_1, PORTRAIT_AMELIA_SERIOUSLY
-# 452 "data/maps/Bakery/scripts.pory"
+# 494 "data/maps/Bakery/scripts.pory"
 	msgbox Bakery_KidsMom_Text_12
-# 453 "data/maps/Bakery/scripts.pory"
+# 495 "data/maps/Bakery/scripts.pory"
 	speakername Bakery_ViceScript_Text_1, PORTRAIT_AMELIA_NEUTRAL
-# 454 "data/maps/Bakery/scripts.pory"
+# 496 "data/maps/Bakery/scripts.pory"
 	msgbox Bakery_KidsMom_Text_13
-# 455 "data/maps/Bakery/scripts.pory"
+# 497 "data/maps/Bakery/scripts.pory"
 	speakername Bakery_KidsMom_Text_0
-# 456 "data/maps/Bakery/scripts.pory"
+# 498 "data/maps/Bakery/scripts.pory"
 	msgbox Bakery_KidsMom_Text_14, MSGBOX_AUTOCLOSE
-# 457 "data/maps/Bakery/scripts.pory"
+# 499 "data/maps/Bakery/scripts.pory"
 	setflag FLAG_TEMP_11
 Bakery_KidsMom_1:
-# 459 "data/maps/Bakery/scripts.pory"
+# 501 "data/maps/Bakery/scripts.pory"
 	release
 	return
 
 Bakery_KidsMom_2:
-# 428 "data/maps/Bakery/scripts.pory"
+# 470 "data/maps/Bakery/scripts.pory"
 	speakername Bakery_KidsMom_Text_0
-# 429 "data/maps/Bakery/scripts.pory"
+# 471 "data/maps/Bakery/scripts.pory"
 	msgbox Bakery_KidsMom_Text_1
-# 430 "data/maps/Bakery/scripts.pory"
+# 472 "data/maps/Bakery/scripts.pory"
 	speakername Bakery_ViceScript_Text_1, PORTRAIT_AMELIA_NEUTRAL
-# 431 "data/maps/Bakery/scripts.pory"
+# 473 "data/maps/Bakery/scripts.pory"
 	msgbox Bakery_KidsMom_Text_2
-# 432 "data/maps/Bakery/scripts.pory"
+# 474 "data/maps/Bakery/scripts.pory"
 	speakername Bakery_KidsMom_Text_0
-# 433 "data/maps/Bakery/scripts.pory"
+# 475 "data/maps/Bakery/scripts.pory"
 	msgbox Bakery_KidsMom_Text_3
-# 434 "data/maps/Bakery/scripts.pory"
+# 476 "data/maps/Bakery/scripts.pory"
 	speakername Bakery_ViceScript_Text_1, PORTRAIT_AMELIA_SERIOUSLY
-# 435 "data/maps/Bakery/scripts.pory"
+# 477 "data/maps/Bakery/scripts.pory"
 	msgbox Bakery_KidsMom_Text_4
-# 436 "data/maps/Bakery/scripts.pory"
+# 478 "data/maps/Bakery/scripts.pory"
 	speakername Bakery_KidsMom_Text_0
-# 437 "data/maps/Bakery/scripts.pory"
+# 479 "data/maps/Bakery/scripts.pory"
 	msgbox Bakery_KidsMom_Text_5
-# 438 "data/maps/Bakery/scripts.pory"
+# 480 "data/maps/Bakery/scripts.pory"
 	speakername Bakery_ViceScript_Text_1, PORTRAIT_AMELIA_NEUTRAL
-# 439 "data/maps/Bakery/scripts.pory"
+# 481 "data/maps/Bakery/scripts.pory"
 	msgbox Bakery_KidsMom_Text_6, MSGBOX_AUTOCLOSE
 	goto Bakery_KidsMom_1
 
 
 Bakery_Sign_Bread::
-# 464 "data/maps/Bakery/scripts.pory"
+# 506 "data/maps/Bakery/scripts.pory"
 	msgbox Bakery_Sign_Bread_Text_0, MSGBOX_SIGN
 	return
 
 
 Bakery_Sign_Cookies::
-# 469 "data/maps/Bakery/scripts.pory"
+# 511 "data/maps/Bakery/scripts.pory"
 	msgbox Bakery_Sign_Cookies_Text_0, MSGBOX_SIGN
 	return
 
 
 Bakery_Sign_Pretzels::
-# 474 "data/maps/Bakery/scripts.pory"
+# 516 "data/maps/Bakery/scripts.pory"
 	msgbox Bakery_Sign_Pretzels_Text_0, MSGBOX_SIGN
 	return
 
 
 Bakery_Sign_Baguettes::
-# 479 "data/maps/Bakery/scripts.pory"
+# 521 "data/maps/Bakery/scripts.pory"
 	msgbox Bakery_Sign_Baguettes_Text_0, MSGBOX_SIGN
 	return
 
 
 Bakery_Sign_MenuLeft::
-# 484 "data/maps/Bakery/scripts.pory"
+# 526 "data/maps/Bakery/scripts.pory"
 	msgbox Bakery_Sign_MenuLeft_Text_0, MSGBOX_SIGN
 	return
 
 
 Bakery_Sign_MenuRight::
-# 489 "data/maps/Bakery/scripts.pory"
+# 531 "data/maps/Bakery/scripts.pory"
 	msgbox Bakery_Sign_MenuRight_Text_0, MSGBOX_SIGN
 	return
 
 
 Bakery_Sign_PantomPicture::
-# 494 "data/maps/Bakery/scripts.pory"
+# 536 "data/maps/Bakery/scripts.pory"
 	msgbox Bakery_Sign_PantomPicture_Text_0, MSGBOX_SIGN
 	return
 
 
 Bakery_Sign_MountainPicture::
-# 499 "data/maps/Bakery/scripts.pory"
+# 541 "data/maps/Bakery/scripts.pory"
 	msgbox Bakery_Sign_MountainPicture_Text_0, MSGBOX_SIGN
 	return
 
 
 Bakery_DubsnakeHydroil::
-# 504 "data/maps/Bakery/scripts.pory"
+# 546 "data/maps/Bakery/scripts.pory"
 	lock
-# 505 "data/maps/Bakery/scripts.pory"
+# 547 "data/maps/Bakery/scripts.pory"
 	goto_if_set FLAG_GOT_VICE, Bakery_DubsnakeHydroil_2
-# 529 "data/maps/Bakery/scripts.pory"
+# 571 "data/maps/Bakery/scripts.pory"
 	specialvar VAR_RESULT, GetPlayerFacingDirection
-# 530 "data/maps/Bakery/scripts.pory"
+# 572 "data/maps/Bakery/scripts.pory"
 	switch VAR_RESULT
-# 532 "data/maps/Bakery/scripts.pory"
+# 574 "data/maps/Bakery/scripts.pory"
 	case DIR_EAST, Bakery_DubsnakeHydroil_10
-# 535 "data/maps/Bakery/scripts.pory"
+# 577 "data/maps/Bakery/scripts.pory"
 	case DIR_WEST, Bakery_DubsnakeHydroil_11
-# 538 "data/maps/Bakery/scripts.pory"
+# 580 "data/maps/Bakery/scripts.pory"
 	case DIR_NORTH, Bakery_DubsnakeHydroil_12
 Bakery_DubsnakeHydroil_1:
-# 554 "data/maps/Bakery/scripts.pory"
+# 596 "data/maps/Bakery/scripts.pory"
 	release
 	return
 
 Bakery_DubsnakeHydroil_2:
-# 507 "data/maps/Bakery/scripts.pory"
+# 549 "data/maps/Bakery/scripts.pory"
 	specialvar VAR_RESULT, GetPlayerFacingDirection
-# 508 "data/maps/Bakery/scripts.pory"
+# 550 "data/maps/Bakery/scripts.pory"
 	switch VAR_RESULT
-# 510 "data/maps/Bakery/scripts.pory"
+# 552 "data/maps/Bakery/scripts.pory"
 	case DIR_EAST, Bakery_DubsnakeHydroil_6
-# 513 "data/maps/Bakery/scripts.pory"
+# 555 "data/maps/Bakery/scripts.pory"
 	case DIR_WEST, Bakery_DubsnakeHydroil_7
-# 516 "data/maps/Bakery/scripts.pory"
+# 558 "data/maps/Bakery/scripts.pory"
 	case DIR_NORTH, Bakery_DubsnakeHydroil_8
 	goto Bakery_DubsnakeHydroil_1
 
 Bakery_DubsnakeHydroil_6:
-# 511 "data/maps/Bakery/scripts.pory"
+# 553 "data/maps/Bakery/scripts.pory"
 	speakername Bakery_ViceRecruitCutscene_Text_4, PORTRAIT_HYDROIL_WATER
-# 512 "data/maps/Bakery/scripts.pory"
+# 554 "data/maps/Bakery/scripts.pory"
 	msgbox Bakery_DubsnakeHydroil_Text_0
 	goto Bakery_DubsnakeHydroil_1
 
 Bakery_DubsnakeHydroil_7:
-# 514 "data/maps/Bakery/scripts.pory"
+# 556 "data/maps/Bakery/scripts.pory"
 	speakername Bakery_ViceRecruitCutscene_Text_4, PORTRAIT_HYDROIL_FIRE
-# 515 "data/maps/Bakery/scripts.pory"
+# 557 "data/maps/Bakery/scripts.pory"
 	msgbox Bakery_DubsnakeHydroil_Text_1
 	goto Bakery_DubsnakeHydroil_1
 
 Bakery_DubsnakeHydroil_8:
-# 517 "data/maps/Bakery/scripts.pory"
+# 559 "data/maps/Bakery/scripts.pory"
 	speakername Bakery_ViceRecruitCutscene_Text_4, PORTRAIT_HYDROIL_FIRE
-# 518 "data/maps/Bakery/scripts.pory"
+# 560 "data/maps/Bakery/scripts.pory"
 	msgbox Bakery_DubsnakeHydroil_Text_2
-# 519 "data/maps/Bakery/scripts.pory"
+# 561 "data/maps/Bakery/scripts.pory"
 	speakername Bakery_ViceRecruitCutscene_Text_4, PORTRAIT_HYDROIL_WATER
-# 520 "data/maps/Bakery/scripts.pory"
+# 562 "data/maps/Bakery/scripts.pory"
 	msgbox Bakery_DubsnakeHydroil_Text_3
-# 521 "data/maps/Bakery/scripts.pory"
+# 563 "data/maps/Bakery/scripts.pory"
 	speakername Bakery_ViceScript_Text_1, PORTRAIT_AMELIA_SERIOUSLY
-# 522 "data/maps/Bakery/scripts.pory"
+# 564 "data/maps/Bakery/scripts.pory"
 	msgbox Bakery_DubsnakeHydroil_Text_4
-# 523 "data/maps/Bakery/scripts.pory"
+# 565 "data/maps/Bakery/scripts.pory"
 	speakername Bakery_ViceScript_Text_1, PORTRAIT_AMELIA_NEUTRAL
-# 524 "data/maps/Bakery/scripts.pory"
+# 566 "data/maps/Bakery/scripts.pory"
 	msgbox Bakery_DubsnakeHydroil_Text_5
 	goto Bakery_DubsnakeHydroil_1
 
 Bakery_DubsnakeHydroil_10:
-# 533 "data/maps/Bakery/scripts.pory"
+# 575 "data/maps/Bakery/scripts.pory"
 	speakername Bakery_DubsnakeHydroil_Text_6, PORTRAIT_DUBSNAKE_ICE
-# 534 "data/maps/Bakery/scripts.pory"
+# 576 "data/maps/Bakery/scripts.pory"
 	msgbox Bakery_DubsnakeHydroil_Text_7
 	goto Bakery_DubsnakeHydroil_1
 
 Bakery_DubsnakeHydroil_11:
-# 536 "data/maps/Bakery/scripts.pory"
+# 578 "data/maps/Bakery/scripts.pory"
 	speakername Bakery_DubsnakeHydroil_Text_8, PORTRAIT_DUBSNAKE_OIL
-# 537 "data/maps/Bakery/scripts.pory"
+# 579 "data/maps/Bakery/scripts.pory"
 	msgbox Bakery_DubsnakeHydroil_Text_9
 	goto Bakery_DubsnakeHydroil_1
 
 Bakery_DubsnakeHydroil_12:
-# 539 "data/maps/Bakery/scripts.pory"
+# 581 "data/maps/Bakery/scripts.pory"
 	speakername Bakery_ViceScript_Text_1, PORTRAIT_AMELIA_NEUTRAL
-# 540 "data/maps/Bakery/scripts.pory"
+# 582 "data/maps/Bakery/scripts.pory"
 	msgbox Bakery_DubsnakeHydroil_Text_10
-# 541 "data/maps/Bakery/scripts.pory"
+# 583 "data/maps/Bakery/scripts.pory"
 	speakername Bakery_DubsnakeHydroil_Text_11, PORTRAIT_DUBSNAKE_ICE
-# 542 "data/maps/Bakery/scripts.pory"
+# 584 "data/maps/Bakery/scripts.pory"
 	msgbox Bakery_DubsnakeHydroil_Text_12
-# 543 "data/maps/Bakery/scripts.pory"
+# 585 "data/maps/Bakery/scripts.pory"
 	speakername Bakery_ViceScript_Text_1, PORTRAIT_AMELIA_NEUTRAL
-# 544 "data/maps/Bakery/scripts.pory"
+# 586 "data/maps/Bakery/scripts.pory"
 	msgbox Bakery_DubsnakeHydroil_Text_13
-# 545 "data/maps/Bakery/scripts.pory"
+# 587 "data/maps/Bakery/scripts.pory"
 	speakername Bakery_DubsnakeHydroil_Text_11, PORTRAIT_DUBSNAKE_ICE
-# 546 "data/maps/Bakery/scripts.pory"
+# 588 "data/maps/Bakery/scripts.pory"
 	msgbox Bakery_DubsnakeHydroil_Text_14
-# 547 "data/maps/Bakery/scripts.pory"
+# 589 "data/maps/Bakery/scripts.pory"
 	speakername Bakery_DubsnakeHydroil_Text_11, PORTRAIT_DUBSNAKE_OIL
-# 548 "data/maps/Bakery/scripts.pory"
+# 590 "data/maps/Bakery/scripts.pory"
 	msgbox Bakery_DubsnakeHydroil_Text_14
-# 549 "data/maps/Bakery/scripts.pory"
+# 591 "data/maps/Bakery/scripts.pory"
 	speakername Bakery_ViceScript_Text_1, PORTRAIT_AMELIA_SMUG
-# 550 "data/maps/Bakery/scripts.pory"
+# 592 "data/maps/Bakery/scripts.pory"
 	msgbox Bakery_DubsnakeHydroil_Text_15
 	goto Bakery_DubsnakeHydroil_1
 
 
 Bakery_ComputerGuy::
-# 559 "data/maps/Bakery/scripts.pory"
+# 601 "data/maps/Bakery/scripts.pory"
 	speakername Bakery_ComputerGuy_Text_0
-# 560 "data/maps/Bakery/scripts.pory"
+# 602 "data/maps/Bakery/scripts.pory"
 	goto_if_set FLAG_GOT_VICE, Bakery_ComputerGuy_3
 Bakery_ComputerGuy_2:
-# 569 "data/maps/Bakery/scripts.pory"
+# 611 "data/maps/Bakery/scripts.pory"
 	msgbox Bakery_ComputerGuy_Text_2, MSGBOX_NPC
 	return
 
 Bakery_ComputerGuy_1:
-# 562 "data/maps/Bakery/scripts.pory"
+# 604 "data/maps/Bakery/scripts.pory"
 	msgbox Bakery_ComputerGuy_Text_1
-# 563 "data/maps/Bakery/scripts.pory"
+# 605 "data/maps/Bakery/scripts.pory"
 	speakername NULL
-# 564 "data/maps/Bakery/scripts.pory"
+# 606 "data/maps/Bakery/scripts.pory"
 	giveitem ITEM_EXP_CANDY_L
-# 565 "data/maps/Bakery/scripts.pory"
+# 607 "data/maps/Bakery/scripts.pory"
 	setflag FLAG_ITEM_BAKERY_CANDY
 	return
 
 Bakery_ComputerGuy_3:
-# 560 "data/maps/Bakery/scripts.pory"
+# 602 "data/maps/Bakery/scripts.pory"
 	goto_if_unset FLAG_ITEM_BAKERY_CANDY, Bakery_ComputerGuy_1
 	goto Bakery_ComputerGuy_2
 
 
 Bakery_LeftGuy::
-# 575 "data/maps/Bakery/scripts.pory"
+# 617 "data/maps/Bakery/scripts.pory"
 	speakername Bakery_LeftGuy_Text_0
-# 576 "data/maps/Bakery/scripts.pory"
+# 618 "data/maps/Bakery/scripts.pory"
 	msgbox Bakery_LeftGuy_Text_1, MSGBOX_NPC
-# 577 "data/maps/Bakery/scripts.pory"
+# 619 "data/maps/Bakery/scripts.pory"
 	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
-# 578 "data/maps/Bakery/scripts.pory"
+# 620 "data/maps/Bakery/scripts.pory"
 	waitmovement 0
 	return
 
 
 Bakery_RightGuy::
-# 583 "data/maps/Bakery/scripts.pory"
+# 625 "data/maps/Bakery/scripts.pory"
 	speakername Bakery_RightGuy_Text_0
-# 584 "data/maps/Bakery/scripts.pory"
+# 626 "data/maps/Bakery/scripts.pory"
 	msgbox Bakery_RightGuy_Text_1, MSGBOX_AUTOCLOSE
 	return
 
 
-Bakery_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_0:
-# 30 "data/maps/Bakery/scripts.pory"
+Bakery_ShowViceMapScript_Text_0:
+# 43 "data/maps/Bakery/scripts.pory"
 	.string "Little girl$"
 
-Bakery_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_1:
-# 31 "data/maps/Bakery/scripts.pory"
+Bakery_ShowViceMapScript_Text_1:
+# 44 "data/maps/Bakery/scripts.pory"
 	.string "What's this Pokémon's name, mommy?$"
 
-Bakery_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_2:
-# 33 "data/maps/Bakery/scripts.pory"
+Bakery_ShowViceMapScript_Text_2:
+# 46 "data/maps/Bakery/scripts.pory"
 	.string "Her mom$"
 
-Bakery_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_3:
-# 34 "data/maps/Bakery/scripts.pory"
+Bakery_ShowViceMapScript_Text_3:
+# 47 "data/maps/Bakery/scripts.pory"
 	.string "That's a Flygon, sweetie. That kind\n"
 	.string "doesn't live around here.$"
 
-Bakery_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_4:
-# 36 "data/maps/Bakery/scripts.pory"
+Bakery_ShowViceMapScript_Text_4:
+# 49 "data/maps/Bakery/scripts.pory"
 	.string "Little boy$"
 
-Bakery_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_5:
-# 37 "data/maps/Bakery/scripts.pory"
+Bakery_ShowViceMapScript_Text_5:
+# 50 "data/maps/Bakery/scripts.pory"
 	.string "Where does it live?$"
 
-Bakery_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_6:
-# 40 "data/maps/Bakery/scripts.pory"
+Bakery_ShowViceMapScript_Text_6:
+# 53 "data/maps/Bakery/scripts.pory"
 	.string "Vice$"
 
-Bakery_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_7:
-# 41 "data/maps/Bakery/scripts.pory"
+Bakery_ShowViceMapScript_Text_7:
+# 54 "data/maps/Bakery/scripts.pory"
 	.string "I'm not a jungle gym, little runts.\n"
 	.string "If it wasn't raining so hard, I'd be\l"
 	.string "far, far away from you.$"
 
-Bakery_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_8:
-# 44 "data/maps/Bakery/scripts.pory"
+Bakery_ShowViceMapScript_Text_8:
+# 57 "data/maps/Bakery/scripts.pory"
 	.string "He made a funny noise!\n"
 	.string "Ggnnnrrr!$"
 
-Bakery_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_9:
-# 46 "data/maps/Bakery/scripts.pory"
+Bakery_ShowViceMapScript_Text_9:
+# 59 "data/maps/Bakery/scripts.pory"
 	.string "Sigh…$"
 
 Bakery_ViceScript_Text_0:
-# 61 "data/maps/Bakery/scripts.pory"
+# 74 "data/maps/Bakery/scripts.pory"
 	.string "Can you tell these kids that I'm\n"
 	.string "not a boy? It's starting to get to me.$"
 
 Bakery_ViceScript_Text_1:
-# 62 "data/maps/Bakery/scripts.pory"
+# 75 "data/maps/Bakery/scripts.pory"
 	.string "Amelia$"
 
 Bakery_ViceScript_Text_2:
-# 63 "data/maps/Bakery/scripts.pory"
+# 76 "data/maps/Bakery/scripts.pory"
 	.string "No, I don't think I can. They probably\n"
 	.string "think I'M a boy…\p"
 	.string "Kids just sort of decide.$"
 
 Bakery_ViceScript_Text_3:
-# 69 "data/maps/Bakery/scripts.pory"
+# 82 "data/maps/Bakery/scripts.pory"
 	.string "What, another one? I'm about to…$"
 
 Bakery_ViceScript_Text_4:
-# 71 "data/maps/Bakery/scripts.pory"
+# 84 "data/maps/Bakery/scripts.pory"
 	.string "Hey, you're not a kid.$"
 
 Bakery_ViceScript_Text_5:
-# 73 "data/maps/Bakery/scripts.pory"
+# 86 "data/maps/Bakery/scripts.pory"
 	.string "Vice! Glad I found you. Can you come\n"
 	.string "help me find Python?$"
 
 Bakery_ViceScript_Text_6:
-# 75 "data/maps/Bakery/scripts.pory"
+# 88 "data/maps/Bakery/scripts.pory"
 	.string "Who? And what? And why?\n"
 	.string "Why are you talking to me?$"
 
 Bakery_ViceScript_Text_7:
-# 77 "data/maps/Bakery/scripts.pory"
+# 90 "data/maps/Bakery/scripts.pory"
 	.string "Oh, come on. You're acting stupid too?\n"
 	.string "Well, I guess it's nothing new…\p"
 	.string "Everyone's memories are fogged up.\n"
 	.string "You don't remember me at all?$"
 
 Bakery_ViceScript_Text_8:
-# 80 "data/maps/Bakery/scripts.pory"
+# 93 "data/maps/Bakery/scripts.pory"
 	.string "I dunno, I think I've seen your face\n"
 	.string "before. You're a good trainer, right?$"
 
 Bakery_ViceScript_Text_9:
-# 82 "data/maps/Bakery/scripts.pory"
+# 95 "data/maps/Bakery/scripts.pory"
 	.string "I'm YOUR trainer. Look, I have your\n"
 	.string "Poké Ball right here.$"
 
 Bakery_ViceScript_Text_10:
-# 84 "data/maps/Bakery/scripts.pory"
+# 97 "data/maps/Bakery/scripts.pory"
 	.string "Okay, but like…I'm busy. I'm waiting\n"
 	.string "until the end of the day so the\l"
 	.string "baker will give me all the leftovers\l"
 	.string "instead of throwing them away.$"
 
 Bakery_ViceScript_Text_11:
-# 89 "data/maps/Bakery/scripts.pory"
+# 102 "data/maps/Bakery/scripts.pory"
 	.string "Marcel$"
 
 Bakery_ViceScript_Text_12:
-# 90 "data/maps/Bakery/scripts.pory"
+# 103 "data/maps/Bakery/scripts.pory"
 	.string "You'll come with use if we get you\n"
 	.string "a spicy treat, won't you?\l"
 	.string "Spicy is your favorite flavor.$"
 
 Bakery_ViceScript_Text_13:
-# 92 "data/maps/Bakery/scripts.pory"
+# 105 "data/maps/Bakery/scripts.pory"
 	.string "Woah…a spicy treat from a cutie…\n"
 	.string "That does sound like a good deal…\p"
 	.string "Okay, then! I'll come with you if\n"
@@ -1147,21 +1211,21 @@ Bakery_ViceScript_Text_13:
 	.string "Otherwise you gotta wait till later.$"
 
 Bakery_ViceScript_Text_14:
-# 95 "data/maps/Bakery/scripts.pory"
+# 108 "data/maps/Bakery/scripts.pory"
 	.string "It's settled! Come on, Amelia, let's\n"
 	.string "ask the baker about special orders.$"
 
 Bakery_ViceScript_Text_15:
-# 99 "data/maps/Bakery/scripts.pory"
+# 112 "data/maps/Bakery/scripts.pory"
 	.string "Demi-Vee$"
 
 Bakery_ViceScript_Text_16:
-# 100 "data/maps/Bakery/scripts.pory"
+# 113 "data/maps/Bakery/scripts.pory"
 	.string "Is there anything we could do to\n"
 	.string "get you to come with us NOW?$"
 
 Bakery_ViceScript_Text_17:
-# 102 "data/maps/Bakery/scripts.pory"
+# 115 "data/maps/Bakery/scripts.pory"
 	.string "Hmm…well, the reason I have to wait\n"
 	.string "is I don't have any money…\p"
 	.string "If you could get me a treat, I'll\n"
@@ -1169,101 +1233,112 @@ Bakery_ViceScript_Text_17:
 	.string "But it has to be a kind that I like!$"
 
 Bakery_ViceScript_Text_18:
-# 106 "data/maps/Bakery/scripts.pory"
+# 119 "data/maps/Bakery/scripts.pory"
 	.string "Okay, then…sounds like a plan.\n"
 	.string "What kind do you like?$"
 
 Bakery_ViceScript_Text_19:
-# 108 "data/maps/Bakery/scripts.pory"
+# 121 "data/maps/Bakery/scripts.pory"
 	.string "I dunno!$"
 
 Bakery_ViceScript_Text_20:
-# 110 "data/maps/Bakery/scripts.pory"
+# 123 "data/maps/Bakery/scripts.pory"
 	.string "… … … … …\p"
 	.string "Okay, let's just go.$"
 
 Bakery_ViceScript_Text_21:
-# 113 "data/maps/Bakery/scripts.pory"
+# 126 "data/maps/Bakery/scripts.pory"
 	.string "Bradley$"
 
 Bakery_ViceScript_Text_22:
-# 114 "data/maps/Bakery/scripts.pory"
+# 127 "data/maps/Bakery/scripts.pory"
 	.string "Why not just ask for something NOW?$"
 
 Bakery_ViceScript_Text_23:
-# 116 "data/maps/Bakery/scripts.pory"
+# 129 "data/maps/Bakery/scripts.pory"
 	.string "Huh? I never thought of that.\n"
 	.string "But I don't know what I want!$"
 
 Bakery_ViceScript_Text_24:
-# 118 "data/maps/Bakery/scripts.pory"
+# 131 "data/maps/Bakery/scripts.pory"
 	.string "Of course you didn't…\p"
 	.string "Let's just ask Marcel what Vice would\n"
 	.string "like and then get it for her.$"
 
 Bakery_Baker_Text_0:
-# 139 "data/maps/Bakery/scripts.pory"
+# 152 "data/maps/Bakery/scripts.pory"
 	.string "He's taking inventory. Probably best\n"
 	.string "not to bother him now.$"
 
 Bakery_Cashier_Text_0:
-# 151 "data/maps/Bakery/scripts.pory"
+# 165 "data/maps/Bakery/scripts.pory"
+	.string "Cashier$"
+
+Bakery_Cashier_Text_1:
+# 166 "data/maps/Bakery/scripts.pory"
+	.string "Do you have the spicy berries?$"
+
+Bakery_Cashier_Text_2:
+# 170 "data/maps/Bakery/scripts.pory"
+	.string "Ah, you've got them! Okay, just\n"
+	.string "one moment…$"
+
+Bakery_Cashier_Text_3:
+# 177 "data/maps/Bakery/scripts.pory"
+	.string "The berry fields are on the right\n"
+	.string "side of the Road to Elthe.\p"
+	.string "I think the good {POKEBLOCK} berries are\n"
+	.string "toward the far end of the field.$"
+
+Bakery_Cashier_Text_4:
+# 187 "data/maps/Bakery/scripts.pory"
 	.string "'Scuse me, what's your policy on\n"
 	.string "special orders? That Flygon over there\l"
 	.string "is mine, but she wants a treat\l"
 	.string "before we go.$"
 
-Bakery_Cashier_Text_1:
-# 152 "data/maps/Bakery/scripts.pory"
-	.string "Cashier$"
-
-Bakery_Cashier_Text_2:
-# 153 "data/maps/Bakery/scripts.pory"
+Bakery_Cashier_Text_5:
+# 189 "data/maps/Bakery/scripts.pory"
 	.string "Uh, I think we can do it. It\n"
 	.string "depends, I guess. What did you want?$"
 
-Bakery_Cashier_Text_3:
-# 157 "data/maps/Bakery/scripts.pory"
+Bakery_Cashier_Text_6:
+# 194 "data/maps/Bakery/scripts.pory"
 	.string "Something spicy. Can you do spicy?$"
 
-Bakery_Cashier_Text_4:
-# 159 "data/maps/Bakery/scripts.pory"
+Bakery_Cashier_Text_7:
+# 196 "data/maps/Bakery/scripts.pory"
 	.string "I'm not sure. Lemme ask the boss.$"
 
-Bakery_Cashier_Text_5:
-# 170 "data/maps/Bakery/scripts.pory"
+Bakery_Cashier_Text_8:
+# 207 "data/maps/Bakery/scripts.pory"
 	.string "We don't have anything on hand.\n"
 	.string "If you're committed enough to bring\l"
 	.string "your own spicy berries, we could\l"
 	.string "make something out of them.$"
 
-Bakery_Cashier_Text_6:
-# 174 "data/maps/Bakery/scripts.pory"
-	.string "Ah, you've got them! Okay, just\n"
-	.string "one moment…$"
-
-Bakery_Cashier_Text_7:
-# 181 "data/maps/Bakery/scripts.pory"
+Bakery_Cashier_Text_9:
+# 218 "data/maps/Bakery/scripts.pory"
 	.string "We'll need at least 3 berries with\n"
-	.string "high Spicy content. And if the other\l"
-	.string "flavors are too strong, it won't work.\p"
-	.string "There's berry fields outside of town\n"
+	.string "high Spicy content. Probably the kind\l"
+	.string "people use for {POKEBLOCK}s.\p"
+	.string "There's berry fields south of town\n"
 	.string "to the east. Maybe you can get them\l"
 	.string "to give you what you need.$"
 
-Bakery_Cashier_Text_8:
-# 192 "data/maps/Bakery/scripts.pory"
+Bakery_Cashier_Text_10:
+# 229 "data/maps/Bakery/scripts.pory"
 	.string "…Um, good question…$"
 
-Bakery_Cashier_Text_9:
-# 194 "data/maps/Bakery/scripts.pory"
+Bakery_Cashier_Text_11:
+# 231 "data/maps/Bakery/scripts.pory"
 	.string "… … … … …\n"
 	.string "Well, we need something to work from.\l"
 	.string "Could you figure out what flavor\l"
 	.string "it likes, at least?$"
 
-Bakery_Cashier_Text_10:
-# 200 "data/maps/Bakery/scripts.pory"
+Bakery_Cashier_Text_12:
+# 238 "data/maps/Bakery/scripts.pory"
 	.string "Sorry about the mess. I did not see\n"
 	.string "that coming. If that thing went wild,\l"
 	.string "it could have burned down the\l"
@@ -1273,24 +1348,24 @@ Bakery_Cashier_Text_10:
 	.string "the special order. So don't worry\l"
 	.string "about paying.$"
 
-Bakery_Cashier_Text_11:
-# 203 "data/maps/Bakery/scripts.pory"
+Bakery_Cashier_Text_13:
+# 241 "data/maps/Bakery/scripts.pory"
 	.string "(I kinda thought they wouldn't make\n"
 	.string "me pay anyway since I brought in\l"
 	.string "my own ingredients. But oh well,\l"
 	.string "I guess it worked out.)$"
 
-Bakery_Cashier_Text_12:
-# 208 "data/maps/Bakery/scripts.pory"
+Bakery_Cashier_Text_14:
+# 246 "data/maps/Bakery/scripts.pory"
 	.string "Welcome to Pomona Bread!\n"
 	.string "Let me know if you need anything.$"
 
 Bakery_ViceRecruitCutscene_Text_0:
-# 231 "data/maps/Bakery/scripts.pory"
+# 269 "data/maps/Bakery/scripts.pory"
 	.string "Baker$"
 
 Bakery_ViceRecruitCutscene_Text_1:
-# 232 "data/maps/Bakery/scripts.pory"
+# 270 "data/maps/Bakery/scripts.pory"
 	.string "Since you so graciously provided me\n"
 	.string "with these wonderful Spelon Berries,\l"
 	.string "I'll whip up some Spicy Poffins\l"
@@ -1300,63 +1375,63 @@ Bakery_ViceRecruitCutscene_Text_1:
 	.string "get the dough to settle right.$"
 
 Bakery_ViceRecruitCutscene_Text_2:
-# 267 "data/maps/Bakery/scripts.pory"
+# 305 "data/maps/Bakery/scripts.pory"
 	.string "This thing looks pissed…\n"
 	.string "Vice, we could use your help!$"
 
 Bakery_ViceRecruitCutscene_Text_3:
-# 275 "data/maps/Bakery/scripts.pory"
+# 313 "data/maps/Bakery/scripts.pory"
 	.string "Hey, hey! That spicy goodness is mine!\n"
 	.string "Back up off!$"
 
 Bakery_ViceRecruitCutscene_Text_4:
-# 283 "data/maps/Bakery/scripts.pory"
+# 325 "data/maps/Bakery/scripts.pory"
 	.string "Hydroil$"
 
 Bakery_ViceRecruitCutscene_Text_5:
-# 284 "data/maps/Bakery/scripts.pory"
+# 326 "data/maps/Bakery/scripts.pory"
 	.string "… … … … …\n"
 	.string "SORRY.$"
 
 Bakery_ViceRecruitCutscene_Text_6:
-# 286 "data/maps/Bakery/scripts.pory"
+# 328 "data/maps/Bakery/scripts.pory"
 	.string "WE GOT SUCH A RUSH FROM EVOLVING.\n"
 	.string "WE HAD TO TEST OUR STRENGTH.$"
 
 Bakery_ViceRecruitCutscene_Text_7:
-# 290 "data/maps/Bakery/scripts.pory"
+# 332 "data/maps/Bakery/scripts.pory"
 	.string "Oh well! All's well that ends well!$"
 
 Bakery_ViceRecruitCutscene_Text_8:
-# 292 "data/maps/Bakery/scripts.pory"
+# 334 "data/maps/Bakery/scripts.pory"
 	.string "…Well, if that's over, you can\n"
 	.string "finally have your treat.$"
 
 Bakery_ViceRecruitCutscene_Text_9:
-# 294 "data/maps/Bakery/scripts.pory"
+# 336 "data/maps/Bakery/scripts.pory"
 	.string "Oh, I already ate it.$"
 
 Bakery_ViceRecruitCutscene_Text_10:
-# 296 "data/maps/Bakery/scripts.pory"
+# 338 "data/maps/Bakery/scripts.pory"
 	.string "What!? But it was boiling hot, and\n"
 	.string "not even fully cooked…!$"
 
 Bakery_ViceRecruitCutscene_Text_11:
-# 298 "data/maps/Bakery/scripts.pory"
+# 340 "data/maps/Bakery/scripts.pory"
 	.string "Yup! Just the way I like it.$"
 
 Bakery_ViceRecruitCutscene_Text_12:
-# 300 "data/maps/Bakery/scripts.pory"
+# 342 "data/maps/Bakery/scripts.pory"
 	.string "…It's good to have you back, Vice.$"
 
 Bakery_ViceRecruitCutscene_Text_13:
-# 304 "data/maps/Bakery/scripts.pory"
+# 346 "data/maps/Bakery/scripts.pory"
 	.string "Now, the last one left is Python.\n"
 	.string "He's a Zoroark, an illusionist…\l"
 	.string "How are we supposed to find him?$"
 
 Bakery_ViceRecruitCutscene_Text_14:
-# 306 "data/maps/Bakery/scripts.pory"
+# 348 "data/maps/Bakery/scripts.pory"
 	.string "Ooh, maybe Bradley can help!\n"
 	.string "Those big ol' ears of his must be\l"
 	.string "useful for something.\p"
@@ -1364,7 +1439,7 @@ Bakery_ViceRecruitCutscene_Text_14:
 	.string "Maybe he can hear the difference.$"
 
 Bakery_ViceRecruitCutscene_Text_15:
-# 309 "data/maps/Bakery/scripts.pory"
+# 351 "data/maps/Bakery/scripts.pory"
 	.string "I don't know if that's actually true…\n"
 	.string "But it's worth a shot.\p"
 	.string "So if I bring Bradley out, he can\n"
@@ -1373,251 +1448,251 @@ Bakery_ViceRecruitCutscene_Text_15:
 	.string "Now let's get going.$"
 
 Bakery_ViceRecruitCutscene_Text_16:
-# 322 "data/maps/Bakery/scripts.pory"
+# 364 "data/maps/Bakery/scripts.pory"
 	.string "You recalled Vice the Flygon!$"
 
 Bakery_LittleBoy_Text_0:
-# 378 "data/maps/Bakery/scripts.pory"
+# 420 "data/maps/Bakery/scripts.pory"
 	.string "Louis$"
 
 Bakery_LittleBoy_Text_1:
-# 387 "data/maps/Bakery/scripts.pory"
+# 429 "data/maps/Bakery/scripts.pory"
 	.string "How do you talk to Pokémon?$"
 
 Bakery_LittleBoy_Text_2:
-# 389 "data/maps/Bakery/scripts.pory"
+# 431 "data/maps/Bakery/scripts.pory"
 	.string "I learned it at the school of\n"
 	.string "hard knocks. You don't wanna go there…$"
 
 Bakery_LittleBoy_Text_3:
-# 393 "data/maps/Bakery/scripts.pory"
+# 435 "data/maps/Bakery/scripts.pory"
 	.string "Go away! My Fygon!$"
 
 Bakery_LittleGirl_Text_0:
-# 404 "data/maps/Bakery/scripts.pory"
+# 446 "data/maps/Bakery/scripts.pory"
 	.string "Leah$"
 
 Bakery_LittleGirl_Text_1:
-# 413 "data/maps/Bakery/scripts.pory"
+# 455 "data/maps/Bakery/scripts.pory"
 	.string "Donut!$"
 
 Bakery_LittleGirl_Text_2:
-# 417 "data/maps/Bakery/scripts.pory"
+# 459 "data/maps/Bakery/scripts.pory"
 	.string "Can he take off his glasses?$"
 
 Bakery_KidsMom_Text_0:
-# 428 "data/maps/Bakery/scripts.pory"
+# 470 "data/maps/Bakery/scripts.pory"
 	.string "Lisa$"
 
 Bakery_KidsMom_Text_1:
-# 429 "data/maps/Bakery/scripts.pory"
+# 471 "data/maps/Bakery/scripts.pory"
 	.string "Do you have any kids, Amelia?$"
 
 Bakery_KidsMom_Text_2:
-# 431 "data/maps/Bakery/scripts.pory"
+# 473 "data/maps/Bakery/scripts.pory"
 	.string "Oh, no. My Pokémon are like my kids.$"
 
 Bakery_KidsMom_Text_3:
-# 433 "data/maps/Bakery/scripts.pory"
+# 475 "data/maps/Bakery/scripts.pory"
 	.string "Ah, you're one of those…$"
 
 Bakery_KidsMom_Text_4:
-# 435 "data/maps/Bakery/scripts.pory"
+# 477 "data/maps/Bakery/scripts.pory"
 	.string "My circumstances are a bit…abnormal,\n"
 	.string "to be fair…$"
 
 Bakery_KidsMom_Text_5:
-# 437 "data/maps/Bakery/scripts.pory"
+# 479 "data/maps/Bakery/scripts.pory"
 	.string "Sorry, sorry! I didn't mean it like\n"
 	.string "that! It's all alright.$"
 
 Bakery_KidsMom_Text_6:
-# 439 "data/maps/Bakery/scripts.pory"
+# 481 "data/maps/Bakery/scripts.pory"
 	.string "Eh…whatever.$"
 
 Bakery_KidsMom_Text_7:
-# 444 "data/maps/Bakery/scripts.pory"
+# 486 "data/maps/Bakery/scripts.pory"
 	.string "I hope I don't ruin your day by\n"
 	.string "taking back my Flygon.$"
 
 Bakery_KidsMom_Text_8:
-# 445 "data/maps/Bakery/scripts.pory"
+# 487 "data/maps/Bakery/scripts.pory"
 	.string "Kids' mom$"
 
 Bakery_KidsMom_Text_9:
-# 446 "data/maps/Bakery/scripts.pory"
+# 488 "data/maps/Bakery/scripts.pory"
 	.string "Oh, the kids will be fine. Maybe\n"
 	.string "it'll get them to actually eat.$"
 
 Bakery_KidsMom_Text_10:
-# 448 "data/maps/Bakery/scripts.pory"
+# 490 "data/maps/Bakery/scripts.pory"
 	.string "Do you have any Pokémon of your own?$"
 
 Bakery_KidsMom_Text_11:
-# 450 "data/maps/Bakery/scripts.pory"
+# 492 "data/maps/Bakery/scripts.pory"
 	.string "Not yet. When they're a little older,\n"
 	.string "I'll get them each a Keesh.$"
 
 Bakery_KidsMom_Text_12:
-# 452 "data/maps/Bakery/scripts.pory"
+# 494 "data/maps/Bakery/scripts.pory"
 	.string "(A…quiche?)$"
 
 Bakery_KidsMom_Text_13:
-# 454 "data/maps/Bakery/scripts.pory"
+# 496 "data/maps/Bakery/scripts.pory"
 	.string "Er, that's nice. When they're old\n"
 	.string "enough to take responsibility, right?$"
 
 Bakery_KidsMom_Text_14:
-# 456 "data/maps/Bakery/scripts.pory"
+# 498 "data/maps/Bakery/scripts.pory"
 	.string "Of course!\n"
 	.string "By the way, I'm Lisa. And the kids\l"
 	.string "are Louis and Leah.$"
 
 Bakery_Sign_Bread_Text_0:
-# 464 "data/maps/Bakery/scripts.pory"
+# 506 "data/maps/Bakery/scripts.pory"
 	.string "A fresh-baked loaf of bread. It looks\n"
 	.string "so hearty, it could raise your HP.$"
 
 Bakery_Sign_Cookies_Text_0:
-# 469 "data/maps/Bakery/scripts.pory"
+# 511 "data/maps/Bakery/scripts.pory"
 	.string "Chocolate chip cookies. The chips are\n"
 	.string "still melty.$"
 
 Bakery_Sign_Pretzels_Text_0:
-# 474 "data/maps/Bakery/scripts.pory"
+# 516 "data/maps/Bakery/scripts.pory"
 	.string "Soft pretzels. You feel like you need\n"
 	.string "a drink just from looking at them.$"
 
 Bakery_Sign_Baguettes_Text_0:
-# 479 "data/maps/Bakery/scripts.pory"
+# 521 "data/maps/Bakery/scripts.pory"
 	.string "French bread. Or is it Italian?\n"
 	.string "Sorry, you mean Kalosian.$"
 
 Bakery_Sign_MenuLeft_Text_0:
-# 484 "data/maps/Bakery/scripts.pory"
+# 526 "data/maps/Bakery/scripts.pory"
 	.string "Food menu. They serve baked goods\n"
 	.string "and sandwiches here.$"
 
 Bakery_Sign_MenuRight_Text_0:
-# 489 "data/maps/Bakery/scripts.pory"
+# 531 "data/maps/Bakery/scripts.pory"
 	.string "Drink menu. You're at a loss trying\n"
 	.string "to figure out these drink names.$"
 
 Bakery_Sign_PantomPicture_Text_0:
-# 494 "data/maps/Bakery/scripts.pory"
+# 536 "data/maps/Bakery/scripts.pory"
 	.string "A picture commemorating an incident\n"
 	.string "where a Pokémon called Pantom\l"
 	.string "haunted the kitchen.$"
 
 Bakery_Sign_MountainPicture_Text_0:
-# 499 "data/maps/Bakery/scripts.pory"
+# 541 "data/maps/Bakery/scripts.pory"
 	.string "“Morning over Lake Elthe”, painting\n"
 	.string "by L. D. Vinki.$"
 
 Bakery_DubsnakeHydroil_Text_0:
-# 512 "data/maps/Bakery/scripts.pory"
+# 554 "data/maps/Bakery/scripts.pory"
 	.string "SORRY ABOUT THE MESS. ONE OF US HAS\n"
 	.string "NO SELF-CONTROL.$"
 
 Bakery_DubsnakeHydroil_Text_1:
-# 515 "data/maps/Bakery/scripts.pory"
+# 557 "data/maps/Bakery/scripts.pory"
 	.string "YOU SHOULD STICK YOUR HEAD IN A FIRE.\n"
 	.string "I HIGHLY RECOMMEND THE EXPERIENCE.$"
 
 Bakery_DubsnakeHydroil_Text_2:
-# 518 "data/maps/Bakery/scripts.pory"
+# 560 "data/maps/Bakery/scripts.pory"
 	.string "YOU'RE REALLY STRONG. IN ANOTHER\n"
 	.string "TIME, WE WOULD BE GREAT FRIENDS.$"
 
 Bakery_DubsnakeHydroil_Text_3:
-# 520 "data/maps/Bakery/scripts.pory"
+# 562 "data/maps/Bakery/scripts.pory"
 	.string "BUT I MUST STAY HERE. I AM LOYAL\n"
 	.string "TO THIS BAKERY.$"
 
 Bakery_DubsnakeHydroil_Text_4:
-# 522 "data/maps/Bakery/scripts.pory"
+# 564 "data/maps/Bakery/scripts.pory"
 	.string "(I wasn't planning to ask them to\n"
 	.string "come with me, but whatever.)$"
 
 Bakery_DubsnakeHydroil_Text_5:
-# 524 "data/maps/Bakery/scripts.pory"
+# 566 "data/maps/Bakery/scripts.pory"
 	.string "Okay. Take care of yourself, Hydroil.$"
 
 Bakery_DubsnakeHydroil_Text_6:
-# 533 "data/maps/Bakery/scripts.pory"
+# 575 "data/maps/Bakery/scripts.pory"
 	.string "Ice Snake$"
 
 Bakery_DubsnakeHydroil_Text_7:
-# 534 "data/maps/Bakery/scripts.pory"
+# 576 "data/maps/Bakery/scripts.pory"
 	.string "You get a discount on cold drinks if\n"
 	.string "you're brave enough to let them make\l"
 	.string "it with the ice from my head.$"
 
 Bakery_DubsnakeHydroil_Text_8:
-# 536 "data/maps/Bakery/scripts.pory"
+# 578 "data/maps/Bakery/scripts.pory"
 	.string "Oil Snake$"
 
 Bakery_DubsnakeHydroil_Text_9:
-# 537 "data/maps/Bakery/scripts.pory"
+# 579 "data/maps/Bakery/scripts.pory"
 	.string "I think I'm ready to evolve. I just\n"
 	.string "need a heat source to start it.$"
 
 Bakery_DubsnakeHydroil_Text_10:
-# 540 "data/maps/Bakery/scripts.pory"
+# 582 "data/maps/Bakery/scripts.pory"
 	.string "What kind of Pokémon are you?$"
 
 Bakery_DubsnakeHydroil_Text_11:
-# 541 "data/maps/Bakery/scripts.pory"
+# 583 "data/maps/Bakery/scripts.pory"
 	.string "Dubsnake$"
 
 Bakery_DubsnakeHydroil_Text_12:
-# 542 "data/maps/Bakery/scripts.pory"
+# 584 "data/maps/Bakery/scripts.pory"
 	.string "We're called Dubsnake!$"
 
 Bakery_DubsnakeHydroil_Text_13:
-# 544 "data/maps/Bakery/scripts.pory"
+# 586 "data/maps/Bakery/scripts.pory"
 	.string "Cool. I've never seen one of you\n"
 	.string "before. Which head is the main one?$"
 
 Bakery_DubsnakeHydroil_Text_14:
-# 546 "data/maps/Bakery/scripts.pory"
+# 588 "data/maps/Bakery/scripts.pory"
 	.string "I am!$"
 
 Bakery_DubsnakeHydroil_Text_15:
-# 550 "data/maps/Bakery/scripts.pory"
+# 592 "data/maps/Bakery/scripts.pory"
 	.string "Got it, got it. Great. Thanks.$"
 
 Bakery_ComputerGuy_Text_0:
-# 559 "data/maps/Bakery/scripts.pory"
+# 601 "data/maps/Bakery/scripts.pory"
 	.string "Linus$"
 
 Bakery_ComputerGuy_Text_1:
-# 562 "data/maps/Bakery/scripts.pory"
+# 604 "data/maps/Bakery/scripts.pory"
 	.string "Thanks for taking care of that\n"
 	.string "Pokémon. It would've sucked if I had\l"
 	.string "to evacuate right now. Take this.$"
 
 Bakery_ComputerGuy_Text_2:
-# 569 "data/maps/Bakery/scripts.pory"
+# 611 "data/maps/Bakery/scripts.pory"
 	.string "The wi-fi in my house has been out\n"
 	.string "because of the storm, so I have to\l"
 	.string "come here to get my work done.$"
 
 Bakery_LeftGuy_Text_0:
-# 575 "data/maps/Bakery/scripts.pory"
+# 617 "data/maps/Bakery/scripts.pory"
 	.string "Peter$"
 
 Bakery_LeftGuy_Text_1:
-# 576 "data/maps/Bakery/scripts.pory"
+# 618 "data/maps/Bakery/scripts.pory"
 	.string "Could you move along? I'm trying to\n"
 	.string "have a date, here…$"
 
 Bakery_RightGuy_Text_0:
-# 583 "data/maps/Bakery/scripts.pory"
+# 625 "data/maps/Bakery/scripts.pory"
 	.string "Dave$"
 
 Bakery_RightGuy_Text_1:
-# 584 "data/maps/Bakery/scripts.pory"
+# 626 "data/maps/Bakery/scripts.pory"
 	.string "I always tell myself I'll try other\n"
 	.string "items on the menu, but then I just\l"
 	.string "end up getting the crepes again, haha.$"

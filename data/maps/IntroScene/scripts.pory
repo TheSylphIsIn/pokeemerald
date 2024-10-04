@@ -151,13 +151,24 @@ script FollowerScript_Demivee
 				case 9: 
 					msgbox("So we need to go back to Road to Elthe\n" "and head east. I think I saw some\l" "stumps we could jump across, near\l" "where we met Marcel.")
 				case 10:
-					msgbox("We need to find 3 of a berry that's\n" "high in Spicy and low in other flavors.\p" "Don't forget to check the berry tag!")
+					msgbox("We need to find 3 of a berry that's\n" "good for making Spicy treats.\p" "Red means Spicy! Did you check the\n" "spots near the Trainers we fought?")
 				case 15: // has vice, bradley, or both
 					if(!flag(FLAG_GOT_VICE))
 					{
 						msgbox("Have you checked the businesses near\n" "the entrance to town? Vice might have\l" "taken shelter as soon as she could.")
 					}
 					elif(!flag(FLAG_GOT_BRADLEY))
+					{
+						msgbox("Did you try fighting in the arena\n" "at the north end of town?\p"
+								"If you're having trouble winning, try\n" "exploring to find more Rock Candy\l" "to power me up and counter what the\l" "foes will use.")
+					}
+					else
+					{
+						msgbox("Your last missing friend is in\n" "disguise somewhere in town.\p"
+								"Have Bradley follow you and try to\n" "pick out the person who isn't\l" "normally there.")
+					}
+				case 16:
+					if(!flag(FLAG_GOT_BRADLEY))
 					{
 						msgbox("Did you try fighting in the arena\n" "at the north end of town?\p"
 								"If you're having trouble winning, try\n" "exploring to find more Rock Candy\l" "to power me up and counter what the\l" "foes will use.")
@@ -235,7 +246,7 @@ script FollowerScript_Marcel
 {
 	lock
 	faceplayer
-	if(var(VAR_MAIN_GAME_STATE) > 6 && !flag(FLAG_KNOW_VICE_FLAVOR))
+	if(flag(FLAG_TREES_CLEARED) && !flag(FLAG_KNOW_VICE_FLAVOR))
 	{
 		speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
 		msgbox("Hey, Marcel, do you know what Vice's\n" "favorite flavor is?")

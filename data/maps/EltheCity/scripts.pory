@@ -11,6 +11,7 @@ const LOCALID_UMBRASHARD = 11
 const LOCALID_PYTHON = 2
 const LOCALID_WEATHERBANE = 1
 const LOCALID_BRADLEY = 4
+const LOCALID_LOMBRE = 16
 
 const LOCALID_ED_MARCEL = 24
 const LOCALID_ED_VICE = 25
@@ -513,7 +514,7 @@ script EltheCity_Lass
 script EltheCity_Mom
 {
 	speakername("Andrea")
-	msgbox("I thought I would try to distract\n" "Sarah with some battles, but it\l" "looks like the arena is being held.\l" "That Nidoking must be at least as\l" "strong as a Dragonite.", MSGBOX_SIGN)
+	msgbox("I thought I would try to distract\n" "Marisa with some battles, but it\l" "looks like the arena is being held.\l" "That Nidoking must be at least as\l" "strong as a Dragonite.", MSGBOX_SIGN)
 }
 
 script EltheCity_ArenaSign
@@ -610,24 +611,28 @@ script EltheCity_BradleyScript
 {
 	lock
 	faceplayer
-	speakername("Bradley", PORTRAIT_NIDOKING_GRIN, PORTRAIT_DEFAULT_LEFT)
-	msgbox("Grah hah hah! Another puny trainer\n" "has come to challenge me, eh?")
-	speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
-	msgbox("Bradley, it's me, Amelia.\n" "What are you doing out here?")
-	speakername("Bradley", PORTRAIT_NIDOKING_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
-	msgbox("I want to fight!\p" "You've been holding me back for years!\n" "It's time to let loose!")
-	speakername("Amelia", PORTRAIT_AMELIA_STRAINED)
-	msgbox("Oh, you've forgotten about our talks,\n" "haven't you…\p"
-			"Bradley, learning to control your\n" "bloodlust was YOUR idea. And it's been\l" "great for you! Chillax.")
-	speakername("Bradley", PORTRAIT_NIDOKING_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
-	playmoncry(SPECIES_NIDOKING, CRY_MODE_NORMAL)
-	msgbox("I don't care! I want to fight.\n" "I'm enjoying this too much.")
-	speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
-	msgbox("Fine, we'll have a little spar, and\n" "then we get going, okay?")
-	speakername("Bradley", PORTRAIT_NIDOKING_GRIN, PORTRAIT_DEFAULT_LEFT)
-	msgbox("I don't want to fight your Pokémon.\n" "I've beaten them before already.\l" "I want to fight YOU, Amelia. You\l" "hold back too much.")
-	speakername("Amelia", PORTRAIT_AMELIA_SERIOUSLY)
-	msgbox("Well, too bad. I can't do that in\n" "public. I still have work to do here,\l" "I can't go getting kicked out.")
+	if(!flag(FLAG_SKIP_BRADLEY_CONVO))
+	{
+		speakername("Bradley", PORTRAIT_NIDOKING_GRIN, PORTRAIT_DEFAULT_LEFT)
+		msgbox("Grah hah hah! Another puny trainer\n" "has come to challenge me, eh?")
+		speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+		msgbox("Bradley, it's me, Amelia.\n" "What are you doing out here?")
+		speakername("Bradley", PORTRAIT_NIDOKING_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
+		msgbox("I want to fight!\p" "You've been holding me back for years!\n" "It's time to let loose!")
+		speakername("Amelia", PORTRAIT_AMELIA_STRAINED)
+		msgbox("Oh, you've forgotten about our talks,\n" "haven't you…\p"
+				"Bradley, learning to control your\n" "bloodlust was YOUR idea. And it's been\l" "great for you! Chillax.")
+		speakername("Bradley", PORTRAIT_NIDOKING_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
+		playmoncry(SPECIES_NIDOKING, CRY_MODE_NORMAL)
+		msgbox("I don't care! I want to fight.\n" "I'm enjoying this too much.")
+		speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+		msgbox("Fine, we'll have a little spar, and\n" "then we get going, okay?")
+		speakername("Bradley", PORTRAIT_NIDOKING_GRIN, PORTRAIT_DEFAULT_LEFT)
+		msgbox("I don't want to fight your Pokémon.\n" "I've beaten them before already.\l" "I want to fight YOU, Amelia. You\l" "hold back too much.")
+		speakername("Amelia", PORTRAIT_AMELIA_SERIOUSLY)
+		msgbox("Well, too bad. I can't do that in\n" "public. I still have work to do here,\l" "I can't go getting kicked out.")
+		setflag(FLAG_SKIP_BRADLEY_CONVO)
+	}
 	speakername("Bradley", PORTRAIT_NIDOKING_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
 	msgbox("Hrmph! Fine, then. I'll fight your\n" "team, if you're really serious.", MSGBOX_YESNO)
 	if (var(VAR_RESULT) == NO)
@@ -723,8 +728,9 @@ script EltheCity_BradleyScript
 			waitfanfare
 			waitbuttonpress
 			closemessage
-			givemon(SPECIES_NIDOKING, 56, ITEM_QUICK_CLAW, ITEM_ULTRA_BALL, NATURE_LONELY, 2, MON_MALE, 0, 0, 0, 0, 0, 0, 31, 31, 31, 31, 31, 31, MOVE_POISON_JAB, MOVE_EARTHQUAKE, MOVE_ICE_BEAM, MOVE_THUNDERBOLT, FALSE, FALSE, TYPE_GROUND)
+			givemon(SPECIES_NIDOKING, 56, ITEM_QUICK_CLAW, ITEM_ULTRA_BALL, NATURE_LONELY, 2, MON_MALE, 0, 0, 0, 0, 0, 0, 31, 31, 31, 31, 31, 31, MOVE_POISON_JAB, MOVE_EARTHQUAKE, MOVE_MEGAHORN, MOVE_SLUDGE_BOMB, FALSE, FALSE, TYPE_GROUND)
 			setpartymemberinfo(3)
+			setvar(VAR_MAIN_GAME_STATE, 15)
 		}
 	}
 	release
@@ -1135,6 +1141,8 @@ script EltheCity_Trigger_FinalBoss
 	addobject(LOCALID_ED_PYTHON)
 	addobject(LOCALID_ED_VICE)
 	removeobject(OBJ_EVENT_ID_FOLLOWER)
+	removeobject(LOCALID_KEESIGHT)
+	removeobject(LOCALID_LOMBRE)
 	delay(32)
 	setobjectxy(OBJ_EVENT_ID_PLAYER, 18, 15)
 	setvar(VAR_0x8000, 18)
@@ -1245,7 +1253,16 @@ script EltheCity_Trigger_FinalBoss
 	applymovement(LOCALID_ED_DEMIVEE, Ending_DemiveeLeave)
 	waitmovement(LOCALID_ED_VICE)
 	fadescreenspeed(FADE_TO_BLACK, 8)
-	msgbox("Thank you for playing\n" "Recollection Quest!", MSGBOX_AUTOCLOSE)
+	msgbox("You win! Thank you for playing\n" "Recollection Quest!\p"
+			"CREDITS:\p"
+			"Codebase - pret/pokeemerald maintainers\n" "and RHH contributors.\l" "Base used: Expansion 1.9.0\p"
+			"Nameplates - code by Tustin2121.\n" "Portraits - code and graphics by Sylph.\p"
+			"Tilesets - Aqua Asset Repository\n" "“Shady Forest” and “Dojo Interior”, and\l" "Voluptuas tileset collection 11.\p"
+			"NPC graphics - Pokémon FireRed. “Amelia”\n" "design and sprites by Sylph.\p"
+			"Demi-Vee customizer - based on the\n" "stat editor UI from Team Aqua's Hideout.\p"
+			"Pokémon design - “Dubsnake”, “Hydroil”\n" "“Vinos”, and “Keesight” by Sylph.\l" "“Weatherbane” by SomeAre.\p"
+			"Pokémon sprites - “Dubsnake”, “Hydroil”,\n" "and “Weatherbane” battle sprites\l" "by zacsukki. “Vinos” battle sprite\l" "by Sylph. Fakemon overworlds by Sylph.\p"
+			"Scenario, characters, writing, and\n" "story by Sylph.", MSGBOX_AUTOCLOSE)
 	special(Script_FadeOutMapMusic)
 	waitstate
 	delay(60)

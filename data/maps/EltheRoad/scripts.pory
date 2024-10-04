@@ -231,7 +231,7 @@ script EltheRoad_Trigger_VinosTrigger
 			speakername("Vine Mon", PORTRAIT_VINOS_NEUTRAL, PORTRAIT_DEFAULT_LEFT)
 			msgbox("Fascinating…this may be an interesting\n" "exercise. I am Vinos. Let us begin.")
 			speakername(NULL, 0)
-			msgbox("Try to make Vinos happy so it'll\n" "you pass through! It will ask you\l" "a series of questions.\p"
+			msgbox("Try to make Vinos happy so it'll let\n" "you pass through! It will ask you\l" "a series of questions.\p"
 					"If you make Vinos angry, it may\n" "decide to attack you instead.\p"
 					"If it likes your answers, you may\n" "get a gift as well.", MSGBOX_AUTOCLOSE)
 			delay(32)
@@ -870,7 +870,7 @@ script EltheRoad_BerrySpot_PlotBerries
 	{
 		msgbox("You plunged your hand into the water…")
 		delay(32)
-		random(3)
+		random(4)
 		switch(var(VAR_RESULT))
 		{
 			case 0:
@@ -879,6 +879,8 @@ script EltheRoad_BerrySpot_PlotBerries
 				giveitem(ITEM_WATMEL_BERRY)
 			case 2:
 				giveitem(ITEM_BELUE_BERRY)
+			case 3:
+				giveitem(ITEM_SPELON_BERRY)
 		}
 	}
 	release
@@ -922,13 +924,29 @@ script EltheRoad_Trigger_AromaLadyTrainer
 	speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
 	msgbox("Yeah. Thanks, this will be useful.\n" "See you around.")
 	setvar(VAR_BERRY_FIELD_STATE, 1)
+	setvar(VAR_MAIN_GAME_STATE, 10)
 	release
 }
 
 script EltheRoad_EventScript_AromaLady
-{
+{	
+	lock
+	faceplayer
 	speakername("Amelia")
-	msgbox("Berries are hardy enough that I\n" "think we'll be able to just replant\l" "them once the flooding clears up.\l" "But still, it's a bother.", MSGBOX_NPC)
+	if(!flag(FLAG_GOT_VICE))
+	{
+		speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+		msgbox("I'm trying to find some berries to\n" "make a spicy treat at Pomona Bread.\l" "What kind should I get?")
+		speakername("Amelia")
+		msgbox("Oh, the spiciest berries we grow here\n" "are Spelon berries! There should be\l" "some right in front of me.\l" "Just reach in the water and grab them.")
+		speakername("Amelia", PORTRAIT_AMELIA_NEUTRAL)
+		msgbox("Thanks, Amelia.")
+	}
+	else
+	{
+		msgbox("Berries are hardy enough that I\n" "think we'll be able to just replant\l" "them once the flooding clears up.\l" "But still, it's a bother.")
+	}
+	release
 }
 
 script EltheRoad_EventScript_BerryMan
